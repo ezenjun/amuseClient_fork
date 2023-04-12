@@ -1,2 +1,2 @@
 # amuseClient
-amuse Front-End client repository
+amuse Front-End client repository 
