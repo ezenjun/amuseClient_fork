@@ -1,0 +1,13 @@
+.container {
+  display: flex;
+  /* justify-content: space-between; */
+  width: 100%;
+  /* max-width: 900px; */
+  margin-bottom: 24px;
+}
+
+.regBox {
+  width: 359px;
+  height: 150px;
+  border-radius: 12px;
+}

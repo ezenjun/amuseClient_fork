@@ -1,0 +1,12 @@
+.container {
+  display: flex;
+  /* justify-content: space-between; */
+  width: 100%;
+  /* max-width: 900px; */
+}
+
+.box {
+  width: 359px;
+  height: 300px;
+  border-radius: 12px;
+}
