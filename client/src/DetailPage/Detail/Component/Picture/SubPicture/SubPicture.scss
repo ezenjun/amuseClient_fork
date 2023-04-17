@@ -1,0 +1,13 @@
+.SubPicture {
+    margin-right: 0.5%;
+    .image {
+        height: 170px;
+        width: 216.5px;
+        object-fit: cover;
+  
+        &:hover {
+            opacity: 0.9;
+        }
+    }
+  }
+  

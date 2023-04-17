@@ -1,0 +1,19 @@
+.ReviewPicture {
+    margin-right: 40%;
+    margin-left: 14%;
+    padding: 1% 2% 2% 0;
+
+    border-bottom: 1px solid #E9ECEF;
+    color: #373A3C;
+
+    .review-title {
+        margin-bottom: 3%;
+        font-size: 20px;
+        font-weight: 700;
+    }
+
+    .subpicture {
+        display: flex;
+        flex-direction: row;
+    }
+}

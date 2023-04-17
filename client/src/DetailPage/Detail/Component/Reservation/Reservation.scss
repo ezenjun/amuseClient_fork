@@ -1,0 +1,150 @@
+.reservation {
+    width: 320px;
+    position: sticky;
+    top: 100px;
+    left: 900px;
+    margin-top: 50px;
+
+    .reservation-main {
+        height: 190px;
+        border: 1px solid #DEE2E6;
+        border-radius: 2% 2% 0 0;
+        padding: 24px 24px 8px 24px;
+
+        .reservation-top {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            .reservation-price {
+                display: flex;
+                align-items: center;
+                p:first-child {
+                    color: #848C94;
+                    font-size: 14px;
+                    font-weight: 500;
+                    margin: 0;
+                    margin-right: 4px;
+                    padding-top: 7px;
+                }
+                .price {
+                    color: #343A40;
+                    font-size: 24px;
+                    font-weight: 700;
+                    margin: 0;
+                }
+                p:last-child {
+                    color: #848C94;
+                    font-size: 14px;
+                    font-weight: 500;
+                    margin: 0;
+                    margin-left: 4px;
+                    padding-top: 7px;
+                }
+            }
+            .reservation-link {
+                height: 24px;
+                padding-top: 7px;
+                .share-icon {
+                    height: 20px;
+                    width: 20px;
+                    color: #373A3C;
+                }
+            }
+        }
+        .selectticket-btn-div {
+            margin-bottom: 10px;
+            .selectticket-btn {
+                height: 48px;
+                width: 272px;
+                color: #FFFFFF;
+                font-size: 16px;
+                font-weight: 700;
+                background-color: #51ABF3;
+                border: none;
+                border-radius: 2%;
+            }
+        }
+        .wishlist-btn-div {
+            .wishlist-btn {
+                height: 40px;
+                width: 272px;
+                color: #495056;
+                font-size: 14px;
+                font-weight: 700;
+                background-color: #FFFFFF;
+                border: 1px solid #CED4DA;
+                border-radius: 2%;
+                .heart-icon {
+                    height: 15px;
+                    width: 15px;
+                    color: #373A3C;
+                    margin-right: 4px;
+                }
+            }
+        }
+
+        .wish-people {
+            p {
+                color: #848C94;
+                font-size: 13px;
+                text-align: center;
+            }
+        }
+    }
+
+    .manager {
+        border: 1px solid #DEE2E6;
+        border-top: none;
+        border-radius: 0 0 2% 2%;
+        display: flex;
+        padding-left: 24px;
+        padding-right: 24px;
+        justify-content: space-between;
+
+        .manager-profile {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+
+            .manager-image {
+                width: 32px;
+                height: 32px;
+                border-radius: 50%;
+                outline: #E9ECEF dashed 0.8px;
+                margin-right: 10px;
+            }
+            .manager-name {
+                align-items: center;
+                font-size: 14px;
+                font-weight: 600;
+                width: 50px;
+            }
+        }
+        .manager-inquiry {
+            display: flex;
+            align-items: center;
+            width: 60px;
+            height: 50px;
+            color: #808080;
+
+            .icon {
+                padding-right: 4%;
+            }
+            .inquiry {
+                font-weight: 600;
+                font-size: 12px;
+            }
+        }
+    }
+
+    .product-code {
+        height: 30px;
+        margin-top: 10px;
+        background-color: #f3f5f6;
+        border-radius: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 14px;
+    }
+}
