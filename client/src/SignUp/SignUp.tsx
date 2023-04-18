@@ -1,8 +1,13 @@
 import React from 'react'
 import './SignUp.css'
+import Header from '../Headers/Header'
 
 export default function SignUp() {
   return (
+    <>
+    <div className="App">
+        <Header />
+    </div>
     <div className="login_body">
         <form className='login' action='/loginURL' method='post'>
         <div className='amuse_login_title'>
@@ -45,5 +50,6 @@ export default function SignUp() {
         </div>
         </form>
     </div>
+    </>
   )
 }

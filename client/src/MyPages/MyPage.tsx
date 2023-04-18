@@ -10,6 +10,7 @@ import Quotes from './MyPage/Quotes';
 import Bills from './MyPage/Bills';
 import './MyPage.css';
 import GroupingTable from './GroupingTable/GroupingTable';
+import Header from '../Headers/Header';
 
 export default function MyPage() {
   
@@ -43,11 +44,16 @@ export default function MyPage() {
     }
 
   return (
+    <>
+    <div className="App">
+        <Header />
+    </div>
     <div className='myPage'>
     <MyPagelist />
     <div className='myPage_box'>
         {handleCategory()}
     </div>
     </div>
+    </>
   )
 }
