@@ -1,0 +1,26 @@
+.Review {
+    margin-right: 37%;
+    margin-left: 14%;
+    padding: 1% 2% 0 0;
+
+    color: #373A3C;
+    .review-header {
+        display: flex;
+
+        .review-title {
+            margin-bottom: 3%;
+            font-size: 20px;
+            font-weight: 700;
+        }
+        .review-number {
+            margin-left: 1%;
+            font-size: 20px;
+            font-weight: 700;
+            color: #EB1749;
+        }
+    }
+    
+    img {
+        width: 660px;
+    }
+}
