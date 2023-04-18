@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import logoimage from "../MainPage/MainImgs/amuse_logo.png";
 import Concierge from "../SubPages/Concierge/Concierge";
 import { Link } from "react-router-dom";
+import MyPagelist from '../MyPages/MyPageList';
+import MyPageMenu from '../MyPages/MyPageMenu';
 
 function Header() {
   const movePage = useNavigate();
@@ -22,6 +24,12 @@ function Header() {
   const navigateToOnlineTour = () => {
     movePage("/OnlineTour");
   };
+  const navigateToLogIn = () => {
+    movePage("/LogIn");
+  };
+  const navigateToSignUP = () => {
+    movePage("/SignUP");
+  };
 
   return (
     <div>
@@ -32,8 +40,9 @@ function Header() {
           <button className="searchBtn">검색</button>
         </div>
         <div className="whiteSquare"></div>
-        <button className="loginBtn">로그인</button>
-        <button className="signInBtn">회원가입</button>
+        <button className="loginBtn" onClick={navigateToLogIn}>로그인</button>
+        <button className="signInBtn" onClick={navigateToSignUP}>회원가입</button>
+        <MyPageMenu />
       </div>
       <div className="menu">
         <div className="menu-item" onClick={navigateToConcierge}>
