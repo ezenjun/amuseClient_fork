@@ -4,6 +4,7 @@ import './Calendar.scss';
 import { format } from 'date-fns';
 import { ko } from 'date-fns/locale';
 import { DayPicker, DateFormatter } from 'react-day-picker';
+import TicketList from '../TicketList/TicketList';
 
 const seasonEmoji: Record<string, string> = {
     winter: '⛄️',
@@ -32,22 +33,25 @@ const formatCaption: DateFormatter = (month, options) => {
     );
 };
 
-
+// 달력 날짜 별 색 지정 및 legend 추가
 function Calendar() {
     const [selected, setSelected] = React.useState<Date>();
 
     return (
-        <div className='Calendar'>
-            <DayPicker
-                locale={ko}
-                numberOfMonths={2}
-                pagedNavigation
-                formatters={{ formatCaption }}
-                mode="single"
-                selected={selected}
-                onSelect={setSelected}
-                footer={<p>{selected ? format(selected, 'yyyy년 LL월 dd일') : ''}</p>}
-            />
+        <div className='select-date'>
+            <p className='select-ticket-title'>티켓 선택</p>
+            <div className='Calendar'>
+                <DayPicker
+                    locale={ko}
+                    numberOfMonths={2}
+                    pagedNavigation
+                    formatters={{ formatCaption }}
+                    mode="single"
+                    selected={selected}
+                    onSelect={setSelected}
+                />
+            </div>
+            <TicketList selected={selected} />
         </div>
     );
 }

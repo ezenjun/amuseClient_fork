@@ -12,7 +12,7 @@ import OtherInfo from './Component/OtherInfo/OtherInfo';
 import Manager from './Component/Manager/Manager';
 import Review from './Component/Review/Review';
 import ReviewPicture from './Component/ReviewPicture/ReviewPicture';
-import TicketList from './Component/TicketSelect/TicketList/TicketList';
+import Calendar from './Component/TicketSelect/Calendar/Calendar';
 
 function Detail() {
   return (
@@ -28,7 +28,7 @@ function Detail() {
           <Title />
           <IconInfo />
           <Picture />
-          <TicketList />
+          <Calendar />
           <ProductIntro />
           <CourseIntro />
           <OtherInfo />
