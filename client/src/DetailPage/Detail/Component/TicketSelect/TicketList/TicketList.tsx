@@ -1,15 +1,19 @@
 import React from 'react';
 import './TicketList.scss';
 import Ticket from '../Ticket/Ticket';
-import Calendar from '../Calendar/Calendar';
+import { format } from 'date-fns';
 
-function TicketList() {
+
+type DateProps = {
+    selected: Date | undefined;
+};
+
+function TicketList({ selected }: DateProps) {
     return (
         <div className='select-ticket'>
-            <p className='select-ticket-title'>티켓 선택</p>
-            <Calendar />
             <div className='TicketList'>
-                {/* 날짜 출력하는 곳 */}
+                {/* 선택 날짜 출력 : defult 오늘 날짜 출력하기*/}
+                <p>{selected ? format(selected, 'yyyy년 LL월 dd일') : ''}</p>
                 <Ticket
                     name="어린이 이용권"
                     detail="만 6세~13세"

@@ -1,0 +1,51 @@
+.Likes_box {
+    display: flex;
+    border: lightgrey 0.5px solid;
+    border-radius: 4px;
+    height: 110px;
+    margin: 16px 0;
+}
+
+ .Likes_img {
+    padding: 0 12px;
+}
+
+.Likes_content {
+    padding: 10px 12px;
+    height: 90px;
+}
+
+.Likes_title{
+    font-size: 16px;
+    margin: 0 0 12px;
+}
+
+.Likes_subtitle{
+    font-size: 14px;
+    margin: 0 0 12px;
+    color: gray;
+}
+
+.Likes_start {
+    font-size: 12px;
+    border: gray 1px solid;
+    border-radius: 12px;
+    padding: 0 12px;
+}
+
+.Likes_price {
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.Likes_price_box{
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.total:hover {
+    transform: scale(1.05);
+    transition: all var(--animation-duration) ease;
+    cursor: pointer;
+}
