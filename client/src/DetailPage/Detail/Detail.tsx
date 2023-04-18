@@ -8,6 +8,7 @@ import Picture from './Component/Picture/Picture';
 import ProductIntro from './Component/ProductIntro/ProductIntro';
 import Footer from '../../Footers/Footer';
 import CourseIntro from './Component/CourseIntro/CourseIntro';
+import Map from './Component/Map/Map';
 import OtherInfo from './Component/OtherInfo/OtherInfo';
 import Manager from './Component/Manager/Manager';
 import Review from './Component/Review/Review';
@@ -31,6 +32,7 @@ function Detail() {
           <TicketList />
           <ProductIntro />
           <CourseIntro />
+          <Map />
           <OtherInfo />
           <Manager />
           <ReviewPicture />
