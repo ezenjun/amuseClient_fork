@@ -25,7 +25,7 @@ function Concierge() {
       <div className="liner"></div>
       {/* <br /> */}
       <div className="subTitleContainer">
-        <img className="mainPicture" src={ChildTitle} alt="Child Title img" />
+        <img className="mainPicture.image" src={ChildTitle} alt="Child Title img" />
         <h2 className="subTitle">아이와 함께하는 돌봄여행</h2>
         <h3 className="subContent">어린이/어른 코스로 구성된 어린이 동반 가족 여행</h3>
       </div>
