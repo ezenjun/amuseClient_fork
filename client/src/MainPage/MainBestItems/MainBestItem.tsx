@@ -17,7 +17,7 @@ function MainBestItem() {
 
   return (
     <div>
-      <h2 style={{ marginTop: "1rem" }}>실시간 Best 여행 상품🏞</h2>
+      <h2 style={{ marginTop: "1rem", marginBottom: "1rem" }}>실시간 Best 여행 상품🏞</h2>
       <div className="container" onClick={navigateToDetail}>
         <Box marginRight="32px"></Box>
         <Box marginRight="32px" />

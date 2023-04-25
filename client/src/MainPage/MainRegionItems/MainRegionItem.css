@@ -7,7 +7,19 @@
 }
 
 .regBox {
-  width: 359px;
-  height: 150px;
+  width: 340px;
+  height: 140px;
   border-radius: 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.emptyBox {
+  width: 340px;
+  height: 140px;
+  border-radius: 12px;
+}
+
+.regionName {
 }

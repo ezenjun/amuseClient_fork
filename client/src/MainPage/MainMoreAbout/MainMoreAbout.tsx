@@ -20,7 +20,7 @@ function gotoFacebook() {
 function MainMoreAbout() {
   return (
     <>
-      <h2 style={{ marginTop: "3rem" }}>어뮤즈트래블에 대해 더 알고싶다면? 🔍</h2>
+      <h2 style={{ marginTop: "4rem" }}>어뮤즈트래블에 대해 더 알고싶다면? 🔍</h2>
       <div className="middle">
         <h4 className="sns" onClick={gotoBlog}>
           네이버 블로그

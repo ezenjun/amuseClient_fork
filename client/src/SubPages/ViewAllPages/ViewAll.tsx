@@ -12,7 +12,7 @@ function ViewAll() {
       </div>
       <div className="liner"></div>
       {/* <br /> */}
-
+      <h1 style={{ marginLeft: "5rem" }}>상품 모두보기 페이지</h1>
       <Footer />
     </div>
   );
