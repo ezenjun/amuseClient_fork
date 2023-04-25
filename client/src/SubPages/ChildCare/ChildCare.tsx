@@ -6,7 +6,10 @@ import "../SubPage.css";
 import ChildTitle from "../SubtitleImgs/ChildTitle.jpg";
 
 const Box = ({ backgroundColor, marginRight }: { backgroundColor: string; marginRight: string }) => (
-  <div className="box" style={{ backgroundColor, marginRight }}></div>
+  <div className="box" style={{ backgroundColor, marginRight }}>
+    <p className="tripTitle">여행 제목</p>
+    <p className="tripCost">가격 : ~~~</p>
+  </div>
 );
 
 function Concierge() {
