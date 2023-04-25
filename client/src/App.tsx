@@ -6,10 +6,11 @@ import Concierge from "./SubPages/Concierge/Concierge";
 import ChildCare from "./SubPages/ChildCare/ChildCare";
 import SeniorCare from "./SubPages/SeniorCare/SeniorCare";
 import OnlineTour from "./SubPages/OnlineTour/OnlineTour";
-import MyPage from './MyPages/MyPage';
-import Login from './LogIn/LogIn';
-import SignUp from './SignUp/SignUp';
+import MyPage from "./MyPages/MyPage";
+import Login from "./LogIn/LogIn";
+import SignUp from "./SignUp/SignUp";
 import Detail from "./DetailPage/Detail/Detail";
+import ViewAll from "./SubPages/ViewAllPages/ViewAll";
 // import NotFound from './NotFound';
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
         <Route path="/MyPage/:category" element={<MyPage />}></Route>
         <Route path="/OnlineTour" element={<OnlineTour />}></Route>
         <Route path="/Detail" element={<Detail />}></Route>
+        <Route path="/ViewAll" element={<ViewAll />}></Route>
       </Routes>
     </div>
   );

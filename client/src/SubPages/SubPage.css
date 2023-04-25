@@ -112,3 +112,17 @@
 .transition-div.hidden {
   opacity: 0;
 }
+
+.allBtn {
+  margin: auto;
+  width: 150px;
+  height: 40px;
+  font-size: 16px;
+  border-radius: 10px;
+  background-color: pink;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+}
