@@ -31,7 +31,7 @@ function Concierge() {
       </div>
 
       <div className="App">
-        <h2 style={{ marginTop: "2rem" }}>어르신돌봄 여행 Best 상품🏞</h2>
+        <h2 style={{ marginTop: "2rem", marginBottom: "1rem" }}>어르신돌봄 여행 Best 상품🏞</h2>
         <div className="container">
           <Box backgroundColor="lightgray" marginRight="57px" />
           <Box backgroundColor="lightgray" marginRight="0" />

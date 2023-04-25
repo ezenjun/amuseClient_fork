@@ -30,7 +30,7 @@ function Concierge() {
         <h3 className="subContent">장애 유형별 맞춤형 일정으로 진행되는 풀컨시어지 여행</h3>
       </div>
       <div className="App">
-        <h2 style={{ marginTop: "2rem" }}>컨시어지 여행 Best 상품🏞</h2>
+        <h2 style={{ marginTop: "2rem", marginBottom: "1rem" }}>컨시어지 여행 Best 상품🏞</h2>
         <div className="container">
           <Box backgroundColor="lightgray" marginRight="57px" />
           <Box backgroundColor="lightgray" marginRight="0" />

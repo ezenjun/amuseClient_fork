@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import "../BestAndNew.css";
+import "../BestAndNewStyle.css";
 import { useNavigate } from "react-router-dom";
 
 const Box = ({ marginRight }: { marginRight: string }) => (
