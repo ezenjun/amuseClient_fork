@@ -7,14 +7,30 @@ import logo03 from "../MainImgs/logo03.svg";
 import logo04 from "../MainImgs/logo04.svg";
 import logo05 from "../MainImgs/logo05.svg";
 
+function gotoBlog() {
+  window.open("https://blog.naver.com/amusetravel", "_blank");
+}
+function gotoInstagram() {
+  window.open("https://www.instagram.com/amusetravel_kor/", "_blank");
+}
+function gotoFacebook() {
+  window.open("https://www.facebook.com/amusetravel", "_blank");
+}
+
 function MainMoreAbout() {
   return (
     <>
       <h2 style={{ marginTop: "3rem" }}>어뮤즈트래블에 대해 더 알고싶다면? 🔍</h2>
       <div className="middle">
-        <h4 className="sns">네이버 블로그 </h4>
-        <h4 className="sns">인스타그램 </h4>
-        <h4 className="sns">페이스북 </h4>
+        <h4 className="sns" onClick={gotoBlog}>
+          네이버 블로그
+        </h4>
+        <h4 className="sns" onClick={gotoInstagram}>
+          인스타그램
+        </h4>
+        <h4 className="sns" onClick={gotoFacebook}>
+          페이스북
+        </h4>
       </div>
       <div style={{ clear: "left" }}></div>
       <div className="imgContainer">
