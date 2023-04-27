@@ -37,7 +37,8 @@ input[type="text"] {
   background-color: #929292;
   color: white;
   border: none;
-  padding: 14px 20px;
+  padding: 14px 0px;
+  width: 80px;
   border-radius: 5px;
   cursor: pointer;
 }
@@ -86,7 +87,7 @@ input[type="text"] {
 }
 
 .signInBtn {
-  width: 80px;
+  width: 100px;
   height: 40px;
   margin-top: 10px;
   border: none;

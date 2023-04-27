@@ -2,7 +2,7 @@ import React, { ReactNode } from "react";
 import "./App.css";
 import Header from "./Headers/Header";
 import MainBestItem from "./MainPage/MainBestItems/MainBestItem";
-import MainRecommendItem from "./MainPage/MainRecommendItems/MainRecommendItem";
+import MainNewItem from "./MainPage/MainNewItems/MainNewItem";
 import MainNews from "./MainPage/MainNews/MainNews";
 import MainRegionItem from "./MainPage/MainRegionItems/MainRegionItem";
 import MainMoreAbout from "./MainPage/MainMoreAbout/MainMoreAbout";
@@ -19,7 +19,7 @@ function Home() {
         <br />
         <div className="App">
           <MainBestItem />
-          <MainRecommendItem />
+          <MainNewItem />
           <MainNews />
           <MainRegionItem />
           <MainMoreAbout />
