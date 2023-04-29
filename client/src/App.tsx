@@ -11,6 +11,8 @@ import Login from "./LogIn/LogIn";
 import SignUp from "./SignUp/SignUp";
 import Detail from "./DetailPage/Detail/Detail";
 import ViewAll from "./SubPages/ViewAllPages/ViewAll";
+import GyeonggiPage from "./SubPages/Regions/GyeonggiPage";
+import GangwonPage from "./SubPages/Regions/GangwonPage";
 // import NotFound from './NotFound';
 
 function App() {
@@ -27,6 +29,8 @@ function App() {
         <Route path="/OnlineTour" element={<OnlineTour />}></Route>
         <Route path="/Detail" element={<Detail />}></Route>
         <Route path="/ViewAll" element={<ViewAll />}></Route>
+        <Route path="/toGyeonggi" element={<GyeonggiPage />}></Route>
+        <Route path="/toGangwon" element={<GangwonPage />}></Route>
       </Routes>
     </div>
   );
