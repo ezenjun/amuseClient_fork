@@ -14,8 +14,27 @@ import ViewAll from "./SubPages/ViewAllPages/ViewAll";
 import GyeonggiPage from "./SubPages/Regions/GyeonggiPage";
 import GangwonPage from "./SubPages/Regions/GangwonPage";
 // import NotFound from './NotFound';
+import { useEffect, useState } from "react";
+
+const apiUrl = "https://ammuse.shop/amusetest";
 
 function App() {
+  const [data, setData] = useState<Response | null>(null);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(apiUrl);
+        const responseData = await response.json();
+        setData(responseData);
+        console.log(data);
+      } catch (error) {
+        console.log("오류 발생");
+        console.error(error);
+      }
+    };
+
+    fetchData();
+  }, []);
   return (
     <div>
       <Routes>
