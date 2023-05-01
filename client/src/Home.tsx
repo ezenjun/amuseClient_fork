@@ -7,10 +7,11 @@ import MainNews from "./MainPage/MainNews/MainNews";
 import MainRegionItem from "./MainPage/MainRegionItems/MainRegionItem";
 import MainMoreAbout from "./MainPage/MainMoreAbout/MainMoreAbout";
 import Footer from "./Footers/Footer";
+import Fade from "./Fade";
 
 function Home() {
   return (
-    <>
+    <Fade>
       <div>
         <div className="App">
           <Header />
@@ -26,7 +27,7 @@ function Home() {
         </div>
         <Footer />
       </div>
-    </>
+    </Fade>
   );
 }
 
