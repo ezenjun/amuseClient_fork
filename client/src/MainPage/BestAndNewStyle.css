@@ -1,0 +1,54 @@
+.container {
+  display: flex;
+  /* justify-content: space-between; */
+  width: 100%;
+  /* max-width: 900px; */
+}
+
+.box {
+  width: 359px;
+  height: 300px;
+  border-radius: 12px;
+  position: relative;
+  background-color: lightblue;
+}
+.box::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60%;
+  background-color: lightblue;
+  border-radius: 12px 12px 0 0;
+}
+
+.box::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 40%;
+  background-color: rgb(210, 255, 254);
+  border-radius: 0 0 12px 12px;
+}
+
+.tripTitle {
+  position: absolute;
+  font-size: 20px;
+  font-weight: bold;
+  margin-left: 20px;
+  margin-top: 210px;
+  width: 100%;
+  z-index: 5;
+}
+
+.tripCost {
+  position: absolute;
+  font-size: 16px;
+  margin-left: 20px;
+  margin-top: 240px;
+  width: 100%;
+  z-index: 5;
+}

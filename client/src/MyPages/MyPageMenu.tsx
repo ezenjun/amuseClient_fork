@@ -1,16 +1,16 @@
-import * as React from 'react';
-import Button from '@mui/material/Button';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import SettingsIcon from '@mui/icons-material/Settings';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import NotificationsIcon from '@mui/icons-material/Notifications';
-import RoomServiceIcon from '@mui/icons-material/RoomService';
-import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
-import CreditCardIcon from '@mui/icons-material/CreditCard';
-import AssignmentIcon from '@mui/icons-material/Assignment';
-import "./MyPageMenu.css"
-import { useNavigate } from 'react-router-dom';
+import * as React from "react";
+import Button from "@mui/material/Button";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import SettingsIcon from "@mui/icons-material/Settings";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import NotificationsIcon from "@mui/icons-material/Notifications";
+import RoomServiceIcon from "@mui/icons-material/RoomService";
+import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
+import CreditCardIcon from "@mui/icons-material/CreditCard";
+import AssignmentIcon from "@mui/icons-material/Assignment";
+import "./MyPageMenu.css";
+import { useNavigate } from "react-router-dom";
 
 export default function MyPageMenu() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -54,21 +54,23 @@ export default function MyPageMenu() {
     <>
       <Button
         id="basic-button"
-        className='basic-button'
-        aria-controls={open ? 'basic-menu' : undefined}
+        className="basic-button"
+        aria-controls={open ? "basic-menu" : undefined}
         aria-haspopup="true"
-        aria-expanded={open ? 'true' : undefined}
+        aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
-        style={{width: "100px",
-                height: "40px",
-                marginTop: "12px",
-                border: "none",
-                backgroundColor: "transparent",
-                fontSize: "16px",
-                fontWeight: "bolder",
-                cursor: "pointer",
-                color: "black",
-                padding: "1px 6px"}}
+        style={{
+          width: "120px",
+          height: "40px",
+          marginTop: "10px",
+          border: "none",
+          backgroundColor: "transparent",
+          fontSize: "16px",
+          fontWeight: "bolder",
+          cursor: "pointer",
+          color: "black",
+          padding: "1px 6px",
+        }}
       >
         마이페이지
       </Button>
@@ -78,50 +80,36 @@ export default function MyPageMenu() {
         open={open}
         onClose={handleClose}
         MenuListProps={{
-          'aria-labelledby': 'basic-button',
+          "aria-labelledby": "basic-button",
         }}
       >
         <MenuItem onClick={navigateToSettings}>
-            <SettingsIcon />
-            <div className='mypage_category_item'>
-                설정
-            </div>
+          <SettingsIcon />
+          <div className="mypage_category_item">설정</div>
         </MenuItem>
         <MenuItem onClick={navigateToLikes}>
-            <FavoriteIcon />
-            <div className='mypage_category_item'>
-                관심상품
-            </div>
+          <FavoriteIcon />
+          <div className="mypage_category_item">관심상품</div>
         </MenuItem>
         <MenuItem onClick={navigateToNotifications}>
-            <NotificationsIcon />
-            <div className='mypage_category_item'>
-                알림
-            </div>
+          <NotificationsIcon />
+          <div className="mypage_category_item">알림</div>
         </MenuItem>
         <MenuItem onClick={navigateToInquiries}>
-            <RoomServiceIcon />
-            <div className='mypage_category_item'>
-                문의
-            </div>
+          <RoomServiceIcon />
+          <div className="mypage_category_item">문의</div>
         </MenuItem>
         <MenuItem onClick={navigateToOrders}>
-            <CalendarMonthIcon />
-            <div className='mypage_category_item'>
-                주문상품
-            </div>
+          <CalendarMonthIcon />
+          <div className="mypage_category_item">주문상품</div>
         </MenuItem>
         <MenuItem onClick={navigateToQuotes}>
-            <CreditCardIcon />
-            <div className='mypage_category_item'>
-                상품견적
-            </div>
+          <CreditCardIcon />
+          <div className="mypage_category_item">상품견적</div>
         </MenuItem>
         <MenuItem onClick={navigateToBills}>
-            <AssignmentIcon />
-            <div className='mypage_category_item'>
-                맞춤견적
-            </div>
+          <AssignmentIcon />
+          <div className="mypage_category_item">맞춤견적</div>
         </MenuItem>
       </Menu>
     </>

@@ -8,7 +8,7 @@ const BigBox = ({ backgroundColor }: { backgroundColor: string }) => (
 function MainNews() {
   return (
     <>
-      <h2 style={{ marginTop: "3rem" }}>전해드릴 소식이 있어요📢</h2>
+      <h2 style={{ marginTop: "3rem", marginBottom: "1rem" }}>전해드릴 소식이 있어요📢</h2>
       <div className="container">
         <BigBox backgroundColor="lightgray" />
       </div>
