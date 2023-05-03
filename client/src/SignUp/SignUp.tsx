@@ -1,6 +1,8 @@
 import React from 'react'
 import './SignUp.css'
 import Header from '../Headers/Header'
+import GoogleIcon from '@mui/icons-material/Google';
+import { Link } from 'react-router-dom';
 
 export default function SignUp() {
   return (
@@ -44,9 +46,23 @@ export default function SignUp() {
             <div className="login_function_box">
                 <div className='signup_box'>
                     <span>이미 가입하셨나요?</span>
-                    <span className='signup_link'>로그인</span>
+                    <Link to='/LogIn'>
+                        <span className='signup_link'>로그인</span>
+                    </Link>
                 </div>
             </div>
+        </div>
+        <div className='OAuth'>
+            <button className='login_google'>
+                <GoogleIcon style={{width: "20px", height: "20px"}}/>
+                Google 로그인
+            </button>
+            <button className='login_naver'>
+                Naver 로그인
+            </button>
+            <button className='login_kakao'>
+                KaKao 로그인
+            </button>
         </div>
         </form>
     </div>
