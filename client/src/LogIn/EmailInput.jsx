@@ -6,7 +6,7 @@ import FormControl from '@mui/material/FormControl';
 export default function EmailInput({ email, handleChangeEmail }) {
   return (
     <FormControl sx={{ m: 1, width: '25ch' }} variant="standard">
-      <TextField id="standard-basic" label="Standard" variant="standard" value={email} onChange={handleChangeEmail} sx={{ width: "490px"}} />
+      <TextField id="standard-basic" label="Email" variant="standard" value={email} onChange={handleChangeEmail} sx={{ width: "490px"}} />
     </FormControl>
   );
 }

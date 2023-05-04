@@ -10,6 +10,7 @@ import MyPage from './MyPages/MyPage';
 import Login from './LogIn/LogIn';
 import SignUp from './SignUp/SignUp';
 import Detail from "./DetailPage/Detail/Detail";
+import Review from './MyPages/Review/Review';
 // import NotFound from './NotFound';
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
         <Route path="/LogIn" element={<Login />}></Route>
         <Route path="/SignUp" element={<SignUp />}></Route>
         <Route path="/MyPage/:category" element={<MyPage />}></Route>
+        <Route path="/Review/:name" element={<Review />}></Route>
         <Route path="/OnlineTour" element={<OnlineTour />}></Route>
         <Route path="/Detail" element={<Detail />}></Route>
       </Routes>
