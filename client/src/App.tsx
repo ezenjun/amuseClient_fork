@@ -1,6 +1,6 @@
 import React, { ReactNode } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import "./App.css";
+import Style from "./App.module.css";
 import Home from "../src/Home";
 import Concierge from "./SubPages/Concierge/Concierge";
 import ChildCare from "./SubPages/ChildCare/ChildCare";
@@ -28,7 +28,7 @@ function App() {
         setData(responseData);
         console.log(data);
       } catch (error) {
-        console.log("오류 발생");
+        console.log("연결 실패");
         console.error(error);
       }
     };
