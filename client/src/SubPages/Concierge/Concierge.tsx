@@ -20,9 +20,7 @@ function Concierge() {
   };
   return (
     <div>
-      <div className={Style["App"]}>
-        <Header />
-      </div>
+      <Header />
       <div className={Style["liner"]}></div>
       {/* <br /> */}
       <Fade>
