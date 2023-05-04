@@ -1,6 +1,6 @@
 import React, { ReactNode } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import "./App.css";
+import Style from "./App.module.css";
 import Home from "../src/Home";
 import Concierge from "./SubPages/Concierge/Concierge";
 import ChildCare from "./SubPages/ChildCare/ChildCare";
@@ -10,6 +10,7 @@ import MyPage from "./MyPages/MyPage";
 import Login from "./LogIn/LogIn";
 import SignUp from "./SignUp/SignUp";
 import Detail from "./DetailPage/Detail/Detail";
+import Review from './MyPages/Review/Review';
 import ViewAll from "./SubPages/ViewAllPages/ViewAll";
 import GyeonggiPage from "./SubPages/Regions/GyeonggiPage";
 import GangwonPage from "./SubPages/Regions/GangwonPage";
@@ -28,7 +29,7 @@ function App() {
         setData(responseData);
         console.log(data);
       } catch (error) {
-        console.log("오류 발생");
+        console.log("연결 실패");
         console.error(error);
       }
     };
@@ -45,6 +46,7 @@ function App() {
         <Route path="/LogIn" element={<Login />}></Route>
         <Route path="/SignUp" element={<SignUp />}></Route>
         <Route path="/MyPage/:category" element={<MyPage />}></Route>
+        <Route path="/Review/:name" element={<Review />}></Route>
         <Route path="/OnlineTour" element={<OnlineTour />}></Route>
         <Route path="/Detail" element={<Detail />}></Route>
         <Route path="/ViewAll" element={<ViewAll />}></Route>

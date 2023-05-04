@@ -9,7 +9,6 @@ import Orders from './MyPage/Orders';
 import Quotes from './MyPage/Quotes';
 import Bills from './MyPage/Bills';
 import './MyPage.css';
-import GroupingTable from './GroupingTable/NotificationsTable';
 import Header from '../Headers/Header';
 
 export default function MyPage() {

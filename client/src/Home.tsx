@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import "./App.css";
+import Style from "./App.module.css";
 import Header from "./Headers/Header";
 import MainBestItem from "./MainPage/MainBestItems/MainBestItem";
 import MainNewItem from "./MainPage/MainNewItems/MainNewItem";
@@ -13,12 +13,10 @@ function Home() {
   return (
     <Fade>
       <div>
-        <div className="App">
-          <Header />
-        </div>
-        <div className="liner"></div>
+        <Header />
+        <div className={Style["liner"]}></div>
         <br />
-        <div className="App">
+        <div className={Style["App"]}>
           <MainBestItem />
           <MainNewItem />
           <MainNews />
