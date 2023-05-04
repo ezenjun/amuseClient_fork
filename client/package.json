@@ -9,7 +9,11 @@
     "@fortawesome/free-solid-svg-icons": "^6.4.0",
     "@fortawesome/react-fontawesome": "^0.2.0",
     "@mui/icons-material": "^5.11.16",
+<<<<<<< HEAD
     "@mui/material": "^5.12.3",
+=======
+    "@mui/material": "^5.12.0",
+>>>>>>> 66ceafbdaf56028990695dc8a9634fe9e7f3b9da
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -26,6 +30,7 @@
     "react-modal": "^3.16.1",
     "react-router-dom": "^6.10.0",
     "react-scripts": "5.0.1",
+    "react-transition-group": "^4.4.5",
     "sass": "^1.62.0",
     "typescript": "^4.9.5",
     "v6": "^0.0.0",
