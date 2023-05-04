@@ -1,5 +1,5 @@
 import React from 'react'
-import GroupingTable from '../GroupingTable/GroupingTable'
+import GroupingTable from '../GroupingTable/NotificationsTable'
 
 export default function Bills() {
   return (

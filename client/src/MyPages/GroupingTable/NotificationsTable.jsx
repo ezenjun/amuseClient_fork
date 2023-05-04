@@ -8,84 +8,46 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 
-interface Column {
-  id: 'name' | 'code' | 'population' | 'size';
-  label: string;
-  minWidth?: number;
-  align?: 'right';
-  format?: (value: number) => string;
-}
-
-const columns: readonly Column[] = [
-  { id: 'name', label: '분류', minWidth: 170 },
-  { id: 'code', label: '여행상품명', minWidth: 100 },
+const columns = [
+  { id: 'group', label: '분류', minWidth: 140 },
+  { id: 'name', label: '여행\u00a0상품명', minWidth: 140 },
   {
-    id: 'population',
-    label: '생성',
-    minWidth: 170,
-    align: 'right',
-    format: (value: number) => value.toLocaleString('en-US'),
-  },
+    id: 'date',
+    label: '날짜',
+    minWidth: 120,
+  },  
   {
-    id: 'size',
-    label: '확인',
-    minWidth: 170,
-    align: 'right',
-    format: (value: number) => value.toLocaleString('en-US'),
+    id: 'contents',
+    label: '내용',
+    minWidth: 370,
   },
 ];
 
-interface Data {
-  name: string;
-  code: string;
-  population: number;
-  size: number;
-}
-
-function createData(
-  name: string,
-  code: string,
-  population: number,
-  size: number,
-): Data {
-  const density = population / size;
-  return { name, code, population, size };
+function createData(group, name, date, contents) {
+  return { group, name, date, contents };
 }
 
 const rows = [
-  createData('아이돌봄', '[1박 2일] 수제맥주와 함께하는 감성 충만 강릉여행', 0, 0),
-  // createData('China', 'CN', 1403500365, 9596961),
-  // createData('Italy', 'IT', 60483973, 301340),
-  // createData('United States', 'US', 327167434, 9833520),
-  // createData('Canada', 'CA', 37602103, 9984670),
-  // createData('Australia', 'AU', 25475400, 7692024),
-  // createData('Germany', 'DE', 83019200, 357578),
-  // createData('Ireland', 'IE', 4857000, 70273),
-  // createData('Mexico', 'MX', 126577691, 1972550),
-  // createData('Japan', 'JP', 126317000, 377973),
-  // createData('France', 'FR', 67022000, 640679),
-  // createData('United Kingdom', 'GB', 67545757, 242495),
-  // createData('Russia', 'RU', 146793744, 17098246),
-  // createData('Nigeria', 'NG', 200962417, 923768),
-  // createData('Brazil', 'BR', 210147125, 8515767),
+  createData('컨시어지 여행', '자연찾아 전라도', "2023-01-15", '2월 한정 30퍼센트 할인 중!'),
+  createData('어르신 돌봄 여행', '강릉 데이투어', "2023-01-15", "00님 이런 여행은 어떠세요?"),
 ];
 
-export default function GroupingTable() {
+export default function NotificationsTable() {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
-  const handleChangePage = (event: unknown, newPage: number) => {
+  const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
 
-  const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
 
   return (
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-      <TableContainer sx={{ maxHeight: 450 }}>
+      <TableContainer sx={{ maxHeight: 440 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
@@ -123,7 +85,7 @@ export default function GroupingTable() {
         </Table>
       </TableContainer>
       <TablePagination
-        rowsPerPageOptions={[5, 10, 15]}
+        rowsPerPageOptions={[10, 15, 20]}
         component="div"
         count={rows.length}
         rowsPerPage={rowsPerPage}

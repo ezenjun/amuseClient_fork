@@ -1,7 +1,7 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
 import MyPagelist from './MyPageList';
-import Settings from './MyPage/Settings';
+import Settings from './MyPage/Settings/Settings';
 import Likes from './MyPage/Likes';
 import Notifications from './MyPage/Notifications';
 import Inquiries from './MyPage/Inquiries';
@@ -9,7 +9,7 @@ import Orders from './MyPage/Orders';
 import Quotes from './MyPage/Quotes';
 import Bills from './MyPage/Bills';
 import './MyPage.css';
-import GroupingTable from './GroupingTable/GroupingTable';
+import GroupingTable from './GroupingTable/NotificationsTable';
 import Header from '../Headers/Header';
 
 export default function MyPage() {
