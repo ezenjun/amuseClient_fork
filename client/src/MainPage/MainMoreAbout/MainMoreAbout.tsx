@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import "./MainMoreAbout.css";
+import Style from "./MainMoreAbout.module.css";
 import bcorplogo from "../MainImgs/bcorplogo.svg";
 import logo01 from "../MainImgs/logo01.svg";
 import logo02 from "../MainImgs/logo02.svg";
@@ -21,25 +21,25 @@ function MainMoreAbout() {
   return (
     <>
       <h2 style={{ marginTop: "4rem" }}>어뮤즈트래블에 대해 더 알고싶다면? 🔍</h2>
-      <div className="middle">
-        <h4 className="sns" onClick={gotoBlog}>
+      <div className={Style["middle"]}>
+        <h4 className={Style["sns"]} onClick={gotoBlog}>
           네이버 블로그
         </h4>
-        <h4 className="sns" onClick={gotoInstagram}>
+        <h4 className={Style["sns"]} onClick={gotoInstagram}>
           인스타그램
         </h4>
-        <h4 className="sns" onClick={gotoFacebook}>
+        <h4 className={Style["sns"]} onClick={gotoFacebook}>
           페이스북
         </h4>
       </div>
       <div style={{ clear: "left" }}></div>
-      <div className="imgContainer">
-        <img className="logoImgs" src={bcorplogo} alt="Bcorp Logo" />
-        <img className="logoImgs" src={logo01} alt="Logo 01" />
-        <img className="logoImgs" src={logo02} alt="Logo 02" />
-        <img className="logoImgs" src={logo03} alt="Logo 03" />
-        <img className="logoImgs" src={logo04} alt="Logo 04" />
-        <img className="logoImgs" src={logo05} alt="Logo 05" />
+      <div className={Style["imgContainer"]}>
+        <img className={Style["logoImgs"]} src={bcorplogo} alt="Bcorp Logo" />
+        <img className={Style["logoImgs"]} src={logo01} alt="Logo 01" />
+        <img className={Style["logoImgs"]} src={logo02} alt="Logo 02" />
+        <img className={Style["logoImgs"]} src={logo03} alt="Logo 03" />
+        <img className={Style["logoImgs"]} src={logo04} alt="Logo 04" />
+        <img className={Style["logoImgs"]} src={logo05} alt="Logo 05" />
       </div>
       <div style={{ clear: "left" }}></div>
     </>
