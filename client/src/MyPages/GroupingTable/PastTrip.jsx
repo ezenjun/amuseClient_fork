@@ -31,7 +31,9 @@ function createData(status, name, date, review) {
 
 const rows = [
   createData('완료', '자연찾아 전라도', "2023-01-15 ~ 2023-01-17", "리뷰 남기기"),
+  createData('완료', '춘천 1박 2일', "2023-01-15 ~ 2023-01-17", "리뷰 남기기"),
   createData('완료', '강릉 데이투어', "2023-01-15 ~ 2023-01-17", "리뷰 남기기"),
+  createData('완료', '여기서 쉬어가요 여행 (ver. 강원도)', "2023-01-15 ~ 2023-01-17", "리뷰 남기기"),
 ];
 
 export default function PastTrip() {
