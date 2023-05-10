@@ -13,7 +13,7 @@ const Box = ({ backgroundColor, marginRight }: { backgroundColor: string; margin
   </div>
 );
 
-function Concierge() {
+function ChildCare() {
   const movePage = useNavigate();
   const moveToViewAll = () => {
     movePage("/ViewAll");
@@ -46,4 +46,4 @@ function Concierge() {
   );
 }
 
-export default Concierge;
+export default ChildCare;
