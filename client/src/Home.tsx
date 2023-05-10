@@ -13,9 +13,7 @@ function Home() {
   return (
     <Fade>
       <div>
-        <div className={Style["App"]}>
-          <Header />
-        </div>
+        <Header />
         <div className={Style["liner"]}></div>
         <br />
         <div className={Style["App"]}>

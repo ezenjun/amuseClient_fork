@@ -24,14 +24,7 @@ const CourseIntroDetail: FC<CourseIntroDetailProps> = ({
         </div>
         <div className="course-line-content">
           <div className="course-line" />
-          <p className="course-content">
-            {content.split('\n').map((line) => (
-              <span>
-                {line}
-                <br />
-              </span>
-            ))}
-          </p>
+          <p className="course-content">{content}</p>
         </div>
       </div>
       <img className="course-image" src={imageSrc} alt={title} />

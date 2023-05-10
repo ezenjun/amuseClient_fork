@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import Style from "./App.module.css";
 import Home from "../src/Home";
 import Concierge from "./SubPages/Concierge/Concierge";
@@ -16,6 +16,7 @@ import GyeonggiPage from "./SubPages/Regions/GyeonggiPage";
 import GangwonPage from "./SubPages/Regions/GangwonPage";
 // import NotFound from './NotFound';
 import { useEffect, useState } from "react";
+import axios from "axios";
 
 const apiUrl = "https://ammuse.shop/amusetest";
 
@@ -36,6 +37,44 @@ function App() {
 
     fetchData();
   }, []);
+
+  /**
+   * Current Item API
+   */
+  const [currentItemIds, setCurrentItemIds] = useState<number[]>([]);
+  useEffect(() => {
+    axios
+      .get("https://ammuse.store/main/current-item")
+      .then((response) => {
+        const currentItems = response.data.data.currentItems;
+        const ids = currentItems.map((item: any) => item.item_db_id);
+        setCurrentItemIds(ids);
+
+        // console.log(response.data.data.currentItems)
+      })
+      .catch(error => {
+        console.log("연결 실패");
+      });
+  }, []);
+
+  /**
+   * Course API
+   */
+  const [categoryIds, setCategoryIds] = useState<number[]>([]);
+  useEffect(() => {
+    axios
+      .get("https://ammuse.store/main/category")
+      .then((response) => {
+        const categories = response.data.data.categories;
+        const ids = categories.map((category: any) => category.categoryId);
+        setCategoryIds(ids);
+        console.log(response.data.data.categories)
+      })
+      .catch(error => {
+        console.log("연결 실패");
+      });
+  }, []);
+
   return (
     <div>
       <Routes>
@@ -48,10 +87,21 @@ function App() {
         <Route path="/MyPage/:category" element={<MyPage />}></Route>
         <Route path="/Review/:name" element={<Review />}></Route>
         <Route path="/OnlineTour" element={<OnlineTour />}></Route>
-        <Route path="/Detail" element={<Detail />}></Route>
         <Route path="/ViewAll" element={<ViewAll />}></Route>
         <Route path="/toGyeonggi" element={<GyeonggiPage />}></Route>
         <Route path="/toGangwon" element={<GangwonPage />}></Route>
+
+        {/**
+         * 상세페이지 Route
+         */}
+         {currentItemIds.map((currentItemId) => (
+            <Route 
+              key={currentItemId}
+              path={`/detail/${currentItemId}`} 
+              element={<Detail itemId={currentItemId} />}
+            />
+         ))}
+        
       </Routes>
     </div>
   );

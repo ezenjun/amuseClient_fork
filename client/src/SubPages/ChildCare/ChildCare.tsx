@@ -13,16 +13,14 @@ const Box = ({ backgroundColor, marginRight }: { backgroundColor: string; margin
   </div>
 );
 
-function Concierge() {
+function ChildCare() {
   const movePage = useNavigate();
   const moveToViewAll = () => {
     movePage("/ViewAll");
   };
   return (
     <div>
-      <div className={Style["App"]}>
-        <Header />
-      </div>
+      <Header />
       <div className={Style["liner"]}></div>
       {/* <br /> */}
       <Fade>
@@ -48,4 +46,4 @@ function Concierge() {
   );
 }
 
-export default Concierge;
+export default ChildCare;

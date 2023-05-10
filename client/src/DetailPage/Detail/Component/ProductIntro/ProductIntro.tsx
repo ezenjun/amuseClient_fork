@@ -2,7 +2,11 @@ import React from 'react';
 import './ProductIntro.scss';
 import MoreBtn from '../MoreBtn/MoreBtn';
 
-function ProductIntro() {
+type ProductIntroProps = {
+  itemId: number | null;
+};
+
+function ProductIntro({ itemId }: ProductIntroProps) {
   return (
     <div className="product-introduction">
       <p className="introduction-title">놀면서 쉬면서 즐겨보는 나의 제주 ⭐</p>
@@ -57,7 +61,6 @@ function ProductIntro() {
         <br />
         <br />
       </p>
-      <MoreBtn />
     </div>
   );
 }

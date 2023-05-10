@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Detail.scss';
 import Header from '../../Headers/Header';
 import Reservation from './Component/Reservation/Reservation';
@@ -14,26 +14,31 @@ import Manager from './Component/Manager/Manager';
 import Review from './Component/Review/Review';
 import ReviewPicture from './Component/ReviewPicture/ReviewPicture';
 import Calendar from './Component/TicketSelect/Calendar/Calendar';
+import Style from "../../App.module.css";
 
-function Detail() {
+type DetailProps = {
+  itemId: number | null;
+};
+
+function Detail({ itemId }: DetailProps) {
   return (
     <div className="Detail">
         <>
           <div className="App">
             <Header />
+            <div className={Style["liner"]}></div>
           </div>
-          <div className="liner"></div>
         </>
         <div className="page">
           <Reservation />
-          <Title />
-          <IconInfo />
-          <Picture />
-          <Calendar />
-          <ProductIntro />
-          <CourseIntro />
+          <Title itemId={itemId} />
+          <IconInfo itemId={itemId} />
+          <Picture itemId={itemId} />
+          <Calendar itemId={itemId} />
+          <ProductIntro itemId={itemId} />
+          <CourseIntro itemId={itemId} />
           <Map />
-          <OtherInfo />
+          <OtherInfo itemId={itemId} />
           <Manager />
           <ReviewPicture />
           <Review />

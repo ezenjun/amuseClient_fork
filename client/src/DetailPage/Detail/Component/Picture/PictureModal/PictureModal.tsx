@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from "axios";
 import Modal from 'react-modal';
 import './PictureModal.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -6,22 +7,37 @@ import { faChevronLeft, faChevronRight, faTimes } from '@fortawesome/free-solid-
 
 interface PictureModalProps {
   onClose: () => void;
+  itemId: number | null;
 }
 
 const onAfterOpen = () => {
   document.body.style.overflow = 'hidden';
 };
 
-const PictureModal: React.FC<PictureModalProps> = ({ onClose }) => {
+const PictureModal: React.FC<PictureModalProps> = ({ onClose, itemId }) => {
+  /**
+   * Picture Data
+   */
+  const [pictureData, setPictureData] = useState<string[]>([]);
+
+  /**
+   * Picture API
+   */
+  useEffect(() => {
+    axios
+      .get(`https://ammuse.store/detail/${itemId}/picture`)
+      .then((response) => {
+        setPictureData(response.data.data.pictures)
+
+        //console.log(response.data.data.pictures)
+      })
+      .catch(error => {
+        console.log("연결 실패");
+      });
+  }, []);
+
   // 이미지 목록
-  const pictures = [
-    'images/test1.jpeg',
-    'images/test2.jpeg',
-    'images/test3.jpeg',
-    'images/test4.jpeg',
-    'images/test5.jpeg',
-    'images/test6.jpeg',
-  ];
+  const pictures = pictureData;
 
   // 현재 이미지의 인덱스
   const [currentPictureIndex, setCurrentPictureIndex] = useState(0);
