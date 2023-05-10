@@ -7,10 +7,11 @@ interface TitleDetailProps {
     country: string;
     city: string;
     title: string;
+    rated: number;
 }
 
 const TitleDetail: FC<TitleDetailProps> = ({
-    country, city, title,
+    country, city, title, rated
 }) => (
     <div className="Detail-title">
       {/* 헤더의 위치 */}
@@ -20,10 +21,12 @@ const TitleDetail: FC<TitleDetailProps> = ({
         <FontAwesomeIcon className="icon-location" icon={faLocationDot} />
         <p className="city">{city}</p>
       </div>
+
       {/* 헤더의 제목 */}
       <div className="title">
         <p className="title">{title}</p>
       </div>
+
       {/* 헤더의 별점 */}
       <div className="review">
         <div className="star">
@@ -33,7 +36,7 @@ const TitleDetail: FC<TitleDetailProps> = ({
           <FontAwesomeIcon icon={faStar} />
           <FontAwesomeIcon icon={faStar} />
         </div>
-        <p className="score">5.0</p>
+        <p className="score">{rated}</p>
         <p className="count">(12)</p>
         <FontAwesomeIcon className="icon-right" icon={faChevronRight} />
       </div>

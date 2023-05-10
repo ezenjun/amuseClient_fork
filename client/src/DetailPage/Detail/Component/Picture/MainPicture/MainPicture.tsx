@@ -5,9 +5,10 @@ import './MainPicture.scss';
 interface MainPictureProps {
   src: string;
   alt: string;
+  itemId: number | null;
 }
 
-const MainPicture: React.FC<MainPictureProps> = ({ src, alt }) => {
+const MainPicture: React.FC<MainPictureProps> = ({ src, alt, itemId }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => {
@@ -22,7 +23,7 @@ const MainPicture: React.FC<MainPictureProps> = ({ src, alt }) => {
     <div className="MainPicture">
       <img className="image" src={src} alt={alt} onClick={openModal} />
       {isModalOpen && (
-        <PictureModal onClose={closeModal} />
+        <PictureModal onClose={closeModal} itemId={itemId}/>
       )}
     </div>
   );

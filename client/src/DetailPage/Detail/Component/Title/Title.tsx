@@ -2,30 +2,46 @@ import React, { useEffect, useState } from 'react';
 import TitleDetail from './TitleDetail/TitleDetail';
 import axios from "axios";
 
-function Title() {
-  interface DataProps {
+type TitleProps = {
+  itemId: number | null;
+};
+
+function Title({ itemId }: TitleProps) {
+  /**
+   * Title Data
+   */
+  interface TitleData {
     country : string
     city : string
     title : string
+    rated : number
   }
-  let [data, setData] = useState<DataProps>();
 
+  const [titleData, setTitleData] = useState<TitleData>();
+
+  /**
+   * Title API
+   */
   useEffect(() => {
     axios
-      .get("https://1cba6b89-f8d3-4a92-95a3-9444a854510f.mock.pstmn.io/data")
-      .then((result) => {
-        setData(result.data[0]);
-        console.log(result.data[0])
+      .get(`https://ammuse.store/detail/${itemId}/title`)
+      .then((response) => {
+        setTitleData(response.data.data)
+
+        //console.log(response.data.data)
       })
-      .catch(() => {});
+      .catch(error => {
+        console.log("연결 실패");
+      });
   }, []);
 
   return (
     <div>
       <TitleDetail
-        country={data?.country ?? "country"}
-        city={data?.city ?? "city"}
-        title={data?.title ?? "title"}
+        country={titleData?.country ?? "country"}
+        city={titleData?.city ?? "city"}
+        title={titleData?.title ?? "title"}
+        rated={titleData?.rated ?? 0.0}
       />
     </div>
   );
