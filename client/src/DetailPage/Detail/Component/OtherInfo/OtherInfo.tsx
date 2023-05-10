@@ -2,7 +2,11 @@ import React from 'react';
 import './OtherInfo.scss';
 import OtherInfoDetail from './OtherInfoDetail/OtherInfoDetail';
 
-function OtherInfo() {
+type OtherInfoProps = {
+  itemId: number | null;
+};
+
+function OtherInfo({ itemId }: OtherInfoProps) {
   return (
     <div className='other-info'>
         <div className="other-information">

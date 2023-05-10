@@ -33,8 +33,12 @@ const formatCaption: DateFormatter = (month, options) => {
     );
 };
 
+type CalendarProps = {
+    itemId: number | null;
+};
+
 // 달력 날짜 별 색 지정 및 legend 추가
-function Calendar() {
+function Calendar({ itemId }: CalendarProps) {
     const [selected, setSelected] = React.useState<Date>();
 
     return (

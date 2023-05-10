@@ -1,16 +1,44 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from "axios";
 import MainPicture from './MainPicture/MainPicture';
 import SubPicture from './SubPicture/SubPicture';
 import './Picture.scss';
 
-function Picture() {
+type PictureProps = {
+  itemId: number | null;
+};
+
+function Picture({ itemId }: PictureProps) {
+  /**
+   * Picture Data
+   */
+  const [pictureData, setPictureData] = useState<string[]>([]);
+  const mainPicture = pictureData.shift();
+  const subPicture = pictureData.slice(0, 3);
+
+  /**
+   * Picture API
+   */
+  useEffect(() => {
+    axios
+      .get(`https://ammuse.store/detail/${itemId}/picture`)
+      .then((response) => {
+        setPictureData(response.data.data.pictures)
+
+        //console.log(response.data.data.pictures)
+      })
+      .catch(error => {
+        console.log("연결 실패");
+      });
+  }, []);
+
   return (
     <div className="Picture">
-      <MainPicture src="images/main.jpeg" alt="test1" />
+      {mainPicture && <MainPicture src={mainPicture} alt={mainPicture} itemId={itemId} />}
       <div className="subpicture">
-        <SubPicture src="images/day2-3.png" alt="test1" />
-        <SubPicture src="images/day3-3.png" alt="test1" />
-        <SubPicture src="images/picturetest.png" alt="test1" />
+        {subPicture.map((picture) => (
+          <SubPicture src={picture} alt={picture} itemId={itemId}/>
+        ))}
       </div>
     </div>
   );
