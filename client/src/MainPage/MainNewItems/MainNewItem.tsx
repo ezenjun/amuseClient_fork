@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Style from "../BestAndNewStyle.module.css";
 import axios from "axios";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart } from "@fortawesome/free-regular-svg-icons";
+import { faHeart as fullHeart } from "@fortawesome/free-solid-svg-icons";
 
 const numberWithCommas = (num: number): string => {
   return num.toLocaleString("en");
@@ -13,14 +16,8 @@ interface BoxProps {
   handleClick: () => void;
   title: string;
   startPrice: string;
+  imageUrl: string;
 }
-
-const Box: React.FC<BoxProps> = ({ marginRight, itemId, handleClick, title, startPrice }) => (
-  <div className={Style["box"]} style={{ marginRight }} onClick={handleClick}>
-    <p className={Style["tripTitle"]}>{title}</p>
-    <p className={Style["tripCost"]}>가격 : {startPrice}원 ~</p>
-  </div>
-);
 
 function MainNewItem() {
   /**
@@ -29,6 +26,28 @@ function MainNewItem() {
   const [currentItemIds, setCurrentItemIds] = useState<number[]>([]);
   const [currentItemTitle, setCurrentItemTitle] = useState([]);
   const [currentItemPrice, setCurrentItemPrice] = useState<number[]>([]);
+  const [currentItemImageUrl, setCurrentItemImageUrl] = useState([]);
+  const [isLiked, setIsLiked] = useState(false);
+
+  const handleLikeClick = () => {
+    setIsLiked(!isLiked);
+  };
+
+  const Box: React.FC<BoxProps> = ({ marginRight, itemId, handleClick, title, startPrice, imageUrl }) => (
+    <div className={Style["box"]} style={{ marginRight }} onClick={handleClick}>
+      <div className={Style["box_before"]} style={{ backgroundImage: `url(${imageUrl})` }}></div>
+      <div className={Style["like_count"]}>
+        <FontAwesomeIcon
+          icon={isLiked ? fullHeart : faHeart}
+          style={{ color: "#ffffff", width: "20px", height: "20px", marginTop: "10px", marginLeft: "10px" }}
+          onClick={handleLikeClick}
+        />
+      </div>
+      <p className={Style["tripTitle"]}>{title}</p>
+      <p className={Style["tripCost"]}>가격 : {startPrice}원 ~</p>
+    </div>
+  );
+
   useEffect(() => {
     axios
       .get("https://ammuse.store/main/current-item")
@@ -40,6 +59,8 @@ function MainNewItem() {
         setCurrentItemTitle(titles);
         const startPrices = currentItems.map((item: any) => item.startPrice);
         setCurrentItemPrice(startPrices);
+        const imgUrl = currentItems.map((item: any) => item.imageUrl);
+        setCurrentItemImageUrl(imgUrl);
         console.log(response.data.data.currentItems);
       })
       .catch((error) => {
@@ -67,6 +88,7 @@ function MainNewItem() {
             title={currentItemTitle[index]}
             startPrice={numberWithCommas(currentItemPrice[index])}
             handleClick={() => navigateToDetail(itemId)}
+            imageUrl={currentItemImageUrl[index]}
           />
         ))}
       </div>
