@@ -85,8 +85,11 @@ export default function PastTrip() {
                         <TableCell key={column.id} align={column.align}>
                           {column.id === 'review' ? <button 
                           onClick={()=>handleClickReview(row.name)}
-                          style={{ borderRadius: '4px', border: 'none', boxShadow: '0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12)'}}
-                          className={styles.reviewBtn}>리뷰 남기기</button> : value}
+                          style={{ borderRadius: '4px', border: 'none',
+                          boxShadow: '0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12)',
+                          padding: '8px 12px',
+                          fontWeight: '600'}}
+                          className={styles.reviewBtn}>후기 남기기</button> : value}
                         </TableCell>
                       );
                     })}
