@@ -5,10 +5,13 @@ import GoogleIcon from '@mui/icons-material/Google';
 import { Link } from 'react-router-dom';
 import PasswordInput from './PasswordInput';
 import EmailInput from './EmailInput';
+import GoogleButton from './GoogleButton';
 
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [isLogin, setIsLogin] = useState(false);
+  const [userInfo, setUserInfo] = useState({});
 
   const handleChangeEmail = (e) => {
     setEmail(e.target.value);
@@ -64,10 +67,7 @@ export default function Login() {
                 </div>
             </div>
             <div className='OAuth'>
-                <button className='login_google'>
-                    <GoogleIcon style={{width: "20px", height: "20px"}}/>
-                    Google 로그인
-                </button>
+                <GoogleButton />
                 <button className='login_naver'>
                     Naver 로그인
                 </button>
