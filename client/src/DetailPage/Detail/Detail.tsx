@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Detail.scss';
 import Header from '../../Headers/Header';
 import Reservation from './Component/Reservation/Reservation';
@@ -15,7 +15,13 @@ import Review from './Component/Review/Review';
 import ReviewPicture from './Component/ReviewPicture/ReviewPicture';
 import Calendar from './Component/TicketSelect/Calendar/Calendar';
 
-function Detail() {
+type DetailProps = {
+  itemId: number | null;
+};
+
+function Detail({ itemId }: DetailProps) {
+  const [savedItemId, setSavedItemId] = useState(itemId);
+
   return (
     <div className="Detail">
         <>
