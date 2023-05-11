@@ -4,8 +4,8 @@ import Header from '../Headers/Header';
 import { Link } from 'react-router-dom';
 import PasswordInput from './PasswordInput';
 import EmailInput from './EmailInput';
-// import GoogleButton from './GoogleButton';
 import NaverLogin from './NaverButton';
+
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -13,6 +13,7 @@ export default function Login() {
   const [isLogin, setIsLogin] = useState(false);
   const [userInfo, setUserInfo] = useState({});
   console.log(userInfo);
+
 
   const handleChangeEmail = (e) => {
     setEmail(e.target.value);
