@@ -52,7 +52,23 @@ function Header() {
     </div>
   );
 
+  const MoreCategoryMenu: React.FC<CategoryMenuProps> = ({ hashtagName, handleClick }) => (
+    <div className="menu-item" onClick={handleClick}>
+      {hashtagName}
+    </div>
+  );
+
   const [hashtag, setHashtag] = useState([]);
+  const [showDropdown, setShowDropdown] = useState(false);
+  const MoreDropdown: React.FC = () => (
+    <div className="dropdown">
+      {hashtag.slice(4).map((hashtagName: string, index: number) => (
+        <div className="dropdown-item" key={index}>
+          {hashtagName}
+        </div>
+      ))}
+    </div>
+  );
 
   useEffect(() => {
     axios
@@ -87,10 +103,21 @@ function Header() {
           <MyPageMenu />
         </div>
         <div className="menu">
-          {hashtag.length <= 4
-            ? hashtag.map((id: any) => <CategoryMenu key={id} hashtagName={id} handleClick={() => {}} />)
-            : hashtag.slice(0, 4).map((id: any) => <CategoryMenu key={id} hashtagName={id} handleClick={() => {}} />)}
-          <div className="menu-item"> </div>
+          {hashtag.length <= 4 ? (
+            hashtag.map((hashtagName: string, index: number) => (
+              <CategoryMenu key={index} hashtagName={hashtagName} handleClick={() => {}} />
+            ))
+          ) : (
+            <>
+              {hashtag.slice(0, 4).map((id: string) => (
+                <CategoryMenu key={id} hashtagName={id} handleClick={() => {}} />
+              ))}
+              <div className="menu-item more-dropdown">
+                더보기
+                <MoreDropdown />
+              </div>
+            </>
+          )}
           <div className="menu-item">회사 소개</div>
         </div>
       </div>
