@@ -86,25 +86,39 @@
   .OAuth {
     display: flex;
     flex-direction: column;
-    /* width: 100%; */
+    width: 100%;
     text-align: center;
     margin: auto;
     margin-top: 30px;
   }
 
   .login_google {
+    display: flex;
+    justify-content: center; /* 수평 가운데 정렬 */
+    align-items: center; /* 수직 가운데 정렬 */
+    /* 기존 스타일 유지 */
     background-color: #fff;
+    color: black;
     box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+    text-align: center;
   }
 
   .login_kakao {
-    background-color: yellow;
+    display: flex;
+    justify-content: center; /* 수평 가운데 정렬 */
+    align-items: center; /* 수직 가운데 정렬 */
+
+    background-color: #ffe812;
     box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
     color: black;
   }
 
   .login_naver {
-    background-color: green;
+    display: flex;
+    justify-content: center; /* 수평 가운데 정렬 */
+    align-items: center; /* 수직 가운데 정렬 */
+
+    background-color: #3EAF0E;
     box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
     color: white;
   }
@@ -115,4 +129,13 @@
     border: none;
     padding: 4px;
     margin: 4px 0;
+    
+    text-decoration: none;
+    font-weight: 550;
+  }
+
+  .naver_logo, .kakao_logo {
+    width: 30px;
+    height: 30px;
+    margin-right: 36px;
   }

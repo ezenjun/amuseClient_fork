@@ -4,19 +4,17 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
-// import { GoogleOAuthProvider } from '@react-oauth/google';
+import { RecoilRoot, atom, selector, useRecoilState, useRecoilValue } from 'recoil'; 
 
 const google_id: string = process.env.REACT_APP_GOOGLE_API_KEY ?? "";
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 root.render(
-
-  //<GoogleOAuthProvider clientId={google_id}>
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>
-  //</GoogleOAuthProvider>
-
+  <RecoilRoot>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </RecoilRoot>
 );
 
 // If you want to start measuring performance in your app, pass a function
