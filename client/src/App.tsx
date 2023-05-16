@@ -13,8 +13,6 @@ import GangwonPage from "./SubPages/Regions/GangwonPage";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-
-
 function App() {
   /*
   const apiUrl = "https://ammuse.shop/amusetest";
@@ -43,7 +41,7 @@ function App() {
   const [currentItemProductCodes, setCurrentItemProductCodes] = useState<number[]>([]);
   const [currentItemStartPrices, setCurrentItemStartPrices] = useState<number[]>([]);
   const [currentItemLikeNums, setCurrentItemLikeNums] = useState<number[]>([]);
-  
+
   useEffect(() => {
     axios
       .get("https://ammuse.store/main/current-item")
@@ -53,7 +51,7 @@ function App() {
         const codes = items.map((item: any) => item.product_code);
         const prices = items.map((item: any) => item.startPrice);
         const likeNums = items.map((item: any) => item.likeNum);
-        
+
         setCurrentItemIds(ids);
         setCurrentItemProductCodes(codes);
         setCurrentItemStartPrices(prices);
@@ -105,20 +103,23 @@ function App() {
          * 상세페이지 Route
          */}
         {currentItemIds.map((currentItemId, index) => (
-          <Route 
-            key={currentItemId} 
-            path={`/detail/${currentItemId}`} 
-            element={<Detail itemId={currentItemId} productCode={currentItemProductCodes[index]} startPrice={currentItemStartPrices[index]} likeNum={currentItemLikeNums[index]} />} />
+          <Route
+            key={currentItemId}
+            path={`/detail/${currentItemId}`}
+            element={
+              <Detail
+                itemId={currentItemId}
+                productCode={currentItemProductCodes[index]}
+                startPrice={currentItemStartPrices[index]}
+                likeNum={currentItemLikeNums[index]}
+              />
+            }
+          />
         ))}
         {/**
-         * 서브페이지 Route - 수정 필요
+         * 서브페이지 Route
          */}
-        {categoryIds.map((categoryId, index) => (
-          <Route 
-            key={categoryId} 
-            path={`/${categoryId}`} 
-            element={<Detail itemId={categoryId} productCode={currentItemProductCodes[index]} startPrice={currentItemStartPrices[index]} likeNum={currentItemLikeNums[index]} />} />
-        ))}
+        <Route path="/category/:apiKey" element={<SubPageComp />} />
       </Routes>
     </div>
   );
