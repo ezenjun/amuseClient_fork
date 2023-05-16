@@ -1,11 +1,5 @@
-import React, { ReactNode } from "react";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
-import Style from "./App.module.css";
+import { Routes, Route } from "react-router-dom";
 import Home from "../src/Home";
-import Concierge from "./SubPages/Concierge/Concierge";
-import ChildCare from "./SubPages/ChildCare/ChildCare";
-import SeniorCare from "./SubPages/SeniorCare/SeniorCare";
-import OnlineTour from "./SubPages/OnlineTour/OnlineTour";
 import SubPageComp from "./SubPages/SubPageComp";
 import MyPage from "./MyPages/MyPage";
 import Login from "./LogIn/LogIn";
@@ -19,9 +13,11 @@ import GangwonPage from "./SubPages/Regions/GangwonPage";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-const apiUrl = "https://ammuse.shop/amusetest";
+
 
 function App() {
+  /*
+  const apiUrl = "https://ammuse.shop/amusetest";
   const [data, setData] = useState<Response | null>(null);
   useEffect(() => {
     const fetchData = async () => {
@@ -37,21 +33,33 @@ function App() {
     };
 
     fetchData();
-  }, []);
+  });
+  */
 
   /**
    * Current Item API
    */
   const [currentItemIds, setCurrentItemIds] = useState<number[]>([]);
+  const [currentItemProductCodes, setCurrentItemProductCodes] = useState<number[]>([]);
+  const [currentItemStartPrices, setCurrentItemStartPrices] = useState<number[]>([]);
+  const [currentItemLikeNums, setCurrentItemLikeNums] = useState<number[]>([]);
+  
   useEffect(() => {
     axios
       .get("https://ammuse.store/main/current-item")
       .then((response) => {
-        const currentItems = response.data.data.items;
-        const ids = currentItems.map((item: any) => item.item_db_id);
+        const items = response.data.data.items;
+        const ids = items.map((item: any) => item.item_db_id);
+        const codes = items.map((item: any) => item.product_code);
+        const prices = items.map((item: any) => item.startPrice);
+        const likeNums = items.map((item: any) => item.likeNum);
+        
         setCurrentItemIds(ids);
+        setCurrentItemProductCodes(codes);
+        setCurrentItemStartPrices(prices);
+        setCurrentItemLikeNums(likeNums);
 
-        // console.log(response.data.data.currentItems)
+        //console.log(response.data.data.items[0])
       })
       .catch((error) => {
         console.log("연결 실패");
@@ -69,7 +77,7 @@ function App() {
         const categories = response.data.data.categories;
         const ids = categories.map((category: any) => category.categoryId);
         setCategoryIds(ids);
-        console.log(response.data.data.categories);
+        //console.log(response.data.data.categories);
       })
       .catch((error) => {
         console.log("연결 실패");
@@ -96,15 +104,20 @@ function App() {
         {/**
          * 상세페이지 Route
          */}
-        {currentItemIds.map((currentItemId) => (
-
-          <Route key={currentItemId} path={`/detail/${currentItemId}`} element={<Detail itemId={currentItemId} />} />
+        {currentItemIds.map((currentItemId, index) => (
+          <Route 
+            key={currentItemId} 
+            path={`/detail/${currentItemId}`} 
+            element={<Detail itemId={currentItemId} productCode={currentItemProductCodes[index]} startPrice={currentItemStartPrices[index]} likeNum={currentItemLikeNums[index]} />} />
         ))}
         {/**
-         * 서브페이지 Route
+         * 서브페이지 Route - 수정 필요
          */}
-        {categoryIds.map((categoryId) => (
-          <Route key={categoryId} path={`/${categoryId}`} element={<Detail itemId={categoryId} />} />
+        {categoryIds.map((categoryId, index) => (
+          <Route 
+            key={categoryId} 
+            path={`/${categoryId}`} 
+            element={<Detail itemId={categoryId} productCode={currentItemProductCodes[index]} startPrice={currentItemStartPrices[index]} likeNum={currentItemLikeNums[index]} />} />
         ))}
       </Routes>
     </div>

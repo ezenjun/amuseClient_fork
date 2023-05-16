@@ -16,10 +16,13 @@ import Calendar from "./Component/TicketSelect/Calendar/Calendar";
 import Style from "../../App.module.css";
 
 type DetailProps = {
-  itemId: number | null;
+  itemId: number;
+  productCode: number;
+  startPrice: number;
+  likeNum: number;
 };
 
-function Detail({ itemId }: DetailProps) {
+function Detail({ itemId, productCode, startPrice, likeNum }: DetailProps) {
   return (
     <div className="Detail">
       <>
@@ -29,7 +32,7 @@ function Detail({ itemId }: DetailProps) {
         </div>
       </>
       <div className="page">
-        <Reservation />
+        <Reservation itemId={itemId} productCode={productCode} startPrice={startPrice} likeNum={likeNum} />
         <Title itemId={itemId} />
         <IconInfo itemId={itemId} />
         <Picture itemId={itemId} />
@@ -38,7 +41,7 @@ function Detail({ itemId }: DetailProps) {
         <CourseIntro itemId={itemId} />
         <Map />
         <OtherInfo itemId={itemId} />
-        <Manager />
+        <Manager itemId={itemId} />
         <ReviewPicture />
         <Review />
         <Footer />

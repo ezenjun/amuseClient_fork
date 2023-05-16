@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import axios from "axios";
-import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './CourseIntro.scss';
 import CourseIntroDetail from './CourseIntroDetail/CourseIntroDetail';
 
@@ -39,7 +37,7 @@ function CourseIntro({ itemId }: CourseIntroProps) {
       .catch(error => {
         console.log("연결 실패");
       });
-  }, []);
+  });
 
   return (
     <div className="CourseIntro">
