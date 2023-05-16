@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import "./Detail.scss";
 import Header from "../../Headers/Header";
 import Reservation from "./Component/Reservation/Reservation";
