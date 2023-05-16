@@ -52,7 +52,7 @@ function MainBestItem() {
     axios
       .get("https://ammuse.store/main/best-item")
       .then((response) => {
-        const bestItems = response.data.data.bestItems;
+        const bestItems = response.data.data.items;
         const ids = bestItems.map((item: any) => item.item_db_id);
         setBestItemIds(ids);
         const titles = bestItems.map((item: any) => item.title);

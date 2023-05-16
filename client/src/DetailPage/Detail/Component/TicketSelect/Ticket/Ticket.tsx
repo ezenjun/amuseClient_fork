@@ -1,53 +1,47 @@
 /* eslint-disable react/button-has-type */
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import './Ticket.scss';
 
 interface TicketProps {
-    name: string;
-    detail: string;
-    price: string;
+  name: string;
+  detail: string;
+  price: number | undefined;
 }
 
 const Ticket: FC<TicketProps> = ({
   name, detail, price,
-}) => (
-  <div className="ticket">
-    <div className="ticket-content">
-      <h5 className="ticket-name">{name}</h5>
-      <p className="ticket-detail">{detail}</p>
-    </div>
-    <div className="ticket-price">
-      <span className="person">1명</span>
-      <span className="price">{price}</span>
-      <span className="won">원</span>
-    </div>
-    <div className="ticket-cnt">
-      <button className="minus-btn">-</button>
-      <p className="cnt">0</p>
-      <button className="plus-btn">+</button>
-    </div>
-  </div>
-);
+}) => {
+  const [count, setCount] = useState(0);
+  
+  const handlePlus = () => {
+    setCount(count + 1);
+  }
 
-// function Ticket() {
-//     return (
-//         <div className='ticket'>
-//             <div className='ticket-content'>
-//                 <h5 className='ticket-name'>어린이 이용권</h5>
-//                 <p className='ticket-detail'>만 6세~13세</p>
-//             </div>
-//             <div className='ticket-price'>
-//                 <span className='person'>1명</span>
-//                 <span className='price'>55,000</span>
-//                 <span className='won'>원</span>
-//             </div>
-//             <div className='ticket-cnt'>
-//                 <button className='minus-btn'>-</button>
-//                 <p className='cnt'>0</p>
-//                 <button className='plus-btn'>+</button>
-//             </div>
-//         </div>
-//     );
-// }
+  const handleMinus = () => {
+    if (count > 0) {
+      setCount(count - 1);
+    }
+  }
+  
+  return (
+    <div className="ticket">
+      <div className="ticket-content">
+        <h5 className="ticket-name">{name}</h5>
+        <p className="ticket-detail">{detail}</p>
+      </div>
+      <div className="ticket-price">
+        <span className="person">1명</span>
+        <span className="price">{price}</span>
+        <span className="won">원</span>
+      </div>
+      <div className="ticket-cnt">
+        <button className="minus-btn" onClick={handleMinus}>-</button>
+        <p className="cnt">{count}</p>
+        <button className="plus-btn" onClick={handlePlus}>+</button>
+      </div>
+    </div>
+  );
+
+};
 
 export default Ticket;
