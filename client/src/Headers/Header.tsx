@@ -14,10 +14,17 @@ interface CategoryMenuProps {
   handleClick: () => void;
 }
 
+interface MoreDropdownProps {
+  handleClick: () => void;
+}
+
 function Header() {
   const movePage = useNavigate();
   const navigateToHome = () => {
     movePage("/");
+  };
+  const navigateToSubPageComp = () => {
+    movePage("/Subtest");
   };
   // const navigateToConcierge = () => {
   //   movePage("/Concierge");
@@ -60,10 +67,10 @@ function Header() {
 
   const [hashtag, setHashtag] = useState([]);
   const [showDropdown, setShowDropdown] = useState(false);
-  const MoreDropdown: React.FC = () => (
+  const MoreDropdown: React.FC<MoreDropdownProps> = ({ handleClick }) => (
     <div className="dropdown">
       {hashtag.slice(4).map((hashtagName: string, index: number) => (
-        <div className="dropdown-item" key={index}>
+        <div className="dropdown-item" key={index} onClick={handleClick}>
           {hashtagName}
         </div>
       ))}
@@ -105,16 +112,16 @@ function Header() {
         <div className="menu">
           {hashtag.length <= 4 ? (
             hashtag.map((hashtagName: string, index: number) => (
-              <CategoryMenu key={index} hashtagName={hashtagName} handleClick={() => {}} />
+              <CategoryMenu key={index} hashtagName={hashtagName} handleClick={navigateToSubPageComp} />
             ))
           ) : (
             <>
               {hashtag.slice(0, 4).map((id: string) => (
-                <CategoryMenu key={id} hashtagName={id} handleClick={() => {}} />
+                <CategoryMenu key={id} hashtagName={id} handleClick={navigateToSubPageComp} />
               ))}
               <div className="menu-item more-dropdown">
-                더보기
-                <MoreDropdown />
+                더보기 ▼
+                <MoreDropdown handleClick={navigateToSubPageComp} />
               </div>
             </>
           )}
