@@ -6,10 +6,14 @@ import logoimage from "../MainPage/MainImgs/amuse_logo.png";
 import Concierge from "../SubPages/Concierge/Concierge";
 import { Link } from "react-router-dom";
 import MyPagelist from "../MyPages/MyPageList";
+import { useRecoilState } from 'recoil';
 import MyPageMenu from "../MyPages/MyPageMenu";
+
+import { isLoggedIn } from '../atoms';
 
 function Header() {
   const movePage = useNavigate();
+  const [loggedIn, setLoggedIn] = useRecoilState(isLoggedIn);
   const navigateToHome = () => {
     movePage("/");
   };
@@ -50,13 +54,17 @@ function Header() {
             <button className="searchBtn">검색</button>
           </div>
           <div className="whiteSquare"></div>
+          {loggedIn ? 
           <button className="loginBtn" onClick={navigateToLogIn}>
+            로그아웃
+          </button> : 
+          <button className="loginBtn" onClick={() => setLoggedIn(false)}>
             로그인
-          </button>
+          </button>}
+          {loggedIn ? <MyPageMenu /> :  
           <button className="signInBtn" onClick={navigateToSignUP}>
             회원가입
-          </button>
-          <MyPageMenu />
+          </button>}
         </div>
         <div className="menu">
           <div className="menu-item" onClick={navigateToConcierge}>
