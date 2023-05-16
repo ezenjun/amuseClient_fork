@@ -6,6 +6,7 @@ import logoimage from "../MainPage/MainImgs/amuse_logo.png";
 import Concierge from "../SubPages/Concierge/Concierge";
 import { Link } from "react-router-dom";
 import MyPagelist from "../MyPages/MyPageList";
+import { isLoggedIn } from '../atoms';
 import { useRecoilState } from 'recoil';
 import MyPageMenu from "../MyPages/MyPageMenu";
 import axios from "axios";
@@ -19,7 +20,7 @@ interface MoreDropdownProps {
   handleClick: () => void;
 }
 
-import { isLoggedIn } from '../atoms';
+
 
 function Header() {
   const movePage = useNavigate();
