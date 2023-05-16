@@ -10,11 +10,13 @@ const google_id: string = process.env.REACT_APP_GOOGLE_API_KEY ?? "";
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 root.render(
+
   //<GoogleOAuthProvider clientId={google_id}>
   <BrowserRouter>
     <App />
   </BrowserRouter>
   //</GoogleOAuthProvider>
+
 );
 
 // If you want to start measuring performance in your app, pass a function

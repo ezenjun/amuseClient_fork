@@ -47,7 +47,7 @@ function App() {
     axios
       .get("https://ammuse.store/main/current-item")
       .then((response) => {
-        const currentItems = response.data.data.currentItems;
+        const currentItems = response.data.data.items;
         const ids = currentItems.map((item: any) => item.item_db_id);
         setCurrentItemIds(ids);
 
@@ -97,6 +97,7 @@ function App() {
          * 상세페이지 Route
          */}
         {currentItemIds.map((currentItemId) => (
+
           <Route key={currentItemId} path={`/detail/${currentItemId}`} element={<Detail itemId={currentItemId} />} />
         ))}
         {/**
