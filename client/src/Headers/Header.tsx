@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React, { useEffect, useState } from "react";
 import "./Header.css";
 import Style from "../App.module.css";
 import { useNavigate } from "react-router-dom";
@@ -7,24 +7,30 @@ import Concierge from "../SubPages/Concierge/Concierge";
 import { Link } from "react-router-dom";
 import MyPagelist from "../MyPages/MyPageList";
 import MyPageMenu from "../MyPages/MyPageMenu";
+import axios from "axios";
+
+interface CategoryMenuProps {
+  hashtagName: string;
+  handleClick: () => void;
+}
 
 function Header() {
   const movePage = useNavigate();
   const navigateToHome = () => {
     movePage("/");
   };
-  const navigateToConcierge = () => {
-    movePage("/Concierge");
-  };
-  const navigateToChildCare = () => {
-    movePage("/ChildCare");
-  };
-  const navigateToSeniorCare = () => {
-    movePage("/SeniorCare");
-  };
-  const navigateToOnlineTour = () => {
-    movePage("/OnlineTour");
-  };
+  // const navigateToConcierge = () => {
+  //   movePage("/Concierge");
+  // };
+  // const navigateToChildCare = () => {
+  //   movePage("/ChildCare");
+  // };
+  // const navigateToSeniorCare = () => {
+  //   movePage("/SeniorCare");
+  // };
+  // const navigateToOnlineTour = () => {
+  //   movePage("/OnlineTour");
+  // };
   const navigateToLogIn = () => {
     movePage("/LogIn");
   };
@@ -39,6 +45,28 @@ function Header() {
     width: "250px",
     backgroundColor: "rgb(235, 235, 235)",
   };
+
+  const CategoryMenu: React.FC<CategoryMenuProps> = ({ hashtagName, handleClick }) => (
+    <div className="menu-item" onClick={handleClick}>
+      {hashtagName}
+    </div>
+  );
+
+  const [hashtag, setHashtag] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("https://ammuse.store/main/category")
+      .then((response) => {
+        const hashtagAll = response.data.data.categories;
+        const categoryNames = hashtagAll.map((id: any) => id.categoryName);
+        setHashtag(categoryNames);
+        console.log(response.data.data);
+      })
+      .catch((error) => {
+        console.log("해시태그 연결 실패");
+      });
+  }, []);
 
   return (
     <div>
@@ -59,18 +87,9 @@ function Header() {
           <MyPageMenu />
         </div>
         <div className="menu">
-          <div className="menu-item" onClick={navigateToConcierge}>
-            👨🏼‍🦯 컨시어지 여행
-          </div>
-          <div className="menu-item" onClick={navigateToChildCare}>
-            👶🏻 아이돌봄 여행
-          </div>
-          <div className="menu-item" onClick={navigateToSeniorCare}>
-            👴🏼 어르신돌봄 여행
-          </div>
-          <div className="menu-item" onClick={navigateToOnlineTour}>
-            🖥 랜선 여행
-          </div>
+          {hashtag.length <= 4
+            ? hashtag.map((id: any) => <CategoryMenu key={id} hashtagName={id} handleClick={() => {}} />)
+            : hashtag.slice(0, 4).map((id: any) => <CategoryMenu key={id} hashtagName={id} handleClick={() => {}} />)}
           <div className="menu-item"> </div>
           <div className="menu-item">회사 소개</div>
         </div>

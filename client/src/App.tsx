@@ -10,7 +10,7 @@ import MyPage from "./MyPages/MyPage";
 import Login from "./LogIn/LogIn";
 import SignUp from "./SignUp/SignUp";
 import Detail from "./DetailPage/Detail/Detail";
-import Review from './MyPages/Review/Review';
+import Review from "./MyPages/Review/Review";
 import ViewAll from "./SubPages/ViewAllPages/ViewAll";
 import GyeonggiPage from "./SubPages/Regions/GyeonggiPage";
 import GangwonPage from "./SubPages/Regions/GangwonPage";
@@ -52,7 +52,7 @@ function App() {
 
         // console.log(response.data.data.currentItems)
       })
-      .catch(error => {
+      .catch((error) => {
         console.log("연결 실패");
       });
   }, []);
@@ -68,9 +68,9 @@ function App() {
         const categories = response.data.data.categories;
         const ids = categories.map((category: any) => category.categoryId);
         setCategoryIds(ids);
-        console.log(response.data.data.categories)
+        console.log(response.data.data.categories);
       })
-      .catch(error => {
+      .catch((error) => {
         console.log("연결 실패");
       });
   }, []);
@@ -94,14 +94,15 @@ function App() {
         {/**
          * 상세페이지 Route
          */}
-         {currentItemIds.map((currentItemId) => (
-            <Route 
-              key={currentItemId}
-              path={`/detail/${currentItemId}`} 
-              element={<Detail itemId={currentItemId} />}
-            />
-         ))}
-        
+        {currentItemIds.map((currentItemId) => (
+          <Route key={currentItemId} path={`/detail/${currentItemId}`} element={<Detail itemId={currentItemId} />} />
+        ))}
+        {/**
+         * 서브페이지 Route
+         */}
+        {categoryIds.map((categoryId) => (
+          <Route key={categoryId} path={`/detail/${categoryId}`} element={<Detail itemId={categoryId} />} />
+        ))}
       </Routes>
     </div>
   );
