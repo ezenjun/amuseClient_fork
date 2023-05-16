@@ -6,11 +6,12 @@ import Concierge from "./SubPages/Concierge/Concierge";
 import ChildCare from "./SubPages/ChildCare/ChildCare";
 import SeniorCare from "./SubPages/SeniorCare/SeniorCare";
 import OnlineTour from "./SubPages/OnlineTour/OnlineTour";
+import SubPageComp from "./SubPages/SubPageComp";
 import MyPage from "./MyPages/MyPage";
 import Login from "./LogIn/LogIn";
 import SignUp from "./SignUp/SignUp";
 import Detail from "./DetailPage/Detail/Detail";
-import Review from './MyPages/Review/Review';
+import Review from "./MyPages/Review/Review";
 import ViewAll from "./SubPages/ViewAllPages/ViewAll";
 import GyeonggiPage from "./SubPages/Regions/GyeonggiPage";
 import GangwonPage from "./SubPages/Regions/GangwonPage";
@@ -46,13 +47,13 @@ function App() {
     axios
       .get("https://ammuse.store/main/current-item")
       .then((response) => {
-        const currentItems = response.data.data.currentItems;
+        const currentItems = response.data.data.items;
         const ids = currentItems.map((item: any) => item.item_db_id);
         setCurrentItemIds(ids);
 
         // console.log(response.data.data.currentItems)
       })
-      .catch(error => {
+      .catch((error) => {
         console.log("연결 실패");
       });
   }, []);
@@ -68,9 +69,9 @@ function App() {
         const categories = response.data.data.categories;
         const ids = categories.map((category: any) => category.categoryId);
         setCategoryIds(ids);
-        console.log(response.data.data.categories)
+        console.log(response.data.data.categories);
       })
-      .catch(error => {
+      .catch((error) => {
         console.log("연결 실패");
       });
   }, []);
@@ -79,29 +80,32 @@ function App() {
     <div>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/Concierge" element={<Concierge />}></Route>
+        {/* <Route path="/Concierge" element={<Concierge />}></Route>
         <Route path="/ChildCare" element={<ChildCare />}></Route>
-        <Route path="/SeniorCare" element={<SeniorCare />}></Route>
+        <Route path="/SeniorCare" element={<SeniorCare />}></Route> */}
         <Route path="/LogIn" element={<Login />}></Route>
         <Route path="/SignUp" element={<SignUp />}></Route>
         <Route path="/MyPage/:category" element={<MyPage />}></Route>
         <Route path="/Review/:name" element={<Review />}></Route>
-        <Route path="/OnlineTour" element={<OnlineTour />}></Route>
+        {/* <Route path="/OnlineTour" element={<OnlineTour />}></Route> */}
         <Route path="/ViewAll" element={<ViewAll />}></Route>
         <Route path="/toGyeonggi" element={<GyeonggiPage />}></Route>
         <Route path="/toGangwon" element={<GangwonPage />}></Route>
+        <Route path="/Subtest" element={<SubPageComp />}></Route>
 
         {/**
          * 상세페이지 Route
          */}
-         {currentItemIds.map((currentItemId) => (
-            <Route 
-              key={currentItemId}
-              path={`/detail/${currentItemId}`} 
-              element={<Detail itemId={currentItemId} />}
-            />
-         ))}
-        
+        {currentItemIds.map((currentItemId) => (
+
+          <Route key={currentItemId} path={`/detail/${currentItemId}`} element={<Detail itemId={currentItemId} />} />
+        ))}
+        {/**
+         * 서브페이지 Route
+         */}
+        {categoryIds.map((categoryId) => (
+          <Route key={categoryId} path={`/${categoryId}`} element={<Detail itemId={categoryId} />} />
+        ))}
       </Routes>
     </div>
   );

@@ -52,7 +52,7 @@ function MainNewItem() {
     axios
       .get("https://ammuse.store/main/current-item")
       .then((response) => {
-        const currentItems = response.data.data.currentItems;
+        const currentItems = response.data.data.items;
         const ids = currentItems.map((item: any) => item.item_db_id);
         setCurrentItemIds(ids);
         const titles = currentItems.map((item: any) => item.title);
