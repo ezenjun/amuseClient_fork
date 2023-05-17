@@ -16,18 +16,24 @@ const CourseIntroDetail: FC<CourseIntroDetailProps> = ({
 }) => (
   <div className="course-information">
     <div className="course">
+
       <div className="course-text">
+
         <div className="course-icon-title">
           <FontAwesomeIcon className="icon-location" icon={faLocationDot} />
           <p className="course-title">{title}</p>
           <p className="course-time">{time}</p>
         </div>
+
         <div className="course-line-content">
           <div className="course-line" />
           <p className="course-content">{content}</p>
         </div>
+        
       </div>
-      <img className="course-image" src={imageSrc} alt={title} />
+      <div className='course-image'>
+        <img className="course-img" src={imageSrc} alt={title} />
+      </div>
     </div>
   </div>
 );
