@@ -74,6 +74,11 @@ function SubPageComp() {
                 className={Style["mainPicture.image"]}
                 src={categoryData.categoryImg ? categoryData.categoryImg : ChildTitle}
                 alt="Title img"
+                style={{
+                  width: "100%",
+                  height: "400px",
+                  objectFit: "cover",
+                }}
               />
               <h2 className={Style["subTitle"]}>{categoryData.mainDescription}</h2>
               <h3 className={Style["subContent"]}>{categoryData.subDescription}</h3>
