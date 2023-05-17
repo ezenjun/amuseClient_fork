@@ -8,9 +8,7 @@ import ViewAllList from "./ViewAllList";
 function ViewAll() {
   return (
     <div>
-      <div className={Style["App"]}>
-        <Header />
-      </div>
+      <Header />
       <div className={Style["liner"]}></div>
       {/* <br /> */}
 
