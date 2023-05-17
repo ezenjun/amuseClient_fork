@@ -91,22 +91,17 @@ function Header() {
             <button className="searchBtn">검색</button>
           </div>
           <div className="whiteSquare"></div>
-          {loggedIn ? (
-            <button className="loginBtn" onClick={navigateToLogIn}>
-              로그아웃
-            </button>
-          ) : (
-            <button className="loginBtn" onClick={() => setLoggedIn(false)}>
-              로그인
-            </button>
-          )}
-          {loggedIn ? (
-            <MyPageMenu />
-          ) : (
-            <button className="signInBtn" onClick={navigateToSignUP}>
-              회원가입
-            </button>
-          )}
+          {loggedIn ? 
+          <button className="loginBtn" onClick={() => setLoggedIn(false)}>
+            로그아웃
+          </button> : 
+          <button className="loginBtn" onClick={navigateToLogIn}>
+            로그인
+          </button>}
+          {loggedIn ? <MyPageMenu /> :  
+          <button className="signInBtn" onClick={navigateToSignUP}>
+            회원가입
+          </button>}
         </div>
         <div className="menu">
           {hashtag.length <= 4 ? (
