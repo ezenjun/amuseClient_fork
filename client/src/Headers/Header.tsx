@@ -3,11 +3,10 @@ import "./Header.css";
 import Style from "../App.module.css";
 import { useNavigate } from "react-router-dom";
 import logoimage from "../MainPage/MainImgs/amuse_logo.png";
-import Concierge from "../SubPages/Concierge/Concierge";
 import { Link } from "react-router-dom";
 import MyPagelist from "../MyPages/MyPageList";
-import { isLoggedIn } from '../atoms';
-import { useRecoilState } from 'recoil';
+import { isLoggedIn } from "../atoms";
+import { useRecoilState } from "recoil";
 import MyPageMenu from "../MyPages/MyPageMenu";
 import axios from "axios";
 
@@ -17,10 +16,8 @@ interface CategoryMenuProps {
 }
 
 interface MoreDropdownProps {
-  handleClick: () => void;
+  // handleClick: () => void;
 }
-
-
 
 function Header() {
   const movePage = useNavigate();
@@ -28,21 +25,14 @@ function Header() {
   const navigateToHome = () => {
     movePage("/");
   };
-  const navigateToSubPageComp = () => {
-    movePage("/Subtest");
+  // const navigateToSubPageComp = () => {
+  //   movePage("/Subtest");
+  // };
+
+  const navigateToSubPageComp = (apiKey: string) => {
+    movePage(`/category/${apiKey}`);
   };
-  // const navigateToConcierge = () => {
-  //   movePage("/Concierge");
-  // };
-  // const navigateToChildCare = () => {
-  //   movePage("/ChildCare");
-  // };
-  // const navigateToSeniorCare = () => {
-  //   movePage("/SeniorCare");
-  // };
-  // const navigateToOnlineTour = () => {
-  //   movePage("/OnlineTour");
-  // };
+
   const navigateToLogIn = () => {
     movePage("/LogIn");
   };
@@ -64,18 +54,13 @@ function Header() {
     </div>
   );
 
-  const MoreCategoryMenu: React.FC<CategoryMenuProps> = ({ hashtagName, handleClick }) => (
-    <div className="menu-item" onClick={handleClick}>
-      {hashtagName}
-    </div>
-  );
-
   const [hashtag, setHashtag] = useState([]);
   const [showDropdown, setShowDropdown] = useState(false);
-  const MoreDropdown: React.FC<MoreDropdownProps> = ({ handleClick }) => (
+
+  const MoreDropdown: React.FC<MoreDropdownProps> = () => (
     <div className="dropdown">
       {hashtag.slice(4).map((hashtagName: string, index: number) => (
-        <div className="dropdown-item" key={index} onClick={handleClick}>
+        <div className="dropdown-item" key={index} onClick={() => navigateToSubPageComp(hashtagName)}>
           {hashtagName}
         </div>
       ))}
@@ -121,16 +106,21 @@ function Header() {
         <div className="menu">
           {hashtag.length <= 4 ? (
             hashtag.map((hashtagName: string, index: number) => (
-              <CategoryMenu key={index} hashtagName={hashtagName} handleClick={navigateToSubPageComp} />
+              <CategoryMenu
+                key={index}
+                hashtagName={hashtagName}
+                handleClick={() => navigateToSubPageComp(hashtagName)}
+              />
+              // <CategoryMenu key={index} hashtagName={hashtagName} handleClick={navigateToSubPageComp} />
             ))
           ) : (
             <>
-              {hashtag.slice(0, 4).map((id: string) => (
-                <CategoryMenu key={id} hashtagName={id} handleClick={navigateToSubPageComp} />
+              {hashtag.slice(0, 4).map((id: string, index: number) => (
+                <CategoryMenu key={id} hashtagName={id} handleClick={() => navigateToSubPageComp(id)} />
               ))}
               <div className="menu-item more-dropdown">
                 더보기 ▼
-                <MoreDropdown handleClick={navigateToSubPageComp} />
+                <MoreDropdown />
               </div>
             </>
           )}

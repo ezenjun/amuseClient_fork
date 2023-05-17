@@ -67,6 +67,5 @@
     "@types/google-map-react": "^2.1.7",
     "@types/react-modal": "^3.13.1",
     "gh-pages": "^5.0.0"
-  },
-  "homepage": "http://Blaaake7.github.io/amuseClient"
+  }
 }
