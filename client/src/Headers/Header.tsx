@@ -107,10 +107,10 @@ function Header() {
           </div>
           <div className="whiteSquare"></div>
           {loggedIn ? 
-          <button className="loginBtn" onClick={navigateToLogIn}>
+          <button className="loginBtn" onClick={() => setLoggedIn(false)}>
             로그아웃
           </button> : 
-          <button className="loginBtn" onClick={() => setLoggedIn(false)}>
+          <button className="loginBtn" onClick={navigateToLogIn}>
             로그인
           </button>}
           {loggedIn ? <MyPageMenu /> :  
