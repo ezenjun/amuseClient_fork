@@ -16,7 +16,6 @@ const CourseIntroDetail: FC<CourseIntroDetailProps> = ({
 }) => (
   <div className="course-information">
     <div className="course">
-
       <div className="course-text">
 
         <div className="course-icon-title">
@@ -29,7 +28,7 @@ const CourseIntroDetail: FC<CourseIntroDetailProps> = ({
           <div className="course-line" />
           <p className="course-content">{content}</p>
         </div>
-        
+
       </div>
       <div className='course-image'>
         <img className="course-img" src={imageSrc} alt={title} />
