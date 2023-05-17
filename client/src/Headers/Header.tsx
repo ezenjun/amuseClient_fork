@@ -61,7 +61,7 @@ function Header() {
   const MoreDropdown: React.FC<MoreDropdownProps> = () => (
     <div className="dropdown">
       {hashtag.slice(4).map((hashtagName: string, index: number) => (
-        <div className="dropdown-item" key={index} onClick={() => navigateToSubPageComp(index)}>
+        <div className="dropdown-item" key={index} onClick={() => navigateToSubPageComp(index + 4)}>
           {hashtagName}
         </div>
       ))}
