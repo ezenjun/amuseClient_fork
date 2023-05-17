@@ -52,16 +52,16 @@ export default function ViewAllList() {
 
   return (
     <>
-      <Box sx={{ width: "100%", maxWidth: 270, bgcolor: "background.paper" }}>
+      <Box sx={{ width: "100%", maxWidth: 240, bgcolor: "background.paper" }}>
         <h2 className="title" style={{ marginTop: "2rem" }}>
           검색 조건
         </h2>
         <nav aria-label="main mailbox folders">
-          <List>
+          <List className="listbox">
             {hashtag.map((hashtagName: string, index: number) => (
               <CategoryMenu key={index} hashtagName={hashtagName} handleClick={navigateToHear} />
             ))}
-            <ListItem disablePadding onClick={navigateToHear}>
+            {/* <ListItem disablePadding onClick={navigateToHear}>
               <ListItemButton>
                 <ListItemText primary="카테고리1" />
               </ListItemButton>
@@ -70,7 +70,7 @@ export default function ViewAllList() {
               <ListItemButton>
                 <ListItemText primary="카테고리2" />
               </ListItemButton>
-            </ListItem>
+            </ListItem> */}
           </List>
         </nav>
       </Box>
