@@ -34,22 +34,22 @@ export default function MyPageMenu() {
     navigate("/MyPage/Notifications");
     setAnchorEl(null);
   };
-  const navigateToInquiries = () => {
-    navigate("/MyPage/Inquiries");
-    setAnchorEl(null);
-  };
+  // const navigateToInquiries = () => {
+  //   navigate("/MyPage/Inquiries");
+  //   setAnchorEl(null);
+  // };
   const navigateToOrders = () => {
     navigate("/MyPage/Orders");
     setAnchorEl(null);
   };
-  const navigateToQuotes = () => {
-    navigate("/MyPage/Quotes");
-    setAnchorEl(null);
-  };
-  const navigateToBills = () => {
-    navigate("/MyPage/Bills");
-    setAnchorEl(null);
-  };
+  // const navigateToQuotes = () => {
+  //   navigate("/MyPage/Quotes");
+  //   setAnchorEl(null);
+  // };
+  // const navigateToBills = () => {
+  //   navigate("/MyPage/Bills");
+  //   setAnchorEl(null);
+  // };
   return (
     <>
       <Button
@@ -95,22 +95,22 @@ export default function MyPageMenu() {
           <NotificationsIcon />
           <div className="mypage_category_item">알림</div>
         </MenuItem>
-        <MenuItem onClick={navigateToInquiries}>
+        {/* <MenuItem onClick={navigateToInquiries}>
           <RoomServiceIcon />
           <div className="mypage_category_item">문의</div>
-        </MenuItem>
+        </MenuItem> */}
         <MenuItem onClick={navigateToOrders}>
           <CalendarMonthIcon />
           <div className="mypage_category_item">주문상품</div>
         </MenuItem>
-        <MenuItem onClick={navigateToQuotes}>
+        {/* <MenuItem onClick={navigateToQuotes}>
           <CreditCardIcon />
           <div className="mypage_category_item">상품견적</div>
         </MenuItem>
         <MenuItem onClick={navigateToBills}>
           <AssignmentIcon />
           <div className="mypage_category_item">맞춤견적</div>
-        </MenuItem>
+        </MenuItem> */}
       </Menu>
     </>
   );
