@@ -27,18 +27,18 @@ export default function MyPage() {
             case 'Notifications':
                 return <Notifications />;
                 break;
-            case 'Inquiries':
-                return <Inquiries />;
-                break;
+            // case 'Inquiries':
+            //     return <Inquiries />;
+            //     break;
             case 'Orders':
                 return <Orders />;
                 break;
-            case 'Quotes':
-                return <Quotes />;
-                break;
-            case 'Bills':
-                return <Bills />;
-                break;
+            // case 'Quotes':
+            //     return <Quotes />;
+            //     break;
+            // case 'Bills':
+            //     return <Bills />;
+            //     break;
         }
     }
 

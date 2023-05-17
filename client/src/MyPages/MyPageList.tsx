@@ -26,18 +26,18 @@ export default function MyPagelist() {
     const navigateToNotifications = () => {
       navigate("/MyPage/Notifications");
     };
-    const navigateToInquiries = () => {
-      navigate("/MyPage/Inquiries");
-    };
+    // const navigateToInquiries = () => {
+    //   navigate("/MyPage/Inquiries");
+    // };
     const navigateToOrders = () => {
       navigate("/MyPage/Orders");
     };
-    const navigateToQuotes = () => {
-      navigate("/MyPage/Quotes");
-    };
-    const navigateToBills = () => {
-      navigate("/MyPage/Bills");
-    };
+    // const navigateToQuotes = () => {
+    //   navigate("/MyPage/Quotes");
+    // };
+    // const navigateToBills = () => {
+    //   navigate("/MyPage/Bills");
+    // };
   return (
     <>
     <Box sx={{ width: '100%', maxWidth: 270, bgcolor: 'background.paper' }}>
@@ -68,14 +68,14 @@ export default function MyPagelist() {
               <ListItemText primary="알림" />
             </ListItemButton>
           </ListItem>
-          <ListItem disablePadding onClick={navigateToInquiries}>
+          {/* <ListItem disablePadding onClick={navigateToInquiries}>
             <ListItemButton>
               <ListItemIcon>
                 <RoomServiceIcon />
               </ListItemIcon>
               <ListItemText primary="문의" />
             </ListItemButton>
-          </ListItem>
+          </ListItem> */}
           <ListItem disablePadding onClick={navigateToOrders}>
             <ListItemButton>
               <ListItemIcon>
@@ -84,7 +84,7 @@ export default function MyPagelist() {
               <ListItemText primary="주문상품" />
             </ListItemButton>
           </ListItem>
-          <ListItem disablePadding onClick={navigateToQuotes}>
+          {/* <ListItem disablePadding onClick={navigateToQuotes}>
             <ListItemButton>
               <ListItemIcon>
                 <CreditCardIcon />
@@ -99,7 +99,7 @@ export default function MyPagelist() {
               </ListItemIcon>
               <ListItemText primary="맞춤견적" />
             </ListItemButton>
-          </ListItem>
+          </ListItem> */}
         </List>
       </nav>
     </Box>
