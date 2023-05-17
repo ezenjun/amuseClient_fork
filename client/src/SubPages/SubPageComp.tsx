@@ -31,7 +31,9 @@ function SubPageComp() {
 
   const { apiKey } = useParams() as { apiKey: string };
   const [categoryData, setCategoryData] = useState<CategoryData | null>(null);
-  //   console.log("apiKey = " + apiKey);
+
+  console.log("apiKey = " + apiKey);
+  const apiKeyNumber: number = Number(apiKey) + 1;
   useEffect(() => {
     axios
       .get(`https://ammuse.store/main/category`)
@@ -40,7 +42,7 @@ function SubPageComp() {
 
         let matchedIndex = -1;
         for (let i = 0; i < hashtagAll.length; i++) {
-          if (hashtagAll[i].categoryName === apiKey) {
+          if (hashtagAll[i].categoryId === apiKeyNumber) {
             matchedIndex = i;
             // console.log("idx = " + matchedIndex);
             break;
@@ -54,7 +56,7 @@ function SubPageComp() {
       .catch((error) => {
         console.log("subpage 연결 실패");
       });
-  }, [apiKey]);
+  }, [apiKeyNumber]);
 
   useEffect(() => {
     console.log(categoryData);
@@ -74,6 +76,11 @@ function SubPageComp() {
                 className={Style["mainPicture.image"]}
                 src={categoryData.categoryImg ? categoryData.categoryImg : ChildTitle}
                 alt="Title img"
+                style={{
+                  width: "100%",
+                  height: "400px",
+                  objectFit: "cover",
+                }}
               />
               <h2 className={Style["subTitle"]}>{categoryData.mainDescription}</h2>
               <h3 className={Style["subContent"]}>{categoryData.subDescription}</h3>
