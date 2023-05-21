@@ -9,6 +9,7 @@ import Review from "./MyPages/Review/Review";
 import ViewAll from "./SubPages/ViewAllPages/ViewAll";
 import GyeonggiPage from "./SubPages/Regions/GyeonggiPage";
 import GangwonPage from "./SubPages/Regions/GangwonPage";
+import SearchPageComp from "./SubPages/SearchPageComp";
 // import NotFound from './NotFound';
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -120,6 +121,10 @@ function App() {
          * 서브페이지 Route
          */}
         <Route path="/category/:apiKey" element={<SubPageComp />} />
+        {/**
+         * 검색 시 Route
+         */}
+        <Route path="/search/:apiKey" element={<SearchPageComp />} />
       </Routes>
     </div>
   );

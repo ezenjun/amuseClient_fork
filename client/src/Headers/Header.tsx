@@ -34,6 +34,14 @@ function Header() {
     movePage(`/category/${apiKeyString}`);
   };
 
+  const navigateToSearch = () => {
+    movePage(`/search/${searchKeyword}`);
+  };
+
+  // const handleSearch = () => {
+  //   console.log(searchKeyword);
+  // };
+
   const navigateToLogIn = () => {
     movePage("/LogIn");
   };
@@ -82,14 +90,35 @@ function Header() {
       });
   }, []);
 
+  const [searchKeyword, setSearchKeyword] = useState("");
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchKeyword(event.target.value);
+  };
+
+  const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
+      navigateToSearch();
+    }
+  };
+
   return (
     <div>
       <div className={Style["App"]}>
         <div className="top">
           <img className="logo" src={logoimage} alt="Amuse Travel Logo" onClick={navigateToHome} />
           <div className="search-box">
-            <input style={searchKeywordStyle} type="text" placeholder="🔍 여행 키워드를 검색해보세요!" />
-            <button className="searchBtn">검색</button>
+            <input
+              style={searchKeywordStyle}
+              type="text"
+              placeholder="🔍 여행 키워드를 검색해보세요!"
+              value={searchKeyword}
+              onChange={handleInputChange}
+              onKeyPress={handleKeyPress}
+            />
+            <button className="searchBtn" onClick={navigateToSearch}>
+              검색
+            </button>
           </div>
           <div className="whiteSquare"></div>
           {loggedIn ? (
