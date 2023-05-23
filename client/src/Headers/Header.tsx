@@ -22,12 +22,10 @@ interface MoreDropdownProps {
 function Header() {
   const movePage = useNavigate();
   const [loggedIn, setLoggedIn] = useRecoilState(isLoggedIn);
+
   const navigateToHome = () => {
     movePage("/");
   };
-  // const navigateToSubPageComp = () => {
-  //   movePage("/Subtest");
-  // };
 
   const navigateToSubPageComp = (apiKey: number) => {
     const apiKeyString: string = apiKey.toString();
@@ -36,6 +34,7 @@ function Header() {
 
   const navigateToSearch = () => {
     movePage(`/search/${searchKeyword}`);
+    window.location.reload();
   };
 
   // const handleSearch = () => {
@@ -114,7 +113,7 @@ function Header() {
               placeholder="🔍 여행 키워드를 검색해보세요!"
               value={searchKeyword}
               onChange={handleInputChange}
-              onKeyPress={handleKeyPress}
+              onKeyDown={handleKeyPress}
             />
             <button className="searchBtn" onClick={navigateToSearch}>
               검색
