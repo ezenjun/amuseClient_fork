@@ -39,7 +39,7 @@ function Detail({ itemId, productCode, startPrice, likeNum }: DetailProps) {
         <Calendar itemId={itemId} />
         <ProductIntro itemId={itemId} />
         <CourseIntro itemId={itemId} />
-        <Map />
+        <Map itemId={itemId} />
         <OtherInfo itemId={itemId} />
         <Manager itemId={itemId} />
         <ReviewPicture />
