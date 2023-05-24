@@ -6,22 +6,15 @@ interface TicketProps {
   name: string;
   detail: string;
   price: number | undefined;
+  count: number;
+  handlePlus: () => void;
+  handleMinus: () => void;
 }
 
 const Ticket: FC<TicketProps> = ({
-  name, detail, price,
+  name, detail, price, count, handlePlus, handleMinus
 }) => {
-  const [count, setCount] = useState(0);
-  
-  const handlePlus = () => {
-    setCount(count + 1);
-  }
-
-  const handleMinus = () => {
-    if (count > 0) {
-      setCount(count - 1);
-    }
-  }
+  const formattedCount = count !== undefined ? count : 0;
   
   return (
     <div className="ticket">
@@ -36,7 +29,7 @@ const Ticket: FC<TicketProps> = ({
       </div>
       <div className="ticket-cnt">
         <button className="minus-btn" onClick={handleMinus}>-</button>
-        <p className="cnt">{count}</p>
+        <p className="cnt">{formattedCount}</p>
         <button className="plus-btn" onClick={handlePlus}>+</button>
       </div>
     </div>

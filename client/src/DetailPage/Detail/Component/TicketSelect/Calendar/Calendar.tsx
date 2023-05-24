@@ -40,7 +40,7 @@ type CalendarProps = {
 
 
 function Calendar({ itemId }: CalendarProps) {
-    // 달력에 표시할 기간 불러오기
+    // duration data
     interface CalendarData {
         duration: number
     }
@@ -57,7 +57,7 @@ function Calendar({ itemId }: CalendarProps) {
             });
     }, [itemId]);
 
-    // 날짜 클릭시 기간 표시 및 선택해제
+    // default date
     const [range, setRange] = useState<DateRange | undefined>(undefined);
     useEffect(() => {
         if (CalendarData) {
@@ -67,21 +67,8 @@ function Calendar({ itemId }: CalendarProps) {
                 to: addDays(today, CalendarData.duration - 1)
             };
             setRange(defaultDate);
-            // console.log(setRange)
         }
     }, [CalendarData]);
-    const today = new Date();
-    // const today = new Date();
-    // let period = 0;
-    // if (CalendarData) {
-    //     period = CalendarData.duration - 1
-    // }
-    // const defaultDate: DateRange = {
-    //     from: today,
-    //     to: addDays(today, period)
-    // }
-
-    // const [range, setRange] = useState<DateRange | undefined>(defaultDate);
 
     const handleDayClick: DayClickEventHandler = (day, modifiers) => {
         if (CalendarData) {
@@ -105,6 +92,7 @@ function Calendar({ itemId }: CalendarProps) {
         }
     }
 
+    const today = new Date();
     return (
         <div className='select-date'>
             <p className='select-ticket-title'>티켓 선택</p>
