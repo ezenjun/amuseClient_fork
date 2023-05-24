@@ -66,7 +66,7 @@ export default function Review() {
     const loginToken = localStorage.getItem('loginToken');
     const config = {
       headers: {
-        'Authorization': `Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMDc5MTE1OTM4NDA4NTkxMzUxNjYiLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjg0OTQ5Njc0fQ.4TztQwDottQsAdb4HUaD-9YZuh70F5AkbGRFyfdp3IQ`,
+        'Authorization': `Bearer ${loginToken}`,
         'Content-Type': 'application/json'
       }
     }
