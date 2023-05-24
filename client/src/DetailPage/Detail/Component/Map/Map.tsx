@@ -22,6 +22,7 @@ function Map({ itemId }: MapProps) {
   * Map Data
   */
   const [mapData, setMapData] = useState<MapData[]>([]);
+  const [selectedDay, setSelectedDay] = useState<number | null>(null);
 
   /**
    * Map API
@@ -37,14 +38,28 @@ function Map({ itemId }: MapProps) {
       .catch(error => {
         console.log("연결 실패");
       });
-  });
+  }, [itemId]);
+
+  /**
+   * Select Day
+   */
+  useEffect(() => {
+    if (mapData.length > 0) {
+      setSelectedDay(mapData[0].day);
+    }
+  }, [mapData]);
 
   const uniqueDays = Array.from(new Set(mapData.map(data => data.day)));
-  const [selectedDay, setSelectedDay] = useState<number | null>(uniqueDays[0] || null);
-
+  
+  /**
+   * Click Button
+   */
   const handleDayClick = (day: number) => {
     setSelectedDay(day);
   };
+
+
+  console.log(uniqueDays[0], selectedDay)
 
   return (
     <div className='Map'>

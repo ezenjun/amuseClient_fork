@@ -31,7 +31,7 @@ function OtherInfo({ itemId }: OtherInfoProps) {
       .catch(error => {
         console.log("연결 실패");
       });
-  }, []);
+  }, [itemId]);
 
   return (
     <div className='other-info'>
