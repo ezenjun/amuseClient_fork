@@ -17,6 +17,7 @@
             height: 45px;
             border-radius: 50%;
             outline: #E9ECEF dashed 0.8px;
+            object-fit: cover;
         }
         .manager-name {
             width: 200px;
@@ -30,7 +31,7 @@
             align-items: center;
             width: 200px;
             height: 50px;
-            color: #808080;
+            color: #848c94;
             padding-left: 420px;
 
             .icon {
