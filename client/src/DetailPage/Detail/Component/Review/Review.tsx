@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './Review.scss';
 import axios from 'axios';
+import ReviewDetail from './ReviewDetail/ReviewDetail';
 
 interface ReviewProps {
   itemId: number | null;
@@ -13,14 +14,14 @@ interface ReviewData {
     user_name : string;
     review_content : string;
     images : string;
-  }
+  }[];
 }
 
 function Review({ itemId }: ReviewProps) {
   /**
    * Review Data
    */
-  const [reviewData, setReviewData] = useState<ReviewData>();
+  const [reviewData, setReviewData] = useState<ReviewData | null>(null);
 
   /**
    * Review API
@@ -36,16 +37,18 @@ function Review({ itemId }: ReviewProps) {
       });
   }, [itemId]);
 
+  console.log(reviewData?.reviews)
+
   return (
     <div className="Review">
       <div className="review-header">
         <p className="review-title">후기</p>
         <p className="review-number">{reviewData?.review_count}</p>
-
-        <div className='ReviewDetail'>
-          <p className='review-detail-name'></p>
-        </div>
-
+      </div>
+      <div className='ReviewDetail'>
+        {reviewData?.reviews && reviewData.reviews.map((review, index) => (
+          <ReviewDetail key={index} name={review.user_name} content={review.review_content} img={review.images} />
+        ))}
       </div>
     </div>
   );
