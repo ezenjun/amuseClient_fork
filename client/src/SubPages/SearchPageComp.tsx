@@ -37,7 +37,7 @@ function SearchPageComp() {
 
   useEffect(() => {
     axios
-      .get("https://ammuse.store/main/best-item")
+      .get(`https://ammuse.store/search/content/page=1?keyword=${apiKey}`)
       .then((response) => {
         const bestItems = response.data.data.items;
         const ids = bestItems.map((item: any) => item.item_db_id);
@@ -84,7 +84,7 @@ function SearchPageComp() {
               return (
                 <Box
                   key={itemId}
-                  marginRight={itemIndex === ItemIds.length - 1 ? "0" : "32px"}
+                  marginRight={itemIndex !== 0 && (itemIndex + 1) % 3 === 0 ? "0" : "32px"}
                   itemId={itemId}
                   title={ItemTitle[itemIndex]}
                   startPrice={numberWithCommas(ItemPrice[itemIndex])}
