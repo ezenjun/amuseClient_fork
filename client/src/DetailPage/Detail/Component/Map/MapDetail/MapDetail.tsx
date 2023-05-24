@@ -28,6 +28,8 @@ const Marker = ({ lat, lng, title }: MarkerProps) => (
 );
 
 function MapDetail({ data }: MapProps) { 
+  const API_KEY = process.env.REACT_APP_GOOGLE_API_KEY_MAP; 
+
   const markerCount = data.length;
   const sumLat = data.reduce((sum, marker) => sum + marker.latitude, 0);
   const sumLng = data.reduce((sum, marker) => sum + marker.longitude, 0);
@@ -37,7 +39,7 @@ function MapDetail({ data }: MapProps) {
   return (
     <div className='MapDetail'>
       <GoogleMapReact
-        bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_API_KEY_MAP || "" }}
+        bootstrapURLKeys={{ key: API_KEY || "" }}
         defaultCenter={{ lat: centerLat, lng: centerLng }}
         defaultZoom={15}
       >
