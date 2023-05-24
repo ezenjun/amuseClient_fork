@@ -25,6 +25,10 @@ jobs:
           cd client
           npm install
           
+      - name: Setting .env # 환경변수 설정
+        run: |
+          echo "REACT_APP_GOOGLE_API_KEY_MAP=${{ secrets.REACT_APP_GOOGLE_API_KEY_MAP }}" >> .env
+          
       - name: Build # React Build
         run: |
           cd client
