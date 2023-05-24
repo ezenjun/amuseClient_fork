@@ -11,8 +11,9 @@ function ReviewPicture({ itemId }: ReviewPictureProps) {
   /**
    * Review Picture Data
    */
-  const [reviewPictureData, setReviewPictureData] = useState<string[]>([]);
-  //const subReviewPicture = reviewPictureData.slice(0, 3);
+  const [reviewPictureData, setReviewPictureData] = useState<{ review_img: string }[]>([]);
+  const reviewPicture = reviewPictureData ? reviewPictureData.map(obj => obj.review_img) : [];
+  const subReviewPicture = reviewPicture.slice(0, 3);
 
   /**
    * Review Picture API
@@ -21,24 +22,25 @@ function ReviewPicture({ itemId }: ReviewPictureProps) {
     axios
       .get(`https://ammuse.store/detail/${itemId}/review`)
       .then((response) => {
-        setReviewPictureData(response.data.data.reviews)
+        setReviewPictureData(response.data.data.review_all_imgs)
 
-        console.log(response.data.data.reviews)
+        //console.log(response.data.data.review_all_imgs)
       })
       .catch(error => {
         console.log("연결 실패");
       });
   }, [itemId]);
 
+  
+
   return (
     <div className="ReviewPicture">
       <p className="review-title">여행자 후기 사진</p>
-      {/*
       <div className="subpicture">
-        <SubPicture src="images/day2-3.png" alt="test1" />
-        <SubPicture src="images/day3-3.png" alt="test1" />
+        {subReviewPicture.map((picture, idx) => (
+          <SubPicture src={picture} alt={picture} itemId={idx} modal={reviewPicture}/>
+        ))}
       </div>
-  */}
     </div>
   );
 }

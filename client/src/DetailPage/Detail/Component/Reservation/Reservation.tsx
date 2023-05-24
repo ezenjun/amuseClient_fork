@@ -13,17 +13,18 @@ interface ReservationProps {
   likeNum: number;
 };
 
+interface ManagerData {
+  email : string;
+  img : string;
+  name : string;
+  test : string;
+  title : string;
+}
+
 function Reservation({ itemId, productCode, startPrice, likeNum }: ReservationProps) {
   /**
    * Manager Data
    */
-  interface ManagerData {
-    email : string
-    img : string
-    name : string
-    test : string
-  }
-
   const [managerData, setManagerData] = useState<ManagerData>();
   const [isHovered, setIsHovered] = useState(false);
 
@@ -48,7 +49,7 @@ function Reservation({ itemId, productCode, startPrice, likeNum }: ReservationPr
    */
   const handleInquiryClick = () => {
     if (managerData && managerData.email) {
-      const subject = encodeURIComponent('문의하기');
+      const subject = encodeURIComponent(`${managerData?.title} 문의하기`);
       const body = encodeURIComponent('안녕하세요, AmuseTravel 입니다 :-)\n\n문의 내용을 입력해주세요.\n\n감사합니다.');
       window.location.href = `mailto:${managerData.email}?subject=${subject}&body=${body}`;
     }

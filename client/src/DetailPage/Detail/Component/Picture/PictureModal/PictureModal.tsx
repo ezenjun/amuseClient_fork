@@ -8,36 +8,17 @@ import { faChevronLeft, faChevronRight, faTimes } from '@fortawesome/free-solid-
 interface PictureModalProps {
   onClose: () => void;
   itemId: number | null;
+  images: string[];
 }
 
 const onAfterOpen = () => {
   document.body.style.overflow = 'hidden';
 };
 
-function PictureModal({ onClose, itemId } : PictureModalProps){
-  /**
-   * Picture Data
-   */
-  const [pictureData, setPictureData] = useState<string[]>([]);
-
-  /**
-   * Picture API
-   */
-  useEffect(() => {
-    axios
-      .get(`https://ammuse.store/detail/${itemId}/picture`)
-      .then((response) => {
-        setPictureData(response.data.data.pictures)
-
-        //console.log(response.data.data.pictures)
-      })
-      .catch(error => {
-        console.log("연결 실패");
-      });
-  }, [itemId]);
+function PictureModal({ onClose, itemId, images } : PictureModalProps){
 
   // 이미지 목록
-  const pictures = pictureData;
+  const pictures = images;
 
   // 현재 이미지의 인덱스
   const [currentPictureIndex, setCurrentPictureIndex] = useState(0);
