@@ -13,7 +13,7 @@ function Picture({ itemId }: PictureProps) {
    * Picture Data
    */
   const [pictureData, setPictureData] = useState<string[]>([]);
-  const mainPicture = pictureData.shift();
+  const mainPicture = pictureData ? pictureData.shift() : null;
   const subPicture = pictureData.slice(0, 3);
 
   /**
