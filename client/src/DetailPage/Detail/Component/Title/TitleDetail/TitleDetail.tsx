@@ -10,9 +10,8 @@ interface TitleDetailProps {
     rated: number;
 }
 
-const TitleDetail: FC<TitleDetailProps> = ({
-    country, city, title, rated
-}) => (
+function TitleDetail({ country, city, title, rated } : TitleDetailProps){
+  return(
     <div className="Detail-title">
       {/* 헤더의 위치 */}
       <div className="location">
@@ -41,6 +40,7 @@ const TitleDetail: FC<TitleDetailProps> = ({
         <FontAwesomeIcon className="icon-right" icon={faChevronRight} />
       </div>
     </div>
-);
+  );
+};
 
 export default TitleDetail;

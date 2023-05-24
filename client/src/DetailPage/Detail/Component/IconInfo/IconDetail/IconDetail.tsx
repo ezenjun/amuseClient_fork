@@ -8,7 +8,7 @@ interface Props {
   text: string;
 }
 
-function IconDetail({ icon, text }: Props): JSX.Element {
+function IconDetail({ icon, text }: Props) {
   return (
     <div className="Detail-icon-detail">
       {/* 아이콘 정보 */}

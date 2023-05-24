@@ -3,11 +3,11 @@ import './Map.scss';
 import MapDetail from './MapDetail/MapDetail';
 import axios from 'axios';
 
-type MapProps = {
+interface MapProps {
   itemId: number | null;
 };
 
-type MapData = {
+interface MapData {
   title: string;
   content: string;
   day: number;
@@ -19,8 +19,8 @@ type MapData = {
 
 function Map({ itemId }: MapProps) {
   /**
-  * Map Data
-  */
+   * Map Data
+   */
   const [mapData, setMapData] = useState<MapData[]>([]);
   const [selectedDay, setSelectedDay] = useState<number | null>(null);
 
@@ -57,9 +57,6 @@ function Map({ itemId }: MapProps) {
   const handleDayClick = (day: number) => {
     setSelectedDay(day);
   };
-
-
-  console.log(uniqueDays[0], selectedDay)
 
   return (
     <div className='Map'>

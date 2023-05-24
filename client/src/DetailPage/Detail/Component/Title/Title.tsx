@@ -2,21 +2,21 @@ import React, { useEffect, useState } from 'react';
 import TitleDetail from './TitleDetail/TitleDetail';
 import axios from "axios";
 
-type TitleProps = {
+interface TitleProps {
   itemId: number | null;
 };
+
+interface TitleData {
+  country : string
+  city : string
+  title : string
+  rated : number
+}
 
 function Title({ itemId }: TitleProps) {
   /**
    * Title Data
    */
-  interface TitleData {
-    country : string
-    city : string
-    title : string
-    rated : number
-  }
-
   const [titleData, setTitleData] = useState<TitleData>();
 
   /**
