@@ -33,8 +33,8 @@ function Header() {
   };
 
   const navigateToSearch = () => {
-    window.location.reload();
     movePage(`/search/${searchKeyword}`);
+    window.location.reload();
   };
 
   // const handleSearch = () => {
