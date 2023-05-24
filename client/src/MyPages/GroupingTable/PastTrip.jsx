@@ -44,7 +44,7 @@ export default function PastTrip() {
   const navigate = useNavigate();
 
   const handleClickReview = React.useCallback((name) => {
-    navigate(`/review/${name}`);
+    navigate(`/review/1`);
   }, [navigate]);
   
   const handleChangePage = (event, newPage) => {

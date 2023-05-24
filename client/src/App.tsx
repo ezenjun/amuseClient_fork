@@ -93,7 +93,7 @@ function App() {
         <Route path="/LogIn" element={<Login />}></Route>
         <Route path="/SignUp" element={<SignUp />}></Route>
         <Route path="/MyPage/:category" element={<MyPage />}></Route>
-        <Route path="/Review/:name" element={<Review />}></Route>
+        <Route path="/Review/:id" element={<Review />}></Route>
         {/* <Route path="/OnlineTour" element={<OnlineTour />}></Route> */}
         <Route path="/ViewAll" element={<ViewAll />}></Route>
         <Route path="/toGyeonggi" element={<GyeonggiPage />}></Route>
