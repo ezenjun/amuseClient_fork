@@ -6,9 +6,10 @@ interface SubPictureProps {
     src: string;
     alt: string;
     itemId: number | null;
+    modal: string[];
 }
 
-function SubPicture({ src, alt, itemId } : SubPictureProps){
+function SubPicture({ src, alt, itemId, modal } : SubPictureProps){
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => {
@@ -23,7 +24,7 @@ function SubPicture({ src, alt, itemId } : SubPictureProps){
     <div className="SubPicture">
       <img className="image" src={src} alt={alt} onClick={openModal} />
       {isModalOpen && (
-        <PictureModal onClose={closeModal} itemId={itemId}/>
+        <PictureModal onClose={closeModal} itemId={itemId} images={modal} />
       )}
     </div>
   )
