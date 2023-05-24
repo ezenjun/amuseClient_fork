@@ -121,7 +121,12 @@ function Header() {
           </div>
           <div className="whiteSquare"></div>
           {loggedIn ? (
-            <button className="loginBtn" onClick={() => setLoggedIn(false)}>
+            <button className="loginBtn" onClick={() => {
+              setLoggedIn(false);
+              localStorage.removeItem('dev_access_token');
+              localStorage.removeItem('dev_refresh_token');
+              navigateToHome();
+            }}>
               로그아웃
             </button>
           ) : (

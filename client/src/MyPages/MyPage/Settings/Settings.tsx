@@ -9,19 +9,6 @@ export default function Settings() {
   return (
     <div>
       <h2>나의 설정</h2>
-      {/* <div className={styles.wrapper}>
-        <div className={styles.upperBox}>
-          <h4>아바타</h4>
-          <button className={styles.modifyBtn}>아바타 수정</button>
-        </div>
-        <div className={styles.avater_bottomBox}>
-          <img src='' alt='프로필 사진' />
-          <div>
-            <p>회원아이디</p>
-            <p>leesu0229@naver.com</p>
-          </div>
-        </div>
-      </div> */}
       <div className={styles.wrapper}>
         <div className={styles.upperBox}>
           <h4>내정보</h4>
@@ -37,7 +24,7 @@ export default function Settings() {
           <SettingsGender />
         </div>
       </div>
-      <div className={styles.wrapper}>
+      {/* <div className={styles.wrapper}>
         <div className={styles.upperBox}>
           <h4>관심영역</h4>
           <button className={styles.modifyBtn}>관심영역 저장</button>
@@ -45,7 +32,7 @@ export default function Settings() {
         <div className={styles.interestField_bottomBox}>
           <SettingsInterestField />
         </div>
-      </div>
+      </div> */}
       <div className={styles.wrapper}>
         <div className={styles.upperBox}>
             <h4>마케팅 설정</h4>
