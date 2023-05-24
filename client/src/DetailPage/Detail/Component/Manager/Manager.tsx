@@ -5,22 +5,22 @@ import { faEnvelope as solidFaEnelope } from '@fortawesome/free-solid-svg-icons'
 import { faEnvelope as regularFaEnelope } from '@fortawesome/free-regular-svg-icons';
 import axios from 'axios';
 
-type ManagerProps = {
+interface ManagerProps {
   itemId: number | null;
 };
+
+interface ManagerData {
+  email : string
+  img : string
+  name : string
+  manager_content : string
+  title : string
+}
 
 function Manager({ itemId }: ManagerProps) {
   /**
    * Manager Data
    */
-  interface ManagerData {
-    email : string
-    img : string
-    name : string
-    manager_content : string
-    title : string
-  }
-
   const [managerData, setManagerData] = useState<ManagerData>();
   const [isHovered, setIsHovered] = useState(false);
 

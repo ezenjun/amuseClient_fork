@@ -1,17 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import axios from "axios";
 import './IconInfo.scss';
-import {
-  faCalendar, faLanguage, faRoad, faRoute,
-} from '@fortawesome/free-solid-svg-icons';
+import { faCalendar, faLanguage, faRoad, faRoute } from '@fortawesome/free-solid-svg-icons';
 import IconDetail from './IconDetail/IconDetail';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
-type IconInfoProps = {
+interface IconInfoProps {
   itemId: number | null;
 };
 
-type IconInfoData = {
+interface IconInfoData {
   icon: IconProp;
   text: string;
 };

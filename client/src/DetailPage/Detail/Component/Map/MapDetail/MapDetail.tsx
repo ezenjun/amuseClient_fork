@@ -5,7 +5,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
 
 interface MapProps {
-  data: { day: number; latitude: number; longitude: number; title: string }[];
+  data: { 
+    day: number; 
+    latitude: number; 
+    longitude: number; 
+    title: string 
+  }[];
 }
 
 interface MarkerProps {
@@ -40,7 +45,6 @@ function MapDetail({ data }: MapProps) {
         {data.map((marker) => (
           <Marker key={marker.title} lat={marker.latitude} lng={marker.longitude} title={marker.title} />
         ))}
-
       </GoogleMapReact>
     </div>
   );

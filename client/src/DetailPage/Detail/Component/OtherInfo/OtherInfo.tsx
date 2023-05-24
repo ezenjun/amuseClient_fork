@@ -3,18 +3,18 @@ import './OtherInfo.scss';
 import OtherInfoDetail from './OtherInfoDetail/OtherInfoDetail';
 import axios from 'axios';
 
-type OtherInfoProps = {
+interface OtherInfoProps {
   itemId: number | null;
 };
+
+interface OtherInfoData {
+  content: string;
+}
 
 function OtherInfo({ itemId }: OtherInfoProps) {
   /**
    * OtherInfo Data
    */
-  interface OtherInfoData {
-    content: string;
-  }
-
   const [otherInfoData, setOtherInfoData] = useState<OtherInfoData>();
 
   /**

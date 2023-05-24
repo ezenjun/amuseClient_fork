@@ -8,7 +8,7 @@ interface SubPictureProps {
     itemId: number | null;
 }
 
-const SubPicture: React.FC<SubPictureProps> = ({ src, alt, itemId }) => {
+function SubPicture({ src, alt, itemId } : SubPictureProps){
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => {

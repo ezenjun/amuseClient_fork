@@ -6,7 +6,7 @@ import { faEnvelope as solidFaEnelope } from '@fortawesome/free-solid-svg-icons'
 import { faEnvelope as regularFaEnelope } from '@fortawesome/free-regular-svg-icons';
 import axios from 'axios';
 
-type ReservationProps = {
+interface ReservationProps {
   itemId: number | null;
   productCode: number;
   startPrice: number;

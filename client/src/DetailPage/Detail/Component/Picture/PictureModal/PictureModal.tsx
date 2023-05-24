@@ -14,7 +14,7 @@ const onAfterOpen = () => {
   document.body.style.overflow = 'hidden';
 };
 
-const PictureModal: React.FC<PictureModalProps> = ({ onClose, itemId }) => {
+function PictureModal({ onClose, itemId } : PictureModalProps){
   /**
    * Picture Data
    */

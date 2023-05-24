@@ -4,7 +4,7 @@ import MainPicture from './MainPicture/MainPicture';
 import SubPicture from './SubPicture/SubPicture';
 import './Picture.scss';
 
-type PictureProps = {
+interface PictureProps {
   itemId: number | null;
 };
 
