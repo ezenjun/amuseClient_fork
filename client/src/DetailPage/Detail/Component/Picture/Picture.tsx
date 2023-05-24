@@ -4,7 +4,7 @@ import MainPicture from './MainPicture/MainPicture';
 import SubPicture from './SubPicture/SubPicture';
 import './Picture.scss';
 
-type PictureProps = {
+interface PictureProps {
   itemId: number | null;
 };
 
@@ -30,7 +30,7 @@ function Picture({ itemId }: PictureProps) {
       .catch(error => {
         console.log("연결 실패");
       });
-  }, []);
+  }, [itemId]);
 
   return (
     <div className="Picture">

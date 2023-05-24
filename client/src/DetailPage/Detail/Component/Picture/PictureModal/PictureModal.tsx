@@ -14,7 +14,7 @@ const onAfterOpen = () => {
   document.body.style.overflow = 'hidden';
 };
 
-const PictureModal: React.FC<PictureModalProps> = ({ onClose, itemId }) => {
+function PictureModal({ onClose, itemId } : PictureModalProps){
   /**
    * Picture Data
    */
@@ -34,7 +34,7 @@ const PictureModal: React.FC<PictureModalProps> = ({ onClose, itemId }) => {
       .catch(error => {
         console.log("연결 실패");
       });
-  }, []);
+  }, [itemId]);
 
   // 이미지 목록
   const pictures = pictureData;

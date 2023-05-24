@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react';
 import './Reservation.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faShareNodes } from '@fortawesome/free-solid-svg-icons';
-import { faEnvelope } from '@fortawesome/free-regular-svg-icons';
+import { faEnvelope as solidFaEnelope } from '@fortawesome/free-solid-svg-icons';
+import { faEnvelope as regularFaEnelope } from '@fortawesome/free-regular-svg-icons';
 import axios from 'axios';
 
-type ReservationProps = {
+interface ReservationProps {
   itemId: number | null;
   productCode: number;
   startPrice: number;
@@ -24,6 +25,7 @@ function Reservation({ itemId, productCode, startPrice, likeNum }: ReservationPr
   }
 
   const [managerData, setManagerData] = useState<ManagerData>();
+  const [isHovered, setIsHovered] = useState(false);
 
   /**
    * Manager API
@@ -39,7 +41,18 @@ function Reservation({ itemId, productCode, startPrice, likeNum }: ReservationPr
       .catch(error => {
         console.log("연결 실패");
       });
-  });
+  }, [itemId]);
+
+  /**
+   * Email Connect
+   */
+  const handleInquiryClick = () => {
+    if (managerData && managerData.email) {
+      const subject = encodeURIComponent('문의하기');
+      const body = encodeURIComponent('안녕하세요, AmuseTravel 입니다 :-)\n\n문의 내용을 입력해주세요.\n\n감사합니다.');
+      window.location.href = `mailto:${managerData.email}?subject=${subject}&body=${body}`;
+    }
+  };
   
   return (
     <div className="reservation">
@@ -78,8 +91,13 @@ function Reservation({ itemId, productCode, startPrice, likeNum }: ReservationPr
           <img className="manager-image" src={managerData?.img ?? "img"} alt="manager" />
           <p className="manager-name">{managerData?.name ?? "name"}</p>
         </div>
-        <div className="manager-inquiry">
-          <FontAwesomeIcon className="icon" icon={faEnvelope} />
+        <div 
+          className="manager-inquiry" 
+          onClick={handleInquiryClick}
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+        >
+          <FontAwesomeIcon className="icon" icon={isHovered ? regularFaEnelope : solidFaEnelope} />
           <p className="inquiry">문의하기</p>
         </div>
       </div>

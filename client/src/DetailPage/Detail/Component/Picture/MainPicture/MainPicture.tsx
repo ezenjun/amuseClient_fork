@@ -8,7 +8,7 @@ interface MainPictureProps {
   itemId: number | null;
 }
 
-const MainPicture: React.FC<MainPictureProps> = ({ src, alt, itemId }) => {
+function MainPicture({ src, alt, itemId } : MainPictureProps){
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => {

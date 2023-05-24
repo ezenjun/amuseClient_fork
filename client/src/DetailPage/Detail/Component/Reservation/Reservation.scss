@@ -112,6 +112,7 @@
                 border-radius: 50%;
                 outline: #E9ECEF dashed 0.8px;
                 margin-right: 10px;
+                object-fit: cover;
             }
             .manager-name {
                 align-items: center;
@@ -128,7 +129,7 @@
             color: #808080;
 
             .icon {
-                padding-right: 4%;
+                padding-right: 6%;
             }
             .inquiry {
                 font-weight: 600;
