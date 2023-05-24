@@ -24,6 +24,7 @@ jobs:
         env:
           REACT_APP_GOOGLE_API_KEY_MAP: ${{ secrets.REACT_APP_GOOGLE_API_KEY_MAP }}
         run: |
+          cd client
           echo "REACT_APP_GOOGLE_API_KEY_MAP=$REACT_APP_GOOGLE_API_KEY_MAP" >> .env
           cat .env
 
