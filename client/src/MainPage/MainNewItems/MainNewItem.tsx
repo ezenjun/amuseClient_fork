@@ -79,7 +79,7 @@ function MainNewItem() {
 
   return (
     <>
-      <h2 style={{ marginTop: "3rem", marginBottom: "1rem" }}>어뮤즈의 최신 여행 패키지🚙</h2>
+      {/* <h2 style={{ marginTop: "3rem", marginBottom: "1rem" }}>어뮤즈의 최신 여행 패키지🚙</h2>
       <div className={Style["container"]}>
         {currentItemIds.slice(0, 3).map((itemId: any, index: number) => (
           <Box
@@ -92,7 +92,7 @@ function MainNewItem() {
             imageUrl={currentItemImageUrl[index]}
           />
         ))}
-      </div>
+      </div> */}
     </>
   );
 }

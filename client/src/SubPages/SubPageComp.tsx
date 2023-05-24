@@ -41,9 +41,9 @@ function SubPageComp() {
   const navigateToDetail = (itemId: number) => {
     movePage(`/detail/${itemId}`);
   };
-  const moveToViewAll = () => {
-    movePage("/ViewAll");
-  };
+  // const moveToViewAll = () => {
+  //   movePage("/ViewAll");
+  // };
 
   interface CategoryData {
     categoryId: string;
@@ -56,7 +56,7 @@ function SubPageComp() {
   const { apiKey } = useParams() as { apiKey: string };
   const [categoryData, setCategoryData] = useState<CategoryData | null>(null);
 
-  console.log("apiKey = " + apiKey);
+  // console.log("apiKey = " + apiKey);
   const apiKeyNumber: number = Number(apiKey) + 1;
   useEffect(() => {
     axios
@@ -86,7 +86,7 @@ function SubPageComp() {
   const [bestItemTitle, setBestItemTitle] = useState<string[]>([]);
   const [bestItemPrice, setBestItemPrice] = useState<number[]>([]);
   const [bestItemImageUrl, setBestItemImageUrl] = useState<string[]>([]);
-  console.log("apikeynum = ", apiKeyNumber);
+  // console.log("apikeynum = ", apiKeyNumber);
   useEffect(() => {
     axios
       .get(`https://ammuse.store/category/${apiKeyNumber}/best-item/page=1`)
@@ -102,45 +102,37 @@ function SubPageComp() {
         setBestItemImageUrl(imgUrl);
         // const likes = new Array(ids.length).fill(false);
         // setIsLiked(likes);
-        console.log("subpage 상품", titles);
+        // console.log("subpage 상품", titles);
       })
       .catch((error) => {
         console.log("subpage 상품 연결 실패");
       });
   }, [apiKeyNumber]);
 
-  useEffect(() => {
-    console.log(categoryData);
-  }, [categoryData]);
+  // useEffect(() => {
+  //   console.log(categoryData);
+  // }, [categoryData]);
 
-  const BoxGroup = () => {
-    const numIterations = Math.ceil(bestItemIds.length / 3); // ItemIds의 길이를 3으로 나눈 후 올림하여 반복 횟수 계산
+  const [displayedItemCount, setDisplayedItemCount] = useState(3);
 
-    return (
-      <div>
-        {Array.from({ length: numIterations }, (_, iteration) => (
-          <div className={Style["container"]} style={{ marginTop: "3rem" }} key={iteration}>
-            {bestItemIds.slice(iteration * 3, iteration * 3 + 3).map((itemId: number, index: number) => {
-              const itemIndex = iteration * 3 + index;
-              if (itemIndex >= bestItemIds.length) return null; // ItemIds의 범위를 초과한 경우 null 반환
-
-              return (
-                <Box
-                  key={itemId}
-                  marginRight={itemIndex !== 0 && (itemIndex + 1) % 3 === 0 ? "0" : "32px"}
-                  itemId={itemId}
-                  title={bestItemTitle[itemIndex]}
-                  startPrice={numberWithCommas(bestItemPrice[itemIndex])}
-                  handleClick={() => navigateToDetail(itemId)}
-                  imageUrl={bestItemImageUrl[itemIndex]}
-                />
-              );
-            })}
-          </div>
-        ))}
-      </div>
-    );
+  const handleResize = () => {
+    const windowWidth = window.innerWidth;
+    if (windowWidth >= 992) {
+      setDisplayedItemCount(3);
+    } else if (windowWidth >= 700) {
+      setDisplayedItemCount(2);
+    } else {
+      setDisplayedItemCount(1);
+    }
   };
+
+  useEffect(() => {
+    handleResize(); // Call initially
+    window.addEventListener("resize", handleResize); // Add event listener for window resize
+    return () => {
+      window.removeEventListener("resize", handleResize); // Clean up event listener on component unmount
+    };
+  }, []);
 
   return (
     <div>
@@ -172,7 +164,30 @@ function SubPageComp() {
               {/* <div className={Style["allBtn"]} onClick={moveToViewAll}>
                 상품 모두보기
               </div> */}
-              <BoxGroup />
+              <div>
+                {Array.from({ length: Math.ceil(bestItemIds.length / displayedItemCount) }, (_, iteration) => (
+                  <div className={Style["container"]} style={{ marginTop: "3rem" }} key={iteration}>
+                    {bestItemIds
+                      .slice(iteration * displayedItemCount, iteration * displayedItemCount + displayedItemCount)
+                      .map((itemId: number, index: number) => {
+                        const itemIndex = iteration * displayedItemCount + index;
+                        if (itemIndex >= bestItemIds.length) return null; // ItemIds의 범위를 초과한 경우 null 반환
+
+                        return (
+                          <Box
+                            key={itemId}
+                            marginRight={itemIndex !== 0 && (itemIndex + 1) % displayedItemCount === 0 ? "0" : "32px"}
+                            itemId={itemId}
+                            title={bestItemTitle[itemIndex]}
+                            startPrice={numberWithCommas(bestItemPrice[itemIndex])}
+                            handleClick={() => navigateToDetail(itemId)}
+                            imageUrl={bestItemImageUrl[itemIndex]}
+                          />
+                        );
+                      })}
+                  </div>
+                ))}
+              </div>
             </div>
             <Footer />
           </Fade>

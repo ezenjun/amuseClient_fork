@@ -84,23 +84,42 @@ function MainBestItem() {
     movePage(`/detail/${itemId}`);
   };
 
+  const [displayedItemCount, setDisplayedItemCount] = useState(3);
+
+  const handleResize = () => {
+    const windowWidth = window.innerWidth;
+    if (windowWidth >= 992) {
+      setDisplayedItemCount(3);
+    } else if (windowWidth >= 700) {
+      setDisplayedItemCount(2);
+    } else {
+      setDisplayedItemCount(1);
+    }
+  };
+
+  useEffect(() => {
+    handleResize(); // Call initially
+    window.addEventListener("resize", handleResize); // Add event listener for window resize
+    return () => {
+      window.removeEventListener("resize", handleResize); // Clean up event listener on component unmount
+    };
+  }, []);
+
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const handleNextClick = () => {
-    setCurrentIndex((prevIndex) => prevIndex + 1);
+    setCurrentIndex((prevIndex) => prevIndex + displayedItemCount);
   };
 
   const handlePrevClick = () => {
-    setCurrentIndex((prevIndex) => prevIndex - 1);
+    setCurrentIndex((prevIndex) => prevIndex - displayedItemCount);
   };
-  console.log(currentIndex);
 
-  const displayedItemIds = bestItemIds.slice(currentIndex, currentIndex + 3);
-
-  console.log(displayedItemIds);
+  const displayedItemIds = bestItemIds.slice(currentIndex, currentIndex + displayedItemCount);
 
   const isPrevDisabled = currentIndex === 0;
-  const isNextDisabled = currentIndex + 3 >= bestItemIds.length;
+  const isNextDisabled = currentIndex + displayedItemCount >= bestItemIds.length;
+
   return (
     <div>
       <h2 style={{ marginTop: "1rem", marginBottom: "1rem" }}>실시간 Best 여행 상품🏞</h2>
