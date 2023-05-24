@@ -12,7 +12,7 @@ function ReviewPicture({ itemId }: ReviewPictureProps) {
    * Review Picture Data
    */
   const [reviewPictureData, setReviewPictureData] = useState<{ review_img: string }[]>([]);
-  const reviewPicture = reviewPictureData.map(obj => obj.review_img);
+  const reviewPicture = reviewPictureData ? reviewPictureData.map(obj => obj.review_img) : [];
   const subReviewPicture = reviewPicture.slice(0, 3);
 
   /**

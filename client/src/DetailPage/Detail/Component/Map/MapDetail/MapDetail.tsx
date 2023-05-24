@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from 'react';
 import GoogleMapReact from 'google-map-react';
 import './MapDetail.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
