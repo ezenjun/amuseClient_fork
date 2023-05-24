@@ -89,7 +89,7 @@ function SubPageComp() {
   console.log("apikeynum = ", apiKeyNumber);
   useEffect(() => {
     axios
-      .get(`https://ammuse.store/category/${apiKeyNumber}/best-item?page=1`)
+      .get(`https://ammuse.store/category/${apiKeyNumber}/best-item/page=1`)
       .then((response) => {
         const bestItems = response.data.data.items;
         const ids = bestItems.map((item: any) => item.item_db_id);
