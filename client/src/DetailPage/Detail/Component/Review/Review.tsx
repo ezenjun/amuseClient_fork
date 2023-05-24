@@ -21,7 +21,7 @@ function Review({ itemId }: ReviewProps) {
   /**
    * Review Data
    */
-  const [reviewData, setReviewData] = useState<ReviewData>();
+  const [reviewData, setReviewData] = useState<ReviewData | null>(null);
 
   /**
    * Review API
@@ -37,6 +37,8 @@ function Review({ itemId }: ReviewProps) {
       });
   }, [itemId]);
 
+  console.log(reviewData?.reviews)
+
   return (
     <div className="Review">
       <div className="review-header">
@@ -44,10 +46,10 @@ function Review({ itemId }: ReviewProps) {
         <p className="review-number">{reviewData?.review_count}</p>
       </div>
       <div className='ReviewDetail'>
-          {reviewData?.reviews.map((review, index) => (
-            <ReviewDetail name={review.user_name} content={review.review_content} img={review.images} />
-          ))}
-        </div>
+        {reviewData?.reviews && reviewData.reviews.map((review, index) => (
+          <ReviewDetail key={index} name={review.user_name} content={review.review_content} img={review.images} />
+        ))}
+      </div>
     </div>
   );
 }
