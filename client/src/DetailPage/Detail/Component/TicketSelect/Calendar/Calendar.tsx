@@ -55,7 +55,7 @@ function Calendar({ itemId }: CalendarProps) {
             .catch(error => {
                 console.log("연결 실패");
             });
-    }, []);
+    }, [itemId]);
 
     // 날짜 클릭시 기간 표시 및 선택해제
     const [range, setRange] = useState<DateRange | undefined>(undefined);

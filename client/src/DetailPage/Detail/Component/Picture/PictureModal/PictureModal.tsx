@@ -34,7 +34,7 @@ const PictureModal: React.FC<PictureModalProps> = ({ onClose, itemId }) => {
       .catch(error => {
         console.log("연결 실패");
       });
-  }, []);
+  }, [itemId]);
 
   // 이미지 목록
   const pictures = pictureData;

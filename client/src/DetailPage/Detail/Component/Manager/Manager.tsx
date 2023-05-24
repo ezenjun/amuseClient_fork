@@ -38,7 +38,7 @@ function Manager({ itemId }: ManagerProps) {
       .catch(error => {
         console.log("연결 실패");
       });
-  });
+  }, [itemId]);
   
   /**
    * Email Connect

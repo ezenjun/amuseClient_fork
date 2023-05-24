@@ -31,7 +31,7 @@ function TicketList({ range, itemId }: DateProps) {
             .catch(error => {
                 console.log("연결 실패");
             });
-    }, []);
+    }, [itemId]);
 
 
     return (

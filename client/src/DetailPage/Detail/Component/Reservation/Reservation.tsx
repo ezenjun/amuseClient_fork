@@ -41,7 +41,7 @@ function Reservation({ itemId, productCode, startPrice, likeNum }: ReservationPr
       .catch(error => {
         console.log("연결 실패");
       });
-  });
+  }, [itemId]);
 
   /**
    * Email Connect
