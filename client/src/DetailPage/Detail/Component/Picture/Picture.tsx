@@ -4,7 +4,7 @@ import MainPicture from './MainPicture/MainPicture';
 import SubPicture from './SubPicture/SubPicture';
 import './Picture.scss';
 
-type PictureProps = {
+interface PictureProps {
   itemId: number | null;
 };
 
@@ -13,7 +13,7 @@ function Picture({ itemId }: PictureProps) {
    * Picture Data
    */
   const [pictureData, setPictureData] = useState<string[]>([]);
-  const mainPicture = pictureData.shift();
+  const mainPicture = pictureData ? pictureData.shift() : null;
   const subPicture = pictureData.slice(0, 3);
 
   /**
@@ -30,14 +30,14 @@ function Picture({ itemId }: PictureProps) {
       .catch(error => {
         console.log("연결 실패");
       });
-  }, []);
+  }, [itemId]);
 
   return (
     <div className="Picture">
-      {mainPicture && <MainPicture src={mainPicture} alt={mainPicture} itemId={itemId} />}
+      {mainPicture && <MainPicture src={mainPicture} alt={mainPicture} itemId={itemId} modal={pictureData} />}
       <div className="subpicture">
         {subPicture.map((picture) => (
-          <SubPicture src={picture} alt={picture} itemId={itemId}/>
+          <SubPicture src={picture} alt={picture} itemId={itemId} modal={pictureData}/>
         ))}
       </div>
     </div>

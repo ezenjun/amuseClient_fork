@@ -3,11 +3,11 @@ import axios from "axios";
 import './CourseIntro.scss';
 import CourseIntroDetail from './CourseIntroDetail/CourseIntroDetail';
 
-type CourseIntroProps = {
+interface CourseIntroProps {
   itemId: number | null;
 };
 
-type CourseIntroData = {
+interface CourseIntroData {
   title: string;
   content: string;
   sequenceId: number;
@@ -37,7 +37,7 @@ function CourseIntro({ itemId }: CourseIntroProps) {
       .catch(error => {
         console.log("연결 실패");
       });
-  });
+  }, [itemId]);
 
   return (
     <div className="CourseIntro">

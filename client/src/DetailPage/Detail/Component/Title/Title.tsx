@@ -2,21 +2,22 @@ import React, { useEffect, useState } from 'react';
 import TitleDetail from './TitleDetail/TitleDetail';
 import axios from "axios";
 
-type TitleProps = {
+interface TitleProps {
   itemId: number | null;
 };
+
+interface TitleData {
+  country : string
+  city : string
+  title : string
+  rated : number
+  review_count : number
+}
 
 function Title({ itemId }: TitleProps) {
   /**
    * Title Data
    */
-  interface TitleData {
-    country : string
-    city : string
-    title : string
-    rated : number
-  }
-
   const [titleData, setTitleData] = useState<TitleData>();
 
   /**
@@ -33,7 +34,7 @@ function Title({ itemId }: TitleProps) {
       .catch(error => {
         console.log("연결 실패");
       });
-  }, []);
+  }, [itemId]);
 
   return (
     <div>
@@ -42,6 +43,7 @@ function Title({ itemId }: TitleProps) {
         city={titleData?.city ?? "city"}
         title={titleData?.title ?? "title"}
         rated={titleData?.rated ?? 0.0}
+        review_count={titleData?.review_count ?? 0.0}
       />
     </div>
   );

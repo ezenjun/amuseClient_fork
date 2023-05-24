@@ -55,7 +55,7 @@ function Calendar({ itemId }: CalendarProps) {
             .catch(error => {
                 console.log("연결 실패");
             });
-    }, []);
+    }, [itemId]);
 
     // default date
     const [range, setRange] = useState<DateRange | undefined>(undefined);

@@ -5,6 +5,10 @@ import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-regular-svg-icons";
 import { faHeart as fullHeart } from "@fortawesome/free-solid-svg-icons";
+import RightIcon from "../ArrowIcons/right.png";
+import NoRightIcon from "../ArrowIcons/right_no.png";
+import LeftIcon from "../ArrowIcons/left.png";
+import NoLeftIcon from "../ArrowIcons/left_no.png";
 
 const numberWithCommas = (number: number): string => {
   return number.toLocaleString("en");
@@ -24,13 +28,15 @@ function MainBestItem() {
    * Best Item API
    */
   const [bestItemIds, setBestItemIds] = useState<number[]>([]);
-  const [bestItemTitle, setBestItemTitle] = useState([]);
+  const [bestItemTitle, setBestItemTitle] = useState<string[]>([]);
   const [bestItemPrice, setBestItemPrice] = useState<number[]>([]);
-  const [bestItemImageUrl, setBestItemImageUrl] = useState([]);
-  const [isLiked, setIsLiked] = useState(false);
+  const [bestItemImageUrl, setBestItemImageUrl] = useState<string[]>([]);
+  const [isLiked, setIsLiked] = useState<boolean[]>([]);
 
-  const handleLikeClick = () => {
-    setIsLiked(!isLiked);
+  const handleLikeClick = (index: number) => {
+    const updatedIsLiked = [...isLiked];
+    updatedIsLiked[index] = !updatedIsLiked[index];
+    setIsLiked(updatedIsLiked);
   };
 
   const Box: React.FC<BoxProps> = ({ marginRight, itemId, handleClick, title, startPrice, imageUrl }) => (
@@ -38,9 +44,9 @@ function MainBestItem() {
       <div className={Style["box_before"]} style={{ backgroundImage: `url(${imageUrl})` }}></div>
       <div className={Style["like_count"]}>
         <FontAwesomeIcon
-          icon={isLiked ? fullHeart : faHeart}
+          icon={isLiked[itemId] ? fullHeart : faHeart}
           style={{ color: "#ffffff", width: "20px", height: "20px", marginTop: "10px", marginLeft: "10px" }}
-          onClick={handleLikeClick}
+          onClick={() => handleLikeClick(itemId)}
         />
       </div>
       <p className={Style["tripTitle"]}>{title}</p>
@@ -61,6 +67,8 @@ function MainBestItem() {
         setBestItemPrice(startPrices);
         const imgUrl = bestItems.map((item: any) => item.imageUrl);
         setBestItemImageUrl(imgUrl);
+        const likes = new Array(ids.length).fill(false);
+        setIsLiked(likes);
         console.log(response.data.data);
       })
       .catch((error) => {
@@ -76,21 +84,73 @@ function MainBestItem() {
     movePage(`/detail/${itemId}`);
   };
 
+  const [displayedItemCount, setDisplayedItemCount] = useState(3);
+
+  const handleResize = () => {
+    const windowWidth = window.innerWidth;
+    if (windowWidth >= 992) {
+      setDisplayedItemCount(3);
+    } else if (windowWidth >= 700) {
+      setDisplayedItemCount(2);
+    } else {
+      setDisplayedItemCount(1);
+    }
+  };
+
+  useEffect(() => {
+    handleResize(); // Call initially
+    window.addEventListener("resize", handleResize); // Add event listener for window resize
+    return () => {
+      window.removeEventListener("resize", handleResize); // Clean up event listener on component unmount
+    };
+  }, []);
+
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const handleNextClick = () => {
+    setCurrentIndex((prevIndex) => prevIndex + displayedItemCount);
+  };
+
+  const handlePrevClick = () => {
+    setCurrentIndex((prevIndex) => prevIndex - displayedItemCount);
+  };
+
+  const displayedItemIds = bestItemIds.slice(currentIndex, currentIndex + displayedItemCount);
+
+  const isPrevDisabled = currentIndex === 0;
+  const isNextDisabled = currentIndex + displayedItemCount >= bestItemIds.length;
+
   return (
     <div>
       <h2 style={{ marginTop: "1rem", marginBottom: "1rem" }}>실시간 Best 여행 상품🏞</h2>
       <div className={Style["container"]}>
-        {bestItemIds.slice(0, 3).map((itemId: any, index: number) => (
+        {displayedItemIds.map((itemId: number, index: number) => (
           <Box
             key={itemId}
-            marginRight={index === bestItemIds.length - 1 ? "0" : "32px"}
+            marginRight={index === displayedItemIds.length - 1 ? "0" : "32px"}
             itemId={itemId}
-            title={bestItemTitle[index]}
-            startPrice={numberWithCommas(bestItemPrice[index])}
+            title={bestItemTitle[index + currentIndex]}
+            startPrice={numberWithCommas(bestItemPrice[index + currentIndex])}
             handleClick={() => navigateToDetail(itemId)}
-            imageUrl={bestItemImageUrl[index]}
+            imageUrl={bestItemImageUrl[index + currentIndex]}
           />
         ))}
+      </div>
+      <div style={{ display: "flex", justifyContent: "center", marginTop: "1rem" }}>
+        <button
+          onClick={handlePrevClick}
+          disabled={isPrevDisabled}
+          style={{ background: "transparent", border: "transparent" }}
+        >
+          <img src={isPrevDisabled ? NoLeftIcon : LeftIcon} alt="Previous" style={{ width: "24px", height: "24px" }} />
+        </button>
+        <button
+          onClick={handleNextClick}
+          disabled={isNextDisabled}
+          style={{ background: "transparent", border: "transparent" }}
+        >
+          <img src={isNextDisabled ? NoRightIcon : RightIcon} alt="Next" style={{ width: "24px", height: "24px" }} />
+        </button>
       </div>
     </div>
   );

@@ -1,16 +1,82 @@
-import React from 'react';
-import GoogleMapReact from 'google-map-react';
+import React, { useEffect, useState } from 'react';
 import './Map.scss';
+import MapDetail from './MapDetail/MapDetail';
+import axios from 'axios';
 
-function Map(props: any) {
+interface MapProps {
+  itemId: number | null;
+};
+
+interface MapData {
+  title: string;
+  content: string;
+  day: number;
+  sequenceId: number;
+  timeCost: string;
+  latitude: number;
+  longitude: number;
+};
+
+function Map({ itemId }: MapProps) {
+  /**
+   * Map Data
+   */
+  const [mapData, setMapData] = useState<MapData[]>([]);
+  const [selectedDay, setSelectedDay] = useState<number | null>(null);
+
+  /**
+   * Map API
+   */
+  useEffect(() => {
+    axios
+      .get(`https://ammuse.store/detail/${itemId}/course-intro`)
+      .then((response) => {
+
+        setMapData(response.data.data.course);
+        //console.log(response.data.data.course)
+      })
+      .catch(error => {
+        console.log("연결 실패");
+      });
+  }, [itemId]);
+
+  /**
+   * Select Day
+   */
+  useEffect(() => {
+    if (mapData.length > 0) {
+      setSelectedDay(mapData[0].day);
+    }
+  }, [mapData]);
+
+  const uniqueDays = Array.from(new Set(mapData.map(data => data.day)));
+  
+  /**
+   * Click Button
+   */
+  const handleDayClick = (day: number) => {
+    setSelectedDay(day);
+  };
+
   return (
     <div className='Map'>
-      <GoogleMapReact
-        bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_API_KEY || "" }}
-        defaultCenter={{ lat: 37.5994, lng: 126.8653 }}
-        defaultZoom={16}
-      >
-      </GoogleMapReact>
+      <div className='day-button'>
+        {uniqueDays.map((day) => (
+          <button 
+            key={day}
+            onClick={() => handleDayClick(day)}
+            className={selectedDay === day ? 'selected' : ''}
+          >
+            {day + "일차"}
+          </button>
+        ))}
+      </div>
+      {selectedDay && (
+        <MapDetail
+          key={selectedDay}
+          data={mapData.filter((item) => item.day === selectedDay)}
+        />
+      )}
     </div>
   );
 }

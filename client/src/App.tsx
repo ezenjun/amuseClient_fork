@@ -9,6 +9,7 @@ import Review from "./MyPages/Review/Review";
 import ViewAll from "./SubPages/ViewAllPages/ViewAll";
 import GyeonggiPage from "./SubPages/Regions/GyeonggiPage";
 import GangwonPage from "./SubPages/Regions/GangwonPage";
+import SearchPageComp from "./SubPages/SearchPageComp";
 // import NotFound from './NotFound';
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -92,7 +93,7 @@ function App() {
         <Route path="/LogIn" element={<Login />}></Route>
         <Route path="/SignUp" element={<SignUp />}></Route>
         <Route path="/MyPage/:category" element={<MyPage />}></Route>
-        <Route path="/Review/:name" element={<Review />}></Route>
+        <Route path="/Review/:id" element={<Review />}></Route>
         {/* <Route path="/OnlineTour" element={<OnlineTour />}></Route> */}
         <Route path="/ViewAll" element={<ViewAll />}></Route>
         <Route path="/toGyeonggi" element={<GyeonggiPage />}></Route>
@@ -120,6 +121,10 @@ function App() {
          * 서브페이지 Route
          */}
         <Route path="/category/:apiKey" element={<SubPageComp />} />
+        {/**
+         * 검색 시 Route
+         */}
+        <Route path="/search/:apiKey" element={<SearchPageComp />} />
       </Routes>
     </div>
   );

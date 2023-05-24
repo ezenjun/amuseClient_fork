@@ -15,7 +15,7 @@ import ReviewPicture from "./Component/ReviewPicture/ReviewPicture";
 import Calendar from "./Component/TicketSelect/Calendar/Calendar";
 import Style from "../../App.module.css";
 
-type DetailProps = {
+interface DetailProps {
   itemId: number;
   productCode: number;
   startPrice: number;
@@ -39,11 +39,11 @@ function Detail({ itemId, productCode, startPrice, likeNum }: DetailProps) {
         <Calendar itemId={itemId} />
         <ProductIntro itemId={itemId} />
         <CourseIntro itemId={itemId} />
-        <Map />
+        <Map itemId={itemId} />
         <OtherInfo itemId={itemId} />
         <Manager itemId={itemId} />
-        <ReviewPicture />
-        <Review />
+        <ReviewPicture itemId={itemId} />
+        <Review itemId={itemId} />
         <Footer />
       </div>
     </div>

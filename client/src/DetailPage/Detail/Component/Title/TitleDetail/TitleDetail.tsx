@@ -1,4 +1,3 @@
-import React, { FC } from 'react';
 import './TitleDetail.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronRight, faLocationDot, faStar } from '@fortawesome/free-solid-svg-icons';
@@ -8,11 +7,11 @@ interface TitleDetailProps {
     city: string;
     title: string;
     rated: number;
+    review_count: number;
 }
 
-const TitleDetail: FC<TitleDetailProps> = ({
-    country, city, title, rated
-}) => (
+function TitleDetail({ country, city, title, rated, review_count } : TitleDetailProps){
+  return(
     <div className="Detail-title">
       {/* 헤더의 위치 */}
       <div className="location">
@@ -37,10 +36,11 @@ const TitleDetail: FC<TitleDetailProps> = ({
           <FontAwesomeIcon icon={faStar} />
         </div>
         <p className="score">{rated}</p>
-        <p className="count">(12)</p>
+        <p className="count">({review_count})</p>
         <FontAwesomeIcon className="icon-right" icon={faChevronRight} />
       </div>
     </div>
-);
+  );
+};
 
 export default TitleDetail;

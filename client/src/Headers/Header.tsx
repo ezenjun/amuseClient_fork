@@ -22,16 +22,24 @@ interface MoreDropdownProps {
 function Header() {
   const movePage = useNavigate();
   const [loggedIn, setLoggedIn] = useRecoilState(isLoggedIn);
+
   const navigateToHome = () => {
     movePage("/");
   };
-  // const navigateToSubPageComp = () => {
-  //   movePage("/Subtest");
-  // };
 
-  const navigateToSubPageComp = (apiKey: string) => {
-    movePage(`/category/${apiKey}`);
+  const navigateToSubPageComp = (apiKey: number) => {
+    const apiKeyString: string = apiKey.toString();
+    movePage(`/category/${apiKeyString}`);
   };
+
+  const navigateToSearch = () => {
+    movePage(`/search/${searchKeyword}`);
+    window.location.reload();
+  };
+
+  // const handleSearch = () => {
+  //   console.log(searchKeyword);
+  // };
 
   const navigateToLogIn = () => {
     movePage("/LogIn");
@@ -60,7 +68,7 @@ function Header() {
   const MoreDropdown: React.FC<MoreDropdownProps> = () => (
     <div className="dropdown">
       {hashtag.slice(4).map((hashtagName: string, index: number) => (
-        <div className="dropdown-item" key={index} onClick={() => navigateToSubPageComp(hashtagName)}>
+        <div className="dropdown-item" key={index} onClick={() => navigateToSubPageComp(index + 4)}>
           {hashtagName}
         </div>
       ))}
@@ -81,42 +89,69 @@ function Header() {
       });
   }, []);
 
+  const [searchKeyword, setSearchKeyword] = useState("");
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchKeyword(event.target.value);
+  };
+
+  const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
+      navigateToSearch();
+    }
+  };
+
   return (
     <div>
       <div className={Style["App"]}>
         <div className="top">
           <img className="logo" src={logoimage} alt="Amuse Travel Logo" onClick={navigateToHome} />
           <div className="search-box">
-            <input style={searchKeywordStyle} type="text" placeholder="🔍 여행 키워드를 검색해보세요!" />
-            <button className="searchBtn">검색</button>
+            <input
+              style={searchKeywordStyle}
+              type="text"
+              placeholder="🔍 여행 키워드를 검색해보세요!"
+              value={searchKeyword}
+              onChange={handleInputChange}
+              onKeyDown={handleKeyPress}
+            />
+            <button className="searchBtn" onClick={navigateToSearch}>
+              검색
+            </button>
           </div>
           <div className="whiteSquare"></div>
-          {loggedIn ? 
-          <button className="loginBtn" onClick={() => setLoggedIn(false)}>
-            로그아웃
-          </button> : 
-          <button className="loginBtn" onClick={navigateToLogIn}>
-            로그인
-          </button>}
-          {loggedIn ? <MyPageMenu /> :  
-          <button className="signInBtn" onClick={navigateToSignUP}>
-            회원가입
-          </button>}
+          {loggedIn ? (
+            <button className="loginBtn" onClick={() => {
+              setLoggedIn(false);
+              localStorage.removeItem('dev_access_token');
+              localStorage.removeItem('dev_refresh_token');
+              navigateToHome();
+            }}>
+              로그아웃
+            </button>
+          ) : (
+            <button className="loginBtn" onClick={navigateToLogIn}>
+              로그인
+            </button>
+          )}
+          {loggedIn ? (
+            <MyPageMenu />
+          ) : (
+            <button className="signInBtn" onClick={navigateToSignUP}>
+              회원가입
+            </button>
+          )}
         </div>
         <div className="menu">
           {hashtag.length <= 4 ? (
             hashtag.map((hashtagName: string, index: number) => (
-              <CategoryMenu
-                key={index}
-                hashtagName={hashtagName}
-                handleClick={() => navigateToSubPageComp(hashtagName)}
-              />
+              <CategoryMenu key={index} hashtagName={hashtagName} handleClick={() => navigateToSubPageComp(index)} />
               // <CategoryMenu key={index} hashtagName={hashtagName} handleClick={navigateToSubPageComp} />
             ))
           ) : (
             <>
               {hashtag.slice(0, 4).map((id: string, index: number) => (
-                <CategoryMenu key={id} hashtagName={id} handleClick={() => navigateToSubPageComp(id)} />
+                <CategoryMenu key={id} hashtagName={id} handleClick={() => navigateToSubPageComp(index)} />
               ))}
               <div className="menu-item more-dropdown">
                 더보기 ▼

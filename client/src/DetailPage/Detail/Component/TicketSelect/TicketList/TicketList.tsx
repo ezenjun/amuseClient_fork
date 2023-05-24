@@ -39,7 +39,7 @@ function TicketList({ range, itemId }: DateProps) {
             .catch(error => {
                 console.log("연결 실패");
             });
-    }, []);
+    }, [itemId]);
 
     // plus button function
     const handlePlus = (index: number) => {

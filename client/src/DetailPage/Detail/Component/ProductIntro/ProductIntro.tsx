@@ -2,18 +2,18 @@ import React, { useEffect, useState } from 'react';
 import './ProductIntro.scss';
 import axios from 'axios';
 
-type ProductIntroProps = {
+interface ProductIntroProps {
   itemId: number | null;
 };
+
+interface ProductIntroData {
+  content: string;
+}
 
 function ProductIntro({ itemId }: ProductIntroProps) {
   /**
    * ProductIntro Data
    */
-  interface ProductIntroData {
-    content: string;
-  }
-
   const [productIntroData, setProductIntroData] = useState<ProductIntroData>();
 
   /**
@@ -30,7 +30,7 @@ function ProductIntro({ itemId }: ProductIntroProps) {
       .catch(error => {
         console.log("연결 실패");
       });
-  }, []);
+  }, [itemId]);
 
   return (
     <div className="product-introduction">

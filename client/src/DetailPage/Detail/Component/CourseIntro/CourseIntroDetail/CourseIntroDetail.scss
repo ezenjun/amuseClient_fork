@@ -32,10 +32,11 @@
             }
 
             .course-line-content {
+                padding: 0px 30px;
                 display: flex;
                 display: row;
                 .course-line {
-                    margin: 0 0 -50px 7.3%;
+                    margin: 0 0 -15%;
                     border-left: 2px solid #DEE2E6;
                 }
                 
@@ -50,10 +51,14 @@
         }
         
         .course-image {
-            padding: 2.2%;
-            height: 170px;
-            width: 300px;
-            object-fit: cover;
+            margin-right: 15px;
+            margin-top: 10px;
+            .course-img{
+                padding: 2.2%;
+                height: 170px;
+                width: 250px;
+                object-fit: cover;
+            }
         }
     }
 }
