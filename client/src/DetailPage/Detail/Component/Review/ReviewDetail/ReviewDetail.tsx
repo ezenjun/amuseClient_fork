@@ -41,11 +41,6 @@ function Review({ itemId }: ReviewProps) {
       <div className="review-header">
         <p className="review-title">후기</p>
         <p className="review-number">{reviewData?.review_count}</p>
-
-        <div className='ReviewDetail'>
-          <p className='review-detail-name'></p>
-        </div>
-
       </div>
     </div>
   );

@@ -11,6 +11,7 @@ interface TitleData {
   city : string
   title : string
   rated : number
+  review_count : number
 }
 
 function Title({ itemId }: TitleProps) {
@@ -42,6 +43,7 @@ function Title({ itemId }: TitleProps) {
         city={titleData?.city ?? "city"}
         title={titleData?.title ?? "title"}
         rated={titleData?.rated ?? 0.0}
+        review_count={titleData?.review_count ?? 0.0}
       />
     </div>
   );
