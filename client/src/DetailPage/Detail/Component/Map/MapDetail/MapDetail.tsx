@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
 
 interface MapProps {
-  data: { day: number; lat: number; lng: number; title: string }[];
+  data: { day: number; latitude: number; longitude: number; title: string }[];
 }
 
 interface MarkerProps {
@@ -25,8 +25,8 @@ const Marker = ({ lat, lng, title }: MarkerProps) => (
 
 function MapDetail({ data }: MapProps) { 
   const markerCount = data.length;
-  const sumLat = data.reduce((sum, marker) => sum + marker.lat, 0);
-  const sumLng = data.reduce((sum, marker) => sum + marker.lng, 0);
+  const sumLat = data.reduce((sum, marker) => sum + marker.latitude, 0);
+  const sumLng = data.reduce((sum, marker) => sum + marker.longitude, 0);
   const centerLat = sumLat / markerCount;
   const centerLng = sumLng / markerCount;
 
@@ -38,7 +38,7 @@ function MapDetail({ data }: MapProps) {
         defaultZoom={15}
       >
         {data.map((marker) => (
-          <Marker key={marker.title} lat={marker.lat} lng={marker.lng} title={marker.title} />
+          <Marker key={marker.title} lat={marker.latitude} lng={marker.longitude} title={marker.title} />
         ))}
 
       </GoogleMapReact>
