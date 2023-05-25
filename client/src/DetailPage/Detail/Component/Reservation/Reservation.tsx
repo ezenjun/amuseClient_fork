@@ -63,8 +63,16 @@ function Reservation({ itemId, productCode, startPrice, likeNum }: ReservationPr
   };
 
   const handleCopyLink = async (): Promise<void> => {
-    await navigator.clipboard.writeText(window.location.href);
+    console.log(window.location.href);
+    
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      await navigator.clipboard.writeText(window.location.href);
+      console.log('Link copied to clipboard!');
+    } else {
+      console.log('Copying to clipboard is not supported in this browser.');
+    }
   };
+  
 
 
   return (
