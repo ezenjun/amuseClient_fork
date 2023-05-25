@@ -25,7 +25,8 @@ const EmptyBox = ({ backgroundColor }: { backgroundColor: string }) => (
 function MainRegionItem() {
   const movePage = useNavigate();
   const moveToGyeonggi = () => {
-    movePage("/toGyeonggi");
+    // movePage("/toGyeonggi");
+    movePage(`/search/경기도`);
   };
   const moveToGangwon = () => {
     movePage("/toGangwon");

@@ -37,15 +37,13 @@ function Review({ itemId }: ReviewProps) {
       });
   }, [itemId]);
 
-  console.log(reviewData?.reviews)
-
   return (
     <div className="Review">
       <div className="review-header">
         <p className="review-title">후기</p>
         <p className="review-number">{reviewData?.review_count}</p>
       </div>
-      <div className='ReviewDetail'>
+      <div className='review-detail'>
         {reviewData?.reviews && reviewData.reviews.map((review, index) => (
           <ReviewDetail key={index} name={review.user_name} content={review.review_content} img={review.images} />
         ))}
