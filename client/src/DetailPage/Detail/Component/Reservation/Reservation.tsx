@@ -14,11 +14,11 @@ interface ReservationProps {
 };
 
 interface ManagerData {
-  email : string;
-  img : string;
-  name : string;
-  test : string;
-  title : string;
+  email: string;
+  img: string;
+  name: string;
+  test: string;
+  title: string;
 }
 
 function Reservation({ itemId, productCode, startPrice, likeNum }: ReservationProps) {
@@ -54,7 +54,19 @@ function Reservation({ itemId, productCode, startPrice, likeNum }: ReservationPr
       window.location.href = `mailto:${managerData.email}?subject=${subject}&body=${body}`;
     }
   };
-  
+
+
+  // Share btn
+  const [showTooltip, setShowTooltip] = useState(false);
+  const handleTooltipToggle = () => {
+    setShowTooltip(!showTooltip);
+  };
+
+  const handleCopyLink = async (): Promise<void> => {
+    await navigator.clipboard.writeText(window.location.href);
+  };
+
+
   return (
     <div className="reservation">
       {/* 가격, 티켓선택, 위시 div */}
@@ -67,7 +79,15 @@ function Reservation({ itemId, productCode, startPrice, likeNum }: ReservationPr
             <p>부터</p>
           </div>
           <div className="reservation-link">
-            <FontAwesomeIcon icon={faShareNodes} className="share-icon" />
+            <button className='share-btn' onClick={handleTooltipToggle}>
+              <FontAwesomeIcon icon={faShareNodes} className="share-icon" />
+            </button>
+            {showTooltip && (
+              <div className="tooltip">
+                <span className='link'>{window.location.href}</span>
+                <button className='copy-btn' onClick={handleCopyLink}>링크 복사</button>
+              </div>
+            )}
           </div>
         </div>
         {/* 티켓 선택 btn */}
@@ -92,8 +112,8 @@ function Reservation({ itemId, productCode, startPrice, likeNum }: ReservationPr
           <img className="manager-image" src={managerData?.img ?? "img"} alt="manager" />
           <p className="manager-name">{managerData?.name ?? "name"}</p>
         </div>
-        <div 
-          className="manager-inquiry" 
+        <div
+          className="manager-inquiry"
           onClick={handleInquiryClick}
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
