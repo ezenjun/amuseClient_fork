@@ -10,7 +10,10 @@ import NoRightIcon from "../ArrowIcons/right_no.png";
 import LeftIcon from "../ArrowIcons/left.png";
 import NoLeftIcon from "../ArrowIcons/left_no.png";
 
-const numberWithCommas = (number: number): string => {
+const numberWithCommas = (number: number | null): string => {
+  if (number === null) {
+    return "N/A"; // 또는 원하는 다른 대체 값을 반환할 수 있습니다.
+  }
   return number.toLocaleString("en");
 };
 
