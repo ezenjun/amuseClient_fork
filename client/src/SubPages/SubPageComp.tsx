@@ -8,7 +8,10 @@ import Style from "./SubPage.module.css";
 import ChildTitle from "./SubtitleImgs/ChildTitle.jpg";
 import Fade from "../Fade";
 
-const numberWithCommas = (number: number): string => {
+const numberWithCommas = (number: number | null): string => {
+  if (number === null) {
+    return "N/A"; // 또는 원하는 다른 대체 값을 반환할 수 있습니다.
+  }
   return number.toLocaleString("en");
 };
 
