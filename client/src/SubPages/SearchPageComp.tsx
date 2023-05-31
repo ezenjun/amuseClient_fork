@@ -3,13 +3,13 @@ import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Header from "../Headers/Header";
 import Footer from "../Footers/Footer";
-import Style from "../MainPage/BestAndNewStyle.module.css";
+import Style from "../MainPage/ListStyle.module.css";
 import AppStyle from "../App.module.css";
 import axios from "axios";
 
 const numberWithCommas = (number: number | null): string => {
   if (number === null) {
-    return "N/A"; // 또는 원하는 다른 대체 값을 반환할 수 있습니다.
+    return "N/A";
   }
   return number.toLocaleString("en");
 };
@@ -40,7 +40,7 @@ function SearchPageComp() {
 
   useEffect(() => {
     axios
-      .get(`https://ammuse.store/search?keyword=${apiKey}&sort=like_num_desc&page=1`)
+      .get(`https://ammuse.store/item/search?keyword=${apiKey}&sort=like_num_desc&page=1`)
       .then((response) => {
         const bestItems = response.data.data.items;
         const ids = bestItems.map((item: any) => item.item_db_id);
@@ -54,7 +54,7 @@ function SearchPageComp() {
         console.log(response.data.data);
       })
       .catch((error) => {
-        console.log("mainbest 연결 실패");
+        console.log("search 연결 실패");
       });
   }, []);
 

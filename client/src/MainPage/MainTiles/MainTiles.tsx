@@ -1,6 +1,6 @@
 import React, { ReactNode } from "react";
 import { useNavigate } from "react-router-dom";
-import Style from "./MainRegionItem.module.css";
+import Style from "./MainTiles.module.css";
 import SeoulImg from "../MainImgs/seoul.jpg";
 import GangwonImg from "../MainImgs/gangwon.jpg";
 import ChungImg from "../MainImgs/chungcheong.jpg";
@@ -22,7 +22,7 @@ const EmptyBox = ({ backgroundColor }: { backgroundColor: string }) => (
   <div className={Style["emptyBox"]} style={{ backgroundColor, margin: "auto" }}></div>
 );
 
-function MainRegionItem() {
+function MainTiles() {
   const movePage = useNavigate();
   const moveToGyeonggi = () => {
     // movePage("/toGyeonggi");
@@ -69,4 +69,4 @@ function MainRegionItem() {
   );
 }
 
-export default MainRegionItem;
+export default MainTiles;
