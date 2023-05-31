@@ -13,7 +13,7 @@ interface TitleDetailProps {
 function TitleDetail({ country, city, title, rated, review_count } : TitleDetailProps){
   return(
     <div className="Detail-title">
-      {/* 헤더의 위치 */}
+      {/* 제목의 위치 */}
       <div className="location">
         <p className="country">{country}</p>
         <FontAwesomeIcon className="icon-right" icon={faChevronRight} />
@@ -21,12 +21,12 @@ function TitleDetail({ country, city, title, rated, review_count } : TitleDetail
         <p className="city">{city}</p>
       </div>
 
-      {/* 헤더의 제목 */}
+      {/* 제목의 제목 */}
       <div className="title">
         <p className="title">{title}</p>
       </div>
 
-      {/* 헤더의 별점 */}
+      {/* 제목의 별점 */}
       <div className="review">
         <div className="star">
           <FontAwesomeIcon icon={faStar} />

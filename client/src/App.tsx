@@ -45,7 +45,7 @@ function App() {
 
   useEffect(() => {
     axios
-      .get("https://ammuse.store/main/current-item")
+      .get("http://ammuse.store/item/search?page=1")
       .then((response) => {
         const items = response.data.data.items;
         const ids = items.map((item: any) => item.item_db_id);
