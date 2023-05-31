@@ -6,6 +6,7 @@ import Footer from "../Footers/Footer";
 import Style from "../MainPage/ListStyle.module.css";
 import AppStyle from "../App.module.css";
 import axios from "axios";
+import { SearchSharp } from "@mui/icons-material";
 
 const numberWithCommas = (number: number | null): string => {
   if (number === null) {
@@ -22,9 +23,32 @@ interface BoxProps {
   startPrice: string;
   imageUrl: string;
 }
-interface BoxGroupProps {
-  itemIds: number;
+
+interface DropdownProps {
+  onChange: (sortOption: string) => void;
 }
+
+const Dropdown: React.FC<DropdownProps> = ({ onChange }) => {
+  const [selectedOption, setSelectedOption] = useState("like_num_desc");
+
+  const handleDropdownChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedValue = event.target.value;
+    setSelectedOption(selectedValue);
+    onChange(selectedValue);
+  };
+
+  return (
+    <div className={Style["dropdown"]} style={{ float: "right" }}>
+      <select value={selectedOption} onChange={handleDropdownChange}>
+        <option value="like_num_desc">좋아요 순</option>
+        <option value="rated_desc">평점 높은 순</option>
+        <option value="startPrice_desc">시작가 높은 순</option>
+        <option value="startPrice_asc">시작가 낮은 순</option>
+        <option value="date_desc">최신순</option>
+      </select>
+    </div>
+  );
+};
 
 function SearchPageComp() {
   const { apiKey } = useParams() as { apiKey: string };
@@ -32,6 +56,7 @@ function SearchPageComp() {
   const [ItemTitle, setItemTitle] = useState<string[]>([]);
   const [ItemPrice, setItemPrice] = useState<number[]>([]);
   const [ItemImageUrl, setItemImageUrl] = useState<string[]>([]);
+  const [searchSort, setSearchSort] = useState("like_num_desc");
 
   const movePage = useNavigate();
   const navigateToDetail = (itemId: number) => {
@@ -39,8 +64,12 @@ function SearchPageComp() {
   };
 
   useEffect(() => {
+    fetchData(searchSort); // 초기값으로 "like_num_desc"로 데이터를 가져옵니다.
+  }, [searchSort]); // searchSort 값이 변경될 때마다 useEffect를 실행합니다.
+
+  const fetchData = (sortOption: string) => {
     axios
-      .get(`https://ammuse.store/item/search?keyword=${apiKey}&sort=like_num_desc&page=1`)
+      .get(`https://ammuse.store/item/search?keyword=${apiKey}&sort=${searchSort}&page=1`)
       .then((response) => {
         const bestItems = response.data.data.items;
         const ids = bestItems.map((item: any) => item.item_db_id);
@@ -56,7 +85,13 @@ function SearchPageComp() {
       .catch((error) => {
         console.log("search 연결 실패");
       });
-  }, []);
+  };
+
+  const handleSortChange = (sortOption: string) => {
+    setSearchSort(sortOption);
+  };
+
+  console.log(searchSort);
 
   const Box: React.FC<BoxProps> = ({ marginRight, itemId, handleClick, title, startPrice, imageUrl }) => (
     <div className={Style["box"]} style={{ marginRight }} onClick={handleClick}>
@@ -122,6 +157,7 @@ function SearchPageComp() {
         "{apiKey}" 검색 결과
       </h1>
       <div className={AppStyle["App"]}>
+        <Dropdown onChange={handleSortChange} />
         <BoxGroup />
       </div>
       <Footer />

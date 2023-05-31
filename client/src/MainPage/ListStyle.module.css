@@ -73,3 +73,12 @@
   width: 90%;
   z-index: 5;
 }
+
+.dropdown {
+  margin: 10px;
+}
+
+.dropdown select {
+  padding: 8px;
+  font-size: 14px;
+}
