@@ -26,7 +26,7 @@ interface BoxProps {
   imageUrl: string;
 }
 
-function MainBestItem() {
+function MainLists() {
   /**
    * Best Item API
    */
@@ -159,4 +159,4 @@ function MainBestItem() {
   );
 }
 
-export default MainBestItem;
+export default MainLists;

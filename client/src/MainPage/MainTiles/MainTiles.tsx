@@ -22,7 +22,7 @@ const EmptyBox = ({ backgroundColor }: { backgroundColor: string }) => (
   <div className={Style["emptyBox"]} style={{ backgroundColor, margin: "auto" }}></div>
 );
 
-function MainRegionItem() {
+function MainTiles() {
   const movePage = useNavigate();
   const moveToGyeonggi = () => {
     // movePage("/toGyeonggi");
@@ -69,4 +69,4 @@ function MainRegionItem() {
   );
 }
 
-export default MainRegionItem;
+export default MainTiles;
