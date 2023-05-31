@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import TitleDetail from './TitleDetail/TitleDetail';
 import axios from "axios";
+import './Title.scss';
 
 interface TitleProps {
   itemId: number | null;
@@ -38,7 +39,7 @@ function Title({ itemId }: TitleProps) {
   }, [itemId]);
 
   return (
-    <div>
+    <div className='Title'>
       <TitleDetail
         country={titleData?.country ?? "country"}
         city={titleData?.city ?? "city"}

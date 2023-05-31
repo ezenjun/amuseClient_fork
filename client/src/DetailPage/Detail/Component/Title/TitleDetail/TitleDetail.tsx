@@ -23,7 +23,7 @@ function TitleDetail({ country, city, title, rated, review_count } : TitleDetail
 
       {/* 제목의 제목 */}
       <div className="title">
-        <p className="title">{title}</p>
+        <p className="content">{title}</p>
       </div>
 
       {/* 제목의 별점 */}
