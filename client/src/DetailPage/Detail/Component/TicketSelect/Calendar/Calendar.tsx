@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import '../../../../../../node_modules/react-day-picker/dist/style.css';
+import styles from '../../../../../../node_modules/react-day-picker/dist/style.module.css';
 import './Calendar.scss';
 import { addDays, format, isSameDay } from 'date-fns';
 import { ko } from 'date-fns/locale';
-import { DayPicker, DateFormatter, DateRange, DayClickEventHandler } from 'react-day-picker';
+import { DayPicker, DateFormatter, DateRange, DayClickEventHandler, ClassNames } from 'react-day-picker';
 import TicketList from '../TicketList/TicketList';
 import axios from "axios";
 
@@ -92,11 +92,18 @@ function Calendar({ itemId }: CalendarProps) {
         }
     }
 
+    const classNames: ClassNames = {
+        ...styles,
+        head: 'custom-head',
+        day_selected: 'custom-select'
+    };
+
     const today = new Date();
     return (
         <div className='select-date'>
             <p className='select-ticket-title'>티켓 선택</p>
             <div className='Calendar'>
+                <style>{`.custom-select { color: white; background-color: #F184A1 }`}</style>
                 <DayPicker
                     locale={ko}
                     numberOfMonths={2}
@@ -106,6 +113,8 @@ function Calendar({ itemId }: CalendarProps) {
                     selected={range}
                     onDayClick={handleDayClick}
                     disabled={{ before: today }}
+                    classNames={classNames}
+
                 />
             </div>
             <TicketList range={range} itemId={itemId} />

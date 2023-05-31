@@ -1,15 +1,17 @@
-.select-date {
-  margin-left: 14%;
+@use "../../../Detail.scss" as detail;
 
+.select-date {
+  padding: detail.$padding;
+  @include detail.line;
+  
   .select-ticket-title {
-    color: #343A40;
+    color: detail.$dark-color;
     font-size: 22px;
     font-weight: 700;
     margin-bottom: 16px;
   }
 
   .Calendar {
-    width: 700px;
     padding: 30px 0;
     border: 1px solid #E9ECEF;
     display: flex;

@@ -5,7 +5,7 @@ import './Ticket.scss';
 interface TicketProps {
   name: string;
   detail: string;
-  price: number | undefined;
+  price: number;
   count: number;
   handlePlus: () => void;
   handleMinus: () => void;
@@ -24,7 +24,7 @@ const Ticket: FC<TicketProps> = ({
       </div>
       <div className="ticket-price">
         <span className="person">1명</span>
-        <span className="price">{price}</span>
+        <span className="price">{price.toLocaleString('en')}</span>
         <span className="won">원</span>
       </div>
       <div className="ticket-cnt">

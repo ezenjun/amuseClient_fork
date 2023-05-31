@@ -83,7 +83,7 @@ function Reservation({ itemId, productCode, startPrice, likeNum }: ReservationPr
         <div className="reservation-top">
           <div className="reservation-price">
             <p>시작가</p>
-            <p className="price">{startPrice}</p>
+            <p className="price">{startPrice.toLocaleString('en')}</p>
             <p>부터</p>
           </div>
           <div className="reservation-link">

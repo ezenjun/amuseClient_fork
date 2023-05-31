@@ -1,12 +1,10 @@
+@use "../../Detail.scss" as detail;
+
 .Manager {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    width: 700px;
-    margin-right: 37%;
-    margin-left: 14%;
-    padding: 2% 0 2% 0;
-
-    border-bottom: 1px solid #E9ECEF;
-    color: #373A3C;
+    padding: detail.$padding;
+    @include detail.line;
+    color: detail.$dark-color;
 
     .manager-profile {
         display: flex;
@@ -31,7 +29,7 @@
             align-items: center;
             width: 200px;
             height: 50px;
-            color: #848c94;
+            color: detail.$secondary-color;
             padding-left: 420px;
 
             .icon {
@@ -45,7 +43,7 @@
     }
 
     .manager-info{
-        color: #343A40;
+        color: detail.$dark-color;
         font-weight: 400;
         font-size: 14px;
         line-height: 20px;
