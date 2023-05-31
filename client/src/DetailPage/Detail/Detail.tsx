@@ -32,19 +32,28 @@ function Detail({ itemId, productCode, startPrice, likeNum }: DetailProps) {
         </div>
       </>
       <div className="page">
+        
+        {/* 상세페이지 컨텐츠 */}
+        <div className="content">
+          <Title itemId={itemId} />
+          <IconInfo itemId={itemId} />
+          <Picture itemId={itemId} />
+          <Calendar itemId={itemId} />
+          <ProductIntro itemId={itemId} />
+          <CourseIntro itemId={itemId} />
+          <Map itemId={itemId} />
+          <OtherInfo itemId={itemId} />
+          <Manager itemId={itemId} />
+          <ReviewPicture itemId={itemId} />
+          <Review itemId={itemId} />
+          <Footer /> {/* 상세페이지 푸터 */}
+        </div>
+
+        {/* 상세페이지 사이드 바 */}
+        <div className="side">
         <Reservation itemId={itemId} productCode={productCode} startPrice={startPrice} likeNum={likeNum} />
-        <Title itemId={itemId} />
-        <IconInfo itemId={itemId} />
-        <Picture itemId={itemId} />
-        <Calendar itemId={itemId} />
-        <ProductIntro itemId={itemId} />
-        <CourseIntro itemId={itemId} />
-        <Map itemId={itemId} />
-        <OtherInfo itemId={itemId} />
-        <Manager itemId={itemId} />
-        <ReviewPicture itemId={itemId} />
-        <Review itemId={itemId} />
-        <Footer />
+        </div>
+
       </div>
     </div>
   );

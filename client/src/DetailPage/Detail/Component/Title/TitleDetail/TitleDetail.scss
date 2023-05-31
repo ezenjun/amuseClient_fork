@@ -1,75 +1,67 @@
+@use "../../../Detail.scss" as detail;
+
 .Detail-title {
     display: flex;
     flex-direction: column;
-    margin: -300px 200px 30px;
+    margin: detail.$magin;
     
+    // 제목의 위치
     .location {
         display: flex;
         align-items: center;
-        text-align: center;
-        vertical-align: middle;
         height: 30px;
-        margin: 0 0 8px 0;
+        margin-bottom: 8px;
         
         font-size: 14px;
         font-weight: 700;
-        color: #848c94;
+        color: detail.$light-color;
 
-        .country{
-            padding: 6px;
-        }
         .icon-right{
-            padding: 6px;
+            margin: 6px;
         }
         .icon-location{
-            padding: 0 0 0 6px;
-        }
-        .city{
-            padding: 6px;
+            margin: 6px;
         }
     } 
 
+    // 제목의 제목
     .title {
         display: flex;
         align-items: center;
-        text-align: center;
-        vertical-align: middle;
         height: 40px;
         
         font-size: 32px;
         font-weight: 700;
-        color: #343a40;
+        color: detail.$dark-color;
     }
 
+    // 제목의 리뷰
     .review {
         display: flex;
         align-items: center;
         text-align: center;
-        vertical-align: middle;
-        height: 13px;
-        margin: 15px 0 0 0;
         
+        margin-top: 8px;
+        height: 30px;
+        
+        font-size: 14px;
         font-weight: 600;
 
         .star {
-            width: 60px;
             font-size: 10px;
-            color: #eb1749;
+            color: detail.$secondary-color;
         }
         .score {
-            width: 30px;
-            font-size: 14px;
-            color: #343a40;
+            width: 3%;
+            color: detail.$dark-color;
         }
         .count {
-            width: 30px;
-            font-size: 14px;
-            color: #848c94;
+            width: 3%;
+            color: detail.$light-color;
         }
         .icon-right{
-            padding-bottom: 1px;
-            font-size: 11px;
-            color: #848c94;
+            font-size: 10px;
+            color: detail.$light-color;
         }
     }
 }
