@@ -1,0 +1,6 @@
+@use "../../Detail.scss" as detail;
+
+.Title{
+    padding: detail.$padding;
+    @include detail.line;
+}
