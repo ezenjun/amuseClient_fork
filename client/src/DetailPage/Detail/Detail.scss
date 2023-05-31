@@ -1,3 +1,21 @@
-.Detail {
-    min-width: 1425px;
+/* main color */
+$primary-color:#E6003D;
+$secondary-color:#F184A1;
+
+/* font color */
+$dark-color : #343A40;
+$light-color: #848c94;
+$very-light-color: #ADB5BD;
+
+/* background color */
+$background-color: #F8F9FA;
+
+/* margin */
+$magin : 24px 0 24px 0;
+
+.page {
+    display: grid;
+    justify-content: center;
+    grid-template-columns: 700px 320px;
+    column-gap: 40px;
 }
