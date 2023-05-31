@@ -1,6 +1,6 @@
 import React, { ReactNode } from "react";
 import { useNavigate } from "react-router-dom";
-import Style from "./MainRegionItem.module.css";
+import Style from "./MainTiles.module.css";
 import SeoulImg from "../MainImgs/seoul.jpg";
 import GangwonImg from "../MainImgs/gangwon.jpg";
 import ChungImg from "../MainImgs/chungcheong.jpg";

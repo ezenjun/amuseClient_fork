@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Header from "../Headers/Header";
 import Footer from "../Footers/Footer";
-import Style from "../MainPage/BestAndNewStyle.module.css";
+import Style from "../MainPage/ListStyle.module.css";
 import AppStyle from "../App.module.css";
 import axios from "axios";
 

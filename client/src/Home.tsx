@@ -1,10 +1,9 @@
 import React, { ReactNode, useEffect, useState } from "react";
 import Style from "./App.module.css";
 import Header from "./Headers/Header";
-import MainBestItem from "./MainPage/MainBestItems/MainBestItem";
-import MainNewItem from "./MainPage/MainNewItems/MainNewItem";
-import MainNews from "./MainPage/MainNews/MainNews";
-import MainRegionItem from "./MainPage/MainRegionItems/MainRegionItem";
+import MainLists from "./MainPage/MainLists/MainLists";
+import MainBanner from "./MainPage/MainBanner/MainBanner";
+import MainTiles from "./MainPage/MainTiles/MainTiles";
 import MainMoreAbout from "./MainPage/MainMoreAbout/MainMoreAbout";
 import Footer from "./Footers/Footer";
 import Fade from "./Fade";
@@ -58,10 +57,9 @@ function Home() {
         <div className={Style["liner"]}></div>
         <br />
         <div className={Style["App"]}>
-          <MainBestItem />
-          <MainNewItem />
-          <MainNews />
-          <MainRegionItem />
+          <MainLists />
+          <MainBanner />
+          <MainTiles />
           <MainMoreAbout />
         </div>
         <Footer />
