@@ -1,3 +1,5 @@
+@use "../../../Detail.scss" as detail;
+
 .ticket {
     height: 136px;
     width: 650px;
@@ -9,6 +11,7 @@
     border-radius: 4px;
     box-sizing: border-box;
     box-shadow:  2px 3px 5px 0px rgba(33,37,41,0.1);
+    color: detail.$dark-color;
 
     .ticket-content {
         display: flex;
@@ -17,14 +20,13 @@
         width: 310px;
         margin-bottom: 4px;
         .ticket-name {
-            color: #343A40;
             font-size: 16px;
             font-weight: 600;
             margin: 0;
             margin-bottom: 10px;
         }
         .ticket-detail {
-            color: #848C94;
+            color: detail.$light-color;
             font-size: 14px;
             font-weight: 500;
             margin: 0;
@@ -36,20 +38,18 @@
         display: flex;
         align-items: center;
         .person {
-            color: #ADB5BD;
+            color: detail.$very-light-color;
             font-size: 13px;
             padding-top: 5px;
             margin: 0;
             margin-right: 4px;
         }
         .price {
-            color: #343A40;
             font-size: 20px;
             font-weight: 700;
             margin: 0;
         }
         .won {
-            color: #343A40;
             font-size: 15px;
             font-weight: 600;
             padding-top: 3px;
@@ -66,10 +66,10 @@
             width: 32px;
             height: 32px;
             font-size: 30px;
-            color: #51ABF3;
-            border: 1px solid #51ABF3;
+            color: detail.$secondary-color;
+            border: 1px solid detail.$secondary-color;
             border-radius: 50%;
-            background-color: #F5FBFF;
+            background-color: detail.$background-color;
             line-height: 32px;
         }
     }

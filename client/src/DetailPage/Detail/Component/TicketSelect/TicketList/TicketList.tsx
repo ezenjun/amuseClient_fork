@@ -118,8 +118,8 @@ function TicketList({ range, itemId }: DateProps) {
                     return (
                         <div key={index} className='selected-ticket'>
                             <div className='selected-ticket-title'>{ticket.title}</div>
-                            <div className='selected-ticket-count'>{ticket.count} X {price}원</div>
-                            <div className='selected-ticket-price'>{ticket.count * price}원</div>
+                            <div className='selected-ticket-count'>{ticket.count} X {price.toLocaleString('en')}원</div>
+                            <div className='selected-ticket-price'>{(ticket.count * price).toLocaleString('en')}원</div>
                         </div>
                     );
                 })}
@@ -133,7 +133,7 @@ function TicketList({ range, itemId }: DateProps) {
                                 const selectedPriceIndex = getSelectedPriceIndex(ticket, range);
                                 const price = selectedPriceIndex !== -1 ? ticket.priceList[selectedPriceIndex].price : 0;
                                 return sum + ticket.count * price;
-                            }, 0)}원
+                            }, 0).toLocaleString('en')}원
                         </span>
                     </div>
                 )}

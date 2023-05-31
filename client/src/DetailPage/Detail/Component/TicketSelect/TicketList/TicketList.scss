@@ -1,12 +1,14 @@
+@use "../../../Detail.scss" as detail;
+
 .select-ticket {
     .TicketList {
         width: 650px;
         border: 1px solid #E9ECEF;
-        background-color: #F5F6F7;
+        background-color: detail.$background-color;
         padding: 24px;
-
+        color: detail.$dark-color;
         .selected-ticket {
-            border-bottom: 1px solid #DEE2E6;
+            @include detail.line;
             display: flex;
             justify-content: space-between;
             font-size: 14px;
@@ -14,12 +16,11 @@
 
             .selected-ticket-title,
             .selected-ticket-count {
-                color: #848C94;
+                color: detail.$light-color;
                 font-weight: 500;
             }
 
             .selected-ticket-price {
-                color: #495056;
                 font-weight: 600;
                 width: 92px;
                 text-align: right;
@@ -33,14 +34,13 @@
             .total-title {
                 font-size: 14px;
                 font-weight: 600;
-                color: #495056;
                 margin-right: 16px;
             }
 
             .total-amount {
                 font-size: 20px;
                 font-weight: 700;
-                color: #2b96ed;
+                color: detail.$secondary-color;
             }
         }
     }
@@ -58,8 +58,8 @@
             color: #fff;
             text-align: center;
             border-radius: 4px;
-            background-color: #51abf3;
-            border: 1px solid #51abf3;
+            background-color: detail.$secondary-color;
+            border: 1px solid detail.$secondary-color;
             position: relative;
             cursor: pointer;
         }
