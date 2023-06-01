@@ -35,7 +35,7 @@ function OtherInfo({ itemId }: OtherInfoProps) {
 
   return (
     <div className='other-info'>
-         <div dangerouslySetInnerHTML={{ __html: otherInfoData?.content ?? '' }}></div>
+      <div dangerouslySetInnerHTML={{ __html: otherInfoData?.content ?? '' }}></div>
     </div>
   );
 }

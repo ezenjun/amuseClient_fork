@@ -14,6 +14,7 @@ import Review from "./Component/Review/Review";
 import ReviewPicture from "./Component/ReviewPicture/ReviewPicture";
 import Calendar from "./Component/TicketSelect/Calendar/Calendar";
 import Style from "../../App.module.css";
+import ReservationBottom from "./Component/ReservationBottom/ReservationBottom";
 
 interface DetailProps {
   itemId: number;
@@ -32,7 +33,7 @@ function Detail({ itemId, productCode, startPrice, likeNum }: DetailProps) {
         </div>
       </>
       <div className="page">
-        
+
         {/* 상세페이지 컨텐츠 */}
         <div className="content">
           <Title itemId={itemId} />
@@ -51,7 +52,11 @@ function Detail({ itemId, productCode, startPrice, likeNum }: DetailProps) {
 
         {/* 상세페이지 사이드 바 */}
         <div className="side">
-        <Reservation itemId={itemId} productCode={productCode} startPrice={startPrice} likeNum={likeNum} />
+          <Reservation itemId={itemId} productCode={productCode} startPrice={startPrice} likeNum={likeNum} />
+        </div>
+
+        <div className="bottom-btn">
+          <ReservationBottom />
         </div>
 
       </div>

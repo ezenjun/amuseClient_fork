@@ -1,8 +1,6 @@
-.other-info {
-    width: 700px;
-    margin-right: 37%;
-    margin-left: 14%;
-    padding: 1% 0 2% 0;
+@use "../../Detail.scss" as detail;
 
-    border-bottom: 1px solid #E9ECEF;
+.other-info {
+    padding: detail.$padding;
+    @include detail.line;
 }
