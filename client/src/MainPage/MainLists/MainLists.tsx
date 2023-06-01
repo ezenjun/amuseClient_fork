@@ -87,13 +87,15 @@ function MainLists() {
     movePage(`/detail/${itemId}`);
   };
 
-  const [displayedItemCount, setDisplayedItemCount] = useState(3);
+  const [displayedItemCount, setDisplayedItemCount] = useState(4);
 
   const handleResize = () => {
     const windowWidth = window.innerWidth;
-    if (windowWidth >= 992) {
+    if (windowWidth >= 1100) {
+      setDisplayedItemCount(4);
+    } else if (windowWidth >= 900) {
       setDisplayedItemCount(3);
-    } else if (windowWidth >= 700) {
+    } else if (windowWidth >= 650) {
       setDisplayedItemCount(2);
     } else {
       setDisplayedItemCount(1);
@@ -130,7 +132,7 @@ function MainLists() {
         {displayedItemIds.map((itemId: number, index: number) => (
           <Box
             key={itemId}
-            marginRight={index === displayedItemIds.length - 1 ? "0" : "32px"}
+            marginRight={index === displayedItemIds.length - 1 ? "0" : "18px"}
             itemId={itemId}
             title={bestItemTitle[index + currentIndex]}
             startPrice={numberWithCommas(bestItemPrice[index + currentIndex])}
