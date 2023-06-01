@@ -115,27 +115,49 @@ function SearchPageComp() {
       <div>
         {Array.from({ length: numIterations }, (_, iteration) => (
           <div className={Style["container"]} style={{ marginTop: "3rem" }} key={iteration}>
-            {ItemIds.slice(iteration * 3, iteration * 3 + 3).map((itemId: number, index: number) => {
-              const itemIndex = iteration * 3 + index;
-              if (itemIndex >= ItemIds.length) return null; // ItemIds의 범위를 초과한 경우 null 반환
+            {ItemIds.slice(iteration * displayedItemCount, iteration * displayedItemCount + displayedItemCount).map(
+              (itemId: number, index: number) => {
+                const itemIndex = iteration * displayedItemCount + index;
+                if (itemIndex >= ItemIds.length) return null; // ItemIds의 범위를 초과한 경우 null 반환
 
-              return (
-                <Box
-                  key={itemId}
-                  marginRight={itemIndex !== 0 && (itemIndex + 1) % 3 === 0 ? "0" : "32px"}
-                  itemId={itemId}
-                  title={ItemTitle[itemIndex]}
-                  startPrice={numberWithCommas(ItemPrice[itemIndex])}
-                  handleClick={() => navigateToDetail(itemId)}
-                  imageUrl={ItemImageUrl[itemIndex]}
-                />
-              );
-            })}
+                return (
+                  <Box
+                    key={itemId}
+                    marginRight={itemIndex !== 0 && (itemIndex + 1) % 3 === 0 ? "0" : "32px"}
+                    itemId={itemId}
+                    title={ItemTitle[itemIndex]}
+                    startPrice={numberWithCommas(ItemPrice[itemIndex])}
+                    handleClick={() => navigateToDetail(itemId)}
+                    imageUrl={ItemImageUrl[itemIndex]}
+                  />
+                );
+              }
+            )}
           </div>
         ))}
       </div>
     );
   };
+  const [displayedItemCount, setDisplayedItemCount] = useState(3);
+
+  const handleResize = () => {
+    const windowWidth = window.innerWidth;
+    if (windowWidth >= 900) {
+      setDisplayedItemCount(3);
+    } else if (windowWidth >= 650) {
+      setDisplayedItemCount(2);
+    } else {
+      setDisplayedItemCount(1);
+    }
+  };
+
+  useEffect(() => {
+    handleResize(); // Call initially
+    window.addEventListener("resize", handleResize); // Add event listener for window resize
+    return () => {
+      window.removeEventListener("resize", handleResize); // Clean up event listener on component unmount
+    };
+  }, []);
 
   return (
     <div>
