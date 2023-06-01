@@ -1,7 +1,11 @@
+@use "../../Detail.scss" as detail;
+
 .Picture {
+    padding: detail.$padding;
+    @include detail.line;
+    
     .subpicture {
         display: flex;
         flex-direction: row;
-        margin-left: 14%;
     }
 }

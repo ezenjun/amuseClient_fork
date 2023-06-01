@@ -1,60 +1,68 @@
+@use "../../../Detail.scss" as detail;
+
 .course-information {
-    padding: 0.5% 0 1% 0;
+    margin-bottom: 10px;
 
     .course {
         display: flex;
         flex-direction: row;
-        width: 700px;
-        height: 200px;
-        background-color: #F8F9FA;
+        padding: 2.5%;
+        
+        background-color: detail.$background-color;
+
+        .course-line{
+            display: flex;
+            flex-direction: column;
+
+            margin: 10px 0 10px 0;
+            .icon{
+                .icon-location{
+                    color: detail.$dark-color;
+                }
+            }
+            .line{
+                height: 100%;
+                margin: 5px;
+                border-left: 2px solid #DEE2E6;
+            }
+        }
 
         .course-text {
-            .course-icon-title {
+            .course-title-time {
                 display: flex;
                 flex-direction: row;
-                .icon-location{
-                    padding: 18px 20px 0 25px;
-                    color: #373A3C;
-                }
-            
-                .course-title {
-                    padding: 4px 0 0 0;
+                align-items: center;
+                
+                .title {
                     font-size: 14px;
                     font-weight: 700;
-                    color: #343A40;
+                    margin: detail.$margin;
+                    color: detail.$dark-color;
+                    margin: 0 10px 0 10px;
                 }
-                .course-time {
-                    padding: 9px 0 0 6px;
+                .time {
                     font-size: 11px;
                     font-weight: 400;
-                    color: #848C94;
+                    margin: detail.$margin;
+                    color: detail.$light-color;
                 }
             }
 
-            .course-line-content {
-                padding: 0px 30px;
-                display: flex;
-                display: row;
-                .course-line {
-                    margin: 0 0 -15%;
-                    border-left: 2px solid #DEE2E6;
-                }
-                
-                .course-content {
-                    padding: 0 0 0 25px;
-                    font-size: 13px;
+            .course-content {
+                .content {
+                    padding: 0 12px 0 12px;
+                    margin: 8px 0 8px 0;
+                    font-size: 14px;
                     font-weight: 400;
-                    color: #343A40;
+                    color: detail.$dark-color;
+                    line-height: 24px;
                 }
             }
-            
         }
         
         .course-image {
-            margin-right: 15px;
-            margin-top: 10px;
             .course-img{
-                padding: 2.2%;
+                margin: 12px 0 12px 0;
                 height: 170px;
                 width: 250px;
                 object-fit: cover;
