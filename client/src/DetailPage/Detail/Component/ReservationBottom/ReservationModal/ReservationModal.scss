@@ -1,0 +1,23 @@
+.picture-modal{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;  
+  .btn-close {
+      position: absolute;
+      top: 0;
+      right: 0;
+  
+      background: none;
+      border: none;
+      font-size: 2rem;
+      cursor: pointer;
+      color: #fff;
+  
+      &:hover {
+          color: #ccc;
+      }
+  }
+  
+
+}
