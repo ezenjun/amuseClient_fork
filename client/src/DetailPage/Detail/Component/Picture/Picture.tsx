@@ -34,7 +34,9 @@ function Picture({ itemId }: PictureProps) {
 
   return (
     <div className="Picture">
-      {mainPicture && <MainPicture src={mainPicture} alt={mainPicture} itemId={itemId} modal={pictureData} />}
+      <div className='mainpicture'>
+       {mainPicture && <MainPicture src={mainPicture} alt={mainPicture} itemId={itemId} modal={pictureData} />}
+      </div>
       <div className="subpicture">
         {subPicture.map((picture) => (
           <SubPicture src={picture} alt={picture} itemId={itemId} modal={pictureData}/>
