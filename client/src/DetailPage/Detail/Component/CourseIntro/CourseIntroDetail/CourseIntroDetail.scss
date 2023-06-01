@@ -1,71 +1,160 @@
 @use "../../../Detail.scss" as detail;
 
-.course-information {
-    margin-bottom: 10px;
-
-    .course {
-        display: flex;
-        flex-direction: row;
-        padding: 2.5%;
-        
-        background-color: detail.$background-color;
-
-        .course-line{
+/* 데스크탑 */
+@media (min-width: 720px) {
+    .course-information {
+        margin-bottom: 10px;
+    
+        .course {
             display: flex;
-            flex-direction: column;
-
-            margin: 10px 0 10px 0;
-            .icon{
-                .icon-location{
-                    color: detail.$dark-color;
+            flex-direction: row;
+            padding: 2.5%;
+            
+            background-color: detail.$background-color;
+    
+            .course-line{
+                display: flex;
+                flex-direction: column;
+    
+                margin: 10px 0 10px 0;
+                .icon{
+                    .icon-location{
+                        color: detail.$dark-color;
+                    }
+                }
+                .line{
+                    height: 100%;
+                    margin: 5px;
+                    border-left: 2px solid #DEE2E6;
                 }
             }
-            .line{
-                height: 100%;
-                margin: 5px;
-                border-left: 2px solid #DEE2E6;
-            }
-        }
-
-        .course-text {
-            .course-title-time {
+            
+            .course-text-image{
                 display: flex;
                 flex-direction: row;
-                align-items: center;
-                
-                .title {
-                    font-size: 14px;
-                    font-weight: 700;
-                    margin: detail.$margin;
-                    color: detail.$dark-color;
-                    margin: 0 10px 0 10px;
-                }
-                .time {
-                    font-size: 11px;
-                    font-weight: 400;
-                    margin: detail.$margin;
-                    color: detail.$light-color;
+
+                .course-text {
+                    .course-title-time {
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        
+                        .title {
+                            font-size: 14px;
+                            font-weight: 700;
+                            margin: detail.$margin;
+                            color: detail.$dark-color;
+                            margin: 0 10px 0 10px;
+                        }
+                        .time {
+                            font-size: 11px;
+                            font-weight: 400;
+                            margin: detail.$margin;
+                            color: detail.$light-color;
+                        }
+                    }
+        
+                    .course-content {
+                        .content {
+                            padding: 0 12px 0 12px;
+                            margin: 8px 0 8px 0;
+                            font-size: 14px;
+                            font-weight: 400;
+                            color: detail.$dark-color;
+                            line-height: 24px;
+                        }
+                    }
                 }
             }
-
-            .course-content {
-                .content {
-                    padding: 0 12px 0 12px;
-                    margin: 8px 0 8px 0;
-                    font-size: 14px;
-                    font-weight: 400;
-                    color: detail.$dark-color;
-                    line-height: 24px;
+            
+            .course-image {
+                .course-img{
+                    margin: 12px 0 12px 0;
+                    height: 170px;
+                    width: 250px;
+                    object-fit: cover;
                 }
             }
         }
+    }    
+}
+
+/* 모바일 */
+@media (max-width: 720px) {
+    .course-information {
+        margin-bottom: 10px;
+    
+        .course {
+            display: flex;
+            flex-direction: row;
+            padding: 2.5%;
+            
+            background-color: detail.$background-color;
+    
+            .course-line{
+                display: flex;
+                flex-direction: column;
+    
+                margin: 10px 0 10px 0;
+                .icon{
+                    .icon-location{
+                        color: detail.$dark-color;
+                    }
+                }
+                .line{
+                    height: 100%;
+                    margin: 5px;
+                    border-left: 2px solid #DEE2E6;
+                }
+            }
+            
+            .course-text-image{
+                display: flex;
+                flex-direction: column;
+
+                .course-text {
+                    .course-title-time {
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        
+                        .title {
+                            font-size: 14px;
+                            font-weight: 700;
+                            margin: detail.$margin;
+                            color: detail.$dark-color;
+                            margin: 0 10px 0 10px;
+                        }
+                        .time {
+                            font-size: 11px;
+                            font-weight: 400;
+                            margin: detail.$margin;
+                            color: detail.$light-color;
+                        }
+                    }
         
-        .course-image {
-            .course-img{
+                    .course-content {
+                        .content {
+                            padding: 0 12px 0 12px;
+                            margin: 8px 0 8px 0;
+                            font-size: 14px;
+                            font-weight: 400;
+                            color: detail.$dark-color;
+                            line-height: 24px;
+                        }
+                    }
+                }
+            }
+            
+            .course-image {
+                padding: 0 12px 0 12px;
                 margin: 12px 0 12px 0;
-                height: 170px;
-                width: 250px;
-                object-fit: cover;
+
+                .course-img{
+                    height: 100%;
+                    width: 100%;
+                    object-fit: cover;
+                }
             }
         }
     }
