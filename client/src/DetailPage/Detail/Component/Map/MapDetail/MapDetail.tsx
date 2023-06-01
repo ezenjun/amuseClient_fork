@@ -38,15 +38,17 @@ function MapDetail({ data }: MapProps) {
 
   return (
     <div className='MapDetail'>
-      <GoogleMapReact
-        bootstrapURLKeys={{ key: API_KEY || "" }}
-        defaultCenter={{ lat: centerLat, lng: centerLng }}
-        defaultZoom={15}
-      >
-        {data.map((marker) => (
-          <Marker key={marker.title} lat={marker.latitude} lng={marker.longitude} title={marker.title} />
-        ))}
-      </GoogleMapReact>
+      <div className='google-map'>
+        <GoogleMapReact
+          bootstrapURLKeys={{ key: API_KEY || "" }}
+          defaultCenter={{ lat: centerLat, lng: centerLng }}
+          defaultZoom={15}
+        >
+          {data.map((marker) => (
+            <Marker key={marker.title} lat={marker.latitude} lng={marker.longitude} title={marker.title} />
+          ))}
+        </GoogleMapReact>
+      </div>
     </div>
   );
 }
