@@ -5,38 +5,45 @@
     padding: detail.$padding;
     @include detail.line;
 
-    .manager-profile {
+    .manager-header{
         display: flex;
         flex-direction: row;
-
-        .manager-image {
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            outline: #E9ECEF dashed 0.8px;
-            object-fit: cover;
+        justify-content: space-between;
+        
+        .manager-profile {
+            display: flex;
+            flex-direction: row;
+            white-space:nowrap;
+    
+            .manager-image {
+                width: 45px;
+                height: 45px;
+                border-radius: 50%;
+                outline: #E9ECEF dashed 0.8px;
+                object-fit: cover;
+            }
+    
+            .manager-name {
+                margin: 10px;
+                text-align: left;
+                font-size: 17px;
+                font-weight: 700;
+            }
         }
-        .manager-name {
-            width: 200px;
-            margin: 2% 2% 0 2%;
-            align-items: center;
-            font-size: 17px;
-            font-weight: 700;
-        }
+    
         .manager-inquiry {
             display: flex;
             align-items: center;
-            width: 200px;
-            height: 50px;
             color: detail.$secondary-color;
-            padding-left: 420px;
-
+            white-space:nowrap;
+    
             .icon {
                 padding-right: 4%;
             }
             .inquiry {
+                margin: 10px 10px 10px 5px;
                 font-weight: 600;
-                font-size: 14px;
+                font-size: 15px;
             }
         }
     }
@@ -45,7 +52,6 @@
         color: detail.$dark-color;
         font-weight: 400;
         font-size: 15px;
-        line-height: 20px;
-        margin: 0 8px 0 8px;
+        line-height: 24px;
     }
 }
