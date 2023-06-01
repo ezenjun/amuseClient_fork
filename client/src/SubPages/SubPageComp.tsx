@@ -39,6 +39,29 @@ const Box: React.FC<BoxProps> = ({ marginRight, itemId, handleClick, title, star
   </div>
 );
 
+interface DropdownProps {
+  onChange: (sortOption: string) => void;
+}
+
+const Dropdown: React.FC<DropdownProps> = ({ onChange }) => {
+  const [selectedOption, setSelectedOption] = useState("like_num_desc");
+
+  const handleDropdownChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedValue = event.target.value;
+    setSelectedOption(selectedValue);
+    onChange(selectedValue);
+  };
+
+  return (
+    <div className={Style["dropdown"]} style={{ float: "right" }}>
+      <select value={selectedOption} onChange={handleDropdownChange}>
+        <option value="best-item">좋아요 순</option>
+        <option value="current-item">최신순</option>
+      </select>
+    </div>
+  );
+};
+
 function SubPageComp() {
   const movePage = useNavigate();
   const navigateToDetail = (itemId: number) => {
@@ -89,10 +112,16 @@ function SubPageComp() {
   const [bestItemTitle, setBestItemTitle] = useState<string[]>([]);
   const [bestItemPrice, setBestItemPrice] = useState<number[]>([]);
   const [bestItemImageUrl, setBestItemImageUrl] = useState<string[]>([]);
-  // console.log("apikeynum = ", apiKeyNumber);
+
+  const [itemSort, setItemSort] = useState("best-item");
+
   useEffect(() => {
+    fetchData(itemSort); // 초기값으로 "like_num_desc"로 데이터를 가져옵니다.
+  }, [itemSort]);
+  // console.log("apikeynum = ", apiKeyNumber);
+  const fetchData = (sortOption: string) => {
     axios
-      .get(`https://ammuse.store/category/${apiKeyNumber}/best-item/page=1`)
+      .get(`https://ammuse.store/category/${apiKeyNumber}/${itemSort}/page=1`)
       .then((response) => {
         const bestItems = response.data.data.items;
         const ids = bestItems.map((item: any) => item.item_db_id);
@@ -110,11 +139,11 @@ function SubPageComp() {
       .catch((error) => {
         console.log("subpage 상품 연결 실패");
       });
-  }, [apiKeyNumber]);
+  };
 
-  // useEffect(() => {
-  //   console.log(categoryData);
-  // }, [categoryData]);
+  const handleSortChange = (sortOption: string) => {
+    setItemSort(sortOption);
+  };
 
   const [displayedItemCount, setDisplayedItemCount] = useState(3);
 
@@ -162,6 +191,7 @@ function SubPageComp() {
             </div>
 
             <div className={Style["App"]}>
+              <Dropdown onChange={handleSortChange} />
               <h2 style={{ marginTop: "2rem", marginBottom: "1rem" }}>{categoryData.categoryName} 여행 Best 상품🏞</h2>
               {/* <div className={Style["container"]}></div> */}
               {/* <div className={Style["allBtn"]} onClick={moveToViewAll}>
