@@ -4,7 +4,6 @@
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     padding: detail.$padding;
     @include detail.line;
-    color: detail.$dark-color;
 
     .manager-profile {
         display: flex;
@@ -37,7 +36,7 @@
             }
             .inquiry {
                 font-weight: 600;
-                font-size: 12px;
+                font-size: 14px;
             }
         }
     }
@@ -45,7 +44,8 @@
     .manager-info{
         color: detail.$dark-color;
         font-weight: 400;
-        font-size: 14px;
+        font-size: 15px;
         line-height: 20px;
+        margin: 0 8px 0 8px;
     }
 }

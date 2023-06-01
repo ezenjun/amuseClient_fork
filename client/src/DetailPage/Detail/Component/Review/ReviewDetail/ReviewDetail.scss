@@ -1,8 +1,8 @@
+@use "../../../Detail.scss" as detail;
+
 .ReviewDetail{
     padding: 3% 0 3% 0;
-    
-    border-bottom: 1px solid #DEE2E6;
-    color: #373A3C;
+    @include detail.line;
     
     .name{
         padding: 0 0 2% 0;
