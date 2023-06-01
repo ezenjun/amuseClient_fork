@@ -24,7 +24,7 @@ function ReservationBottom() {
 
             <button className="purchase-btn" onClick={openModal}>구매하기</button>
             {isModalOpen && (
-                <ReservationModal onClose={closeModal} />
+                <ReservationModal onClose={closeModal} itemId={0} />
             )}
         </div>
     );
