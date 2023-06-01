@@ -33,7 +33,10 @@ function MainMoreAbout() {
         </h4>
       </div>
       <div style={{ clear: "left" }}></div>
-      <div className={Style["imgContainer"]}>
+      <div
+        className={Style["imgContainer"]}
+        style={{ display: "flex", flexWrap: "wrap", justifyContent: "flex-start" }}
+      >
         <img className={Style["logoImgs"]} src={bcorplogo} alt="Bcorp Logo" />
         <img className={Style["logoImgs"]} src={logo01} alt="Logo 01" />
         <img className={Style["logoImgs"]} src={logo02} alt="Logo 02" />
