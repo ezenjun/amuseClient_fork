@@ -109,7 +109,7 @@ function SearchPageComp() {
   );
 
   const BoxGroup = () => {
-    const numIterations = Math.ceil(ItemIds.length / 3); // ItemIds의 길이를 3으로 나눈 후 올림하여 반복 횟수 계산
+    const numIterations = Math.ceil(ItemIds.length / displayedItemCount); // ItemIds의 길이를 3으로 나눈 후 올림하여 반복 횟수 계산
 
     return (
       <div>
@@ -123,7 +123,7 @@ function SearchPageComp() {
                 return (
                   <Box
                     key={itemId}
-                    marginRight={itemIndex !== 0 && (itemIndex + 1) % 3 === 0 ? "0" : "32px"}
+                    marginRight={itemIndex !== 0 && (itemIndex + 1) % displayedItemCount === 0 ? "0" : "18px"}
                     itemId={itemId}
                     title={ItemTitle[itemIndex]}
                     startPrice={numberWithCommas(ItemPrice[itemIndex])}
@@ -142,7 +142,9 @@ function SearchPageComp() {
 
   const handleResize = () => {
     const windowWidth = window.innerWidth;
-    if (windowWidth >= 900) {
+    if (windowWidth >= 1100) {
+      setDisplayedItemCount(4);
+    } else if (windowWidth >= 900) {
       setDisplayedItemCount(3);
     } else if (windowWidth >= 650) {
       setDisplayedItemCount(2);
