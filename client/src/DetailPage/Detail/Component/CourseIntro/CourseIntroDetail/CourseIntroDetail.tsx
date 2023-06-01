@@ -23,18 +23,20 @@ function CourseIntroDetail({ title, time, content, imageSrc }: CourseIntroDetail
           <div className="line"></div>
         </div>
 
-        <div className="course-text">
-          <div className="course-title-time">
-            <p className="title">{title}</p>
-            <p className="time">{time}</p>
+        <div className='course-text-image'>
+          <div className="course-text">
+            <div className="course-title-time">
+              <p className="title">{title}</p>
+              <p className="time">{time}</p>
+            </div>
+            <div className='course-content'>
+              <p className="content">{content}</p>
+            </div>
           </div>
-          <div className='course-content'>
-            <p className="content">{content}</p>
-          </div>
-        </div>
 
-        <div className='course-image'>
-          <img className="course-img" src={imageSrc} alt={title} />
+          <div className='course-image'>
+            <img className="course-img" src={imageSrc} alt={title} />
+          </div>
         </div>
 
       </div>
