@@ -116,10 +116,12 @@ function SubPageComp() {
   const [itemSort, setItemSort] = useState("best-item");
 
   useEffect(() => {
-    fetchData(itemSort); // 초기값으로 "like_num_desc"로 데이터를 가져옵니다.
-  }, [itemSort]);
+    fetchData(itemSort, apiKeyNumber); // 초기값으로 "like_num_desc"로 데이터를 가져옵니다.
+  }, [itemSort, apiKeyNumber]);
+
+  console.log(itemSort, apiKeyNumber);
   // console.log("apikeynum = ", apiKeyNumber);
-  const fetchData = (sortOption: string) => {
+  const fetchData = (sortOption: string, apiKeyNumber: number) => {
     axios
       .get(`https://ammuse.store/category/${apiKeyNumber}/${itemSort}/page=1`)
       .then((response) => {
