@@ -53,19 +53,23 @@ function Manager({ itemId }: ManagerProps) {
 
   return (
     <div className="Manager">
-      <div className="manager-profile">
-        <img className="manager-image" src={managerData?.img ?? "img"} alt="manager" />
-        <p className="manager-name">{managerData?.name ?? "name"}</p>
+      <div className='manager-header'>
+        <div className="manager-profile">
+          <img className="manager-image" src={managerData?.img ?? "img"} alt="manager" />
+          <p className="manager-name">{managerData?.name ?? "name"}</p>
+        </div>
+          
         <div 
-          className="manager-inquiry" 
-          onClick={handleInquiryClick}
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
-        >
-          <FontAwesomeIcon className="icon" icon={isHovered ? regularFaEnelope : solidFaEnelope} />
-          <p className="inquiry">문의하기</p>
+            className="manager-inquiry" 
+            onClick={handleInquiryClick}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+          >
+            <FontAwesomeIcon className="icon" icon={isHovered ? regularFaEnelope : solidFaEnelope} />
+            <p className="inquiry">문의하기</p>
         </div>
       </div>
+
       <div className="manager-info">
         <p>{managerData?.manager_content ?? "manager_content"}</p>
       </div>
