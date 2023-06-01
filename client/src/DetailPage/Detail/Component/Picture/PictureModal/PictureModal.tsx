@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import axios from "axios";
+import React, { useState } from 'react';
 import Modal from 'react-modal';
 import './PictureModal.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -11,24 +10,19 @@ interface PictureModalProps {
   images: string[];
 }
 
+
 const onAfterOpen = () => {
   document.body.style.overflow = 'hidden';
 };
 
 function PictureModal({ onClose, itemId, images } : PictureModalProps){
-
-  // 이미지 목록
   const pictures = images;
-
-  // 현재 이미지의 인덱스
   const [currentPictureIndex, setCurrentPictureIndex] = useState(0);
 
-  // 다음 이미지를 보여주는 함수
   const showNextPicture = () => {
     setCurrentPictureIndex((prevIndex) => (prevIndex + 1) % pictures.length);
   };
 
-  // 이전 이미지를 보여주는 함수
   const showPreviousPicture = () => {
     setCurrentPictureIndex((prevIndex) => (prevIndex - 1 + pictures.length) % pictures.length);
   };

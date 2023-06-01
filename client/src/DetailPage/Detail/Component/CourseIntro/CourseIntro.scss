@@ -1,11 +1,9 @@
-.CourseIntro {
-    width: 700px;
-    margin-right: 37%;
-    margin-left: 14%;
-    padding: 1% 0 2% 0;
+@use "../../Detail.scss" as detail;
 
-    border-bottom: 1px solid #E9ECEF;
-    
+.CourseIntro {
+    padding: detail.$padding;
+    @include detail.line;
+
     .information-title {
         font-size: 20px;
         font-weight: 700;

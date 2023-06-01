@@ -16,16 +16,20 @@ function CourseIntroDetail({ title, time, content, imageSrc }: CourseIntroDetail
     <div className="course-information">
       <div className="course">
         
-        <div className="course-text">
-          <div className="course-icon-title">
+        <div className="course-line">
+          <div className='icon'>
             <FontAwesomeIcon className="icon-location" icon={faLocationDot} />
-            <p className="course-title">{title}</p>
-            <p className="course-time">{time}</p>
           </div>
+          <div className="line"></div>
+        </div>
 
-          <div className="course-line-content">
-            <div className="course-line" />
-            <p className="course-content">{content}</p>
+        <div className="course-text">
+          <div className="course-title-time">
+            <p className="title">{title}</p>
+            <p className="time">{time}</p>
+          </div>
+          <div className='course-content'>
+            <p className="content">{content}</p>
           </div>
         </div>
 
