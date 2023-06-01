@@ -5,8 +5,6 @@ import { faHeart } from '@fortawesome/free-solid-svg-icons';
 
 
 function ReservationBottom() {
-
-
     return (
         <div className="reservation-bottom">
             <button className="wish-btn">

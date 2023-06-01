@@ -19,24 +19,29 @@ $margin : 12px 0 12px 0;
     border-bottom: 1px solid #E9ECEF;
 }
 
-.page {
-    margin-top: 30px;
-    display: grid;
-    justify-content: center;
-    grid-template-columns: 700px 320px;
-    column-gap: 40px;
+/* 데스크탑 */
+@media (min-width: 720px) {
+    .bottom-btn {
+        display: none;
+    }
+
+    .page {
+        margin-top: 30px;
+        display: grid;
+        justify-content: center;
+        grid-template-columns: 700px 320px;
+        column-gap: 40px;
+    }
 }
 
-
+/* 모바일 */
 @media (max-width: 720px) {
     .side,
     .content .select-date {
         display: none;
     }
-}
 
-@media (min-width: 720px) {
-    .bottom-btn {
-        display: none;
+    .page{
+        margin: 30px 15px 15px 15px;
     }
 }
