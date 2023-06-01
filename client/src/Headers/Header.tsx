@@ -68,17 +68,22 @@ function Header() {
 
   const MoreDropdown: React.FC<MoreDropdownProps> = () => (
     <div className="dropdown">
-      {mobileHeader === 0
-        ? hashtag.slice(4).map((hashtagName: string, index: number) => (
-            <div className="dropdown-item" key={index} onClick={() => navigateToSubPageComp(index + 4)}>
-              {hashtagName}
-            </div>
-          ))
-        : hashtag.slice(2).map((hashtagName: string, index: number) => (
+      {mobileHeader === 0 ? (
+        hashtag.slice(4).map((hashtagName: string, index: number) => (
+          <div className="dropdown-item" key={index} onClick={() => navigateToSubPageComp(index + 4)}>
+            {hashtagName}
+          </div>
+        ))
+      ) : (
+        <>
+          {hashtag.slice(2).map((hashtagName: string, index: number) => (
             <div className="dropdown-item" key={index} onClick={() => navigateToSubPageComp(index + 2)}>
               {hashtagName}
             </div>
           ))}
+          <div className="dropdown-item">회사 소개</div>
+        </>
+      )}
     </div>
   );
 
@@ -267,26 +272,6 @@ function Header() {
             </div>
           )}
         </div>
-        {/* <div className="menu">
-          {hashtag.length <= 4 ? (
-            hashtag.map((hashtagName: string, index: number) => (
-              <CategoryMenu key={index} hashtagName={hashtagName} handleClick={() => navigateToSubPageComp(index)} />
-              // <CategoryMenu key={index} hashtagName={hashtagName} handleClick={navigateToSubPageComp} />
-            ))
-          ) : (
-            <>
-              {hashtag.slice(0, 4).map((id: string, index: number) => (
-                <CategoryMenu key={id} hashtagName={id} handleClick={() => navigateToSubPageComp(index)} />
-              ))}
-              <div className="menu-item more-dropdown">
-                더보기 ▼
-                <MoreDropdown />
-              </div>
-            </>
-          )}
-          <div className="menu-item">회사 소개</div>
-        </div>
-      </div> */}
       </div>
     </div>
   );

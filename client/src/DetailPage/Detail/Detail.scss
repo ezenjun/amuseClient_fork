@@ -20,7 +20,7 @@ $margin : 12px 0 12px 0;
 }
 
 /* 데스크탑 */
-@media (min-width: 720px) {
+@media (min-width: 1060px) {
     .bottom-btn {
         display: none;
     }
@@ -35,7 +35,7 @@ $margin : 12px 0 12px 0;
 }
 
 /* 모바일 */
-@media (max-width: 720px) {
+@media (max-width: 1060px) {
     .side,
     .content .select-date {
         display: none;
