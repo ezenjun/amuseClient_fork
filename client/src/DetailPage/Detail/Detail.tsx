@@ -21,7 +21,7 @@ interface DetailProps {
   productCode: number;
   startPrice: number;
   likeNum: number;
-};
+}
 
 function Detail({ itemId, productCode, startPrice, likeNum }: DetailProps) {
   return (
@@ -33,7 +33,6 @@ function Detail({ itemId, productCode, startPrice, likeNum }: DetailProps) {
         </div>
       </>
       <div className="page">
-
         {/* 상세페이지 컨텐츠 */}
         <div className="content">
           <Title itemId={itemId} />
@@ -47,7 +46,7 @@ function Detail({ itemId, productCode, startPrice, likeNum }: DetailProps) {
           <Manager itemId={itemId} />
           <ReviewPicture itemId={itemId} />
           <Review itemId={itemId} />
-          <Footer /> {/* 상세페이지 푸터 */}
+          {/* <Footer /> 상세페이지 푸터 */}
         </div>
 
         {/* 상세페이지 사이드 바 */}
@@ -58,8 +57,8 @@ function Detail({ itemId, productCode, startPrice, likeNum }: DetailProps) {
         <div className="bottom-btn">
           <ReservationBottom />
         </div>
-
       </div>
+      <Footer />
     </div>
   );
 }
