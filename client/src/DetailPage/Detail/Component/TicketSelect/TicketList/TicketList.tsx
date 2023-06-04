@@ -10,9 +10,13 @@ import axios from "axios";
 type DateProps = {
     itemId: number | null;
     range: DateRange | undefined;
+    classNone? : string;
+    classTicketContainer? : string;
+    classTicketPrice? : string;
+    classTicketCnt? : string;
 };
 
-function TicketList({ range, itemId }: DateProps) {
+function TicketList({ range, itemId, classNone, classTicketContainer, classTicketPrice, classTicketCnt }: DateProps) {
     // Ticket Data
     interface TicketData {
         title: string;
@@ -20,8 +24,6 @@ function TicketList({ range, itemId }: DateProps) {
         priceList: { startDate: string; price: number; }[];
         count: number;
     }
-
-
 
     const [ticketData, setTicketData] = useState<TicketData[]>([]);
 
@@ -121,6 +123,9 @@ function TicketList({ range, itemId }: DateProps) {
                             count={ticketInfo.count}
                             handleMinus={() => handleMinus(index)}
                             handlePlus={() => handlePlus(index)}
+                            classTicketContainer={classTicketContainer}
+                            classTicketPrice={classTicketPrice}
+                            classTicketCnt={classTicketCnt}
                         />
                     );
                 })}
@@ -156,7 +161,7 @@ function TicketList({ range, itemId }: DateProps) {
             {/* payment button */}
             {ticketData.some(ticket => ticket.count > 0) && (
                 <div className='pay-btn-container'>
-                    <button className='pay-btn' onClick={handleButtonClick}>티켓 문의</button>
+                    <button className={`pay-btn ${classNone}`} onClick={handleButtonClick}>티켓 문의</button>
                 </div>
             )}
         </div>
