@@ -7,7 +7,7 @@ import Calendar from '../../TicketSelect/Calendar/Calendar';
 
 interface ModalProps {
     onClose: () => void;
-    itemId: number;
+    itemId: number | null;
 }
 
 const onAfterOpen = () => {
@@ -48,7 +48,7 @@ function ReservationModal({ onClose, itemId }: ModalProps) {
                     </button>
                 </header>
                 <section className='modal-section'>
-                    <Calendar itemId={itemId}/>
+                    <Calendar itemId={itemId} numberOfmonth={1} />
                 </section>
             </div>
         </Modal>

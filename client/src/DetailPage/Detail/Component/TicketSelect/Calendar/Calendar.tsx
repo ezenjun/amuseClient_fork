@@ -36,10 +36,11 @@ const formatCaption: DateFormatter = (month, options) => {
 
 type CalendarProps = {
     itemId: number | null;
+    numberOfmonth: number;
 };
 
 
-function Calendar({ itemId }: CalendarProps) {
+function Calendar({ itemId, numberOfmonth }: CalendarProps) {
     // duration data
     interface CalendarData {
         duration: number
@@ -106,7 +107,7 @@ function Calendar({ itemId }: CalendarProps) {
                 <style>{`.custom-select { color: white; background-color: #F184A1 }`}</style>
                 <DayPicker
                     locale={ko}
-                    numberOfMonths={2}
+                    numberOfMonths={numberOfmonth}
                     pagedNavigation
                     formatters={{ formatCaption }}
                     mode='range'
