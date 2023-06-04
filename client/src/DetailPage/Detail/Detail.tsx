@@ -38,7 +38,7 @@ function Detail({ itemId, productCode, startPrice, likeNum }: DetailProps) {
           <Title itemId={itemId} />
           <IconInfo itemId={itemId} />
           <Picture itemId={itemId} />
-          <Calendar itemId={itemId} />
+          <Calendar itemId={itemId} numberOfmonth={2}/>
           <ProductIntro itemId={itemId} />
           <CourseIntro itemId={itemId} />
           <Map itemId={itemId} />
@@ -54,8 +54,9 @@ function Detail({ itemId, productCode, startPrice, likeNum }: DetailProps) {
           <Reservation itemId={itemId} productCode={productCode} startPrice={startPrice} likeNum={likeNum} />
         </div>
 
+        {/* 상세페이지 모바일 티켓선택 */}
         <div className="bottom-btn">
-          <ReservationBottom />
+          <ReservationBottom itemId={itemId} />
         </div>
       </div>
       <Footer />
