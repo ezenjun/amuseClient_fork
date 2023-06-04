@@ -6,7 +6,6 @@ import { faChevronLeft, faChevronRight, faTimes } from '@fortawesome/free-solid-
 import Calendar from '../../TicketSelect/Calendar/Calendar';
 import customModule from '../../TicketSelect/custom.module.scss';
 import axios from "axios";
-import { title } from 'process';
 
 interface ModalProps {
     onClose: () => void;
