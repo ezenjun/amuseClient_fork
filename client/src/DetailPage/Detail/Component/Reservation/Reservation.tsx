@@ -74,6 +74,9 @@ function Reservation({ itemId, productCode, startPrice, likeNum }: ReservationPr
     }
   };
 
+  /**
+   * Ticket Button
+   */
   const handleButtonClick = () => { 
     Swal.fire({
       icon: "success",

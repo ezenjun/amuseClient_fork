@@ -3,6 +3,7 @@ import './TicketList.scss';
 import Ticket from '../Ticket/Ticket';
 import { format, isSameDay, parseISO, parse } from 'date-fns';
 import { DateRange } from 'react-day-picker';
+import Swal from "sweetalert2";
 import axios from "axios";
 
 
@@ -88,6 +89,19 @@ function TicketList({ range, itemId }: DateProps) {
         });
     }
 
+    /**
+     * Ticket Button
+     */
+    const handleButtonClick = () => { 
+        Swal.fire({
+        icon: "success",
+        title: "티켓 구입 문의",
+        confirmButtonText: "확인",
+        confirmButtonColor: "#F184A1",
+        html: "📞 02-719-6811<br>✉️ info@amusetravel.com<br>"
+        });
+    };
+
     return (
         <div className='select-ticket'>
             <div className='TicketList'>
@@ -142,7 +156,7 @@ function TicketList({ range, itemId }: DateProps) {
             {/* payment button */}
             {ticketData.some(ticket => ticket.count > 0) && (
                 <div className='pay-btn-container'>
-                    <button className='pay-btn'>결제하기</button>
+                    <button className='pay-btn' onClick={handleButtonClick}>티켓 문의</button>
                 </div>
             )}
         </div>
