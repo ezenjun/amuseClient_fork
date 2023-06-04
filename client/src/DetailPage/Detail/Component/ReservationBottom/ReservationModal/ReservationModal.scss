@@ -1,26 +1,23 @@
 .reservation-modal {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   height: 100%;
   width: 100%;
+  overflow: hidden;
 
   .modal-header {
-    width: 100%;
-    height: 50px;
-    justify-content: center;
-    padding: 12px;
-    position: relative;
-    align-items: center;
+    height: 48px;
+    top: 0;
+    padding: 10px;
     border-bottom: 1px solid #dee2e6;
+    position: relative;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 
-    .btn-close {
-      // position: absolute;
-      // top: 0;
-      // right: 0;
+    .modal-header-title {
+      font-weight: 700;
+    }
+
+    .modal-btn-close {
       background: none;
       border: none;
       font-size: 2rem;
@@ -31,7 +28,10 @@
         color: #ccc;
       }
     }
-
   }
 
+  .modal-section {
+    height: 85%;
+    overflow: scroll;
+  }
 }

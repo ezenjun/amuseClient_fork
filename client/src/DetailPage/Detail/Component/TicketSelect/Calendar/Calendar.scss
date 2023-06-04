@@ -3,7 +3,7 @@
 .select-date {
   padding: detail.$padding;
   @include detail.line;
-  
+
   .select-ticket-title {
     color: detail.$dark-color;
     font-size: 22px;
