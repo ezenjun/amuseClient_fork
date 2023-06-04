@@ -1,7 +1,8 @@
 @use "../../Detail.scss" as detail;
 
 .reservation-bottom {
-  width: 100vw;
+  width: 100%;
+  box-sizing: border-box;
   align-items: center;
   background-color: #fff;
   bottom: 0;
@@ -9,9 +10,8 @@
   left: 0;
   padding: 12px 16px;
   position: fixed;
-  z-index: 1000;
-  overflow: visible;
-  
+  z-index: 1;
+
   .wish-btn {
     text-align: center;
     font-size: 16px;
@@ -22,10 +22,10 @@
     background-color: detail.$very-light-color;
     color: detail.$dark-color;
   }
-  
+
   .purchase-btn {
-    text-align: center;
     width: 100%;
+    text-align: center;
     padding: 0;
     background-color: detail.$secondary-color;
     border: none;
