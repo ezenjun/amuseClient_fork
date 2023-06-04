@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faShareNodes } from '@fortawesome/free-solid-svg-icons';
 import { faEnvelope as solidFaEnelope } from '@fortawesome/free-solid-svg-icons';
 import { faEnvelope as regularFaEnelope } from '@fortawesome/free-regular-svg-icons';
+import Swal from "sweetalert2";
 import axios from 'axios';
 
 interface ReservationProps {
@@ -72,8 +73,16 @@ function Reservation({ itemId, productCode, startPrice, likeNum }: ReservationPr
       console.log('Copying to clipboard is not supported in this browser.');
     }
   };
-  
 
+  const handleButtonClick = () => { 
+    Swal.fire({
+      icon: "success",
+      title: "티켓 구입 문의",
+      confirmButtonText: "확인",
+      confirmButtonColor: "#F184A1",
+      html: "📞 02-719-6811<br>✉️ info@amusetravel.com<br>"
+    });
+  };
 
   return (
     <div className="reservation">
@@ -100,7 +109,7 @@ function Reservation({ itemId, productCode, startPrice, likeNum }: ReservationPr
         </div>
         {/* 티켓 선택 btn */}
         <div className="selectticket-btn-div">
-          <button className="selectticket-btn">티켓 선택</button>
+          <button className="selectticket-btn" onClick={handleButtonClick}>티켓 문의</button>
         </div>
         {/* 위시리스트 담기 btn */}
         <div className="wishlist-btn-div">
