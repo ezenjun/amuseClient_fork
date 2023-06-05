@@ -2,11 +2,11 @@
 
 .select-ticket {
     .TicketList {
-        width: 650px;
         border: 1px solid #E9ECEF;
         background-color: detail.$background-color;
         padding: 24px;
         color: detail.$dark-color;
+
         .selected-ticket {
             @include detail.line;
             display: flex;
@@ -20,9 +20,14 @@
                 font-weight: 500;
             }
 
+            .selected-ticket-count {
+                min-width: 90px;
+            }
+
             .selected-ticket-price {
                 font-weight: 600;
                 width: 92px;
+                min-width: 80px;
                 text-align: right;
             }
         }

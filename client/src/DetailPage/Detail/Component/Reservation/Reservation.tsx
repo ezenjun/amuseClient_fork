@@ -4,7 +4,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faShareNodes } from '@fortawesome/free-solid-svg-icons';
 import { faEnvelope as solidFaEnelope } from '@fortawesome/free-solid-svg-icons';
 import { faEnvelope as regularFaEnelope } from '@fortawesome/free-regular-svg-icons';
+import Swal from "sweetalert2";
 import axios from 'axios';
+import { CopyToClipboard } from "react-copy-to-clipboard";
+
 
 interface ReservationProps {
   itemId: number | null;
@@ -62,18 +65,37 @@ function Reservation({ itemId, productCode, startPrice, likeNum }: ReservationPr
     setShowTooltip(!showTooltip);
   };
 
-  const handleCopyLink = async (): Promise<void> => {
-    console.log(window.location.href);
-    
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      await navigator.clipboard.writeText(window.location.href);
-      console.log('Link copied to clipboard!');
-    } else {
-      console.log('Copying to clipboard is not supported in this browser.');
-    }
-  };
-  
+  // const handleCopyLink = async (
+  //   // successAction?: () => void,
+  //   // failAction?: () => void,
+  // ): Promise<void> => {
+  //   console.log(window.location.href);
+  //   try {
+  //     await navigator.clipboard.writeText(window.location.href);
+  //     // successAction && successAction();
+  //   } catch (error) {
+  //     // failAction && failAction();
+  //   }
+  //   // if (navigator.clipboard && navigator.clipboard.writeText) {
+  //   //   await navigator.clipboard.writeText(window.location.href);
+  //   //   console.log('Link copied to clipboard!');
+  //   // } else {
+  //   //   console.log('Copying to clipboard is not supported in this browser.');
+  //   // }
+  // };
 
+  /**
+   * Ticket Button
+   */
+  const handleButtonClick = () => {
+    Swal.fire({
+      icon: "success",
+      title: "티켓 구입 문의",
+      confirmButtonText: "확인",
+      confirmButtonColor: "#F184A1",
+      html: "📞 02-719-6811<br>✉️ info@amusetravel.com<br>"
+    });
+  };
 
   return (
     <div className="reservation">
@@ -90,17 +112,20 @@ function Reservation({ itemId, productCode, startPrice, likeNum }: ReservationPr
             <button className='share-btn' onClick={handleTooltipToggle}>
               <FontAwesomeIcon icon={faShareNodes} className="share-icon" />
             </button>
+
             {showTooltip && (
               <div className="tooltip">
                 <span className='link'>{window.location.href}</span>
-                <button className='copy-btn' onClick={handleCopyLink}>링크 복사</button>
+                <CopyToClipboard text="링크" onCopy={() => alert("복사완료")}>
+                  <button className='copy-btn'>링크 복사</button>
+                </CopyToClipboard>
               </div>
             )}
           </div>
         </div>
         {/* 티켓 선택 btn */}
         <div className="selectticket-btn-div">
-          <button className="selectticket-btn">티켓 선택</button>
+          <button className="selectticket-btn" onClick={handleButtonClick}>구입 문의</button>
         </div>
         {/* 위시리스트 담기 btn */}
         <div className="wishlist-btn-div">

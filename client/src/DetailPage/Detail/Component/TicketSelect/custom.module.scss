@@ -1,0 +1,25 @@
+.container {
+  padding: 0;
+  height: 100%;
+}
+
+.invisible {
+  display: none;
+}
+
+.ticket-container {
+  display: grid;
+  grid-template-columns: minmax(280px ,auto);
+  grid-template-rows: repeat(2, minmax(30px, auto));
+  gap: 5px;
+}
+
+.ticket-container-price {
+  grid-row: 2/3;
+  grid-column: 2/3;
+}
+
+.ticket-container-cnt {
+  grid-row: 2/3;
+  grid-column: 1/2;
+}

@@ -10,7 +10,6 @@ interface PictureModalProps {
   images: string[];
 }
 
-
 const onAfterOpen = () => {
   document.body.style.overflow = 'hidden';
 };
@@ -49,6 +48,7 @@ function PictureModal({ onClose, itemId, images } : PictureModalProps){
           backgroundColor: 'rgba( 73, 80, 86, 95% )',
           width: '100%',
           height: '100%',
+          zIndex: '10',
         },
       }}
     >

@@ -3,15 +3,20 @@ import './TicketList.scss';
 import Ticket from '../Ticket/Ticket';
 import { format, isSameDay, parseISO, parse } from 'date-fns';
 import { DateRange } from 'react-day-picker';
+import Swal from "sweetalert2";
 import axios from "axios";
 
 
 type DateProps = {
     itemId: number | null;
     range: DateRange | undefined;
+    classNone?: string;
+    classTicketContainer?: string;
+    classTicketPrice?: string;
+    classTicketCnt?: string;
 };
 
-function TicketList({ range, itemId }: DateProps) {
+function TicketList({ range, itemId, classNone, classTicketContainer, classTicketPrice, classTicketCnt }: DateProps) {
     // Ticket Data
     interface TicketData {
         title: string;
@@ -19,8 +24,6 @@ function TicketList({ range, itemId }: DateProps) {
         priceList: { startDate: string; price: number; }[];
         count: number;
     }
-
-
 
     const [ticketData, setTicketData] = useState<TicketData[]>([]);
 
@@ -68,7 +71,7 @@ function TicketList({ range, itemId }: DateProps) {
     };
 
     // date format change
-    function getSelectedPriceIndex(ticket: TicketData, range: DateRange | undefined):number {
+    function getSelectedPriceIndex(ticket: TicketData, range: DateRange | undefined): number {
         return ticket.priceList.findIndex(priceItem => {
             function getMonthNumber(monthString: string) {
                 const months = [
@@ -87,6 +90,26 @@ function TicketList({ range, itemId }: DateProps) {
             return range?.from && isSameDay(parseISO(formattedDate), range.from)
         });
     }
+
+    /**
+     * Ticket Button
+     */
+    const handleButtonClick = () => {
+        Swal.fire({
+            icon: "success",
+            title: "티켓 구입 문의",
+            confirmButtonText: "확인",
+            confirmButtonColor: "#F184A1",
+            html: "📞 02-719-6811<br>✉️ info@amusetravel.com<br>"
+        });
+    };
+
+
+    const totalAmount = ticketData.reduce((sum, ticket) => {
+        const selectedPriceIndex = getSelectedPriceIndex(ticket, range);
+        const price = selectedPriceIndex !== -1 ? ticket.priceList[selectedPriceIndex].price : 0;
+        return sum + ticket.count * price;
+    }, 0);
 
     return (
         <div className='select-ticket'>
@@ -107,6 +130,9 @@ function TicketList({ range, itemId }: DateProps) {
                             count={ticketInfo.count}
                             handleMinus={() => handleMinus(index)}
                             handlePlus={() => handlePlus(index)}
+                            classTicketContainer={classTicketContainer}
+                            classTicketPrice={classTicketPrice}
+                            classTicketCnt={classTicketCnt}
                         />
                     );
                 })}
@@ -129,20 +155,16 @@ function TicketList({ range, itemId }: DateProps) {
                     <div className='total-container'>
                         <span className='total-title'>총 여행 금액</span>
                         <span className='total-amount'>
-                            {ticketData.reduce((sum, ticket) => {
-                                const selectedPriceIndex = getSelectedPriceIndex(ticket, range);
-                                const price = selectedPriceIndex !== -1 ? ticket.priceList[selectedPriceIndex].price : 0;
-                                return sum + ticket.count * price;
-                            }, 0).toLocaleString('en')}원
+                            {totalAmount.toLocaleString('en')}원
                         </span>
                     </div>
                 )}
             </div>
-            
+
             {/* payment button */}
             {ticketData.some(ticket => ticket.count > 0) && (
                 <div className='pay-btn-container'>
-                    <button className='pay-btn'>결제하기</button>
+                    <button className={`pay-btn ${classNone}`} onClick={handleButtonClick}>티켓 선택</button>
                 </div>
             )}
         </div>

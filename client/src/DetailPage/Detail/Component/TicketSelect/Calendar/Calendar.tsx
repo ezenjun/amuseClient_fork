@@ -36,10 +36,16 @@ const formatCaption: DateFormatter = (month, options) => {
 
 type CalendarProps = {
     itemId: number | null;
+    numberOfmonth: number;
+    classNone?: string;
+    classContainer?: string;
+    classTicketContainer?: string;
+    classTicketPrice? : string;
+    classTicketCnt?: string;
 };
 
 
-function Calendar({ itemId }: CalendarProps) {
+function Calendar({ itemId, numberOfmonth, classNone, classContainer, classTicketContainer, classTicketPrice, classTicketCnt }: CalendarProps) {
     // duration data
     interface CalendarData {
         duration: number
@@ -94,19 +100,18 @@ function Calendar({ itemId }: CalendarProps) {
 
     const classNames: ClassNames = {
         ...styles,
-        head: 'custom-head',
         day_selected: 'custom-select'
     };
 
     const today = new Date();
     return (
-        <div className='select-date'>
-            <p className='select-ticket-title'>티켓 선택</p>
+        <div className={`select-date ${classContainer}`}>
+            <p className={`select-ticket-title ${classNone}`}>티켓 선택</p>
             <div className='Calendar'>
-                <style>{`.custom-select { color: white; background-color: #F184A1 }`}</style>
+                <style>{`.custom-select { color: white; background-color: #F184A1; }`}</style>
                 <DayPicker
                     locale={ko}
-                    numberOfMonths={2}
+                    numberOfMonths={numberOfmonth}
                     pagedNavigation
                     formatters={{ formatCaption }}
                     mode='range'
@@ -114,10 +119,16 @@ function Calendar({ itemId }: CalendarProps) {
                     onDayClick={handleDayClick}
                     disabled={{ before: today }}
                     classNames={classNames}
-
                 />
             </div>
-            <TicketList range={range} itemId={itemId} />
+            <TicketList
+                range={range}
+                itemId={itemId}
+                classNone={classNone}
+                classTicketContainer={classTicketContainer}
+                classTicketPrice={classTicketPrice}
+                classTicketCnt={classTicketCnt}
+            />
         </div>
     );
 }

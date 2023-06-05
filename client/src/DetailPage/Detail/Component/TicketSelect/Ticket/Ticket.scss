@@ -1,8 +1,6 @@
 @use "../../../Detail.scss" as detail;
 
 .ticket {
-    height: 136px;
-    width: 650px;
     background-color: #FFFFFF;
     padding: 32px 24px;
     display: flex;
@@ -10,7 +8,7 @@
     margin-bottom: 8px;
     border-radius: 4px;
     box-sizing: border-box;
-    box-shadow:  2px 3px 5px 0px rgba(33,37,41,0.1);
+    box-shadow: 2px 3px 5px 0px rgba(33, 37, 41, 0.1);
     color: detail.$dark-color;
 
     .ticket-content {
@@ -19,12 +17,14 @@
         justify-content: center;
         width: 310px;
         margin-bottom: 4px;
+
         .ticket-name {
             font-size: 16px;
             font-weight: 600;
             margin: 0;
             margin-bottom: 10px;
         }
+
         .ticket-detail {
             color: detail.$light-color;
             font-size: 14px;
@@ -34,9 +34,10 @@
     }
 
     .ticket-price {
-        width: 120px;
+        min-width: 115px;
         display: flex;
         align-items: center;
+
         .person {
             color: detail.$very-light-color;
             font-size: 13px;
@@ -44,11 +45,13 @@
             margin: 0;
             margin-right: 4px;
         }
+
         .price {
             font-size: 20px;
             font-weight: 700;
             margin: 0;
         }
+
         .won {
             font-size: 15px;
             font-weight: 600;
@@ -62,7 +65,10 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        .plus-btn, .minus-btn {
+
+        .plus-btn,
+        .minus-btn {
+            display: flex;
             width: 32px;
             height: 32px;
             font-size: 30px;
@@ -71,6 +77,18 @@
             border-radius: 50%;
             background-color: detail.$background-color;
             line-height: 32px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .minus-btn {
+            padding-bottom: 5px;
+        }
+
+        .gray {
+            color: gray;
+            background-color: lightgray;
+            border-color: gray;
         }
     }
 }

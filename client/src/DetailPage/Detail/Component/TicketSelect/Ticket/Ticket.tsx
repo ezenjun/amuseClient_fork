@@ -9,26 +9,29 @@ interface TicketProps {
   count: number;
   handlePlus: () => void;
   handleMinus: () => void;
+  classTicketContainer? : string;
+  classTicketPrice? : string;
+  classTicketCnt? : string;
 }
 
 const Ticket: FC<TicketProps> = ({
-  name, detail, price, count, handlePlus, handleMinus
+  name, detail, price, count, handlePlus, handleMinus, classTicketContainer, classTicketPrice, classTicketCnt
 }) => {
   const formattedCount = count !== undefined ? count : 0;
   
   return (
-    <div className="ticket">
+    <div className={`ticket ${classTicketContainer}`}>
       <div className="ticket-content">
         <h5 className="ticket-name">{name}</h5>
         <p className="ticket-detail">{detail}</p>
       </div>
-      <div className="ticket-price">
+      <div className={`ticket-price ${classTicketPrice}`}>
         <span className="person">1명</span>
         <span className="price">{price.toLocaleString('en')}</span>
         <span className="won">원</span>
       </div>
-      <div className="ticket-cnt">
-        <button className="minus-btn" onClick={handleMinus}>-</button>
+      <div className={`ticket-cnt ${classTicketCnt}`}>
+        <button className={`minus-btn ${formattedCount === 0 ? 'gray' : ''}`} onClick={handleMinus}>-</button>
         <p className="cnt">{formattedCount}</p>
         <button className="plus-btn" onClick={handlePlus}>+</button>
       </div>
