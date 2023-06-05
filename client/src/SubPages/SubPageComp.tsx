@@ -7,16 +7,28 @@ import Footer from "../Footers/Footer";
 import Style from "./SubPage.module.css";
 import ChildTitle from "./SubtitleImgs/ChildTitle.jpg";
 import Fade from "../Fade";
-import MainLists from "../MainPage/MainLists/MainLists";
-import MainTiles from "../MainPage/MainTiles/MainTiles";
-import MainBanner from "../MainPage/MainBanner/MainBanner";
+import SubLists from "./SubLists";
+import SubBanners from "./SubBanners";
+import SubTiles from "./SubTiles";
 
-const numberWithCommas = (number: number | null): string => {
-  if (number === null) {
-    return "N/A"; // 또는 원하는 다른 대체 값을 반환할 수 있습니다.
-  }
-  return number.toLocaleString("en");
-};
+// const numberWithCommas = (number: number | null): string => {
+//   if (number === null) {
+//     return "N/A"; // 또는 원하는 다른 대체 값을 반환할 수 있습니다.
+//   }
+//   return number.toLocaleString("en");
+// };
+
+interface BannerProps {
+  page_component_id: number;
+  type: string;
+  title: string;
+  content: string;
+  itemInfos: [];
+  pcBannerUrl: string;
+  pcBannerLink: string;
+  mobileBannerUrl: string;
+  mobileBannerLink: string;
+}
 
 interface BoxProps {
   marginRight: string;
@@ -111,17 +123,6 @@ function SubPageComp() {
       });
   }, [apiKeyNumber]);
 
-  const [bestItemIds, setBestItemIds] = useState<number[]>([]);
-  const [bestItemTitle, setBestItemTitle] = useState<string[]>([]);
-  const [bestItemPrice, setBestItemPrice] = useState<number[]>([]);
-  const [bestItemImageUrl, setBestItemImageUrl] = useState<string[]>([]);
-
-  // const [itemSort, setItemSort] = useState("best-item");
-
-  // const handleSortChange = (sortOption: string) => {
-  //   setItemSort(sortOption);
-  // };
-
   const [displayedItemCount, setDisplayedItemCount] = useState(3);
 
   const handleResize = () => {
@@ -144,7 +145,10 @@ function SubPageComp() {
   }, []);
 
   const [comTypes, setComTypes] = useState<[]>([]);
-  const [ItemIds, setItemIds] = useState<number[]>([]);
+  const [Items, setItems] = useState<[]>([]);
+  // const [bannerItems, setBannerItems] = useState<BannerProps[]>([]);
+  const [bannerContent, setBannerContent] = useState<string[]>([]);
+  const [bannerPCUrl, setBannerPCUrl] = useState<string[]>([]);
   const [ItemTitle, setItemTitle] = useState<string[]>([]);
   const [ItemPrice, setItemPrice] = useState<number[]>([]);
   const [ItemImageUrl, setItemImageUrl] = useState<string[]>([]);
@@ -160,20 +164,36 @@ function SubPageComp() {
       .then((response) => {
         const ComponentInfos = response.data.data.pageComponentInfos;
         const items = ComponentInfos.map((item: any) => item);
+        setItems(items);
+        // console.log(items);
         const types = items.map((item: any) => item.type);
         setComTypes(types);
         console.log("컴포넌트", types);
-        // const titles = bestItems.map((item: any) => item.title);
-        // setBestItemTitle(titles);
-        // const startPrices = bestItems.map((item: any) => item.startPrice);
-        // setBestItemPrice(startPrices);
-        // const imgUrl = bestItems.map((item: any) => item.imageUrl);
-        // setBestItemImageUrl(imgUrl);
       })
       .catch((error) => {
         console.log("subpage 컴포넌트 연결 실패");
       });
   };
+
+  const renderedComponents = comTypes.map((type, index) => {
+    console.log(type);
+    if (type === "리스트") {
+      return <SubLists key={index} />;
+    } else if (type === "타일") {
+      return <SubTiles key={index} />;
+    } else if (type === "배너") {
+      const bannerItem: BannerProps = Items[index];
+      return (
+        <SubBanners
+          key={index}
+          title={bannerItem.title}
+          content={bannerItem.content}
+          bannerUrl={bannerItem.pcBannerUrl}
+        />
+      );
+    }
+    return null;
+  });
 
   return (
     <div>
@@ -199,17 +219,7 @@ function SubPageComp() {
 
             <div className={Style["App"]}>
               <div>
-                {comTypes.map((type, index) => {
-                  if (type === "리스트") {
-                    return <MainLists />;
-                  } else if (type === "타일") {
-                    return <MainTiles />;
-                  } else if (type === "배너") {
-                    return <MainBanner />;
-                  } else {
-                    return null;
-                  }
-                })}
+                <div>{renderedComponents}</div>
               </div>
             </div>
             <Footer />
