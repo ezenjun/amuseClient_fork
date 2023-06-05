@@ -63,21 +63,29 @@ function Reservation({ itemId, productCode, startPrice, likeNum }: ReservationPr
     setShowTooltip(!showTooltip);
   };
 
-  const handleCopyLink = async (): Promise<void> => {
+  const handleCopyLink = async (
+    // successAction?: () => void,
+    // failAction?: () => void,
+  ): Promise<void> => {
     console.log(window.location.href);
-    
-    if (navigator.clipboard && navigator.clipboard.writeText) {
+    try {
       await navigator.clipboard.writeText(window.location.href);
-      console.log('Link copied to clipboard!');
-    } else {
-      console.log('Copying to clipboard is not supported in this browser.');
+      // successAction && successAction();
+    } catch (error) {
+      // failAction && failAction();
     }
+    // if (navigator.clipboard && navigator.clipboard.writeText) {
+    //   await navigator.clipboard.writeText(window.location.href);
+    //   console.log('Link copied to clipboard!');
+    // } else {
+    //   console.log('Copying to clipboard is not supported in this browser.');
+    // }
   };
 
   /**
    * Ticket Button
    */
-  const handleButtonClick = () => { 
+  const handleButtonClick = () => {
     Swal.fire({
       icon: "success",
       title: "티켓 구입 문의",
