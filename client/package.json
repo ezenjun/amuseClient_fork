@@ -66,6 +66,7 @@
   },
   "devDependencies": {
     "@types/google-map-react": "^2.1.7",
+    "@types/react-copy-to-clipboard": "^5.0.4",
     "@types/react-modal": "^3.13.1",
     "gh-pages": "^5.0.0"
   }
