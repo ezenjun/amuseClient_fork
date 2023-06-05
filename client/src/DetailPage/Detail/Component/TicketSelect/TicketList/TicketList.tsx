@@ -164,7 +164,7 @@ function TicketList({ range, itemId, classNone, classTicketContainer, classTicke
             {/* payment button */}
             {ticketData.some(ticket => ticket.count > 0) && (
                 <div className='pay-btn-container'>
-                    <button className={`pay-btn ${classNone}`} onClick={handleButtonClick}>티켓 문의</button>
+                    <button className={`pay-btn ${classNone}`} onClick={handleButtonClick}>티켓 선택</button>
                 </div>
             )}
         </div>
