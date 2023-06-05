@@ -112,7 +112,7 @@ function Reservation({ itemId, productCode, startPrice, likeNum }: ReservationPr
         </div>
         {/* 티켓 선택 btn */}
         <div className="selectticket-btn-div">
-          <button className="selectticket-btn" onClick={handleButtonClick}>티켓 문의</button>
+          <button className="selectticket-btn" onClick={handleButtonClick}>구입 문의</button>
         </div>
         {/* 위시리스트 담기 btn */}
         <div className="wishlist-btn-div">
