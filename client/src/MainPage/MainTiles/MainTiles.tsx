@@ -26,10 +26,10 @@ function MainTiles() {
   const movePage = useNavigate();
   const moveToGyeonggi = () => {
     // movePage("/toGyeonggi");
-    movePage(`/search/경기도`);
+    // movePage(`/search/경기도`);
   };
   const moveToGangwon = () => {
-    movePage("/toGangwon");
+    // movePage("/toGangwon");
   };
   const moveToChungcheong = () => {
     // movePage("/toChungcheong");

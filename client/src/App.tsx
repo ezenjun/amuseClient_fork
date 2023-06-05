@@ -7,8 +7,8 @@ import SignUp from "./SignUp/SignUp";
 import Detail from "./DetailPage/Detail/Detail";
 import Review from "./MyPages/Review/Review";
 import ViewAll from "./SubPages/ViewAllPages/ViewAll";
-import GyeonggiPage from "./SubPages/Regions/GyeonggiPage";
-import GangwonPage from "./SubPages/Regions/GangwonPage";
+// import GyeonggiPage from "./SubPages/Regions/GyeonggiPage";
+// import GangwonPage from "./SubPages/Regions/GangwonPage";
 import SearchPageComp from "./SubPages/SearchPageComp";
 // import NotFound from './NotFound';
 import { useEffect, useState } from "react";
@@ -96,8 +96,6 @@ function App() {
         <Route path="/Review/:id" element={<Review />}></Route>
         {/* <Route path="/OnlineTour" element={<OnlineTour />}></Route> */}
         <Route path="/ViewAll" element={<ViewAll />}></Route>
-        <Route path="/toGyeonggi" element={<GyeonggiPage />}></Route>
-        <Route path="/toGangwon" element={<GangwonPage />}></Route>
         <Route path="/Subtest" element={<SubPageComp />}></Route>
 
         {/**

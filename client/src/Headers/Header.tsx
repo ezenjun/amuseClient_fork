@@ -30,7 +30,7 @@ function Header() {
 
   const navigateToSubPageComp = (apiKey: number) => {
     const apiKeyString: string = apiKey.toString();
-    movePage(`/category/${apiKeyString}`);
+    movePage(`/category/${apiKey}`);
   };
 
   const navigateToSearch = () => {
