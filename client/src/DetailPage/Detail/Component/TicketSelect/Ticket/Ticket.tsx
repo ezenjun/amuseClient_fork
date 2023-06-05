@@ -31,7 +31,7 @@ const Ticket: FC<TicketProps> = ({
         <span className="won">원</span>
       </div>
       <div className={`ticket-cnt ${classTicketCnt}`}>
-        <button className="minus-btn" onClick={handleMinus}>-</button>
+        <button className={`minus-btn ${formattedCount === 0 ? 'gray' : ''}`} onClick={handleMinus}>-</button>
         <p className="cnt">{formattedCount}</p>
         <button className="plus-btn" onClick={handlePlus}>+</button>
       </div>
