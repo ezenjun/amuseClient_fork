@@ -7,6 +7,9 @@ import Footer from "../Footers/Footer";
 import Style from "./SubPage.module.css";
 import ChildTitle from "./SubtitleImgs/ChildTitle.jpg";
 import Fade from "../Fade";
+import MainLists from "../MainPage/MainLists/MainLists";
+import MainTiles from "../MainPage/MainTiles/MainTiles";
+import MainBanner from "../MainPage/MainBanner/MainBanner";
 
 const numberWithCommas = (number: number | null): string => {
   if (number === null) {
@@ -113,39 +116,11 @@ function SubPageComp() {
   const [bestItemPrice, setBestItemPrice] = useState<number[]>([]);
   const [bestItemImageUrl, setBestItemImageUrl] = useState<string[]>([]);
 
-  const [itemSort, setItemSort] = useState("best-item");
+  // const [itemSort, setItemSort] = useState("best-item");
 
-  useEffect(() => {
-    fetchData(itemSort, apiKeyNumber); // 초기값으로 "like_num_desc"로 데이터를 가져옵니다.
-  }, [itemSort, apiKeyNumber]);
-
-  console.log(itemSort, apiKeyNumber);
-  // console.log("apikeynum = ", apiKeyNumber);
-  const fetchData = (sortOption: string, apiKeyNumber: number) => {
-    axios
-      .get(`https://ammuse.store/category/${apiKeyNumber}/${itemSort}/page=1`)
-      .then((response) => {
-        const bestItems = response.data.data.items;
-        const ids = bestItems.map((item: any) => item.item_db_id);
-        setBestItemIds(ids);
-        const titles = bestItems.map((item: any) => item.title);
-        setBestItemTitle(titles);
-        const startPrices = bestItems.map((item: any) => item.startPrice);
-        setBestItemPrice(startPrices);
-        const imgUrl = bestItems.map((item: any) => item.imageUrl);
-        setBestItemImageUrl(imgUrl);
-        // const likes = new Array(ids.length).fill(false);
-        // setIsLiked(likes);
-        // console.log("subpage 상품", titles);
-      })
-      .catch((error) => {
-        console.log("subpage 상품 연결 실패");
-      });
-  };
-
-  const handleSortChange = (sortOption: string) => {
-    setItemSort(sortOption);
-  };
+  // const handleSortChange = (sortOption: string) => {
+  //   setItemSort(sortOption);
+  // };
 
   const [displayedItemCount, setDisplayedItemCount] = useState(3);
 
@@ -168,14 +143,44 @@ function SubPageComp() {
     };
   }, []);
 
+  const [comTypes, setComTypes] = useState<[]>([]);
+  const [ItemIds, setItemIds] = useState<number[]>([]);
+  const [ItemTitle, setItemTitle] = useState<string[]>([]);
+  const [ItemPrice, setItemPrice] = useState<number[]>([]);
+  const [ItemImageUrl, setItemImageUrl] = useState<string[]>([]);
+
+  useEffect(() => {
+    fetchPageData(apiKeyNumber);
+  }, [apiKeyNumber]);
+
+  console.log("apikeynum = ", apiKeyNumber);
+  const fetchPageData = (apiKeyNumber: number) => {
+    axios
+      .get(`http://ammuse.store/main/category/${apiKeyNumber}/page`)
+      .then((response) => {
+        const ComponentInfos = response.data.data.pageComponentInfos;
+        const items = ComponentInfos.map((item: any) => item);
+        const types = items.map((item: any) => item.type);
+        setComTypes(types);
+        console.log("컴포넌트", types);
+        // const titles = bestItems.map((item: any) => item.title);
+        // setBestItemTitle(titles);
+        // const startPrices = bestItems.map((item: any) => item.startPrice);
+        // setBestItemPrice(startPrices);
+        // const imgUrl = bestItems.map((item: any) => item.imageUrl);
+        // setBestItemImageUrl(imgUrl);
+      })
+      .catch((error) => {
+        console.log("subpage 컴포넌트 연결 실패");
+      });
+  };
+
   return (
     <div>
       {categoryData ? (
         <div>
-          {/* <h1>{categoryData.categoryId}</h1> */}
           <Header />
           <div className={Style["liner"]}></div>
-          {/* <br /> */}
           <Fade>
             <div className={Style["subTitleContainer"]}>
               <img
@@ -193,35 +198,18 @@ function SubPageComp() {
             </div>
 
             <div className={Style["App"]}>
-              <Dropdown onChange={handleSortChange} />
-              <h2 style={{ marginTop: "2rem", marginBottom: "1rem" }}>{categoryData.categoryName} 여행 Best 상품🏞</h2>
-              {/* <div className={Style["container"]}></div> */}
-              {/* <div className={Style["allBtn"]} onClick={moveToViewAll}>
-                상품 모두보기
-              </div> */}
               <div>
-                {Array.from({ length: Math.ceil(bestItemIds.length / displayedItemCount) }, (_, iteration) => (
-                  <div className={Style["container"]} style={{ marginTop: "3rem" }} key={iteration}>
-                    {bestItemIds
-                      .slice(iteration * displayedItemCount, iteration * displayedItemCount + displayedItemCount)
-                      .map((itemId: number, index: number) => {
-                        const itemIndex = iteration * displayedItemCount + index;
-                        if (itemIndex >= bestItemIds.length) return null; // ItemIds의 범위를 초과한 경우 null 반환
-
-                        return (
-                          <Box
-                            key={itemId}
-                            marginRight={itemIndex !== 0 && (itemIndex + 1) % displayedItemCount === 0 ? "0" : "32px"}
-                            itemId={itemId}
-                            title={bestItemTitle[itemIndex]}
-                            startPrice={numberWithCommas(bestItemPrice[itemIndex])}
-                            handleClick={() => navigateToDetail(itemId)}
-                            imageUrl={bestItemImageUrl[itemIndex]}
-                          />
-                        );
-                      })}
-                  </div>
-                ))}
+                {comTypes.map((type, index) => {
+                  if (type === "리스트") {
+                    return <MainLists />;
+                  } else if (type === "타일") {
+                    return <MainTiles />;
+                  } else if (type === "배너") {
+                    return <MainBanner />;
+                  } else {
+                    return null;
+                  }
+                })}
               </div>
             </div>
             <Footer />
