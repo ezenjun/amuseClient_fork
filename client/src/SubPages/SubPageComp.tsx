@@ -11,13 +11,6 @@ import SubLists from "./SubLists";
 import SubBanners from "./SubBanners";
 import SubTiles from "./SubTiles";
 
-// const numberWithCommas = (number: number | null): string => {
-//   if (number === null) {
-//     return "N/A"; // 또는 원하는 다른 대체 값을 반환할 수 있습니다.
-//   }
-//   return number.toLocaleString("en");
-// };
-
 interface BannerProps {
   page_component_id: number;
   type: string;
@@ -146,7 +139,6 @@ function SubPageComp() {
 
   const [comTypes, setComTypes] = useState<[]>([]);
   const [Items, setItems] = useState<[]>([]);
-  // const [bannerItems, setBannerItems] = useState<BannerProps[]>([]);
   const [bannerContent, setBannerContent] = useState<string[]>([]);
   const [bannerPCUrl, setBannerPCUrl] = useState<string[]>([]);
   const [ItemTitle, setItemTitle] = useState<string[]>([]);

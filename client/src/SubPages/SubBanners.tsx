@@ -21,7 +21,7 @@ const BigBox = ({
     style={{
       backgroundColor,
       backgroundImage: bannerUrl ? `url(${bannerUrl})` : undefined,
-    }}
+    }} // url 있을때는 이미지로, 없으면 기본 배경
   >
     <h3 style={{ marginLeft: "1rem" }}>{content}</h3>
   </div>
@@ -33,7 +33,7 @@ function SubBanners({ title, content, bannerUrl }: SubBannersProps) {
     <>
       <h2 style={{ marginTop: "3rem", marginBottom: "1rem" }}>{title}</h2>
       <div className={Style["container"]}>
-        <BigBox backgroundColor="lightgray" content={content} bannerUrl={bannerUrl} />
+        <BigBox backgroundColor="lightpink" content={content} bannerUrl={bannerUrl} />
       </div>
     </>
   );
