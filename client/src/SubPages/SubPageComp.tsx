@@ -17,10 +17,22 @@ interface BannerProps {
   title: string;
   content: string;
   itemInfos: [];
+  mobileBannerLink: string;
   pcBannerUrl: string;
   pcBannerLink: string;
   mobileBannerUrl: string;
-  mobileBannerLink: string;
+}
+
+interface ListProps {
+  page_component_id: string;
+  type: string;
+  title: string;
+  content: null;
+  itemInfos: [];
+  pcBannerUrl: null;
+  pcBannerLink: null;
+  mobileBannerUrl: null;
+  mobileBannerLink: null;
 }
 
 interface BoxProps {
@@ -170,7 +182,9 @@ function SubPageComp() {
   const renderedComponents = comTypes.map((type, index) => {
     console.log(type);
     if (type === "리스트") {
-      return <SubLists key={index} />;
+      const listItem: ListProps = Items[index];
+      console.log("subpage list ", listItem.itemInfos);
+      return <SubLists key={index} title={listItem.title} itemInfos={listItem.itemInfos} />;
     } else if (type === "타일") {
       return <SubTiles key={index} />;
     } else if (type === "배너") {

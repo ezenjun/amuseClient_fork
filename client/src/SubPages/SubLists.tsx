@@ -26,15 +26,29 @@ interface BoxProps {
   imageUrl: string;
 }
 
-function SubLists() {
-  /**
-   * Best Item API
-   */
+interface SubListsProps {
+  title: string;
+  itemInfos: [];
+}
+
+function SubLists({ title, itemInfos }: SubListsProps) {
+  console.log("itemInfos", itemInfos);
   const [bestItemIds, setBestItemIds] = useState<number[]>([]);
   const [bestItemTitle, setBestItemTitle] = useState<string[]>([]);
   const [bestItemPrice, setBestItemPrice] = useState<number[]>([]);
   const [bestItemImageUrl, setBestItemImageUrl] = useState<string[]>([]);
   const [isLiked, setIsLiked] = useState<boolean[]>([]);
+
+  useEffect(() => {
+    const ids = itemInfos.map((item: any) => item.item_db_id);
+    setBestItemIds(ids);
+    const titles = itemInfos.map((item: any) => item.title);
+    setBestItemTitle(titles);
+    const startPrices = itemInfos.map((item: any) => item.startPrice);
+    setBestItemPrice(startPrices);
+    const imgUrl = itemInfos.map((item: any) => item.imageUrl);
+    setBestItemImageUrl(imgUrl);
+  }, [itemInfos]);
 
   const handleLikeClick = (index: number) => {
     const updatedIsLiked = [...isLiked];
@@ -56,29 +70,6 @@ function SubLists() {
       <p className={Style["tripCost"]}>가격 : {startPrice}원 ~</p>
     </div>
   );
-
-  useEffect(() => {
-    axios
-      .get("https://ammuse.store/main/best-item")
-      .then((response) => {
-        const bestItems = response.data.data.items;
-        const ids = bestItems.map((item: any) => item.item_db_id);
-        setBestItemIds(ids);
-        const titles = bestItems.map((item: any) => item.title);
-        setBestItemTitle(titles);
-        const startPrices = bestItems.map((item: any) => item.startPrice);
-        setBestItemPrice(startPrices);
-        const imgUrl = bestItems.map((item: any) => item.imageUrl);
-        setBestItemImageUrl(imgUrl);
-        const likes = new Array(ids.length).fill(false);
-        setIsLiked(likes);
-        console.log(response.data.data);
-      })
-      .catch((error) => {
-        console.log("mainbest 연결 실패");
-      });
-  }, []);
-
   /**
    * Best Item -> Detail Page
    */
@@ -127,7 +118,7 @@ function SubLists() {
 
   return (
     <div>
-      <h2 style={{ marginTop: "1rem", marginBottom: "1rem" }}>실시간 Best 여행 상품🏞</h2>
+      <h2 style={{ marginTop: "1rem", marginBottom: "1rem" }}>{title}</h2>
       <div className={Style["container"]}>
         {displayedItemIds.map((itemId: number, index: number) => (
           <Box
