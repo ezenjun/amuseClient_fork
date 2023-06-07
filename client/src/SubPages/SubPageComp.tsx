@@ -35,6 +35,18 @@ interface ListProps {
   mobileBannerLink: null;
 }
 
+interface TileProps {
+  page_component_id: string;
+  type: string;
+  title: string;
+  content: null;
+  itemInfos: [];
+  pcBannerUrl: null;
+  pcBannerLink: null;
+  mobileBannerUrl: null;
+  mobileBannerLink: null;
+}
+
 interface BoxProps {
   marginRight: string;
   itemId: number;
@@ -84,9 +96,9 @@ const Dropdown: React.FC<DropdownProps> = ({ onChange }) => {
 
 function SubPageComp() {
   const movePage = useNavigate();
-  const navigateToDetail = (itemId: number) => {
-    movePage(`/detail/${itemId}`);
-  };
+  // const navigateToDetail = (itemId: number) => {
+  //   movePage(`/detail/${itemId}`);
+  // };
   // const moveToViewAll = () => {
   //   movePage("/ViewAll");
   // };
@@ -103,7 +115,7 @@ function SubPageComp() {
   const [categoryData, setCategoryData] = useState<CategoryData | null>(null);
 
   // console.log("apiKey = " + apiKey);
-  const apiKeyNumber: number = Number(apiKey) + 1;
+  const apiKeyNumber: number = Number(apiKey);
   useEffect(() => {
     axios
       .get(`https://ammuse.store/main/category`)
@@ -183,9 +195,10 @@ function SubPageComp() {
     console.log(type);
     if (type === "리스트") {
       const listItem: ListProps = Items[index];
-      console.log("subpage list ", listItem.itemInfos);
+      // console.log("subpage list ", listItem.itemInfos);
       return <SubLists key={index} title={listItem.title} itemInfos={listItem.itemInfos} />;
     } else if (type === "타일") {
+      const tileItem: TileProps = Items[index];
       return <SubTiles key={index} />;
     } else if (type === "배너") {
       const bannerItem: BannerProps = Items[index];
