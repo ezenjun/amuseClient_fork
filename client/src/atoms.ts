@@ -8,3 +8,9 @@ export const isLoggedIn = atom<boolean>({
     default: false,
     effects_UNSTABLE: [persistAtom],
 });
+
+export const isManager = atom<boolean>({
+    key: 'isManager',
+    default: false,
+    effects_UNSTABLE: [persistAtom],
+});
