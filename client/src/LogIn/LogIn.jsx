@@ -1,14 +1,19 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './LogIn.css';
 import Header from '../Headers/Header';
 import { Link, useSearchParams } from 'react-router-dom';
 import PasswordInput from './PasswordInput';
 import EmailInput from './EmailInput';
 import GoogleIcon from '@mui/icons-material/Google';
+import { useRecoilState } from 'recoil';
+import { isLoggedIn } from '../atoms';
+import { useNavigate } from 'react-router-dom';
 
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loggedIn, setLoggedIn] = useRecoilState(isLoggedIn);
+  const navigate = useNavigate();
 
   const handleChangeEmail = (e) => {
     setEmail(e.target.value);
@@ -19,6 +24,14 @@ export default function Login() {
     setPassword(e.target.value);
     console.log(e.target.value);
   }
+
+  useEffect(() => {
+    if(loggedIn) {
+        alert('이미 로그인 하였습니다.')
+        navigate('/');
+
+    }
+  }, [])
 
   return (
     <>

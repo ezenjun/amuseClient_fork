@@ -8,11 +8,15 @@ import MainMoreAbout from "./MainPage/MainMoreAbout/MainMoreAbout";
 import Footer from "./Footers/Footer";
 import Fade from "./Fade";
 import { useRecoilState } from "recoil";
-import { isLoggedIn } from "./atoms";
+import { isLoggedIn, isManager } from "./atoms";
 import axios from "axios";
+import { useLocation } from 'react-router-dom';
 
 function Home() {
   const [loggedIn, setLoggedIn] = useRecoilState(isLoggedIn);
+  const [manager, setManager] = useRecoilState(isManager);
+  
+  const location = useLocation();
 
   //redirect 했을 때 token 값 받아서 localStorage에 저장하기
   useEffect(() => {
@@ -20,11 +24,31 @@ function Home() {
     if (token == null) {
       return;
     } else {
-      console.log(token);
       localStorage.setItem("loginToken", token);
       setLoggedIn(true);
+      checkIsManager();
     }
   }, []);
+
+  const checkIsManager = () => {
+
+    const searchParams = new URLSearchParams(location.search);
+    const email = searchParams.get('email');
+
+    const accessToken = localStorage.getItem('loginToken');
+    axios.get(`https://ammuse.store/api/v1/admin/search/users?email=${email}`, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${accessToken}`
+      }
+    })
+    .then((response) => {
+      console.log(response.data);
+      if(response.data.code == 1000) {
+        setManager(true);
+      }
+    })
+  }
 
   const [listTitle, setListTitle] = useState<string[]>([]);
   const [itemCount, setItemCount] = useState<number[]>([]);
