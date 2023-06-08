@@ -256,7 +256,7 @@ function Header() {
                 )}
                 {manager && loggedIn &&
                 <a className="adminBtn" href={`http://localhost:3000/?token=${token}`} target='_blank'>
-                  어드민   이동
+                  어드민
                 </a>}
               </div>
               <div className="menu">
