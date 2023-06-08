@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import logoimage from "../MainPage/MainImgs/amuse_logo.png";
 import { Link } from "react-router-dom";
 import MyPagelist from "../MyPages/MyPageList";
-import { isLoggedIn } from "../atoms";
+import { isLoggedIn, isManager } from "../atoms";
 import { useRecoilState } from "recoil";
 import MyPageMenu from "../MyPages/MyPageMenu";
 import axios from "axios";
@@ -23,6 +23,8 @@ interface MoreDropdownProps {
 function Header() {
   const movePage = useNavigate();
   const [loggedIn, setLoggedIn] = useRecoilState(isLoggedIn);
+  const [manager, setManager] = useRecoilState(isManager);
+  const [token, setToken] = useState('');
 
   const navigateToHome = () => {
     movePage("/");
@@ -132,6 +134,13 @@ function Header() {
       window.removeEventListener("resize", handleResize); // Clean up event listener on component unmount
     };
   }, []);
+
+  useEffect(() => {
+    const getToken: string | null = localStorage.getItem("loginToken");
+    if (getToken) {
+      setToken(getToken);
+    }
+  }, [])
 
   return (
     <div>
@@ -251,6 +260,10 @@ function Header() {
                     회원가입
                   </button>
                 )}
+                {manager && loggedIn &&
+                <a className="adminBtn" href={`http://localhost:3000/?token=${token}`} target='_blank'>
+                  어드민
+                </a>}
               </div>
               <div className="menu">
                 {categories.length <= 4 ? (

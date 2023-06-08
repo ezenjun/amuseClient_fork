@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom'
 import MyPagelist from './MyPageList';
 import Settings from './MyPage/Settings/Settings';
@@ -9,12 +9,23 @@ import Orders from './MyPage/Orders';
 import Quotes from './MyPage/Quotes';
 import Bills from './MyPage/Bills';
 import './MyPage.css';
+import { useRecoilState } from "recoil";
+import { isLoggedIn } from "../atoms";
 import Header from '../Headers/Header';
+import { useNavigate } from 'react-router-dom';
 
 export default function MyPage() {
   
     const { category } = useParams();
-    console.log(category);
+    const [loggedIn, setLoggedIn] = useRecoilState(isLoggedIn);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if(!loggedIn) {
+            alert('아직 로그인하지 않았습니다.');
+            navigate('/login');
+        }
+    }, [])
 
     const handleCategory = (): JSX.Element | undefined => {
         switch(category) {
