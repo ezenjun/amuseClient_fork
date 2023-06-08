@@ -11,7 +11,7 @@ import MyPageMenu from "../MyPages/MyPageMenu";
 import axios from "axios";
 
 interface CategoryMenuProps {
-  hashtagName: string;
+  categoryName: string;
   handleClick: () => void;
 }
 
@@ -32,7 +32,7 @@ function Header() {
 
   const navigateToSubPageComp = (apiKey: number) => {
     const apiKeyString: string = apiKey.toString();
-    movePage(`/category/${apiKey}`);
+    movePage(`/category/${apiKeyString}`);
   };
 
   const navigateToSearch = () => {
@@ -59,28 +59,29 @@ function Header() {
     backgroundColor: "rgb(235, 235, 235)",
   };
 
-  const CategoryMenu: React.FC<CategoryMenuProps> = ({ hashtagName, handleClick }) => (
+  const CategoryMenu: React.FC<CategoryMenuProps> = ({ categoryName: categoryName, handleClick }) => (
     <div className={mobileHeader === 0 ? "menu-item" : "menu-item_mobile"} onClick={handleClick}>
-      {hashtagName}
+      {categoryName}
     </div>
   );
 
-  const [hashtag, setHashtag] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [categoryIds, setCategoryIds] = useState([]);
   const [showDropdown, setShowDropdown] = useState(false);
 
   const MoreDropdown: React.FC<MoreDropdownProps> = () => (
     <div className="dropdown">
       {mobileHeader === 0 ? (
-        hashtag.slice(4).map((hashtagName: string, index: number) => (
+        categories.slice(4).map((categoryName: string, index: number) => (
           <div className="dropdown-item" key={index} onClick={() => navigateToSubPageComp(index + 4)}>
-            {hashtagName}
+            {categoryName}
           </div>
         ))
       ) : (
         <>
-          {hashtag.slice(2).map((hashtagName: string, index: number) => (
+          {categories.slice(2).map((categoryName: string, index: number) => (
             <div className="dropdown-item" key={index} onClick={() => navigateToSubPageComp(index + 2)}>
-              {hashtagName}
+              {categoryName}
             </div>
           ))}
           <div className="dropdown-item">회사 소개</div>
@@ -93,9 +94,11 @@ function Header() {
     axios
       .get("https://ammuse.store/main/category")
       .then((response) => {
-        const hashtagAll = response.data.data.categories;
-        const categoryNames = hashtagAll.map((id: any) => id.categoryName);
-        setHashtag(categoryNames);
+        const categoryAll = response.data.data.categories;
+        const categoryNames = categoryAll.map((id: any) => id.categoryName);
+        setCategories(categoryNames);
+        const categoryId = categoryAll.map((id: any) => id.categoryId);
+        setCategoryIds(categoryId);
         console.log(response.data.data);
       })
       .catch((error) => {
@@ -189,19 +192,22 @@ function Header() {
                 </button>
               </div>
               <div className="menu">
-                {hashtag.length <= 2 ? (
-                  hashtag.map((hashtagName: string, index: number) => (
+                {categories.length <= 2 ? (
+                  categories.map((categoryName: string, index: number) => (
                     <CategoryMenu
                       key={index}
-                      hashtagName={hashtagName}
-                      handleClick={() => navigateToSubPageComp(index)}
+                      categoryName={categoryName}
+                      handleClick={() => navigateToSubPageComp(categoryIds[index])}
                     />
-                    // <CategoryMenu key={index} hashtagName={hashtagName} handleClick={navigateToSubPageComp} />
                   ))
                 ) : (
                   <>
-                    {hashtag.slice(0, 2).map((id: string, index: number) => (
-                      <CategoryMenu key={id} hashtagName={id} handleClick={() => navigateToSubPageComp(index)} />
+                    {categories.slice(0, 2).map((id: string, index: number) => (
+                      <CategoryMenu
+                        key={id}
+                        categoryName={id}
+                        handleClick={() => navigateToSubPageComp(categoryIds[index])}
+                      />
                     ))}
                     <div className="menu-item_mobile more-dropdown">
                       더보기 ▼
@@ -260,19 +266,18 @@ function Header() {
                 </a>}
               </div>
               <div className="menu">
-                {hashtag.length <= 4 ? (
-                  hashtag.map((hashtagName: string, index: number) => (
+                {categories.length <= 4 ? (
+                  categories.map((categoryName: string, index: number) => (
                     <CategoryMenu
                       key={index}
-                      hashtagName={hashtagName}
-                      handleClick={() => navigateToSubPageComp(index)}
+                      categoryName={categoryName}
+                      handleClick={() => navigateToSubPageComp(categoryIds[index])}
                     />
-                    // <CategoryMenu key={index} hashtagName={hashtagName} handleClick={navigateToSubPageComp} />
                   ))
                 ) : (
                   <>
-                    {hashtag.slice(0, 4).map((id: string, index: number) => (
-                      <CategoryMenu key={id} hashtagName={id} handleClick={() => navigateToSubPageComp(index)} />
+                    {categories.slice(0, 4).map((id: string, index: number) => (
+                      <CategoryMenu key={id} categoryName={id} handleClick={() => navigateToSubPageComp(index)} />
                     ))}
                     <div className="menu-item more-dropdown">
                       더보기 ▼

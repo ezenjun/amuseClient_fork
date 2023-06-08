@@ -2,13 +2,6 @@ import React, { ReactNode, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Style from "../MainPage/MainTiles/MainTiles.module.css";
 import basicImg from "../MainPage/MainImgs/seoul.jpg";
-// import SeoulImg from "../MainImgs/seoul.jpg";
-// import GangwonImg from "../MainImgs/gangwon.jpg";
-// import ChungImg from "../MainImgs/chungcheong.jpg";
-// import Jeonla from "../MainImgs/jeonla.jpg";
-// import GS from "../MainImgs/gyeongsang.jpg";
-// import Jeju from "../MainImgs/jeju.jpg";
-// import Boeing from "../MainImgs/boeing.jpg";
 
 const Box = ({ backgroundImage, text, onClick }: { backgroundImage: string; text: string; onClick: () => void }) => (
   <div
