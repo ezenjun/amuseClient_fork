@@ -208,6 +208,7 @@ function SubPageComp() {
           title={bannerItem.title}
           content={bannerItem.content}
           bannerUrl={bannerItem.pcBannerUrl}
+          bannerLink={bannerItem.pcBannerLink}
         />
       );
     }

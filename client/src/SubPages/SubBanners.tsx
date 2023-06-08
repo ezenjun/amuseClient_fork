@@ -5,35 +5,53 @@ interface SubBannersProps {
   title: string;
   content: string;
   bannerUrl: string;
+  bannerLink: string;
 }
 
 const BigBox = ({
   backgroundColor,
   content,
   bannerUrl,
+  bannerLink,
 }: {
   backgroundColor: string;
   content: string;
   bannerUrl: string;
-}) => (
-  <div
-    className={Style["bigbox"]}
-    style={{
-      backgroundColor,
-      backgroundImage: bannerUrl ? `url(${bannerUrl})` : undefined,
-    }} // url 있을때는 이미지로, 없으면 기본 배경
-  >
-    <h3 style={{ marginLeft: "1rem" }}>{content}</h3>
-  </div>
-);
+  bannerLink: string;
+}) => {
+  const handleClick = () => {
+    window.open(bannerLink, "_blank", "noopener"); // 새 탭으로 링크 열기
+  };
 
-function SubBanners({ title, content, bannerUrl }: SubBannersProps) {
+  return (
+    <div
+      className={Style["bigbox"]}
+      style={{
+        backgroundColor,
+        backgroundImage: bannerUrl ? `url(${bannerUrl})` : undefined,
+      }}
+      onClick={handleClick} // 클릭 시 handleClick 함수 실행
+      onMouseEnter={(e) => {
+        e.currentTarget.style.cursor = "pointer";
+      }} // 마우스 올릴 때 포인터 모양 변경
+      onMouseLeave={(e) => {
+        e.currentTarget.style.cursor = "auto";
+      }} // 마우스 내릴 때 포인터 모양 원래대로 변경
+    >
+      <h1 style={{ color: "white", marginLeft: "20px", marginTop: "20px", position: "relative", zIndex: 1 }}>
+        {content}
+      </h1>
+    </div>
+  );
+};
+
+function SubBanners({ title, content, bannerUrl, bannerLink }: SubBannersProps) {
   console.log(title);
   return (
     <>
       <h2 style={{ marginTop: "3rem", marginBottom: "1rem" }}>{title}</h2>
       <div className={Style["container"]}>
-        <BigBox backgroundColor="lightpink" content={content} bannerUrl={bannerUrl} />
+        <BigBox backgroundColor="lightpink" content={content} bannerUrl={bannerUrl} bannerLink={bannerLink} />
       </div>
     </>
   );
