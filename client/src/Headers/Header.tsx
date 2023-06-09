@@ -136,11 +136,18 @@ function Header() {
   }, []);
 
   useEffect(() => {
-    const getToken: string | null = localStorage.getItem("loginToken");
+    let getToken: string | null = new URL(window.location.href).searchParams.get("token");
     if (getToken) {
       setToken(getToken);
     }
-  }, [])
+  }, []);
+
+  const handleLogout = ()=> {
+    setLoggedIn(false);
+    setManager(false);
+    localStorage.removeItem('loginToken');
+    navigateToHome();
+  }
 
   return (
     <div>
@@ -155,12 +162,7 @@ function Header() {
                 {loggedIn ? (
                   <button
                     className="loginBtn"
-                    onClick={() => {
-                      setLoggedIn(false);
-                      localStorage.removeItem("dev_access_token");
-                      localStorage.removeItem("dev_refresh_token");
-                      navigateToHome();
-                    }}
+                    onClick={handleLogout}
                   >
                     로그아웃
                   </button>
@@ -239,12 +241,7 @@ function Header() {
                 {loggedIn ? (
                   <button
                     className="loginBtn"
-                    onClick={() => {
-                      setLoggedIn(false);
-                      localStorage.removeItem("dev_access_token");
-                      localStorage.removeItem("dev_refresh_token");
-                      navigateToHome();
-                    }}
+                    onClick={handleLogout}
                   >
                     로그아웃
                   </button>
@@ -261,7 +258,7 @@ function Header() {
                   </button>
                 )}
                 {manager && loggedIn &&
-                <a className="adminBtn" href={`http://localhost:3000/?token=${token}`} target='_blank'>
+                <a className="adminBtn" href={`http://amuse-admin.s3-website.ap-northeast-2.amazonaws.com/?token=${token}`} target='_blank'>
                   어드민
                 </a>}
               </div>
