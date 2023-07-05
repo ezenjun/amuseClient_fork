@@ -13,6 +13,8 @@ import SearchPageComp from "./SubPages/SearchPageComp";
 // import NotFound from './NotFound';
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Header from "./Headers/Header";
+import Footer from "./Footers/Footer";
 
 function App() {
   /*
@@ -85,6 +87,7 @@ function App() {
 
   return (
     <div>
+      <Header />
       <Routes>
         <Route path="/" element={<Home />} />
         {/* <Route path="/Concierge" element={<Concierge />}></Route>
@@ -124,6 +127,7 @@ function App() {
          */}
         <Route path="/search/:apiKey" element={<SearchPageComp />} />
       </Routes>
+      <Footer />
     </div>
   );
 }

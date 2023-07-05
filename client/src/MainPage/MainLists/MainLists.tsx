@@ -129,6 +129,18 @@ function MainLists() {
     <div>
       <h2 style={{ marginTop: "1rem", marginBottom: "1rem" }}>실시간 Best 여행 상품🏞</h2>
       <div className={Style["container"]}>
+        {displayedItemIds.length === 0 && (
+          <Box
+            key={0}
+            marginRight={"18px"}
+            itemId={0}
+            title={"테스트 여행"}
+            startPrice={"0"}
+            handleClick={() => navigateToDetail(-1)}
+            imageUrl={"0"}
+          />
+        )}
+
         {displayedItemIds.map((itemId: number, index: number) => (
           <Box
             key={itemId}

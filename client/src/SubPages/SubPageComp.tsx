@@ -219,8 +219,6 @@ function SubPageComp() {
     <div>
       {categoryData ? (
         <div>
-          <Header />
-          <div className={Style["liner"]}></div>
           <Fade>
             <div className={Style["subTitleContainer"]}>
               <img
@@ -242,7 +240,6 @@ function SubPageComp() {
                 <div>{renderedComponents}</div>
               </div>
             </div>
-            <Footer />
           </Fade>
         </div>
       ) : (

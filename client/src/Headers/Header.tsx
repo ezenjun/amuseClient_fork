@@ -9,6 +9,7 @@ import { isLoggedIn, isManager } from "../atoms";
 import { useRecoilState } from "recoil";
 import MyPageMenu from "../MyPages/MyPageMenu";
 import axios from "axios";
+import SearchIcon from "./search.png";
 
 interface CategoryMenuProps {
   categoryName: string;
@@ -24,7 +25,7 @@ function Header() {
   const movePage = useNavigate();
   const [loggedIn, setLoggedIn] = useRecoilState(isLoggedIn);
   const [manager, setManager] = useRecoilState(isManager);
-  const [token, setToken] = useState('');
+  const [token, setToken] = useState("");
 
   const navigateToHome = () => {
     movePage("/");
@@ -49,14 +50,6 @@ function Header() {
   };
   const navigateToSignUP = () => {
     movePage("/SignUP");
-  };
-
-  const searchKeywordStyle = {
-    border: "none",
-    padding: "14px",
-    marginRight: "10px",
-    width: "250px",
-    backgroundColor: "rgb(235, 235, 235)",
   };
 
   const CategoryMenu: React.FC<CategoryMenuProps> = ({ categoryName: categoryName, handleClick }) => (
@@ -142,12 +135,12 @@ function Header() {
     }
   }, []);
 
-  const handleLogout = ()=> {
+  const handleLogout = () => {
     setLoggedIn(false);
     setManager(false);
-    localStorage.removeItem('loginToken');
+    localStorage.removeItem("loginToken");
     navigateToHome();
-  }
+  };
 
   return (
     <div>
@@ -160,10 +153,7 @@ function Header() {
 
                 <div className="whiteSquare"></div>
                 {loggedIn ? (
-                  <button
-                    className="loginBtn"
-                    onClick={handleLogout}
-                  >
+                  <button className="loginBtn" onClick={handleLogout}>
                     로그아웃
                   </button>
                 ) : (
@@ -182,15 +172,14 @@ function Header() {
 
               <div className="search-box">
                 <input
-                  style={searchKeywordStyle}
                   type="text"
-                  placeholder="🔍 여행 키워드를 검색해보세요!"
+                  placeholder="여행 키워드를 검색해보세요!"
                   value={searchKeyword}
                   onChange={handleInputChange}
                   onKeyDown={handleKeyPress}
                 />
                 <button className="searchBtn" onClick={navigateToSearch}>
-                  검색
+                  <img src={SearchIcon} alt="searchIcon"></img>
                 </button>
               </div>
               <div className="menu">
@@ -226,23 +215,19 @@ function Header() {
                 <img className="logo" src={logoimage} alt="Amuse Travel Logo" onClick={navigateToHome} />
                 <div className="search-box">
                   <input
-                    style={searchKeywordStyle}
                     type="text"
-                    placeholder="🔍 여행 키워드를 검색해보세요!"
+                    placeholder="여행 키워드를 검색해보세요!"
                     value={searchKeyword}
                     onChange={handleInputChange}
                     onKeyDown={handleKeyPress}
                   />
                   <button className="searchBtn" onClick={navigateToSearch}>
-                    검색
+                    <img src={SearchIcon} alt="searchIcon"></img>
                   </button>
                 </div>
                 <div className="whiteSquare"></div>
                 {loggedIn ? (
-                  <button
-                    className="loginBtn"
-                    onClick={handleLogout}
-                  >
+                  <button className="loginBtn" onClick={handleLogout}>
                     로그아웃
                   </button>
                 ) : (
@@ -257,10 +242,15 @@ function Header() {
                     회원가입
                   </button>
                 )}
-                {manager && loggedIn &&
-                <a className="adminBtn" href={`http://amuse-admin.s3-website.ap-northeast-2.amazonaws.com/?token=${token}`} target='_blank'>
-                  어드민
-                </a>}
+                {manager && loggedIn && (
+                  <a
+                    className="adminBtn"
+                    href={`http://amuse-admin.s3-website.ap-northeast-2.amazonaws.com/?token=${token}`}
+                    target="_blank"
+                  >
+                    어드민
+                  </a>
+                )}
               </div>
               <div className="menu">
                 {categories.length <= 4 ? (
@@ -288,6 +278,7 @@ function Header() {
           )}
         </div>
       </div>
+      <div className={Style["liner"]}></div>
     </div>
   );
 }

@@ -6,4 +6,5 @@
 .liner {
   border: none;
   border-top: 1.5px solid rgb(184, 184, 184);
+  margin: 0;
 }

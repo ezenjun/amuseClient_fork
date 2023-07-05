@@ -1,8 +1,6 @@
 import React, { useEffect, useState, ReactNode } from "react";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import Header from "../Headers/Header";
-import Footer from "../Footers/Footer";
 import Style from "../MainPage/ListStyle.module.css";
 import AppStyle from "../App.module.css";
 import axios from "axios";
@@ -163,10 +161,6 @@ function SearchPageComp() {
 
   return (
     <div>
-      <Header />
-      <div className={AppStyle["liner"]}></div>
-      {/* <br /> */}
-
       <h1
         style={{
           display: "flex",
@@ -184,7 +178,6 @@ function SearchPageComp() {
         <Dropdown onChange={handleSortChange} />
         <BoxGroup />
       </div>
-      <Footer />
     </div>
   );
 }

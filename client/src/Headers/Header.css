@@ -1,7 +1,8 @@
 .top {
   display: flex;
+  align-items: center;
   width: 100%;
-  padding-top: 20px;
+  padding-top: 30px;
   padding-bottom: 10px;
 }
 
@@ -12,7 +13,7 @@
   color: black;
   font-size: 1.5rem;
   font-weight: bold;
-  margin: 10px;
+  margin-right: 30px;
 }
 .logo:hover {
   cursor: pointer;
@@ -39,18 +40,38 @@
 .search-box {
   display: flex;
   align-items: center;
-  padding: 10px;
-  border-radius: 5px;
+
+  width: 450px;
+  height: 40px;
+  border: 2px solid #b5b5b5;
+  border-radius: 30px;
+}
+
+.search-box input {
+  border-radius: 30px;
+  background: transparent;
+  border-color: transparent;
+  width: 80%;
+  height: 40px;
+  padding-left: 20px;
+  outline: none;
 }
 
 .searchBtn {
-  background-color: #929292;
-  color: white;
+  background-color: transparent;
+  color: black;
+  font-weight: bold;
   border: none;
-  padding: 14px 0px;
-  width: 80px;
-  border-radius: 5px;
+  width: 20%;
   cursor: pointer;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.searchBtn img {
+  height: 25px;
+  width: auto;
+  margin-right: 30%;
 }
 
 .whiteSquare {
@@ -139,7 +160,6 @@
 .loginBtn {
   width: 100px;
   height: 40px;
-  margin-top: 10px;
   border: none;
   background-color: transparent;
   font-size: 16px;
@@ -150,7 +170,6 @@
 .signInBtn {
   width: 120px;
   height: 40px;
-  margin-top: 10px;
   border: none;
   background-color: transparent;
   font-size: 16px;
@@ -162,7 +181,6 @@
   display: inline-block;
   width: 120px;
   height: 40px;
-  margin-top: 18px;
   border: none;
   background-color: transparent;
   font-size: 16px;
