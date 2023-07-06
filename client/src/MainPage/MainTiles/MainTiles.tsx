@@ -10,11 +10,7 @@ import Jeju from "../MainImgs/jeju.jpg";
 import Boeing from "../MainImgs/boeing.jpg";
 
 const Box = ({ backgroundImage, text, onClick }: { backgroundImage: string; text: string; onClick: () => void }) => (
-  <div
-    className={Style["regBox"]}
-    onClick={onClick}
-    style={{ margin: "auto", backgroundImage: `url(${backgroundImage})` }}
-  >
+  <div className={Style["regBox"]} onClick={onClick} style={{ backgroundImage: `url(${backgroundImage})` }}>
     <p className={Style["regionName"]}>{text}</p>
   </div>
 );

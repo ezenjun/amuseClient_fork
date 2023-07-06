@@ -4,6 +4,7 @@
   width: 100%;
   /* max-width: 900px; */
   margin-bottom: 24px;
+  justify-content: space-between;
 }
 
 .regBox {

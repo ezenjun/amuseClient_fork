@@ -9,6 +9,7 @@ import RightIcon from "../ArrowIcons/right.png";
 import NoRightIcon from "../ArrowIcons/right_no.png";
 import LeftIcon from "../ArrowIcons/left.png";
 import NoLeftIcon from "../ArrowIcons/left_no.png";
+import DefaultImg from "../MainBanner/default.jpg";
 
 const numberWithCommas = (number: number | null): string => {
   if (number === null) {
@@ -127,7 +128,7 @@ function MainLists() {
 
   return (
     <div>
-      <h2 style={{ marginTop: "1rem", marginBottom: "1rem" }}>실시간 Best 여행 상품🏞</h2>
+      <h2 style={{ marginTop: "2rem", marginBottom: "1rem" }}>실시간 Best 여행 상품🏞</h2>
       <div className={Style["container"]}>
         {displayedItemIds.length === 0 && (
           <Box
@@ -137,7 +138,7 @@ function MainLists() {
             title={"테스트 여행"}
             startPrice={"0"}
             handleClick={() => navigateToDetail(-1)}
-            imageUrl={"0"}
+            imageUrl={DefaultImg}
           />
         )}
 

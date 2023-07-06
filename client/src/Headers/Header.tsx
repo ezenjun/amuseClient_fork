@@ -145,6 +145,7 @@ function Header() {
   return (
     <div>
       <div className={Style["App"]}>
+        {/* 모바일 버전 */}
         <div className={`${mobileHeader === 1 ? "mobile-header" : ""}`}>
           {mobileHeader === 1 && (
             <div style={{ paddingTop: "20px", paddingBottom: "10px" }}>
@@ -209,23 +210,10 @@ function Header() {
               </div>
             </div>
           )}
+          {/* pc 버전 */}
           {mobileHeader === 0 && (
             <div>
-              <div className="top">
-                <img className="logo" src={logoimage} alt="Amuse Travel Logo" onClick={navigateToHome} />
-                <div className="search-box">
-                  <input
-                    type="text"
-                    placeholder="여행 키워드를 검색해보세요!"
-                    value={searchKeyword}
-                    onChange={handleInputChange}
-                    onKeyDown={handleKeyPress}
-                  />
-                  <button className="searchBtn" onClick={navigateToSearch}>
-                    <img src={SearchIcon} alt="searchIcon"></img>
-                  </button>
-                </div>
-                <div className="whiteSquare"></div>
+              <div className="btnBox">
                 {loggedIn ? (
                   <button className="loginBtn" onClick={handleLogout}>
                     로그아웃
@@ -251,6 +239,21 @@ function Header() {
                     어드민
                   </a>
                 )}
+              </div>
+              <div className="top">
+                <img className="logo" src={logoimage} alt="Amuse Travel Logo" onClick={navigateToHome} />
+                <div className="search-box">
+                  <input
+                    type="text"
+                    placeholder="여행 키워드를 검색해보세요!"
+                    value={searchKeyword}
+                    onChange={handleInputChange}
+                    onKeyDown={handleKeyPress}
+                  />
+                  <button className="searchBtn" onClick={navigateToSearch}>
+                    <img src={SearchIcon} alt="searchIcon"></img>
+                  </button>
+                </div>
               </div>
               <div className="menu">
                 {categories.length <= 4 ? (

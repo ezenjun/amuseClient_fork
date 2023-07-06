@@ -1,26 +1,62 @@
 import React, { useState, useEffect } from "react";
 import Style from "./MainBanner.module.css";
+import "./swiperStyle.css";
 import DefaultImg from "./default.jpg";
+import TestImg from "./test.jpg";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { EffectFade, Navigation, Pagination } from "swiper";
+import "swiper/css";
+import "swiper/css/effect-fade";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "swiper/css/scrollbar";
+import SwiperCore, { Autoplay } from "swiper";
 
-const BigBox = ({ backgroundImg }: { backgroundImg: string }) => (
-  <div className={Style["bigbox"]} style={{ backgroundImage: `url(${backgroundImg})` }}></div>
-);
+import "swiper/swiper.scss";
+import "swiper/components/effect-fade/effect-fade.scss";
+import "swiper/components/navigation/navigation.scss";
+import "swiper/components/pagination/pagination.scss";
+
+SwiperCore.use([EffectFade, Navigation, Pagination, Autoplay]);
 
 function MainBanner() {
   const [mainBannerImg, setMainBannerImg] = useState("");
   useEffect(() => {
-    // 예를 들어 axios.get() 등을 사용하여 서버에서 이미지 URL을 가져와서 설정할 수 있습니다.
-    // 만약 mainBannerImg 값을 설정하지 못하고 기본값인 ""로 남아 있다면 default 이미지를 사용합니다.
     if (mainBannerImg === "") {
       setMainBannerImg(DefaultImg);
     }
   }, [mainBannerImg]);
+
   return (
     <>
-      {/* <h2 style={{ marginTop: "3rem", marginBottom: "1rem" }}>전해드릴 소식이 있어요📢</h2> */}
-      <div className={Style["container"]}>
-        <BigBox backgroundImg={mainBannerImg} />
-      </div>
+      <Swiper
+        spaceBetween={0}
+        effect="fade"
+        slidesPerView={1}
+        speed={1000}
+        direction="horizontal"
+        pagination={{
+          clickable: true,
+        }}
+        className="mySwiper"
+        loop={false}
+        navigation={{
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        }}
+        autoplay={{
+          delay: 6000,
+        }}
+      >
+        <SwiperSlide>
+          <img src={mainBannerImg} />
+        </SwiperSlide>
+        <SwiperSlide>
+          <img src={TestImg} />
+        </SwiperSlide>
+      </Swiper>
+      <div className="swiper-button-next"></div>
+      <div className="swiper-button-prev"></div>
     </>
   );
 }

@@ -25,3 +25,12 @@
   font-size: 13px;
   color: #a3a3a3;
 }
+
+.docsBtn {
+  height: 30px;
+}
+
+p span {
+  font-weight: bold;
+  margin-right: 20px;
+}

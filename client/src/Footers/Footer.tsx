@@ -15,6 +15,11 @@ function Footer() {
           <br />
           <br />
           <p className={Style["smallText"]}>
+            <br />
+            <div className={Style["docsBtn"]}>
+              <span>이용약관</span>
+              <span>개인정보취급정책</span>
+            </div>
             (주) 어뮤즈 | 어뮤즈트래블 <br />
             대표 : 오서연 <br />
             주소 : 서울시 중구 청계천로 40 한국관광공사 서울센터 / 사업자등록번호 : 707-86-00503 <br />

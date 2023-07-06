@@ -6,6 +6,9 @@ import logo02 from "../MainImgs/logo02.svg";
 import logo03 from "../MainImgs/logo03.svg";
 import logo04 from "../MainImgs/logo04.svg";
 import logo05 from "../MainImgs/logo05.svg";
+import NaverIcon from "./naver-icon.png";
+import InstaIcon from "./instagram-icon.png";
+import FaceIcon from "./facebook-icon.png";
 
 function gotoBlog() {
   window.open("https://blog.naver.com/amusetravel", "_blank");
@@ -22,15 +25,18 @@ function MainMoreAbout() {
     <>
       <h2 style={{ marginTop: "4rem" }}>어뮤즈트래블에 대해 더 알고싶다면? 🔍</h2>
       <div className={Style["middle"]}>
-        <h4 className={Style["sns"]} onClick={gotoBlog}>
-          네이버 블로그
-        </h4>
-        <h4 className={Style["sns"]} onClick={gotoInstagram}>
-          인스타그램
-        </h4>
-        <h4 className={Style["sns"]} onClick={gotoFacebook}>
-          페이스북
-        </h4>
+        <div className={Style["sns"]} onClick={gotoBlog}>
+          <img src={NaverIcon} alt="" />
+          <h4>네이버 블로그</h4>
+        </div>
+        <div className={Style["sns"]} onClick={gotoInstagram}>
+          <img src={InstaIcon} alt="" />
+          <h4>인스타그램</h4>
+        </div>
+        <div className={Style["sns"]} onClick={gotoFacebook}>
+          <img src={FaceIcon} alt="" />
+          <h4>페이스북</h4>
+        </div>
       </div>
       <div style={{ clear: "left" }}></div>
       <div
