@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import Style from "./MainBanner.module.css";
-import "./SwiperStyle.css";
+// import Style from "./MainBanner.module.css";
+import "./Swipestyle.css";
 import DefaultImg from "./default.jpg";
 import TestImg from "./test.jpg";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -45,7 +45,7 @@ function MainBanner() {
           prevEl: ".swiper-button-prev",
         }}
         autoplay={{
-          delay: 6000,
+          delay: 5000,
         }}
       >
         <SwiperSlide>

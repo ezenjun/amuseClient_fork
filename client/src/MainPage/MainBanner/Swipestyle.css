@@ -31,21 +31,37 @@
   opacity: 0;
 }
 .swiper-button-prev {
-  right: 100px;
-  top: 50px;
+  /* right: 105px;
+  bottom: 100px;
   left: auto;
-  top: auto;
+  top: auto; */
   filter: grayscale(100%) brightness(3);
-  transform: scale(0.5);
+  transform: scale(0.8);
   z-index: 10;
 }
 
 .swiper-button-next {
-  right: 60px;
-  top: 50px;
+  /* right: 60px;
+  bottom: 100px;
   left: auto;
-  top: auto;
+  top: auto; */
   filter: grayscale(100%) brightness(3);
-  transform: scale(0.5);
+  transform: scale(0.8);
   z-index: 10;
+}
+
+.swiper-pagination-bullets {
+  bottom: 30px !important;
+}
+
+.swiper-pagination-bullet {
+  background: #fff !important;
+  opacity: 0.5 !important;
+  width: 10px !important;
+  height: 10px !important;
+}
+
+.swiper-pagination-bullet-active {
+  background: #fff !important;
+  opacity: 1 !important;
 }
