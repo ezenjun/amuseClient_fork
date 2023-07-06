@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Style from "./MainBanner.module.css";
-import "./swiperStyle.css";
+import "./SwiperStyle.css";
 import DefaultImg from "./default.jpg";
 import TestImg from "./test.jpg";
 import { Swiper, SwiperSlide } from "swiper/react";
