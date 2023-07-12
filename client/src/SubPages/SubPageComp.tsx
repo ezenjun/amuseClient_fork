@@ -176,7 +176,7 @@ function SubPageComp() {
   console.log("apikeynum = ", apiKeyNumber);
   const fetchPageData = (apiKeyNumber: number) => {
     axios
-      .get(`http://ammuse.store/main/category/${apiKeyNumber}/page`)
+      .get(`http://43.200.171.174/main/category/${apiKeyNumber}/page`)
       .then((response) => {
         const ComponentInfos = response.data.data.pageComponentInfos;
         const items = ComponentInfos.map((item: any) => item);

@@ -57,7 +57,7 @@ function Home() {
 
   useEffect(() => {
     axios
-      .get("http://ammuse.store/main-page/lists")
+      .get("http://43.200.171.174/main-page/lists")
       .then((response) => {
         const Items = response.data.data.listItems;
         const list_title = Items.map((item: any) => item.list_title);
