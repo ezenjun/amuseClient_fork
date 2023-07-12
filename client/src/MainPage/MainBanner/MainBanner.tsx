@@ -5,11 +5,7 @@ import DefaultImg from "./default.jpg";
 import TestImg from "./test.jpg";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectFade, Navigation, Pagination } from "swiper";
-import "swiper/css";
-import "swiper/css/effect-fade";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
-import "swiper/css/scrollbar";
+// import "swiper/components";
 import SwiperCore, { Autoplay } from "swiper";
 
 import "swiper/swiper.scss";
