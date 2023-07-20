@@ -178,7 +178,7 @@ function Header() {
                 {loggedIn && (
                   <a
                     className="adminBtn"
-                    href={`http://amuse-admin.s3-website.ap-northeast-2.amazonaws.com/?token=${token}`}
+                    href={`http://13.125.82.58/manager?token=${token}`}
                     target="_blank"
                     rel="noreferrer"
                   >
@@ -244,7 +244,7 @@ function Header() {
                     <MyPageMenu />
                     <a
                       className="adminBtn"
-                      href={`http://13.125.82.58?token=${token}`}
+                      href={`http://13.125.82.58/manager?token=${token}`}
                       target="_blank"
                       rel="noreferrer"
                     >
