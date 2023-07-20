@@ -1,0 +1,17 @@
+.introduce {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.content-block {
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+.content-block h2 {
+  margin-bottom: 10px;
+}
+
+.content-block p {
+  font-size: 14px;
+}

@@ -7,14 +7,13 @@ import SignUp from "./SignUp/SignUp";
 import Detail from "./DetailPage/Detail/Detail";
 import Review from "./MyPages/Review/Review";
 import ViewAll from "./SubPages/ViewAllPages/ViewAll";
-// import GyeonggiPage from "./SubPages/Regions/GyeonggiPage";
-// import GangwonPage from "./SubPages/Regions/GangwonPage";
 import SearchPageComp from "./SubPages/SearchPageComp";
 // import NotFound from './NotFound';
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Header from "./Headers/Header";
 import Footer from "./Footers/Footer";
+import AboutAmuse from "./SubPages/AboutAmuse/AboutAmuse";
 
 function App() {
   /*
@@ -100,6 +99,7 @@ function App() {
         {/* <Route path="/OnlineTour" element={<OnlineTour />}></Route> */}
         <Route path="/ViewAll" element={<ViewAll />}></Route>
         <Route path="/Subtest" element={<SubPageComp />}></Route>
+        <Route path="/aboutAmuse" element={<AboutAmuse />}></Route>
 
         {/**
          * 상세페이지 Route

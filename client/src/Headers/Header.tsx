@@ -30,11 +30,9 @@ function Header() {
   const navigateToHome = () => {
     movePage("/");
   };
-
-  // const navigateToAdmin = () => {
-  //   movePage(`http://amuse-admin.s3-website.ap-northeast-2.amazonaws.com/?token=${token}`);
-
-  // }
+  const navigateToAboutAmuse = () => {
+    movePage("/aboutAmuse");
+  };
 
   const navigateToSubPageComp = (apiKey: number) => {
     const apiKeyString: string = apiKey.toString();
@@ -292,7 +290,9 @@ function Header() {
                     </div>
                   </>
                 )}
-                <div className="menu-item">회사 소개</div>
+                <div className="menu-item" onClick={navigateToAboutAmuse}>
+                  회사 소개
+                </div>
               </div>
             </div>
           )}

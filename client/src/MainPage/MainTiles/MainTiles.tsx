@@ -62,7 +62,7 @@ function MainTiles() {
 
   return (
     <>
-      <h2 style={{ marginTop: "3rem", marginBottom: "1rem" }}>지역 별 여행 상품📍</h2>
+      {/* <h2 style={{ marginTop: "3rem", marginBottom: "1rem" }}>지역 별 여행 상품📍</h2>
       {mobileHeader === 0 && ( // 넓은 화면
         <div>
           <div className={Style["container"]}>
@@ -101,7 +101,7 @@ function MainTiles() {
             <EmptyBox backgroundColor="white" />
           </div>
         </div>
-      )}
+      )} */}
     </>
   );
 }
