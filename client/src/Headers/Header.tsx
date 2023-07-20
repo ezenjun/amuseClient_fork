@@ -85,7 +85,7 @@ function Header() {
 
   useEffect(() => {
     axios
-      .get("https://ammuse.store/main/category")
+      .get("https://vikrant.store/main/category")
       .then((response) => {
         const categoryAll = response.data.data.categories;
         const categoryNames = categoryAll.map((id: any) => id.categoryName);

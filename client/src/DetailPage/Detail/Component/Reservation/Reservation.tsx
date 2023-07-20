@@ -1,20 +1,19 @@
-import React, { useEffect, useState } from 'react';
-import './Reservation.scss';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart, faShareNodes } from '@fortawesome/free-solid-svg-icons';
-import { faEnvelope as solidFaEnelope } from '@fortawesome/free-solid-svg-icons';
-import { faEnvelope as regularFaEnelope } from '@fortawesome/free-regular-svg-icons';
+import React, { useEffect, useState } from "react";
+import "./Reservation.scss";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart, faShareNodes } from "@fortawesome/free-solid-svg-icons";
+import { faEnvelope as solidFaEnelope } from "@fortawesome/free-solid-svg-icons";
+import { faEnvelope as regularFaEnelope } from "@fortawesome/free-regular-svg-icons";
 import Swal from "sweetalert2";
-import axios from 'axios';
+import axios from "axios";
 import { CopyToClipboard } from "react-copy-to-clipboard";
-
 
 interface ReservationProps {
   itemId: number | null;
   productCode: number;
   startPrice: number;
   likeNum: number;
-};
+}
 
 interface ManagerData {
   email: string;
@@ -36,13 +35,13 @@ function Reservation({ itemId, productCode, startPrice, likeNum }: ReservationPr
    */
   useEffect(() => {
     axios
-      .get(`https://ammuse.store/detail/${itemId}/manager-info`)
+      .get(`https://vikrant.store/detail/${itemId}/manager-info`)
       .then((response) => {
-        setManagerData(response.data.data)
+        setManagerData(response.data.data);
 
         //console.log(response.data.data)
       })
-      .catch(error => {
+      .catch((error) => {
         console.log("연결 실패");
       });
   }, [itemId]);
@@ -53,11 +52,10 @@ function Reservation({ itemId, productCode, startPrice, likeNum }: ReservationPr
   const handleInquiryClick = () => {
     if (managerData && managerData.email) {
       const subject = encodeURIComponent(`${managerData?.title} 문의하기`);
-      const body = encodeURIComponent('안녕하세요, AmuseTravel 입니다 :-)\n\n문의 내용을 입력해주세요.\n\n감사합니다.');
+      const body = encodeURIComponent("안녕하세요, AmuseTravel 입니다 :-)\n\n문의 내용을 입력해주세요.\n\n감사합니다.");
       window.location.href = `mailto:${managerData.email}?subject=${subject}&body=${body}`;
     }
   };
-
 
   // Share btn
   const [showTooltip, setShowTooltip] = useState(false);
@@ -93,7 +91,7 @@ function Reservation({ itemId, productCode, startPrice, likeNum }: ReservationPr
       title: "티켓 구입 문의",
       confirmButtonText: "확인",
       confirmButtonColor: "#F184A1",
-      html: "📞 02-719-6811<br>✉️ info@amusetravel.com<br>"
+      html: "📞 02-719-6811<br>✉️ info@amusetravel.com<br>",
     });
   };
 
@@ -105,19 +103,19 @@ function Reservation({ itemId, productCode, startPrice, likeNum }: ReservationPr
         <div className="reservation-top">
           <div className="reservation-price">
             <p>시작가</p>
-            <p className="price">{startPrice.toLocaleString('en')}</p>
+            <p className="price">{startPrice.toLocaleString("en")}</p>
             <p>부터</p>
           </div>
           <div className="reservation-link">
-            <button className='share-btn' onClick={handleTooltipToggle}>
+            <button className="share-btn" onClick={handleTooltipToggle}>
               <FontAwesomeIcon icon={faShareNodes} className="share-icon" />
             </button>
 
             {showTooltip && (
               <div className="tooltip">
-                <span className='link'>{window.location.href}</span>
+                <span className="link">{window.location.href}</span>
                 <CopyToClipboard text="링크" onCopy={() => alert("복사완료")}>
-                  <button className='copy-btn'>링크 복사</button>
+                  <button className="copy-btn">링크 복사</button>
                 </CopyToClipboard>
               </div>
             )}
@@ -125,7 +123,9 @@ function Reservation({ itemId, productCode, startPrice, likeNum }: ReservationPr
         </div>
         {/* 티켓 선택 btn */}
         <div className="selectticket-btn-div">
-          <button className="selectticket-btn" onClick={handleButtonClick}>구입 문의</button>
+          <button className="selectticket-btn" onClick={handleButtonClick}>
+            구입 문의
+          </button>
         </div>
         {/* 위시리스트 담기 btn */}
         <div className="wishlist-btn-div">

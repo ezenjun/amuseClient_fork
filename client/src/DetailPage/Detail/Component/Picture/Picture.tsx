@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-import MainPicture from './MainPicture/MainPicture';
-import SubPicture from './SubPicture/SubPicture';
-import './Picture.scss';
+import MainPicture from "./MainPicture/MainPicture";
+import SubPicture from "./SubPicture/SubPicture";
+import "./Picture.scss";
 
 interface PictureProps {
   itemId: number | null;
-};
+}
 
 function Picture({ itemId }: PictureProps) {
   /**
@@ -21,25 +21,25 @@ function Picture({ itemId }: PictureProps) {
    */
   useEffect(() => {
     axios
-      .get(`https://ammuse.store/detail/${itemId}/picture`)
+      .get(`https://vikrant.store/detail/${itemId}/picture`)
       .then((response) => {
-        setPictureData(response.data.data.pictures)
+        setPictureData(response.data.data.pictures);
 
         //console.log(response.data.data.pictures)
       })
-      .catch(error => {
+      .catch((error) => {
         console.log("연결 실패");
       });
   }, [itemId]);
 
   return (
     <div className="Picture">
-      <div className='mainpicture'>
-       {mainPicture && <MainPicture src={mainPicture} alt={mainPicture} itemId={itemId} modal={pictureData} />}
+      <div className="mainpicture">
+        {mainPicture && <MainPicture src={mainPicture} alt={mainPicture} itemId={itemId} modal={pictureData} />}
       </div>
       <div className="subpicture">
         {subPicture.map((picture) => (
-          <SubPicture src={picture} alt={picture} itemId={itemId} modal={pictureData}/>
+          <SubPicture src={picture} alt={picture} itemId={itemId} modal={pictureData} />
         ))}
       </div>
     </div>

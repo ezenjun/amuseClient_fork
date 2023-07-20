@@ -34,7 +34,7 @@ function Home() {
 
     const accessToken = localStorage.getItem("loginToken");
     axios
-      .get(`https://ammuse.store/api/v1/admin/search/users?email=${email}`, {
+      .get(`https://vikrant.store/api/v1/admin/search/users?email=${email}`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${accessToken}`,
@@ -57,7 +57,7 @@ function Home() {
 
   useEffect(() => {
     axios
-      .get("http://43.200.171.174/main-page/lists")
+      .get("http://vikrant.store/main-page/lists")
       .then((response) => {
         const Items = response.data.data.listItems;
         const list_title = Items.map((item: any) => item.list_title);

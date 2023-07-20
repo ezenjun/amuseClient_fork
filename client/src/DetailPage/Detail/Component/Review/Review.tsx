@@ -1,19 +1,19 @@
-import React, { useEffect, useState } from 'react';
-import './Review.scss';
-import axios from 'axios';
-import ReviewDetail from './ReviewDetail/ReviewDetail';
+import React, { useEffect, useState } from "react";
+import "./Review.scss";
+import axios from "axios";
+import ReviewDetail from "./ReviewDetail/ReviewDetail";
 
 interface ReviewProps {
   itemId: number | null;
-};
+}
 
 interface ReviewData {
-  rated : number;
-  review_count : number;
-  reviews : {
-    user_name : string;
-    review_content : string;
-    images : string;
+  rated: number;
+  review_count: number;
+  reviews: {
+    user_name: string;
+    review_content: string;
+    images: string;
   }[];
 }
 
@@ -28,11 +28,11 @@ function Review({ itemId }: ReviewProps) {
    */
   useEffect(() => {
     axios
-      .get(`https://ammuse.store/detail/${itemId}/review`)
+      .get(`https://vikrant.store/detail/${itemId}/review`)
       .then((response) => {
-        setReviewData(response.data.data)
+        setReviewData(response.data.data);
       })
-      .catch(error => {
+      .catch((error) => {
         console.log("연결 실패");
       });
   }, [itemId]);
@@ -43,10 +43,11 @@ function Review({ itemId }: ReviewProps) {
         <p className="review-title">후기</p>
         <p className="review-number">{reviewData?.review_count}</p>
       </div>
-      <div className='review-detail'>
-        {reviewData?.reviews && reviewData.reviews.map((review, index) => (
-          <ReviewDetail key={index} name={review.user_name} content={review.review_content} img={review.images} />
-        ))}
+      <div className="review-detail">
+        {reviewData?.reviews &&
+          reviewData.reviews.map((review, index) => (
+            <ReviewDetail key={index} name={review.user_name} content={review.review_content} img={review.images} />
+          ))}
       </div>
     </div>
   );

@@ -67,7 +67,7 @@ function SearchPageComp() {
 
   const fetchData = (sortOption: string) => {
     axios
-      .get(`https://ammuse.store/item/search?keyword=${apiKey}&sort=${searchSort}&page=1`)
+      .get(`https://vikrant.store/item/search?keyword=${apiKey}&sort=${searchSort}&page=1`)
       .then((response) => {
         const bestItems = response.data.data.items;
         const ids = bestItems.map((item: any) => item.item_db_id);

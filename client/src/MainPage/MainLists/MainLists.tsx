@@ -60,7 +60,7 @@ function MainLists() {
 
   useEffect(() => {
     axios
-      .get("https://ammuse.store/main/best-item")
+      .get("https://vikrant.store/main/best-item")
       .then((response) => {
         const bestItems = response.data.data.items;
         const ids = bestItems.map((item: any) => item.item_db_id);

@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import './Map.scss';
-import MapDetail from './MapDetail/MapDetail';
-import axios from 'axios';
+import React, { useEffect, useState } from "react";
+import "./Map.scss";
+import MapDetail from "./MapDetail/MapDetail";
+import axios from "axios";
 
 interface MapProps {
   itemId: number | null;
-};
+}
 
 interface MapData {
   title: string;
@@ -15,7 +15,7 @@ interface MapData {
   timeCost: string;
   latitude: number;
   longitude: number;
-};
+}
 
 function Map({ itemId }: MapProps) {
   /**
@@ -29,13 +29,12 @@ function Map({ itemId }: MapProps) {
    */
   useEffect(() => {
     axios
-      .get(`https://ammuse.store/detail/${itemId}/course-intro`)
+      .get(`https://vikrant.store/detail/${itemId}/course-intro`)
       .then((response) => {
-
         setMapData(response.data.data.course);
         //console.log(response.data.data.course)
       })
-      .catch(error => {
+      .catch((error) => {
         console.log("연결 실패");
       });
   }, [itemId]);
@@ -49,8 +48,8 @@ function Map({ itemId }: MapProps) {
     }
   }, [mapData]);
 
-  const uniqueDays = Array.from(new Set(mapData.map(data => data.day)));
-  
+  const uniqueDays = Array.from(new Set(mapData.map((data) => data.day)));
+
   /**
    * Click Button
    */
@@ -59,24 +58,15 @@ function Map({ itemId }: MapProps) {
   };
 
   return (
-    <div className='Map'>
-      <div className='day-button'>
+    <div className="Map">
+      <div className="day-button">
         {uniqueDays.map((day) => (
-          <button 
-            key={day}
-            onClick={() => handleDayClick(day)}
-            className={selectedDay === day ? 'selected' : ''}
-          >
+          <button key={day} onClick={() => handleDayClick(day)} className={selectedDay === day ? "selected" : ""}>
             {day + "일차"}
           </button>
         ))}
       </div>
-      {selectedDay && (
-        <MapDetail
-          key={selectedDay}
-          data={mapData.filter((item) => item.day === selectedDay)}
-        />
-      )}
+      {selectedDay && <MapDetail key={selectedDay} data={mapData.filter((item) => item.day === selectedDay)} />}
     </div>
   );
 }

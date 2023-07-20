@@ -1,18 +1,18 @@
-import React, { useEffect, useState } from 'react';
-import TitleDetail from './TitleDetail/TitleDetail';
+import React, { useEffect, useState } from "react";
+import TitleDetail from "./TitleDetail/TitleDetail";
 import axios from "axios";
-import './Title.scss';
+import "./Title.scss";
 
 interface TitleProps {
   itemId: number | null;
-};
+}
 
 interface TitleData {
-  country : string
-  city : string
-  title : string
-  rated : number
-  review_count : number
+  country: string;
+  city: string;
+  title: string;
+  rated: number;
+  review_count: number;
 }
 
 function Title({ itemId }: TitleProps) {
@@ -27,19 +27,19 @@ function Title({ itemId }: TitleProps) {
    */
   useEffect(() => {
     axios
-      .get(`https://ammuse.store/detail/${itemId}/title`)
+      .get(`https://vikrant.store/detail/${itemId}/title`)
       .then((response) => {
-        setTitleData(response.data.data)
+        setTitleData(response.data.data);
 
         //console.log(response.data.data)
       })
-      .catch(error => {
+      .catch((error) => {
         console.log("연결 실패");
       });
   }, [itemId]);
 
   return (
-    <div className='Title'>
+    <div className="Title">
       <TitleDetail
         country={titleData?.country ?? "country"}
         city={titleData?.city ?? "city"}
