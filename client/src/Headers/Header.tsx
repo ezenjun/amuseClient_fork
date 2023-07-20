@@ -31,6 +31,11 @@ function Header() {
     movePage("/");
   };
 
+  // const navigateToAdmin = () => {
+  //   movePage(`http://amuse-admin.s3-website.ap-northeast-2.amazonaws.com/?token=${token}`);
+
+  // }
+
   const navigateToSubPageComp = (apiKey: number) => {
     const apiKeyString: string = apiKey.toString();
     movePage(`/category/${apiKeyString}`);
@@ -133,6 +138,7 @@ function Header() {
     if (getToken) {
       setToken(getToken);
     }
+    console.log("hghjvhvhgv", loggedIn);
   }, []);
 
   const handleLogout = () => {
@@ -168,6 +174,16 @@ function Header() {
                   <button className="signInBtn" onClick={navigateToSignUP}>
                     회원가입
                   </button>
+                )}
+                {loggedIn && (
+                  <a
+                    className="adminBtn"
+                    href={`http://amuse-admin.s3-website.ap-northeast-2.amazonaws.com/?token=${token}`}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    어드민
+                  </a>
                 )}
               </div>
 
@@ -224,20 +240,21 @@ function Header() {
                   </button>
                 )}
                 {loggedIn ? (
-                  <MyPageMenu />
+                  <div>
+                    <MyPageMenu />
+                    <a
+                      className="adminBtn"
+                      href={`http://13.125.82.58?token=${token}`}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      어드민
+                    </a>
+                  </div>
                 ) : (
                   <button className="signInBtn" onClick={navigateToSignUP}>
                     회원가입
                   </button>
-                )}
-                {manager && loggedIn && (
-                  <a
-                    className="adminBtn"
-                    href={`http://amuse-admin.s3-website.ap-northeast-2.amazonaws.com/?token=${token}`}
-                    target="_blank"
-                  >
-                    어드민
-                  </a>
                 )}
               </div>
               <div className="top">

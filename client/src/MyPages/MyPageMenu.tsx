@@ -60,16 +60,12 @@ export default function MyPageMenu() {
         aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
         style={{
-          width: "120px",
+          width: "100px",
           height: "40px",
-          marginTop: "10px",
           border: "none",
           backgroundColor: "transparent",
-          fontSize: "16px",
-          fontWeight: "bolder",
           cursor: "pointer",
           color: "black",
-          padding: "1px 6px",
         }}
       >
         마이페이지
