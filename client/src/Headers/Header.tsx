@@ -255,12 +255,7 @@ function Header() {
                   </button>
                 )}
                 {loggedIn && manager ? (
-                  <a
-                    className="adminBtn"
-                    href={`http://13.125.82.58/manager?token=${token}`}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
+                  <a className="adminBtn" href={`http://myadmin.wheelgo.net/login`} target="_blank" rel="noreferrer">
                     어드민
                   </a>
                 ) : (
