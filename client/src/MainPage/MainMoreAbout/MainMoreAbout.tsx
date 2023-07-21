@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React, { useState, useEffect } from "react";
 import Style from "./MainMoreAbout.module.css";
 import bcorplogo from "../MainImgs/bcorplogo.svg";
 import logo01 from "../MainImgs/logo01.svg";
@@ -21,23 +21,56 @@ function gotoFacebook() {
 }
 
 function MainMoreAbout() {
+  const [isMobile, setIsMobile] = useState(0);
+  const handleResize = () => {
+    const windowWidth = window.innerWidth;
+    if (windowWidth >= 700) {
+      setIsMobile(0);
+    } else {
+      setIsMobile(1);
+    }
+  };
+  useEffect(() => {
+    handleResize(); // Call initially
+    window.addEventListener("resize", handleResize); // Add event listener for window resize
+    return () => {
+      window.removeEventListener("resize", handleResize); // Clean up event listener on component unmount
+    };
+  }, []);
   return (
     <>
       <h2 style={{ marginTop: "4rem" }}>어뮤즈트래블에 대해 더 알고싶다면? 🔍</h2>
-      <div className={Style["middle"]}>
-        <div className={Style["sns"]} onClick={gotoBlog}>
-          <img src={NaverIcon} alt="" />
-          <h4>네이버 블로그</h4>
+      {isMobile ? (
+        <div className={Style["middle-mobile"]}>
+          <div className={Style["sns-mobile"]} onClick={gotoBlog}>
+            <img src={NaverIcon} alt="" />
+            <h4>네이버 블로그</h4>
+          </div>
+          <div className={Style["sns-mobile"]} onClick={gotoInstagram}>
+            <img src={InstaIcon} alt="" />
+            <h4>인스타그램</h4>
+          </div>
+          <div className={Style["sns-mobile"]} onClick={gotoFacebook}>
+            <img src={FaceIcon} alt="" />
+            <h4>페이스북</h4>
+          </div>
         </div>
-        <div className={Style["sns"]} onClick={gotoInstagram}>
-          <img src={InstaIcon} alt="" />
-          <h4>인스타그램</h4>
+      ) : (
+        <div className={Style["middle"]}>
+          <div className={Style["sns"]} onClick={gotoBlog}>
+            <img src={NaverIcon} alt="" />
+            <h4>네이버 블로그</h4>
+          </div>
+          <div className={Style["sns"]} onClick={gotoInstagram}>
+            <img src={InstaIcon} alt="" />
+            <h4>인스타그램</h4>
+          </div>
+          <div className={Style["sns"]} onClick={gotoFacebook}>
+            <img src={FaceIcon} alt="" />
+            <h4>페이스북</h4>
+          </div>
         </div>
-        <div className={Style["sns"]} onClick={gotoFacebook}>
-          <img src={FaceIcon} alt="" />
-          <h4>페이스북</h4>
-        </div>
-      </div>
+      )}
       <div style={{ clear: "left" }}></div>
       <div
         className={Style["imgContainer"]}
