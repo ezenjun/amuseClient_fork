@@ -152,11 +152,8 @@ function Header() {
         {/* 모바일 버전 */}
         <div className={`${mobileHeader === 1 ? "mobile-header" : ""}`}>
           {mobileHeader === 1 && (
-            <div style={{ paddingTop: "20px", paddingBottom: "10px" }}>
-              <div className="logo_container">
-                <img className="logo_mobile" src={logoimage} alt="Amuse Travel Logo" onClick={navigateToHome} />
-
-                <div className="whiteSquare"></div>
+            <div style={{ paddingTop: "5px", paddingBottom: "10px" }}>
+              <div className="btnBox_mobile">
                 {loggedIn ? (
                   <button className="loginBtn" onClick={handleLogout}>
                     로그아웃
@@ -173,19 +170,19 @@ function Header() {
                     회원가입
                   </button>
                 )}
-                {loggedIn && (
-                  <a
-                    className="adminBtn"
-                    href={`http://13.125.82.58/manager?token=${token}`}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
+                {loggedIn && manager ? (
+                  <a className="adminBtn" href={`http://myadmin.wheelgo.net/login`} target="_blank" rel="noreferrer">
                     어드민
                   </a>
+                ) : (
+                  <div></div>
                 )}
               </div>
+              <div className="logo_container">
+                <img className="logo_mobile" src={logoimage} alt="Amuse Travel Logo" onClick={navigateToHome} />
+              </div>
 
-              <div className="search-box">
+              <div className="search-box-mobile">
                 <input
                   type="text"
                   placeholder="여행 키워드를 검색해보세요!"
