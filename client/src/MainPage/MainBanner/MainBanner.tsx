@@ -24,7 +24,7 @@ function MainBanner() {
   }, [mainBannerImg]);
 
   return (
-    <>
+    <div className="swiperCover">
       <Swiper
         spaceBetween={0}
         effect="fade"
@@ -43,6 +43,7 @@ function MainBanner() {
         autoplay={{
           delay: 5000,
         }}
+        autoHeight={true}
       >
         <SwiperSlide>
           <img src={mainBannerImg} />
@@ -53,7 +54,7 @@ function MainBanner() {
       </Swiper>
       <div className="swiper-button-next"></div>
       <div className="swiper-button-prev"></div>
-    </>
+    </div>
   );
 }
 

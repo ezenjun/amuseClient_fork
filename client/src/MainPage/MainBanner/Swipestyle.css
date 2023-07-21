@@ -30,25 +30,6 @@
   position: absolute;
   opacity: 0;
 }
-.swiper-button-prev {
-  /* right: 105px;
-  bottom: 100px;
-  left: auto;
-  top: auto; */
-  filter: grayscale(100%) brightness(3);
-  transform: scale(0.8);
-  z-index: 10;
-}
-
-.swiper-button-next {
-  /* right: 60px;
-  bottom: 100px;
-  left: auto;
-  top: auto; */
-  filter: grayscale(100%) brightness(3);
-  transform: scale(0.8);
-  z-index: 10;
-}
 
 .swiper-pagination-bullets {
   bottom: 30px !important;
@@ -64,4 +45,18 @@
 .swiper-pagination-bullet-active {
   background: #fff !important;
   opacity: 1 !important;
+}
+
+.swiperCover {
+  height: 500px;
+}
+.swiperCover .swiper-button-prev,
+.swiperCover .swiper-button-next {
+  filter: grayscale(100%) brightness(5);
+  transform: scale(0.8);
+  z-index: 10;
+  position: absolute;
+  top: 500px;
+  /* top: 50%; Position the buttons at the middle height
+  transform: translateY(-50%); Center the buttons vertically */
 }

@@ -25,14 +25,14 @@
 }
 
 .logoImgs {
-  width: 120px;
+  width: 100px;
   float: left;
   margin: auto;
 }
 
 .imgContainer {
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */
 }
 
 .middle-mobile {
