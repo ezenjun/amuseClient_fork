@@ -240,19 +240,31 @@ function Header() {
                 {loggedIn ? (
                   <div>
                     <MyPageMenu />
-                    <a
+                    {/* <a
                       className="adminBtn"
                       href={`http://13.125.82.58/manager?token=${token}`}
                       target="_blank"
                       rel="noreferrer"
                     >
                       어드민
-                    </a>
+                    </a> */}
                   </div>
                 ) : (
                   <button className="signInBtn" onClick={navigateToSignUP}>
                     회원가입
                   </button>
+                )}
+                {loggedIn && manager ? (
+                  <a
+                    className="adminBtn"
+                    href={`http://13.125.82.58/manager?token=${token}`}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    어드민
+                  </a>
+                ) : (
+                  <div></div>
                 )}
               </div>
               <div className="top">

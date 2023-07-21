@@ -165,7 +165,7 @@
 
 .btnBox .loginBtn {
   width: 60px;
-  height: 40px;
+  height: 30px;
   border: none;
   background-color: transparent;
   cursor: pointer;
@@ -180,14 +180,16 @@
 }
 
 .btnBox .adminBtn {
+  display: flex;
   width: 60px;
-  height: 40px;
+  height: 30px;
   border: none;
   background-color: transparent;
   font-weight: bolder;
   cursor: pointer;
   color: black;
-  font-size: 14px;
+  font-size: 13.3333px;
   text-decoration: none; /* 링크의 밑줄 제거 */
-  padding-left: 3px;
+  align-items: center;
+  justify-content: center;
 }

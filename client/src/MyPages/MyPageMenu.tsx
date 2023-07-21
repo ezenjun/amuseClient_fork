@@ -61,11 +61,13 @@ export default function MyPageMenu() {
         onClick={handleClick}
         style={{
           width: "100px",
-          height: "40px",
+          height: "30px",
           border: "none",
           backgroundColor: "transparent",
           cursor: "pointer",
           color: "black",
+          fontSize: "13.3333px",
+          display: "flex",
         }}
       >
         마이페이지
