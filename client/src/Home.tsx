@@ -34,7 +34,7 @@ function Home() {
 
     const accessToken = localStorage.getItem("loginToken");
     axios
-      .get(`https://vikrant.store/api/v1/admin/search/users?email=${email}`, {
+      .get(`https://amuseapi.wheelgo.net/api/v1/admin/search/users?email=${email}`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${accessToken}`,
@@ -57,7 +57,7 @@ function Home() {
 
   useEffect(() => {
     axios
-      .get("http://vikrant.store/main-page/lists")
+      .get("http://amuseapi.wheelgo.net/main-page/lists")
       .then((response) => {
         const Items = response.data.data.listItems;
         const list_title = Items.map((item: any) => item.list_title);

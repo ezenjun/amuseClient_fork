@@ -21,7 +21,7 @@ function Picture({ itemId }: PictureProps) {
    */
   useEffect(() => {
     axios
-      .get(`https://vikrant.store/detail/${itemId}/picture`)
+      .get(`https://amuseapi.wheelgo.net/detail/${itemId}/picture`)
       .then((response) => {
         setPictureData(response.data.data.pictures);
 

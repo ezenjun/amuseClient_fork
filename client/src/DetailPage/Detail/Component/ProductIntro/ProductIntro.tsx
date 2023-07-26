@@ -21,7 +21,7 @@ function ProductIntro({ itemId }: ProductIntroProps) {
    */
   useEffect(() => {
     axios
-      .get(`https://vikrant.store/detail/${itemId}/product-intro`)
+      .get(`https://amuseapi.wheelgo.net/detail/${itemId}/product-intro`)
       .then((response) => {
         setProductIntroData(response.data.data);
 

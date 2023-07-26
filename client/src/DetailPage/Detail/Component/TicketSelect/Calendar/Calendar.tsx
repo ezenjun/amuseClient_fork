@@ -61,7 +61,7 @@ function Calendar({
 
   useEffect(() => {
     axios
-      .get(`https://vikrant.store/detail/${itemId}/title`)
+      .get(`https://amuseapi.wheelgo.net/detail/${itemId}/title`)
       .then((response) => {
         setCalendarData(response.data.data);
       })

@@ -20,7 +20,7 @@ function ReviewPicture({ itemId }: ReviewPictureProps) {
    */
   useEffect(() => {
     axios
-      .get(`https://vikrant.store/detail/${itemId}/review`)
+      .get(`https://amuseapi.wheelgo.net/detail/${itemId}/review`)
       .then((response) => {
         setReviewPictureData(response.data.data.review_all_imgs);
 

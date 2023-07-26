@@ -28,7 +28,7 @@ function Review({ itemId }: ReviewProps) {
    */
   useEffect(() => {
     axios
-      .get(`https://vikrant.store/detail/${itemId}/review`)
+      .get(`https://amuseapi.wheelgo.net/detail/${itemId}/review`)
       .then((response) => {
         setReviewData(response.data.data);
       })

@@ -46,7 +46,7 @@ function App() {
 
   useEffect(() => {
     axios
-      .get("http://vikrant.store/item/search?page=1")
+      .get("http://amuseapi.wheelgo.net/item/search?page=1")
       .then((response) => {
         const items = response.data.data.items;
         const ids = items.map((item: any) => item.item_db_id);
@@ -72,7 +72,7 @@ function App() {
   const [categoryIds, setCategoryIds] = useState<number[]>([]);
   useEffect(() => {
     axios
-      .get("https://vikrant.store/main/category")
+      .get("https://amuseapi.wheelgo.net/main/category")
       .then((response) => {
         const categories = response.data.data.categories;
         const ids = categories.map((category: any) => category.categoryId);

@@ -88,7 +88,7 @@ function Header() {
 
   useEffect(() => {
     axios
-      .get("https://vikrant.store/main/category")
+      .get("https://amuseapi.wheelgo.net/main/category")
       .then((response) => {
         const categoryAll = response.data.data.categories;
         const categoryNames = categoryAll.map((id: any) => id.categoryName);
@@ -170,13 +170,13 @@ function Header() {
                     회원가입
                   </button>
                 )}
-                {loggedIn && manager ? (
+                {/* {loggedIn && manager ? (
                   <a className="adminBtn" href={`http://myadmin.wheelgo.net/login`} target="_blank" rel="noreferrer">
                     어드민
                   </a>
                 ) : (
                   <div></div>
-                )}
+                )} */}
               </div>
               <div className="logo_container">
                 <img className="logo_mobile" src={logoimage} alt="Amuse Travel Logo" onClick={navigateToHome} />
@@ -251,13 +251,13 @@ function Header() {
                     회원가입
                   </button>
                 )}
-                {loggedIn && manager ? (
+                {/* {loggedIn && manager ? (
                   <a className="adminBtn" href={`http://myadmin.wheelgo.net/login`} target="_blank" rel="noreferrer">
                     어드민
                   </a>
                 ) : (
                   <div></div>
-                )}
+                )} */}
               </div>
               <div className="top">
                 <img className="logo" src={logoimage} alt="Amuse Travel Logo" onClick={navigateToHome} />

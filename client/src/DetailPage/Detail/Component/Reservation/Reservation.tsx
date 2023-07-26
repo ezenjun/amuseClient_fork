@@ -35,7 +35,7 @@ function Reservation({ itemId, productCode, startPrice, likeNum }: ReservationPr
    */
   useEffect(() => {
     axios
-      .get(`https://vikrant.store/detail/${itemId}/manager-info`)
+      .get(`https://amuseapi.wheelgo.net/detail/${itemId}/manager-info`)
       .then((response) => {
         setManagerData(response.data.data);
 

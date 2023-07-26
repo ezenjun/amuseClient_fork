@@ -22,7 +22,7 @@ function OtherInfo({ itemId }: OtherInfoProps) {
    */
   useEffect(() => {
     axios
-      .get(`https://vikrant.store/detail/${itemId}/other-info`)
+      .get(`https://amuseapi.wheelgo.net/detail/${itemId}/other-info`)
       .then((response) => {
         setOtherInfoData(response.data.data);
 

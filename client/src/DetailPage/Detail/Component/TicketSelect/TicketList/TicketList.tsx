@@ -29,7 +29,7 @@ function TicketList({ range, itemId, classNone, classTicketContainer, classTicke
   // Ticket API
   useEffect(() => {
     axios
-      .get(`https://vikrant.store/detail/${itemId}/ticket-select`)
+      .get(`https://amuseapi.wheelgo.net/detail/${itemId}/ticket-select`)
       .then((response) => {
         const dataWithCount = response.data.data.ticket.map((ticket: TicketData) => ({
           ...ticket,
