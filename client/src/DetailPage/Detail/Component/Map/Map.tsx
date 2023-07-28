@@ -13,8 +13,8 @@ interface MapData {
   day: number;
   sequenceId: number;
   timeCost: string;
-  latitude: number;
-  longitude: number;
+  latitude: number | null;
+  longitude: number | null;
 }
 
 function Map({ itemId }: MapProps) {
