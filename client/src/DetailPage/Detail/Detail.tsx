@@ -50,7 +50,7 @@ function Detail({ itemId, productCode, startPrice, likeNum }: DetailProps) {
           <Review itemId={itemId} />
           {/* <Footer /> 상세페이지 푸터 */}
         </div>
-        x{/* 상세페이지 사이드 바 */}
+        {/* 상세페이지 사이드 바 */}
         <div className="side">
           <Reservation itemId={itemId} productCode={productCode} startPrice={startPrice} likeNum={likeNum} />
         </div>
