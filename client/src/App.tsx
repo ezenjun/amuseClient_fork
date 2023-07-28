@@ -46,7 +46,7 @@ function App() {
 
   useEffect(() => {
     axios
-      .get("http://amuseapi.wheelgo.net/item/search?page=1")
+      .get("https://amuseapi.wheelgo.net/item/search?page=1")
       .then((response) => {
         const items = response.data.data.items;
         const ids = items.map((item: any) => item.item_db_id);

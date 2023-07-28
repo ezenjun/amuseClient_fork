@@ -55,22 +55,22 @@ function Home() {
   // const [titles, setTitles] = useState<string[]>([]);
   // const [startPrices, setStartPrice] = useState<number[]>([]);
 
-  useEffect(() => {
-    axios
-      .get("http://amuseapi.wheelgo.net/main-page/lists")
-      .then((response) => {
-        const Items = response.data.data.listItems;
-        const list_title = Items.map((item: any) => item.list_title);
-        setListTitle(list_title);
-        const item_count = Items.map((item: any) => item.item_count);
-        setItemCount(item_count);
+  // useEffect(() => {
+  //   axios
+  //     .get("http://amuseapi.wheelgo.net/main-page/lists")
+  //     .then((response) => {
+  //       const Items = response.data.data.listItems;
+  //       const list_title = Items.map((item: any) => item.list_title);
+  //       setListTitle(list_title);
+  //       const item_count = Items.map((item: any) => item.item_count);
+  //       setItemCount(item_count);
 
-        console.log(response.data.data);
-      })
-      .catch((error) => {
-        console.log("home api 연결 실패");
-      });
-  }, []);
+  //       console.log(response.data.data);
+  //     })
+  //     .catch((error) => {
+  //       console.log("home api 연결 실패");
+  //     });
+  // }, []);
 
   return (
     <Fade>
