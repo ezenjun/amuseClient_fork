@@ -57,7 +57,7 @@ function Home() {
 
   // useEffect(() => {
   //   axios
-  //     .get("http://amuseapi.wheelgo.net/main-page/lists")
+  //     .get("https://amuseapi.wheelgo.net/main-page/lists")
   //     .then((response) => {
   //       const Items = response.data.data.listItems;
   //       const list_title = Items.map((item: any) => item.list_title);
