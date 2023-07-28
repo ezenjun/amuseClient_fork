@@ -20,7 +20,7 @@ function Title({ itemId }: TitleProps) {
    * Title Data
    */
   const [titleData, setTitleData] = useState<TitleData>();
-  const formattedRated = titleData?.rated.toFixed(1);
+  const formattedRated = titleData?.rated.toFixed(1) ?? "0.0";
   console.log("title", itemId);
   /**
    * Title API
