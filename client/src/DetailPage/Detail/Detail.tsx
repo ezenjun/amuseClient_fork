@@ -24,21 +24,23 @@ interface DetailProps {
 }
 
 function Detail({ itemId, productCode, startPrice, likeNum }: DetailProps) {
+  // console.log("detail page 진입");
   return (
     <div className="Detail">
-      <>
-        <div className="App">
+      {/* <> */}
+      {/* <div className="App">
           <Header />
           <div className={Style["liner"]}></div>
         </div>
-      </>
+      </> */}
+
       <div className="page">
         {/* 상세페이지 컨텐츠 */}
         <div className="content">
           <Title itemId={itemId} />
           <IconInfo itemId={itemId} />
           <Picture itemId={itemId} />
-          <Calendar itemId={itemId} numberOfmonth={2}/>
+          <Calendar itemId={itemId} numberOfmonth={2} />
           <ProductIntro itemId={itemId} />
           <CourseIntro itemId={itemId} />
           <Map itemId={itemId} />
@@ -48,12 +50,10 @@ function Detail({ itemId, productCode, startPrice, likeNum }: DetailProps) {
           <Review itemId={itemId} />
           {/* <Footer /> 상세페이지 푸터 */}
         </div>
-
-        {/* 상세페이지 사이드 바 */}
+        x{/* 상세페이지 사이드 바 */}
         <div className="side">
           <Reservation itemId={itemId} productCode={productCode} startPrice={startPrice} likeNum={likeNum} />
         </div>
-
         {/* 상세페이지 모바일 티켓선택 */}
         <div className="bottom-btn">
           <ReservationBottom itemId={itemId} />

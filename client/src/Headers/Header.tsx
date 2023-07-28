@@ -136,7 +136,7 @@ function Header() {
     if (getToken) {
       setToken(getToken);
     }
-    console.log("hghjvhvhgv", loggedIn);
+    console.log("login?", loggedIn);
   }, []);
 
   const handleLogout = () => {

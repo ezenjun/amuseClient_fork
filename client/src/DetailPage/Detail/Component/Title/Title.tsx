@@ -21,7 +21,7 @@ function Title({ itemId }: TitleProps) {
    */
   const [titleData, setTitleData] = useState<TitleData>();
   const formattedRated = titleData?.rated.toFixed(1);
-
+  console.log("title", itemId);
   /**
    * Title API
    */
@@ -30,8 +30,7 @@ function Title({ itemId }: TitleProps) {
       .get(`https://amuseapi.wheelgo.net/detail/${itemId}/title`)
       .then((response) => {
         setTitleData(response.data.data);
-
-        //console.log(response.data.data)
+        console.log(response.data.data);
       })
       .catch((error) => {
         console.log("연결 실패");

@@ -1,17 +1,17 @@
-import './TitleDetail.scss';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronRight, faLocationDot, faStar } from '@fortawesome/free-solid-svg-icons';
+import "./TitleDetail.scss";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronRight, faLocationDot, faStar } from "@fortawesome/free-solid-svg-icons";
 
 interface TitleDetailProps {
-    country: string;
-    city: string;
-    title: string;
-    rated: number;
-    review_count: number;
+  country: string;
+  city: string;
+  title: string;
+  rated: number;
+  review_count: number;
 }
 
-function TitleDetail({ country, city, title, rated, review_count } : TitleDetailProps){
-  return(
+function TitleDetail({ country, city, title, rated, review_count }: TitleDetailProps) {
+  return (
     <div className="Detail-title">
       {/* 제목의 위치 */}
       <div className="location">
@@ -41,6 +41,6 @@ function TitleDetail({ country, city, title, rated, review_count } : TitleDetail
       </div>
     </div>
   );
-};
+}
 
 export default TitleDetail;

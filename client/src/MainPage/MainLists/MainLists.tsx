@@ -59,8 +59,9 @@ function MainLists() {
   );
 
   useEffect(() => {
+    console.log("dddddd");
     axios
-      .get("https://amuseapi.wheelgo.net/main/best-item")
+      .get("https://amuseapi.wheelgo.net/main/current-item")
       .then((response) => {
         const bestItems = response.data.data.items;
         const ids = bestItems.map((item: any) => item.item_db_id);
@@ -128,19 +129,19 @@ function MainLists() {
 
   return (
     <div>
-      <h2 style={{ marginTop: "2rem", marginBottom: "1rem" }}>실시간 Best 여행 상품🏞</h2>
+      <h2 style={{ marginTop: "2rem", marginBottom: "1rem" }}>최신 여행 상품🏞</h2>
       <div className={Style["container"]}>
-        {displayedItemIds.length === 0 && (
+        {/* {displayedItemIds.length === 0 && (
           <Box
             key={0}
             marginRight={"18px"}
-            itemId={0}
-            title={"테스트 여행"}
+            itemId={bestItemIds}
+            title={bestItemTitle}
             startPrice={"0"}
             handleClick={() => navigateToDetail(-1)}
             imageUrl={DefaultImg}
           />
-        )}
+        )} */}
 
         {displayedItemIds.map((itemId: number, index: number) => (
           <Box
