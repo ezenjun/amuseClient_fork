@@ -59,7 +59,6 @@ function Detail({ itemId, productCode, startPrice, likeNum }: DetailProps) {
           <ReservationBottom itemId={itemId} />
         </div>
       </div>
-      <Footer />
     </div>
   );
 }
