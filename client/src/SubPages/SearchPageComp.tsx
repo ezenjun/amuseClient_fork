@@ -67,7 +67,7 @@ function SearchPageComp() {
 
   const fetchData = (sortOption: string) => {
     axios
-      .get(`https://amuseapi.wheelgo.net/item/search?keyword=${apiKey}&sort=${searchSort}&page=1`)
+      .get(`${process.env.REACT_APP_AMUSE_API}/item/search?keyword=${apiKey}&sort=${searchSort}&page=1`)
       .then((response) => {
         const bestItems = response.data.data.items;
         const ids = bestItems.map((item: any) => item.item_db_id);

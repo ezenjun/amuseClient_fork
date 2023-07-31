@@ -6,6 +6,7 @@ import { ko } from "date-fns/locale";
 import { DayPicker, DateFormatter, DateRange, DayClickEventHandler, ClassNames } from "react-day-picker";
 import TicketList from "../TicketList/TicketList";
 import axios from "axios";
+import { useOrderContext } from "../../../../Contexts/OrderContext";
 
 const seasonEmoji: Record<string, string> = {
   winter: "⛄️",
@@ -61,7 +62,7 @@ function Calendar({
 
   useEffect(() => {
     axios
-      .get(`https://amuseapi.wheelgo.net/detail/${itemId}/title`)
+      .get(`${process.env.REACT_APP_AMUSE_API}/detail/${itemId}/title`)
       .then((response) => {
         setCalendarData(response.data.data);
       })
@@ -109,8 +110,13 @@ function Calendar({
     ...styles,
     day_selected: "custom-select",
   };
-
+  console.log(range)
   const today = new Date();
+
+  const {orderRange, setOrderRange}=useOrderContext()
+  useEffect(()=>{
+    setOrderRange(range)
+  },[range])
   return (
     <div className={`select-date ${classContainer}`}>
       <p className={`select-ticket-title ${classNone}`}>티켓 선택</p>

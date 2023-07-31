@@ -14,6 +14,8 @@ import axios from "axios";
 import Header from "./Headers/Header";
 import Footer from "./Footers/Footer";
 import AboutAmuse from "./SubPages/AboutAmuse/AboutAmuse";
+import { OrderPage } from "./DetailPage/OrderPage";
+import { OrderContextProvider } from "./DetailPage/Contexts/OrderContext"; 
 
 function App() {
   /*
@@ -46,7 +48,7 @@ function App() {
 
   useEffect(() => {
     axios
-      .get("https://amuseapi.wheelgo.net/item/search?page=1")
+      .get(`${process.env.REACT_APP_AMUSE_API}/item/search?page=1`)
       .then((response) => {
         const items = response.data.data.items;
         const ids = items.map((item: any) => item.item_db_id);
@@ -72,7 +74,7 @@ function App() {
   const [categoryIds, setCategoryIds] = useState<number[]>([]);
   useEffect(() => {
     axios
-      .get("https://amuseapi.wheelgo.net/main/category")
+      .get(`${process.env.REACT_APP_AMUSE_API}/main/category`)
       .then((response) => {
         const categories = response.data.data.categories;
         const ids = categories.map((category: any) => category.categoryId);
@@ -85,50 +87,53 @@ function App() {
   }, []);
 
   return (
-    <div>
-      <Header />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        {/* <Route path="/Concierge" element={<Concierge />}></Route>
-        <Route path="/ChildCare" element={<ChildCare />}></Route>
-        <Route path="/SeniorCare" element={<SeniorCare />}></Route> */}
-        <Route path="/LogIn" element={<Login />}></Route>
-        <Route path="/SignUp" element={<SignUp />}></Route>
-        <Route path="/MyPage/:category" element={<MyPage />}></Route>
-        <Route path="/Review/:id" element={<Review />}></Route>
-        {/* <Route path="/OnlineTour" element={<OnlineTour />}></Route> */}
-        <Route path="/ViewAll" element={<ViewAll />}></Route>
-        <Route path="/Subtest" element={<SubPageComp />}></Route>
-        <Route path="/aboutAmuse" element={<AboutAmuse />}></Route>
+    <OrderContextProvider>
+      <div>
+        <Header />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          {/* <Route path="/Concierge" element={<Concierge />}></Route>
+          <Route path="/ChildCare" element={<ChildCare />}></Route>
+          <Route path="/SeniorCare" element={<SeniorCare />}></Route> */}
+          <Route path="/LogIn" element={<Login />}></Route>
+          <Route path="/SignUp" element={<SignUp />}></Route>
+          <Route path="/MyPage/:category" element={<MyPage />}></Route>
+          <Route path="/Review/:id" element={<Review />}></Route>
+          {/* <Route path="/OnlineTour" element={<OnlineTour />}></Route> */}
+          <Route path="/ViewAll" element={<ViewAll />}></Route>
+          <Route path="/Subtest" element={<SubPageComp />}></Route>
+          <Route path="/aboutAmuse" element={<AboutAmuse />}></Route>
+          <Route path="/order" element={<OrderPage />}></Route>
 
-        {/**
-         * 상세페이지 Route
-         */}
-        {currentItemIds.map((currentItemId, index) => (
-          <Route
-            key={currentItemId}
-            path={`/detail/${currentItemId}`}
-            element={
-              <Detail
-                itemId={currentItemId}
-                productCode={currentItemProductCodes[index]}
-                startPrice={currentItemStartPrices[index]}
-                likeNum={currentItemLikeNums[index]}
-              />
-            }
-          />
-        ))}
-        {/**
-         * 서브페이지 Route
-         */}
-        <Route path="/category/:apiKey" element={<SubPageComp />} />
-        {/**
-         * 검색 시 Route
-         */}
-        <Route path="/search/:apiKey" element={<SearchPageComp />} />
-      </Routes>
-      <Footer />
-    </div>
+          {/**
+           * 상세페이지 Route
+           */}
+          {currentItemIds.map((currentItemId, index) => (
+            <Route
+              key={currentItemId}
+              path={`/detail/${currentItemId}`}
+              element={
+                <Detail
+                  itemId={currentItemId}
+                  productCode={currentItemProductCodes[index]}
+                  startPrice={currentItemStartPrices[index]}
+                  likeNum={currentItemLikeNums[index]}
+                />
+              }
+            />
+          ))}
+          {/**
+           * 서브페이지 Route
+           */}
+          <Route path="/category/:apiKey" element={<SubPageComp />} />
+          {/**
+           * 검색 시 Route
+           */}
+          <Route path="/search/:apiKey" element={<SearchPageComp />} />
+        </Routes>
+        <Footer />
+      </div>
+    </OrderContextProvider>
   );
 }
 

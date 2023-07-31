@@ -28,7 +28,7 @@ function Review({ itemId }: ReviewProps) {
    */
   useEffect(() => {
     axios
-      .get(`https://amuseapi.wheelgo.net/detail/${itemId}/review`)
+      .get(`${process.env.REACT_APP_AMUSE_API}/detail/${itemId}/review`)
       .then((response) => {
         setReviewData(response.data.data);
       })

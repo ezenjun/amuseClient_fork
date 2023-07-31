@@ -1,0 +1,22 @@
+.container {
+  padding: 30px;
+}
+
+.container div {
+  display: flex;
+  justify-content: space-between;
+
+  :last-child {
+    color: #2c96ed;
+  }
+}
+
+.subContainer div:last-child {
+  font-size: 10px;
+  color: #ced4d9;
+}
+
+.subContainer {
+  display: flex;
+  flex-direction: column;
+}

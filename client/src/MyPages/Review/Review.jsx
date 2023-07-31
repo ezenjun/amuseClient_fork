@@ -26,11 +26,11 @@ export default function Review() {
   const [rating, setRating] = useState(5);
 
   useEffect(() => {
-    axios.get(`https://amuseapi.wheelgo.net/detail/${id}/picture`).then((res) => {
+    axios.get(`${process.env.REACT_APP_AMUSE_API}/detail/${id}/picture`).then((res) => {
       console.log(res);
       setReviewItemImg(res.data.data.pictures[0]);
     });
-    axios.get(`https://amuseapi.wheelgo.net/detail/${id}/title`).then((res) => {
+    axios.get(`${process.env.REACT_APP_AMUSE_API}/detail/${id}/title`).then((res) => {
       console.log(res);
       setItemTitle(res.data.data.title);
     });
@@ -70,7 +70,7 @@ export default function Review() {
       },
     };
     // 리뷰 post 요청하기
-    axios.post(`https://amuseapi.wheelgo.net/my-page/item/${id}/review`, data, config).then((res) => console.log(res));
+    axios.post(`${process.env.REACT_APP_AMUSE_API}/my-page/item/${id}/review`, data, config).then((res) => console.log(res));
   };
 
   const handleRating = (newValue) => {

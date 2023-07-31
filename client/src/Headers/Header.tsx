@@ -87,8 +87,10 @@ function Header() {
   );
 
   useEffect(() => {
+    console.log(`${process.env.REACT_APP_AMUSE_API}/main/category`)
+    console.log(`${process.env.REACT_APP_IMPORT_API_SECRET}`)
     axios
-      .get("https://amuseapi.wheelgo.net/main/category")
+      .get(`${process.env.REACT_APP_AMUSE_API}/main/category`)
       .then((response) => {
         const categoryAll = response.data.data.categories;
         const categoryNames = categoryAll.map((id: any) => id.categoryName);

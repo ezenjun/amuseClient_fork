@@ -30,7 +30,7 @@ export default function ViewAllList() {
   const [hashtag, setHashtag] = useState([]);
   useEffect(() => {
     axios
-      .get("https://amuseapi.wheelgo.net/main/category")
+      .get(`${process.env.REACT_APP_AMUSE_API}/main/category`)
       .then((response) => {
         const hashtagAll = response.data.data.categories;
         const categoryNames = hashtagAll.map((id: any) => id.categoryName);

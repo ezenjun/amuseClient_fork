@@ -27,7 +27,7 @@ function ReservationModal({ onClose, itemId }: ModalProps) {
   // title API
   useEffect(() => {
     axios
-      .get(`https://amuseapi.wheelgo.net/detail/${itemId}/title`)
+      .get(`${process.env.REACT_APP_AMUSE_API}/detail/${itemId}/title`)
       .then((response) => {
         setTitleData(response.data.data);
       })

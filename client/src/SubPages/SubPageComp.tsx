@@ -118,7 +118,7 @@ function SubPageComp() {
   const apiKeyNumber: number = Number(apiKey);
   useEffect(() => {
     axios
-      .get(`https://amuseapi.wheelgo.net/main/category`)
+      .get(`${process.env.REACT_APP_AMUSE_API}/main/category`)
       .then((response) => {
         const hashtagAll = response.data.data.categories;
 
@@ -176,7 +176,7 @@ function SubPageComp() {
   console.log("apikeynum = ", apiKeyNumber);
   const fetchPageData = (apiKeyNumber: number) => {
     axios
-      .get(`https://amuseapi.wheelgo.net/main/category/${apiKeyNumber}/page`)
+      .get(`${process.env.REACT_APP_AMUSE_API}/main/category/${apiKeyNumber}/page`)
       .then((response) => {
         const ComponentInfos = response.data.data.pageComponentInfos;
         const items = ComponentInfos.map((item: any) => item);

@@ -5,6 +5,7 @@ import { format, isSameDay, parseISO, parse } from "date-fns";
 import { DateRange } from "react-day-picker";
 import Swal from "sweetalert2";
 import axios from "axios";
+import { useOrderContext } from "../../../../Contexts/OrderContext";
 
 type DateProps = {
   itemId: number | null;
@@ -25,11 +26,12 @@ function TicketList({ range, itemId, classNone, classTicketContainer, classTicke
   }
 
   const [ticketData, setTicketData] = useState<TicketData[]>([]);
+  const { orderTicketData, setOrderTicketData } = useOrderContext();
 
   // Ticket API
   useEffect(() => {
     axios
-      .get(`https://amuseapi.wheelgo.net/detail/${itemId}/ticket-select`)
+      .get(`${process.env.REACT_APP_AMUSE_API}/detail/${itemId}/ticket-select`)
       .then((response) => {
         const dataWithCount = response.data.data.ticket.map((ticket: TicketData) => ({
           ...ticket,
@@ -54,6 +56,9 @@ function TicketList({ range, itemId, classNone, classTicketContainer, classTicke
       return updatedData;
     });
   };
+  useEffect(()=>{
+    setOrderTicketData(ticketData)
+  },[ticketData])
 
   // minus button function
   const handleMinus = (index: number) => {
@@ -91,6 +96,7 @@ function TicketList({ range, itemId, classNone, classTicketContainer, classTicke
    * Ticket Button
    */
   const handleButtonClick = () => {
+    console.log(orderTicketData)
     Swal.fire({
       icon: "success",
       title: "티켓 구입 문의",
@@ -105,7 +111,6 @@ function TicketList({ range, itemId, classNone, classTicketContainer, classTicke
     const price = selectedPriceIndex !== -1 ? ticket.priceList[selectedPriceIndex].price : 0;
     return sum + ticket.count * price;
   }, 0);
-
   return (
     <div className="select-ticket">
       <div className="TicketList">
@@ -159,13 +164,13 @@ function TicketList({ range, itemId, classNone, classTicketContainer, classTicke
       </div>
 
       {/* payment button */}
-      {ticketData.some((ticket) => ticket.count > 0) && (
+      {/* {ticketData.some((ticket) => ticket.count > 0) && (
         <div className="pay-btn-container">
           <button className={`pay-btn ${classNone}`} onClick={handleButtonClick}>
             티켓 선택
           </button>
         </div>
-      )}
+      )} */}
     </div>
   );
 }

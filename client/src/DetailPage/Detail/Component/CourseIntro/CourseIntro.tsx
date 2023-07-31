@@ -28,7 +28,7 @@ function CourseIntro({ itemId }: CourseIntroProps) {
    */
   useEffect(() => {
     axios
-      .get(`https://amuseapi.wheelgo.net/detail/${itemId}/course-intro`)
+      .get(`${process.env.REACT_APP_AMUSE_API}/detail/${itemId}/course-intro`)
       .then((response) => {
         setCourseIntroData(response.data.data.course);
         //console.log(response.data.data.course)

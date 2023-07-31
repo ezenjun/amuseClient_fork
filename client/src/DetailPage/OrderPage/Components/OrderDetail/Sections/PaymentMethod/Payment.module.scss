@@ -1,0 +1,45 @@
+.paymentContainer {
+  padding: 0;
+}
+
+.paymentContainer li {
+  list-style-type: none;
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.paymentContainer input {
+  cursor: pointer;
+  border: 3px solid #ced4d9;
+  border-radius: 100%;
+}
+
+.paymentContainer img {
+  width: 35px;
+  height: 15px;
+}
+
+.paymentContainer input {
+  -webkit-appearance: none;
+  box-sizing: border-box;
+  position: relative;
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+  outline: none !important;
+  border: 2px solid #ced4d9;
+  vertical-align: middle;
+}
+
+.paymentContainer input:checked {
+  border-color: #63aeff;
+  color: #ced4d9;
+}
+
+.addInfo {
+  font-size: 7px;
+  margin-left: 10px;
+  color: red;
+}

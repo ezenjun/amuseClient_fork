@@ -1,0 +1,40 @@
+.imageBox {
+  display: flex;
+  gap: 2rem;
+}
+
+.itemList {
+  padding: 0;
+}
+
+.item {
+  margin: 0;
+  display: flex;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  justify-content: space-between;
+  padding: 12px;
+  background-color: rgba(250, 250, 250, 0.935);
+}
+
+.totalSection {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px;
+  border-bottom: 1.5px solid rgb(232, 228, 228);
+}
+
+.totalAvg {
+  display: flex;
+  flex-direction: column;
+}
+
+.couponSection {
+  padding: 12px;
+}
+
+.couponSection :nth-child(2) {
+  padding: 0.5rem;
+  width: 300px;
+  border: 1px solid #ced4d9;
+}

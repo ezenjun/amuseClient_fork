@@ -21,7 +21,7 @@ function Picture({ itemId }: PictureProps) {
    */
   useEffect(() => {
     axios
-      .get(`https://amuseapi.wheelgo.net/detail/${itemId}/picture`)
+      .get(`${process.env.REACT_APP_AMUSE_API}/detail/${itemId}/picture`)
       .then((response) => {
         setPictureData(response.data.data.pictures);
 

@@ -15,7 +15,7 @@ export default function Likes() {
         "Content-Type": "application/json",
       },
     };
-    axios.get("https://amuseapi.wheelgo.net/my-page/like", config).then((res) => {
+    axios.get(`${process.env.REACT_APP_AMUSE_API}/my-page/like`, config).then((res) => {
       console.log(res);
       setLikesList(res.data.likeItems);
     });

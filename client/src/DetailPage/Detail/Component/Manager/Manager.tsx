@@ -29,7 +29,7 @@ function Manager({ itemId }: ManagerProps) {
    */
   useEffect(() => {
     axios
-      .get(`https://amuseapi.wheelgo.net/detail/${itemId}/manager-info`)
+      .get(`${process.env.REACT_APP_AMUSE_API}/detail/${itemId}/manager-info`)
       .then((response) => {
         setManagerData(response.data.data);
 

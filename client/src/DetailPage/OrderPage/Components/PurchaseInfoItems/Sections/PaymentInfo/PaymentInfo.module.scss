@@ -1,0 +1,17 @@
+.container {
+  padding: 0;
+}
+
+.container li {
+  display: flex;
+  justify-content: space-between;
+}
+
+.totalPrice {
+  background-color: #f5fbff;
+  height: 60px;
+  align-items: center;
+  :last-child {
+    font-size: 25px;
+  }
+}

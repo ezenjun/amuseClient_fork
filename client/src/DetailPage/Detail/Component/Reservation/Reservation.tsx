@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router";
 import "./Reservation.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart, faShareNodes } from "@fortawesome/free-solid-svg-icons";
@@ -7,6 +8,7 @@ import { faEnvelope as regularFaEnelope } from "@fortawesome/free-regular-svg-ic
 import Swal from "sweetalert2";
 import axios from "axios";
 import { CopyToClipboard } from "react-copy-to-clipboard";
+import { useOrderContext } from "../../../Contexts/OrderContext";
 
 interface ReservationProps {
   itemId: number | null;
@@ -24,6 +26,8 @@ interface ManagerData {
 }
 
 function Reservation({ itemId, productCode, startPrice, likeNum }: ReservationProps) {
+  const movePage = useNavigate();
+  const { orderData, setOrderData, orderTicketData } = useOrderContext();
   /**
    * Manager Data
    */
@@ -35,7 +39,7 @@ function Reservation({ itemId, productCode, startPrice, likeNum }: ReservationPr
    */
   useEffect(() => {
     axios
-      .get(`https://amuseapi.wheelgo.net/detail/${itemId}/manager-info`)
+      .get(`${process.env.REACT_APP_AMUSE_API}/detail/${itemId}/manager-info`)
       .then((response) => {
         setManagerData(response.data.data);
 
@@ -93,6 +97,13 @@ function Reservation({ itemId, productCode, startPrice, likeNum }: ReservationPr
       confirmButtonColor: "#F184A1",
       html: "📞 02-719-6811<br>✉️ info@amusetravel.com<br>",
     });
+  };
+
+  const handleBuyTicket = () => {
+    console.log(orderTicketData.length)
+    if(orderTicketData.length > 0 && orderData["productPrice"] > 0){
+      movePage("/order")
+    }
   };
 
   return (

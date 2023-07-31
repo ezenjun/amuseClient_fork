@@ -34,7 +34,7 @@ function Home() {
 
     const accessToken = localStorage.getItem("loginToken");
     axios
-      .get(`https://amuseapi.wheelgo.net/api/v1/admin/search/users?email=${email}`, {
+      .get(`${process.env.REACT_APP_AMUSE_API}/api/v1/admin/search/users?email=${email}`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${accessToken}`,

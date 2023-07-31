@@ -25,7 +25,7 @@ function IconInfo({ itemId }: IconInfoProps) {
    */
   useEffect(() => {
     axios
-      .get(`https://amuseapi.wheelgo.net/detail/${itemId}/icon-info`)
+      .get(`${process.env.REACT_APP_AMUSE_API}/detail/${itemId}/icon-info`)
       .then((response) => {
         setIconInfoData(response.data.data.icon_infos);
 

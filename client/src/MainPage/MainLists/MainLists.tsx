@@ -61,7 +61,7 @@ function MainLists() {
   useEffect(() => {
     console.log("dddddd");
     axios
-      .get("https://amuseapi.wheelgo.net/main/current-item")
+      .get(`${process.env.REACT_APP_AMUSE_API}/main/best-item`)
       .then((response) => {
         const bestItems = response.data.data.items;
         const ids = bestItems.map((item: any) => item.item_db_id);

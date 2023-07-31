@@ -22,7 +22,7 @@ function OtherInfo({ itemId }: OtherInfoProps) {
    */
   useEffect(() => {
     axios
-      .get(`https://amuseapi.wheelgo.net/detail/${itemId}/other-info`)
+      .get(`${process.env.REACT_APP_AMUSE_API}/detail/${itemId}/other-info`)
       .then((response) => {
         setOtherInfoData(response.data.data);
 

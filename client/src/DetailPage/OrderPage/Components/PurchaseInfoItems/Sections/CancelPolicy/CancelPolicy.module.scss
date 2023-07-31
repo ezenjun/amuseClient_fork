@@ -1,0 +1,16 @@
+.container {
+  padding: 18px;
+  background-color: #f8f9fa;
+  border-radius: 5px;
+  margin: 30px 30px;
+  @media screen and (max-width: 740px) {
+    margin: 0;
+    margin-bottom: 3rem;
+    padding: 3px 18px;
+  }
+}
+
+.policyContainer div {
+  margin-bottom: 10px;
+  font-size: 13px;
+}

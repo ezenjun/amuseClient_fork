@@ -21,7 +21,7 @@ function ProductIntro({ itemId }: ProductIntroProps) {
    */
   useEffect(() => {
     axios
-      .get(`https://amuseapi.wheelgo.net/detail/${itemId}/product-intro`)
+      .get(`${process.env.REACT_APP_AMUSE_API}/detail/${itemId}/product-intro`)
       .then((response) => {
         setProductIntroData(response.data.data);
 
