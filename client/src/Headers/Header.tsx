@@ -87,8 +87,6 @@ function Header() {
   );
 
   useEffect(() => {
-    console.log(`${process.env.REACT_APP_AMUSE_API}/main/category`)
-    console.log(`${process.env.REACT_APP_IMPORT_API_SECRET}`)
     axios
       .get(`${process.env.REACT_APP_AMUSE_API}/main/category`)
       .then((response) => {
@@ -97,7 +95,7 @@ function Header() {
         setCategories(categoryNames);
         const categoryId = categoryAll.map((id: any) => id.categoryId);
         setCategoryIds(categoryId);
-        console.log(response.data.data);
+        // console.log(response.data.data);
       })
       .catch((error) => {
         console.log("해시태그 연결 실패");

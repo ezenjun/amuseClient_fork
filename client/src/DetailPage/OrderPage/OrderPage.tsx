@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import Style from "../../App.module.css";
 import Footer from "../../Footers/Footer";
 
@@ -12,20 +12,17 @@ import { useNavigate } from "react-router-dom";
 export const OrderPage = () => {
   // const [loggedIn, setLoggedIn] = useRecoilState(isLoggedIn);
   // console.log({ loggedIn });
+  const [isShow,setIsShow] = useState(<></>)
+
   const { orderData , orderTicketData} = useOrderContext()
   const navigate = useNavigate();
+
+
   const checkOrderData =()=>{
     if(orderTicketData.length <1){
       navigate(-1)
-    }
-  }
-  useEffect(()=>{
-    checkOrderData()
-  },[orderTicketData])
-
-
-  return (
-      <InfoContextProvider>
+    }else{
+      setIsShow(
         <div className={styles.container}>
           <div className="App">
             <div className={Style["liner"]}></div>
@@ -35,6 +32,17 @@ export const OrderPage = () => {
             <OrderForm />
           </div>
         </div>
+      )
+    }
+  }
+  useEffect(()=>{
+    checkOrderData()
+  },[orderTicketData])
+
+
+  return (
+      <InfoContextProvider>
+        { isShow }
       </InfoContextProvider>
   );
 };

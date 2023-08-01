@@ -11,7 +11,6 @@ export function PointAccrual() {
   };
 
   const calculatePoint = () => {
-    console.log(orderData);
     if (orderData.pay_method === "계좌이체") {
       return Math.floor(orderData.productPrice * 0.01 + 3000);
     } else {

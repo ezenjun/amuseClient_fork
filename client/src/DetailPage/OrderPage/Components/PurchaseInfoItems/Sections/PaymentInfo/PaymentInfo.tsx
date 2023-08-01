@@ -17,7 +17,6 @@ export function PaymentInfo() {
 
   useEffect(()=>{
     setTotalPrice(convertCurrencyFormat(orderData.productPrice))
-    console.log(orderData)
   },[orderData])
   return (
     <CommonHeader title="결제 정보" isRight={true}>

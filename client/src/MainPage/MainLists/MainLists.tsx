@@ -59,7 +59,6 @@ function MainLists() {
   );
 
   useEffect(() => {
-    console.log("dddddd");
     axios
       .get(`${process.env.REACT_APP_AMUSE_API}/main/best-item`)
       .then((response) => {

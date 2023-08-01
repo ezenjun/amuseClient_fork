@@ -110,7 +110,6 @@ function Calendar({
     ...styles,
     day_selected: "custom-select",
   };
-  console.log(range)
   const today = new Date();
 
   const {orderRange, setOrderRange}=useOrderContext()

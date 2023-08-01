@@ -15,7 +15,6 @@ export function PaymentMethod() {
     data[name] = value;
     setOrderData(data);
   };
-  console.log(orderData);
   return (
     <CommonHeader title="결제 방법">
       <ul className={styles.paymentContainer}>

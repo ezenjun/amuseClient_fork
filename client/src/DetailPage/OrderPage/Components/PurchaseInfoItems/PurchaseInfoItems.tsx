@@ -21,7 +21,7 @@ export const PurchaseInfoItems = ({ isLoading }: Props) => {
         <button type="submit" form="orderForm" disabled={isLoading}>
           {isLoading
             ? "결제중"
-            : `${orderData.productPrice - orderData.point} 결제`}
+            : `${(orderData.productPrice - orderData.point).toLocaleString("en")}원 결제`}
         </button>
       </div>
     </>
