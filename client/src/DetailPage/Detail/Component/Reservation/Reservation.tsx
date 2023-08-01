@@ -101,8 +101,12 @@ function Reservation({ itemId, productCode, startPrice, likeNum }: ReservationPr
   };
 
   const handleBuyTicket = () => {
-    if(orderTicketData.length > 0 ){
+    let count = 0
+    for (let i =0 ; i< orderTicketData.length; i++){ if(orderTicketData[i].count){  count += 1 } }
+    if(count > 0 ){
       movePage("/order")
+    }else{
+      alert("티켓을 선택해 주세요")
     }
   };
 

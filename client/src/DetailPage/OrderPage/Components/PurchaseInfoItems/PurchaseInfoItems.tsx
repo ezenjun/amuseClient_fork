@@ -1,3 +1,4 @@
+import {useState,useEffect} from "react";
 import styles from "./PurchaseInfoItems.module.scss";
 import { PointAccrual } from "./Sections/PointAccrual";
 import { PaymentInfo } from "./Sections/PaymentInfo";
@@ -11,11 +12,19 @@ type Props = {
 
 export const PurchaseInfoItems = ({ isLoading }: Props) => {
   const { orderData } = useOrderContext();
+  const [privacy,setPrivacy] = useState(false);
+  const [takeVideo,setTakeVideo] = useState(false);
+  const [useVideoInMarketing,setUseVideoInMarketing] = useState(false);
+
+
   return (
     <>
       <PaymentInfo />
       <PointAccrual />
-      <Terms />
+      <Terms  privacy={privacy} privacyCheck={setPrivacy} 
+              takeVideo={takeVideo} takeVideoCheck={setTakeVideo} 
+              videoInMarketing={useVideoInMarketing} videoInMarketingCheck={setUseVideoInMarketing}
+            />
       <CancelPolicy />
       <div className={styles.buttonSection}>
         <button type="submit" form="orderForm" disabled={isLoading}>

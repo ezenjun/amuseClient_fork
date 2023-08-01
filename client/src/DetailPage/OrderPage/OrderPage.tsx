@@ -9,17 +9,24 @@ import { InfoContextProvider } from "../Contexts/InfoContext";
 import { useOrderContext } from "../Contexts/OrderContext";
 import { useNavigate } from "react-router-dom";
 
+
 export const OrderPage = () => {
   // const [loggedIn, setLoggedIn] = useRecoilState(isLoggedIn);
   // console.log({ loggedIn });
   const [isShow,setIsShow] = useState(<></>)
 
-  const { orderData , orderTicketData} = useOrderContext()
+  const { orderData , orderTicketData,orderRange} = useOrderContext()
   const navigate = useNavigate();
 
 
   const checkOrderData =()=>{
-    if(orderTicketData.length <1){
+    let count = 0
+    for (let i =0 ; i< orderTicketData.length; i++){
+      if(orderTicketData[i].count){
+        count += 1
+      }
+    }
+    if(count<1){
       navigate(-1)
     }else{
       setIsShow(

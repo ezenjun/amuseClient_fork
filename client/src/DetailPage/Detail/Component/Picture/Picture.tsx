@@ -38,8 +38,8 @@ function Picture({ itemId }: PictureProps) {
         {mainPicture && <MainPicture src={mainPicture} alt={mainPicture} itemId={itemId} modal={pictureData} />}
       </div>
       <div className="subpicture">
-        {subPicture.map((picture) => (
-          <SubPicture src={picture} alt={picture} itemId={itemId} modal={pictureData} />
+        {subPicture.map((picture,key) => (
+          <SubPicture key={itemId+key.toString()} src={picture} alt={picture} itemId={itemId} modal={pictureData} />
         ))}
       </div>
     </div>
