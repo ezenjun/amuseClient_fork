@@ -21,10 +21,13 @@ export default function Login() {
   if(process.env.REACT_APP_AMUSE_API === "https://amuseapi.wheelgo.net"){
     redirectUri = "https://amusetravel.wheelgo.net";
   }
-
+  const axiosInstance = axios.create({
+    withCredentials: true,
+  });
+  
   const googleLogin = async() =>{
     
-    axios.get(`${process.env.REACT_APP_AMUSE_API}/oauth2/authorization/google?redirect_uri=${redirectUri}`,
+    axiosInstance.get(`${process.env.REACT_APP_AMUSE_API}/oauth2/authorization/google?redirect_uri=${redirectUri}`,
      ).then((response) => {
       console.log(response);
     });
@@ -83,14 +86,13 @@ export default function Login() {
             </div>
           </div>
           <div className="OAuth">
-            {/* <div
+            <a
               className="login_google"
               href={`${process.env.REACT_APP_AMUSE_API}/oauth2/authorization/google?redirect_uri=${redirectUri}`}
             >
               <GoogleIcon sx={{ mr: 4 }} />
               Google 로그인
-            </div> */}
-            <Button variant="contained" onClick={() => googleLogin()}>Sign in</Button>
+            </a>
        
             <a
               className="login_naver"
