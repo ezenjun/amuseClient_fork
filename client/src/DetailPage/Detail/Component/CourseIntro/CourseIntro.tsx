@@ -42,15 +42,16 @@ function CourseIntro({ itemId }: CourseIntroProps) {
     <div className="CourseIntro">
       <p className="information-title">코스 소개</p>
       {courseIntroData.map((courseIntro) => {
-        return(
-        <CourseIntroDetail
-          key={courseIntro.title}
-          title={courseIntro.title}
-          time={courseIntro.timeCost}
-          content={courseIntro.content}
-          imageSrc={courseIntro.imageUrl}
-        />
-      )})}
+        return (
+          <CourseIntroDetail
+            key={courseIntro.title}
+            title={courseIntro.title}
+            time={courseIntro.timeCost}
+            content={courseIntro.content}
+            imageSrc={courseIntro.imageUrl}
+          />
+        );
+      })}
     </div>
   );
 }
