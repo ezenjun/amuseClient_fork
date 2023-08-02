@@ -1,13 +1,19 @@
+import { useEffect } from "react"
 import axios from "axios";
 import { FormEvent, useState } from "react";
 import { requestPay } from "../../API/import";
 import { useOrderContext } from "../../../Contexts/OrderContext";
 import { OrderDetail } from "../OrderDetail";
+import { useInfoContext } from "../../../Contexts/InfoContext";
 import { PurchaseInfo } from "../PurchaseInfo";
 import styles from "./OrderForm.module.scss";
+import { useCookies } from "react-cookie";
 
 export function OrderForm() {
   const { orderData, setOrderData } = useOrderContext();
+  const { name,setName, email,setEmail, phone,setPhone } = useInfoContext();
+
+  const [cookies, setCookie, removeCookie] = useCookies(["__jwtk__"]);
   const [isLoading, setLoading] = useState(false);
 
   const submitHandler = (e: FormEvent<HTMLFormElement>) => {
@@ -35,6 +41,28 @@ export function OrderForm() {
       setLoading(false);
     });
   };
+
+  const getUserInfoAsToken = async()=>{
+    const token = cookies["__jwtk__"]
+    axios
+      .get(`${process.env.REACT_APP_AMUSE_API}/api/v1/user/info`, {
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `${token}`,
+        },
+      })
+      .then((response) => {
+        const data =response.data.data
+        // console.log(data);
+        setName(data?.name)
+        setEmail(data?.email)
+      }).catch((err)=>{
+        console.log(err)
+      });
+  }
+  useEffect(()=>{
+    getUserInfoAsToken()
+  },[])
   return (
     <form
       className={styles.subContainer}

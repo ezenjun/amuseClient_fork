@@ -58,7 +58,7 @@ export function PaymentMethod() {
           />
           <label htmlFor="check3">
             <span>
-              토스페이 <img src={tossImage} />
+              토스페이 <img src={tossImage} style={{width:"68px"}} />
             </span>
           </label>
         </li>

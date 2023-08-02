@@ -8,17 +8,15 @@ import styles from "./Reservation.module.scss";
 export function ReservationInfo() {
   const [showInfoModal, setInfoModal] = useState(false);
   const { name, email, phone } = useInfoContext(); // 이게 글로벌된 유저 정보라고 가정
-  const [useUserInfo, setUserInfo] = useState(true);
 
   const clickHandler = (e: any) => {
     setInfoModal(true);
     document.body.style.overflow = "hidden";
   };
 
-  const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setUserInfo(!useUserInfo);
-  };
-
+  // const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   setUserInfo(!useUserInfo);
+  // };
   return (
     <CommonHeader title="예약자 정보">
       <div className={styles.infoContainer}>

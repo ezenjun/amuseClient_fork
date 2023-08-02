@@ -19,21 +19,23 @@ function Home() {
 
   const location = useLocation();
 
-  //redirect 했을 때 token 값 받아서 localStorage에 저장하기
   useEffect(()=>{
-    
-    // checkIsManager();
+    const token = cookies["__jwtk__"]
+    if(token){
+      checkIsManager(token);
+    }
   },[])
-  const checkIsManager = () => {
+
+  const checkIsManager = (token:String) => {
     const searchParams = new URLSearchParams(location.search);
     const email = searchParams.get("email");
 
-    const accessToken = localStorage.getItem("loginToken");
+    // const token = cookies["__jwtk__"]
     axios
       .get(`${process.env.REACT_APP_AMUSE_API}/api/v1/admin/search/users?email=${email}`, {
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${accessToken}`,
+          Authorization: `Bearer ${token}`,
         },
       })
       .then((response) => {
