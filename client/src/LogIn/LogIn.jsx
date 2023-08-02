@@ -25,13 +25,6 @@ export default function Login() {
     withCredentials: true,
   });
   
-  const googleLogin = async() =>{
-    
-    axiosInstance.get(`${process.env.REACT_APP_AMUSE_API}/oauth2/authorization/google?redirect_uri=${redirectUri}`,
-     ).then((response) => {
-      console.log(response);
-    });
-  }
   const handleChangeEmail = (e) => {
     setEmail(e.target.value);
     console.log(e.target.value);
