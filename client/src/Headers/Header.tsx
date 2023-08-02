@@ -10,6 +10,9 @@ import { useRecoilState } from "recoil";
 import MyPageMenu from "../MyPages/MyPageMenu";
 import axios from "axios";
 import SearchIcon from "./search.png";
+import { useCookies } from "react-cookie";
+import moment from "moment"
+
 
 interface CategoryMenuProps {
   categoryName: string;
@@ -26,6 +29,8 @@ function Header() {
   const [loggedIn, setLoggedIn] = useRecoilState(isLoggedIn);
   const [manager, setManager] = useRecoilState(isManager);
   const [token, setToken] = useState("");
+  const [cookies, setCookie, removeCookie] = useCookies(["__jwtk__"]);
+  
 
   const navigateToHome = () => {
     movePage("/");
@@ -139,10 +144,29 @@ function Header() {
     console.log("login?", loggedIn);
   }, []);
 
+    
+  useEffect(() => {
+    let locationString = window.location.toString()
+    if(locationString.includes("http://localhost:3000/?access-token")){
+      let token: string | null = new URL(window.location.href).searchParams.get("access-token");
+      if (token == null) {
+        return;
+      } else {
+        // localStorage.setItem("loginToken", token);
+        const expires =  moment().add('3','h').toDate()
+        console.log(expires)
+        setCookie("__jwtk__",token,{expires})
+        setLoggedIn(true);
+        window.location.href = "http://localhost:3000/"
+      }
+    }
+  }, []);
+
   const handleLogout = () => {
     setLoggedIn(false);
     setManager(false);
-    localStorage.removeItem("loginToken");
+    removeCookie("__jwtk__", { path: '/' }); 
+    window.location.reload();
     navigateToHome();
   };
 

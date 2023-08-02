@@ -5,15 +5,18 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import { RecoilRoot, atom, selector, useRecoilState, useRecoilValue } from 'recoil'; 
+import { CookiesProvider } from "react-cookie";
 
 const google_id: string = process.env.REACT_APP_GOOGLE_API_KEY ?? "";
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 root.render(
   <RecoilRoot>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <CookiesProvider>
+      <BrowserRouter>
+        <App/>
+      </BrowserRouter>
+    </CookiesProvider>
   </RecoilRoot>
 );
 

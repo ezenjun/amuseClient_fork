@@ -8,26 +8,22 @@ import Fade from "./Fade";
 import { useRecoilState } from "recoil";
 import { isLoggedIn, isManager } from "./atoms";
 import axios from "axios";
-import { useLocation } from "react-router-dom";
+import { redirect, useLocation } from "react-router-dom";
+import { useCookies } from "react-cookie";
+import moment from "moment";
 
 function Home() {
   const [loggedIn, setLoggedIn] = useRecoilState(isLoggedIn);
   const [manager, setManager] = useRecoilState(isManager);
+  const [cookies, setCookie, removeCookie] = useCookies(["__jwtk__"]);
 
   const location = useLocation();
 
   //redirect 했을 때 token 값 받아서 localStorage에 저장하기
-  useEffect(() => {
-    let token: string | null = new URL(window.location.href).searchParams.get("token");
-    if (token == null) {
-      return;
-    } else {
-      localStorage.setItem("loginToken", token);
-      setLoggedIn(true);
-      checkIsManager();
-    }
-  }, []);
-
+  useEffect(()=>{
+    
+    // checkIsManager();
+  },[])
   const checkIsManager = () => {
     const searchParams = new URLSearchParams(location.search);
     const email = searchParams.get("email");
