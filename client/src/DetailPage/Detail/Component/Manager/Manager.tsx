@@ -9,19 +9,21 @@ interface ManagerProps {
   itemId: number | null;
 }
 
-interface ManagerData {
+interface GuideData {
+  guide_db_id: number;
+  guideCode: string;
+  userName: string;
   email: string;
-  img: string;
-  name: string;
-  manager_content: string;
-  title: string;
+  profileImageUrl: string;
+  introduce: string;
+  guide_comment_by_item: string;
 }
 
 function Manager({ itemId }: ManagerProps) {
   /**
    * Manager Data
    */
-  const [managerData, setManagerData] = useState<ManagerData>();
+  const [guideData, setGuideData] = useState<GuideData>();
   const [isHovered, setIsHovered] = useState(false);
 
   /**
@@ -29,25 +31,26 @@ function Manager({ itemId }: ManagerProps) {
    */
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_AMUSE_API}/detail/${itemId}/manager-info`)
+      .get(`${process.env.REACT_APP_AMUSE_API}/detail/${itemId}/guide-info`)
       .then((response) => {
-        setManagerData(response.data.data);
-
-        //console.log(response.data.data)
+        setGuideData(response.data.data);
       })
       .catch((error) => {
-        console.log("연결 실패");
+        console.log("가이드 연결 실패");
       });
   }, [itemId]);
 
+  console.log("가이드 정보 api : ", guideData);
   /**
    * Email Connect
    */
   const handleInquiryClick = () => {
-    if (managerData && managerData.email) {
-      const subject = encodeURIComponent(`${managerData?.title} 문의하기`);
-      const body = encodeURIComponent("안녕하세요, AmuseTravel 입니다 :-)\n\n문의 내용을 입력해주세요.\n\n감사합니다.");
-      window.location.href = `mailto:${managerData.email}?subject=${subject}&body=${body}`;
+    if (guideData && guideData.email) {
+      const subject = encodeURIComponent(`[어뮤즈트래블 상품 문의하기]`);
+      const body = encodeURIComponent(
+        "안녕하세요, AmuseTravel 입니다 :-)\n\n아래에 문의 내용을 입력해주세요.\n\n감사합니다.\n\n---------------------\n\n"
+      );
+      window.location.href = `mailto:${guideData.email}?subject=${subject}&body=${body}`;
     }
   };
 
@@ -55,8 +58,8 @@ function Manager({ itemId }: ManagerProps) {
     <div className="Manager">
       <div className="manager-header">
         <div className="manager-profile">
-          <img className="manager-image" src={managerData?.img ?? "img"} alt="manager" />
-          <p className="manager-name">{managerData?.name ?? "name"}</p>
+          <img className="manager-image" src={guideData?.profileImageUrl ?? "img"} alt="manager" />
+          <p className="manager-name">{guideData?.userName ?? "name"}</p>
         </div>
 
         <div
@@ -71,7 +74,7 @@ function Manager({ itemId }: ManagerProps) {
       </div>
 
       <div className="manager-info">
-        <p>{managerData?.manager_content ?? "manager_content"}</p>
+        <p>{guideData?.guide_comment_by_item ?? "manager_content"}</p>
       </div>
     </div>
   );

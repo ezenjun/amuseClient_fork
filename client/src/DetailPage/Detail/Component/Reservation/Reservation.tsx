@@ -17,12 +17,14 @@ interface ReservationProps {
   likeNum: number;
 }
 
-interface ManagerData {
+interface GuideData {
+  guide_db_id: number;
+  guideCode: string;
+  userName: string;
   email: string;
-  img: string;
-  name: string;
-  test: string;
-  title: string;
+  profileImageUrl: string;
+  introduce: string;
+  guide_comment_by_item: string;
 }
 
 function Reservation({ itemId, productCode, startPrice, likeNum }: ReservationProps) {
@@ -31,7 +33,7 @@ function Reservation({ itemId, productCode, startPrice, likeNum }: ReservationPr
   /**
    * Manager Data
    */
-  const [managerData, setManagerData] = useState<ManagerData>();
+  const [guideData, setGuideData] = useState<GuideData>();
   const [isHovered, setIsHovered] = useState(false);
 
   /**
@@ -39,9 +41,9 @@ function Reservation({ itemId, productCode, startPrice, likeNum }: ReservationPr
    */
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_AMUSE_API}/detail/${itemId}/manager-info`)
+      .get(`${process.env.REACT_APP_AMUSE_API}/detail/${itemId}/guide-info`)
       .then((response) => {
-        setManagerData(response.data.data);
+        setGuideData(response.data.data);
 
         //console.log(response.data.data)
       })
@@ -54,10 +56,12 @@ function Reservation({ itemId, productCode, startPrice, likeNum }: ReservationPr
    * Email Connect
    */
   const handleInquiryClick = () => {
-    if (managerData && managerData.email) {
-      const subject = encodeURIComponent(`${managerData?.title} 문의하기`);
-      const body = encodeURIComponent("안녕하세요, AmuseTravel 입니다 :-)\n\n문의 내용을 입력해주세요.\n\n감사합니다.");
-      window.location.href = `mailto:${managerData.email}?subject=${subject}&body=${body}`;
+    if (guideData && guideData.email) {
+      const subject = encodeURIComponent(`[어뮤즈트래블 상품 문의하기]`);
+      const body = encodeURIComponent(
+        "안녕하세요, AmuseTravel 입니다 :-)\n\n아래에 문의 내용을 입력해주세요.\n\n감사합니다.\n\n---------------------\n\n"
+      );
+      window.location.href = `mailto:${guideData.email}?subject=${subject}&body=${body}`;
     }
   };
 
@@ -90,7 +94,7 @@ function Reservation({ itemId, productCode, startPrice, likeNum }: ReservationPr
    * Ticket Button
    */
   const handleButtonClick = () => {
-    handleBuyTicket()
+    handleBuyTicket();
     // Swal.fire({
     //   icon: "success",
     //   title: "티켓 구입 문의",
@@ -101,12 +105,16 @@ function Reservation({ itemId, productCode, startPrice, likeNum }: ReservationPr
   };
 
   const handleBuyTicket = () => {
-    let count = 0
-    for (let i =0 ; i< orderTicketData.length; i++){ if(orderTicketData[i].count){  count += 1 } }
-    if(count > 0 ){
-      movePage("/order")
-    }else{
-      alert("티켓을 선택해 주세요")
+    let count = 0;
+    for (let i = 0; i < orderTicketData.length; i++) {
+      if (orderTicketData[i].count) {
+        count += 1;
+      }
+    }
+    if (count > 0) {
+      movePage("/order");
+    } else {
+      alert("티켓을 선택해 주세요");
     }
   };
 
@@ -157,8 +165,8 @@ function Reservation({ itemId, productCode, startPrice, likeNum }: ReservationPr
       {/* 담당자, 문의하기 div */}
       <div className="manager">
         <div className="manager-profile">
-          <img className="manager-image" src={managerData?.img ?? "img"} alt="manager" />
-          <p className="manager-name">{managerData?.name ?? "name"}</p>
+          <img className="manager-image" src={guideData?.profileImageUrl ?? "img"} alt="manager" />
+          <p className="manager-name">{guideData?.userName ?? "name"}</p>
         </div>
         <div
           className="manager-inquiry"
