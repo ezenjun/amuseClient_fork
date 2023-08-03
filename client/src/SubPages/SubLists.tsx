@@ -118,7 +118,7 @@ function SubLists({ title, itemInfos }: SubListsProps) {
 
   return (
     <div>
-      <h2 style={{ marginTop: "1rem", marginBottom: "1rem" }}>{title}</h2>
+      <h2 style={{ marginTop: "30px", marginBottom: "1rem" }}>{title}</h2>
       <div className={Style["container"]}>
         {displayedItemIds.map((itemId: number, index: number) => (
           <Box
