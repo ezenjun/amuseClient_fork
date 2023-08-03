@@ -10,17 +10,35 @@ import styles from "./OrderForm.module.scss";
 import { useCookies } from "react-cookie";
 
 export function OrderForm() {
-  const { orderData, setOrderData } = useOrderContext();
+  const { orderData, setOrderData ,orderTicketData} = useOrderContext();
   const { name,setName, email,setEmail, phone,setPhone } = useInfoContext();
 
   const [cookies, setCookie, removeCookie] = useCookies(["__jwtk__"]);
   const [isLoading, setLoading] = useState(false);
+  console.log(orderTicketData)
+
+  const ticketNameAndCount =()=>{
+    let count = -1
+    let product = orderTicketData[0]?.title
+    for(let item of orderTicketData){
+       count = count + item.count
+    }
+    if( count >0 ){
+      return( product+" 외 " + count.toString() +"개")
+    }else{
+      return( product )
+    }
+    // return 
+  }
 
   const submitHandler = (e: FormEvent<HTMLFormElement>) => {
     console.log("orderForm");
     e.preventDefault();
     setLoading(true);
-    requestPay(orderData, (rsp: any) => {
+    let products =ticketNameAndCount()
+    let data = {...orderData,name,email,products}
+    console.log("data",data)
+    requestPay(data, (rsp: any) => {
       if (rsp.success) {
         // axios로 HTTP 요청
         axios({
@@ -62,6 +80,7 @@ export function OrderForm() {
   }
   useEffect(()=>{
     getUserInfoAsToken()
+    console.log(ticketNameAndCount())
   },[])
   return (
     <form
