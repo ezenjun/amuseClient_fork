@@ -119,7 +119,7 @@ function SubPageComp() {
       .get(`${process.env.REACT_APP_AMUSE_API}/main/category`)
       .then((response) => {
         const hashtagAll = response.data.data.categories;
-
+        // console.log("hash ", hashtagAll);
         let matchedIndex = -1;
         for (let i = 0; i < hashtagAll.length; i++) {
           if (hashtagAll[i].categoryId === apiKeyNumber) {
@@ -179,7 +179,7 @@ function SubPageComp() {
         const ComponentInfos = response.data.data.pageComponentInfos;
         const items = ComponentInfos.map((item: any) => item);
         setItems(items);
-        console.log(items);
+        console.log("items :n", items);
         const types = items.map((item: any) => item.type);
         setComTypes(types);
         console.log("컴포넌트", types);
@@ -193,7 +193,6 @@ function SubPageComp() {
     console.log(type);
     if (type === "리스트") {
       const listItem: ListProps = Items[index];
-      // console.log("subpage list ", listItem.itemInfos);
       return <SubLists key={index} title={listItem.title} itemInfos={listItem.itemInfos} />;
     } else if (type === "타일") {
       const tileItem: TileProps = Items[index];

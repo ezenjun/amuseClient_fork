@@ -1,4 +1,5 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Router } from "react-router-dom";
+import { redirect } from "react-router-dom";
 import Home from "../src/Home";
 import SubPageComp from "./SubPages/SubPageComp";
 import MyPage from "./MyPages/MyPage";
@@ -19,26 +20,6 @@ import { OrderContextProvider } from "./DetailPage/Contexts/OrderContext";
 import { CategoryContextProvider } from "./Headers/Contexts/CategoryContext";
 
 function App() {
-  /*
-  const apiUrl = "https://ammuse.shop/amusetest";
-  const [data, setData] = useState<Response | null>(null);
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(apiUrl);
-        const responseData = await response.json();
-        setData(responseData);
-        console.log(data);
-      } catch (error) {
-        console.log("연결 실패");
-        console.error(error);
-      }
-    };
-
-    fetchData();
-  });
-  */
-
   /**
    * Current Item API
    */
@@ -94,6 +75,7 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />
+
           {/* <Route path="/Concierge" element={<Concierge />}></Route>
           <Route path="/ChildCare" element={<ChildCare />}></Route>
           <Route path="/SeniorCare" element={<SeniorCare />}></Route> */}

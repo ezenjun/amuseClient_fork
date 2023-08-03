@@ -89,6 +89,7 @@ function Home() {
     let infoIndex = _.findIndex(categoriesInfo,{categoryName: 'home'})
     if(categoriesInfo?.length){
       const info = categoriesInfo[infoIndex]
+      console.log(info)
       setApiKeyNumber(info.categoryId)
     }
   }, [categoriesInfo]);
@@ -96,6 +97,7 @@ function Home() {
   
 
   useEffect(() => {
+    console.log("do")
     axios
       .get(`${process.env.REACT_APP_AMUSE_API}/main/category`)
       .then((response) => {
@@ -131,7 +133,7 @@ function Home() {
     fetchPageData(apiKeyNumber);
   }, [apiKeyNumber]);
 
-  // console.log("apikeynum = ", apiKeyNumber);
+  console.log("apikeynum = ", apiKeyNumber);
   const fetchPageData = (apiKeyNumber: number) => {
     axios
       .get(`${process.env.REACT_APP_AMUSE_API}/main/category/${apiKeyNumber}/page`)
@@ -139,10 +141,10 @@ function Home() {
         const ComponentInfos = response.data.data.pageComponentInfos;
         const items = ComponentInfos.map((item: any) => item);
         setItems(items);
-        // console.log(items);
+        console.log(items);
         const types = items.map((item: any) => item.type);
         setComTypes(types);
-        // console.log("컴포넌트", types);
+        console.log("컴포넌트", types);
       })
       .catch((error) => {
         console.log("subpage 컴포넌트 연결 실패");
@@ -150,7 +152,7 @@ function Home() {
   };
 
   const renderedComponents = comTypes.map((type, index) => {
-    // console.log(type);
+    console.log(type);
     if (type === "리스트") {
       const listItem: ListProps = Items[index];
       // console.log("subpage list ", listItem.itemInfos);

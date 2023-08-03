@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import _ from "lodash"
+import _ from "lodash";
 import "./Header.css";
 import Style from "../App.module.css";
 import { useNavigate } from "react-router-dom";
@@ -59,10 +59,12 @@ function Header() {
     movePage("/aboutAmuse");
   };
 
-  const navigateToSubPageComp = (apiKey: number) => {
+  const navigateToSubPageComp = (apiKey: number, cName: string) => {
     const apiKeyString: string = apiKey.toString();
     console.log(apiKey, "apiKey");
-    movePage(`/category/${apiKeyString}`);
+    if (cName === "home" || cName === "Home") {
+      movePage("/");
+    } else movePage(`/category/${apiKeyString}`);
   };
 
   const navigateToSearch = () => {
@@ -95,14 +97,22 @@ function Header() {
     <div className="dropdown">
       {mobileHeader === 0 ? (
         categories.slice(4).map((categoryName: string, index: number) => (
-          <div className="dropdown-item" key={index} onClick={() => navigateToSubPageComp(categoryIds[index + 4])}>
+          <div
+            className="dropdown-item"
+            key={index}
+            onClick={() => navigateToSubPageComp(categoryIds[index + 4], categoryName)}
+          >
             {categoryName}
           </div>
         ))
       ) : (
         <>
           {categories.slice(2).map((categoryName: string, index: number) => (
-            <div className="dropdown-item" key={index} onClick={() => navigateToSubPageComp(categoryIds[index + 2])}>
+            <div
+              className="dropdown-item"
+              key={index}
+              onClick={() => navigateToSubPageComp(categoryIds[index + 2], categoryName)}
+            >
               {categoryName}
             </div>
           ))}
@@ -124,7 +134,7 @@ function Header() {
       .get(`${process.env.REACT_APP_AMUSE_API}/main/category`)
       .then((response) => {
         const categoryAll = response.data.data.categories;
-        const categorySort: any | [] =  _.sortBy(categoryAll, "sequence");
+        const categorySort: any | [] = _.sortBy(categoryAll, "sequence");
         const categoryNames = categorySort.map((id: any) => id.categoryName);
         setCategoriesInfo(categorySort)
         setCategories(categoryNames);
@@ -167,10 +177,10 @@ function Header() {
   }, []);
 
   useEffect(() => {
-    let getToken: string | null = cookies.__jwtk__
+    let getToken: string | null = cookies.__jwtk__;
     if (getToken) {
       setToken(getToken);
-      getUserInfoAsToken()
+      getUserInfoAsToken();
       setLoggedIn(true);
     }
     console.log("login?", loggedIn);
@@ -192,37 +202,39 @@ function Header() {
       }
     }
   }, []);
-  const handleCheckUserInfo = async(token : string) => {
-    console.log("xsxs")
-    await axios.get(`${process.env.REACT_APP_AMUSE_API}/api/v1/user/login/info`,{
+  const handleCheckUserInfo = async (token: string) => {
+    console.log("xsxs");
+    await axios
+      .get(`${process.env.REACT_APP_AMUSE_API}/api/v1/user/login/info`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
       })
-      .then((response)=>{
-        console.log(response)
+      .then((response) => {
+        console.log(response);
       })
-      .catch((err)=>{
-        console.log(err)
-      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
-  const getUserInfoAsToken = async()=>{
-    const token = cookies["__jwtk__"]
+  const getUserInfoAsToken = async () => {
+    const token = cookies["__jwtk__"];
     axios
       .get(`${process.env.REACT_APP_AMUSE_API}/api/v1/user/login/info`, {
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `${token}`,
+          Authorization: `${token}`,
         },
       })
       .then((response) => {
-        const data =response.data.data
+        const data = response.data.data;
         console.log(data);
-      }).catch((err)=>{
-        console.log(err)
+      })
+      .catch((err) => {
+        console.log(err);
       });
-  }
+  };
   const handleLogout = () => {
     setLoggedIn(false);
     setManager(false);
@@ -285,16 +297,16 @@ function Header() {
                     <CategoryMenu
                       key={index}
                       categoryName={categoryName}
-                      handleClick={() => navigateToSubPageComp(categoryIds[index])}
+                      handleClick={() => navigateToSubPageComp(categoryIds[index], categoryName)}
                     />
                   ))
                 ) : (
                   <>
-                    {categories.slice(0, 2).map((id: string, index: number) => (
+                    {categories.slice(0, 2).map((categoryName: string, index: number) => (
                       <CategoryMenu
-                        key={id}
-                        categoryName={id}
-                        handleClick={() => navigateToSubPageComp(categoryIds[index])}
+                        key={index}
+                        categoryName={categoryName}
+                        handleClick={() => navigateToSubPageComp(categoryIds[index], categoryName)}
                       />
                     ))}
                     <div className="menu-item_mobile more-dropdown">
@@ -365,16 +377,16 @@ function Header() {
                     <CategoryMenu
                       key={index}
                       categoryName={categoryName}
-                      handleClick={() => navigateToSubPageComp(categoryIds[index])}
+                      handleClick={() => navigateToSubPageComp(categoryIds[index], categoryName)}
                     />
                   ))
                 ) : (
                   <>
-                    {categories.slice(0, 4).map((id: string, index: number) => (
+                    {categories.slice(0, 4).map((categoryName: string, index: number) => (
                       <CategoryMenu
-                        key={id}
-                        categoryName={id}
-                        handleClick={() => navigateToSubPageComp(categoryIds[index])}
+                        key={index}
+                        categoryName={categoryName}
+                        handleClick={() => navigateToSubPageComp(categoryIds[index], categoryName)}
                       />
                     ))}
                     <div className="menu-item more-dropdown">
