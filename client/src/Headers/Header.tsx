@@ -11,8 +11,7 @@ import MyPageMenu from "../MyPages/MyPageMenu";
 import axios from "axios";
 import SearchIcon from "./search.png";
 import { useCookies } from "react-cookie";
-import moment from "moment"
-
+import moment from "moment";
 
 interface CategoryMenuProps {
   categoryName: string;
@@ -30,7 +29,6 @@ function Header() {
   const [manager, setManager] = useRecoilState(isManager);
   const [token, setToken] = useState("");
   const [cookies, setCookie, removeCookie] = useCookies(["__jwtk__"]);
-  
 
   const navigateToHome = () => {
     movePage("/");
@@ -41,6 +39,7 @@ function Header() {
 
   const navigateToSubPageComp = (apiKey: number) => {
     const apiKeyString: string = apiKey.toString();
+    console.log(apiKey, "apiKey");
     movePage(`/category/${apiKeyString}`);
   };
 
@@ -74,14 +73,14 @@ function Header() {
     <div className="dropdown">
       {mobileHeader === 0 ? (
         categories.slice(4).map((categoryName: string, index: number) => (
-          <div className="dropdown-item" key={index} onClick={() => navigateToSubPageComp(index + 4)}>
+          <div className="dropdown-item" key={index} onClick={() => navigateToSubPageComp(categoryIds[index + 4])}>
             {categoryName}
           </div>
         ))
       ) : (
         <>
           {categories.slice(2).map((categoryName: string, index: number) => (
-            <div className="dropdown-item" key={index} onClick={() => navigateToSubPageComp(index + 2)}>
+            <div className="dropdown-item" key={index} onClick={() => navigateToSubPageComp(categoryIds[index + 2])}>
               {categoryName}
             </div>
           ))}
@@ -100,7 +99,7 @@ function Header() {
         setCategories(categoryNames);
         const categoryId = categoryAll.map((id: any) => id.categoryId);
         setCategoryIds(categoryId);
-        // console.log(response.data.data);
+        console.log(categoryId);
       })
       .catch((error) => {
         console.log("해시태그 연결 실패");
@@ -144,20 +143,19 @@ function Header() {
     console.log("login?", loggedIn);
   }, []);
 
-    
   useEffect(() => {
-    let locationString = window.location.toString()
-    if(locationString.includes("http://localhost:3000/?access-token")){
+    let locationString = window.location.toString();
+    if (locationString.includes("http://localhost:3000/?access-token")) {
       let token: string | null = new URL(window.location.href).searchParams.get("access-token");
       if (token == null) {
         return;
       } else {
         // localStorage.setItem("loginToken", token);
-        const expires =  moment().add('8','h').toDate()
-        console.log(expires)
-        setCookie("__jwtk__",token,{expires})
+        const expires = moment().add("8", "h").toDate();
+        console.log(expires);
+        setCookie("__jwtk__", token, { expires });
         setLoggedIn(true);
-        window.location.href = "http://localhost:3000/"
+        window.location.href = "http://localhost:3000/";
       }
     }
   }, []);
@@ -165,7 +163,7 @@ function Header() {
   const handleLogout = () => {
     setLoggedIn(false);
     setManager(false);
-    removeCookie("__jwtk__", { path: '/' }); 
+    removeCookie("__jwtk__", { path: "/" });
     window.location.reload();
     navigateToHome();
   };
@@ -310,7 +308,11 @@ function Header() {
                 ) : (
                   <>
                     {categories.slice(0, 4).map((id: string, index: number) => (
-                      <CategoryMenu key={id} categoryName={id} handleClick={() => navigateToSubPageComp(index)} />
+                      <CategoryMenu
+                        key={id}
+                        categoryName={id}
+                        handleClick={() => navigateToSubPageComp(categoryIds[index])}
+                      />
                     ))}
                     <div className="menu-item more-dropdown">
                       더보기 ▼

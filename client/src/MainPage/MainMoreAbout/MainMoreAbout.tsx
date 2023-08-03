@@ -38,8 +38,8 @@ function MainMoreAbout() {
     };
   }, []);
   return (
-    <>
-      <h2 style={{ marginTop: "4rem" }}>어뮤즈트래블에 대해 더 알고싶다면? 🔍</h2>
+    <div style={{ width: "80%", margin: "auto" }}>
+      <h2>어뮤즈트래블에 대해 더 알고싶다면? 🔍</h2>
       {isMobile ? (
         <div className={Style["middle-mobile"]}>
           <div className={Style["sns-mobile"]} onClick={gotoBlog}>
@@ -71,7 +71,7 @@ function MainMoreAbout() {
           </div>
         </div>
       )}
-      <div style={{ clear: "left" }}></div>
+      {/* <div style={{ clear: "left" }}></div>
       <div
         className={Style["imgContainer"]}
         style={{ display: "flex", flexWrap: "wrap", justifyContent: "flex-start" }}
@@ -83,8 +83,8 @@ function MainMoreAbout() {
         <img className={Style["logoImgs"]} src={logo04} alt="Logo 04" />
         <img className={Style["logoImgs"]} src={logo05} alt="Logo 05" />
       </div>
-      <div style={{ clear: "left" }}></div>
-    </>
+      <div style={{ clear: "left" }}></div> */}
+    </div>
   );
 }
 
