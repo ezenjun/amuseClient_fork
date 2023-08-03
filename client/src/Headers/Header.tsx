@@ -136,9 +136,10 @@ function Header() {
   }, []);
 
   useEffect(() => {
-    let getToken: string | null = new URL(window.location.href).searchParams.get("token");
+    let getToken: string | null = cookies.__jwtk__
     if (getToken) {
       setToken(getToken);
+      setLoggedIn(true);
     }
     console.log("login?", loggedIn);
   }, []);

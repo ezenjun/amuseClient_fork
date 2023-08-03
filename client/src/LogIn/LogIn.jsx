@@ -17,7 +17,7 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [loggedIn, setLoggedIn] = useRecoilState(isLoggedIn);
   const navigate = useNavigate();
-  let redirectUri =  "http://amusetravel.wheelgo.net"
+  let redirectUri =  "http://localhost:3000"
   if(process.env.REACT_APP_AMUSE_API === "https://amuseapi.wheelgo.net"){
     redirectUri = "http://amusetravel.wheelgo.net";
   }
