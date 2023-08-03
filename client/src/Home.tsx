@@ -133,7 +133,6 @@ function Home() {
     fetchPageData(apiKeyNumber);
   }, [apiKeyNumber]);
 
-  console.log("apikeynum = ", apiKeyNumber);
   const fetchPageData = (apiKeyNumber: number) => {
     axios
       .get(`${process.env.REACT_APP_AMUSE_API}/main/category/${apiKeyNumber}/page`)
