@@ -88,7 +88,7 @@ function App() {
 
   return (
     <OrderContextProvider>
-      <div>
+      <div style={{fontFamily:"yg-jalnan"}}>
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />

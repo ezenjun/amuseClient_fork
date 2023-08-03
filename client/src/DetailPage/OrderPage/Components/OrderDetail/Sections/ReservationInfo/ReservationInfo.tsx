@@ -8,6 +8,7 @@ import styles from "./Reservation.module.scss";
 export function ReservationInfo() {
   const [showInfoModal, setInfoModal] = useState(false);
   const { name, email, phone } = useInfoContext(); // 이게 글로벌된 유저 정보라고 가정
+  const [ reservationPhoneNumber,setReservationPhoneNumber ] = useState(phone)
 
   const clickHandler = (e: any) => {
     setInfoModal(true);
@@ -17,6 +18,10 @@ export function ReservationInfo() {
   // const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
   //   setUserInfo(!useUserInfo);
   // };
+  const phoneNumberHandler = (e: React.ChangeEvent<HTMLInputElement>) =>{
+    let target = e.target.value
+    setReservationPhoneNumber(target.replace(/[^0-9]/g,""))
+  }
   return (
     <CommonHeader title="예약자 정보">
       <div className={styles.infoContainer}>
@@ -45,17 +50,18 @@ export function ReservationInfo() {
           <li>
             <span>휴대폰 번호</span>
             <span>{phone}</span>
+            <input type="phone" style={{ padding: "0.5rem", width: "300px", border: "1px solid #efefef",backgroundColor: "#efefef",borderRadius: "3px"}} value={reservationPhoneNumber} onChange={(e)=>{phoneNumberHandler(e)}}/>
           </li>
 
           <li>예약 안내 정보가 입력하신 이메일로 발송됩니다.</li>
         </ul>
-        <button
+        {/* <button
           type="button"
           className={styles.infoButton}
           onClick={clickHandler}
         >
           정보변경
-        </button>
+        </button> */}
       </div>
       {showInfoModal && <InfoModal setInfoModal={setInfoModal} />}
     </CommonHeader>

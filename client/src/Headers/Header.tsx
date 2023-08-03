@@ -153,7 +153,7 @@ function Header() {
         return;
       } else {
         // localStorage.setItem("loginToken", token);
-        const expires =  moment().add('3','h').toDate()
+        const expires =  moment().add('8','h').toDate()
         console.log(expires)
         setCookie("__jwtk__",token,{expires})
         setLoggedIn(true);

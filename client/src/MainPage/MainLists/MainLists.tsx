@@ -128,7 +128,7 @@ function MainLists() {
 
   return (
     <div>
-      <h2 style={{ marginTop: "2rem", marginBottom: "1rem" }}>최신 여행 상품🏞</h2>
+      <h2 style={{ marginTop: "2rem", marginBottom: "1rem" }}>최신 여행 상품 🏞</h2>
       <div className={Style["container"]}>
         {/* {displayedItemIds.length === 0 && (
           <Box
