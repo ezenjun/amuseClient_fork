@@ -16,6 +16,7 @@ import Footer from "./Footers/Footer";
 import AboutAmuse from "./SubPages/AboutAmuse/AboutAmuse";
 import { OrderPage } from "./DetailPage/OrderPage";
 import { OrderContextProvider } from "./DetailPage/Contexts/OrderContext"; 
+import { CategoryContextProvider } from "./Headers/Contexts/CategoryContext";
 
 function App() {
   /*
@@ -88,6 +89,7 @@ function App() {
 
   return (
     <OrderContextProvider>
+      <CategoryContextProvider>
       <div style={{fontFamily:"Pretendard-Regular"}}>
         <Header />
         <Routes>
@@ -133,6 +135,7 @@ function App() {
         </Routes>
         <Footer />
       </div>
+      </CategoryContextProvider>
     </OrderContextProvider>
   );
 }

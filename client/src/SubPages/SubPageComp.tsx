@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import Header from "../Headers/Header";
-import Footer from "../Footers/Footer";
 import Style from "./SubPage.module.css";
 import ChildTitle from "./SubtitleImgs/ChildTitle.jpg";
 import Fade from "../Fade";

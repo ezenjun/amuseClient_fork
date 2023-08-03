@@ -1,49 +1,177 @@
 import React, { ReactNode, useEffect, useState } from "react";
-import Style from "./App.module.css";
-import MainLists from "./MainPage/MainLists/MainLists";
-import MainBanner from "./MainPage/MainBanner/MainBanner";
-import MainTiles from "./MainPage/MainTiles/MainTiles";
-import MainMoreAbout from "./MainPage/MainMoreAbout/MainMoreAbout";
+import _ from "lodash";
+// import AppStyle from "./App.module.css";
+import Style from "./SubPages/SubPage.module.css";
+// import MainLists from "./MainPage/MainLists/MainLists";
+// import MainBanner from "./MainPage/MainBanner/MainBanner";
+// import MainTiles from "./MainPage/MainTiles/MainTiles";
+// import MainMoreAbout from "./MainPage/MainMoreAbout/MainMoreAbout";
 import Fade from "./Fade";
 import { useRecoilState } from "recoil";
 import { isLoggedIn, isManager } from "./atoms";
 import axios from "axios";
 import { redirect, useLocation } from "react-router-dom";
-import { useCookies } from "react-cookie";
-import moment from "moment";
+// import { useCookies } from "react-cookie";
+import { useCategoryContext } from "./Headers/Contexts/CategoryContext";
+import ChildTitle from "./SubPages/SubtitleImgs/ChildTitle.jpg";
+import SubLists from "./SubPages/SubLists";
+import SubBanners from "./SubPages/SubBanners";
+import SubTiles from "./SubPages/SubTiles";
+
 
 function Home() {
-  const [loggedIn, setLoggedIn] = useRecoilState(isLoggedIn);
-  const [manager, setManager] = useRecoilState(isManager);
-  const [cookies, setCookie, removeCookie] = useCookies(["__jwtk__"]);
+
+  interface CategoryData {
+    categoryId: string;
+    categoryName: string;
+    categoryImg: string;
+    mainDescription: string;
+    subDescription: string;
+  }
+  
+  interface BannerProps {
+    page_component_id: number;
+    type: string;
+    title: string;
+    content: string;
+    itemInfos: [];
+    mobileBannerLink: string;
+    pcBannerUrl: string;
+    pcBannerLink: string;
+    mobileBannerUrl: string;
+  }
+
+  interface ListProps {
+    page_component_id: string;
+    type: string;
+    title: string;
+    content: null;
+    itemInfos: [];
+    pcBannerUrl: null;
+    pcBannerLink: null;
+    mobileBannerUrl: null;
+    mobileBannerLink: null;
+  }
+
+  interface TileProps {
+    page_component_id: string;
+    type: string;
+    title: string;
+    content: null;
+    itemInfos: [];
+    pcBannerUrl: null;
+    pcBannerLink: null;
+    mobileBannerUrl: null;
+    mobileBannerLink: null;
+  }
+
+  interface BoxProps {
+    marginRight: string;
+    itemId: number;
+    handleClick: () => void;
+    title: string;
+    startPrice: string;
+    imageUrl: string;
+  }
+
+
+  const { categoriesInfo } = useCategoryContext();
+  const [apiKeyNumber,setApiKeyNumber] = useState(0)
+  const [categoryData, setCategoryData] = useState<CategoryData | null>(null);
+
+  // const [loggedIn, setLoggedIn] = useRecoilState(isLoggedIn);
+  // const [manager, setManager] = useRecoilState(isManager);
+  // const [cookies, setCookie, removeCookie] = useCookies(["__jwtk__"]);
 
   const location = useLocation();
 
   useEffect(() => {
-    const token = cookies["__jwtk__"];
-    if (token) {
-      checkIsManager(token);
+    let infoIndex = _.findIndex(categoriesInfo,{categoryName: 'home'})
+    if(categoriesInfo?.length){
+      const info = categoriesInfo[infoIndex]
+      setApiKeyNumber(info.categoryId)
     }
-  }, []);
+  }, [categoriesInfo]);
 
-  const checkIsManager = (token: String) => {
-    const searchParams = new URLSearchParams(location.search);
-    const email = searchParams.get("email");
+  
 
+  useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_AMUSE_API}/api/v1/admin/search/users?email=${email}`, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      })
+      .get(`${process.env.REACT_APP_AMUSE_API}/main/category`)
       .then((response) => {
-        console.log(response.data);
-        if (response.data.code == 1000) {
-          setManager(true);
+        const hashtagAll = response.data.data.categories;
+
+        let matchedIndex = -1;
+        for (let i = 0; i < hashtagAll.length; i++) {
+          if (hashtagAll[i].categoryId === apiKeyNumber) {
+            matchedIndex = i;
+            // console.log("idx = " + matchedIndex);
+            break;
+          }
         }
+        if (matchedIndex !== -1) {
+          const matchedCategory = hashtagAll[matchedIndex];
+          setCategoryData(matchedCategory);
+        }
+      })
+      .catch((error) => {
+        console.log("subpage 연결 실패");
+      });
+  }, [apiKeyNumber]);
+
+  const [comTypes, setComTypes] = useState<[]>([]);
+  const [Items, setItems] = useState<[]>([]);
+  const [bannerContent, setBannerContent] = useState<string[]>([]);
+  const [bannerPCUrl, setBannerPCUrl] = useState<string[]>([]);
+  const [ItemTitle, setItemTitle] = useState<string[]>([]);
+  const [ItemPrice, setItemPrice] = useState<number[]>([]);
+  const [ItemImageUrl, setItemImageUrl] = useState<string[]>([]);
+
+  useEffect(() => {
+    fetchPageData(apiKeyNumber);
+  }, [apiKeyNumber]);
+
+  // console.log("apikeynum = ", apiKeyNumber);
+  const fetchPageData = (apiKeyNumber: number) => {
+    axios
+      .get(`${process.env.REACT_APP_AMUSE_API}/main/category/${apiKeyNumber}/page`)
+      .then((response) => {
+        const ComponentInfos = response.data.data.pageComponentInfos;
+        const items = ComponentInfos.map((item: any) => item);
+        setItems(items);
+        // console.log(items);
+        const types = items.map((item: any) => item.type);
+        setComTypes(types);
+        // console.log("컴포넌트", types);
+      })
+      .catch((error) => {
+        console.log("subpage 컴포넌트 연결 실패");
       });
   };
+
+  const renderedComponents = comTypes.map((type, index) => {
+    // console.log(type);
+    if (type === "리스트") {
+      const listItem: ListProps = Items[index];
+      // console.log("subpage list ", listItem.itemInfos);
+      return <SubLists key={index} title={listItem.title} itemInfos={listItem.itemInfos} />;
+    } else if (type === "타일") {
+      const tileItem: TileProps = Items[index];
+      return <SubTiles key={index} />;
+    } else if (type === "배너") {
+      const bannerItem: BannerProps = Items[index];
+      return (
+        <SubBanners
+          key={index}
+          title={bannerItem.title}
+          content={bannerItem.content}
+          bannerUrl={bannerItem.pcBannerUrl}
+          bannerLink={bannerItem.pcBannerLink}
+        />
+      );
+    }
+    return null;
+  });
 
   const [listTitle, setListTitle] = useState<string[]>([]);
   const [itemCount, setItemCount] = useState<number[]>([]);
@@ -72,13 +200,36 @@ function Home() {
   return (
     <Fade>
       <div>
-        {/* <Header /> */}
+        {/* <Header />
         <MainBanner />
         <div className={Style["App"]}>
           <MainLists />
           <MainTiles />
-          {/* <MainMoreAbout /> */}
+          {/* <MainMoreAbout /> 
+        </div> */}
+        
+      {categoryData && (
+        <div className={Style["subTitleContainer"]}>
+          <img
+            className={Style["mainPicture.image"]}
+            src={categoryData.categoryImg ? categoryData.categoryImg : ChildTitle}
+            alt="Title img"
+            style={{
+              width: "100%",
+              height: "400px",
+              objectFit: "cover",
+            }}
+          />
+          <h2 className={Style["subTitle"]}>{categoryData.mainDescription}</h2>
+          <h3 className={Style["subContent"]}>{categoryData.subDescription}</h3>
         </div>
+        )}
+
+            <div className={Style["App"]}>
+              <div>
+                <div>{renderedComponents}</div>
+              </div>
+            </div>
       </div>
     </Fade>
   );
