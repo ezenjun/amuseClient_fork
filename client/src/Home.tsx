@@ -30,7 +30,6 @@ function Home() {
     const searchParams = new URLSearchParams(location.search);
     const email = searchParams.get("email");
 
-    // const token = cookies["__jwtk__"]
     axios
       .get(`${process.env.REACT_APP_AMUSE_API}/api/v1/admin/search/users?email=${email}`, {
         headers: {

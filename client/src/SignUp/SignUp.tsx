@@ -3,7 +3,7 @@ import { Link, useSearchParams } from "react-router-dom";
 import GoogleIcon from "@mui/icons-material/Google";
 
 export default function SignUp() {
-  const redirectU = "http://amuse-travel-client.s3-website.ap-northeast-2.amazonaws.com/";
+  const redirectU = "http://amusetravel.wheelgo.net/"
   return (
     <>
       <div className="login_body">
