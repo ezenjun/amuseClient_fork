@@ -19,14 +19,14 @@ function Home() {
 
   const location = useLocation();
 
-  useEffect(()=>{
-    const token = cookies["__jwtk__"]
-    if(token){
+  useEffect(() => {
+    const token = cookies["__jwtk__"];
+    if (token) {
       checkIsManager(token);
     }
-  },[])
+  }, []);
 
-  const checkIsManager = (token:String) => {
+  const checkIsManager = (token: String) => {
     const searchParams = new URLSearchParams(location.search);
     const email = searchParams.get("email");
 
@@ -78,7 +78,7 @@ function Home() {
         <div className={Style["App"]}>
           <MainLists />
           <MainTiles />
-          <MainMoreAbout />
+          {/* <MainMoreAbout /> */}
         </div>
       </div>
     </Fade>

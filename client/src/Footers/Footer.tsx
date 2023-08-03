@@ -1,11 +1,12 @@
 import React, { ReactNode } from "react";
 import Style from "./Footer.module.css";
+import MainMoreAbout from "../MainPage/MainMoreAbout/MainMoreAbout";
 
 function Footer() {
   return (
     <div className={Style["footer"]}>
-      <div className={Style["footer_text"]}>{/* <p>어뮤즈트래블 협력업체 및 기관</p> */}</div>
       <div className={Style["bottom"]}>
+        <MainMoreAbout />
         <div className={Style["bottom_text"]}>
           고객센터 02-719-6811 평일 오전9시 ~ 오후6시
           <br />
