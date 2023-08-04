@@ -101,7 +101,7 @@
   background-color: #ffffff;
   height: 3.5rem;
   margin-top: 1rem;
-  font-family:"yg-jalnan";
+  font-family: "yg-jalnan";
 }
 
 .menu-item {
@@ -200,6 +200,18 @@
   border: none;
   background-color: transparent;
   cursor: pointer;
+}
+
+.userName {
+  width: 100px;
+  height: 40px;
+  border: none;
+  background-color: transparent;
+  display: flex;
+  align-items: center; /* 수직 중앙 정렬 */
+  justify-content: center; /* 수평 중앙 정렬 */
+  font-size: 14;
+  /* font-weight: bold; */
 }
 
 .btnBox .signInBtn {

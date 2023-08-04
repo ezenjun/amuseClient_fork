@@ -8,8 +8,27 @@ import Fade from "../Fade";
 import SubLists from "./SubLists";
 import SubBanners from "./SubBanners";
 import SubTiles from "./SubTiles";
-import { BannerProps, ListProps, TileProps, BoxProps, DropdownProps } from "../Interfaces/PropsInterfaces";
+import { BannerProps, ListProps, BoxProps, DropdownProps } from "../Interfaces/PropsInterfaces";
 import { CategoryData } from "../Interfaces/DataInterfaces";
+
+interface TileProps {
+  page_component_id: string;
+  type: string;
+  title: string;
+  tileCount: number;
+  tileList: tileList[];
+}
+
+interface tileList {
+  tile_id: number;
+  tile_name: string;
+  tile_images: string;
+  itemInfos: [];
+}
+
+// interface Hashtag {
+//   hashtag: string;
+// }
 
 const Box: React.FC<BoxProps> = ({ marginRight, itemId, handleClick, title, startPrice, imageUrl }) => (
   <div className={Style["box"]} style={{ marginRight }} onClick={handleClick}>
@@ -48,12 +67,6 @@ const Dropdown: React.FC<DropdownProps> = ({ onChange }) => {
 
 function SubPageComp() {
   const movePage = useNavigate();
-  // const navigateToDetail = (itemId: number) => {
-  //   movePage(`/detail/${itemId}`);
-  // };
-  // const moveToViewAll = () => {
-  //   movePage("/ViewAll");
-  // };
 
   const { apiKey } = useParams() as { apiKey: string };
   const [categoryData, setCategoryData] = useState<CategoryData | null>(null);
@@ -142,7 +155,9 @@ function SubPageComp() {
       return <SubLists key={index} title={listItem.title} itemInfos={listItem.itemInfos} />;
     } else if (type === "타일") {
       const tileItem: TileProps = Items[index];
-      return <SubTiles key={index} />;
+      return (
+        <SubTiles key={index} title={tileItem.title} tileCount={tileItem.tileCount} tileList={tileItem.tileList} />
+      );
     } else if (type === "배너") {
       const bannerItem: BannerProps = Items[index];
       return (
