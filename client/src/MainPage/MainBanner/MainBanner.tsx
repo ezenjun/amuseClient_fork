@@ -24,7 +24,7 @@ function MainBanner() {
   }, [mainBannerImg]);
 
   return (
-    <div className="swiperCover">
+    <div className="swiperCover" style={{border:"2px solid #f00"}}>
       <Swiper
         spaceBetween={0}
         effect="fade"

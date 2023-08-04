@@ -23,6 +23,10 @@ const BigBox = ({
       style={{
         backgroundColor,
         backgroundImage: bannerUrl ? `url(${bannerUrl})` : undefined,
+        width: "100%",
+        height: "400px",
+        objectFit: "cover",
+
       }}
       onClick={handleClick} // 클릭 시 handleClick 함수 실행
       onMouseEnter={(e) => {
@@ -40,14 +44,13 @@ const BigBox = ({
 };
 
 function SubBanners({ title, content, bannerUrl, bannerLink }: SubBannersProps) {
-  console.log(title);
   return (
-    <>
+    <div style={{minHeight: "500px"}}>
       <h2 style={{ marginTop: "3rem", marginBottom: "1rem" }}>{title}</h2>
-      <div className={Style["container"]}>
+      <div className={Style["container"]} style={{width:"134%",position:"absolute",left:"-17%"}}>
         <BigBox backgroundColor="lightpink" content={content} bannerUrl={bannerUrl} bannerLink={bannerLink} />
       </div>
-    </>
+    </div>
   );
 }
 
