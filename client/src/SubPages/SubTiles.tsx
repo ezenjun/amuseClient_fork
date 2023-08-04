@@ -12,33 +12,42 @@ const Box = ({ backgroundImage, text, onClick }: { backgroundImage: string; text
     <p className={Style["regionName"]}>{text}</p>
   </div>
 );
-const EmptyBox = ({ backgroundColor }: { backgroundColor: string }) => (
-  <div className={Style["emptyBox"]} style={{ backgroundColor, margin: "auto" }}></div>
-);
 
-function SubTiles() {
+interface tileList {
+  tile_id: number;
+  tile_name: string;
+  tile_images: string;
+  itemInfos: [];
+}
+
+interface SubTileProps {
+  title: string;
+  tileCount: number;
+  tileList: tileList[];
+}
+
+function SubTiles({ title, tileCount, tileList }: SubTileProps) {
+  const [ItemIds, setItemIds] = useState<number[]>([]);
+  const [ItemTitle, setItemTitle] = useState<string[]>([]);
+  const [ItemPrice, setItemPrice] = useState<number[]>([]);
+  const [tileImageUrl, setTileImageUrl] = useState<string[]>([]);
+  const [tileName, setTileName] = useState<string[]>([]);
+
+  useEffect(() => {
+    const tileItems = tileList.map((items) => items.itemInfos);
+    console.log(title, tileItems);
+    const tlist = tileList.map((item: any) => item.tile_name);
+    setTileName(tlist);
+    const timg = tileList.map((item: any) => item.tile_images);
+    setTileImageUrl(timg);
+  }, [tileList]);
+
+  console.log("tilename ", tileName);
+  // console.log(ItemIds, ItemTitle, ItemPrice, ItemImageUrl);
+
   const movePage = useNavigate();
-  const moveToGyeonggi = () => {
-    // movePage("/toGyeonggi");
-    // movePage(`/search/경기도`);
-  };
   const moveToGangwon = () => {
     // movePage("/toGangwon");
-  };
-  const moveToChungcheong = () => {
-    // movePage("/toChungcheong");
-  };
-  const moveToJeolla = () => {
-    // movePage("/toJeolla");
-  };
-  const moveToGyeongsang = () => {
-    // movePage("/toGyeongsang");
-  };
-  const moveToJeju = () => {
-    // movePage("/toJeju");
-  };
-  const moveToOverSea = () => {
-    // movePage("/toOverSea");
   };
 
   const [mobileHeader, setMobileHeader] = useState(0);
@@ -60,23 +69,18 @@ function SubTiles() {
 
   return (
     <>
-      <h2 style={{ marginTop: "3rem", marginBottom: "1rem" }}>지역 별 여행 상품📍</h2>
+      <h2 style={{ marginTop: "3rem", marginBottom: "1rem" }}>{title}</h2>
       {mobileHeader === 0 && ( // 넓은 화면
         <div>
           <div className={Style["container"]}>
-            <Box backgroundImage={basicImg} text="서울 / 경기도" onClick={moveToGyeonggi} />
-            <Box backgroundImage={basicImg} text="강원도" onClick={moveToGangwon} />
-            <Box backgroundImage={basicImg} text="충청도" onClick={moveToChungcheong} />
-          </div>
-          <div className={Style["container"]}>
-            <Box backgroundImage={basicImg} text="전라도" onClick={moveToJeolla} />
-            <Box backgroundImage={basicImg} text="경상도" onClick={moveToGyeongsang} />
-            <Box backgroundImage={basicImg} text="제주도" onClick={moveToJeju} />
-          </div>
-          <div className={Style["container"]}>
-            <Box backgroundImage={basicImg} text="해외" onClick={moveToOverSea} />
-            <EmptyBox backgroundColor="white" />
-            <EmptyBox backgroundColor="white" />
+            {tileName.map((name, index) => (
+              <Box
+                key={index}
+                backgroundImage={tileImageUrl[index]} // You can change this to use the respective image based on the tile name
+                text={name}
+                onClick={moveToGangwon} // You can replace the console.log with the actual onClick function
+              />
+            ))}
           </div>
         </div>
       )}
@@ -85,19 +89,7 @@ function SubTiles() {
           {/* <div className={Style["container"]}>
             <Box backgroundImage={SeoulImg} text="서울 / 경기도" onClick={moveToGyeonggi} />
             <Box backgroundImage={GangwonImg} text="강원도" onClick={moveToGangwon} />
-          </div>
-          <div className={Style["container"]}>
-            <Box backgroundImage={ChungImg} text="충청도" onClick={moveToChungcheong} />
-            <Box backgroundImage={Jeonla} text="전라도" onClick={moveToJeolla} />
-          </div>
-          <div className={Style["container"]}>
-            <Box backgroundImage={GS} text="경상도" onClick={moveToGyeongsang} />
-            <Box backgroundImage={Jeju} text="제주도" onClick={moveToJeju} />
-          </div>
-          <div className={Style["container"]}>
-            <Box backgroundImage={Boeing} text="해외" onClick={moveToOverSea} />
-            <EmptyBox backgroundColor="white" />
-          </div> */}
+          </div>*/}
         </div>
       )}
     </>

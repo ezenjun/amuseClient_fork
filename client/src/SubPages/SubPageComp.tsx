@@ -34,25 +34,23 @@ interface ListProps {
 }
 
 interface TileProps {
-  page_component_id: number;
+  page_component_id: string;
   type: string;
   title: string;
-  content: null;
-  itemInfos: ItemInfo[];
-  pcBannerUrl: null;
-  pcBannerLink: null;
-  mobileBannerUrl: null;
-  mobileBannerLink: null;
+  tileCount: number;
+  tileList: tileList[];
 }
 
-interface ItemInfo {
+interface tileList {
   tile_id: number;
   tile_name: string;
+  tile_images: string;
+  itemInfos: [];
 }
 
-interface Hashtag {
-  hashtag: string;
-}
+// interface Hashtag {
+//   hashtag: string;
+// }
 
 interface BoxProps {
   marginRight: string;
@@ -103,12 +101,6 @@ const Dropdown: React.FC<DropdownProps> = ({ onChange }) => {
 
 function SubPageComp() {
   const movePage = useNavigate();
-  // const navigateToDetail = (itemId: number) => {
-  //   movePage(`/detail/${itemId}`);
-  // };
-  // const moveToViewAll = () => {
-  //   movePage("/ViewAll");
-  // };
 
   interface CategoryData {
     categoryId: string;
@@ -205,7 +197,9 @@ function SubPageComp() {
       return <SubLists key={index} title={listItem.title} itemInfos={listItem.itemInfos} />;
     } else if (type === "타일") {
       const tileItem: TileProps = Items[index];
-      return <SubTiles key={index} />;
+      return (
+        <SubTiles key={index} title={tileItem.title} tileCount={tileItem.tileCount} tileList={tileItem.tileList} />
+      );
     } else if (type === "배너") {
       const bannerItem: BannerProps = Items[index];
       return (

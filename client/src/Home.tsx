@@ -18,9 +18,7 @@ import SubLists from "./SubPages/SubLists";
 import SubBanners from "./SubPages/SubBanners";
 import SubTiles from "./SubPages/SubTiles";
 
-
 function Home() {
-
   interface CategoryData {
     categoryId: string;
     categoryName: string;
@@ -28,7 +26,7 @@ function Home() {
     mainDescription: string;
     subDescription: string;
   }
-  
+
   interface BannerProps {
     page_component_id: number;
     type: string;
@@ -53,18 +51,6 @@ function Home() {
     mobileBannerLink: null;
   }
 
-  interface TileProps {
-    page_component_id: string;
-    type: string;
-    title: string;
-    content: null;
-    itemInfos: [];
-    pcBannerUrl: null;
-    pcBannerLink: null;
-    mobileBannerUrl: null;
-    mobileBannerLink: null;
-  }
-
   interface BoxProps {
     marginRight: string;
     itemId: number;
@@ -74,9 +60,22 @@ function Home() {
     imageUrl: string;
   }
 
+  interface TileProps {
+    page_component_id: string;
+    type: string;
+    title: string;
+    tileCount: number;
+    tileList: tileList[];
+  }
 
+  interface tileList {
+    tile_id: number;
+    tile_name: string;
+    tile_images: string;
+    itemInfos: [];
+  }
   const { categoriesInfo } = useCategoryContext();
-  const [apiKeyNumber,setApiKeyNumber] = useState(0)
+  const [apiKeyNumber, setApiKeyNumber] = useState(0);
   const [categoryData, setCategoryData] = useState<CategoryData | null>(null);
 
   // const [loggedIn, setLoggedIn] = useRecoilState(isLoggedIn);
@@ -86,18 +85,16 @@ function Home() {
   const location = useLocation();
 
   useEffect(() => {
-    let infoIndex = _.findIndex(categoriesInfo,{categoryName: 'home'})
-    if(categoriesInfo?.length){
-      const info = categoriesInfo[infoIndex]
-      console.log(info)
-      setApiKeyNumber(info.categoryId)
+    let infoIndex = _.findIndex(categoriesInfo, { categoryName: "home" });
+    if (categoriesInfo?.length) {
+      const info = categoriesInfo[infoIndex];
+      console.log(info);
+      setApiKeyNumber(info.categoryId);
     }
   }, [categoriesInfo]);
 
-  
-
   useEffect(() => {
-    console.log("do")
+    console.log("do");
     axios
       .get(`${process.env.REACT_APP_AMUSE_API}/main/category`)
       .then((response) => {
@@ -158,7 +155,9 @@ function Home() {
       return <SubLists key={index} title={listItem.title} itemInfos={listItem.itemInfos} />;
     } else if (type === "타일") {
       const tileItem: TileProps = Items[index];
-      return <SubTiles key={index} />;
+      return (
+        <SubTiles key={index} title={tileItem.title} tileCount={tileItem.tileCount} tileList={tileItem.tileList} />
+      );
     } else if (type === "배너") {
       const bannerItem: BannerProps = Items[index];
       return (
@@ -208,29 +207,29 @@ function Home() {
           <MainTiles />
           {/* <MainMoreAbout /> 
         </div> */}
-        
-      {categoryData && (
-        <div className={Style["subTitleContainer"]}>
-          <img
-            className={Style["mainPicture.image"]}
-            src={categoryData.categoryImg ? categoryData.categoryImg : ChildTitle}
-            alt="Title img"
-            style={{
-              width: "100%",
-              height: "400px",
-              objectFit: "cover",
-            }}
-          />
-          <h2 className={Style["subTitle"]}>{categoryData.mainDescription}</h2>
-          <h3 className={Style["subContent"]}>{categoryData.subDescription}</h3>
-        </div>
+
+        {categoryData && (
+          <div className={Style["subTitleContainer"]}>
+            <img
+              className={Style["mainPicture.image"]}
+              src={categoryData.categoryImg ? categoryData.categoryImg : ChildTitle}
+              alt="Title img"
+              style={{
+                width: "100%",
+                height: "400px",
+                objectFit: "cover",
+              }}
+            />
+            <h2 className={Style["subTitle"]}>{categoryData.mainDescription}</h2>
+            <h3 className={Style["subContent"]}>{categoryData.subDescription}</h3>
+          </div>
         )}
 
-            <div className={Style["App"]}>
-              <div>
-                <div>{renderedComponents}</div>
-              </div>
-            </div>
+        <div className={Style["App"]}>
+          <div>
+            <div>{renderedComponents}</div>
+          </div>
+        </div>
       </div>
     </Fade>
   );
