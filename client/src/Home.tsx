@@ -1,114 +1,25 @@
 import React, { ReactNode, useEffect, useState } from "react";
+import _ from "lodash";
+// import AppStyle from "./App.module.css";
 import Style from "./SubPages/SubPage.module.css";
-import MainLists from "./MainPage/MainLists/MainLists";
-import MainBanner from "./MainPage/MainBanner/MainBanner";
-import MainTiles from "./MainPage/MainTiles/MainTiles";
-import MainMoreAbout from "./MainPage/MainMoreAbout/MainMoreAbout";
+// import MainLists from "./MainPage/MainLists/MainLists";
+// import MainBanner from "./MainPage/MainBanner/MainBanner";
+// import MainTiles from "./MainPage/MainTiles/MainTiles";
+// import MainMoreAbout from "./MainPage/MainMoreAbout/MainMoreAbout";
 import Fade from "./Fade";
 import { useRecoilState } from "recoil";
 import { isLoggedIn, isManager } from "./atoms";
 import axios from "axios";
 import { redirect, useLocation } from "react-router-dom";
-import { useCookies } from "react-cookie";
-import moment from "moment";
-import { useNavigate } from "react-router-dom";
-import { useParams } from "react-router-dom";
-import SubLists from "./SubPages/SubLists";
-import SubTiles from "./SubPages/SubTiles";
-import SubBanners from "./SubPages/SubBanners";
+// import { useCookies } from "react-cookie";
+import { useCategoryContext } from "./Headers/Contexts/CategoryContext";
 import ChildTitle from "./SubPages/SubtitleImgs/ChildTitle.jpg";
+import SubLists from "./SubPages/SubLists";
+import SubBanners from "./SubPages/SubBanners";
+import SubTiles from "./SubPages/SubTiles";
 
-interface BannerProps {
-  page_component_id: number;
-  type: string;
-  title: string;
-  content: string;
-  itemInfos: [];
-  mobileBannerLink: string;
-  pcBannerUrl: string;
-  pcBannerLink: string;
-  mobileBannerUrl: string;
-}
-
-interface ListProps {
-  page_component_id: string;
-  type: string;
-  title: string;
-  content: null;
-  itemInfos: [];
-  pcBannerUrl: null;
-  pcBannerLink: null;
-  mobileBannerUrl: null;
-  mobileBannerLink: null;
-}
-
-interface TileProps {
-  page_component_id: string;
-  type: string;
-  title: string;
-  content: null;
-  itemInfos: [];
-  pcBannerUrl: null;
-  pcBannerLink: null;
-  mobileBannerUrl: null;
-  mobileBannerLink: null;
-}
-
-interface BoxProps {
-  marginRight: string;
-  itemId: number;
-  handleClick: () => void;
-  title: string;
-  startPrice: string;
-  imageUrl: string;
-}
-
-const Box: React.FC<BoxProps> = ({ marginRight, itemId, handleClick, title, startPrice, imageUrl }) => (
-  <div className={Style["box"]} style={{ marginRight }} onClick={handleClick}>
-    <div className={Style["box_before"]} style={{ backgroundImage: `url(${imageUrl})` }}></div>
-    <div className={Style["like_count"]}>
-      {/* <FontAwesomeIcon
-        icon={isLiked[itemId] ? fullHeart : faHeart}
-        style={{ color: "#ffffff", width: "20px", height: "20px", marginTop: "10px", marginLeft: "10px" }}
-        onClick={() => handleLikeClick(itemId)}
-      /> */}
-    </div>
-    <p className={Style["tripTitle"]}>{title}</p>
-    <p className={Style["tripCost"]}>가격 : {startPrice}원 ~</p>
-  </div>
-);
-
-interface DropdownProps {
-  onChange: (sortOption: string) => void;
-}
-
-const Dropdown: React.FC<DropdownProps> = ({ onChange }) => {
-  const [selectedOption, setSelectedOption] = useState("like_num_desc");
-
-  const handleDropdownChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const selectedValue = event.target.value;
-    setSelectedOption(selectedValue);
-    onChange(selectedValue);
-  };
-
-  return (
-    <div className={Style["dropdown"]} style={{ float: "right" }}>
-      <select value={selectedOption} onChange={handleDropdownChange}>
-        <option value="best-item">좋아요 순</option>
-        <option value="current-item">최신순</option>
-      </select>
-    </div>
-  );
-};
 
 function Home() {
-  const movePage = useNavigate();
-  // const navigateToDetail = (itemId: number) => {
-  //   movePage(`/detail/${itemId}`);
-  // };
-  // const moveToViewAll = () => {
-  //   movePage("/ViewAll");
-  // };
 
   interface CategoryData {
     categoryId: string;
@@ -117,18 +28,81 @@ function Home() {
     mainDescription: string;
     subDescription: string;
   }
+  
+  interface BannerProps {
+    page_component_id: number;
+    type: string;
+    title: string;
+    content: string;
+    itemInfos: [];
+    mobileBannerLink: string;
+    pcBannerUrl: string;
+    pcBannerLink: string;
+    mobileBannerUrl: string;
+  }
 
-  const { apiKey } = useParams() as { apiKey: string };
+  interface ListProps {
+    page_component_id: string;
+    type: string;
+    title: string;
+    content: null;
+    itemInfos: [];
+    pcBannerUrl: null;
+    pcBannerLink: null;
+    mobileBannerUrl: null;
+    mobileBannerLink: null;
+  }
+
+  interface TileProps {
+    page_component_id: string;
+    type: string;
+    title: string;
+    content: null;
+    itemInfos: [];
+    pcBannerUrl: null;
+    pcBannerLink: null;
+    mobileBannerUrl: null;
+    mobileBannerLink: null;
+  }
+
+  interface BoxProps {
+    marginRight: string;
+    itemId: number;
+    handleClick: () => void;
+    title: string;
+    startPrice: string;
+    imageUrl: string;
+  }
+
+
+  const { categoriesInfo } = useCategoryContext();
+  const [apiKeyNumber,setApiKeyNumber] = useState(0)
   const [categoryData, setCategoryData] = useState<CategoryData | null>(null);
 
-  // console.log("apiKey = " + apiKey);
-  const apiKeyNumber: number = 8;
+  // const [loggedIn, setLoggedIn] = useRecoilState(isLoggedIn);
+  // const [manager, setManager] = useRecoilState(isManager);
+  // const [cookies, setCookie, removeCookie] = useCookies(["__jwtk__"]);
+
+  const location = useLocation();
+
   useEffect(() => {
+    let infoIndex = _.findIndex(categoriesInfo,{categoryName: 'home'})
+    if(categoriesInfo?.length){
+      const info = categoriesInfo[infoIndex]
+      console.log(info)
+      setApiKeyNumber(info.categoryId)
+    }
+  }, [categoriesInfo]);
+
+  
+
+  useEffect(() => {
+    console.log("do")
     axios
       .get(`${process.env.REACT_APP_AMUSE_API}/main/category`)
       .then((response) => {
         const hashtagAll = response.data.data.categories;
-        // console.log("hash ", hashtagAll);
+
         let matchedIndex = -1;
         for (let i = 0; i < hashtagAll.length; i++) {
           if (hashtagAll[i].categoryId === apiKeyNumber) {
@@ -147,27 +121,6 @@ function Home() {
       });
   }, [apiKeyNumber]);
 
-  const [displayedItemCount, setDisplayedItemCount] = useState(3);
-
-  const handleResize = () => {
-    const windowWidth = window.innerWidth;
-    if (windowWidth >= 992) {
-      setDisplayedItemCount(3);
-    } else if (windowWidth >= 700) {
-      setDisplayedItemCount(2);
-    } else {
-      setDisplayedItemCount(1);
-    }
-  };
-
-  useEffect(() => {
-    handleResize(); // Call initially
-    window.addEventListener("resize", handleResize); // Add event listener for window resize
-    return () => {
-      window.removeEventListener("resize", handleResize); // Clean up event listener on component unmount
-    };
-  }, []);
-
   const [comTypes, setComTypes] = useState<[]>([]);
   const [Items, setItems] = useState<[]>([]);
   const [bannerContent, setBannerContent] = useState<string[]>([]);
@@ -180,15 +133,14 @@ function Home() {
     fetchPageData(apiKeyNumber);
   }, [apiKeyNumber]);
 
-  console.log("apikeynum = ", apiKeyNumber);
   const fetchPageData = (apiKeyNumber: number) => {
     axios
-      .get(`${process.env.REACT_APP_AMUSE_API}/main/category/8/page`)
+      .get(`${process.env.REACT_APP_AMUSE_API}/main/category/${apiKeyNumber}/page`)
       .then((response) => {
         const ComponentInfos = response.data.data.pageComponentInfos;
         const items = ComponentInfos.map((item: any) => item);
         setItems(items);
-        console.log("items :n", items);
+        console.log(items);
         const types = items.map((item: any) => item.type);
         setComTypes(types);
         console.log("컴포넌트", types);
@@ -202,6 +154,7 @@ function Home() {
     console.log(type);
     if (type === "리스트") {
       const listItem: ListProps = Items[index];
+      // console.log("subpage list ", listItem.itemInfos);
       return <SubLists key={index} title={listItem.title} itemInfos={listItem.itemInfos} />;
     } else if (type === "타일") {
       const tileItem: TileProps = Items[index];
@@ -221,37 +174,66 @@ function Home() {
     return null;
   });
 
+  const [listTitle, setListTitle] = useState<string[]>([]);
+  const [itemCount, setItemCount] = useState<number[]>([]);
+  // const [itemIds, setItemIds] = useState<number[]>([]);
+  // const [imageUrls, setImageUrls] = useState<string[]>([]);
+  // const [titles, setTitles] = useState<string[]>([]);
+  // const [startPrices, setStartPrice] = useState<number[]>([]);
+
+  // useEffect(() => {
+  //   axios
+  //     .get("https://amuseapi.wheelgo.net/main-page/lists")
+  //     .then((response) => {
+  //       const Items = response.data.data.listItems;
+  //       const list_title = Items.map((item: any) => item.list_title);
+  //       setListTitle(list_title);
+  //       const item_count = Items.map((item: any) => item.item_count);
+  //       setItemCount(item_count);
+
+  //       console.log(response.data.data);
+  //     })
+  //     .catch((error) => {
+  //       console.log("home api 연결 실패");
+  //     });
+  // }, []);
+
   return (
-    <div>
-      {categoryData ? (
-        <div>
-          <Fade>
-            <div className={Style["subTitleContainer"]}>
-              <img
-                className={Style["mainPicture.image"]}
-                src={categoryData.categoryImg ? categoryData.categoryImg : ChildTitle}
-                alt="Title img"
-                style={{
-                  width: "100%",
-                  height: "400px",
-                  objectFit: "cover",
-                }}
-              />
-              <h2 className={Style["subTitle"]}>{categoryData.mainDescription}</h2>
-              <h3 className={Style["subContent"]}>{categoryData.subDescription}</h3>
-            </div>
+    <Fade>
+      <div>
+        {/* <Header />
+        <MainBanner />
+        <div className={Style["App"]}>
+          <MainLists />
+          <MainTiles />
+          {/* <MainMoreAbout /> 
+        </div> */}
+        
+      {categoryData && (
+        <div className={Style["subTitleContainer"]}>
+          <img
+            className={Style["mainPicture.image"]}
+            src={categoryData.categoryImg ? categoryData.categoryImg : ChildTitle}
+            alt="Title img"
+            style={{
+              width: "100%",
+              height: "400px",
+              objectFit: "cover",
+            }}
+          />
+          <h2 className={Style["subTitle"]}>{categoryData.mainDescription}</h2>
+          <h3 className={Style["subContent"]}>{categoryData.subDescription}</h3>
+        </div>
+        )}
 
             <div className={Style["App"]}>
               <div>
                 <div>{renderedComponents}</div>
               </div>
             </div>
-          </Fade>
-        </div>
-      ) : (
-        <h3 style={{ margin: "1rem" }}>존재하지 않는 페이지입니다.</h3>
-      )}
-    </div>
+      </div>
+    </Fade>
   );
 }
+
 export default Home;

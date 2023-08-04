@@ -13,6 +13,7 @@ import axios from "axios";
 import SearchIcon from "./search.png";
 import { useCookies } from "react-cookie";
 import moment from "moment";
+import { useCategoryContext } from "./Contexts/CategoryContext";
 
 interface CategoryMenuProps {
   categoryName: string;
@@ -33,10 +34,30 @@ interface MoreDropdownProps {
 
 function Header() {
   const movePage = useNavigate();
+  const { setCategoriesInfo } =useCategoryContext()
   const [loggedIn, setLoggedIn] = useRecoilState(isLoggedIn);
   const [manager, setManager] = useRecoilState(isManager);
   const [token, setToken] = useState("");
   const [cookies, setCookie, removeCookie] = useCookies(["__jwtk__"]);
+  
+  // const checkIsManager = (token: String) => {
+  //   const searchParams = new URLSearchParams(location.search);
+  //   const email = searchParams.get("email");
+
+  //   axios
+  //     .get(`${process.env.REACT_APP_AMUSE_API}/api/v1/admin/search/users?email=${email}`, {
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         Authorization: `Bearer ${token}`,
+  //       },
+  //     })
+  //     .then((response) => {
+  //       console.log(response.data);
+  //       if (response.data.code == 1000) {
+  //         setManager(true);
+  //       }
+  //     });
+  // };
 
   const navigateToHome = () => {
     movePage("/");
@@ -108,6 +129,13 @@ function Header() {
     </div>
   );
 
+  // useEffect(() => {
+  //   const token = cookies["__jwtk__"];
+  //   if (token) {
+  //     checkIsManager(token);
+  //   }
+  // }, []);
+
   useEffect(() => {
     axios
       .get(`${process.env.REACT_APP_AMUSE_API}/main/category`)
@@ -115,6 +143,7 @@ function Header() {
         const categoryAll = response.data.data.categories;
         const categorySort: any | [] = _.sortBy(categoryAll, "sequence");
         const categoryNames = categorySort.map((id: any) => id.categoryName);
+        setCategoriesInfo(categorySort)
         setCategories(categoryNames);
         const categoryId = categoryAll.map((id: any) => id.categoryId);
         setCategoryIds(categoryId);
