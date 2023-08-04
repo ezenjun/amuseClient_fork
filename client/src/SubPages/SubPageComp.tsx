@@ -36,15 +36,24 @@ interface ListProps {
 }
 
 interface TileProps {
-  page_component_id: string;
+  page_component_id: number;
   type: string;
   title: string;
   content: null;
-  itemInfos: [];
+  itemInfos: ItemInfo[];
   pcBannerUrl: null;
   pcBannerLink: null;
   mobileBannerUrl: null;
   mobileBannerLink: null;
+}
+
+interface ItemInfo {
+  tile_id: number;
+  tile_name: string;
+}
+
+interface Hashtag {
+  hashtag: string;
 }
 
 interface BoxProps {

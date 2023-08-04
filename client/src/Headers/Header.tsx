@@ -19,6 +19,13 @@ interface CategoryMenuProps {
   handleClick: () => void;
 }
 
+interface userProps {
+  id: string;
+  name: string;
+  email: string;
+  grade: string;
+}
+
 interface MoreDropdownProps {
   // handleClick: () => void;
   // count: number;
@@ -189,6 +196,7 @@ function Header() {
         console.log(err);
       });
   };
+  const [userData, setUserData] = useState<userProps>();
   const getUserInfoAsToken = async () => {
     const token = cookies["__jwtk__"];
     axios
@@ -199,8 +207,8 @@ function Header() {
         },
       })
       .then((response) => {
-        const data = response.data.data;
-        console.log(data);
+        setUserData(response.data.data);
+        console.log(response.data.data);
       })
       .catch((err) => {
         console.log(err);
@@ -222,6 +230,7 @@ function Header() {
           {mobileHeader === 1 && (
             <div style={{ paddingTop: "5px", paddingBottom: "10px" }}>
               <div className="btnBox_mobile">
+                {loggedIn ? <p>{userData?.name || ""} 님 😊</p> : ""}
                 {loggedIn ? (
                   <button className="loginBtn" onClick={handleLogout}>
                     로그아웃
@@ -293,6 +302,7 @@ function Header() {
           {mobileHeader === 0 && (
             <div>
               <div className="btnBox">
+                {loggedIn ? <p className="userName">{userData?.name || ""} 님 😊</p> : ""}
                 {loggedIn ? (
                   <button className="loginBtn" onClick={handleLogout}>
                     로그아웃
