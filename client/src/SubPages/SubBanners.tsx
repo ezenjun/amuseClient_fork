@@ -1,12 +1,6 @@
 import React, { ReactNode } from "react";
 import Style from "../MainPage/MainBanner/MainBanner.module.css";
-
-interface SubBannersProps {
-  title: string;
-  content: string;
-  bannerUrl: string;
-  bannerLink: string;
-}
+import { SubBannersProps } from "../Interfaces/PropsInterfaces";
 
 const BigBox = ({
   backgroundColor,

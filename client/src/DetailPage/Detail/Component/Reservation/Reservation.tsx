@@ -9,22 +9,13 @@ import Swal from "sweetalert2";
 import axios from "axios";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { useOrderContext } from "../../../Contexts/OrderContext";
+import { GuideData } from "../../../../Interfaces/DataInterfaces";
 
 interface ReservationProps {
   itemId: number | null;
   productCode: number;
   startPrice: number;
   likeNum: number;
-}
-
-interface GuideData {
-  guide_db_id: number;
-  guideCode: string;
-  userName: string;
-  email: string;
-  profileImageUrl: string;
-  introduce: string;
-  guide_comment_by_item: string;
 }
 
 function Reservation({ itemId, productCode, startPrice, likeNum }: ReservationProps) {

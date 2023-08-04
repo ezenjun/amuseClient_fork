@@ -10,6 +10,7 @@ import NoRightIcon from "../ArrowIcons/right_no.png";
 import LeftIcon from "../ArrowIcons/left.png";
 import NoLeftIcon from "../ArrowIcons/left_no.png";
 import DefaultImg from "../MainBanner/default.jpg";
+import { BoxProps } from "../../Interfaces/PropsInterfaces";
 
 const numberWithCommas = (number: number | null): string => {
   if (number === null) {
@@ -17,15 +18,6 @@ const numberWithCommas = (number: number | null): string => {
   }
   return number.toLocaleString("en");
 };
-
-interface BoxProps {
-  marginRight: string;
-  itemId: number;
-  handleClick: () => void;
-  title: string;
-  startPrice: string;
-  imageUrl: string;
-}
 
 function MainLists() {
   /**

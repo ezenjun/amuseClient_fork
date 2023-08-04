@@ -3,12 +3,9 @@ import axios from "axios";
 import MainPicture from "./MainPicture/MainPicture";
 import SubPicture from "./SubPicture/SubPicture";
 import "./Picture.scss";
+import { ItemIdProps } from "../../../../Interfaces/PropsInterfaces";
 
-interface PictureProps {
-  itemId: number | null;
-}
-
-function Picture({ itemId }: PictureProps) {
+function Picture({ itemId }: ItemIdProps) {
   /**
    * Picture Data
    */

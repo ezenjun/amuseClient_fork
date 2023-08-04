@@ -2,22 +2,10 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./CourseIntro.scss";
 import CourseIntroDetail from "./CourseIntroDetail/CourseIntroDetail";
+import { ItemIdProps } from "../../../../Interfaces/PropsInterfaces";
+import { CourseIntroData } from "../../../../Interfaces/DataInterfaces";
 
-interface CourseIntroProps {
-  itemId: number | null;
-}
-
-interface CourseIntroData {
-  title: string;
-  content: string;
-  sequenceId: number;
-  timeCost: string;
-  imageUrl: string;
-  latitude: number;
-  longitude: number;
-}
-
-function CourseIntro({ itemId }: CourseIntroProps) {
+function CourseIntro({ itemId }: ItemIdProps) {
   /**
    * CourseIntro Data
    */

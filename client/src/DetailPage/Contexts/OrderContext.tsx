@@ -1,28 +1,12 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { DateRange } from "react-day-picker";
-
-interface Props {
-  children: React.ReactElement;
-  location?: any;
-}
-interface TicketData {
-  title: string;
-  content: string;
-  priceList: { startDate: string; price: number }[];
-  count: number;
-}
-type OrderData = {
-  orderData: any;
-  setOrderData: any;
-  orderTicketData: any;
-  setOrderTicketData: any;
-  orderRange: any ; 
-  setOrderRange: any;
-};
+import { OrderData } from "../../Types/DataTypes";
+import { OrderContextProps } from "../../Interfaces/PropsInterfaces";
+import { TicketData } from "../../Interfaces/DataInterfaces";
 
 const OrderContext = createContext({} as OrderData);
 
-export function OrderContextProvider({ children, location }: Props) {
+export function OrderContextProvider({ children, location }: OrderContextProps) {
   const [orderData, setOrderData] = useState<any>({
     pay_method: "신용/체크카드",
     productPrice: 0,

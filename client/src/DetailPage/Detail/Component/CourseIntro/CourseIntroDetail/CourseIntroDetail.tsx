@@ -3,13 +3,7 @@ import { FC } from 'react';
 import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './CourseIntroDetail.scss';
-
-interface CourseIntroDetailProps {
-    title: string;
-    time: string;
-    content: string;
-    imageSrc: string;
-  }
+import { CourseIntroDetailProps } from '../../../../../Interfaces/PropsInterfaces';
 
 function CourseIntroDetail({ title, time, content, imageSrc }: CourseIntroDetailProps) {
   return(

@@ -1,11 +1,11 @@
 import React, { SetStateAction, useEffect, useRef, useState } from "react";
 import styles from "./TermsModal.module.scss";
 
-interface Props {
+interface TermsModalProps {
   setShowModal: React.Dispatch<SetStateAction<boolean>>;
 }
 
-export const TermsModal: React.FC<Props> = ({ setShowModal }) => {
+export const TermsModal: React.FC<TermsModalProps> = ({ setShowModal }) => {
   const closeModal = () => {
     setShowModal(false);
     document.body.style.overflow = "scroll";

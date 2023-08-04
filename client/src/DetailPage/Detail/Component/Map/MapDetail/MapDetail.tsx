@@ -2,21 +2,8 @@ import GoogleMapReact from "google-map-react";
 import "./MapDetail.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
-
-interface MapProps {
-  data: {
-    day: number;
-    latitude: number | null;
-    longitude: number | null;
-    title: string;
-  }[];
-}
-
-interface MarkerProps {
-  lat: number;
-  lng: number;
-  title: string;
-}
+import { MapDataProps } from "../../../../../Interfaces/PropsInterfaces";
+import { MarkerProps } from "../../../../../Interfaces/PropsInterfaces";
 
 const Marker = ({ lat, lng, title }: MarkerProps) => (
   <div className="Marker">
@@ -27,7 +14,7 @@ const Marker = ({ lat, lng, title }: MarkerProps) => (
   </div>
 );
 
-function MapDetail({ data }: MapProps) {
+function MapDetail({ data }: MapDataProps) {
   const hasInvalidCoordinates = data.some((marker) => marker.latitude === null || marker.longitude === null);
 
   if (hasInvalidCoordinates) {

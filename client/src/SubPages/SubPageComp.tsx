@@ -8,51 +8,8 @@ import Fade from "../Fade";
 import SubLists from "./SubLists";
 import SubBanners from "./SubBanners";
 import SubTiles from "./SubTiles";
-
-interface BannerProps {
-  page_component_id: number;
-  type: string;
-  title: string;
-  content: string;
-  itemInfos: [];
-  mobileBannerLink: string;
-  pcBannerUrl: string;
-  pcBannerLink: string;
-  mobileBannerUrl: string;
-}
-
-interface ListProps {
-  page_component_id: string;
-  type: string;
-  title: string;
-  content: null;
-  itemInfos: [];
-  pcBannerUrl: null;
-  pcBannerLink: null;
-  mobileBannerUrl: null;
-  mobileBannerLink: null;
-}
-
-interface TileProps {
-  page_component_id: string;
-  type: string;
-  title: string;
-  content: null;
-  itemInfos: [];
-  pcBannerUrl: null;
-  pcBannerLink: null;
-  mobileBannerUrl: null;
-  mobileBannerLink: null;
-}
-
-interface BoxProps {
-  marginRight: string;
-  itemId: number;
-  handleClick: () => void;
-  title: string;
-  startPrice: string;
-  imageUrl: string;
-}
+import { BannerProps, ListProps, TileProps, BoxProps, DropdownProps } from "../Interfaces/PropsInterfaces";
+import { CategoryData } from "../Interfaces/DataInterfaces";
 
 const Box: React.FC<BoxProps> = ({ marginRight, itemId, handleClick, title, startPrice, imageUrl }) => (
   <div className={Style["box"]} style={{ marginRight }} onClick={handleClick}>
@@ -69,9 +26,6 @@ const Box: React.FC<BoxProps> = ({ marginRight, itemId, handleClick, title, star
   </div>
 );
 
-interface DropdownProps {
-  onChange: (sortOption: string) => void;
-}
 
 const Dropdown: React.FC<DropdownProps> = ({ onChange }) => {
   const [selectedOption, setSelectedOption] = useState("like_num_desc");
@@ -100,14 +54,6 @@ function SubPageComp() {
   // const moveToViewAll = () => {
   //   movePage("/ViewAll");
   // };
-
-  interface CategoryData {
-    categoryId: string;
-    categoryName: string;
-    categoryImg: string;
-    mainDescription: string;
-    subDescription: string;
-  }
 
   const { apiKey } = useParams() as { apiKey: string };
   const [categoryData, setCategoryData] = useState<CategoryData | null>(null);

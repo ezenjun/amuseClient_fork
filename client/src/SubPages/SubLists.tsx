@@ -9,6 +9,8 @@ import RightIcon from "../MainPage/ArrowIcons/right.png";
 import NoRightIcon from "../MainPage/ArrowIcons/right_no.png";
 import LeftIcon from "../MainPage/ArrowIcons/left.png";
 import NoLeftIcon from "../MainPage/ArrowIcons/left_no.png";
+import { BoxProps } from "../Interfaces/PropsInterfaces";
+import { SubListsProps } from "../Interfaces/PropsInterfaces";
 
 const numberWithCommas = (number: number | null): string => {
   if (number === null) {
@@ -16,20 +18,6 @@ const numberWithCommas = (number: number | null): string => {
   }
   return number.toLocaleString("en");
 };
-
-interface BoxProps {
-  marginRight: string;
-  itemId: number;
-  handleClick: () => void;
-  title: string;
-  startPrice: string;
-  imageUrl: string;
-}
-
-interface SubListsProps {
-  title: string;
-  itemInfos: [];
-}
 
 function SubLists({ title, itemInfos }: SubListsProps) {
   console.log("itemInfos", itemInfos);

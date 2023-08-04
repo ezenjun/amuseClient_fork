@@ -2,12 +2,9 @@ import React, { useEffect, useState } from "react";
 import "./ReviewPicture.scss";
 import SubPicture from "../Picture/SubPicture/SubPicture";
 import axios from "axios";
+import { ItemIdProps } from "../../../../Interfaces/PropsInterfaces";
 
-interface ReviewPictureProps {
-  itemId: number | null;
-}
-
-function ReviewPicture({ itemId }: ReviewPictureProps) {
+function ReviewPicture({ itemId }: ItemIdProps) {
   /**
    * Review Picture Data
    */

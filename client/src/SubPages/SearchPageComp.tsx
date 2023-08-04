@@ -5,6 +5,7 @@ import Style from "../MainPage/ListStyle.module.css";
 import AppStyle from "../App.module.css";
 import axios from "axios";
 import { SearchSharp } from "@mui/icons-material";
+import { BoxProps, DropdownProps } from "../Interfaces/PropsInterfaces";
 
 const numberWithCommas = (number: number | null): string => {
   if (number === null) {
@@ -12,19 +13,6 @@ const numberWithCommas = (number: number | null): string => {
   }
   return number.toLocaleString("en");
 };
-
-interface BoxProps {
-  marginRight: string;
-  itemId: number;
-  handleClick: () => void;
-  title: string;
-  startPrice: string;
-  imageUrl: string;
-}
-
-interface DropdownProps {
-  onChange: (sortOption: string) => void;
-}
 
 const Dropdown: React.FC<DropdownProps> = ({ onChange }) => {
   const [selectedOption, setSelectedOption] = useState("like_num_desc");

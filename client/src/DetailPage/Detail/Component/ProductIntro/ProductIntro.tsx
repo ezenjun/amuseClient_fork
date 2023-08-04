@@ -1,16 +1,13 @@
 import React, { useEffect, useState } from "react";
 import "./ProductIntro.scss";
 import axios from "axios";
-
-interface ProductIntroProps {
-  itemId: number | null;
-}
+import { ItemIdProps } from "../../../../Interfaces/PropsInterfaces";
 
 interface ProductIntroData {
   content: string;
 }
 
-function ProductIntro({ itemId }: ProductIntroProps) {
+function ProductIntro({ itemId }: ItemIdProps) {
   /**
    * ProductIntro Data
    */

@@ -1,9 +1,6 @@
 import React, { ReactNode } from "react";
 import { Transition } from "react-transition-group";
-
-interface IProps {
-  children: React.ReactNode;
-}
+import { IProps } from "./Interfaces/PropsInterfaces"
 
 const duration = 200;
 

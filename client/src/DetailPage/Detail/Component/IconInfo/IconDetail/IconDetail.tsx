@@ -1,14 +1,10 @@
 import React from 'react';
 import './IconDetail.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { IconProp } from '@fortawesome/fontawesome-svg-core';
+import { IconDetailProps } from '../../../../../Interfaces/PropsInterfaces';
 
-interface Props {
-  icon: IconProp;
-  text: string;
-}
 
-function IconDetail({ icon, text }: Props) {
+function IconDetail({ icon, text }: IconDetailProps) {
   return (
     <div className="Detail-icon-detail">
       {/* 아이콘 정보 */}

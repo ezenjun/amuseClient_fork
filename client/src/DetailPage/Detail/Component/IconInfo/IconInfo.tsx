@@ -3,18 +3,11 @@ import axios from "axios";
 import "./IconInfo.scss";
 import { faCalendar, faLanguage, faRoad, faRoute } from "@fortawesome/free-solid-svg-icons";
 import IconDetail from "./IconDetail/IconDetail";
-import { IconProp } from "@fortawesome/fontawesome-svg-core";
+import { ItemIdProps } from "../../../../Interfaces/PropsInterfaces";
+import { IconInfoData } from "../../../../Interfaces/DataInterfaces";
 
-interface IconInfoProps {
-  itemId: number | null;
-}
 
-interface IconInfoData {
-  icon: IconProp;
-  text: string;
-}
-
-function IconInfo({ itemId }: IconInfoProps) {
+function IconInfo({ itemId }: ItemIdProps) {
   /**
    * IconInfo Data
    */

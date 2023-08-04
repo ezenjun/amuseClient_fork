@@ -12,6 +12,8 @@ import { isLoggedIn, isManager } from "./atoms";
 import axios from "axios";
 import { redirect, useLocation } from "react-router-dom";
 // import { useCookies } from "react-cookie";
+import { CategoryData } from "./Interfaces/DataInterfaces"
+import { TileProps,ListProps,BannerProps } from "./Interfaces/PropsInterfaces"
 import { useCategoryContext } from "./Headers/Contexts/CategoryContext";
 import ChildTitle from "./SubPages/SubtitleImgs/ChildTitle.jpg";
 import SubLists from "./SubPages/SubLists";
@@ -20,60 +22,6 @@ import SubTiles from "./SubPages/SubTiles";
 
 
 function Home() {
-
-  interface CategoryData {
-    categoryId: string;
-    categoryName: string;
-    categoryImg: string;
-    mainDescription: string;
-    subDescription: string;
-  }
-  
-  interface BannerProps {
-    page_component_id: number;
-    type: string;
-    title: string;
-    content: string;
-    itemInfos: [];
-    mobileBannerLink: string;
-    pcBannerUrl: string;
-    pcBannerLink: string;
-    mobileBannerUrl: string;
-  }
-
-  interface ListProps {
-    page_component_id: string;
-    type: string;
-    title: string;
-    content: null;
-    itemInfos: [];
-    pcBannerUrl: null;
-    pcBannerLink: null;
-    mobileBannerUrl: null;
-    mobileBannerLink: null;
-  }
-
-  interface TileProps {
-    page_component_id: string;
-    type: string;
-    title: string;
-    content: null;
-    itemInfos: [];
-    pcBannerUrl: null;
-    pcBannerLink: null;
-    mobileBannerUrl: null;
-    mobileBannerLink: null;
-  }
-
-  interface BoxProps {
-    marginRight: string;
-    itemId: number;
-    handleClick: () => void;
-    title: string;
-    startPrice: string;
-    imageUrl: string;
-  }
-
 
   const { categoriesInfo } = useCategoryContext();
   const [apiKeyNumber,setApiKeyNumber] = useState(0)

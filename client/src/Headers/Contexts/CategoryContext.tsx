@@ -1,17 +1,10 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import { IProps } from "../../Interfaces/PropsInterfaces";
+import { CategoryInfoData } from "../../Types/DataTypes";
 
-interface Props {
-  children: React.ReactElement;
-}
+const CategoryContext = createContext<CategoryInfoData>({});
 
-type CategoryData = {
-  categoriesInfo?: Array<any>;
-  setCategoriesInfo?: any;
-};
-
-const CategoryContext = createContext<CategoryData>({});
-
-export function CategoryContextProvider({ children }: Props) {
+export function CategoryContextProvider({ children }: IProps) {
   const [categoriesInfo, setCategoriesInfo] = useState<Array<any>>([]);
 
   useEffect(() => {

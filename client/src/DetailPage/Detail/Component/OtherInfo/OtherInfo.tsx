@@ -2,16 +2,13 @@ import React, { useEffect, useState } from "react";
 import "./OtherInfo.scss";
 import OtherInfoDetail from "./OtherInfoDetail/OtherInfoDetail";
 import axios from "axios";
-
-interface OtherInfoProps {
-  itemId: number | null;
-}
+import { ItemIdProps } from "../../../../Interfaces/PropsInterfaces";
 
 interface OtherInfoData {
   content: string;
 }
 
-function OtherInfo({ itemId }: OtherInfoProps) {
+function OtherInfo({ itemId }: ItemIdProps) {
   /**
    * OtherInfo Data
    */

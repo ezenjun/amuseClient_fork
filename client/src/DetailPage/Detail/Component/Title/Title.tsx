@@ -2,20 +2,10 @@ import React, { useEffect, useState } from "react";
 import TitleDetail from "./TitleDetail/TitleDetail";
 import axios from "axios";
 import "./Title.scss";
+import { ItemIdProps } from "../../../../Interfaces/PropsInterfaces";
+import { TitleData } from "../../../../Interfaces/DataInterfaces";
 
-interface TitleProps {
-  itemId: number | null;
-}
-
-interface TitleData {
-  country: string;
-  city: string;
-  title: string;
-  rated: number;
-  review_count: number;
-}
-
-function Title({ itemId }: TitleProps) {
+function Title({ itemId }: ItemIdProps) {
   /**
    * Title Data
    */

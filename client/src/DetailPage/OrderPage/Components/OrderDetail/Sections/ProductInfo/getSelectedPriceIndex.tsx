@@ -1,13 +1,7 @@
 import { format, isSameDay, parseISO, parse } from "date-fns";
 import { DateRange } from "react-day-picker";
+import { TicketData } from "../../../../../../Interfaces/DataInterfaces";
 
-// Ticket Data
-    interface TicketData {
-    title: string;
-    content: string;
-    priceList: { startDate: string; price: number }[];
-    count: number;
-}
 
 // date format change
 function getSelectedPriceIndex(ticket: TicketData, range: DateRange | undefined): number {

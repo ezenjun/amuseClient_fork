@@ -2,17 +2,10 @@ import { useState } from "react";
 import { CommonHeader } from "../../../CommonHeader";
 import { TermsModal } from "../../../Modal/TermsModal";
 import styles from "./Terms.module.scss";
+import { TermsProps } from "../../../../../../Interfaces/PropsInterfaces";
 
-interface Props {
-  privacy : boolean;
-  privacyCheck: (check: boolean) => void;
-  takeVideo : boolean;
-  takeVideoCheck : (check: boolean) => void;
-  videoInMarketing : boolean;
-  videoInMarketingCheck : (check: boolean) => void;
-}
 
-export const Terms: React.FC<Props> = ({privacy,privacyCheck,takeVideo,takeVideoCheck,videoInMarketing,videoInMarketingCheck}) => {
+export const Terms: React.FC<TermsProps> = ({privacy,privacyCheck,takeVideo,takeVideoCheck,videoInMarketing,videoInMarketingCheck}) => {
   const [showModal, setShowModal] = useState(false);
   
 

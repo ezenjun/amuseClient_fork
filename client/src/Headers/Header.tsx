@@ -14,11 +14,8 @@ import SearchIcon from "./search.png";
 import { useCookies } from "react-cookie";
 import moment from "moment";
 import { useCategoryContext } from "./Contexts/CategoryContext";
+import { CategoryNameMenuProps } from "../Interfaces/PropsInterfaces";
 
-interface CategoryMenuProps {
-  categoryName: string;
-  handleClick: () => void;
-}
 
 interface MoreDropdownProps {
   // handleClick: () => void;
@@ -83,7 +80,7 @@ function Header() {
     movePage("/SignUP");
   };
 
-  const CategoryMenu: React.FC<CategoryMenuProps> = ({ categoryName: categoryName, handleClick }) => (
+  const CategoryMenu: React.FC<CategoryNameMenuProps> = ({ categoryName: categoryName, handleClick }) => (
     <div className={mobileHeader === 0 ? "menu-item" : "menu-item_mobile"} onClick={handleClick}>
       {categoryName}
     </div>

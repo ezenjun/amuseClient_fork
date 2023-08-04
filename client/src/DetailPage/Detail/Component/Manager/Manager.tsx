@@ -3,23 +3,13 @@ import "./Manager.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope as solidFaEnelope } from "@fortawesome/free-solid-svg-icons";
 import { faEnvelope as regularFaEnelope } from "@fortawesome/free-regular-svg-icons";
+import { GuideData } from "../../../../Interfaces/DataInterfaces";
+import { ItemIdProps } from "../../../../Interfaces/PropsInterfaces";
 import axios from "axios";
 
-interface ManagerProps {
-  itemId: number | null;
-}
 
-interface GuideData {
-  guide_db_id: number;
-  guideCode: string;
-  userName: string;
-  email: string;
-  profileImageUrl: string;
-  introduce: string;
-  guide_comment_by_item: string;
-}
 
-function Manager({ itemId }: ManagerProps) {
+function Manager({ itemId }: ItemIdProps) {
   /**
    * Manager Data
    */

@@ -4,6 +4,7 @@ import Home from "../src/Home";
 import SubPageComp from "./SubPages/SubPageComp";
 import MyPage from "./MyPages/MyPage";
 import Login from "./LogIn/LogIn";
+import LoginAgree from "./LogIn/LoginAgree";
 import SignUp from "./SignUp/SignUp";
 import Detail from "./DetailPage/Detail/Detail";
 import Review from "./MyPages/Review/Review";
@@ -80,6 +81,7 @@ function App() {
           <Route path="/ChildCare" element={<ChildCare />}></Route>
           <Route path="/SeniorCare" element={<SeniorCare />}></Route> */}
           <Route path="/LogIn" element={<Login />}></Route>
+          <Route path="/LogInAgree" element={<LoginAgree />}></Route>
           <Route path="/SignUp" element={<SignUp />}></Route>
           <Route path="/MyPage/:category" element={<MyPage />}></Route>
           <Route path="/Review/:id" element={<Review />}></Route>

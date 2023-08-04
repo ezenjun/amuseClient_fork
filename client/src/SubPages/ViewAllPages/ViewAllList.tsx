@@ -16,11 +16,7 @@ import CreditCardIcon from "@mui/icons-material/CreditCard";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import "./ViewAllList.css";
 import { useNavigate } from "react-router-dom";
-
-interface CategoryMenuProps {
-  hashtagName: string;
-  handleClick: () => void;
-}
+import { CategoryMenuProps } from "../../Interfaces/PropsInterfaces";
 
 export default function ViewAllList() {
   const navigate = useNavigate();

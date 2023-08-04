@@ -6,6 +6,7 @@ import { DateRange } from "react-day-picker";
 import Swal from "sweetalert2";
 import axios from "axios";
 import { useOrderContext } from "../../../../Contexts/OrderContext";
+import { TicketData } from "../../../../../Interfaces/DataInterfaces";
 
 type DateProps = {
   itemId: number | null;
@@ -18,12 +19,6 @@ type DateProps = {
 
 function TicketList({ range, itemId, classNone, classTicketContainer, classTicketPrice, classTicketCnt }: DateProps) {
   // Ticket Data
-  interface TicketData {
-    title: string;
-    content: string;
-    priceList: { startDate: string; price: number }[];
-    count: number;
-  }
 
   const [ticketData, setTicketData] = useState<TicketData[]>([]);
   const { orderTicketData, setOrderTicketData } = useOrderContext();

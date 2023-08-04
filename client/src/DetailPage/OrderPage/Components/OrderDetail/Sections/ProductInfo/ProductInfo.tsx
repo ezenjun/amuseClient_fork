@@ -3,15 +3,9 @@ import { CommonHeader } from "../../../CommonHeader";
 import styles from "./ProductInfo.module.scss";
 import { useOrderContext } from "../../../../../Contexts/OrderContext";
 import getSelectedPriceIndex from "./getSelectedPriceIndex";
+import { TicketData } from "../../../../../../Interfaces/DataInterfaces";
 
 export function ProductInfo() {
-  interface TicketData {
-    title: string;
-    content: string;
-    priceList: { startDate: string; price: number }[];
-    count: number;
-  }
-
   const {orderData,setOrderData,orderTicketData,setOrderTicketData,orderRange,setOrderRange} = useOrderContext()
   const [ticketData, setTicketData] = useState<TicketData[]>([]);
   useEffect(()=>{

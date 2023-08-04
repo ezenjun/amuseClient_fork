@@ -2,22 +2,11 @@ import React, { useEffect, useState } from "react";
 import "./Map.scss";
 import MapDetail from "./MapDetail/MapDetail";
 import axios from "axios";
+import { ItemIdProps } from "../../../../Interfaces/PropsInterfaces";
+import { MapData } from "../../../../Interfaces/DataInterfaces";
 
-interface MapProps {
-  itemId: number | null;
-}
 
-interface MapData {
-  title: string;
-  content: string;
-  day: number;
-  sequenceId: number;
-  timeCost: string;
-  latitude: number | null;
-  longitude: number | null;
-}
-
-function Map({ itemId }: MapProps) {
+function Map({ itemId }: ItemIdProps) {
   /**
    * Map Data
    */
