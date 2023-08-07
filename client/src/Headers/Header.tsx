@@ -35,7 +35,7 @@ function Header() {
   const [loggedIn, setLoggedIn] = useRecoilState(isLoggedIn);
   const [manager, setManager] = useRecoilState(isManager);
   const [token, setToken] = useState("");
-  const [cookies, setCookie, removeCookie] = useCookies(["__jwtkId__","__jwtk__"]);
+  const [cookies, setCookie, removeCookie] = useCookies(["__jwtkId__","__jwtk__", "__igjwtk__"]);
   
   // const checkIsManager = (token: String) => {
   //   const searchParams = new URLSearchParams(location.search);
@@ -206,9 +206,9 @@ function Header() {
     }else if(locationString.includes("amusetravel.wheelgo.net")){
       let token: string | null = cookies.__jwtk__;
       let idToken: String | null = cookies.__jwtkId__;
-      if(!idToken){
+      let igToken: string | null = cookies.__igjwtk__;
+      if(token && !idToken && token !== igToken){
         const expires = moment().add("8", "h").toDate();
-        console.log(expires);
         setCookie("__jwtkId__", token, { expires });
         setLoggedIn(true);
         movePage("/")
@@ -265,6 +265,8 @@ function Header() {
       console.log(response)
       setLoggedIn(false);
       setManager(false);
+      const expires = moment().add("8", "h").toDate();
+      setCookie("__igjwtk__", token, { expires });
       removeCookie("__jwtkId__", { path: "/" });
       // window.location.reload();
       // navigateToHome();
