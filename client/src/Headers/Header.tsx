@@ -209,7 +209,7 @@ function Header() {
 
       console.log("igToken",igToken)
       console.log("token == null",token == null)
-      console.log("( igToken && igToken?.length > 0 && token == igToken)",( igToken && igToken?.length > 0 && token == igToken))
+      console.log("( igToken && igToken?.length > 0 && token == igToken)", igToken && igToken?.length > 0 && token == igToken)
 
       if (token == null) {
         return;
