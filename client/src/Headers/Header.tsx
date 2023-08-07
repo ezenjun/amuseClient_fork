@@ -254,8 +254,8 @@ function Header() {
       setLoggedIn(false);
       setManager(false);
       removeCookie("__jwtk__", { path: "/" });
-      window.location.reload();
-      navigateToHome();
+      // window.location.reload();
+      // navigateToHome();
     })
   };
   return (
