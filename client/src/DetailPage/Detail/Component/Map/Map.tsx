@@ -5,7 +5,6 @@ import axios from "axios";
 import { ItemIdProps } from "../../../../Interfaces/PropsInterfaces";
 import { MapData } from "../../../../Interfaces/DataInterfaces";
 
-
 function Map({ itemId }: ItemIdProps) {
   /**
    * Map Data

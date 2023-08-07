@@ -12,8 +12,8 @@ import { isLoggedIn, isManager } from "./atoms";
 import axios from "axios";
 import { redirect, useLocation } from "react-router-dom";
 // import { useCookies } from "react-cookie";
-import { CategoryData } from "./Interfaces/DataInterfaces"
-import { ListProps, BannerProps } from "./Interfaces/PropsInterfaces"
+import { CategoryData } from "./Interfaces/DataInterfaces";
+import { ListProps, BannerProps } from "./Interfaces/PropsInterfaces";
 import { useCategoryContext } from "./Headers/Contexts/CategoryContext";
 import ChildTitle from "./SubPages/SubtitleImgs/ChildTitle.jpg";
 import SubLists from "./SubPages/SubLists";
