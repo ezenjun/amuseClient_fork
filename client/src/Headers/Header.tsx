@@ -207,6 +207,9 @@ function Header() {
       let token: string | null = cookies.__jwtk__
       let igToken: string | null = cookies.__igjwtk__
 
+      console.log("token",token)
+      console.log("igToken",token)
+
       if (token == null) {
         return;
       } else if (igToken !== null && token == igToken) {
