@@ -35,7 +35,7 @@ function Header() {
   const [loggedIn, setLoggedIn] = useRecoilState(isLoggedIn);
   const [manager, setManager] = useRecoilState(isManager);
   const [token, setToken] = useState("");
-  const [cookies, setCookie, removeCookie] = useCookies(["__jwtk__"]);
+  const [cookies, setCookie, removeCookie] = useCookies(["__jwtkId__","__jwtk__"]);
   
   // const checkIsManager = (token: String) => {
   //   const searchParams = new URLSearchParams(location.search);
@@ -127,7 +127,7 @@ function Header() {
   );
 
   // useEffect(() => {
-  //   const token = cookies["__jwtk__"];
+  //   const token = cookies["__jwtkId__"];
   //   if (token) {
   //     checkIsManager(token);
   //   }
@@ -180,7 +180,7 @@ function Header() {
   }, []);
 
   useEffect(() => {
-    let getToken: string | null = cookies.__jwtk__;
+    let getToken: string | null = cookies.__jwtkId__;
     if (getToken) {
       setToken(getToken);
       getUserInfoAsToken();
@@ -199,9 +199,21 @@ function Header() {
         // localStorage.setItem("loginToken", token);
         const expires = moment().add("8", "h").toDate();
         console.log(expires);
-        setCookie("__jwtk__", token, { expires });
+        setCookie("__jwtkId__", token, { expires });
         setLoggedIn(true);
         movePage("/")
+      }
+    }else if(locationString.includes("amusetravel.wheelgo.net")){
+      let token: string | null = cookies.__jwtk__;
+      let idToken: String | null = cookies.__jwtkId__;
+      if(!idToken){
+        const expires = moment().add("8", "h").toDate();
+        console.log(expires);
+        setCookie("__jwtkId__", token, { expires });
+        setLoggedIn(true);
+        movePage("/")
+      }else{
+        console.log("cookie is vaild")
       }
     }
   }, []);
@@ -222,7 +234,7 @@ function Header() {
   // };
   const [userData, setUserData] = useState<userProps>();
   const getUserInfoAsToken = async () => {
-    const token = cookies["__jwtk__"];
+    const token = cookies["__jwtkId__"];
     axios
       .get(`${process.env.REACT_APP_AMUSE_API}/api/v1/user/login/info`, {
         headers: {
@@ -253,7 +265,7 @@ function Header() {
       console.log(response)
       setLoggedIn(false);
       setManager(false);
-      removeCookie("__jwtk__", { path: "/" });
+      removeCookie("__jwtkId__", { path: "/" });
       // window.location.reload();
       // navigateToHome();
     })
