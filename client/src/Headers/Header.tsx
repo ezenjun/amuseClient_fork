@@ -4,8 +4,6 @@ import "./Header.css";
 import Style from "../App.module.css";
 import { useNavigate } from "react-router-dom";
 import logoimage from "../MainPage/MainImgs/amuse_logo.png";
-import { Link } from "react-router-dom";
-import MyPagelist from "../MyPages/MyPageList";
 import { isLoggedIn, isManager } from "../atoms";
 import { useRecoilState } from "recoil";
 import MyPageMenu from "../MyPages/MyPageMenu";
@@ -15,6 +13,7 @@ import { useCookies } from "react-cookie";
 import moment from "moment";
 import { useCategoryContext } from "./Contexts/CategoryContext";
 import { CategoryNameMenuProps } from "../Interfaces/PropsInterfaces";
+import { useInfoContext } from "../DetailPage/Contexts/InfoContext";
 
 
 interface userProps {
@@ -31,6 +30,7 @@ interface MoreDropdownProps {
 
 function Header() {
   const movePage = useNavigate();
+  const { name, setName } = useInfoContext();
   const { setCategoriesInfo } =useCategoryContext()
   const [loggedIn, setLoggedIn] = useRecoilState(isLoggedIn);
   const [manager, setManager] = useRecoilState(isManager);
@@ -73,7 +73,6 @@ function Header() {
 
   const navigateToSearch = () => {
     movePage(`/search/${searchKeyword}`);
-    window.location.reload();
   };
 
   // const handleSearch = () => {
@@ -183,10 +182,8 @@ function Header() {
     let getToken: string | null = cookies.__jwtkid__;
     if (getToken) {
       setToken(getToken);
-      getUserInfoAsToken();
       setLoggedIn(true);
     }
-    console.log("login?", loggedIn);
   }, []);
 
   useEffect(() => {
@@ -196,21 +193,15 @@ function Header() {
       if (token == null) {
         return;
       } else {
-        // localStorage.setItem("loginToken", token);
         const expires = moment().add("8", "h").toDate();
-        console.log(expires);
         setCookie("__jwtkid__", token, { expires });
         setLoggedIn(true);
+        getUserInfoAsToken(token);
         movePage("/")
       }
     }else if (locationString.includes("amusetravel.wheelgo.net/")) {
       let token: string | null = cookies.__jwtk__
       let igToken: string | null = cookies.__igjwtk__
-
-      console.log("igToken",igToken)
-      console.log("token == null",token == null)
-      console.log("( igToken && igToken?.length > 0 && token == igToken)", igToken && igToken?.length > 0 && token == igToken)
-
       if (token == null) {
         return;
       } else if ( igToken && igToken?.length > 0 && token == igToken) {
@@ -220,7 +211,7 @@ function Header() {
         const expires = moment().add("8", "h").toDate();
         setCookie("__jwtkid__", token, { expires });
         setLoggedIn(true);
-        movePage("/")
+        getUserInfoAsToken(token);
       }
     }
   }, []);
@@ -239,9 +230,9 @@ function Header() {
   //       console.log(err);
   //     });
   // };
-  const [userData, setUserData] = useState<userProps>();
-  const getUserInfoAsToken = async () => {
-    const token = cookies["__jwtkid__"];
+  // const [userData, setUserData] = useState<userProps>();
+  // console.log(userData)
+  const getUserInfoAsToken = async (token:string) => {
     axios
       .get(`${process.env.REACT_APP_AMUSE_API}/api/v1/user/login/info`, {
         headers: {
@@ -250,11 +241,13 @@ function Header() {
         },
       })
       .then((response) => {
-        setUserData(response.data.data);
-        console.log("response.data.data",response.data.data);
+        // setUserData(response.data.data);
         let userData = response.data.data
+        setName(response.data.data?.name)
         if( !userData?.advertisementTrue ){
-          // movePage("/LoginAgree")
+          setLoggedIn(false);
+          setManager(false);
+          movePage("/LoginAgree")
         }
         
       })
@@ -269,7 +262,6 @@ function Header() {
     const expires = moment().add("1", "m").toDate();
     setCookie("__igjwtk__", token, { expires });
     removeCookie("__jwtkid__", { path: "/", maxAge: 0 });
-    window.location.reload();
     navigateToHome();
   };
   return (
@@ -280,7 +272,7 @@ function Header() {
           {mobileHeader === 1 && (
             <div style={{ paddingTop: "5px", paddingBottom: "10px" }}>
               <div className="btnBox_mobile">
-                {loggedIn ? <p>{userData?.name || ""} 님 😊</p> : ""}
+                {loggedIn ? <div>{name || ""} 님 😊</div> : ""}
                 {loggedIn ? (
                   <button className="loginBtn" onClick={handleLogout}>
                     로그아웃
@@ -352,7 +344,7 @@ function Header() {
           {mobileHeader === 0 && (
             <div>
               <div className="btnBox">
-                {loggedIn ? <p className="userName">{userData?.name || ""} 님 😊</p> : ""}
+                {loggedIn ? <div className="userName">{name || ""} 님 😊</div> : ""}
                 {loggedIn ? (
                   <button className="loginBtn" onClick={handleLogout}>
                     로그아웃

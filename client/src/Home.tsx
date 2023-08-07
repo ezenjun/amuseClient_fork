@@ -56,7 +56,6 @@ function Home() {
   }, [categoriesInfo]);
 
   useEffect(() => {
-    console.log("do");
     axios
       .get(`${process.env.REACT_APP_AMUSE_API}/main/category`)
       .then((response) => {

@@ -19,6 +19,7 @@ import AboutAmuse from "./SubPages/AboutAmuse/AboutAmuse";
 import { OrderPage } from "./DetailPage/OrderPage";
 import { OrderContextProvider } from "./DetailPage/Contexts/OrderContext"; 
 import { CategoryContextProvider } from "./Headers/Contexts/CategoryContext";
+import { InfoContextProvider } from "./DetailPage/Contexts/InfoContext";
 
 function App() {
   /**
@@ -72,6 +73,7 @@ function App() {
   return (
     <OrderContextProvider>
       <CategoryContextProvider>
+      <InfoContextProvider>
       <div style={{fontFamily:"Pretendard-Regular"}}>
         
         <Routes>
@@ -118,6 +120,7 @@ function App() {
           <Route path="/search/:apiKey" element={<SearchPageComp />} />
         </Routes>
       </div>
+      </InfoContextProvider>
       </CategoryContextProvider>
     </OrderContextProvider>
   );

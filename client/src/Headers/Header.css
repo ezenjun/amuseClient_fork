@@ -200,18 +200,20 @@
   border: none;
   background-color: transparent;
   cursor: pointer;
+  font-family: "Pretendard-Regular";
+  font-size: 14px;
 }
 
 .userName {
   width: 100px;
-  height: 40px;
+  height: 38px;
   border: none;
   background-color: transparent;
   display: flex;
   align-items: center; /* 수직 중앙 정렬 */
   justify-content: center; /* 수평 중앙 정렬 */
-  font-size: 14;
-  /* font-weight: bold; */
+  font-size: 14px;
+  padding-bottom: 2px;
 }
 
 .btnBox .signInBtn {
@@ -220,6 +222,7 @@
   border: none;
   background-color: transparent;
   cursor: pointer;
+  font-family: "Pretendard-Regular";
 }
 
 .adminBtn {
