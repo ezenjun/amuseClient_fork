@@ -191,7 +191,6 @@ function Header() {
 
   useEffect(() => {
     let locationString = window.location.toString();
-    console.log(locationString.includes("amusetravel.wheelgo.net/"))
     if (locationString.includes("http://localhost:3000/?access-token")) {
       let token: string | null = new URL(window.location.href).searchParams.get("access-token");
       if (token == null) {
@@ -208,8 +207,9 @@ function Header() {
       let token: string | null = cookies.__jwtk__
       let igToken: string | null = cookies.__igjwtk__
 
-      console.log("token",token)
-      console.log("igToken",token)
+      console.log("igToken",igToken)
+      console.log("token == null",token == null)
+      console.log("igToken !== null && token == igToken",igToken !== null && token == igToken)
 
       if (token == null) {
         return;
