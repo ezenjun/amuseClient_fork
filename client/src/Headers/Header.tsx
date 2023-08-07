@@ -35,7 +35,7 @@ function Header() {
   const [loggedIn, setLoggedIn] = useRecoilState(isLoggedIn);
   const [manager, setManager] = useRecoilState(isManager);
   const [token, setToken] = useState("");
-  const [cookies, setCookie, removeCookie] = useCookies(["__jwtk__"]);
+  const [cookies, setCookie, removeCookie] = useCookies(["__jwtk__","__igjwtk__","__jwtkid__"]);
   
   // const checkIsManager = (token: String) => {
   //   const searchParams = new URLSearchParams(location.search);
@@ -127,7 +127,7 @@ function Header() {
   );
 
   // useEffect(() => {
-  //   const token = cookies["__jwtk__"];
+  //   const token = cookies["__jwtkid__"];
   //   if (token) {
   //     checkIsManager(token);
   //   }
@@ -180,7 +180,7 @@ function Header() {
   }, []);
 
   useEffect(() => {
-    let getToken: string | null = cookies.__jwtk__;
+    let getToken: string | null = cookies.__jwtkid__;
     if (getToken) {
       setToken(getToken);
       getUserInfoAsToken();
@@ -199,7 +199,20 @@ function Header() {
         // localStorage.setItem("loginToken", token);
         const expires = moment().add("8", "h").toDate();
         console.log(expires);
-        setCookie("__jwtk__", token, { expires });
+        setCookie("__jwtkid__", token, { expires });
+        setLoggedIn(true);
+        movePage("/")
+      }
+    }else if (locationString.includes("amusetarvel.wheelgo.net")) {
+      let token: string | null = cookies.__jwtk__
+      let igToken: string | null = cookies.__igjwtk__
+
+      if (token == null && token == igToken) {
+        return;
+      } else {
+        // localStorage.setItem("loginToken", token);
+        const expires = moment().add("8", "h").toDate();
+        setCookie("__jwtkid__", token, { expires });
         setLoggedIn(true);
         movePage("/")
       }
@@ -222,7 +235,7 @@ function Header() {
   // };
   const [userData, setUserData] = useState<userProps>();
   const getUserInfoAsToken = async () => {
-    const token = cookies["__jwtk__"];
+    const token = cookies["__jwtkid__"];
     axios
       .get(`${process.env.REACT_APP_AMUSE_API}/api/v1/user/login/info`, {
         headers: {
@@ -244,19 +257,13 @@ function Header() {
       });
   };
   const handleLogout = () => {
-    axios.get(`${process.env.REACT_APP_AMUSE_API}/api/v1/auth/delete/cookie/access-token`,{
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `${token}`,
-      },
-    }).then((response)=>{
-      console.log(response)
-      setLoggedIn(false);
-      setManager(false);
-      removeCookie("__jwtk__", { path: "/", maxAge: 0 });
-      window.location.reload();
-      navigateToHome();
-    })
+    setLoggedIn(false);
+    setManager(false);
+    const expires = moment().add("1", "m").toDate();
+    setCookie("__igjwtk__", token, { expires });
+    removeCookie("__jwtkid__", { path: "/", maxAge: 0 });
+    window.location.reload();
+    navigateToHome();
   };
   return (
     <div>

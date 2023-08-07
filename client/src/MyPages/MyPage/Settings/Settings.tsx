@@ -16,10 +16,10 @@ interface userProps {
 }
 
 export default function Settings() {
-  const [cookies, setCookie, removeCookie] = useCookies(["__jwtk__"]);
+  const [cookies, setCookie, removeCookie] = useCookies(["__jwtkid__"]);
   const [userData, setUserData] = useState<userProps>();
   const getUserInfoAsToken = async () => {
-    const token = cookies["__jwtk__"];
+    const token = cookies["__jwtkid__"];
     axios
       .get(`${process.env.REACT_APP_AMUSE_API}/api/v1/user/login/info`, {
         headers: {
@@ -36,7 +36,7 @@ export default function Settings() {
       });
   };
   useEffect(() => {
-    let getToken: string | null = cookies.__jwtk__;
+    let getToken: string | null = cookies.__jwtkid__;
     if (getToken) {
       getUserInfoAsToken();
     }

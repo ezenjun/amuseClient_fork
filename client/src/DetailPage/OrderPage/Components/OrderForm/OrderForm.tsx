@@ -13,7 +13,7 @@ export function OrderForm() {
   const { orderData, setOrderData ,orderTicketData} = useOrderContext();
   const { name,setName, email,setEmail, phone,setPhone } = useInfoContext();
 
-  const [cookies, setCookie, removeCookie] = useCookies(["__jwtk__"]);
+  const [cookies, setCookie, removeCookie] = useCookies(["__jwtkid__"]);
   const [isLoading, setLoading] = useState(false);
   console.log(orderTicketData)
 
@@ -61,7 +61,7 @@ export function OrderForm() {
   };
 
   const getUserInfoAsToken = async()=>{
-    const token = cookies["__jwtk__"]
+    const token = cookies["__jwtkid__"]
     axios
       .get(`${process.env.REACT_APP_AMUSE_API}/api/v1/user/info`, {
         headers: {

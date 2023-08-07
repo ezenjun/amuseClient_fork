@@ -42,7 +42,7 @@ function Home() {
 
   // const [loggedIn, setLoggedIn] = useRecoilState(isLoggedIn);
   // const [manager, setManager] = useRecoilState(isManager);
-  // const [cookies, setCookie, removeCookie] = useCookies(["__jwtk__"]);
+  // const [cookies, setCookie, removeCookie] = useCookies(["__jwtkid__"]);
 
   const location = useLocation();
 
