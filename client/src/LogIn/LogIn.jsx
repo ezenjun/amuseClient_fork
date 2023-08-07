@@ -9,8 +9,8 @@ import { useRecoilState } from "recoil";
 import { isLoggedIn } from "../atoms";
 import { useNavigate } from "react-router-dom";
 import AppStyle from "../App.module.css";
-import axios from "axios";
-import { Button } from '@mui/material'
+import axios from "axios"
+import MainComponent from "../MainComponent";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -43,7 +43,7 @@ export default function Login() {
   }, []);
 
   return (
-    <>
+    <MainComponent>
       <div className="login_body">
         <form className="login" action="/loginURL" method="post">
           <div className="amuse_login_title">
@@ -112,6 +112,6 @@ export default function Login() {
           </div>
         </div>
       </div>
-    </>
+    </MainComponent>
   );
 }

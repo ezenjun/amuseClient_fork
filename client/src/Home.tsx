@@ -19,6 +19,7 @@ import ChildTitle from "./SubPages/SubtitleImgs/ChildTitle.jpg";
 import SubLists from "./SubPages/SubLists";
 import SubBanners from "./SubPages/SubBanners";
 import SubTiles from "./SubPages/SubTiles";
+import MainComponent from "./MainComponent";
 
 function Home() {
   interface TileProps {
@@ -141,58 +142,44 @@ function Home() {
   // const [titles, setTitles] = useState<string[]>([]);
   // const [startPrices, setStartPrice] = useState<number[]>([]);
 
-  // useEffect(() => {
-  //   axios
-  //     .get("https://amuseapi.wheelgo.net/main-page/lists")
-  //     .then((response) => {
-  //       const Items = response.data.data.listItems;
-  //       const list_title = Items.map((item: any) => item.list_title);
-  //       setListTitle(list_title);
-  //       const item_count = Items.map((item: any) => item.item_count);
-  //       setItemCount(item_count);
-
-  //       console.log(response.data.data);
-  //     })
-  //     .catch((error) => {
-  //       console.log("home api 연결 실패");
-  //     });
-  // }, []);
 
   return (
-    <Fade>
-      <div>
-        {/* <Header />
-        <MainBanner />
-        <div className={Style["App"]}>
-          <MainLists />
-          <MainTiles />
-          {/* <MainMoreAbout /> 
-        </div> */}
+    <MainComponent>
+      <Fade>
+        <div>
+          {/* <Header />
+          <MainBanner />
+          <div className={Style["App"]}>
+            <MainLists />
+            <MainTiles />
+            {/* <MainMoreAbout /> 
+          </div> */}
 
-        {categoryData && (
-          <div className={Style["subTitleContainer"]}>
-            <img
-              className={Style["mainPicture.image"]}
-              src={categoryData.categoryImg ? categoryData.categoryImg : ChildTitle}
-              alt="Title img"
-              style={{
-                width: "100%",
-                height: "400px",
-                objectFit: "cover",
-              }}
-            />
-            <h2 className={Style["subTitle"]}>{categoryData.mainDescription}</h2>
-            <h3 className={Style["subContent"]}>{categoryData.subDescription}</h3>
-          </div>
-        )}
+          {categoryData && (
+            <div className={Style["subTitleContainer"]}>
+              <img
+                className={Style["mainPicture.image"]}
+                src={categoryData.categoryImg ? categoryData.categoryImg : ChildTitle}
+                alt="Title img"
+                style={{
+                  width: "100%",
+                  height: "400px",
+                  objectFit: "cover",
+                }}
+              />
+              <h2 className={Style["subTitle"]}>{categoryData.mainDescription}</h2>
+              <h3 className={Style["subContent"]}>{categoryData.subDescription}</h3>
+            </div>
+          )}
 
-        <div className={Style["App"]}>
-          <div>
-            <div>{renderedComponents}</div>
+          <div className={Style["App"]}>
+            <div>
+              <div>{renderedComponents}</div>
+            </div>
           </div>
         </div>
-      </div>
-    </Fade>
+      </Fade>
+    </MainComponent>
   );
 }
 

@@ -144,7 +144,6 @@ function Header() {
         setCategories(categoryNames);
         const categoryId = categoryAll.map((id: any) => id.categoryId);
         setCategoryIds(categoryId);
-        console.log(categoryId);
       })
       .catch((error) => {
         console.log("해시태그 연결 실패");
@@ -202,26 +201,25 @@ function Header() {
         console.log(expires);
         setCookie("__jwtk__", token, { expires });
         setLoggedIn(true);
-        window.location.href = "http://localhost:3000/";
+        movePage("/")
       }
     }
   }, []);
-  const handleCheckUserInfo = async (token: string) => {
-    console.log("xsxs");
-    await axios
-      .get(`${process.env.REACT_APP_AMUSE_API}/api/v1/user/login/info`, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+  // const handleCheckUserInfo = async (token: string) => {
+  //   await axios
+  //     .get(`${process.env.REACT_APP_AMUSE_API}/api/v1/user/login/info`, {
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         Authorization: `Bearer ${token}`,
+  //       },
+  //     })
+  //     .then((response) => {
+  //       console.log(response);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // };
   const [userData, setUserData] = useState<userProps>();
   const getUserInfoAsToken = async () => {
     const token = cookies["__jwtk__"];
@@ -234,20 +232,32 @@ function Header() {
       })
       .then((response) => {
         setUserData(response.data.data);
-        console.log(response.data.data);
+        console.log("response.data.data",response.data.data);
+        let userData = response.data.data
+        if( !userData?.advertisementTrue ){
+          // movePage("/LoginAgree")
+        }
+        
       })
       .catch((err) => {
         console.log(err);
       });
   };
   const handleLogout = () => {
-    setLoggedIn(false);
-    setManager(false);
-    removeCookie("__jwtk__", { path: "/" });
-    window.location.reload();
-    navigateToHome();
+    axios.get(`${process.env.REACT_APP_AMUSE_API}/api/v1/auth/delete/cookie/access-token`,{
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `${token}`,
+      },
+    }).then((response)=>{
+      console.log(response)
+      setLoggedIn(false);
+      setManager(false);
+      removeCookie("__jwtk__", { path: "/" });
+      window.location.reload();
+      navigateToHome();
+    })
   };
-
   return (
     <div>
       <div className={Style["App"]}>

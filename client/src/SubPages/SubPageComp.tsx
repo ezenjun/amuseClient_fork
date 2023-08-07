@@ -10,6 +10,7 @@ import SubBanners from "./SubBanners";
 import SubTiles from "./SubTiles";
 import { BannerProps, ListProps, BoxProps, DropdownProps } from "../Interfaces/PropsInterfaces";
 import { CategoryData } from "../Interfaces/DataInterfaces";
+import MainComponent from "../MainComponent";
 
 interface TileProps {
   page_component_id: string;
@@ -174,7 +175,7 @@ function SubPageComp() {
   });
 
   return (
-    <div>
+    <MainComponent>
       {categoryData ? (
         <div>
           <Fade>
@@ -203,7 +204,7 @@ function SubPageComp() {
       ) : (
         <h3 style={{ margin: "1rem" }}>존재하지 않는 페이지입니다.</h3>
       )}
-    </div>
+    </MainComponent>
   );
 }
 

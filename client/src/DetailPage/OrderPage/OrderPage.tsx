@@ -8,6 +8,7 @@ import { OrderForm } from "./Components/OrderForm";
 import { InfoContextProvider } from "../Contexts/InfoContext";
 import { useOrderContext } from "../Contexts/OrderContext";
 import { useNavigate } from "react-router-dom";
+import MainComponent from "../../MainComponent";
 
 
 export const OrderPage = () => {
@@ -48,8 +49,10 @@ export const OrderPage = () => {
 
 
   return (
+    <MainComponent>
       <InfoContextProvider>
         { isShow }
       </InfoContextProvider>
+    </MainComponent>
   );
 };
