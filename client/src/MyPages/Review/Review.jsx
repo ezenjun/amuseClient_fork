@@ -7,6 +7,7 @@ import Button from "@mui/material/Button";
 import ReviewRating from "./ReviewRating";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import MainComponent from "../../MainComponent";
 
 //이미지 미리보기를 위한 컴포넌트
 function ImagePreview({ image }) {
@@ -78,7 +79,7 @@ export default function Review() {
   };
 
   return (
-    <>
+    <MainComponent>
       <div className="App">
         <Header />
       </div>
@@ -119,6 +120,6 @@ export default function Review() {
         </div>
         <div></div>
       </div>
-    </>
+    </MainComponent>
   );
 }

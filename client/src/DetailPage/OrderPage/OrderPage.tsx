@@ -5,9 +5,9 @@ import Footer from "../../Footers/Footer";
 import styles from "./OrderPage.module.scss";
 
 import { OrderForm } from "./Components/OrderForm";
-import { InfoContextProvider } from "../Contexts/InfoContext";
 import { useOrderContext } from "../Contexts/OrderContext";
 import { useNavigate } from "react-router-dom";
+import MainComponent from "../../MainComponent";
 
 
 export const OrderPage = () => {
@@ -48,8 +48,8 @@ export const OrderPage = () => {
 
 
   return (
-      <InfoContextProvider>
+    <MainComponent>
         { isShow }
-      </InfoContextProvider>
+    </MainComponent>
   );
 };

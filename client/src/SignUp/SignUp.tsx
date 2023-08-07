@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import GoogleIcon from "@mui/icons-material/Google";
+import MainComponent from "../MainComponent";
 
 export default function SignUp() {
   const redirectU = "http://amusetravel.wheelgo.net/"
   return (
-    <>
+    <MainComponent>
       <div className="login_body">
         <div className="amuse_login_title">
           <img className="amuse_logo" src="http://cdn.amusetravel.com/assets/headers/logo.png" alt="어뮤즈 이미지" />
@@ -46,6 +47,6 @@ export default function SignUp() {
           </div>
         </div>
       </div>
-    </>
+    </MainComponent>
   );
 }

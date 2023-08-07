@@ -4,10 +4,11 @@ import Header from "../../Headers/Header";
 import Footer from "../../Footers/Footer";
 import Style from "../SubPage.module.css";
 import ViewAllList from "./ViewAllList";
+import MainComponent from "../../MainComponent";
 
 function ViewAll() {
   return (
-    <div>
+    <MainComponent>
       <Header />
       <div className={Style["liner"]}></div>
       {/* <br /> */}
@@ -29,7 +30,7 @@ function ViewAll() {
         <ViewAllList />
       </div>
       <Footer />
-    </div>
+    </MainComponent>
   );
 }
 

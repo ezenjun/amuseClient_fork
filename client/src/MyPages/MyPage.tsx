@@ -12,6 +12,7 @@ import "./MyPage.css";
 import { useRecoilState } from "recoil";
 import { isLoggedIn } from "../atoms";
 import { useNavigate } from "react-router-dom";
+import MainComponent from "../MainComponent";
 
 export default function MyPage() {
   const { category } = useParams();
@@ -52,11 +53,11 @@ export default function MyPage() {
   };
 
   return (
-    <>
+    <MainComponent>
       <div className="myPage">
         <MyPagelist />
         <div className="myPage_box">{handleCategory()}</div>
       </div>
-    </>
+    </MainComponent>
   );
 }

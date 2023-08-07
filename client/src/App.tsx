@@ -19,6 +19,7 @@ import AboutAmuse from "./SubPages/AboutAmuse/AboutAmuse";
 import { OrderPage } from "./DetailPage/OrderPage";
 import { OrderContextProvider } from "./DetailPage/Contexts/OrderContext"; 
 import { CategoryContextProvider } from "./Headers/Contexts/CategoryContext";
+import { InfoContextProvider } from "./DetailPage/Contexts/InfoContext";
 
 function App() {
   /**
@@ -72,8 +73,9 @@ function App() {
   return (
     <OrderContextProvider>
       <CategoryContextProvider>
+      <InfoContextProvider>
       <div style={{fontFamily:"Pretendard-Regular"}}>
-        <Header />
+        
         <Routes>
           <Route path="/" element={<Home />} />
 
@@ -81,7 +83,6 @@ function App() {
           <Route path="/ChildCare" element={<ChildCare />}></Route>
           <Route path="/SeniorCare" element={<SeniorCare />}></Route> */}
           <Route path="/LogIn" element={<Login />}></Route>
-          <Route path="/LogInAgree" element={<LoginAgree />}></Route>
           <Route path="/SignUp" element={<SignUp />}></Route>
           <Route path="/MyPage/:category" element={<MyPage />}></Route>
           <Route path="/Review/:id" element={<Review />}></Route>
@@ -90,6 +91,7 @@ function App() {
           <Route path="/Subtest" element={<SubPageComp />}></Route>
           <Route path="/aboutAmuse" element={<AboutAmuse />}></Route>
           <Route path="/order" element={<OrderPage />}></Route>
+          <Route path="/LogInAgree" element={<LoginAgree />}></Route>
 
           {/**
            * 상세페이지 Route
@@ -117,8 +119,8 @@ function App() {
            */}
           <Route path="/search/:apiKey" element={<SearchPageComp />} />
         </Routes>
-        <Footer />
       </div>
+      </InfoContextProvider>
       </CategoryContextProvider>
     </OrderContextProvider>
   );

@@ -45,8 +45,8 @@ export interface BoxProps {
     imageUrl: string;
 }
 export interface SubListsProps {
-  title: string;
-  itemInfos: [];
+    title: string;
+    itemInfos: [];
 }
 export interface DetailProps {
     itemId: number;

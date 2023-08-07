@@ -9,15 +9,15 @@ import { useRecoilState } from "recoil";
 import { isLoggedIn } from "../atoms";
 import { useNavigate } from "react-router-dom";
 import AppStyle from "../App.module.css";
-import axios from "axios";
-import { Button } from '@mui/material'
+import axios from "axios"
+import MainComponent from "../MainComponent";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loggedIn, setLoggedIn] = useRecoilState(isLoggedIn);
   const navigate = useNavigate();
-  let redirectUri =  "http://localhost:3000"
+  let redirectUri =  "http://amusetravel.wheelgo.net"
   if(process.env.REACT_APP_AMUSE_API === "https://amuseapi.wheelgo.net"){
     redirectUri = "http://amusetravel.wheelgo.net";
   }
@@ -43,7 +43,7 @@ export default function Login() {
   }, []);
 
   return (
-    <>
+    <MainComponent>
       <div className="login_body">
         <form className="login" action="/loginURL" method="post">
           <div className="amuse_login_title">
@@ -51,7 +51,7 @@ export default function Login() {
             <h2 className="amuse_title_top">모두가 즐거운 여행</h2>
             <h2 className="amuse_title_bottom">어뮤즈 트래블</h2>
           </div>
-          <div className="input">
+          {/* <div className="input">
             <div className="email">
               <EmailInput email={email} handleChangeEmail={handleChangeEmail} />
             </div>
@@ -63,21 +63,9 @@ export default function Login() {
             <button className="login_btn">
               <i className="fa-solid fa-door-open"></i>로그인
             </button>
-          </div>
+          </div> */}
         </form>
         <div className="v_box">
-          <div className="login_function_box">
-            <div className="signup_box">
-              <span>아직 가입하지 않으셨나요?</span>
-              <Link to="/SignUp">
-                <span className="signup_link">회원가입</span>
-              </Link>
-            </div>
-            <div className="password_reset_box">
-              <span>비밀번호를 잊으셨나요?</span>
-              <span className="password_reset_link">비밀번호 초기화</span>
-            </div>
-          </div>
           <div className="OAuth">
             <a
               className="login_google"
@@ -110,8 +98,20 @@ export default function Login() {
               KaKao 로그인
             </a>
           </div>
+          <div className="login_function_box">
+            <div className="signup_box">
+              <span>아직 가입하지 않으셨나요?</span>
+              <Link to="/SignUp">
+                <span className="signup_link">회원가입</span>
+              </Link>
+            </div>
+            {/* <div className="password_reset_box">
+              <span>비밀번호를 잊으셨나요?</span>
+              <span className="password_reset_link">비밀번호 초기화</span>
+            </div> */}
+          </div>
         </div>
       </div>
-    </>
+    </MainComponent>
   );
 }
