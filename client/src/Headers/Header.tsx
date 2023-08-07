@@ -263,6 +263,7 @@ function Header() {
       });
   };
   const handleLogout = () => {
+    let token = cookies.__jwtkid__
     setLoggedIn(false);
     setManager(false);
     const expires = moment().add("1", "m").toDate();
