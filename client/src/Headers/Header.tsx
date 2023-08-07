@@ -207,7 +207,9 @@ function Header() {
       let token: string | null = cookies.__jwtk__
       let igToken: string | null = cookies.__igjwtk__
 
-      if (token == null && token == igToken) {
+      if (token == null) {
+        return;
+      } else if (igToken !== null && token == igToken) {
         return;
       } else {
         // localStorage.setItem("loginToken", token);
