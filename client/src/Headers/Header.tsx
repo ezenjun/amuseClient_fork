@@ -238,9 +238,9 @@ function Header() {
     removeCookie("__jwtkid__", { path: "/", maxAge: 0 });
     navigateToHome();
   };
-  if(!name){
-    setName(cookies.__usrN__)
-  }
+  // if(!name){
+  //   setName(cookies.__usrN__)
+  // }
   return (
     <div>
       <div className={Style["App"]}>

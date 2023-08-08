@@ -4,6 +4,7 @@ import MapDetail from "./MapDetail/MapDetail";
 import axios from "axios";
 import { ItemIdProps } from "../../../../Interfaces/PropsInterfaces";
 import { MapData } from "../../../../Interfaces/DataInterfaces";
+import JsMap from "./MapDetail/JsMap";
 
 function Map({ itemId }: ItemIdProps) {
   /**
@@ -44,7 +45,6 @@ function Map({ itemId }: ItemIdProps) {
   const handleDayClick = (day: number) => {
     setSelectedDay(day);
   };
-
   return (
     <div className="Map">
       <div className="day-button">
@@ -54,7 +54,7 @@ function Map({ itemId }: ItemIdProps) {
           </button>
         ))}
       </div>
-      {selectedDay && <MapDetail key={selectedDay} data={mapData.filter((item) => item.day === selectedDay)} />}
+      {selectedDay && <JsMap key={selectedDay} data={mapData.filter((item) => item.day === selectedDay)} />}
     </div>
   );
 }
