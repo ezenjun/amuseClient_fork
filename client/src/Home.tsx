@@ -1,17 +1,17 @@
-import React, { ReactNode, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import _ from "lodash";
-// import AppStyle from "./App.module.css";
 import Style from "./SubPages/SubPage.module.css";
+// import AppStyle from "./App.module.css";
 // import MainLists from "./MainPage/MainLists/MainLists";
 // import MainBanner from "./MainPage/MainBanner/MainBanner";
 // import MainTiles from "./MainPage/MainTiles/MainTiles";
 // import MainMoreAbout from "./MainPage/MainMoreAbout/MainMoreAbout";
-import Fade from "./Fade";
-import { useRecoilState } from "recoil";
-import { isLoggedIn, isManager } from "./atoms";
-import axios from "axios";
-import { redirect, useLocation } from "react-router-dom";
+// import { useRecoilState } from "recoil";
+// import { isLoggedIn, isManager } from "./atoms";
+// import { redirect, useLocation } from "react-router-dom";
 // import { useCookies } from "react-cookie";
+import Fade from "./Fade";
+import axios from "axios";
 import { CategoryData } from "./Interfaces/DataInterfaces";
 import { ListProps, BannerProps } from "./Interfaces/PropsInterfaces";
 import { useCategoryContext } from "./Headers/Contexts/CategoryContext";
@@ -43,11 +43,11 @@ function Home() {
   // const [loggedIn, setLoggedIn] = useRecoilState(isLoggedIn);
   // const [manager, setManager] = useRecoilState(isManager);
   // const [cookies, setCookie, removeCookie] = useCookies(["__jwtkid__"]);
-
-  const location = useLocation();
+  // const location = useLocation();
 
   useEffect(() => {
     let infoIndex = _.findIndex(categoriesInfo, { categoryName: "home" });
+    if(infoIndex < 0) { infoIndex = _.findIndex(categoriesInfo, { categoryName: "Home" }); }
     if (categoriesInfo?.length) {
       const info = categoriesInfo[infoIndex];
       console.log(info);
@@ -65,7 +65,6 @@ function Home() {
         for (let i = 0; i < hashtagAll.length; i++) {
           if (hashtagAll[i].categoryId === apiKeyNumber) {
             matchedIndex = i;
-            // console.log("idx = " + matchedIndex);
             break;
           }
         }
@@ -81,11 +80,11 @@ function Home() {
 
   const [comTypes, setComTypes] = useState<[]>([]);
   const [Items, setItems] = useState<[]>([]);
-  const [bannerContent, setBannerContent] = useState<string[]>([]);
-  const [bannerPCUrl, setBannerPCUrl] = useState<string[]>([]);
-  const [ItemTitle, setItemTitle] = useState<string[]>([]);
-  const [ItemPrice, setItemPrice] = useState<number[]>([]);
-  const [ItemImageUrl, setItemImageUrl] = useState<string[]>([]);
+  // const [bannerContent, setBannerContent] = useState<string[]>([]);
+  // const [bannerPCUrl, setBannerPCUrl] = useState<string[]>([]);
+  // const [ItemTitle, setItemTitle] = useState<string[]>([]);
+  // const [ItemPrice, setItemPrice] = useState<number[]>([]);
+  // const [ItemImageUrl, setItemImageUrl] = useState<string[]>([]);
 
   useEffect(() => {
     fetchPageData(apiKeyNumber);
@@ -98,7 +97,6 @@ function Home() {
         const ComponentInfos = response.data.data.pageComponentInfos;
         const items = ComponentInfos.map((item: any) => item);
         setItems(items);
-        console.log(items);
         const types = items.map((item: any) => item.type);
         setComTypes(types);
         console.log("컴포넌트", types);
@@ -109,7 +107,6 @@ function Home() {
   };
 
   const renderedComponents = comTypes.map((type, index) => {
-    console.log(type);
     if (type === "리스트") {
       const listItem: ListProps = Items[index];
       // console.log("subpage list ", listItem.itemInfos);
@@ -134,8 +131,8 @@ function Home() {
     return null;
   });
 
-  const [listTitle, setListTitle] = useState<string[]>([]);
-  const [itemCount, setItemCount] = useState<number[]>([]);
+  // const [listTitle, setListTitle] = useState<string[]>([]);
+  // const [itemCount, setItemCount] = useState<number[]>([]);
   // const [itemIds, setItemIds] = useState<number[]>([]);
   // const [imageUrls, setImageUrls] = useState<string[]>([]);
   // const [titles, setTitles] = useState<string[]>([]);

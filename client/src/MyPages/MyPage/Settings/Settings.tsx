@@ -1,8 +1,6 @@
 import styles from "./Settings.module.css";
-import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import SettingsGender from "./SettingsGender";
-import SettingsInterestField from "./SettingsIntereestField";
 import SettingsMarketingField from "./SettingsMarketingField";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -16,7 +14,7 @@ interface userProps {
 }
 
 export default function Settings() {
-  const [cookies, setCookie, removeCookie] = useCookies(["__jwtkid__"]);
+  const [ cookies ] = useCookies(["__jwtkid__"]);
   const [userData, setUserData] = useState<userProps>();
   const getUserInfoAsToken = async () => {
     const token = cookies["__jwtkid__"];

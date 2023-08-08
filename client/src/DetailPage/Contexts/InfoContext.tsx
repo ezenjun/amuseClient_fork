@@ -6,7 +6,7 @@ const InfoContext = createContext<InfoData>({});
 
 export function InfoContextProvider({ children }: IProps) {
   const [name, setName] = useState<string>("");
-  const [email, setEmail] = useState<string>("salr921@gmail.com");
+  const [email, setEmail] = useState<string>("");
   const [phone, setPhone] = useState<string>("");
 
   useEffect(() => {

@@ -1,7 +1,7 @@
-import React, { ReactNode, useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+// import { useNavigate } from "react-router-dom";
 import Style from "../MainPage/MainTiles/MainTiles.module.css";
-import basicImg from "../MainPage/MainImgs/seoul.jpg";
+// import basicImg from "../MainPage/MainImgs/seoul.jpg";
 
 const Box = ({ backgroundImage, text, onClick }: { backgroundImage: string; text: string; onClick: () => void }) => (
   <div
@@ -27,15 +27,15 @@ interface SubTileProps {
 }
 
 function SubTiles({ title, tileCount, tileList }: SubTileProps) {
-  const [ItemIds, setItemIds] = useState<number[]>([]);
-  const [ItemTitle, setItemTitle] = useState<string[]>([]);
-  const [ItemPrice, setItemPrice] = useState<number[]>([]);
+  // const [ItemIds, setItemIds] = useState<number[]>([]);
+  // const [ItemTitle, setItemTitle] = useState<string[]>([]);
+  // const [ItemPrice, setItemPrice] = useState<number[]>([]);
   const [tileImageUrl, setTileImageUrl] = useState<string[]>([]);
   const [tileName, setTileName] = useState<string[]>([]);
 
   useEffect(() => {
-    const tileItems = tileList.map((items) => items.itemInfos);
-    console.log(title, tileItems);
+    // const tileItems = tileList.map((items) => items.itemInfos);
+    // console.log(title, tileItems);
     const tlist = tileList.map((item: any) => item.tile_name);
     setTileName(tlist);
     const timg = tileList.map((item: any) => item.tile_images);
@@ -43,9 +43,8 @@ function SubTiles({ title, tileCount, tileList }: SubTileProps) {
   }, [tileList]);
 
   console.log("tilename ", tileName);
-  // console.log(ItemIds, ItemTitle, ItemPrice, ItemImageUrl);
 
-  const movePage = useNavigate();
+  // const movePage = useNavigate();
   const moveToGangwon = () => {
     // movePage("/toGangwon");
   };

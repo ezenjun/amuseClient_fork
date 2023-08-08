@@ -1,5 +1,4 @@
-import { Routes, Route, Router } from "react-router-dom";
-import { redirect } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Home from "../src/Home";
 import SubPageComp from "./SubPages/SubPageComp";
 import MyPage from "./MyPages/MyPage";
@@ -13,8 +12,6 @@ import SearchPageComp from "./SubPages/SearchPageComp";
 // import NotFound from './NotFound';
 import { useEffect, useState } from "react";
 import axios from "axios";
-import Header from "./Headers/Header";
-import Footer from "./Footers/Footer";
 import AboutAmuse from "./SubPages/AboutAmuse/AboutAmuse";
 import { OrderPage } from "./DetailPage/OrderPage";
 import { OrderContextProvider } from "./DetailPage/Contexts/OrderContext"; 

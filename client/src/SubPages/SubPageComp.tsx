@@ -121,11 +121,11 @@ function SubPageComp() {
 
   const [comTypes, setComTypes] = useState<[]>([]);
   const [Items, setItems] = useState<[]>([]);
-  const [bannerContent, setBannerContent] = useState<string[]>([]);
-  const [bannerPCUrl, setBannerPCUrl] = useState<string[]>([]);
-  const [ItemTitle, setItemTitle] = useState<string[]>([]);
-  const [ItemPrice, setItemPrice] = useState<number[]>([]);
-  const [ItemImageUrl, setItemImageUrl] = useState<string[]>([]);
+  // const [bannerContent, setBannerContent] = useState<string[]>([]);
+  // const [bannerPCUrl, setBannerPCUrl] = useState<string[]>([]);
+  // const [ItemTitle, setItemTitle] = useState<string[]>([]);
+  // const [ItemPrice, setItemPrice] = useState<number[]>([]);
+  // const [ItemImageUrl, setItemImageUrl] = useState<string[]>([]);
 
   useEffect(() => {
     fetchPageData(apiKeyNumber);

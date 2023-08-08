@@ -15,14 +15,6 @@ import { useCategoryContext } from "./Contexts/CategoryContext";
 import { CategoryNameMenuProps } from "../Interfaces/PropsInterfaces";
 import { useInfoContext } from "../DetailPage/Contexts/InfoContext";
 
-
-interface userProps {
-  id: string;
-  name: string;
-  email: string;
-  grade: string;
-}
-
 interface MoreDropdownProps {
   // handleClick: () => void;
   // count: number;
@@ -35,7 +27,7 @@ function Header() {
   const [loggedIn, setLoggedIn] = useRecoilState(isLoggedIn);
   const [manager, setManager] = useRecoilState(isManager);
   const [token, setToken] = useState("");
-  const [cookies, setCookie, removeCookie] = useCookies(["__jwtk__","__igjwtk__","__jwtkid__"]);
+  const [cookies, setCookie, removeCookie] = useCookies(["__jwtk__","__igjwtk__","__jwtkid__","__usrN__"]);
   
   // const checkIsManager = (token: String) => {
   //   const searchParams = new URLSearchParams(location.search);
@@ -74,10 +66,6 @@ function Header() {
   const navigateToSearch = () => {
     movePage(`/search/${searchKeyword}`);
   };
-
-  // const handleSearch = () => {
-  //   console.log(searchKeyword);
-  // };
 
   const navigateToLogIn = () => {
     movePage("/LogIn");
@@ -215,23 +203,7 @@ function Header() {
       }
     }
   }, []);
-  // const handleCheckUserInfo = async (token: string) => {
-  //   await axios
-  //     .get(`${process.env.REACT_APP_AMUSE_API}/api/v1/user/login/info`, {
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //         Authorization: `Bearer ${token}`,
-  //       },
-  //     })
-  //     .then((response) => {
-  //       console.log(response);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // };
-  // const [userData, setUserData] = useState<userProps>();
-  // console.log(userData)
+
   const getUserInfoAsToken = async (token:string) => {
     axios
       .get(`${process.env.REACT_APP_AMUSE_API}/api/v1/user/login/info`, {
@@ -244,6 +216,8 @@ function Header() {
         // setUserData(response.data.data);
         let userData = response.data.data
         setName(response.data.data?.name)
+        const expires = moment().add("8", "h").toDate();
+        setCookie("__usrN__",response.data.data?.name,{expires})
         if( !userData?.advertisementTrue ){
           setLoggedIn(false);
           setManager(false);
@@ -264,6 +238,9 @@ function Header() {
     removeCookie("__jwtkid__", { path: "/", maxAge: 0 });
     navigateToHome();
   };
+  if(!name){
+    setName(cookies.__usrN__)
+  }
   return (
     <div>
       <div className={Style["App"]}>
@@ -272,7 +249,7 @@ function Header() {
           {mobileHeader === 1 && (
             <div style={{ paddingTop: "5px", paddingBottom: "10px" }}>
               <div className="btnBox_mobile">
-                {loggedIn ? <div>{name || ""} 님 😊</div> : ""}
+                {loggedIn ? <div>{name || cookies.__usrN__ } 님 😊</div> : ""}
                 {loggedIn ? (
                   <button className="loginBtn" onClick={handleLogout}>
                     로그아웃
@@ -344,7 +321,7 @@ function Header() {
           {mobileHeader === 0 && (
             <div>
               <div className="btnBox">
-                {loggedIn ? <div className="userName">{name || ""} 님 😊</div> : ""}
+                {loggedIn ? <div className="userName">{ name || cookies.__usrN__ } 님 😊</div> : ""}
                 {loggedIn ? (
                   <button className="loginBtn" onClick={handleLogout}>
                     로그아웃
