@@ -41,15 +41,17 @@ function TicketList({ range, itemId, classNone, classTicketContainer, classTicke
   }, [itemId]);
 
   // plus button function
-  const handlePlus = (index: number) => {
-    setTicketData((prevData) => {
-      const updatedData = [...prevData];
-      updatedData[index] = {
-        ...updatedData[index],
-        count: updatedData[index].count + 1,
-      };
-      return updatedData;
-    });
+  const handlePlus = (index: number,price:number) => {
+    if( price >0){
+      setTicketData((prevData) => {
+        const updatedData = [...prevData];
+        updatedData[index] = {
+          ...updatedData[index],
+          count: updatedData[index].count + 1,
+        };
+        return updatedData;
+      });
+    }
   };
   useEffect(()=>{
     setOrderTicketData(ticketData)
@@ -124,7 +126,7 @@ function TicketList({ range, itemId, classNone, classTicketContainer, classTicke
               price={price}
               count={ticketInfo.count}
               handleMinus={() => handleMinus(index)}
-              handlePlus={() => handlePlus(index)}
+              handlePlus={() => handlePlus(index,price)}
               classTicketContainer={classTicketContainer}
               classTicketPrice={classTicketPrice}
               classTicketCnt={classTicketCnt}

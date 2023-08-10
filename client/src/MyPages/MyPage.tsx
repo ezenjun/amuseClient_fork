@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import MyPagelist from "./MyPageList";
 import Settings from "./MyPage/Settings/Settings";
 import Likes from "./MyPage/Likes";
 import Notifications from "./MyPage/Notifications";
-import Inquiries from "./MyPage/Inquiries";
+// import Inquiries from "./MyPage/Inquiries";
 import Orders from "./MyPage/Orders";
-import Quotes from "./MyPage/Quotes";
-import Bills from "./MyPage/Bills";
+// import Quotes from "./MyPage/Quotes";
+// import Bills from "./MyPage/Bills";
 import "./MyPage.css";
 import { useRecoilState } from "recoil";
 import { isLoggedIn } from "../atoms";

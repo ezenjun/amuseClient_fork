@@ -99,7 +99,7 @@ function Home() {
         setItems(items);
         const types = items.map((item: any) => item.type);
         setComTypes(types);
-        console.log("컴포넌트", types);
+        console.log("컴포넌트", response.data.data);
       })
       .catch((error) => {
         console.log("subpage 컴포넌트 연결 실패");

@@ -10,7 +10,8 @@ function Title({ itemId }: ItemIdProps) {
    * Title Data
    */
   const [titleData, setTitleData] = useState<TitleData>();
-  const formattedRated = titleData?.rated.toFixed(1) ?? "0.0";
+  const formattedRated = titleData?.rated;
+  const formattedRatedData = formattedRated?.toFixed(1) ?? "0.0";
   /**
    * Title API
    */
@@ -32,7 +33,7 @@ function Title({ itemId }: ItemIdProps) {
         country={titleData?.country ?? "country"}
         city={titleData?.city ?? "city"}
         title={titleData?.title ?? "title"}
-        rated={formattedRated ? Number(formattedRated) : 0.0}
+        rated={formattedRatedData ? Number(formattedRatedData) : 0.0}
         review_count={titleData?.review_count ?? 0.0}
       />
     </div>

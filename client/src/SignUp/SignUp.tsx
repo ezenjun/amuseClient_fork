@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { Link, useSearchParams } from "react-router-dom";
+import React from "react";
 import GoogleIcon from "@mui/icons-material/Google";
 import MainComponent from "../MainComponent";
 

@@ -18,7 +18,7 @@ export const Terms: React.FC<TermsProps> = ({privacy,privacyCheck,takeVideo,take
     <CommonHeader title="약관 안내" isRight={true}>
       <div className={styles.termsContent}>
         <div>
-          <span style={{cursor:"pointer"}} onClick={handleImageClick}> 개인정보 수집및활용 동의 (필수)</span>
+          <span style={{cursor:"pointer"}} onClick={handleImageClick}> 개인정보 수집 및 활용 동의 (필수)</span>
           <input type={"checkbox"} checked={privacy} onChange={()=>{privacyCheck(!privacy)}}/>
         </div>
         <div>

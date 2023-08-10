@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Style from "./MainMoreAbout.module.css";
-import bcorplogo from "../MainImgs/bcorplogo.svg";
-import logo01 from "../MainImgs/logo01.svg";
-import logo02 from "../MainImgs/logo02.svg";
-import logo03 from "../MainImgs/logo03.svg";
-import logo04 from "../MainImgs/logo04.svg";
-import logo05 from "../MainImgs/logo05.svg";
+// import bcorplogo from "../MainImgs/bcorplogo.svg";
+// import logo01 from "../MainImgs/logo01.svg";
+// import logo02 from "../MainImgs/logo02.svg";
+// import logo03 from "../MainImgs/logo03.svg";
+// import logo04 from "../MainImgs/logo04.svg";
+// import logo05 from "../MainImgs/logo05.svg";
 import NaverIcon from "./naver-icon.png";
 import InstaIcon from "./instagram-icon.png";
 import FaceIcon from "./facebook-icon.png";

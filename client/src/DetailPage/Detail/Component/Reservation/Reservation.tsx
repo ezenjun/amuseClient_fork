@@ -85,14 +85,14 @@ function Reservation({ itemId, productCode, startPrice, likeNum }: ReservationPr
    * Ticket Button
    */
   const handleButtonClick = () => {
-    handleBuyTicket();
-    // Swal.fire({
-    //   icon: "success",
-    //   title: "티켓 구입 문의",
-    //   confirmButtonText: "확인",
-    //   confirmButtonColor: "#F184A1",
-    //   html: "📞 02-719-6811<br>✉️ info@amusetravel.com<br>",
-    // });
+    // handleBuyTicket();
+    Swal.fire({
+      icon: "success",
+      title: "티켓 구입 문의",
+      confirmButtonText: "확인",
+      confirmButtonColor: "#F184A1",
+      html: "📞 02-719-6811<br>✉️ info@amusetravel.com<br>",
+    });
   };
 
   const handleBuyTicket = () => {

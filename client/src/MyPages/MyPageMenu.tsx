@@ -5,10 +5,7 @@ import MenuItem from "@mui/material/MenuItem";
 import SettingsIcon from "@mui/icons-material/Settings";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-import RoomServiceIcon from "@mui/icons-material/RoomService";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
-import CreditCardIcon from "@mui/icons-material/CreditCard";
-import AssignmentIcon from "@mui/icons-material/Assignment";
 import "./MyPageMenu.css";
 import { useNavigate } from "react-router-dom";
 

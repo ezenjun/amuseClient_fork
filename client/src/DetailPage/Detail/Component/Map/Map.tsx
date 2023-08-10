@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./Map.scss";
-import MapDetail from "./MapDetail/MapDetail";
+// import MapDetail from "./MapDetail/MapDetail";
 import axios from "axios";
 import { ItemIdProps } from "../../../../Interfaces/PropsInterfaces";
 import { MapData } from "../../../../Interfaces/DataInterfaces";

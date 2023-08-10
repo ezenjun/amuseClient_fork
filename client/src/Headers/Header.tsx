@@ -4,7 +4,7 @@ import "./Header.css";
 import Style from "../App.module.css";
 import { useNavigate } from "react-router-dom";
 import logoimage from "../MainPage/MainImgs/amuse_logo.png";
-import { isLoggedIn, isManager } from "../atoms";
+import { isLoggedIn } from "../atoms";
 import { useRecoilState } from "recoil";
 import MyPageMenu from "../MyPages/MyPageMenu";
 import axios from "axios";
@@ -25,8 +25,8 @@ function Header() {
   const { name, setName } = useInfoContext();
   const { setCategoriesInfo } =useCategoryContext()
   const [loggedIn, setLoggedIn] = useRecoilState(isLoggedIn);
-  const [manager, setManager] = useRecoilState(isManager);
-  const [token, setToken] = useState("");
+  // const [manager, setManager] = useRecoilState(isManager);
+  // const [token, setToken] = useState("");
   const [cookies, setCookie, removeCookie] = useCookies(["__jwtk__","__igjwtk__","__jwtkid__","__usrN__"]);
   
   // const checkIsManager = (token: String) => {
@@ -82,7 +82,7 @@ function Header() {
 
   const [categories, setCategories] = useState([]);
   const [categoryIds, setCategoryIds] = useState([]);
-  const [showDropdown, setShowDropdown] = useState(false);
+  // const [showDropdown, setShowDropdown] = useState(false);
 
   const MoreDropdown: React.FC<MoreDropdownProps> = () => (
     <div className="dropdown">
@@ -169,8 +169,10 @@ function Header() {
   useEffect(() => {
     let getToken: string | null = cookies.__jwtkid__;
     if (getToken) {
-      setToken(getToken);
+      // setToken(getToken);
       setLoggedIn(true);
+    }else{
+      setLoggedIn(false)
     }
   }, []);
 
@@ -178,7 +180,7 @@ function Header() {
     let locationString = window.location.toString();
     if (locationString.includes("http://localhost:3000/?access-token")) {
       let token: string | null = new URL(window.location.href).searchParams.get("access-token");
-      if (token == null) {
+      if (token === null) {
         return;
       } else {
         const expires = moment().add("8", "h").toDate();
@@ -190,9 +192,9 @@ function Header() {
     }else if (locationString.includes("amusetravel.wheelgo.net/")) {
       let token: string | null = cookies.__jwtk__
       let igToken: string | null = cookies.__igjwtk__
-      if (token == null) {
+      if (token === null) {
         return;
-      } else if ( igToken && igToken?.length > 0 && token == igToken) {
+      } else if ( igToken && igToken?.length > 0 && token === igToken) {
         return;
       } else {
         // localStorage.setItem("loginToken", token);
@@ -220,7 +222,7 @@ function Header() {
         setCookie("__usrN__",response.data.data?.name,{expires})
         if( !userData?.advertisementTrue ){
           setLoggedIn(false);
-          setManager(false);
+          // setManager(false);
           movePage("/LoginAgree")
         }
         
@@ -232,7 +234,7 @@ function Header() {
   const handleLogout = () => {
     let token = cookies.__jwtkid__
     setLoggedIn(false);
-    setManager(false);
+    // setManager(false);
     const expires = moment().add("1", "m").toDate();
     setCookie("__igjwtk__", token, { expires });
     removeCookie("__jwtkid__", { path: "/", maxAge: 0 });

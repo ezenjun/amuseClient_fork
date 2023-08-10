@@ -1,4 +1,4 @@
-import GoogleMapReact from "google-map-react";
+// import GoogleMapReact from "google-map-react";
 import "./MapDetail.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
@@ -21,13 +21,13 @@ function MapDetail({ data }: MapDataProps) {
     return null;
   }
 
-  const API_KEY = process.env.REACT_APP_GOOGLE_API_KEY_MAP;
+  // const API_KEY = process.env.REACT_APP_GOOGLE_API_KEY_MAP;
 
-  const markerCount = data.length;
-  const sumLat = data.reduce((sum, marker) => sum + marker.latitude!, 0);
-  const sumLng = data.reduce((sum, marker) => sum + marker.longitude!, 0);
-  const centerLat = sumLat / markerCount;
-  const centerLng = sumLng / markerCount;
+  // const markerCount = data.length;
+  // const sumLat = data.reduce((sum, marker) => sum + marker.latitude!, 0);
+  // const sumLng = data.reduce((sum, marker) => sum + marker.longitude!, 0);
+  // const centerLat = sumLat / markerCount;
+  // const centerLng = sumLng / markerCount;
 
   return (
     <div className="MapDetail">
