@@ -86,18 +86,18 @@ export default function MyPageMenu() {
           <FavoriteIcon />
           <div className="mypage_category_item">관심상품</div>
         </MenuItem>
-        <MenuItem onClick={navigateToNotifications}>
+        {/* <MenuItem onClick={navigateToNotifications}>
           <NotificationsIcon />
           <div className="mypage_category_item">알림</div>
-        </MenuItem>
+        </MenuItem> */}
         {/* <MenuItem onClick={navigateToInquiries}>
           <RoomServiceIcon />
           <div className="mypage_category_item">문의</div>
         </MenuItem> */}
-        <MenuItem onClick={navigateToOrders}>
+        {/* <MenuItem onClick={navigateToOrders}>
           <CalendarMonthIcon />
           <div className="mypage_category_item">주문상품</div>
-        </MenuItem>
+        </MenuItem> */}
         {/* <MenuItem onClick={navigateToQuotes}>
           <CreditCardIcon />
           <div className="mypage_category_item">상품견적</div>

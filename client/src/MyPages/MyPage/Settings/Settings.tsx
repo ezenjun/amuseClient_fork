@@ -1,3 +1,4 @@
+import React,{ FormEvent } from "react";
 import styles from "./Settings.module.css";
 import TextField from "@mui/material/TextField";
 import SettingsGender from "./SettingsGender";
@@ -16,6 +17,11 @@ interface userProps {
 export default function Settings() {
   const [ cookies ] = useCookies(["__jwtkid__"]);
   const [userData, setUserData] = useState<userProps>();
+  const [ phoneNumber, setPhoneNumber ] =  useState("")
+  const phoneNumberHandler =(event: React.ChangeEvent<HTMLInputElement>)=>{
+    let insert =event.target.value
+    setPhoneNumber(insert.replace(/[^0-9]/g, ''))
+  }
   const getUserInfoAsToken = async () => {
     const token = cookies["__jwtkid__"];
     axios
@@ -26,13 +32,38 @@ export default function Settings() {
         },
       })
       .then((response) => {
+        const res = response.data.data
         setUserData(response.data.data);
-        console.log("mypage", response.data.data);
+        setPhoneNumber(res.phone_number)
       })
       .catch((err) => {
         console.log(err);
       });
   };
+  
+  const submitAgree = async()=>{
+    const token = cookies["__jwtkid__"]
+    const requestBody = {
+        "phone_number" : phoneNumber
+    };
+    console.log(requestBody, {
+        "Content-Type": "application/json",
+        "Authorization": `${token}`,
+      })
+    axios.post(`${process.env.REACT_APP_AMUSE_API}/api/v1/user/login/info`, requestBody, {
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `${token}`,
+        },
+    }).then((response)=>{
+        console.log(response)
+        alert("변경되었습니다.")
+        window.location.reload()
+    }).catch((err)=>{
+
+    })
+  }
+
   useEffect(() => {
     let getToken: string | null = cookies.__jwtkid__;
     if (getToken) {
@@ -45,7 +76,7 @@ export default function Settings() {
       <div className={styles.wrapper}>
         <div className={styles.upperBox}>
           <h4>내정보</h4>
-          <button className={styles.modifyBtn}>내정보 수정</button>
+          <button className={styles.modifyBtn} onClick={submitAgree}>내정보 수정</button>
         </div>
         <div className={styles.myInfo_middleBBox}>
           {/* <TextField
@@ -69,7 +100,9 @@ export default function Settings() {
             label="전화번호"
             variant="standard"
             placeholder="예) 010-1234-5678"
-            type="email"
+            value={phoneNumber}
+            type="phone"
+            onChange={phoneNumberHandler}
             sx={{ mr: 0, width: "390px", margin: "10px" }}
           />
           {/* <TextField
@@ -80,18 +113,18 @@ export default function Settings() {
             placeholder="예) 홍길동"
             sx={{ mr: 0, width: "390px", margin: "10px" }}
           /> */}
-          <TextField
+          {/* <TextField
             id="birth"
             label="생년월일"
             variant="standard"
             placeholder="예) 1990-01-01"
             type="email"
             sx={{ mr: 0, width: "390px", margin: "10px" }}
-          />
+          /> */}
         </div>
-        <div className={styles.myInfo_bottomBBox}>
+        {/* <div className={styles.myInfo_bottomBBox}>
           <SettingsGender />
-        </div>
+        </div> */}
       </div>
       {/* <div className={styles.wrapper}>
         <div className={styles.upperBox}>
@@ -102,7 +135,7 @@ export default function Settings() {
           <SettingsInterestField />
         </div>
       </div> */}
-      <div className={styles.wrapper}>
+      {/* <div className={styles.wrapper}>
         <div className={styles.upperBox}>
           <h4>마케팅 설정</h4>
           <button className={styles.modifyBtn}>마케팅설정 저장</button>
@@ -110,7 +143,7 @@ export default function Settings() {
         <div className={styles.marketing_bottomBox}>
           <SettingsMarketingField />
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }

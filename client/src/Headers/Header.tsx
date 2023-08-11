@@ -107,7 +107,7 @@ function Header() {
               {categoryName}
             </div>
           ))}
-          <div className="dropdown-item">회사 소개</div>
+          {/* <div className="dropdown-item">회사 소개</div> */}
         </>
       )}
     </div>
@@ -397,9 +397,9 @@ function Header() {
                     </div>
                   </>
                 )}
-                <div className="menu-item" onClick={navigateToAboutAmuse}>
+                {/* <div className="menu-item" onClick={navigateToAboutAmuse}>
                   회사 소개
-                </div>
+                </div> */}
               </div>
             </div>
           )}

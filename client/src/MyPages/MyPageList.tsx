@@ -60,14 +60,14 @@ export default function MyPagelist() {
               <ListItemText primary="관심상품" />
             </ListItemButton>
           </ListItem>
-          <ListItem disablePadding onClick={navigateToNotifications}>
+          {/* <ListItem disablePadding onClick={navigateToNotifications}>
             <ListItemButton>
               <ListItemIcon>
                 <NotificationsIcon />
               </ListItemIcon>
               <ListItemText primary="알림" />
             </ListItemButton>
-          </ListItem>
+          </ListItem> */}
           {/* <ListItem disablePadding onClick={navigateToInquiries}>
             <ListItemButton>
               <ListItemIcon>
@@ -76,14 +76,14 @@ export default function MyPagelist() {
               <ListItemText primary="문의" />
             </ListItemButton>
           </ListItem> */}
-          <ListItem disablePadding onClick={navigateToOrders}>
+          {/* <ListItem disablePadding onClick={navigateToOrders}>
             <ListItemButton>
               <ListItemIcon>
                 <CalendarMonthIcon />
               </ListItemIcon>
               <ListItemText primary="주문상품" />
             </ListItemButton>
-          </ListItem>
+          </ListItem> */}
           {/* <ListItem disablePadding onClick={navigateToQuotes}>
             <ListItemButton>
               <ListItemIcon>
