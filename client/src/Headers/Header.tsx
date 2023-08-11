@@ -25,7 +25,6 @@ function Header() {
   const { name, setName } = useInfoContext();
   const { setCategoriesInfo } =useCategoryContext()
   const [loggedIn, setLoggedIn] = useRecoilState(isLoggedIn);
-  const [isLogin, setIsLogin] = useState(false);
   // const [manager, setManager] = useRecoilState(isManager);
   // const [token, setToken] = useState("");
   const [cookies, setCookie, removeCookie] = useCookies(["__jwtk__","__igjwtk__","__jwtkid__","__usrN__"]);
@@ -172,10 +171,8 @@ function Header() {
     if (getToken) {
       // setToken(getToken);
       setLoggedIn(true);
-      setIsLogin(true)
     }else{
       setLoggedIn(false)
-      setIsLogin(false)
     }
   }, []);
 
@@ -254,8 +251,8 @@ function Header() {
           {mobileHeader === 1 && (
             <div style={{ paddingTop: "5px", paddingBottom: "10px" }}>
               <div className="btnBox_mobile">
-                {isLogin ? <div>{name || cookies.__usrN__ } 님 😊</div> : ""}
-                {isLogin ? (
+                {loggedIn ? <div>{name || cookies.__usrN__ } 님 😊</div> : ""}
+                {loggedIn ? (
                   <button className="loginBtn" onClick={handleLogout}>
                     로그아웃
                   </button>
@@ -264,7 +261,7 @@ function Header() {
                     로그인
                   </button>
                 )}
-                {isLogin ? (
+                {loggedIn ? (
                   <MyPageMenu />
                 ) : (
                   <button className="signInBtn" onClick={navigateToSignUP}>
@@ -326,8 +323,8 @@ function Header() {
           {mobileHeader === 0 && (
             <div>
               <div className="btnBox">
-                {isLogin ? <div className="userName">{ name || cookies.__usrN__ } 님 😊</div> : ""}
-                {isLogin ? (
+                {loggedIn ? <div className="userName">{ name || cookies.__usrN__ } 님 😊</div> : ""}
+                {loggedIn ? (
                   <button className="loginBtn" onClick={handleLogout}>
                     로그아웃
                   </button>
@@ -336,7 +333,7 @@ function Header() {
                     로그인
                   </button>
                 )}
-                {isLogin ? (
+                {loggedIn ? (
                   <div>
                     <MyPageMenu />
                     {/* <a
