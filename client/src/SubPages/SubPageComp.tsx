@@ -135,7 +135,6 @@ function SubPageComp() {
 
   const fetchPageData = (apiKeyNumber: number) => {
     const token = cookies["__jwtkid__"]
-    console.log("token = ", token);
     axios
       .get(`${process.env.REACT_APP_AMUSE_API}/main/category/${apiKeyNumber}/page`, {
         headers: {
@@ -147,10 +146,8 @@ function SubPageComp() {
         const ComponentInfos = response.data.data.pageComponentInfos;
         const items = ComponentInfos.map((item: any) => item);
         setItems(items);
-        console.log("ComponentInfos :n", ComponentInfos);
         const types = items.map((item: any) => item.type);
         setComTypes(types);
-        console.log("컴포넌트", types);
       })
       .catch((error) => {
         console.log("subpage 컴포넌트 연결 실패");
@@ -158,7 +155,6 @@ function SubPageComp() {
   };
 
   const renderedComponents = comTypes.map((type, index) => {
-    console.log(type);
     if (type === "리스트") {
       const listItem: ListProps = Items[index];
       return <SubLists key={index} title={listItem.title} itemInfos={listItem.itemInfos} />;
