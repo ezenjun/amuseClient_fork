@@ -33,6 +33,7 @@ function SubLists({ title, itemInfos }: SubListsProps) {
   useEffect(() => {
     const ids = itemInfos.map((item: any) => item.item_db_id);
     setBestItemIds(ids);
+    console.log("ids", bestItemIds);
     const titles = itemInfos.map((item: any) => item.title);
     setBestItemTitle(titles);
     const startPrices = itemInfos.map((item: any) => item.startPrice);

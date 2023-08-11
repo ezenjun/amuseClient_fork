@@ -37,7 +37,11 @@ export default function Likes() {
             <div className="total" onClick={() => navToItemDetail(item.item_db_id)}>
               <div className="Likes_box">
                 <div className="Likes_img">
-                  <img src={item.imageUrl} alt="여행 이미지" style={{ width: "167px", height: "110px" }} />
+                  {item.imageUrl ? (
+                    <img src={item.imageUrl} alt="여행 이미지" style={{ width: "167px", height: "110px" }} />
+                  ) : (
+                    <div style={{ backgroundColor: "gray", width: "167px", height: "110px" }}></div>
+                  )}
                 </div>
                 <div className="Likes_content">
                   <div className="Likes_title">{item.title}</div>

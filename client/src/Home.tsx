@@ -47,7 +47,9 @@ function Home() {
 
   useEffect(() => {
     let infoIndex = _.findIndex(categoriesInfo, { categoryName: "home" });
-    if(infoIndex < 0) { infoIndex = _.findIndex(categoriesInfo, { categoryName: "Home" }); }
+    if (infoIndex < 0) {
+      infoIndex = _.findIndex(categoriesInfo, { categoryName: "Home" });
+    }
     if (categoriesInfo?.length) {
       const info = categoriesInfo[infoIndex];
       console.log(info);
@@ -109,7 +111,7 @@ function Home() {
   const renderedComponents = comTypes.map((type, index) => {
     if (type === "리스트") {
       const listItem: ListProps = Items[index];
-      // console.log("subpage list ", listItem.itemInfos);
+      console.log("subpage list ", listItem.itemInfos);
       return <SubLists key={index} title={listItem.title} itemInfos={listItem.itemInfos} />;
     } else if (type === "타일") {
       const tileItem: TileProps = Items[index];
@@ -137,7 +139,6 @@ function Home() {
   // const [imageUrls, setImageUrls] = useState<string[]>([]);
   // const [titles, setTitles] = useState<string[]>([]);
   // const [startPrices, setStartPrice] = useState<number[]>([]);
-
 
   return (
     <MainComponent>
