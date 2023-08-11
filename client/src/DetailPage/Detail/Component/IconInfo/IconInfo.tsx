@@ -35,10 +35,10 @@ function IconInfo({ itemId }: ItemIdProps) {
         <IconDetail icon={iconInfo.icon} text={iconInfo.text}/>
       ))}
       */}
-      {/* <IconDetail icon={faRoad} text="차량 이동" /> */}
+      <IconDetail icon={faRoad} text="00 출발" />
       <IconDetail icon={faCalendar} text="2박 3일" />
       <IconDetail icon={faLanguage} text="한국어" />
-      {/*<IconDetail icon={faRoute} text="강도 보통" /> */}
+      <IconDetail icon={faRoute} text="강도 보통" />
     </div>
   );
 }

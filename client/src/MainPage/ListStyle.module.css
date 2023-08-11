@@ -26,12 +26,13 @@
 .like_count {
   content: "";
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 20%;
-  height: 20%;
-  background-color: transparent;
+  top: 4px;
+  left: 4px;
+  width: 32px;
+  height: 32px;
+  background-color: rgba(0, 0, 0, 0);
   z-index: 1;
+  border-radius: 50%;
 }
 .box::before {
   content: "";
@@ -42,6 +43,7 @@
   height: 60%;
   background-color: lightblue;
   border-radius: 12px 12px 0 0;
+  cursor: pointer;
 }
 
 .box::after {
@@ -63,6 +65,7 @@
   margin-top: 200px;
   width: 90%;
   z-index: 5;
+  cursor: pointer;
 }
 
 .tripCost {
@@ -72,6 +75,7 @@
   margin-top: 260px;
   width: 90%;
   z-index: 5;
+  cursor: pointer;
 }
 
 .dropdown {

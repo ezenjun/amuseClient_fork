@@ -10,6 +10,8 @@ import LeftIcon from "../MainPage/ArrowIcons/left.png";
 import NoLeftIcon from "../MainPage/ArrowIcons/left_no.png";
 import { BoxProps } from "../Interfaces/PropsInterfaces";
 import { SubListsProps } from "../Interfaces/PropsInterfaces";
+import axios from "axios";
+import { useCookies } from "react-cookie";
 
 const numberWithCommas = (number: number | null): string => {
   if (number === null) {
@@ -26,6 +28,8 @@ function SubLists({ title, itemInfos }: SubListsProps) {
   const [bestItemImageUrl, setBestItemImageUrl] = useState<string[]>([]);
   const [isLiked, setIsLiked] = useState<boolean[]>([]);
 
+  const [cookies, setCookie, removeCookie] = useCookies(["__jwtkid__"]);
+
   useEffect(() => {
     const ids = itemInfos.map((item: any) => item.item_db_id);
     setBestItemIds(ids);
@@ -37,24 +41,56 @@ function SubLists({ title, itemInfos }: SubListsProps) {
     setBestItemImageUrl(imgUrl);
   }, [itemInfos]);
 
-  const handleLikeClick = (index: number) => {
+  const handleLikeClick = (itemId: number) => {
     const updatedIsLiked = [...isLiked];
-    updatedIsLiked[index] = !updatedIsLiked[index];
+    updatedIsLiked[itemId] = !updatedIsLiked[itemId];
     setIsLiked(updatedIsLiked);
+    const token = cookies["__jwtkid__"];
+    console.log(itemId, "like it");
+    axios
+      .post(`${process.env.REACT_APP_AMUSE_API}/detail/${itemId}/like-plus`, null, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `${token}`,
+        },
+      })
+      .then((response) => {
+        alert("관심상품에 등록되었습니다.\n관심상품 관리는 마이페이지에서 가능합니다.");
+      })
+      .catch((error) => {
+        console.error("Error liking item:", error);
+      });
   };
 
   const Box: React.FC<BoxProps> = ({ marginRight, itemId, handleClick, title, startPrice, imageUrl }) => (
-    <div className={Style["box"]} style={{ marginRight }} onClick={handleClick}>
-      <div className={Style["box_before"]} style={{ backgroundImage: `url(${imageUrl})` }}></div>
+    <div className={Style["box"]} style={{ marginRight }}>
+      <div
+        className={Style["box_before"]}
+        onClick={handleClick}
+        style={{ backgroundImage: `url(${imageUrl})`, cursor: "pointer" }}
+      ></div>
       <div className={Style["like_count"]}>
         <FontAwesomeIcon
           icon={isLiked[itemId] ? fullHeart : faHeart}
-          style={{ color: "#ffffff", width: "20px", height: "20px", marginTop: "10px", marginLeft: "10px" }}
+          style={{
+            color: "#ffffff",
+            width: "24px",
+            height: "24px",
+            marginLeft: "4px",
+            marginTop: "4px",
+            justifyItems: "center",
+            zIndex: "9",
+            cursor: "pointer",
+          }}
           onClick={() => handleLikeClick(itemId)}
         />
       </div>
-      <p className={Style["tripTitle"]}>{title}</p>
-      <p className={Style["tripCost"]}>가격 : {startPrice}원 ~</p>
+      <p className={Style["tripTitle"]} onClick={handleClick}>
+        {title}
+      </p>
+      <p className={Style["tripCost"]} onClick={handleClick}>
+        가격 : {startPrice}원 ~
+      </p>
     </div>
   );
   /**

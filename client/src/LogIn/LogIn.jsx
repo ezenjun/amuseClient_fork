@@ -9,7 +9,7 @@ import { useRecoilState } from "recoil";
 import { isLoggedIn } from "../atoms";
 import { useNavigate } from "react-router-dom";
 import AppStyle from "../App.module.css";
-import axios from "axios"
+import axios from "axios";
 import MainComponent from "../MainComponent";
 
 export default function Login() {
@@ -17,14 +17,14 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [loggedIn, setLoggedIn] = useRecoilState(isLoggedIn);
   const navigate = useNavigate();
-  let redirectUri =  "http://amusetravel.wheelgo.net"
-  if(process.env.REACT_APP_AMUSE_API === "https://amuseapi.wheelgo.net"){
+  let redirectUri = "http://amusetravel.wheelgo.net";
+  if (process.env.REACT_APP_AMUSE_API === "https://amuseapi.wheelgo.net") {
     redirectUri = "http://amusetravel.wheelgo.net";
   }
   const axiosInstance = axios.create({
     withCredentials: true,
   });
-  
+
   const handleChangeEmail = (e) => {
     setEmail(e.target.value);
     console.log(e.target.value);
@@ -74,7 +74,7 @@ export default function Login() {
               <GoogleIcon sx={{ mr: 4 }} />
               Google 로그인
             </a>
-       
+
             <a
               className="login_naver"
               href={`${process.env.REACT_APP_AMUSE_API}/oauth2/authorization/naver?redirect_uri=${redirectUri}`}
