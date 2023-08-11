@@ -26,7 +26,7 @@ const Ticket: FC<TicketProps> = ({
         <p className="ticket-detail">{detail}</p>
       </div>
       <div className={`ticket-price ${classTicketPrice}`}>
-        <span className="person">1명</span>
+        {/* <span className="person">1명</span> */}
         <span className="price">{price.toLocaleString('en')}</span>
         <span className="won">원</span>
       </div>

@@ -20,6 +20,7 @@ import SubLists from "./SubPages/SubLists";
 import SubBanners from "./SubPages/SubBanners";
 import SubTiles from "./SubPages/SubTiles";
 import MainComponent from "./MainComponent";
+import { useCookies } from "react-cookie";
 
 function Home() {
   interface TileProps {
@@ -39,10 +40,10 @@ function Home() {
   const { categoriesInfo } = useCategoryContext();
   const [apiKeyNumber, setApiKeyNumber] = useState(0);
   const [categoryData, setCategoryData] = useState<CategoryData | null>(null);
+  const [cookies] = useCookies(["__jwtkid__"])
 
   // const [loggedIn, setLoggedIn] = useRecoilState(isLoggedIn);
   // const [manager, setManager] = useRecoilState(isManager);
-  // const [cookies, setCookie, removeCookie] = useCookies(["__jwtkid__"]);
   // const location = useLocation();
 
   useEffect(() => {
@@ -93,8 +94,14 @@ function Home() {
   }, [apiKeyNumber]);
 
   const fetchPageData = (apiKeyNumber: number) => {
+    const token = cookies["__jwtkid__"]
     axios
-      .get(`${process.env.REACT_APP_AMUSE_API}/main/category/${apiKeyNumber}/page`)
+      .get(`${process.env.REACT_APP_AMUSE_API}/main/category/${apiKeyNumber}/page`, {
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `${token}`,
+        },
+      })
       .then((response) => {
         const ComponentInfos = response.data.data.pageComponentInfos;
         const items = ComponentInfos.map((item: any) => item);

@@ -11,6 +11,7 @@ import SubTiles from "./SubTiles";
 import { BannerProps, ListProps, BoxProps, DropdownProps } from "../Interfaces/PropsInterfaces";
 import { CategoryData } from "../Interfaces/DataInterfaces";
 import MainComponent from "../MainComponent";
+import { useCookies } from "react-cookie";
 
 interface TileProps {
   page_component_id: string;
@@ -71,6 +72,7 @@ function SubPageComp() {
 
   const { apiKey } = useParams() as { apiKey: string };
   const [categoryData, setCategoryData] = useState<CategoryData | null>(null);
+  const [cookies] = useCookies(["__jwtkid__"])
 
   // console.log("apiKey = " + apiKey);
   const apiKeyNumber: number = Number(apiKey);
@@ -131,15 +133,21 @@ function SubPageComp() {
     fetchPageData(apiKeyNumber);
   }, [apiKeyNumber]);
 
-  console.log("apikeynum = ", apiKeyNumber);
   const fetchPageData = (apiKeyNumber: number) => {
+    const token = cookies["__jwtkid__"]
+    console.log("token = ", token);
     axios
-      .get(`${process.env.REACT_APP_AMUSE_API}/main/category/${apiKeyNumber}/page`)
+      .get(`${process.env.REACT_APP_AMUSE_API}/main/category/${apiKeyNumber}/page`, {
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `${token}`,
+        },
+      })
       .then((response) => {
         const ComponentInfos = response.data.data.pageComponentInfos;
         const items = ComponentInfos.map((item: any) => item);
         setItems(items);
-        console.log("items :n", items);
+        console.log("ComponentInfos :n", ComponentInfos);
         const types = items.map((item: any) => item.type);
         setComTypes(types);
         console.log("컴포넌트", types);
