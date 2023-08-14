@@ -169,19 +169,16 @@ function Header() {
   useEffect(() => {
     let getToken: string | null = cookies.__jwtkid__;
     console.log("getToken ",getToken)
-    if(getToken && (getToken === "undefined" || getToken === "null")){
-      removeCookie("__jwtkid__")
-      setLoggedIn(false);
-    }else if(!getToken){
+    if(!cookies.__usrN__ || cookies.__usrN__ === "undefined"){
       removeCookie("__jwtkid__")
       setLoggedIn(false);
     }
-    if (getToken && getToken !== "undefined" && getToken !== "null") {
+    if (getToken) {
       setLoggedIn(true);
     } else {
       setLoggedIn(false);
     }
-  }, []);
+  }, [cookies]);
 
   useEffect(() => {
     let locationString = window.location.toString();

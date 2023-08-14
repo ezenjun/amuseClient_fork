@@ -21,7 +21,6 @@ const numberWithCommas = (number: number | null): string => {
 };
 
 function SubLists({ title, itemInfos }: SubListsProps) {
-  console.log("itemInfos", itemInfos);
   const [bestItemIds, setBestItemIds] = useState<number[]>([]);
   const [bestItemTitle, setBestItemTitle] = useState<string[]>([]);
   const [bestItemPrice, setBestItemPrice] = useState<number[]>([]);
@@ -33,7 +32,6 @@ function SubLists({ title, itemInfos }: SubListsProps) {
   useEffect(() => {
     const ids = itemInfos.map((item: any) => item.item_db_id);
     setBestItemIds(ids);
-    console.log("ids", bestItemIds);
     const titles = itemInfos.map((item: any) => item.title);
     setBestItemTitle(titles);
     const startPrices = itemInfos.map((item: any) => item.startPrice);
@@ -47,7 +45,6 @@ function SubLists({ title, itemInfos }: SubListsProps) {
     updatedIsLiked[itemId] = !updatedIsLiked[itemId];
     setIsLiked(updatedIsLiked);
     const token = cookies["__jwtkid__"];
-    console.log(itemId, "like it");
     axios
       .post(`${process.env.REACT_APP_AMUSE_API}/detail/${itemId}/like-plus`, null, {
         headers: {

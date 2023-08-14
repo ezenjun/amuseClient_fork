@@ -53,7 +53,7 @@ function Home() {
     }
     if (categoriesInfo?.length) {
       const info = categoriesInfo[infoIndex];
-      console.log(info);
+      // console.log(info);
       setApiKeyNumber(info.categoryId);
     }
   }, [categoriesInfo]);
@@ -90,7 +90,9 @@ function Home() {
   // const [ItemImageUrl, setItemImageUrl] = useState<string[]>([]);
 
   useEffect(() => {
-    fetchPageData(apiKeyNumber);
+    if(apiKeyNumber > 0){
+      fetchPageData(apiKeyNumber);
+    }
   }, [apiKeyNumber]);
 
   const fetchPageData = (apiKeyNumber: number) => {
@@ -108,17 +110,17 @@ function Home() {
         setItems(items);
         const types = items.map((item: any) => item.type);
         setComTypes(types);
-        console.log("컴포넌트", response.data.data);
+        // console.log("컴포넌트", response.data.data);
       })
       .catch((error) => {
-        console.log("subpage 컴포넌트 연결 실패");
+        // console.log("subpage 컴포넌트 연결 실패");
       });
   };
 
   const renderedComponents = comTypes.map((type, index) => {
     if (type === "리스트") {
       const listItem: ListProps = Items[index];
-      console.log("subpage list ", listItem.itemInfos);
+      // console.log("subpage list ", listItem.itemInfos);
       return <SubLists key={index} title={listItem.title} itemInfos={listItem.itemInfos} />;
     } else if (type === "타일") {
       const tileItem: TileProps = Items[index];
