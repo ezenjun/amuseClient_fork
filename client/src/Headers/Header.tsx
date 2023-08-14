@@ -241,6 +241,7 @@ function Header() {
     const expires = moment().add("1", "m").toDate();
     setCookie("__igjwtk__", token, { expires });
     removeCookie("__jwtkid__", { path: "/", maxAge: 0 });
+    removeCookie("__usrN__", { path: "/", maxAge: 0 });
     navigateToHome();
   };
   // if(!name){
