@@ -169,6 +169,10 @@ function Header() {
   useEffect(() => {
     let getToken: string | null = cookies.__jwtkid__;
     console.log("getToken ",getToken)
+    if(getToken && (getToken === "undefined" || getToken === "null")){
+      removeCookie("__jwtkid__")
+      setLoggedIn(false);
+    }
     if (getToken && getToken !== "undefined" && getToken !== "null") {
       setLoggedIn(true);
     } else {
