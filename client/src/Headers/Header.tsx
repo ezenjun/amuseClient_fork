@@ -172,6 +172,9 @@ function Header() {
     if(getToken && (getToken === "undefined" || getToken === "null")){
       removeCookie("__jwtkid__")
       setLoggedIn(false);
+    }else if(!getToken){
+      removeCookie("__jwtkid__")
+      setLoggedIn(false);
     }
     if (getToken && getToken !== "undefined" && getToken !== "null") {
       setLoggedIn(true);
