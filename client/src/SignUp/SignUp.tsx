@@ -3,7 +3,7 @@ import GoogleIcon from "@mui/icons-material/Google";
 import MainComponent from "../MainComponent";
 
 export default function SignUp() {
-  const redirectU = "http://amusetravel.wheelgo.net/"
+  const redirectU = "http://amusetravel.wheelgo.net/LoginAgree"
   return (
     <MainComponent>
       <div className="login_body">
