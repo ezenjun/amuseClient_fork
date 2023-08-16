@@ -30,7 +30,6 @@ function Manager({ itemId }: ItemIdProps) {
       });
   }, [itemId]);
 
-  console.log("가이드 정보 api : ", guideData);
   /**
    * Email Connect
    */

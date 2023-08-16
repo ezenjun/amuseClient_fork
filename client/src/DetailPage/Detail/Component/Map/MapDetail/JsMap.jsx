@@ -16,7 +16,6 @@ const JsMap = ({ data }) => {
     const centerLat = sumLat / markerCount;
     const centerLng = sumLng / markerCount;
 
-    console.log(centerLat,centerLng)
     const center = {
         lat: centerLat,
         lng: centerLng

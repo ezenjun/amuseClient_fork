@@ -20,7 +20,6 @@ function Title({ itemId }: ItemIdProps) {
       .get(`${process.env.REACT_APP_AMUSE_API}/detail/${itemId}/title`)
       .then((response) => {
         setTitleData(response.data.data);
-        console.log(response.data.data);
       })
       .catch((error) => {
         console.log("연결 실패");

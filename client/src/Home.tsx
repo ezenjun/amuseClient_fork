@@ -9,7 +9,6 @@ import Style from "./SubPages/SubPage.module.css";
 // import { useRecoilState } from "recoil";
 // import { isLoggedIn, isManager } from "./atoms";
 // import { redirect, useLocation } from "react-router-dom";
-// import { useCookies } from "react-cookie";
 import Fade from "./Fade";
 import axios from "axios";
 import { CategoryData } from "./Interfaces/DataInterfaces";

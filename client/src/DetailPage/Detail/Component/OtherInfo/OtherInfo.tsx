@@ -23,7 +23,7 @@ function OtherInfo({ itemId }: ItemIdProps) {
       .then((response) => {
         setOtherInfoData(response.data.data);
 
-        console.log("product", response.data.data.content)
+        // console.log("product", response.data.data.content)
       })
       .catch((error) => {
         console.log("연결 실패");

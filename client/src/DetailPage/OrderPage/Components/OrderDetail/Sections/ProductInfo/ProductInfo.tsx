@@ -33,7 +33,7 @@ export function ProductInfo() {
               const price = selectedPriceIndex !== -1 ? ticket.priceList[selectedPriceIndex].price : 0;
               return (
                 <div key={index} className={styles.item}>
-                  <div className="selected-ticket-title">{ticket.title}</div>
+                  <div className="selected-ticket-title" style={{ width: 280 }}>{ticket.title}</div>
                   <div className="selected-ticket-count">
                     {ticket.count} X {price.toLocaleString("en")}원
                   </div>
@@ -51,14 +51,14 @@ export function ProductInfo() {
             
           )}
         </ul>
-      <div className={styles.couponSection}>
+      {/* <div className={styles.couponSection}>
         <h4>쿠폰할인</h4>
         <select>
           <option value="" disabled selected>
             사용 가능 쿠폰 0개 /보유 0개
           </option>
         </select>
-      </div>
+      </div> */}
     </CommonHeader>
   );
 }

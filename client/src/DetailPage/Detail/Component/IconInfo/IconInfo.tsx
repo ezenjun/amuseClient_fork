@@ -24,7 +24,6 @@ function IconInfo({ itemId }: ItemIdProps) {
     axios
       .get(`${process.env.REACT_APP_AMUSE_API}/detail/${itemId}/title`)
       .then((response) => {
-        console.log("아이콘 데이터", response.data.data);
         const res = response.data.data;
         if (res.activityIntensity) setActivityIntensity(res.activityIntensity);
         if (res.startPoint) setStartPoint(res.stratPoint);
@@ -33,7 +32,6 @@ function IconInfo({ itemId }: ItemIdProps) {
           setRunningTime(res.runningTime);
           setMinusOne(res.runningTime - 1);
         }
-        console.log(response.data.data.icon_infos);
       })
       .catch((error) => {
         console.log("연결 실패");

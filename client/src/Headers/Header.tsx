@@ -194,7 +194,7 @@ function Header() {
         setCookie("__jwtkid__", token, { expires });
         setLoggedIn(true);
         getUserInfoAsToken(token);
-        movePage("/");
+        // movePage("/");
       }
     } else if (locationString.includes("amusetravel.wheelgo.net/")) {
       let token: string | null = cookies.__jwtk__;
