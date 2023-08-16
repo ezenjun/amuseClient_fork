@@ -20,7 +20,7 @@ function CourseIntroDetail({ title, time, content, imageSrc }: CourseIntroDetail
         <div className='course-text-image'>
           <div className="course-text">
             <div className="course-title-time">
-              <p className="title">{title}</p>
+              <p className="title" style={{textAlign:"left"}}>{title}</p>
               <p className="time">{time}{" 시간"}</p>
             </div>
             <div className='course-content'>

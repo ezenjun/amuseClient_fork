@@ -13,6 +13,7 @@ const LoginAgree = () =>{
     const movePage = useNavigate();
     const [cookies, setCookie, removeCookie] = useCookies(["__jwtkid__"]);
     const [loggedIn, setLoggedIn] = useRecoilState(isLoggedIn);
+    const [privacy,setPrivacy] = useState(false)
     const [marketingAgree,setMarketingAgree] = useState(false)
     const [isShow,setIsShow] = useState(false)
 
@@ -76,7 +77,7 @@ const LoginAgree = () =>{
         getUserInfoAsToken()
     },[])
 
-    if(!isShow){
+    if(isShow){
         return(<></>)
     }else{
         return(
@@ -97,9 +98,14 @@ const LoginAgree = () =>{
                     </div>
                 </div>
                 <div style={{border:"2px solid #828282",borderBottom:"0px",width:"90%",maxWidth:"360px",minHeight :"180px"}}>
+                <div style={{display:"flex",flexDirection:"row",alignItems:"center",height:"28px",marginTop:"28px"}}>
+                    <input type="checkbox" style={{margin:"0px",marginLeft:24}} value={marketingAgree} onChange={()=>{setPrivacy(!privacy)}}/> 
+                        <div style={{marginLeft:24,width:"calc(100% - 100px)"}}>{"개인정보 활용동의 (필수)"}</div> 
+                        <ReadText>보기</ReadText>
+                    </div>
                     <div style={{display:"flex",flexDirection:"row",alignItems:"center",height:"28px",marginTop:"28px"}}>
                         <input type="checkbox" style={{margin:"0px",marginLeft:24}} value={marketingAgree} onChange={()=>{setMarketingAgree(!marketingAgree)}}/> 
-                        <div style={{marginLeft:24,width:"calc(100% - 100px)"}}>{"마케팅 정보 활용동의 (필수)"}</div> 
+                        <div style={{marginLeft:24,width:"calc(100% - 100px)"}}>{"마케팅정보 활용동의 (필수)"}</div> 
                         <ReadText>보기</ReadText>
                     </div>
                 </div>
