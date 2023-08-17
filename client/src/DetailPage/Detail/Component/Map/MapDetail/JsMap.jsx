@@ -43,7 +43,6 @@ const JsMap = ({ data }) => {
             onUnmount={onUnmount}
             >
                 {data.map((marker) =>{
-                    console.log(marker)
                     return(
                         marker.latitude &&
                         marker.longitude && (

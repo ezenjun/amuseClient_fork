@@ -28,16 +28,15 @@ function IconInfo({ itemId }: ItemIdProps) {
         if (res.activityIntensity) setActivityIntensity(res.activityIntensity);
         if (res.startPoint) setStartPoint(res.stratPoint);
         if (res.language) setLanguage(res.language);
-        if (res.runningTime) {
-          setRunningTime(res.runningTime);
-          setMinusOne(res.runningTime - 1);
+        if (res.duration) {
+          setRunningTime(res.duration);
+          setMinusOne(res.duration - 1);
         }
       })
       .catch((error) => {
         console.log("연결 실패");
       });
   }, [itemId]);
-
   return (
     <div className="Detail-icon-info">
       {/*
@@ -46,7 +45,7 @@ function IconInfo({ itemId }: ItemIdProps) {
       ))}
       */}
       <IconDetail icon={faRoad} text={`${startPoint} 출발`} />
-      {(minusOne > 0 && runningTime < 2)?
+      {(minusOne > 0 && runningTime > 1)?
         <IconDetail icon={faCalendar} text={`${minusOne}박 ${runningTime}일`} />
         :
         <IconDetail icon={faCalendar}text={"당일치기"} />
