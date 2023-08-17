@@ -46,7 +46,12 @@ function IconInfo({ itemId }: ItemIdProps) {
       ))}
       */}
       <IconDetail icon={faRoad} text={`${startPoint} 출발`} />
-      <IconDetail icon={faCalendar} text={`${minusOne}박 ${runningTime}일`} />
+      {(minusOne > 0 && runningTime < 2)?
+        <IconDetail icon={faCalendar} text={`${minusOne}박 ${runningTime}일`} />
+        :
+        <IconDetail icon={faCalendar}text={"당일치기"} />
+      }
+      
       <IconDetail icon={faLanguage} text={language} />
       <IconDetail icon={faRoute} text={activityIntensity} />
     </div>
