@@ -170,7 +170,6 @@ function Header() {
     let getToken: string | null = cookies.__jwtkid__;
     console.log("getToken ",getToken)
     if(!cookies.__usrN__ || cookies.__usrN__ === "undefined"){
-      removeCookie("__jwtkid__")
       setLoggedIn(false);
     }
     if(cookies.__usrN__ && (!cookies.__jwtkid__ || cookies.__jwtkid__ === "undefined")){
@@ -194,7 +193,7 @@ function Header() {
         setCookie("__jwtkid__", token, { expires });
         setLoggedIn(true);
         getUserInfoAsToken(token);
-        // movePage("/");
+        movePage("/");
       }
     } else if (locationString.includes("amusetravel.wheelgo.net/")) {
       let token: string | null = cookies.__jwtk__;

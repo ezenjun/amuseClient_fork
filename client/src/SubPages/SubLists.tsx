@@ -86,13 +86,13 @@ function SubLists({ title, itemInfos }: SubListsProps) {
       <p className={Style["tripTitle"]} onClick={handleClick}>
         {title}
       </p>
-      <p className={Style["tripCost"]} onClick={handleClick}>
+      <div className={Style["tripCost"]} onClick={handleClick}>
         {startPrice  !== "N/A"?<p style={{margin:0}}>가격 : {startPrice}원 ~</p>
         :<></>
         
         }
         
-      </p>
+      </div>
     </div>
   );
   /**
