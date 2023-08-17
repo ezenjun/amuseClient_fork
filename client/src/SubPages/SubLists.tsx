@@ -15,7 +15,7 @@ import { useCookies } from "react-cookie";
 
 const numberWithCommas = (number: number | null): string => {
   if (number === null) {
-    return "N/A"; // 또는 원하는 다른 대체 값을 반환할 수 있습니다.
+    return "N/A"; 
   }
   return number.toLocaleString("en");
 };
@@ -87,7 +87,11 @@ function SubLists({ title, itemInfos }: SubListsProps) {
         {title}
       </p>
       <p className={Style["tripCost"]} onClick={handleClick}>
-        가격 : {startPrice}원 ~
+        {startPrice  !== "N/A"?<p style={{margin:0}}>가격 : {startPrice}원 ~</p>
+        :<></>
+        
+        }
+        
       </p>
     </div>
   );
