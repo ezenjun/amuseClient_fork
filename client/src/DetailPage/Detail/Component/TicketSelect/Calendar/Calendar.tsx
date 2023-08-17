@@ -76,9 +76,13 @@ function Calendar({
   useEffect(() => {
     if (CalendarData) {
       const today = new Date();
+      let insertTo = CalendarData?.duration - 1
+      if (insertTo < 0){
+        insertTo = 0
+      }
       const defaultDate: DateRange = {
         from: today,
-        to: addDays(today, CalendarData.duration - 1),
+        to: addDays(today, insertTo),
       };
       setRange(defaultDate);
     }
@@ -86,20 +90,29 @@ function Calendar({
 
   const handleDayClick: DayClickEventHandler = (day, modifiers) => {
     if (CalendarData) {
+      console.log(CalendarData)
       if (modifiers.selected && range?.from) {
         if (isSameDay(day, range?.from)) {
           // setRange(undefined);
         } else {
+          let insertTo = CalendarData?.duration - 1
+          if (insertTo < 0){
+            insertTo = 0
+          }
           const handleRange: DateRange = {
             from: day,
-            to: addDays(day, CalendarData?.duration - 1),
+            to: addDays(day, insertTo),
           };
           setRange(handleRange);
         }
       } else {
+        let insertTo = CalendarData?.duration - 1
+          if (insertTo < 0){
+            insertTo = 0
+        }
         const handleRange: DateRange = {
           from: day,
-          to: addDays(day, CalendarData?.duration - 1),
+          to: addDays(day, insertTo),
         };
         setRange(handleRange);
       }
