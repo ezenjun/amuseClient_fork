@@ -10,6 +10,7 @@ import axios from "axios";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { useOrderContext } from "../../../Contexts/OrderContext";
 import { GuideData } from "../../../../Interfaces/DataInterfaces";
+import { useCookies } from "react-cookie";
 
 interface ReservationProps {
   itemId: number | null;
@@ -19,6 +20,7 @@ interface ReservationProps {
 }
 
 function Reservation({ itemId, productCode, startPrice, likeNum }: ReservationProps) {
+  const [cookies, setCookie, removeCookie] = useCookies(["__jwtkid__"]);
   const movePage = useNavigate();
   const { orderData, setOrderData, orderTicketData } = useOrderContext();
   /**
@@ -96,16 +98,21 @@ function Reservation({ itemId, productCode, startPrice, likeNum }: ReservationPr
   };
 
   const handleBuyTicket = () => {
-    let count = 0;
-    for (let i = 0; i < orderTicketData.length; i++) {
-      if (orderTicketData[i].count) {
-        count += 1;
+    if(cookies.__jwtkid__){
+      let count = 0;
+      for (let i = 0; i < orderTicketData.length; i++) {
+        if (orderTicketData[i].count) {
+          count += 1;
+        }
       }
-    }
-    if (count > 0) {
-      movePage("/order");
-    } else {
-      alert("티켓을 선택해 주세요");
+      
+      if (count > 0) {
+        movePage("/order");
+      } else {
+        alert("티켓을 선택해 주세요");
+      }
+    }else{
+      alert("로그인이 필요합니다.")
     }
   };
 
@@ -116,9 +123,16 @@ function Reservation({ itemId, productCode, startPrice, likeNum }: ReservationPr
         {/* 가격, 링크 */}
         <div className="reservation-top">
           <div className="reservation-price">
-            <p>시작가</p>
-            <p className="price">{startPrice.toLocaleString("en")}</p>
-            <p>부터</p>
+            {startPrice ?
+              <div>
+                <p>시작가</p>
+                <p className="price">{startPrice.toLocaleString("en")}</p>
+                <p>부터</p>
+              </div>
+              :
+              <div>{"상품 준비중"}</div>
+
+            }
           </div>
           <div className="reservation-link">
             <button className="share-btn" onClick={handleTooltipToggle}>
