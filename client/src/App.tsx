@@ -26,10 +26,11 @@ function App() {
   const [currentItemProductCodes, setCurrentItemProductCodes] = useState<number[]>([]);
   const [currentItemStartPrices, setCurrentItemStartPrices] = useState<number[]>([]);
   const [currentItemLikeNums, setCurrentItemLikeNums] = useState<number[]>([]);
+  const [activePageCount, setActivePageCount] = useState(1)
 
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_AMUSE_API}/item/search?page=1`)
+      .get(`${process.env.REACT_APP_AMUSE_API}/item/search?page=${activePageCount}`)
       .then((response) => {
         const items = response.data.data.items;
         const ids = items.map((item: any) => item.item_db_id);
@@ -37,15 +38,29 @@ function App() {
         const prices = items.map((item: any) => item.startPrice);
         const likeNums = items.map((item: any) => item.likeNum);
 
-        setCurrentItemIds(ids);
-        setCurrentItemProductCodes(codes);
-        setCurrentItemStartPrices(prices);
-        setCurrentItemLikeNums(likeNums);
+        setCurrentItemIds([...currentItemIds,...ids]);
+        setCurrentItemProductCodes([...currentItemProductCodes,...codes]);
+        setCurrentItemStartPrices([currentItemStartPrices,...prices]);
+        setCurrentItemLikeNums([...currentItemLikeNums,...likeNums]);
 
-        //console.log(response.data.data.items[0])
       })
       .catch((error) => {
         console.log("연결 실패");
+      });
+  }, [activePageCount]);
+  
+  useEffect(() => {
+    axios
+      .get(`${process.env.REACT_APP_AMUSE_API}/test/api/product/getList/byDisplay`, {
+        params: {
+          limit: 8,
+          page: activePageCount,
+          displayStatus: "DISPLAY",
+        },
+      })
+      .then((res) => {
+        let pageCount = res.data.data.pageCount
+        setActivePageCount(pageCount)
       });
   }, []);
 
