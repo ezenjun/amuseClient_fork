@@ -63,7 +63,7 @@ function Manager({ itemId }: ItemIdProps) {
       </div>
 
       <div className="manager-info">
-        <p>{guideData?.guide_comment_by_item ?? "manager_content"}</p>
+        <p>{guideData?.guide_comment_by_item ?? ""}</p>
       </div>
     </div>
   );

@@ -34,6 +34,7 @@ function TicketList({ range, itemId, classNone, classTicketContainer, classTicke
         }));
         setTicketData(dataWithCount);
         // setTicketData(response.data.data.ticket)
+        // console.log(`${process.env.REACT_APP_AMUSE_API}/detail/${itemId}/ticket-select`)
       })
       .catch((error) => {
         console.log("연결 실패");

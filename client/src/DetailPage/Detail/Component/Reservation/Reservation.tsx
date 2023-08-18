@@ -38,7 +38,7 @@ function Reservation({ itemId, productCode, startPrice, likeNum }: ReservationPr
       .then((response) => {
         setGuideData(response.data.data);
 
-        //console.log(response.data.data)
+        console.log(response.data.data)
       })
       .catch((error) => {
         console.log("연결 실패");
@@ -168,7 +168,7 @@ function Reservation({ itemId, productCode, startPrice, likeNum }: ReservationPr
         </div>
       </div>
       {/* 담당자, 문의하기 div */}
-      <div className="manager">
+      <div className="manager" style={{marginTop:32}}>
         <div className="manager-profile">
           <img className="manager-image" src={guideData?.profileImageUrl ?? "img"} alt="manager" />
           <p className="manager-name">{guideData?.userName ?? "name"}</p>
@@ -178,6 +178,7 @@ function Reservation({ itemId, productCode, startPrice, likeNum }: ReservationPr
           onClick={handleInquiryClick}
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
+          
         >
           <FontAwesomeIcon className="icon" icon={isHovered ? regularFaEnelope : solidFaEnelope} />
           <p className="inquiry">문의하기</p>
