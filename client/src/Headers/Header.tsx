@@ -198,7 +198,7 @@ function Header() {
     } else if (locationString.includes("amusetravel.wheelgo.net/")) {
       let token: string | null = cookies.__jwtk__;
       let igToken: string | null = cookies.__igjwtk__;
-      if (token === null) {
+      if (!token && token !== "undefined" ) {
         return;
       } else if (igToken && igToken?.length > 0 && token === igToken) {
         return;
