@@ -60,7 +60,9 @@ function App() {
       })
       .then((res) => {
         let pageCount = res.data.data.pageCount
-        setActivePageCount(pageCount)
+        for(let i = activePageCount; i< pageCount+1; i++){
+          setActivePageCount(pageCount)
+        }
       });
   }, []);
 
