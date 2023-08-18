@@ -24,7 +24,7 @@ function CourseIntroDetail({ title, time, content, imageSrc }: CourseIntroDetail
               <p className="time">{time}{" 시간"}</p>
             </div>
             <div className='course-content'>
-              <p className="content">{content}</p>
+              <p className="content" style={{whiteSpace:"pre-wrap"}}>{content}</p>
             </div>
           </div>
 

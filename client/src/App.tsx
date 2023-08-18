@@ -1,3 +1,4 @@
+import _ from "lodash";
 import { Routes, Route } from "react-router-dom";
 import Home from "../src/Home";
 import SubPageComp from "./SubPages/SubPageComp";
@@ -38,10 +39,10 @@ function App() {
         const prices = items.map((item: any) => item.startPrice);
         const likeNums = items.map((item: any) => item.likeNum);
 
-        setCurrentItemIds([...currentItemIds,...ids]);
-        setCurrentItemProductCodes([...currentItemProductCodes,...codes]);
-        setCurrentItemStartPrices([currentItemStartPrices,...prices]);
-        setCurrentItemLikeNums([...currentItemLikeNums,...likeNums]);
+        setCurrentItemIds( _.uniq([...currentItemIds,...ids]));
+        setCurrentItemProductCodes(_.uniq([...currentItemProductCodes,...codes]));
+        setCurrentItemStartPrices(_.uniq([currentItemStartPrices,...prices]));
+        setCurrentItemLikeNums(_.uniq([...currentItemLikeNums,...likeNums]));
 
       })
       .catch((error) => {
@@ -63,6 +64,7 @@ function App() {
         for(let i = activePageCount; i< pageCount+1; i++){
           setActivePageCount(pageCount)
         }
+        setActivePageCount(1)
       });
   }, []);
 
