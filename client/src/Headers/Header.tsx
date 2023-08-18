@@ -169,15 +169,15 @@ function Header() {
   useEffect(() => {
     let getToken: string | null = cookies.__jwtkid__;
     console.log("getToken ",getToken)
-    if(!cookies.__usrN__ || cookies.__usrN__ === "undefined"){
-      setLoggedIn(false);
-    }
     if(cookies.__usrN__ && (!cookies.__jwtkid__ || cookies.__jwtkid__ === "undefined")){
       removeCookie("__usrN__")
     }
     if (getToken) {
       setLoggedIn(true);
     } else {
+      setLoggedIn(false);
+    }
+    if(!cookies.__usrN__ || cookies.__usrN__ === "undefined" || cookies.__jwtkid__){
       setLoggedIn(false);
     }
   }, [cookies]);
