@@ -39,6 +39,7 @@ function App() {
         const prices = items.map((item: any) => item.startPrice);
         const likeNums = items.map((item: any) => item.likeNum);
 
+        console.log( _.uniq([...currentItemIds,...ids]))
         setCurrentItemIds( _.uniq([...currentItemIds,...ids]));
         setCurrentItemProductCodes(_.uniq([...currentItemProductCodes,...codes]));
         setCurrentItemStartPrices(_.uniq([currentItemStartPrices,...prices]));
@@ -64,7 +65,6 @@ function App() {
         for(let i = activePageCount; i< pageCount+1; i++){
           setActivePageCount(pageCount)
         }
-        setActivePageCount(1)
       });
   }, []);
 
