@@ -5,9 +5,11 @@ export const requestPay = (data: any, callback: (rsp: any) => void) => {
     console.log(value, process.env.REACT_APP_IMPORT_KAKAO_PG);
     switch (value) {
       case "계좌이체":
-        return "html5_inicis";
+        return "nice";
       case "신용/체크카드":
-        return "html5_inicis";
+        return "nice";
+      case "토스페이":
+        return "tosspayments.iamporttest_3";
       case "카카오페이":
         return "kakaopay";
       case "네이버페이":
@@ -21,6 +23,8 @@ export const requestPay = (data: any, callback: (rsp: any) => void) => {
         return "trans";
       case "신용/체크카드":
         return "card";
+      case "토스페이":
+        return "tosspay";
       case "카카오페이":
         return "card";
       case "네이버페이":
@@ -34,7 +38,7 @@ export const requestPay = (data: any, callback: (rsp: any) => void) => {
       // param
       pg: updatePGCode(data.pay_method),
       pay_method: getPaymentCode(data.pay_method),
-      merchant_uid: "ORD20180131-00001",
+      merchant_uid: "ORD20180131-00000", //가맹점 주문번호(동일한 주문번호로 중복결제 불가)
       name: data.products,
       amount: 500, //data.productPrice - data.point,
       buyer_email: data.email,

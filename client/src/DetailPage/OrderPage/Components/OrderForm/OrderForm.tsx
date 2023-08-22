@@ -41,20 +41,21 @@ export function OrderForm() {
     requestPay(data, (rsp: any) => {
       if (rsp.success) {
         // axios로 HTTP 요청
-        axios({
-          url: `http://localhost:3000/detail/${orderData.productId}`,
-          method: "post",
-          headers: { "Content-Type": "application/json" },
-          data: {
-            imp_uid: rsp.imp_uid,
-            merchant_uid: rsp.merchant_uid,
-          },
-        }).then((data) => {
-          // 서버 결제 API 성공시 로직
-          axios.post("url", { orderData });
-        });
+        // axios({
+        //   url: `http://localhost:3000/detail/${orderData.productId}`,
+        //   method: "post",
+        //   headers: { "Content-Type": "application/json" },
+        //   data: {
+        //     imp_uid: rsp.imp_uid,
+        //     merchant_uid: rsp.merchant_uid,
+        //   },
+        // }).then((data) => {
+        //   // 서버 결제 API 성공시 로직
+        //   axios.post("url", { orderData });
+        // });
+        console.log(rsp)
       } else {
-        alert(`결제에 실패하였습니다. 에러 내용: ${rsp.error_msg}`);
+        alert(`${rsp.error_msg}`);
       }
       setLoading(false);
     });
@@ -62,21 +63,23 @@ export function OrderForm() {
 
   const getUserInfoAsToken = async()=>{
     const token = cookies["__jwtkid__"]
-    axios
-      .get(`${process.env.REACT_APP_AMUSE_API}/api/v1/user/info`, {
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `${token}`,
-        },
-      })
-      .then((response) => {
-        const data =response.data.data
-        // console.log(data);
-        setName(data?.name)
-        setEmail(data?.email)
-      }).catch((err)=>{
-        console.log(err)
-      });
+    if(token){
+      axios
+        .get(`${process.env.REACT_APP_AMUSE_API}/api/v1/user/info`, {
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `${token}`,
+          },
+        })
+        .then((response) => {
+          const data =response.data.data
+          // console.log(data);
+          setName(data?.name)
+          setEmail(data?.email)
+        }).catch((err)=>{
+          console.log(err)
+        });
+    }
   }
   useEffect(()=>{
     getUserInfoAsToken()
