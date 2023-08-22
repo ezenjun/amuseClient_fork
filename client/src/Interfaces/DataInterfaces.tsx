@@ -14,6 +14,7 @@ export interface TicketData {
   count: number;
 }
 export interface CourseIntroData {
+  day: number;
   title: string;
   content: string;
   sequenceId: number;

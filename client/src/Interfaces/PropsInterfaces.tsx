@@ -62,6 +62,7 @@ export interface CourseIntroDetailProps {
     time: string;
     content: string;
     imageSrc: string;
+    day: number;
 }
 export interface IconDetailProps {
     icon: IconProp;

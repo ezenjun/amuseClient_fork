@@ -143,7 +143,12 @@ function SubLists({ title, itemInfos }: SubListsProps) {
 
   return (
     <div>
-      <h2 style={{ marginTop: "30px", marginBottom: "1rem" }}>{title}</h2>
+      <div style={{display:"flex", flexDirection:"row",alignItems:"center"}}>
+        <h2 style={{ marginTop: "30px", marginBottom: "1rem" }}>{title}</h2>
+        <div style={{ fontSize:16,color:"#606060", marginTop: "36px",marginLeft:12, marginBottom: "1rem"}}>
+          {`${bestItemIds.length} 개`}
+        </div>
+      </div>
       <div className={Style["container"]}>
         {displayedItemIds.map((itemId: number, index: number) => (
           <Box

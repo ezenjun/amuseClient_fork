@@ -37,6 +37,7 @@ function CourseIntro({ itemId }: ItemIdProps) {
             time={courseIntro.timeCost}
             content={courseIntro.content}
             imageSrc={courseIntro.imageUrl}
+            day={courseIntro.day}
           />
         );
       })}

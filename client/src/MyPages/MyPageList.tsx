@@ -23,9 +23,13 @@ export default function MyPagelist() {
     const navigateToLikes = () => {
       navigate("/MyPage/Likes");
     };
+    const navigateToSecession = () => {
+      navigate("/MyPage/Likes");
+    };
     const navigateToNotifications = () => {
       navigate("/MyPage/Notifications");
     };
+    
     // const navigateToInquiries = () => {
     //   navigate("/MyPage/Inquiries");
     // };
@@ -60,6 +64,13 @@ export default function MyPagelist() {
               <ListItemText primary="관심상품" />
             </ListItemButton>
           </ListItem>
+          {/* <ListItem disablePadding onClick={navigateToSecession}>
+            <ListItemButton>
+              <ListItemIcon>
+              </ListItemIcon>
+              <ListItemText primary="회원탈퇴" />
+            </ListItemButton>
+          </ListItem> */}
           {/* <ListItem disablePadding onClick={navigateToNotifications}>
             <ListItemButton>
               <ListItemIcon>

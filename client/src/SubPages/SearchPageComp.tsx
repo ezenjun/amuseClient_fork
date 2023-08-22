@@ -98,7 +98,7 @@ function SearchPageComp() {
     const numIterations = Math.ceil(ItemIds.length / displayedItemCount); // ItemIds의 길이를 3으로 나눈 후 올림하여 반복 횟수 계산
 
     return (
-      <MainComponent>
+      <div>
         {Array.from({ length: numIterations }, (_, iteration) => (
           <div className={Style["container"]} style={{ marginTop: "3rem" }} key={iteration}>
             {ItemIds.slice(iteration * displayedItemCount, iteration * displayedItemCount + displayedItemCount).map(
@@ -121,7 +121,7 @@ function SearchPageComp() {
             )}
           </div>
         ))}
-      </MainComponent>
+      </div>
     );
   };
   const [displayedItemCount, setDisplayedItemCount] = useState(3);
@@ -162,10 +162,12 @@ function SearchPageComp() {
       >
         "{apiKey}" 검색 결과
       </h1>
-      <div className={AppStyle["App"]}>
-        <Dropdown onChange={handleSortChange} />
-        <BoxGroup />
-      </div>
+      <MainComponent>
+        <div className={AppStyle["App"]}>
+          <Dropdown onChange={handleSortChange} />
+          <BoxGroup />
+        </div>
+      </MainComponent>
     </div>
   );
 }
