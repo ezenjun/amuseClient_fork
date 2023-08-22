@@ -28,10 +28,11 @@ const LoginAgree = () =>{
         })
         .then((response) => {
             let userData = response.data.data
-            if( !userData?.advertisementTrue ){
-                setIsShow(true)
-            }else{
+            console.log(userData)
+            if( userData?.advertisementTrue === true){
                 movePage("/")
+            }else{
+                setIsShow(true)
             }
             
         })
@@ -77,7 +78,7 @@ const LoginAgree = () =>{
         getUserInfoAsToken()
     },[])
 
-    if(isShow){
+    if(!isShow){
         return(<></>)
     }else{
         return(
