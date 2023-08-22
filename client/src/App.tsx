@@ -11,6 +11,7 @@ import Review from "./MyPages/Review/Review";
 import ViewAll from "./SubPages/ViewAllPages/ViewAll";
 import SearchPageComp from "./SubPages/SearchPageComp";
 // import NotFound from './NotFound';
+import { useCookies } from "react-cookie";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import AboutAmuse from "./SubPages/AboutAmuse/AboutAmuse";
@@ -20,6 +21,7 @@ import { CategoryContextProvider } from "./Headers/Contexts/CategoryContext";
 import { InfoContextProvider } from "./DetailPage/Contexts/InfoContext";
 
 function App() {
+  const [ cookies,setCookie,deleteCookie ] = useCookies(["__jwtkid__"])
   /**
    * Current Item API
    */
@@ -31,7 +33,11 @@ function App() {
 
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_AMUSE_API}/item/search?page=${activePageCount}`)
+      .get(`${process.env.REACT_APP_AMUSE_API}/item/all/display`, {
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `${cookies.__jwtkid__}`,
+        }})
       .then((response) => {
         const items = response.data.data.items;
         const ids = items.map((item: any) => item.item_db_id);
@@ -39,7 +45,7 @@ function App() {
         const prices = items.map((item: any) => item.startPrice);
         const likeNums = items.map((item: any) => item.likeNum);
 
-        console.log( _.uniq([...currentItemIds,...ids]))
+        // console.log( _.uniq([...currentItemIds,...ids]))
         setCurrentItemIds( _.uniq([...currentItemIds,...ids]));
         setCurrentItemProductCodes(_.uniq([...currentItemProductCodes,...codes]));
         setCurrentItemStartPrices(_.uniq([currentItemStartPrices,...prices]));
@@ -47,26 +53,26 @@ function App() {
 
       })
       .catch((error) => {
-        console.log("연결 실패");
+        console.log("연결 실패",error);
       });
   }, [activePageCount]);
   
-  useEffect(() => {
-    axios
-      .get(`${process.env.REACT_APP_AMUSE_API}/test/api/product/getList/byDisplay`, {
-        params: {
-          limit: 8,
-          page: activePageCount,
-          displayStatus: "DISPLAY",
-        },
-      })
-      .then((res) => {
-        let pageCount = res.data.data.pageCount
-        for(let i = activePageCount; i< pageCount+1; i++){
-          setActivePageCount(pageCount)
-        }
-      });
-  }, []);
+  // useEffect(() => {
+  //   axios
+  //     .get(`${process.env.REACT_APP_AMUSE_API}/test/api/product/getList/byDisplay`, {
+  //       params: {
+  //         limit: 8,
+  //         page: activePageCount,
+  //         displayStatus: "DISPLAY",
+  //       },
+  //     })
+  //     .then((res) => {
+  //       let pageCount = res.data.data.pageCount
+  //       for(let i = activePageCount; i< pageCount+1; i++){
+  //         setActivePageCount(pageCount)
+  //       }
+  //     });
+  // }, []);
 
   /**
    * Course API

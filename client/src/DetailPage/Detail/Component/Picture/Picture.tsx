@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import _ from "lodash";
 import axios from "axios";
 import MainPicture from "./MainPicture/MainPicture";
 import SubPicture from "./SubPicture/SubPicture";
@@ -17,12 +18,17 @@ function Picture({ itemId }: ItemIdProps) {
    * Picture API
    */
   useEffect(() => {
+    console.log(`${process.env.REACT_APP_AMUSE_API}/detail/${itemId}/picture`)
     axios
       .get(`${process.env.REACT_APP_AMUSE_API}/detail/${itemId}/picture`)
       .then((response) => {
-        setPictureData(response.data.data.pictures);
-
-        //console.log(response.data.data.pictures)
+        let pictures = response.data.data.pictures
+        pictures = _.sortBy(pictures,"sequence")
+        let result :any[]=[]
+        pictures.map((item:any)=>{
+          result.push(item.imgUrl)
+        })
+        setPictureData(result);
       })
       .catch((error) => {
         console.log("연결 실패");
