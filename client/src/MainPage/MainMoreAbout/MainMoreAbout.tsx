@@ -38,7 +38,7 @@ function MainMoreAbout() {
     };
   }, []);
   return (
-    <div style={{ width: "80%", margin: "auto" }}>
+    <div style={{ width: "1060px", margin: "auto" }}>
       <h2>어뮤즈트래블에 대해 더 알고싶다면? 🔍</h2>
       {isMobile ? (
         <div className={Style["middle-mobile"]}>

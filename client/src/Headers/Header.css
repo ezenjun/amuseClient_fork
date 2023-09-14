@@ -102,6 +102,7 @@
   height: 3.5rem;
   margin-top: 1rem;
   font-family: "yg-jalnan";
+  width: 1060px;
 }
 
 .menu-item {
@@ -179,7 +180,7 @@
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  width: 100%;
+  width: 1060px;
   height: 30px;
   margin-top: 10px;
 }
@@ -216,12 +217,12 @@
 }
 
 .btnBox .signInBtn {
-  width: 80px;
   height: 40px;
   border: none;
   background-color: transparent;
   cursor: pointer;
   font-family: "Pretendard-Regular";
+  font-size: 14px;
 }
 
 .adminBtn {
