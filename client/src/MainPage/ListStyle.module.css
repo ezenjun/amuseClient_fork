@@ -1,12 +1,12 @@
 .container {
   display: flex;
-  /* justify-content: space-between; */
   width: 100%;
-  /* max-width: 900px; */
+  flex-wrap: wrap;
+  gap: 15px;
 }
 
 .box {
-  width: 290px;
+  width: 250px;
   height: 300px;
   border-radius: 12px;
   position: relative;

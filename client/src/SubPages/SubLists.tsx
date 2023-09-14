@@ -15,7 +15,7 @@ import { useCookies } from "react-cookie";
 
 const numberWithCommas = (number: number | null): string => {
   if (number === null) {
-    return "N/A"; 
+    return "N/A";
   }
   return number.toLocaleString("en");
 };
@@ -46,22 +46,34 @@ function SubLists({ title, itemInfos }: SubListsProps) {
     setIsLiked(updatedIsLiked);
     const token = cookies["__jwtkid__"];
     axios
-      .post(`${process.env.REACT_APP_AMUSE_API}/detail/${itemId}/like-plus`, null, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `${token}`,
-        },
-      })
+      .post(
+        `${process.env.REACT_APP_AMUSE_API}/detail/${itemId}/like-plus`,
+        null,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `${token}`,
+          },
+        }
+      )
       .then((response) => {
-        alert("관심상품에 등록되었습니다.\n관심상품 관리는 마이페이지에서 가능합니다.");
+        alert(
+          "관심상품에 등록되었습니다.\n관심상품 관리는 마이페이지에서 가능합니다."
+        );
       })
       .catch((error) => {
         console.error("Error liking item:", error);
       });
   };
 
-  const Box: React.FC<BoxProps> = ({ marginRight, itemId, handleClick, title, startPrice, imageUrl }) => (
-    <div className={Style["box"]} style={{ marginRight }}>
+  const Box: React.FC<BoxProps> = ({
+    itemId,
+    handleClick,
+    title,
+    startPrice,
+    imageUrl,
+  }) => (
+    <div className={Style["box"]}>
       <div
         className={Style["box_before"]}
         onClick={handleClick}
@@ -87,11 +99,11 @@ function SubLists({ title, itemInfos }: SubListsProps) {
         {title}
       </p>
       <div className={Style["tripCost"]} onClick={handleClick}>
-        {startPrice  !== "N/A"?<p style={{margin:0}}>가격 : {startPrice}원 ~</p>
-        :<></>
-        
-        }
-        
+        {startPrice !== "N/A" ? (
+          <p style={{ margin: 0 }}>가격 : {startPrice}원 ~</p>
+        ) : (
+          <></>
+        )}
       </div>
     </div>
   );
@@ -103,28 +115,28 @@ function SubLists({ title, itemInfos }: SubListsProps) {
     movePage(`/detail/${itemId}`);
   };
 
-  const [displayedItemCount, setDisplayedItemCount] = useState(4);
+  const [displayedItemCount, setDisplayedItemCount] = useState(8);
 
-  const handleResize = () => {
-    const windowWidth = window.innerWidth;
-    if (windowWidth >= 1100) {
-      setDisplayedItemCount(4);
-    } else if (windowWidth >= 900) {
-      setDisplayedItemCount(3);
-    } else if (windowWidth >= 650) {
-      setDisplayedItemCount(2);
-    } else {
-      setDisplayedItemCount(1);
-    }
-  };
+  // const handleResize = () => {
+  //   const windowWidth = window.innerWidth;
+  //   if (windowWidth >= 1100) {
+  //     setDisplayedItemCount(8);
+  //   } else if (windowWidth >= 900) {
+  //     setDisplayedItemCount(6);
+  //   } else if (windowWidth >= 650) {
+  //     setDisplayedItemCount(4);
+  //   } else {
+  //     setDisplayedItemCount(2);
+  //   }
+  // };
 
-  useEffect(() => {
-    handleResize(); // Call initially
-    window.addEventListener("resize", handleResize); // Add event listener for window resize
-    return () => {
-      window.removeEventListener("resize", handleResize); // Clean up event listener on component unmount
-    };
-  }, []);
+  // useEffect(() => {
+  //   handleResize(); // Call initially
+  //   window.addEventListener("resize", handleResize); // Add event listener for window resize
+  //   return () => {
+  //     window.removeEventListener("resize", handleResize); // Clean up event listener on component unmount
+  //   };
+  // }, []);
 
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -136,16 +148,30 @@ function SubLists({ title, itemInfos }: SubListsProps) {
     setCurrentIndex((prevIndex) => prevIndex - displayedItemCount);
   };
 
-  const displayedItemIds = bestItemIds.slice(currentIndex, currentIndex + displayedItemCount);
+  const displayedItemIds = bestItemIds.slice(
+    currentIndex,
+    currentIndex + displayedItemCount
+  );
 
   const isPrevDisabled = currentIndex === 0;
-  const isNextDisabled = currentIndex + displayedItemCount >= bestItemIds.length;
+  const isNextDisabled =
+    currentIndex + displayedItemCount >= bestItemIds.length;
 
   return (
     <div>
-      <div style={{display:"flex", flexDirection:"row",alignItems:"center"}}>
+      <div
+        style={{ display: "flex", flexDirection: "row", alignItems: "center" }}
+      >
         <h2 style={{ marginTop: "30px", marginBottom: "1rem" }}>{title}</h2>
-        <div style={{ fontSize:16,color:"#606060", marginTop: "36px",marginLeft:12, marginBottom: "1rem"}}>
+        <div
+          style={{
+            fontSize: 16,
+            color: "#606060",
+            marginTop: "36px",
+            marginLeft: 12,
+            marginBottom: "1rem",
+          }}
+        >
           {`${bestItemIds.length} 개`}
         </div>
       </div>
@@ -153,7 +179,7 @@ function SubLists({ title, itemInfos }: SubListsProps) {
         {displayedItemIds.map((itemId: number, index: number) => (
           <Box
             key={itemId}
-            marginRight={index === displayedItemIds.length - 1 ? "0" : "18px"}
+            marginRight={index === displayedItemIds.length - 1 ? "0" : "15px"}
             itemId={itemId}
             title={bestItemTitle[index + currentIndex]}
             startPrice={numberWithCommas(bestItemPrice[index + currentIndex])}
@@ -162,22 +188,42 @@ function SubLists({ title, itemInfos }: SubListsProps) {
           />
         ))}
       </div>
-      <div style={{ display: "flex", justifyContent: "center", marginTop: "1rem" }}>
-        <button
-          onClick={handlePrevClick}
-          disabled={isPrevDisabled}
-          style={{ background: "transparent", border: "transparent" }}
+      {(!isNextDisabled || !isPrevDisabled) && (
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            marginTop: "1rem",
+          }}
         >
-          <img src={isPrevDisabled ? NoLeftIcon : LeftIcon} alt="Previous" style={{ width: "24px", height: "24px" }} />
-        </button>
-        <button
-          onClick={handleNextClick}
-          disabled={isNextDisabled}
-          style={{ background: "transparent", border: "transparent" }}
-        >
-          <img src={isNextDisabled ? NoRightIcon : RightIcon} alt="Next" style={{ width: "24px", height: "24px" }} />
-        </button>
-      </div>
+          <button
+            onClick={handlePrevClick}
+            disabled={isPrevDisabled}
+            style={{ background: "transparent", border: "transparent" }}
+          >
+            <img
+              src={isPrevDisabled ? NoLeftIcon : LeftIcon}
+              alt="Previous"
+              style={{ width: "20px", height: "20px" }}
+            />
+          </button>
+          <div>
+            {Math.ceil(currentIndex / 8) + 1} /
+            {Math.ceil(bestItemIds.length / 8)}
+          </div>
+          <button
+            onClick={handleNextClick}
+            disabled={isNextDisabled}
+            style={{ background: "transparent", border: "transparent" }}
+          >
+            <img
+              src={isNextDisabled ? NoRightIcon : RightIcon}
+              alt="Next"
+              style={{ width: "20px", height: "20px" }}
+            />
+          </button>
+        </div>
+      )}
     </div>
   );
 }
