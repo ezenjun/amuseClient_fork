@@ -19,7 +19,6 @@ function CourseIntro({ itemId }: ItemIdProps) {
       .get(`${process.env.REACT_APP_AMUSE_API}/detail/${itemId}/course-intro`)
       .then((response) => {
         setCourseIntroData(response.data.data.course);
-        //console.log(response.data.data.course)
       })
       .catch((error) => {
         console.log("연결 실패");
@@ -27,7 +26,10 @@ function CourseIntro({ itemId }: ItemIdProps) {
   }, [itemId]);
 
   return (
-    <div className="CourseIntro">
+    <div
+      className="CourseIntro"
+      style={{ display: courseIntroData.length === 0 ? "none" : "block" }}
+    >
       <p className="information-title">코스 소개</p>
       {courseIntroData.map((courseIntro) => {
         return (
