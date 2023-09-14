@@ -39,7 +39,7 @@ function Home() {
   const { categoriesInfo } = useCategoryContext();
   const [apiKeyNumber, setApiKeyNumber] = useState(0);
   const [categoryData, setCategoryData] = useState<CategoryData | null>(null);
-  const [cookies] = useCookies(["__jwtkid__"])
+  const [cookies] = useCookies(["__jwtkid__"]);
 
   // const [loggedIn, setLoggedIn] = useRecoilState(isLoggedIn);
   // const [manager, setManager] = useRecoilState(isManager);
@@ -89,20 +89,23 @@ function Home() {
   // const [ItemImageUrl, setItemImageUrl] = useState<string[]>([]);
 
   useEffect(() => {
-    if(apiKeyNumber > 0){
+    if (apiKeyNumber > 0) {
       fetchPageData(apiKeyNumber);
     }
   }, [apiKeyNumber]);
 
   const fetchPageData = (apiKeyNumber: number) => {
-    const token = cookies["__jwtkid__"]
+    const token = cookies["__jwtkid__"];
     axios
-      .get(`${process.env.REACT_APP_AMUSE_API}/main/category/${apiKeyNumber}/page`, {
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `${token}`,
-        },
-      })
+      .get(
+        `${process.env.REACT_APP_AMUSE_API}/main/category/${apiKeyNumber}/page`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `${token}`,
+          },
+        }
+      )
       .then((response) => {
         const ComponentInfos = response.data.data.pageComponentInfos;
         const items = ComponentInfos.map((item: any) => item);
@@ -120,11 +123,22 @@ function Home() {
     if (type === "리스트") {
       const listItem: ListProps = Items[index];
       // console.log("subpage list ", listItem.itemInfos);
-      return <SubLists key={index} title={listItem.title} itemInfos={listItem.itemInfos} />;
+      return (
+        <SubLists
+          key={index}
+          title={listItem.title}
+          itemInfos={listItem.itemInfos}
+        />
+      );
     } else if (type === "타일") {
       const tileItem: TileProps = Items[index];
       return (
-        <SubTiles key={index} title={tileItem.title} tileCount={tileItem.tileCount} tileList={tileItem.tileList} />
+        <SubTiles
+          key={index}
+          title={tileItem.title}
+          tileCount={tileItem.tileCount}
+          tileList={tileItem.tileList}
+        />
       );
     } else if (type === "배너") {
       const bannerItem: BannerProps = Items[index];
@@ -164,16 +178,25 @@ function Home() {
             <div className={Style["subTitleContainer"]}>
               <img
                 className={Style["mainPicture.image"]}
-                src={categoryData.categoryImg ? categoryData.categoryImg : ChildTitle}
+                src={
+                  categoryData.categoryImg
+                    ? categoryData.categoryImg
+                    : ChildTitle
+                }
                 alt="Title img"
                 style={{
                   width: "100%",
                   height: "400px",
                   objectFit: "cover",
+                  objectPosition: "left",
                 }}
               />
-              <h2 className={Style["subTitle"]}>{categoryData.mainDescription}</h2>
-              <h3 className={Style["subContent"]}>{categoryData.subDescription}</h3>
+              <h2 className={Style["subTitle"]}>
+                {categoryData.mainDescription}
+              </h2>
+              <h3 className={Style["subContent"]}>
+                {categoryData.subDescription}
+              </h3>
             </div>
           )}
 

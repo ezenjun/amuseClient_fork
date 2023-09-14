@@ -1,11 +1,11 @@
 @use "../../Detail.scss" as detail;
 
 .CourseIntro {
-    padding: detail.$padding;
-    @include detail.line;
+  padding: detail.$padding;
+  @include detail.line;
 
-    .information-title {
-        font-size: 20px;
-        font-weight: 700;
-    }
+  .information-title {
+    font-size: 20px;
+    font-weight: 700;
+  }
 }

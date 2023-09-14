@@ -2,7 +2,6 @@ import "./Detail.scss";
 import Header from "../../Headers/Header";
 import Reservation from "./Component/Reservation/Reservation";
 import Title from "./Component/Title/Title";
-import IconInfo from "./Component/IconInfo/IconInfo";
 import Picture from "./Component/Picture/Picture";
 import ProductIntro from "./Component/ProductIntro/ProductIntro";
 import Footer from "../../Footers/Footer";
@@ -34,7 +33,6 @@ function Detail({ itemId, productCode, startPrice, likeNum }: DetailProps) {
           {/* 상세페이지 컨텐츠 */}
           <div className="content">
             <Title itemId={itemId} />
-            <IconInfo itemId={itemId} />
             <Picture itemId={itemId} />
             <Calendar itemId={itemId} numberOfmonth={2} />
             <ProductIntro itemId={itemId} />
@@ -48,7 +46,12 @@ function Detail({ itemId, productCode, startPrice, likeNum }: DetailProps) {
           </div>
           {/* 상세페이지 사이드 바 */}
           <div className="side">
-            <Reservation itemId={itemId} productCode={productCode} startPrice={startPrice} likeNum={likeNum} />
+            <Reservation
+              itemId={itemId}
+              productCode={productCode}
+              startPrice={startPrice}
+              likeNum={likeNum}
+            />
           </div>
           {/* 상세페이지 모바일 티켓선택 */}
           <div className="bottom-btn">
