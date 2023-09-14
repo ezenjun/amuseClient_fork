@@ -35,13 +35,29 @@ function MainLists() {
     setIsLiked(updatedIsLiked);
   };
 
-  const Box: React.FC<BoxProps> = ({ marginRight, itemId, handleClick, title, startPrice, imageUrl }) => (
+  const Box: React.FC<BoxProps> = ({
+    marginRight,
+    itemId,
+    handleClick,
+    title,
+    startPrice,
+    imageUrl,
+  }) => (
     <div className={Style["box"]} style={{ marginRight }} onClick={handleClick}>
-      <div className={Style["box_before"]} style={{ backgroundImage: `url(${imageUrl})` }}></div>
+      <div
+        className={Style["box_before"]}
+        style={{ backgroundImage: `url(${imageUrl})` }}
+      ></div>
       <div className={Style["like_count"]}>
         <FontAwesomeIcon
           icon={isLiked[itemId] ? fullHeart : faHeart}
-          style={{ color: "#ffffff", width: "20px", height: "20px", marginTop: "10px", marginLeft: "10px" }}
+          style={{
+            color: "#ffffff",
+            width: "20px",
+            height: "20px",
+            marginTop: "10px",
+            marginLeft: "10px",
+          }}
           onClick={() => handleLikeClick(itemId)}
         />
       </div>
@@ -85,13 +101,13 @@ function MainLists() {
   const handleResize = () => {
     const windowWidth = window.innerWidth;
     if (windowWidth >= 1100) {
-      setDisplayedItemCount(4);
+      setDisplayedItemCount(8);
     } else if (windowWidth >= 900) {
-      setDisplayedItemCount(3);
+      setDisplayedItemCount(6);
     } else if (windowWidth >= 650) {
-      setDisplayedItemCount(2);
+      setDisplayedItemCount(4);
     } else {
-      setDisplayedItemCount(1);
+      setDisplayedItemCount(2);
     }
   };
 
@@ -113,14 +129,20 @@ function MainLists() {
     setCurrentIndex((prevIndex) => prevIndex - displayedItemCount);
   };
 
-  const displayedItemIds = bestItemIds.slice(currentIndex, currentIndex + displayedItemCount);
+  const displayedItemIds = bestItemIds.slice(
+    currentIndex,
+    currentIndex + displayedItemCount
+  );
 
   const isPrevDisabled = currentIndex === 0;
-  const isNextDisabled = currentIndex + displayedItemCount >= bestItemIds.length;
+  const isNextDisabled =
+    currentIndex + displayedItemCount >= bestItemIds.length;
 
   return (
     <div>
-      <h2 style={{ marginTop: "2rem", marginBottom: "1rem" }}>최신 여행 상품 🏞</h2>
+      <h2 style={{ marginTop: "2rem", marginBottom: "1rem" }}>
+        최신 여행 상품 🏞
+      </h2>
       <div className={Style["container"]}>
         {/* {displayedItemIds.length === 0 && (
           <Box
@@ -137,7 +159,7 @@ function MainLists() {
         {displayedItemIds.map((itemId: number, index: number) => (
           <Box
             key={itemId}
-            marginRight={index === displayedItemIds.length - 1 ? "0" : "18px"}
+            marginRight={index === displayedItemIds.length - 1 ? "0" : "15px"}
             itemId={itemId}
             title={bestItemTitle[index + currentIndex]}
             startPrice={numberWithCommas(bestItemPrice[index + currentIndex])}
@@ -146,20 +168,30 @@ function MainLists() {
           />
         ))}
       </div>
-      <div style={{ display: "flex", justifyContent: "center", marginTop: "1rem" }}>
+      <div
+        style={{ display: "flex", justifyContent: "center", marginTop: "1rem" }}
+      >
         <button
           onClick={handlePrevClick}
           disabled={isPrevDisabled}
           style={{ background: "transparent", border: "transparent" }}
         >
-          <img src={isPrevDisabled ? NoLeftIcon : LeftIcon} alt="Previous" style={{ width: "24px", height: "24px" }} />
+          <img
+            src={isPrevDisabled ? NoLeftIcon : LeftIcon}
+            alt="Previous"
+            style={{ width: "24px", height: "24px" }}
+          />
         </button>
         <button
           onClick={handleNextClick}
           disabled={isNextDisabled}
           style={{ background: "transparent", border: "transparent" }}
         >
-          <img src={isNextDisabled ? NoRightIcon : RightIcon} alt="Next" style={{ width: "24px", height: "24px" }} />
+          <img
+            src={isNextDisabled ? NoRightIcon : RightIcon}
+            alt="Next"
+            style={{ width: "24px", height: "24px" }}
+          />
         </button>
       </div>
     </div>

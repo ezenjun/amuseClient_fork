@@ -17,7 +17,9 @@ const numberWithCommas = (number: number | null): string => {
 const Dropdown: React.FC<DropdownProps> = ({ onChange }) => {
   const [selectedOption, setSelectedOption] = useState("like_num_desc");
 
-  const handleDropdownChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleDropdownChange = (
+    event: React.ChangeEvent<HTMLSelectElement>
+  ) => {
     const selectedValue = event.target.value;
     setSelectedOption(selectedValue);
     onChange(selectedValue);
@@ -55,7 +57,9 @@ function SearchPageComp() {
 
   const fetchData = (sortOption: string) => {
     axios
-      .get(`${process.env.REACT_APP_AMUSE_API}/item/search?keyword=${apiKey}&sort=${searchSort}&page=1`)
+      .get(
+        `${process.env.REACT_APP_AMUSE_API}/item/search?keyword=${apiKey}&sort=${searchSort}&page=1`
+      )
       .then((response) => {
         const bestItems = response.data.data.items;
         const ids = bestItems.map((item: any) => item.item_db_id);
@@ -79,16 +83,19 @@ function SearchPageComp() {
 
   console.log(searchSort);
 
-  const Box: React.FC<BoxProps> = ({ marginRight, itemId, handleClick, title, startPrice, imageUrl }) => (
-    <div className={Style["box"]} style={{ marginRight }} onClick={handleClick}>
-      <div className={Style["box_before"]} style={{ backgroundImage: `url(${imageUrl})` }}></div>
-      <div className={Style["like_count"]}>
-        {/* <FontAwesomeIcon
-          icon={isLiked[itemId] ? fullHeart : faHeart}
-          style={{ color: "#ffffff", width: "20px", height: "20px", marginTop: "10px", marginLeft: "10px" }}
-          onClick={() => handleLikeClick(itemId)}
-        /> */}
-      </div>
+  const Box: React.FC<BoxProps> = ({
+    itemId,
+    handleClick,
+    title,
+    startPrice,
+    imageUrl,
+  }) => (
+    <div className={Style["box"]} onClick={handleClick}>
+      <div
+        className={Style["box_before"]}
+        style={{ backgroundImage: `url(${imageUrl})` }}
+      ></div>
+      <div className={Style["like_count"]}></div>
       <p className={Style["tripTitle"]}>{title}</p>
       <p className={Style["tripCost"]}>가격 : {startPrice}원 ~</p>
     </div>
@@ -100,25 +107,35 @@ function SearchPageComp() {
     return (
       <div>
         {Array.from({ length: numIterations }, (_, iteration) => (
-          <div className={Style["container"]} style={{ marginTop: "3rem" }} key={iteration}>
-            {ItemIds.slice(iteration * displayedItemCount, iteration * displayedItemCount + displayedItemCount).map(
-              (itemId: number, index: number) => {
-                const itemIndex = iteration * displayedItemCount + index;
-                if (itemIndex >= ItemIds.length) return null; // ItemIds의 범위를 초과한 경우 null 반환
+          <div
+            className={Style["container"]}
+            style={{ marginTop: "3rem" }}
+            key={iteration}
+          >
+            {ItemIds.slice(
+              iteration * displayedItemCount,
+              iteration * displayedItemCount + displayedItemCount
+            ).map((itemId: number, index: number) => {
+              const itemIndex = iteration * displayedItemCount + index;
+              if (itemIndex >= ItemIds.length) return null; // ItemIds의 범위를 초과한 경우 null 반환
 
-                return (
-                  <Box
-                    key={itemId}
-                    marginRight={itemIndex !== 0 && (itemIndex + 1) % displayedItemCount === 0 ? "0" : "18px"}
-                    itemId={itemId}
-                    title={ItemTitle[itemIndex]}
-                    startPrice={numberWithCommas(ItemPrice[itemIndex])}
-                    handleClick={() => navigateToDetail(itemId)}
-                    imageUrl={ItemImageUrl[itemIndex]}
-                  />
-                );
-              }
-            )}
+              return (
+                <Box
+                  key={itemId}
+                  marginRight={
+                    itemIndex !== 0 &&
+                    (itemIndex + 1) % displayedItemCount === 0
+                      ? "0"
+                      : "15px"
+                  }
+                  itemId={itemId}
+                  title={ItemTitle[itemIndex]}
+                  startPrice={numberWithCommas(ItemPrice[itemIndex])}
+                  handleClick={() => navigateToDetail(itemId)}
+                  imageUrl={ItemImageUrl[itemIndex]}
+                />
+              );
+            })}
           </div>
         ))}
       </div>
