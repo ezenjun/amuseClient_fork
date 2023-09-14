@@ -107,45 +107,30 @@
 
 .menu-item {
   display: inline-block;
-  color: #e6003d;
   font-size: 1rem;
   font-weight: bold;
   line-height: 3.5rem;
   margin-right: 100px;
   cursor: pointer;
-  transition: background-color 0.3s;
   text-decoration: none;
 }
 
 .menu-item:hover {
-  background-color: rgb(228, 228, 228);
-}
-
-.menu-item:active,
-.menu-item.active {
-  background-color: rgb(230, 172, 184);
+  color: #e6003d;
 }
 
 .menu-item_mobile {
   display: inline-block;
-  color: #e6003d;
   font-size: 1rem;
   font-weight: bold;
   line-height: 3.5rem;
-  width: 33.333%;
-  text-align: center;
+  margin-right: 100px;
   cursor: pointer;
-  transition: background-color 0.3s;
   text-decoration: none;
 }
 
 .menu-item_mobile:hover {
-  background-color: rgb(228, 228, 228);
-}
-
-.menu-item_mobile:active,
-.menu-item_mobile.active {
-  background-color: rgb(230, 172, 184);
+  color: #e6003d;
 }
 
 .dropdown {
@@ -164,17 +149,15 @@
 }
 .menu-item_mobile.more-dropdown:hover .dropdown {
   display: block;
+  color: black;
 }
 .dropdown-item {
   padding: 5px;
   cursor: pointer;
 }
 .dropdown-item:hover {
-  background-color: rgb(228, 228, 228);
+  color: #e6003d;
 }
-/* .dropdown-item.active {
-  background-color: rgb(230, 172, 184);
-} */
 
 .btnBox {
   display: flex;
