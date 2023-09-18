@@ -69,7 +69,9 @@ function Header() {
   };
 
   const navigateToSearch = () => {
-    movePage(`/search/${searchKeyword}`);
+    const encodedKeyword = encodeURIComponent(searchKeyword);
+    movePage(`/search/${encodedKeyword}`);
+    setSearchKeyword("")
   };
 
   const navigateToLogIn = () => {

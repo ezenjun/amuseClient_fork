@@ -45,15 +45,32 @@ function SearchPageComp() {
   const [ItemPrice, setItemPrice] = useState<number[]>([]);
   const [ItemImageUrl, setItemImageUrl] = useState<string[]>([]);
   const [searchSort, setSearchSort] = useState("like_num_desc");
+  const [noResults, setNoResults] = useState(false);
 
   const movePage = useNavigate();
   const navigateToDetail = (itemId: number) => {
     movePage(`/detail/${itemId}`);
   };
 
+
   useEffect(() => {
-    fetchData(searchSort); // 초기값으로 "like_num_desc"로 데이터를 가져옵니다.
-  }, [searchSort]); // searchSort 값이 변경될 때마다 useEffect를 실행합니다.
+    const urlSearchParams = new URLSearchParams(window.location.search);
+    const sortOption = urlSearchParams.get("sort") || "like_num_desc";
+    setSearchSort(sortOption);
+
+    fetchData(sortOption);
+  }, []);
+
+  useEffect(() => {
+    // 검색 조건이 변경될 때마다 URL 업데이트
+    const urlSearchParams = new URLSearchParams();
+    urlSearchParams.set("sort", searchSort);
+    const newURL = `/search/${apiKey}?${urlSearchParams.toString()}`;
+    window.history.pushState(null, "", newURL);
+    setNoResults(false)
+    fetchData(searchSort);
+  }, [searchSort, apiKey]);
+
 
   const fetchData = (sortOption: string) => {
     axios
@@ -62,18 +79,26 @@ function SearchPageComp() {
       )
       .then((response) => {
         const bestItems = response.data.data.items;
-        const ids = bestItems.map((item: any) => item.item_db_id);
-        setItemIds(ids);
-        const titles = bestItems.map((item: any) => item.title);
-        setItemTitle(titles);
-        const startPrices = bestItems.map((item: any) => item.startPrice);
-        setItemPrice(startPrices);
-        const imgUrl = bestItems.map((item: any) => item.imageUrl);
-        setItemImageUrl(imgUrl);
-        console.log(response.data.data);
+        if (bestItems.length === 0) {
+          setNoResults(true);
+        } else {
+          const ids = bestItems.map((item: any) => item.item_db_id);
+          setItemIds(ids);
+          const titles = bestItems.map((item: any) => item.title);
+          setItemTitle(titles);
+          const startPrices = bestItems.map((item: any) => item.startPrice);
+          setItemPrice(startPrices);
+          const imgUrl = bestItems.map((item: any) => item.imageUrl);
+          setItemImageUrl(imgUrl);
+          console.log(response.data.data);
+        }
       })
       .catch((error) => {
-        console.log("search 연결 실패");
+        if (error.response && error.response.status === 404) {
+          setNoResults(true); // 결과 없음
+        } else {
+          console.log("search 연결 실패");
+        }
       });
   };
 
@@ -179,10 +204,28 @@ function SearchPageComp() {
       >
         "{apiKey}" 검색 결과
       </h1>
+
       <MainComponent>
         <div className={AppStyle["App"]}>
-          <Dropdown onChange={handleSortChange} />
-          <BoxGroup />
+          {noResults ? (
+            <h2
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                width: "100%",
+                height: "100px",
+                margin: "0",
+              }}
+            >
+              검색 결과가 없습니다.
+            </h2>
+          ) : (
+            <>
+              <Dropdown onChange={handleSortChange} />
+              <BoxGroup />
+            </>
+          )}
         </div>
       </MainComponent>
     </div>

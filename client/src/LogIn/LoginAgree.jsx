@@ -106,7 +106,7 @@ const LoginAgree = () =>{
                     </div>
                     <div style={{display:"flex",flexDirection:"row",alignItems:"center",height:"28px",marginTop:"28px"}}>
                         <input type="checkbox" style={{margin:"0px",marginLeft:24}} value={marketingAgree} onChange={()=>{setMarketingAgree(!marketingAgree)}}/> 
-                        <div style={{marginLeft:24,width:"calc(100% - 100px)"}}>{"마케팅정보 활용동의 (필수)"}</div> 
+                        <div style={{marginLeft:24,width:"calc(100% - 100px)"}}>{"마케팅정보 활용동의 (선택)"}</div> 
                         <ReadText>보기</ReadText>
                     </div>
                 </div>
