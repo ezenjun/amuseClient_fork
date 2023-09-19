@@ -49,7 +49,7 @@ function Detail({ itemId, productCode, startPrice, likeNum }: DetailProps) {
             <Reservation
               itemId={itemId}
               productCode={productCode}
-              startPrice={startPrice}
+              // startPrice={startPrice}
               likeNum={likeNum}
             />
           </div>
