@@ -15,14 +15,33 @@ import { useCookies } from "react-cookie";
 interface ReservationProps {
   itemId: number | null;
   productCode: number;
-  startPrice: number;
+  // startPrice: number;
   likeNum: number;
 }
 
-function Reservation({ itemId, productCode, startPrice, likeNum }: ReservationProps) {
+function Reservation({ itemId, productCode, likeNum }: ReservationProps) {
   const [cookies, setCookie, removeCookie] = useCookies(["__jwtkid__"]);
   const movePage = useNavigate();
   const { orderData, setOrderData, orderTicketData } = useOrderContext();
+
+
+  /**
+ * startPrice API
+ */
+  const [startPrice, setStartPrice] = useState(0);
+  useEffect(() => {
+    axios
+      .get(`${process.env.REACT_APP_AMUSE_API}/detail/${itemId}/title`)
+      .then((response) => {
+        setStartPrice(response.data.data.startPrice)
+        console.log(response.data.data)
+      })
+      .catch((error) => {
+        console.log("연결 실패");
+      });
+  }, [itemId]);
+
+
   /**
    * Manager Data
    */
@@ -98,20 +117,20 @@ function Reservation({ itemId, productCode, startPrice, likeNum }: ReservationPr
   };
 
   const handleBuyTicket = () => {
-    if(cookies.__jwtkid__){
+    if (cookies.__jwtkid__) {
       let count = 0;
       for (let i = 0; i < orderTicketData.length; i++) {
         if (orderTicketData[i].count) {
           count += 1;
         }
       }
-      
+
       if (count > 0) {
         movePage("/order");
       } else {
         alert("티켓을 선택해 주세요");
       }
-    }else{
+    } else {
       alert("로그인이 필요합니다.")
     }
   };
@@ -168,7 +187,7 @@ function Reservation({ itemId, productCode, startPrice, likeNum }: ReservationPr
         </div>
       </div>
       {/* 담당자, 문의하기 div */}
-      <div className="manager" style={{marginTop:32}}>
+      <div className="manager" style={{ marginTop: 32 }}>
         <div className="manager-profile">
           <img className="manager-image" src={guideData?.profileImageUrl ?? "img"} alt="manager" />
           <p className="manager-name">{guideData?.userName ?? "name"}</p>
@@ -178,7 +197,7 @@ function Reservation({ itemId, productCode, startPrice, likeNum }: ReservationPr
           onClick={handleInquiryClick}
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
-          
+
         >
           <FontAwesomeIcon className="icon" icon={isHovered ? regularFaEnelope : solidFaEnelope} />
           <p className="inquiry">문의하기</p>
