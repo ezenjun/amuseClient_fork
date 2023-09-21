@@ -14,17 +14,18 @@ export const reset = css`
 		margin: 0;
 		padding: 0;
 		width: 100vw;
-		@media (max-width: 767px) {
+		height: 100vh;
+		@media (max-width: 768px) {
 			/* Mobile styles */
 			font-size: 14px;
 		}
 
-		@media (min-width: 768px) and (max-width: 991px) {
+		@media (min-width: 769px) and (max-width: 1023px) {
 			/* Tablet styles */
 			font-size: 16px; /* Adjust as needed */
 		}
 
-		@media (min-width: 992px) {
+		@media (min-width: 1024px) {
 			/* Desktop styles */
 			font-size: 18px; /* Adjust as needed */
 		}
@@ -38,9 +39,9 @@ export const reset = css`
 		-moz-user-select: -moz-none;
 		-webkit-user-select: none;
 		-khtml-user-select: none;
-		user-select: none; 
+		user-select: none;
 
-		-webkit-tap-highlight-color: transparent; 
+		-webkit-tap-highlight-color: transparent;
 		// 모바일 기기에서 터치 이벤트 발생 시, 해당 요소 주위에 나타나는 하이라이트 색상을 투명색으로 지정
 
 		* {
@@ -50,6 +51,7 @@ export const reset = css`
 `;
 
 export const Pretendard = (props: IPretendard) => css`
+	// font size는 figma 기준 -5 해서 적용
 	font-family: "Pretendard";
 	font-size: ${props.size * 0.0625}rem;
 	font-weight: ${props.weight};
