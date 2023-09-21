@@ -27,7 +27,12 @@ function Header() {
   const [loggedIn, setLoggedIn] = useRecoilState(isLoggedIn);
   // const [manager, setManager] = useRecoilState(isManager);
   // const [token, setToken] = useState("");
-  const [cookies, setCookie, removeCookie] = useCookies(["__jwtk__", "__igjwtk__", "__jwtkid__", "__usrN__"]);
+  const [cookies, setCookie, removeCookie] = useCookies([
+    "__jwtk__",
+    "__igjwtk__",
+    "__jwtkid__",
+    "__usrN__",
+  ]);
 
   // const checkIsManager = (token: String) => {
   //   const searchParams = new URLSearchParams(location.search);
@@ -64,7 +69,9 @@ function Header() {
   };
 
   const navigateToSearch = () => {
-    movePage(`/search/${searchKeyword}`);
+    const encodedKeyword = encodeURIComponent(searchKeyword);
+    movePage(`/search/${encodedKeyword}`);
+    setSearchKeyword("")
   };
 
   const navigateToLogIn = () => {
@@ -74,8 +81,14 @@ function Header() {
     movePage("/SignUP");
   };
 
-  const CategoryMenu: React.FC<CategoryNameMenuProps> = ({ categoryName: categoryName, handleClick }) => (
-    <div className={mobileHeader === 0 ? "menu-item" : "menu-item_mobile"} onClick={handleClick}>
+  const CategoryMenu: React.FC<CategoryNameMenuProps> = ({
+    categoryName: categoryName,
+    handleClick,
+  }) => (
+    <div
+      className={mobileHeader === 0 ? "menu-item" : "menu-item_mobile"}
+      onClick={handleClick}
+    >
       {categoryName}
     </div>
   );
@@ -91,7 +104,9 @@ function Header() {
           <div
             className="dropdown-item"
             key={index}
-            onClick={() => navigateToSubPageComp(categoryIds[index + 4], categoryName)}
+            onClick={() =>
+              navigateToSubPageComp(categoryIds[index + 4], categoryName)
+            }
           >
             {categoryName}
           </div>
@@ -102,7 +117,9 @@ function Header() {
             <div
               className="dropdown-item"
               key={index}
-              onClick={() => navigateToSubPageComp(categoryIds[index + 2], categoryName)}
+              onClick={() =>
+                navigateToSubPageComp(categoryIds[index + 2], categoryName)
+              }
             >
               {categoryName}
             </div>
@@ -168,16 +185,24 @@ function Header() {
 
   useEffect(() => {
     let getToken: string | null = cookies.__jwtkid__;
-    console.log("getToken ",getToken)
-    if(cookies.__usrN__ && (!cookies.__jwtkid__ || cookies.__jwtkid__ === "undefined")){
-      removeCookie("__usrN__")
+    console.log("getToken ", getToken);
+    if (
+      cookies.__usrN__ &&
+      (!cookies.__jwtkid__ || cookies.__jwtkid__ === "undefined")
+    ) {
+      removeCookie("__usrN__");
     }
-    if ( cookies.__jwtkid__ ) {
+    if (cookies.__jwtkid__) {
       setLoggedIn(true);
     } else {
       setLoggedIn(false);
     }
-    if(!cookies.__usrN__ || cookies.__usrN__ === "undefined" || !cookies.__jwtkid__ || cookies.__jwtkid__ === "undefined"){
+    if (
+      !cookies.__usrN__ ||
+      cookies.__usrN__ === "undefined" ||
+      !cookies.__jwtkid__ ||
+      cookies.__jwtkid__ === "undefined"
+    ) {
       setLoggedIn(false);
     }
   }, [cookies]);
@@ -185,7 +210,9 @@ function Header() {
   useEffect(() => {
     let locationString = window.location.toString();
     if (locationString.includes("http://localhost:3000/?access-token")) {
-      let token: string | null = new URL(window.location.href).searchParams.get("access-token");
+      let token: string | null = new URL(window.location.href).searchParams.get(
+        "access-token"
+      );
       if (token === null) {
         return;
       } else {
@@ -198,7 +225,7 @@ function Header() {
     } else if (locationString.includes("amusetravel.wheelgo.net/")) {
       let token: string | null = cookies.__jwtk__;
       let igToken: string | null = cookies.__igjwtk__;
-      if (!token && token !== "undefined" ) {
+      if (!token && token !== "undefined") {
         return;
       } else if (igToken && igToken?.length > 0 && token === igToken) {
         return;
@@ -283,7 +310,12 @@ function Header() {
                 )} */}
               </div>
               <div className="logo_container">
-                <img className="logo_mobile" src={logoimage} alt="Amuse Travel Logo" onClick={navigateToHome} />
+                <img
+                  className="logo_mobile"
+                  src={logoimage}
+                  alt="Amuse Travel Logo"
+                  onClick={navigateToHome}
+                />
               </div>
 
               <div className="search-box-mobile">
@@ -304,18 +336,27 @@ function Header() {
                     <CategoryMenu
                       key={index}
                       categoryName={categoryName}
-                      handleClick={() => navigateToSubPageComp(categoryIds[index], categoryName)}
+                      handleClick={() =>
+                        navigateToSubPageComp(categoryIds[index], categoryName)
+                      }
                     />
                   ))
                 ) : (
                   <>
-                    {categories.slice(0, 2).map((categoryName: string, index: number) => (
-                      <CategoryMenu
-                        key={index}
-                        categoryName={categoryName}
-                        handleClick={() => navigateToSubPageComp(categoryIds[index], categoryName)}
-                      />
-                    ))}
+                    {categories
+                      .slice(0, 2)
+                      .map((categoryName: string, index: number) => (
+                        <CategoryMenu
+                          key={index}
+                          categoryName={categoryName}
+                          handleClick={() =>
+                            navigateToSubPageComp(
+                              categoryIds[index],
+                              categoryName
+                            )
+                          }
+                        />
+                      ))}
                     <div className="menu-item_mobile more-dropdown">
                       더보기 ▼
                       <MoreDropdown />
@@ -329,7 +370,13 @@ function Header() {
           {mobileHeader === 0 && (
             <div>
               <div className="btnBox">
-                {loggedIn ? <div className="userName">{name || cookies.__usrN__} 님 😊</div> : ""}
+                {loggedIn ? (
+                  <div className="userName">
+                    {name || cookies.__usrN__} 님 😊
+                  </div>
+                ) : (
+                  ""
+                )}
                 {loggedIn ? (
                   <button className="loginBtn" onClick={handleLogout}>
                     로그아웃
@@ -365,7 +412,12 @@ function Header() {
                 )} */}
               </div>
               <div className="top">
-                <img className="logo" src={logoimage} alt="Amuse Travel Logo" onClick={navigateToHome} />
+                <img
+                  className="logo"
+                  src={logoimage}
+                  alt="Amuse Travel Logo"
+                  onClick={navigateToHome}
+                />
                 <div className="search-box">
                   <input
                     type="text"
@@ -380,23 +432,32 @@ function Header() {
                 </div>
               </div>
               <div className="menu">
-                {categories.length <= 4 ? (
+                {categories.length <= 5 ? (
                   categories.map((categoryName: string, index: number) => (
                     <CategoryMenu
                       key={index}
                       categoryName={categoryName}
-                      handleClick={() => navigateToSubPageComp(categoryIds[index], categoryName)}
+                      handleClick={() =>
+                        navigateToSubPageComp(categoryIds[index], categoryName)
+                      }
                     />
                   ))
                 ) : (
                   <>
-                    {categories.slice(0, 4).map((categoryName: string, index: number) => (
-                      <CategoryMenu
-                        key={index}
-                        categoryName={categoryName}
-                        handleClick={() => navigateToSubPageComp(categoryIds[index], categoryName)}
-                      />
-                    ))}
+                    {categories
+                      .slice(0, 5)
+                      .map((categoryName: string, index: number) => (
+                        <CategoryMenu
+                          key={index}
+                          categoryName={categoryName}
+                          handleClick={() =>
+                            navigateToSubPageComp(
+                              categoryIds[index],
+                              categoryName
+                            )
+                          }
+                        />
+                      ))}
                     <div className="menu-item more-dropdown">
                       더보기 ▼
                       <MoreDropdown />

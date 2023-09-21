@@ -8,7 +8,12 @@ import Fade from "../Fade";
 import SubLists from "./SubLists";
 import SubBanners from "./SubBanners";
 import SubTiles from "./SubTiles";
-import { BannerProps, ListProps, BoxProps, DropdownProps } from "../Interfaces/PropsInterfaces";
+import {
+  BannerProps,
+  ListProps,
+  BoxProps,
+  DropdownProps,
+} from "../Interfaces/PropsInterfaces";
 import { CategoryData } from "../Interfaces/DataInterfaces";
 import MainComponent from "../MainComponent";
 import { useCookies } from "react-cookie";
@@ -32,9 +37,19 @@ interface tileList {
 //   hashtag: string;
 // }
 
-const Box: React.FC<BoxProps> = ({ marginRight, itemId, handleClick, title, startPrice, imageUrl }) => (
+const Box: React.FC<BoxProps> = ({
+  marginRight,
+  itemId,
+  handleClick,
+  title,
+  startPrice,
+  imageUrl,
+}) => (
   <div className={Style["box"]} style={{ marginRight }} onClick={handleClick}>
-    <div className={Style["box_before"]} style={{ backgroundImage: `url(${imageUrl})` }}></div>
+    <div
+      className={Style["box_before"]}
+      style={{ backgroundImage: `url(${imageUrl})` }}
+    ></div>
     <div className={Style["like_count"]}>
       {/* <FontAwesomeIcon
         icon={isLiked[itemId] ? fullHeart : faHeart}
@@ -47,11 +62,12 @@ const Box: React.FC<BoxProps> = ({ marginRight, itemId, handleClick, title, star
   </div>
 );
 
-
 const Dropdown: React.FC<DropdownProps> = ({ onChange }) => {
   const [selectedOption, setSelectedOption] = useState("like_num_desc");
 
-  const handleDropdownChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleDropdownChange = (
+    event: React.ChangeEvent<HTMLSelectElement>
+  ) => {
     const selectedValue = event.target.value;
     setSelectedOption(selectedValue);
     onChange(selectedValue);
@@ -72,7 +88,7 @@ function SubPageComp() {
 
   const { apiKey } = useParams() as { apiKey: string };
   const [categoryData, setCategoryData] = useState<CategoryData | null>(null);
-  const [cookies] = useCookies(["__jwtkid__"])
+  const [cookies] = useCookies(["__jwtkid__"]);
 
   // console.log("apiKey = " + apiKey);
   const apiKeyNumber: number = Number(apiKey);
@@ -134,14 +150,17 @@ function SubPageComp() {
   }, [apiKeyNumber]);
 
   const fetchPageData = (apiKeyNumber: number) => {
-    const token = cookies["__jwtkid__"]
+    const token = cookies["__jwtkid__"];
     axios
-      .get(`${process.env.REACT_APP_AMUSE_API}/main/category/${apiKeyNumber}/page`, {
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `${token}`,
-        },
-      })
+      .get(
+        `${process.env.REACT_APP_AMUSE_API}/main/category/${apiKeyNumber}/page`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `${token}`,
+          },
+        }
+      )
       .then((response) => {
         const ComponentInfos = response.data.data.pageComponentInfos;
         const items = ComponentInfos.map((item: any) => item);
@@ -157,11 +176,22 @@ function SubPageComp() {
   const renderedComponents = comTypes.map((type, index) => {
     if (type === "리스트") {
       const listItem: ListProps = Items[index];
-      return <SubLists key={index} title={listItem.title} itemInfos={listItem.itemInfos} />;
+      return (
+        <SubLists
+          key={index}
+          title={listItem.title}
+          itemInfos={listItem.itemInfos}
+        />
+      );
     } else if (type === "타일") {
       const tileItem: TileProps = Items[index];
       return (
-        <SubTiles key={index} title={tileItem.title} tileCount={tileItem.tileCount} tileList={tileItem.tileList} />
+        <SubTiles
+          key={index}
+          title={tileItem.title}
+          tileCount={tileItem.tileCount}
+          tileList={tileItem.tileList}
+        />
       );
     } else if (type === "배너") {
       const bannerItem: BannerProps = Items[index];
@@ -186,16 +216,25 @@ function SubPageComp() {
             <div className={Style["subTitleContainer"]}>
               <img
                 className={Style["mainPicture.image"]}
-                src={categoryData.categoryImg ? categoryData.categoryImg : ChildTitle}
+                src={
+                  categoryData.categoryImg
+                    ? categoryData.categoryImg
+                    : ChildTitle
+                }
                 alt="Title img"
                 style={{
                   width: "100%",
                   height: "400px",
                   objectFit: "cover",
+                  objectPosition: "left",
                 }}
               />
-              <h2 className={Style["subTitle"]}>{categoryData.mainDescription}</h2>
-              <h3 className={Style["subContent"]}>{categoryData.subDescription}</h3>
+              <h2 className={Style["subTitle"]}>
+                {categoryData.mainDescription}
+              </h2>
+              <h3 className={Style["subContent"]}>
+                {categoryData.subDescription}
+              </h3>
             </div>
 
             <div className={Style["App"]}>

@@ -17,7 +17,9 @@ const numberWithCommas = (number: number | null): string => {
 const Dropdown: React.FC<DropdownProps> = ({ onChange }) => {
   const [selectedOption, setSelectedOption] = useState("like_num_desc");
 
-  const handleDropdownChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleDropdownChange = (
+    event: React.ChangeEvent<HTMLSelectElement>
+  ) => {
     const selectedValue = event.target.value;
     setSelectedOption(selectedValue);
     onChange(selectedValue);
@@ -43,33 +45,60 @@ function SearchPageComp() {
   const [ItemPrice, setItemPrice] = useState<number[]>([]);
   const [ItemImageUrl, setItemImageUrl] = useState<string[]>([]);
   const [searchSort, setSearchSort] = useState("like_num_desc");
+  const [noResults, setNoResults] = useState(false);
 
   const movePage = useNavigate();
   const navigateToDetail = (itemId: number) => {
     movePage(`/detail/${itemId}`);
   };
 
+
   useEffect(() => {
-    fetchData(searchSort); // 초기값으로 "like_num_desc"로 데이터를 가져옵니다.
-  }, [searchSort]); // searchSort 값이 변경될 때마다 useEffect를 실행합니다.
+    const urlSearchParams = new URLSearchParams(window.location.search);
+    const sortOption = urlSearchParams.get("sort") || "like_num_desc";
+    setSearchSort(sortOption);
+
+    fetchData(sortOption);
+  }, []);
+
+  useEffect(() => {
+    // 검색 조건이 변경될 때마다 URL 업데이트
+    const urlSearchParams = new URLSearchParams();
+    urlSearchParams.set("sort", searchSort);
+    const newURL = `/search/${apiKey}?${urlSearchParams.toString()}`;
+    window.history.pushState(null, "", newURL);
+    setNoResults(false)
+    fetchData(searchSort);
+  }, [searchSort, apiKey]);
+
 
   const fetchData = (sortOption: string) => {
     axios
-      .get(`${process.env.REACT_APP_AMUSE_API}/item/search?keyword=${apiKey}&sort=${searchSort}&page=1`)
+      .get(
+        `${process.env.REACT_APP_AMUSE_API}/item/search?keyword=${apiKey}&sort=${searchSort}&page=1`
+      )
       .then((response) => {
         const bestItems = response.data.data.items;
-        const ids = bestItems.map((item: any) => item.item_db_id);
-        setItemIds(ids);
-        const titles = bestItems.map((item: any) => item.title);
-        setItemTitle(titles);
-        const startPrices = bestItems.map((item: any) => item.startPrice);
-        setItemPrice(startPrices);
-        const imgUrl = bestItems.map((item: any) => item.imageUrl);
-        setItemImageUrl(imgUrl);
-        console.log(response.data.data);
+        if (bestItems.length === 0) {
+          setNoResults(true);
+        } else {
+          const ids = bestItems.map((item: any) => item.item_db_id);
+          setItemIds(ids);
+          const titles = bestItems.map((item: any) => item.title);
+          setItemTitle(titles);
+          const startPrices = bestItems.map((item: any) => item.startPrice);
+          setItemPrice(startPrices);
+          const imgUrl = bestItems.map((item: any) => item.imageUrl);
+          setItemImageUrl(imgUrl);
+          console.log(response.data.data);
+        }
       })
       .catch((error) => {
-        console.log("search 연결 실패");
+        if (error.response && error.response.status === 404) {
+          setNoResults(true); // 결과 없음
+        } else {
+          console.log("search 연결 실패");
+        }
       });
   };
 
@@ -79,16 +108,19 @@ function SearchPageComp() {
 
   console.log(searchSort);
 
-  const Box: React.FC<BoxProps> = ({ marginRight, itemId, handleClick, title, startPrice, imageUrl }) => (
-    <div className={Style["box"]} style={{ marginRight }} onClick={handleClick}>
-      <div className={Style["box_before"]} style={{ backgroundImage: `url(${imageUrl})` }}></div>
-      <div className={Style["like_count"]}>
-        {/* <FontAwesomeIcon
-          icon={isLiked[itemId] ? fullHeart : faHeart}
-          style={{ color: "#ffffff", width: "20px", height: "20px", marginTop: "10px", marginLeft: "10px" }}
-          onClick={() => handleLikeClick(itemId)}
-        /> */}
-      </div>
+  const Box: React.FC<BoxProps> = ({
+    itemId,
+    handleClick,
+    title,
+    startPrice,
+    imageUrl,
+  }) => (
+    <div className={Style["box"]} onClick={handleClick}>
+      <div
+        className={Style["box_before"]}
+        style={{ backgroundImage: `url(${imageUrl})` }}
+      ></div>
+      <div className={Style["like_count"]}></div>
       <p className={Style["tripTitle"]}>{title}</p>
       <p className={Style["tripCost"]}>가격 : {startPrice}원 ~</p>
     </div>
@@ -100,25 +132,35 @@ function SearchPageComp() {
     return (
       <div>
         {Array.from({ length: numIterations }, (_, iteration) => (
-          <div className={Style["container"]} style={{ marginTop: "3rem" }} key={iteration}>
-            {ItemIds.slice(iteration * displayedItemCount, iteration * displayedItemCount + displayedItemCount).map(
-              (itemId: number, index: number) => {
-                const itemIndex = iteration * displayedItemCount + index;
-                if (itemIndex >= ItemIds.length) return null; // ItemIds의 범위를 초과한 경우 null 반환
+          <div
+            className={Style["container"]}
+            style={{ marginTop: "3rem" }}
+            key={iteration}
+          >
+            {ItemIds.slice(
+              iteration * displayedItemCount,
+              iteration * displayedItemCount + displayedItemCount
+            ).map((itemId: number, index: number) => {
+              const itemIndex = iteration * displayedItemCount + index;
+              if (itemIndex >= ItemIds.length) return null; // ItemIds의 범위를 초과한 경우 null 반환
 
-                return (
-                  <Box
-                    key={itemId}
-                    marginRight={itemIndex !== 0 && (itemIndex + 1) % displayedItemCount === 0 ? "0" : "18px"}
-                    itemId={itemId}
-                    title={ItemTitle[itemIndex]}
-                    startPrice={numberWithCommas(ItemPrice[itemIndex])}
-                    handleClick={() => navigateToDetail(itemId)}
-                    imageUrl={ItemImageUrl[itemIndex]}
-                  />
-                );
-              }
-            )}
+              return (
+                <Box
+                  key={itemId}
+                  marginRight={
+                    itemIndex !== 0 &&
+                    (itemIndex + 1) % displayedItemCount === 0
+                      ? "0"
+                      : "15px"
+                  }
+                  itemId={itemId}
+                  title={ItemTitle[itemIndex]}
+                  startPrice={numberWithCommas(ItemPrice[itemIndex])}
+                  handleClick={() => navigateToDetail(itemId)}
+                  imageUrl={ItemImageUrl[itemIndex]}
+                />
+              );
+            })}
           </div>
         ))}
       </div>
@@ -162,10 +204,28 @@ function SearchPageComp() {
       >
         "{apiKey}" 검색 결과
       </h1>
+
       <MainComponent>
         <div className={AppStyle["App"]}>
-          <Dropdown onChange={handleSortChange} />
-          <BoxGroup />
+          {noResults ? (
+            <h2
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                width: "100%",
+                height: "100px",
+                margin: "0",
+              }}
+            >
+              검색 결과가 없습니다.
+            </h2>
+          ) : (
+            <>
+              <Dropdown onChange={handleSortChange} />
+              <BoxGroup />
+            </>
+          )}
         </div>
       </MainComponent>
     </div>
