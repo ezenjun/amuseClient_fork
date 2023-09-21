@@ -60,9 +60,12 @@ export const Pretendard = (props: IPretendard) => css`
 
 export const Common = {
 	colors: {
-		black: "000000",
-		white: "FFFFFF",
-		appColor: "E6003D",
+		black: "#000000",
+		white: "#FFFFFF",
+		appColor: "#E6003D",
+		gray: "#909090",
+		darkGray: "#464646",
+		lightGray: "#CCCCCC",
 	},
 	bold: {
 		thin: 400,
