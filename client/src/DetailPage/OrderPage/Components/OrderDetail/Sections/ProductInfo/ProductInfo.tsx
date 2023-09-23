@@ -6,6 +6,8 @@ import getSelectedPriceIndex from "./getSelectedPriceIndex";
 import { TicketData } from "../../../../../../Interfaces/DataInterfaces";
 import { SubHeader } from "../../../../styles";
 import { DetailSectionContainer } from "../../styles";
+import { useRecoilValue } from "recoil";
+import { selectedItemState } from "../../../../../../Recoil/OrderAtomState";
 
 export function ProductInfo() {
 	const {
@@ -17,6 +19,8 @@ export function ProductInfo() {
 		setOrderRange,
 	} = useOrderContext();
 	const [ticketData, setTicketData] = useState<TicketData[]>([]);
+	const selectedItem = useRecoilValue(selectedItemState);
+
 	useEffect(() => {
 		setTicketData(orderTicketData);
 	}, [orderTicketData]);
@@ -38,6 +42,10 @@ export function ProductInfo() {
 	return (
 		<DetailSectionContainer>
 			<SubHeader>상품정보</SubHeader>
+			{selectedItem.img}
+			{selectedItem.duration}
+			{selectedItem.title}
+			{selectedItem.startDate}
 			<ul className={styles.itemList}>
 				{ticketData
 					.filter((ticket) => ticket.count > 0)
