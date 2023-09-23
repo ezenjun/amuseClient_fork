@@ -47,6 +47,10 @@ export const reset = css`
 		* {
 			box-sizing: border-box;
 		}
+
+		::-webkit-scrollbar {
+			display: none;
+		}
 	}
 `;
 
