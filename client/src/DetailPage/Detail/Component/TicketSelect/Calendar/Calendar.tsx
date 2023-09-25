@@ -100,7 +100,7 @@ function Calendar({
 			setRange(defaultDate);
 			setSelectedItemState((prevSelectedItem) => ({
 				...prevSelectedItem,
-				startDate: today.toLocaleDateString(),
+				startDate: today,
 			}));
 		}
 	}, [CalendarData]);
@@ -123,7 +123,7 @@ function Calendar({
 					setRange(handleRange);
 					setSelectedItemState((prevSelectedItem) => ({
 						...prevSelectedItem,
-						startDate: day.toLocaleDateString(),
+						startDate: day,
 					}));
 				}
 			} else {
@@ -138,7 +138,7 @@ function Calendar({
 				setRange(handleRange);
 				setSelectedItemState((prevSelectedItem) => ({
 					...prevSelectedItem,
-					startDate: day.toLocaleDateString(),
+					startDate: day,
 				}));
 			}
 		}

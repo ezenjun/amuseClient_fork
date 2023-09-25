@@ -64,6 +64,6 @@ export interface TitleData {
 export interface SelectedItemData {
 	title: string;
 	img: string;
-	startDate: string;
+	startDate: Date;
 	duration: number;
 }

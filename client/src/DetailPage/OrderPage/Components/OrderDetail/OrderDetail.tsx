@@ -8,7 +8,7 @@ import React, {
 import styles from "./OrderDetail.module.scss";
 
 import { ProductInfo } from "./Sections/ProductInfo";
-import { Point } from "./Sections/Point";
+import { Point } from "./Sections/Point/Point";
 import { ReservationInfo } from "./Sections/ReservationInfo";
 import { AdditionalInfo } from "./Sections/AdditionalInfo";
 import { PaymentMethod } from "./Sections/PaymentMethod";

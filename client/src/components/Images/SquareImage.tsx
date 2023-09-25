@@ -16,6 +16,7 @@ export const SquareImg = styled.div<{
 	imgUrl: string;
 	borderRadius: number;
 }>`
+	flex-shrink: 0;
 	width: ${(props) => props.size * 0.0625}rem;
 	height: ${(props) => props.size * 0.0625}rem;
 	border-radius: ${(props) => props.borderRadius * 0.0625}rem;

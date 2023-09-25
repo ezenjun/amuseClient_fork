@@ -30,9 +30,8 @@ export const GrayBoxContainer = styled.div<{
 	display: flex;
 	border-radius: ${({ borderRadius }) =>
 		borderRadius ? `${borderRadius * 0.0625}rem` : "0.5rem"};
-	padding: ${(props) =>
-		`${props.verticalPadding * 0.0625}rem ${
-			props.horizontalPadding * 0.0625
-		}rem`};
-	background-color: ${Common.colors.lightGray};
+	padding: ${({ verticalPadding, horizontalPadding }) =>
+		`${verticalPadding * 0.0625}rem ${horizontalPadding * 0.0625}rem`};
+	background-color: ${Common.colors.bgGray};
+	box-sizing: border-box;
 `;
