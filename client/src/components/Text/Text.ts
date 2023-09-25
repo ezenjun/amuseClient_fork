@@ -30,6 +30,13 @@ export const Regular16Gray = styled.span`
 		color: Common.colors.gray,
 	})}
 `;
+export const Regular16DarkGray = styled.span`
+	${Pretendard({
+		size: 16,
+		weight: Common.bold.regular,
+		color: Common.colors.darkGray,
+	})}
+`;
 
 export const Regular16Black = styled.span`
 	${Pretendard({
