@@ -74,7 +74,7 @@ export const Common = {
 		appColor: "#E6003D",
 		gray: "#909090",
 		gray2: "#CCCCCC",
-		lightGray: "#F3F3F3",
+		lightGray: "#F8F9FA",
 		darkGray: "#464646",
 		bgGray: "#F8F9FA",
 	},

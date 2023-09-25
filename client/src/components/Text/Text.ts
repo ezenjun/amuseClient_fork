@@ -9,6 +9,13 @@ export const Bold24Black = styled.span`
 	})}
 `;
 
+export const Bold20DarkGray = styled.span`
+	${Pretendard({
+		size: 20,
+		weight: Common.bold.bold,
+		color: Common.colors.darkGray,
+	})}
+`;
 export const Regular16Gray = styled.span`
 	${Pretendard({
 		size: 16,
@@ -17,10 +24,10 @@ export const Regular16Gray = styled.span`
 	})}
 `;
 
-export const Bold20DarkGray = styled.span`
+export const Regular16Black = styled.span`
 	${Pretendard({
-		size: 20,
-		weight: Common.bold.bold,
-		color: Common.colors.darkGray,
+		size: 16,
+		weight: Common.bold.regular,
+		color: Common.colors.black,
 	})}
 `;
