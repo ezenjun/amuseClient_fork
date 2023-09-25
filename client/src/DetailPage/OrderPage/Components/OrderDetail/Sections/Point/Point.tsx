@@ -50,7 +50,6 @@ export function Point() {
 							min={0}
 							max={myPoint}
 							placeholder="0"
-							className={styles.point}
 							name="point"
 							value={
 								orderData.point > myPoint
@@ -108,6 +107,8 @@ export const PointInput = styled.input<{ value: number }>`
 				props.value > 0 ? Common.colors.appColor : Common.colors.gray,
 		})};
 	outline: none;
+	background: none;
+	border: none;
 	::-webkit-inner-spin-button {
 		-webkit-appearance: none;
 		margin: 0;

@@ -38,7 +38,7 @@ const TicketList = (props: Props) => {
 						<GrayBox
 							key={ticket.title}
 							verticalPadding={31}
-							horizontalPadding={21}
+							horizontalPadding={27}
 						>
 							<TicketContainer>
 								<TicketLeft>

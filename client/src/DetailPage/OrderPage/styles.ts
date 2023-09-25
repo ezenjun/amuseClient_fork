@@ -40,3 +40,4 @@ export const SubHeader = styled.span`
 		color: Common.colors.black,
 	})}
 `;
+
