@@ -22,12 +22,17 @@ export const reset = css`
 
 		@media (min-width: 769px) and (max-width: 1023px) {
 			/* Tablet styles */
-			font-size: 16px; /* Adjust as needed */
+			font-size: 15px; /* Adjust as needed */
 		}
 
-		@media (min-width: 1024px) {
+		@media (min-width: 1024px) and (max-width: 1140px) {
+			/* Tablet styles */
+			font-size: 15px; /* Adjust as needed */
+		}
+
+		@media (min-width: 1141px) {
 			/* Desktop styles */
-			font-size: 18px; /* Adjust as needed */
+			font-size: 16px; /* Adjust as needed */
 		}
 	}
 	body {
@@ -47,6 +52,10 @@ export const reset = css`
 		* {
 			box-sizing: border-box;
 		}
+
+		::-webkit-scrollbar {
+			display: none;
+		}
 	}
 `;
 
@@ -64,8 +73,10 @@ export const Common = {
 		white: "#FFFFFF",
 		appColor: "#E6003D",
 		gray: "#909090",
+		gray2: "#CCCCCC",
+		lightGray: "#F3F3F3",
 		darkGray: "#464646",
-		lightGray: "#CCCCCC",
+		bgGray: "#F8F9FA",
 	},
 	bold: {
 		thin: 400,
