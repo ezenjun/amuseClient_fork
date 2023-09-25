@@ -9,7 +9,7 @@ export const OrderPageContainer = styled.div`
 	box-sizing: border-box;
 	gap: 2rem;
 	padding: 4.6875rem 10% 7.5rem 10%;
-	border: 1px solid blue;
+	/* border: 1px solid blue; */
 	::-webkit-scrollbar {
 		display: none;
 	}
@@ -22,7 +22,7 @@ export const OrderInfoContainer = styled.div`
 	height: 100%;
 	gap: 0.9375rem;
 	box-sizing: border-box;
-	border: 1px solid red;
+	/* border: 1px solid red; */
 `;
 
 export const PageName = styled.span`
