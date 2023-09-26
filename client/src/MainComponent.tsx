@@ -5,9 +5,9 @@ import { IProps } from "./Interfaces/PropsInterfaces";
 const MainComponent = ({ children }: IProps) => {
 	return (
 		<div>
-			{/* <Header /> */}
+			<Header />
 			{children}
-			{/* <Footer /> */}
+			<Footer />
 		</div>
 	);
 };
