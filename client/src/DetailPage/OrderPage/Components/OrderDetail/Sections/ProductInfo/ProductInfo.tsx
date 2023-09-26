@@ -8,7 +8,10 @@ import TicketList from "./components/TicketList";
 import { useOrderContext } from "../../../../../Contexts/OrderContext";
 import { TicketData } from "../../../../../../Interfaces/DataInterfaces";
 import getSelectedPriceIndex from "./getSelectedPriceIndex";
-import { Bold20DarkGray } from "../../../../../../components/Text/Text";
+import {
+	Bold20DarkGray,
+	Bold24DarkGray,
+} from "../../../../../../components/Text/Text";
 import { TotalPriceContainer } from "./styles";
 
 export function ProductInfo() {
@@ -34,9 +37,9 @@ export function ProductInfo() {
 			<TicketList />
 			<TotalPriceContainer>
 				<Bold20DarkGray>총 상품 금액</Bold20DarkGray>
-				<Bold20DarkGray>
+				<Bold24DarkGray>
 					{totalAmount.toLocaleString()}원
-				</Bold20DarkGray>
+				</Bold24DarkGray>
 			</TotalPriceContainer>
 		</DetailSectionContainer>
 	);

@@ -14,10 +14,11 @@ export type InfoData = {
 	setPhone?: any;
 	email?: string;
 	setEmail?: any;
+	birthday?: string;
+	setBirthDay?: any;
 };
 
 export type CategoryInfoData = {
 	categoriesInfo?: Array<any>;
 	setCategoriesInfo?: any;
 };
-

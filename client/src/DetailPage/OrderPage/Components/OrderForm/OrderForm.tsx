@@ -5,10 +5,9 @@ import { requestPay } from "../../API/import";
 import { useOrderContext } from "../../../Contexts/OrderContext";
 import { OrderDetail } from "../OrderDetail";
 import { useInfoContext } from "../../../Contexts/InfoContext";
-import { PurchaseInfo } from "../PurchaseInfo";
-import styles from "./OrderForm.module.scss";
 import { useCookies } from "react-cookie";
 import { OrderInfoContainer } from "./styles";
+import { PurchaseInfoItems } from "../PurchaseInfoItems";
 
 export function OrderForm() {
 	const { orderData, setOrderData, orderTicketData } = useOrderContext();
@@ -91,7 +90,7 @@ export function OrderForm() {
 	return (
 		<OrderInfoContainer>
 			<OrderDetail isLoading={isLoading} />
-			<PurchaseInfo isLoading={isLoading} />
+			<PurchaseInfoItems isLoading={isLoading} />
 		</OrderInfoContainer>
 	);
 }

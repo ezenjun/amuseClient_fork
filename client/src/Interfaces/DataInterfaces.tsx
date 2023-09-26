@@ -67,3 +67,53 @@ export interface SelectedItemData {
 	startDate: Date;
 	duration: number;
 }
+
+export interface PaymentUserData {
+	userName: string;
+	userPhoneNumber: string;
+	userEmail: string;
+	userPoint: number;
+}
+
+export interface SelectedTicket {
+	ticketId: number;
+	ticketCount: number;
+}
+
+export interface PaymentInfo {
+	userId: number;
+	itemId: number;
+	itemType: string;
+	// orderid: number;
+	startDate: Date;
+	endDate: Date;
+	orderDateTime: Date;
+	ticketList: Array<SelectedTicket>;
+	reservationInfo: {
+		nameKR: string;
+		birthday: string;
+		firstNameEN: string;
+		lastNameEN: string;
+		phoneNumber: string;
+		email: string;
+		//국외면
+		passportNumber?: string;
+	};
+	//호텔이면
+	guestInfo: {
+		nameKR: string;
+		birthday: string;
+		firstNameEN: string;
+		lastNameEN: string;
+		phoneNumber: string;
+		email: string;
+	};
+	additionalInfo: string;
+	paymentMethod: string;
+	totalAmount: number;
+	pointUsed: number;
+}
+
+export interface UserPoint {
+	myPoint: number;
+}

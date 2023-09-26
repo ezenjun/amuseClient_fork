@@ -1,4 +1,5 @@
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
+import { ChangeEvent } from "react";
 
 export interface BannerProps {
 	page_component_id: number;
@@ -128,5 +129,44 @@ export interface GrayBoxProps extends IProps {
 }
 
 export interface ButtonProps extends IProps {
+	color: string;
+	width?: number;
+	fontSize: number;
+	verticalPadding: number;
+	isActive?: boolean;
+	onClick: () => void;
+}
+
+export interface InputFieldProps {
+	type: string;
+	isCorrect: boolean;
+	placeholder: string;
+	value: string | number | undefined;
+	setValue: React.Dispatch<React.SetStateAction<string>>;
+	errorMsg?: string;
+}
+
+export interface RadioButtonProps {
+	name: string;
+	checked: boolean;
+	label: string;
+	onClick: () => void;
+}
+
+export interface HorizontalLineProps {
+	marginTop: number;
+	marginBottom: number;
+}
+
+export interface CheckButtonProps {
 	isActive: boolean;
+	onClick: () => void;
+}
+
+export interface onClickProps {
+	onClick: () => void;
+}
+
+export interface PointProps {
+	myPoint: number;
 }
