@@ -5,7 +5,11 @@ export const OrderInfoContainer = styled.div`
 	flex-direction: row;
 	width: 100%;
 	height: 100%;
-	gap: 0.9375rem;
+	gap: 1.25rem;
 	box-sizing: border-box;
-	border: 1px solid orange;
+	@media screen and (max-width: 1023px) {
+		display: grid;
+		grid-template-areas: "main";
+		grid-template-columns: 1fr;
+	}
 `;

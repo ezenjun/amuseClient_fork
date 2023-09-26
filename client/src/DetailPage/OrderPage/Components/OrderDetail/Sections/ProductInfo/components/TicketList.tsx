@@ -38,7 +38,7 @@ const TicketList = (props: Props) => {
 						<GrayBox
 							key={ticket.title}
 							verticalPadding={31}
-							horizontalPadding={21}
+							horizontalPadding={27}
 						>
 							<TicketContainer>
 								<TicketLeft>
@@ -50,7 +50,7 @@ const TicketList = (props: Props) => {
 											{ticket.content}
 										</Regular16Gray>
 									</TicketInfo>
-									<Regular16Gray>
+									<Regular16Gray className="hide-on-mobile">
 										{ticket.count} X{" "}
 										{price.toLocaleString()}원
 									</Regular16Gray>
@@ -89,6 +89,9 @@ export const TicketContainer = styled.div`
 	align-items: center;
 	justify-content: space-between;
 	gap: 4.1875rem;
+	@media (max-width: 768px) {
+		gap: 1.375rem;
+	}
 `;
 
 export const TicketLeft = styled.div`
@@ -98,6 +101,12 @@ export const TicketLeft = styled.div`
 	justify-content: space-between;
 	width: 100%;
 	gap: 1.875rem;
+
+	@media (max-width: 768px) {
+		.hide-on-mobile {
+			display: none;
+		}
+	}
 `;
 export const TicketInfo = styled.div`
 	display: flex;

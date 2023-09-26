@@ -1,9 +1,4 @@
 import { useEffect, useState } from "react";
-import Style from "../../App.module.css";
-import Footer from "../../Footers/Footer";
-
-import styles from "./OrderPage.module.scss";
-
 import { OrderForm } from "./Components/OrderForm";
 import { useOrderContext } from "../Contexts/OrderContext";
 import { useNavigate } from "react-router-dom";
