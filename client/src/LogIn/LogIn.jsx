@@ -20,6 +20,8 @@ export default function Login() {
 	let redirectUri = "http://localhost:3000/";
 	if (process.env.REACT_APP_AMUSE_API === "https://amuseapi.wheelgo.net") {
 		redirectUri = "http://localhost:3000/";
+	} else {
+		redirectUri = "http://localhost:3000/";
 	}
 	const axiosInstance = axios.create({
 		withCredentials: true,

@@ -29,7 +29,7 @@ const WebButton = ({
 export default WebButton;
 
 export const ButtonContainer = styled.div<{
-	width: number;
+	width?: number;
 	fontSize: number;
 	color: string;
 	verticalPadding: number;
@@ -40,7 +40,7 @@ export const ButtonContainer = styled.div<{
 	flex-shrink: 0;
 	justify-content: center;
 	align-items: center;
-	width: ${(props) => props.width * 0.0625}rem;
+	width: ${(props) => (props.width ? `${props.width * 0.0625}rem` : "100%")};
 	border-radius: 0.5rem;
 	padding: ${(props) => props.verticalPadding * 0.0625}rem;
 	border: 1px solid

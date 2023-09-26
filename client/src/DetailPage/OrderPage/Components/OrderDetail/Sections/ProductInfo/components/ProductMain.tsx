@@ -5,6 +5,7 @@ import GrayBox from "../../../../../../../components/Box/GrayBox";
 import { ProductInfoContainer, ProductInfoTextContainer } from "../styles";
 import SquareImage from "../../../../../../../components/Images/SquareImage";
 import {
+	Bold16Black,
 	Bold24Black,
 	Regular16Gray,
 } from "../../../../../../../components/Text/Text";
@@ -18,11 +19,16 @@ const ProductMain = () => {
 			<ProductInfoContainer>
 				<SquareImage
 					imgUrl={selectedItem.img}
-					size={110}
+					size={window.innerWidth <= 768 ? 77 : 110}
 					borderRadius={8}
 				></SquareImage>
 				<ProductInfoTextContainer>
-					<Bold24Black>{selectedItem.title}</Bold24Black>
+					{window.innerWidth <= 768 ? (
+						<Bold16Black>{selectedItem.title}</Bold16Black>
+					) : (
+						<Bold24Black>{selectedItem.title}</Bold24Black>
+					)}
+
 					<Regular16Gray>
 						{formatDate(selectedItem.startDate)}{" "}
 						{selectedItem.duration}일

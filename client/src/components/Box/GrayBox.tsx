@@ -28,6 +28,7 @@ export const GrayBoxContainer = styled.div<{
 	borderRadius?: number;
 }>`
 	display: flex;
+	flex-direction: column;
 	width: 100%;
 	border-radius: ${({ borderRadius }) =>
 		borderRadius ? `${borderRadius * 0.0625}rem` : "0.5rem"};

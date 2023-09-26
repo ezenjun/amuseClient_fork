@@ -11,9 +11,13 @@ import {
 import GrayBox from "../../../../../../components/Box/GrayBox";
 import { EachReservationField, ReservationGrid } from "./styles";
 import InputField from "../../../../../../components/Input/InputField";
+import { PaymentDataState } from "../../../../../../Recoil/OrderAtomState";
+import { useRecoilState } from "recoil";
 
 export function ReservationInfo() {
 	const [showInfoModal, setInfoModal] = useState(false);
+	const [paymentData, setPaymentData] = useRecoilState(PaymentDataState);
+
 	const { name, email, phone, setPhone, setName, birthday, setBirthDay } =
 		useInfoContext(); // 이게 글로벌된 유저 정보라고 가정
 	const [reservationPhoneNumber, setReservationPhoneNumber] = useState(phone);
@@ -43,7 +47,7 @@ export function ReservationInfo() {
 							type="text"
 							placeholder="이름"
 							isCorrect={true}
-							value={name}
+							value={paymentData.reservationInfo.nameKR}
 							setValue={setName}
 						></InputField>
 					</EachReservationField>
@@ -51,9 +55,9 @@ export function ReservationInfo() {
 						<Bold20DarkGray>생년월일</Bold20DarkGray>
 						<InputField
 							type="text"
-							placeholder="이름"
+							placeholder="19990101"
 							isCorrect={true}
-							value={name}
+							value={paymentData.reservationInfo.birthday}
 							setValue={setName}
 						></InputField>
 					</EachReservationField>
@@ -63,7 +67,7 @@ export function ReservationInfo() {
 							type="text"
 							placeholder="이름"
 							isCorrect={true}
-							value={name}
+							value={paymentData.reservationInfo.firstNameEN}
 							setValue={setName}
 						></InputField>
 					</EachReservationField>
@@ -73,7 +77,7 @@ export function ReservationInfo() {
 							type="text"
 							placeholder="이름"
 							isCorrect={true}
-							value={name}
+							value={paymentData.reservationInfo.lastNameEN}
 							setValue={setName}
 						></InputField>
 					</EachReservationField>
@@ -92,7 +96,7 @@ export function ReservationInfo() {
 						type="tel"
 						placeholder="01012345678"
 						isCorrect={true}
-						value={phone}
+						value={paymentData.reservationInfo.phoneNumber}
 						setValue={setName}
 					></InputField>
 					<EachReservationField>
@@ -101,7 +105,7 @@ export function ReservationInfo() {
 							type="email"
 							placeholder="example@example.com"
 							isCorrect={true}
-							value={name}
+							value={paymentData.reservationInfo.email}
 							setValue={setName}
 						></InputField>
 					</EachReservationField>

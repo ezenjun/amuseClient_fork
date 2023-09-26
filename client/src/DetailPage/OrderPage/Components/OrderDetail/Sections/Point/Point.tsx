@@ -12,11 +12,11 @@ import {
 	Regular16Black,
 	Regular16Gray,
 } from "../../../../../../components/Text/Text";
+import { PointProps } from "../../../../../../Interfaces/PropsInterfaces";
 
-export function Point() {
+export const Point = ({ myPoint }: PointProps) => {
 	const { orderData, setOrderData } = useOrderContext();
 
-	const myPoint = 5000;
 	const pointHandler = (e: ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = e.target;
 		const data = { ...orderData };
@@ -82,7 +82,7 @@ export function Point() {
 			</UserPointContainer>
 		</DetailSectionContainer>
 	);
-}
+};
 
 export const PointContainer = styled.div`
 	display: flex;

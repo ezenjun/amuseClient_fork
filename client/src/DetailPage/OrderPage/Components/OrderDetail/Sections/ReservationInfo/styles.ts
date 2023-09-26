@@ -7,6 +7,11 @@ export const ReservationGrid = styled.div`
 	gap: 1.25rem;
 	justify-content: flex-start;
 	align-items: flex-end;
+
+	@media (max-width: 768px) {
+		/* Mobile styles */
+		grid-template-columns: 1fr;
+	}
 `;
 
 export const EachReservationField = styled.div`

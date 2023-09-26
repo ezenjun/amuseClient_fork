@@ -24,10 +24,10 @@ export function AdditionalInfo() {
 	return (
 		<DetailSectionContainer>
 			<SubHeader>추가 요청사항</SubHeader>
-			<Regular16DarkGray>
+			<Regular16Gray>
 				1) 영문 성/이름 2)여권번호 3)생년월일 4)성별 5)여권만료일 6)출발
 				항공권 정보 7)유아 인원 순서대로 기입해주세요
-			</Regular16DarkGray>
+			</Regular16Gray>
 			<div className={styles.additionalInfoContainer}>
 				<TextArea
 					className={styles.text}

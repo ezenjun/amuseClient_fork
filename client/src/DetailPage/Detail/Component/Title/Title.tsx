@@ -5,7 +5,10 @@ import "./Title.scss";
 import { ItemIdProps } from "../../../../Interfaces/PropsInterfaces";
 import { TitleData } from "../../../../Interfaces/DataInterfaces";
 import { useSetRecoilState } from "recoil";
-import { selectedItemState } from "../../../../Recoil/OrderAtomState";
+import {
+	PaymentDataState,
+	selectedItemState,
+} from "../../../../Recoil/OrderAtomState";
 
 function Title({ itemId }: ItemIdProps) {
 	/**
@@ -15,6 +18,8 @@ function Title({ itemId }: ItemIdProps) {
 	const formattedRated = titleData?.rated;
 	const formattedRatedData = formattedRated?.toFixed(1) ?? "0.0";
 	const setSelectedItemTitle = useSetRecoilState(selectedItemState);
+	const setPaymentData = useSetRecoilState(PaymentDataState);
+
 	/**
 	 * Title API
 	 */
@@ -26,6 +31,14 @@ function Title({ itemId }: ItemIdProps) {
 				setSelectedItemTitle((prevSelectedItem) => ({
 					...prevSelectedItem,
 					title: response.data.data.title,
+				}));
+				const data = response.data.data;
+				setPaymentData((prevData) => ({
+					...prevData,
+					reservationInfo: {
+						...prevData.reservationInfo,
+						itemType: data.itemType,
+					},
 				}));
 			})
 			.catch((error) => {

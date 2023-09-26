@@ -9,20 +9,23 @@ export const OrderPageContainer = styled.div`
 	box-sizing: border-box;
 	gap: 2rem;
 	padding: 4.6875rem 10% 7.5rem 10%;
-	/* border: 1px solid blue; */
 	::-webkit-scrollbar {
 		display: none;
+	}
+	@media (max-width: 768px) {
+		/* Mobile styles */
+		padding: 2.5rem 1rem;
 	}
 `;
 
 export const OrderInfoContainer = styled.div`
 	display: flex;
+	flex: 1;
 	flex-direction: row;
 	width: 100%;
-	height: 100%;
+	height: 100vh;
 	gap: 0.9375rem;
 	box-sizing: border-box;
-	/* border: 1px solid red; */
 `;
 
 export const PageName = styled.span`
@@ -40,4 +43,3 @@ export const SubHeader = styled.span`
 		color: Common.colors.black,
 	})}
 `;
-
