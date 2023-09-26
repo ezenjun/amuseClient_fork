@@ -38,7 +38,9 @@ export function PaymentInfo() {
 			<HorizontalLine marginTop={20} marginBottom={30}></HorizontalLine>
 			<OrderAmountContainer>
 				<Regular16DarkGray>주문 금액</Regular16DarkGray>
-				<Regular16DarkGray>{totalAmount}</Regular16DarkGray>
+				<Regular16DarkGray>
+					{totalAmount.toLocaleString()}원
+				</Regular16DarkGray>
 			</OrderAmountContainer>
 			{orderData.point > 0 && (
 				<OrderAmountContainer>
