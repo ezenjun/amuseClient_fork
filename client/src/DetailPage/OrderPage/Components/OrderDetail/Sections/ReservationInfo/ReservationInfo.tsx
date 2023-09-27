@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useInfoContext } from "../../../../../Contexts/InfoContext";
 import { InfoModal } from "../../../Modal/InfoModal";
 import styles from "./Reservation.module.scss";
@@ -18,9 +18,63 @@ export function ReservationInfo() {
 	const [showInfoModal, setInfoModal] = useState(false);
 	const [paymentData, setPaymentData] = useRecoilState(PaymentDataState);
 
-	const { name, email, phone, setPhone, setName, birthday, setBirthDay } =
-		useInfoContext(); // 이게 글로벌된 유저 정보라고 가정
-	const [reservationPhoneNumber, setReservationPhoneNumber] = useState(phone);
+	// 예약자 정보
+	const [reservationNameKR, setReservationNameKR] = useState(
+		paymentData.reservationInfo.reservationNameKR as string | ""
+	);
+	const [reservationBirthday, setReservationBirthday] = useState(
+		paymentData.reservationInfo.reservationBirthday as string | ""
+	);
+	const [reservationFirstNameEN, setReservationFirstNameEN] = useState(
+		paymentData.reservationInfo.reservationFirstNameEN as string | ""
+	);
+	const [reservationLastNameEN, setReservationLastNameEN] = useState(
+		paymentData.reservationInfo.reservationLastNameEN as string | ""
+	);
+	const [reservationPhoneCode, setReservationPhoneCode] = useState(
+		paymentData.reservationInfo.reservationPhoneCode as number | 0
+	);
+	const [reservationPhoneNumber, setReservationPhoneNumber] = useState(
+		paymentData.reservationInfo.reservationPhoneNumber as string | ""
+	);
+	const [reservationEmail, setReservationEmail] = useState(
+		paymentData.reservationInfo.reservationEmail as string | ""
+	);
+	const [reservationPassportNumber, setReservationPassportNumber] = useState(
+		paymentData.reservationInfo.reservationPassportNumber as string | ""
+	);
+
+	useEffect(() => {
+		console.log(paymentData);
+	}, [paymentData]);
+
+	useEffect(() => {
+		setPaymentData((prevData) => ({
+			...prevData,
+			reservationInfo: {
+				...prevData.reservationInfo,
+				reservationNameKR,
+				reservationBirthday,
+				reservationFirstNameEN,
+				reservationLastNameEN,
+				reservationPhoneCode,
+				reservationPhoneNumber,
+				reservationEmail,
+				reservationPassportNumber,
+			},
+			// Add other properties as needed
+		}));
+	}, [
+		reservationNameKR,
+		reservationBirthday,
+		reservationFirstNameEN,
+		reservationLastNameEN,
+		reservationPhoneCode,
+		reservationPhoneNumber,
+		reservationEmail,
+		reservationPassportNumber,
+		setPaymentData, // Make sure to add setPaymentData as a dependency
+	]);
 
 	const clickHandler = (e: any) => {
 		setInfoModal(true);
@@ -30,10 +84,7 @@ export function ReservationInfo() {
 	// const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
 	//   setUserInfo(!useUserInfo);
 	// };
-	const phoneNumberHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-		let target = e.target.value;
-		setReservationPhoneNumber(target.replace(/[^0-9]/g, ""));
-	};
+
 	return (
 		<DetailSectionContainer>
 			<SubHeader>
@@ -47,8 +98,8 @@ export function ReservationInfo() {
 							type="text"
 							placeholder="이름"
 							isCorrect={true}
-							value={paymentData.reservationInfo.nameKR}
-							setValue={setName}
+							value={reservationNameKR}
+							setValue={setReservationNameKR}
 						></InputField>
 					</EachReservationField>
 					<EachReservationField>
@@ -57,8 +108,8 @@ export function ReservationInfo() {
 							type="text"
 							placeholder="19990101"
 							isCorrect={true}
-							value={paymentData.reservationInfo.birthday}
-							setValue={setName}
+							value={reservationBirthday}
+							setValue={setReservationBirthday}
 						></InputField>
 					</EachReservationField>
 					<EachReservationField>
@@ -67,8 +118,8 @@ export function ReservationInfo() {
 							type="text"
 							placeholder="이름"
 							isCorrect={true}
-							value={paymentData.reservationInfo.firstNameEN}
-							setValue={setName}
+							value={reservationFirstNameEN}
+							setValue={setReservationFirstNameEN}
 						></InputField>
 					</EachReservationField>
 					<EachReservationField>
@@ -77,8 +128,8 @@ export function ReservationInfo() {
 							type="text"
 							placeholder="이름"
 							isCorrect={true}
-							value={paymentData.reservationInfo.lastNameEN}
-							setValue={setName}
+							value={reservationLastNameEN}
+							setValue={setReservationLastNameEN}
 						></InputField>
 					</EachReservationField>
 
@@ -89,15 +140,15 @@ export function ReservationInfo() {
 							placeholder="+82 (대한민국)"
 							isCorrect={true}
 							value={"+82 (대한민국)"}
-							setValue={setName}
+							setValue={setReservationPhoneCode}
 						></InputField>
 					</EachReservationField>
 					<InputField
 						type="tel"
 						placeholder="01012345678"
 						isCorrect={true}
-						value={paymentData.reservationInfo.phoneNumber}
-						setValue={setName}
+						value={reservationPhoneNumber}
+						setValue={setReservationPhoneNumber}
 					></InputField>
 					<EachReservationField>
 						<Bold20DarkGray>이메일</Bold20DarkGray>
@@ -105,8 +156,8 @@ export function ReservationInfo() {
 							type="email"
 							placeholder="example@example.com"
 							isCorrect={true}
-							value={paymentData.reservationInfo.email}
-							setValue={setName}
+							value={reservationEmail}
+							setValue={setReservationEmail}
 						></InputField>
 					</EachReservationField>
 				</ReservationGrid>

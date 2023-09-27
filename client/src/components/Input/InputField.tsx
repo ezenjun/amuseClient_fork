@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { InputFieldProps } from "../../Interfaces/PropsInterfaces";
+import { TextInputFieldProps } from "../../Interfaces/PropsInterfaces";
 import styled from "@emotion/styled";
 import { Common, Pretendard } from "../../styles";
 
@@ -10,7 +10,7 @@ const InputField = ({
 	isCorrect,
 	placeholder,
 	errorMsg,
-}: InputFieldProps) => {
+}: TextInputFieldProps) => {
 	const handleInputChange = useMemo(
 		() => (event: React.ChangeEvent<HTMLInputElement>) => {
 			setValue(event.target.value);
@@ -26,10 +26,6 @@ const InputField = ({
 					value={value ? value : undefined}
 					autoFocus={false}
 					onChange={handleInputChange}
-					onKeyDown={(e) =>
-						["e", "E", "+", "-"].includes(e.key) &&
-						e.preventDefault()
-					}
 				/>
 			</InputFieldWrapper>
 			{!isCorrect && <ErrorText>{errorMsg}</ErrorText>}

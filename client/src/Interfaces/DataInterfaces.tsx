@@ -90,23 +90,25 @@ export interface PaymentInfo {
 	orderDateTime: Date;
 	ticketList: Array<SelectedTicket>;
 	reservationInfo: {
-		nameKR: string;
-		birthday: string;
-		firstNameEN: string;
-		lastNameEN: string;
-		phoneNumber: string;
-		email: string;
-		//국외면
-		passportNumber?: string;
+		reservationNameKR: string;
+		reservationBirthday: string;
+		reservationFirstNameEN: string;
+		reservationLastNameEN: string;
+		reservationPhoneCode: number;
+		reservationPhoneNumber: string;
+		reservationEmail: string;
+		reservationPassportNumber?: string;
 	};
 	//호텔이면
 	guestInfo: {
-		nameKR: string;
-		birthday: string;
-		firstNameEN: string;
-		lastNameEN: string;
-		phoneNumber: string;
-		email: string;
+		guestNameKR: string;
+		guestBirthday: string;
+		guestFirstNameEN: string;
+		guestLastNameEN: string;
+		guestPhoneCode: number;
+		guestPhoneNumber: string;
+		guestEmail: string;
+		guestPassportNumber?: string;
 	};
 	additionalInfo: string;
 	paymentMethod: string;

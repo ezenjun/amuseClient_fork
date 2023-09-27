@@ -33,38 +33,7 @@ export const OrderDetail = ({ isLoading }: Props) => {
 	const [currentUserPoint, setCurrentUserPoint] = useRecoilState(
 		currentUserPointState
 	);
-	const getUserInfo = async () => {
-		const token = cookies["__jwtkid__"];
-		if (token) {
-			axios
-				.get(`${process.env.REACT_APP_AMUSE_API}/api/payment`, {
-					headers: {
-						"Content-Type": "application/json",
-						Authorization: `${token}`,
-					},
-				})
-				.then((response) => {
-					const data = response.data.data;
-					console.log("data", data);
-					setPaymentData((prevData) => ({
-						...prevData,
-						reservationInfo: {
-							...prevData.reservationInfo,
-							nameKR: data.userName,
-							phoneNumber: data.userPhoneNumber,
-							email: data.userEmail,
-						},
-					}));
-					setCurrentUserPoint(data.userPoint);
-				})
-				.catch((err) => {
-					console.log(err);
-				});
-		}
-	};
-	useEffect(() => {
-		getUserInfo();
-	}, []);
+	
 
 	return (
 		<OrderDetailContainer ref={ref}>

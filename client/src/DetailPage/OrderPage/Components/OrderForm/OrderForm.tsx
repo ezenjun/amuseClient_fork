@@ -8,6 +8,11 @@ import { useInfoContext } from "../../../Contexts/InfoContext";
 import { useCookies } from "react-cookie";
 import { OrderInfoContainer } from "./styles";
 import { PurchaseInfoItems } from "../PurchaseInfoItems";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import {
+	PaymentDataState,
+	currentUserPointState,
+} from "../../../../Recoil/OrderAtomState";
 
 export function OrderForm() {
 	const { orderData, setOrderData, orderTicketData } = useOrderContext();
@@ -16,6 +21,11 @@ export function OrderForm() {
 
 	const [cookies, setCookie, removeCookie] = useCookies(["__jwtkid__"]);
 	const [isLoading, setLoading] = useState(false);
+
+	const setPaymentData = useSetRecoilState(PaymentDataState);
+	const [currentUserPoint, setCurrentUserPoint] = useRecoilState(
+		currentUserPointState
+	);
 	console.log(orderTicketData);
 
 	const ticketNameAndCount = () => {
@@ -61,12 +71,11 @@ export function OrderForm() {
 			setLoading(false);
 		});
 	};
-
-	const getUserInfoAsToken = async () => {
-		const token = cookies["__jwtkid__"];
+	const getPaymentUserInfo = async () => {
+		const token = cookies.__jwtkid__;
 		if (token) {
 			axios
-				.get(`${process.env.REACT_APP_AMUSE_API}/api/v1/user/info`, {
+				.get(`${process.env.REACT_APP_AMUSE_API}/api/payment`, {
 					headers: {
 						"Content-Type": "application/json",
 						Authorization: `${token}`,
@@ -74,9 +83,17 @@ export function OrderForm() {
 				})
 				.then((response) => {
 					const data = response.data.data;
-					// console.log(data);
-					setName(data?.name);
-					setEmail(data?.email);
+
+					setPaymentData((prevData) => ({
+						...prevData,
+						reservationInfo: {
+							...prevData.reservationInfo,
+							reservationNameKR: data.userName,
+							reservationPhoneNumber: data.userPhoneNumber,
+							reservationEmail: data.userEmail,
+						},
+					}));
+					setCurrentUserPoint(data.userPoint ? data.userPoint : 0);
 				})
 				.catch((err) => {
 					console.log(err);
@@ -84,9 +101,9 @@ export function OrderForm() {
 		}
 	};
 	useEffect(() => {
-		getUserInfoAsToken();
-		console.log(ticketNameAndCount());
+		getPaymentUserInfo();
 	}, []);
+
 	return (
 		<OrderInfoContainer>
 			<OrderDetail isLoading={isLoading} />
