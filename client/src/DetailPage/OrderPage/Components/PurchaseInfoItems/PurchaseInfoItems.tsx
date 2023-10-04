@@ -47,11 +47,11 @@ export const PurchaseInfoItems = ({ isLoading }: Props) => {
 		}
 	};
 
-	const [isWeb, setIsWeb] = useState<boolean>(false);
-	const [screenWidth, setScreenWidth] = useState(window.screen.width);
+	const [isWeb, setIsWeb] = useState<boolean>(true);
+	const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
 	const handleResize = () => {
-		setScreenWidth(window.screen.width);
+		setScreenWidth(window.innerWidth);
 		screenWidth >= 1024 ? setIsWeb(true) : setIsWeb(false);
 		window.removeEventListener("resize", handleResize);
 	};
