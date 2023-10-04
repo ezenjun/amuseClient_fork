@@ -18,7 +18,7 @@ export function AdditionalInfo() {
 		const { name, value } = e.target;
 		const data = { ...orderData };
 		data[name] = value;
-		console.log(data);
+		// console.log(data);
 		setOrderData(data);
 	};
 	return (

@@ -12,6 +12,8 @@ import CancelPolicy from "./Sections/CancelPolicy/CancelPolicy";
 import WebButton from "../../../../components/Button/WebButton";
 import getSelectedPriceIndex from "../OrderDetail/Sections/ProductInfo/getSelectedPriceIndex";
 import { TicketData } from "../../../../Interfaces/DataInterfaces";
+import { useRecoilValue } from "recoil";
+import { PaymentDataState } from "../../../../Recoil/OrderAtomState";
 
 type Props = {
 	isLoading: boolean;
@@ -19,10 +21,7 @@ type Props = {
 
 export const PurchaseInfoItems = ({ isLoading }: Props) => {
 	const { orderData, orderTicketData, orderRange } = useOrderContext();
-	const [privacy, setPrivacy] = useState(false);
-	const [takeVideo, setTakeVideo] = useState(false);
-	const [useVideoInMarketing, setUseVideoInMarketing] = useState(false);
-	const [buyBtn, setBuyBtn] = useState(<></>);
+	const paymentData = useRecoilValue(PaymentDataState);
 
 	const totalAmount = orderTicketData.reduce(
 		(sum: number, ticket: TicketData) => {
@@ -40,11 +39,7 @@ export const PurchaseInfoItems = ({ isLoading }: Props) => {
 	);
 
 	const buyBtnClickAlert = () => {
-		if (!privacy) {
-			alert("개인정보 수집 및 활용에 동의해주세요");
-		} else if (!takeVideo) {
-			alert("영상촬영에 동의해주세요");
-		}
+		console.log(paymentData);
 	};
 
 	const [isWeb, setIsWeb] = useState<boolean>(true);

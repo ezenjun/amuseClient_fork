@@ -141,5 +141,6 @@ export const WonText = styled.span<{ value: number }>`
 export const UserPointContainer = styled.div`
 	display: flex;
 	flex-direction: row;
+	align-items: center;
 	gap: 0.75rem;
 `;

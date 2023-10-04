@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useInfoContext } from "../../../../../Contexts/InfoContext";
 import { InfoModal } from "../../../Modal/InfoModal";
-import styles from "./Reservation.module.scss";
 import { DetailSectionContainer } from "../../styles";
 import { SubHeader } from "../../../../styles";
 import {
@@ -126,7 +124,7 @@ export function ReservationInfo() {
 						<Bold20DarkGray>영문 성</Bold20DarkGray>
 						<InputField
 							type="text"
-							placeholder="이름"
+							placeholder="성"
 							isCorrect={true}
 							value={reservationLastNameEN}
 							setValue={setReservationLastNameEN}
@@ -143,13 +141,16 @@ export function ReservationInfo() {
 							setValue={setReservationPhoneCode}
 						></InputField>
 					</EachReservationField>
-					<InputField
-						type="tel"
-						placeholder="01012345678"
-						isCorrect={true}
-						value={reservationPhoneNumber}
-						setValue={setReservationPhoneNumber}
-					></InputField>
+					<EachReservationField>
+						<InputField
+							type="tel"
+							placeholder="01012345678"
+							isCorrect={true}
+							value={reservationPhoneNumber}
+							setValue={setReservationPhoneNumber}
+						></InputField>
+					</EachReservationField>
+
 					<EachReservationField>
 						<Bold20DarkGray>이메일</Bold20DarkGray>
 						<InputField
@@ -161,39 +162,18 @@ export function ReservationInfo() {
 						></InputField>
 					</EachReservationField>
 				</ReservationGrid>
-				{/* <div className={styles.infoContainer}>
-					<ul className={styles.info}>
-						<li>
-							<span>예약자 이름</span>
-							<span>{name}</span>
-						</li>
-						<li>
-							<span>이메일 주소</span>
-							<span>{email}</span>
-						</li>
-						<li>
-							<span>휴대폰 번호</span>
-							<span>{phone}</span>
-							<input
-								type="phone"
-								style={{
-									padding: "0.5rem",
-									width: "300px",
-									border: "1px solid #efefef",
-									backgroundColor: "#efefef",
-									borderRadius: "3px",
-								}}
-								value={reservationPhoneNumber}
-								onChange={(e) => {
-									phoneNumberHandler(e);
-								}}
-							/>
-						</li>
-
-						<li>예약 안내 정보가 입력하신 이메일로 발송됩니다.</li>
-					</ul>
-					
-				</div> */}
+				{paymentData.itemType === "Hotel" && (
+					<EachReservationField marginTop={30}>
+						<Bold20DarkGray>여권번호</Bold20DarkGray>
+						<InputField
+							type="text"
+							placeholder="1234567"
+							isCorrect={true}
+							value={reservationPassportNumber}
+							setValue={setReservationPassportNumber}
+						></InputField>
+					</EachReservationField>
+				)}
 			</GrayBox>
 
 			{showInfoModal && <InfoModal setInfoModal={setInfoModal} />}

@@ -7,7 +7,7 @@ const MainComponent = ({ children }: IProps) => {
 		<div>
 			<Header />
 			{children}
-			<Footer />
+			{/* <Footer /> */}
 		</div>
 	);
 };

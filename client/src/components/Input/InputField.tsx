@@ -44,7 +44,7 @@ export const InputContainer = styled.div`
 export const InputFieldWrapper = styled.div<{ isCorrect: boolean }>`
 	display: flex;
 	width: 100%;
-	max-width: 25rem;
+	/* max-width: 25rem; */
 	align-items: center;
 	border: 1px solid
 		${({ isCorrect }) =>

@@ -26,7 +26,7 @@ export function OrderForm() {
 	const [currentUserPoint, setCurrentUserPoint] = useRecoilState(
 		currentUserPointState
 	);
-	console.log(orderTicketData);
+	// console.log(orderTicketData);
 
 	const ticketNameAndCount = () => {
 		let count = -1;
@@ -83,7 +83,7 @@ export function OrderForm() {
 				})
 				.then((response) => {
 					const data = response.data.data;
-
+					console.log("getPaymentUserInfo", data);
 					setPaymentData((prevData) => ({
 						...prevData,
 						reservationInfo: {

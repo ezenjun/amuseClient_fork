@@ -14,10 +14,12 @@ import {
 } from "../../../../../../components/Text/Text";
 import { EachPaymentNotice } from "./styles";
 import RadioButton from "../../../../../../components/Button/RadioButton/RadioButton";
+import { useRecoilState } from "recoil";
+import { PaymentDataState } from "../../../../../../Recoil/OrderAtomState";
 
 export function PaymentMethod() {
 	const { orderData, setOrderData } = useOrderContext();
-
+	const [paymentData, setPaymentData] = useRecoilState(PaymentDataState);
 	const [selectedOption, setSelectedOption] =
 		useState<string>("신용/체크카드");
 
@@ -26,6 +28,11 @@ export function PaymentMethod() {
 		const data = { ...orderData };
 		data["pay_method"] = option;
 		setOrderData(data);
+		setPaymentData((prevData) => ({
+			...prevData,
+			paymentMethod: option,
+			// Add other properties as needed
+		}));
 	};
 
 	return (

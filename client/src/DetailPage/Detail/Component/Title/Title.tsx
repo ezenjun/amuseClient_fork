@@ -35,9 +35,9 @@ function Title({ itemId }: ItemIdProps) {
 				const data = response.data.data;
 				setPaymentData((prevData) => ({
 					...prevData,
+					itemType: data.itemType,
 					reservationInfo: {
 						...prevData.reservationInfo,
-						itemType: data.itemType,
 					},
 				}));
 			})
