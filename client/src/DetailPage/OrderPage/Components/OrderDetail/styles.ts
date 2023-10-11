@@ -8,6 +8,9 @@ export const OrderDetailContainer = styled.div`
 	box-sizing: border-box;
 	gap: 4.6875rem;
 	padding-bottom: 2.5rem;
+	.fullWidth {
+		grid-template-columns: 1fr;
+	}
 `;
 
 export const DetailSectionContainer = styled.div`

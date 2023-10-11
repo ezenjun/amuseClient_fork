@@ -7,12 +7,13 @@ import { SubHeader } from "../../../../styles";
 import GrayBox from "../../../../../../components/Box/GrayBox";
 import styled from "@emotion/styled";
 import { Common, Pretendard } from "../../../../../../styles";
-import WebButton from "../../../../../../components/Button/WebButton";
+// import WebButton from "../../../../../../components/Button/WebButton";
 import {
 	Regular16Black,
 	Regular16Gray,
 } from "../../../../../../components/Text/Text";
 import { PointProps } from "../../../../../../Interfaces/PropsInterfaces";
+import { WebButton } from "../../../../../../components/Button/WebButton";
 
 export const Point = ({ myPoint }: PointProps) => {
 	const { orderData, setOrderData } = useOrderContext();
@@ -141,5 +142,6 @@ export const WonText = styled.span<{ value: number }>`
 export const UserPointContainer = styled.div`
 	display: flex;
 	flex-direction: row;
+	align-items: center;
 	gap: 0.75rem;
 `;

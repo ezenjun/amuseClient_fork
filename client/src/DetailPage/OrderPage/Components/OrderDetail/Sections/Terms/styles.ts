@@ -8,12 +8,18 @@ export const TermsContainer = styled.div`
 `;
 
 export const TermsBox = styled.div`
-	display: flex;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
 	flex-direction: column;
-	gap: 1.25rem;
-	padding: 1.4375rem 1.0625rem 1.25rem 1.0625rem;
+	gap: 1.25rem 2.5rem;
+	padding: 23px 1.0625rem 1.25rem 1.0625rem;
 	border-radius: 0.5rem;
 	border: 1px solid ${Common.colors.gray2};
+
+	@media screen and (max-width: 1023px) {
+		display: grid;
+		grid-template-columns: 1fr;
+	}
 `;
 
 export const TermsRow = styled.div`
@@ -27,5 +33,6 @@ export const TermsRight = styled.div`
 	display: flex;
 	flex-direction: row;
 	width: 100%;
+	/* gap: 1.5rem; */
 	justify-content: space-between;
 `;

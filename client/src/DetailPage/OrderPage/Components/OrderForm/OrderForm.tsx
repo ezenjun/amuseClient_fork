@@ -1,22 +1,20 @@
-import { useEffect } from "react";
-import axios from "axios";
 import { FormEvent, useState } from "react";
 import { requestPay } from "../../API/import";
 import { useOrderContext } from "../../../Contexts/OrderContext";
 import { OrderDetail } from "../OrderDetail";
 import { useInfoContext } from "../../../Contexts/InfoContext";
-import { useCookies } from "react-cookie";
 import { OrderInfoContainer } from "./styles";
 import { PurchaseInfoItems } from "../PurchaseInfoItems";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { PaymentDataState } from "../../../../Recoil/OrderAtomState";
+import { FormProvider, useForm } from "react-hook-form";
+import { FormValues } from "../../../../Interfaces/DataInterfaces";
 
 export function OrderForm() {
 	const { orderData, setOrderData, orderTicketData } = useOrderContext();
 	const { name, setName, email, setEmail, phone, setPhone } =
 		useInfoContext();
-
-	const [cookies, setCookie, removeCookie] = useCookies(["__jwtkid__"]);
 	const [isLoading, setLoading] = useState(false);
-	console.log(orderTicketData);
 
 	const ticketNameAndCount = () => {
 		let count = -1;
@@ -62,35 +60,47 @@ export function OrderForm() {
 		});
 	};
 
-	const getUserInfoAsToken = async () => {
-		const token = cookies["__jwtkid__"];
-		if (token) {
-			axios
-				.get(`${process.env.REACT_APP_AMUSE_API}/api/v1/user/info`, {
-					headers: {
-						"Content-Type": "application/json",
-						Authorization: `${token}`,
-					},
-				})
-				.then((response) => {
-					const data = response.data.data;
-					// console.log(data);
-					setName(data?.name);
-					setEmail(data?.email);
-				})
-				.catch((err) => {
-					console.log(err);
-				});
-		}
+	// const { handleSubmit } = useForm<FormValues>();
+	const [paymentData, setPaymentData] = useRecoilState(PaymentDataState);
+
+	const onSubmit = (data: FormValues) => {
+		setPaymentData((prevData) => ({
+			...prevData,
+			reservationInfo: data.reservationInfo,
+			guestInfo: data.guestInfo,
+		}));
 	};
-	useEffect(() => {
-		getUserInfoAsToken();
-		console.log(ticketNameAndCount());
-	}, []);
+	const methods = useForm<FormValues>({
+		defaultValues: {
+			reservationInfo: {
+				reservationNameKR:
+					paymentData.reservationInfo?.reservationNameKR || "",
+				reservationBirthday:
+					paymentData.reservationInfo?.reservationBirthday || "",
+				reservationFirstNameEN:
+					paymentData.reservationInfo?.reservationFirstNameEN || "",
+				reservationLastNameEN:
+					paymentData.reservationInfo?.reservationLastNameEN || "",
+				reservationPhoneCode:
+					paymentData.reservationInfo?.reservationPhoneCode || 82,
+				reservationPhoneNumber:
+					paymentData.reservationInfo?.reservationPhoneNumber || "",
+				reservationEmail:
+					paymentData.reservationInfo?.reservationEmail || "",
+				reservationPassportNumber:
+					paymentData.reservationInfo?.reservationPassportNumber ||
+					"",
+			},
+			guestInfo: {},
+		},
+	});
+
 	return (
-		<OrderInfoContainer>
-			<OrderDetail isLoading={isLoading} />
-			<PurchaseInfoItems isLoading={isLoading} />
-		</OrderInfoContainer>
+		<FormProvider {...methods}>
+			<OrderInfoContainer onSubmit={methods.handleSubmit(onSubmit)}>
+				<OrderDetail isLoading={isLoading} />
+				<PurchaseInfoItems isLoading={isLoading} />
+			</OrderInfoContainer>
+		</FormProvider>
 	);
 }

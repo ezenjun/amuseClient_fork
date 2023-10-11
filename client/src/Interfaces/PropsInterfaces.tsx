@@ -137,12 +137,12 @@ export interface ButtonProps extends IProps {
 	onClick: () => void;
 }
 
-export interface InputFieldProps {
+export interface TextInputFieldProps {
 	type: string;
 	isCorrect: boolean;
 	placeholder: string;
 	value: string | number | undefined;
-	setValue: React.Dispatch<React.SetStateAction<string>>;
+	setValue: React.Dispatch<React.SetStateAction<any>>;
 	errorMsg?: string;
 }
 

@@ -164,7 +164,7 @@ export const Terms = () => {
 								onClickEachSate(cancelRefund, setCancelRefund)
 							}
 						>
-							숙소 이용규칙 <br />및 취소/환불 규정 (필수)
+							숙소 이용규칙 및 취소/환불 규정 (필수)
 						</Regular16DarkGray>
 						<RightArrow
 							onClick={() => onClickShowMore("cancelRefund")}

@@ -1,39 +1,27 @@
-import React, { useState } from "react";
-import { useInfoContext } from "../../../../../Contexts/InfoContext";
-import { InfoModal } from "../../../Modal/InfoModal";
-import styles from "./Reservation.module.scss";
+import { useFormContext } from "react-hook-form";
 import { DetailSectionContainer } from "../../styles";
 import { SubHeader } from "../../../../styles";
 import {
 	Bold20DarkGray,
+	Bold20Transparent,
+	Regular12AppColor,
 	Regular16Black,
 } from "../../../../../../components/Text/Text";
 import GrayBox from "../../../../../../components/Box/GrayBox";
 import { EachReservationField, ReservationGrid } from "./styles";
-import InputField from "../../../../../../components/Input/InputField";
-import { PaymentDataState } from "../../../../../../Recoil/OrderAtomState";
-import { useRecoilState } from "recoil";
+import { FormValues } from "../../../../../../Interfaces/DataInterfaces";
+import styled from "@emotion/styled";
+import { Common } from "../../../../../../styles";
+import { useRecoilValue } from "recoil";
+import { selectedItemState } from "../../../../../../Recoil/OrderAtomState";
 
 export function ReservationInfo() {
-	const [showInfoModal, setInfoModal] = useState(false);
-	const [paymentData, setPaymentData] = useRecoilState(PaymentDataState);
+	const {
+		register,
+		formState: { errors },
+	} = useFormContext<FormValues>();
+	const selectedItem = useRecoilValue(selectedItemState);
 
-	const { name, email, phone, setPhone, setName, birthday, setBirthDay } =
-		useInfoContext(); // 이게 글로벌된 유저 정보라고 가정
-	const [reservationPhoneNumber, setReservationPhoneNumber] = useState(phone);
-
-	const clickHandler = (e: any) => {
-		setInfoModal(true);
-		document.body.style.overflow = "hidden";
-	};
-
-	// const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-	//   setUserInfo(!useUserInfo);
-	// };
-	const phoneNumberHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-		let target = e.target.value;
-		setReservationPhoneNumber(target.replace(/[^0-9]/g, ""));
-	};
 	return (
 		<DetailSectionContainer>
 			<SubHeader>
@@ -43,109 +31,171 @@ export function ReservationInfo() {
 				<ReservationGrid>
 					<EachReservationField>
 						<Bold20DarkGray>예약자</Bold20DarkGray>
-						<InputField
+						<StyledInputField
 							type="text"
 							placeholder="이름"
-							isCorrect={true}
-							value={paymentData.reservationInfo.nameKR}
-							setValue={setName}
-						></InputField>
+							{...register("reservationInfo.reservationNameKR", {
+								required: true,
+							})}
+							error={!!errors.reservationInfo?.reservationNameKR}
+						/>
+						{errors.reservationInfo?.reservationNameKR && (
+							<Regular12AppColor>
+								이름을 입력해주세요
+							</Regular12AppColor>
+						)}
 					</EachReservationField>
 					<EachReservationField>
 						<Bold20DarkGray>생년월일</Bold20DarkGray>
-						<InputField
+						<StyledInputField
 							type="text"
 							placeholder="19990101"
-							isCorrect={true}
-							value={paymentData.reservationInfo.birthday}
-							setValue={setName}
-						></InputField>
+							{...register(
+								"reservationInfo.reservationBirthday",
+								{
+									required: true,
+								}
+							)}
+							error={
+								!!errors.reservationInfo?.reservationBirthday
+							}
+						/>
+						{errors.reservationInfo?.reservationBirthday && (
+							<Regular12AppColor>
+								생년월일을 입력해주세요
+							</Regular12AppColor>
+						)}
 					</EachReservationField>
 					<EachReservationField>
 						<Bold20DarkGray>영문 이름</Bold20DarkGray>
-						<InputField
+						<StyledInputField
 							type="text"
 							placeholder="이름"
-							isCorrect={true}
-							value={paymentData.reservationInfo.firstNameEN}
-							setValue={setName}
-						></InputField>
+							{...register(
+								"reservationInfo.reservationFirstNameEN",
+								{
+									required: true,
+								}
+							)}
+							error={
+								!!errors.reservationInfo?.reservationFirstNameEN
+							}
+						/>
+						{errors.reservationInfo?.reservationFirstNameEN && (
+							<Regular12AppColor>
+								영문 이름을 입력해주세요
+							</Regular12AppColor>
+						)}
 					</EachReservationField>
 					<EachReservationField>
 						<Bold20DarkGray>영문 성</Bold20DarkGray>
-						<InputField
+						<StyledInputField
 							type="text"
-							placeholder="이름"
-							isCorrect={true}
-							value={paymentData.reservationInfo.lastNameEN}
-							setValue={setName}
-						></InputField>
+							placeholder="성"
+							{...register(
+								"reservationInfo.reservationLastNameEN",
+								{
+									required: true,
+								}
+							)}
+							error={
+								!!errors.reservationInfo?.reservationLastNameEN
+							}
+						/>
+						{errors.reservationInfo?.reservationLastNameEN && (
+							<Regular12AppColor>
+								영문 성을 입력해주세요
+							</Regular12AppColor>
+						)}
 					</EachReservationField>
 
 					<EachReservationField>
 						<Bold20DarkGray>전화번호</Bold20DarkGray>
-						<InputField
-							type="tel"
-							placeholder="+82 (대한민국)"
-							isCorrect={true}
-							value={"+82 (대한민국)"}
-							setValue={setName}
-						></InputField>
+						<StyledInputField
+							type="text"
+							placeholder="82"
+							{...register(
+								"reservationInfo.reservationPhoneCode",
+								{
+									required: true,
+								}
+							)}
+							error={
+								!!errors.reservationInfo?.reservationPhoneCode
+							}
+						/>
 					</EachReservationField>
-					<InputField
-						type="tel"
-						placeholder="01012345678"
-						isCorrect={true}
-						value={paymentData.reservationInfo.phoneNumber}
-						setValue={setName}
-					></InputField>
+					<EachReservationField>
+						<Bold20Transparent>전화번호</Bold20Transparent>
+						<StyledInputField
+							type="text"
+							placeholder="01012345678"
+							{...register(
+								"reservationInfo.reservationPhoneNumber",
+								{
+									required: true,
+								}
+							)}
+							error={
+								!!errors.reservationInfo?.reservationPhoneNumber
+							}
+						/>
+						{errors.reservationInfo?.reservationPhoneNumber && (
+							<Regular12AppColor>
+								전화번호를 입력해주세요
+							</Regular12AppColor>
+						)}
+					</EachReservationField>
+
 					<EachReservationField>
 						<Bold20DarkGray>이메일</Bold20DarkGray>
-						<InputField
-							type="email"
+						<StyledInputField
+							type="text"
 							placeholder="example@example.com"
-							isCorrect={true}
-							value={paymentData.reservationInfo.email}
-							setValue={setName}
-						></InputField>
+							{...register("reservationInfo.reservationEmail", {
+								required: true,
+							})}
+							error={!!errors.reservationInfo?.reservationEmail}
+						/>
 					</EachReservationField>
-				</ReservationGrid>
-				{/* <div className={styles.infoContainer}>
-					<ul className={styles.info}>
-						<li>
-							<span>예약자 이름</span>
-							<span>{name}</span>
-						</li>
-						<li>
-							<span>이메일 주소</span>
-							<span>{email}</span>
-						</li>
-						<li>
-							<span>휴대폰 번호</span>
-							<span>{phone}</span>
-							<input
-								type="phone"
-								style={{
-									padding: "0.5rem",
-									width: "300px",
-									border: "1px solid #efefef",
-									backgroundColor: "#efefef",
-									borderRadius: "3px",
-								}}
-								value={reservationPhoneNumber}
-								onChange={(e) => {
-									phoneNumberHandler(e);
-								}}
+					<EachReservationField></EachReservationField>
+					{selectedItem.itemType === "Hotel" && (
+						<EachReservationField className="fullWidth">
+							<Bold20DarkGray>여권번호</Bold20DarkGray>
+							<StyledInputField
+								type="text"
+								placeholder="123456789"
+								{...register("guestInfo.guestPassportNumber", {
+									required: true,
+								})}
+								error={!!errors.guestInfo?.guestPassportNumber}
 							/>
-						</li>
-
-						<li>예약 안내 정보가 입력하신 이메일로 발송됩니다.</li>
-					</ul>
-					
-				</div> */}
+							{errors.guestInfo?.guestPassportNumber && (
+								<Regular12AppColor>
+									여권번호를 입력해주세요
+								</Regular12AppColor>
+							)}
+						</EachReservationField>
+					)}
+				</ReservationGrid>
 			</GrayBox>
 
-			{showInfoModal && <InfoModal setInfoModal={setInfoModal} />}
+			{/* {showInfoModal && <InfoModal setInfoModal={setInfoModal} />} */}
 		</DetailSectionContainer>
 	);
 }
+
+export const StyledInputField = styled.input<{ error?: boolean }>`
+	display: flex;
+	width: 100%;
+	align-items: center;
+	border: 1px solid
+		${({ error }) => (error ? Common.colors.appColor : Common.colors.gray2)};
+	border-radius: 0.5rem;
+	padding: 1.25rem 1.125rem;
+	background-color: ${Common.colors.white};
+	outline: 0;
+	:focus {
+		border: 1px solid ${Common.colors.black};
+	}
+`;
