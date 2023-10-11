@@ -60,6 +60,7 @@ export const WebButton = styled.button<{
 				return "transparent";
 		}
 	}};
+	font-family: "Pretendard";
 	color: ${(props) => {
 		switch (props.color) {
 			case "white":

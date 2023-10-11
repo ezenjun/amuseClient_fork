@@ -66,6 +66,7 @@ export interface SelectedItemData {
 	img: string;
 	startDate: Date;
 	duration: number;
+	itemType: string;
 }
 
 export interface PaymentUserData {
@@ -124,15 +125,6 @@ export interface GuestInfo {
 }
 
 export interface FormValues {
-	reservationInfo: {
-		reservationNameKR: string;
-		reservationBirthday: string;
-		reservationFirstNameEN: string;
-		reservationLastNameEN: string;
-		reservationPhoneCode: number;
-		reservationPhoneNumber: string;
-		reservationEmail: string;
-		reservationPassportNumber: string;
-	};
+	reservationInfo: ReservationInfo;
 	guestInfo: GuestInfo;
 }

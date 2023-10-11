@@ -10,8 +10,8 @@ import { CancelPolicy } from "./Sections/CancelPolicy/CancelPolicy";
 import { OrderDetailContainer } from "./styles";
 import { useRecoilValue } from "recoil";
 import {
-	PaymentDataState,
 	currentUserPointState,
+	selectedItemState,
 } from "../../../../Recoil/OrderAtomState";
 import GuestInfo from "./Sections/GuestInfo/GuestInfo";
 
@@ -21,14 +21,14 @@ type Props = {
 
 export const OrderDetail = ({ isLoading }: Props) => {
 	const ref = useRef<HTMLDivElement>(null);
-	const paymentData = useRecoilValue(PaymentDataState);
 	const currentUserPoint = useRecoilValue(currentUserPointState);
+	const selectedItem = useRecoilValue(selectedItemState);
 
 	return (
 		<OrderDetailContainer ref={ref}>
 			<ProductInfo />
 			<ReservationInfo />
-			{paymentData.itemType === "Hotel" && <GuestInfo />}
+			{selectedItem.itemType === "Hotel" && <GuestInfo />}
 			<AdditionalInfo />
 			<Point myPoint={currentUserPoint} />
 			<PaymentMethod />

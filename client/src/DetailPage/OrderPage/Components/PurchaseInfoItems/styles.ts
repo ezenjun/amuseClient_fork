@@ -8,7 +8,7 @@ export const PurchaseInfoItemsContainer = styled.div`
 	position: sticky;
 	/* margin: 0 auto; */
 	padding: 1.875rem;
-	top: 32px;
+	top: 3.125rem;
 	width: 23.125rem;
 	height: 100%;
 	box-sizing: border-box;

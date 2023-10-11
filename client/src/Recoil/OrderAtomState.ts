@@ -4,7 +4,13 @@ import { PaymentInfo, SelectedItemData } from "../Interfaces/DataInterfaces";
 
 export const selectedItemState = atom<SelectedItemData>({
 	key: atomKeys.selectedItemState,
-	default: { title: "", img: "", startDate: new Date(), duration: 0 },
+	default: {
+		title: "",
+		img: "",
+		startDate: new Date(),
+		duration: 0,
+		itemType: "",
+	},
 });
 
 export const currentUserPointState = atom<number>({

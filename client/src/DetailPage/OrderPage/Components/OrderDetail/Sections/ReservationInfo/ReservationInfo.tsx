@@ -1,4 +1,4 @@
-import { useForm, useFormContext } from "react-hook-form";
+import { useFormContext } from "react-hook-form";
 import { DetailSectionContainer } from "../../styles";
 import { SubHeader } from "../../../../styles";
 import {
@@ -9,19 +9,18 @@ import {
 } from "../../../../../../components/Text/Text";
 import GrayBox from "../../../../../../components/Box/GrayBox";
 import { EachReservationField, ReservationGrid } from "./styles";
-import { PaymentDataState } from "../../../../../../Recoil/OrderAtomState";
-import { useRecoilState } from "recoil";
 import { FormValues } from "../../../../../../Interfaces/DataInterfaces";
 import styled from "@emotion/styled";
 import { Common } from "../../../../../../styles";
+import { useRecoilValue } from "recoil";
+import { selectedItemState } from "../../../../../../Recoil/OrderAtomState";
 
 export function ReservationInfo() {
-	const [paymentData, setPaymentData] = useRecoilState(PaymentDataState);
 	const {
 		register,
 		formState: { errors },
 	} = useFormContext<FormValues>();
-	console.log(errors.reservationInfo?.reservationNameKR);
+	const selectedItem = useRecoilValue(selectedItemState);
 
 	return (
 		<DetailSectionContainer>
@@ -159,19 +158,26 @@ export function ReservationInfo() {
 							error={!!errors.reservationInfo?.reservationEmail}
 						/>
 					</EachReservationField>
+					<EachReservationField></EachReservationField>
+					{selectedItem.itemType === "Hotel" && (
+						<EachReservationField className="fullWidth">
+							<Bold20DarkGray>여권번호</Bold20DarkGray>
+							<StyledInputField
+								type="text"
+								placeholder="123456789"
+								{...register("guestInfo.guestPassportNumber", {
+									required: true,
+								})}
+								error={!!errors.guestInfo?.guestPassportNumber}
+							/>
+							{errors.guestInfo?.guestPassportNumber && (
+								<Regular12AppColor>
+									여권번호를 입력해주세요
+								</Regular12AppColor>
+							)}
+						</EachReservationField>
+					)}
 				</ReservationGrid>
-				{/* {paymentData.itemType === "Hotel" && (
-					<EachReservationField marginTop={30}>
-						<Bold20DarkGray>여권번호</Bold20DarkGray>
-						<InputField
-							type="text"
-							placeholder="1234567"
-							isCorrect={true}
-							value={reservationPassportNumber}
-							setValue={setReservationPassportNumber}
-						></InputField>
-					</EachReservationField>
-				)} */}
 			</GrayBox>
 
 			{/* {showInfoModal && <InfoModal setInfoModal={setInfoModal} />} */}

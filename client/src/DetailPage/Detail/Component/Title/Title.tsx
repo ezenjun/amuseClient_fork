@@ -19,6 +19,7 @@ function Title({ itemId }: ItemIdProps) {
 	const formattedRatedData = formattedRated?.toFixed(1) ?? "0.0";
 	const setSelectedItemTitle = useSetRecoilState(selectedItemState);
 	const setPaymentData = useSetRecoilState(PaymentDataState);
+	const setSelectedItem = useSetRecoilState(selectedItemState);
 
 	/**
 	 * Title API
@@ -31,6 +32,7 @@ function Title({ itemId }: ItemIdProps) {
 				setSelectedItemTitle((prevSelectedItem) => ({
 					...prevSelectedItem,
 					title: response.data.data.title,
+					itemType: response.data.data.itemType,
 				}));
 				const data = response.data.data;
 				setPaymentData((prevData) => ({

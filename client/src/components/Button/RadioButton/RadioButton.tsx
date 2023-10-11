@@ -3,10 +3,11 @@ import { RadioButtonProps } from "../../../Interfaces/PropsInterfaces";
 import styled from "@emotion/styled";
 import { Pretendard, Common } from "../../../styles";
 import Chips from "../../Chips/Chips";
+import { ReactComponent as KakaopayIcon } from "../../../assets/Icons/payment_icon_yellow_large.svg";
 
 const RadioButton = ({ name, checked, label, onClick }: RadioButtonProps) => {
 	return (
-		<Container checked={checked}>
+		<Container checked={checked} onClick={onClick}>
 			<RadioInput
 				type="radio"
 				name={name}
@@ -15,6 +16,9 @@ const RadioButton = ({ name, checked, label, onClick }: RadioButtonProps) => {
 			/>
 			<Label onClick={onClick}>{label}</Label>
 			{label === "현금 결제" && <Chips>결제 시 포인트 적립</Chips>}
+			{label === "카카오페이" && (
+				<KakaopayIcon width={"4.0625rem"} height={"1.6875rem"} />
+			)}
 		</Container>
 	);
 };

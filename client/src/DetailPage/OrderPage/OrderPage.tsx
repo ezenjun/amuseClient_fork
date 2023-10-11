@@ -5,7 +5,10 @@ import { useNavigate } from "react-router-dom";
 import MainComponent from "../../MainComponent";
 import { OrderInfoContainer, OrderPageContainer, PageName } from "./styles";
 import { useRecoilState, useSetRecoilState } from "recoil";
-import { PaymentDataState, currentUserPointState } from "../../Recoil/OrderAtomState";
+import {
+	PaymentDataState,
+	currentUserPointState,
+} from "../../Recoil/OrderAtomState";
 import { useCookies } from "react-cookie";
 import axios from "axios";
 export const OrderPage = () => {
@@ -31,9 +34,7 @@ export const OrderPage = () => {
 		}
 	};
 	const setPaymentData = useSetRecoilState(PaymentDataState);
-	const [currentUserPoint, setCurrentUserPoint] = useRecoilState(
-		currentUserPointState
-	);
+	const setCurrentUserPoint = useSetRecoilState(currentUserPointState);
 
 	const getPaymentUserInfo = async () => {
 		const token = cookies.__jwtkid__;

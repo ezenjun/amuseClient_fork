@@ -33,6 +33,7 @@ export function PaymentMethod() {
 			paymentMethod: option,
 			// Add other properties as needed
 		}));
+		console.log(option);
 	};
 
 	return (

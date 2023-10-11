@@ -5,10 +5,8 @@ import { OrderDetail } from "../OrderDetail";
 import { useInfoContext } from "../../../Contexts/InfoContext";
 import { OrderInfoContainer } from "./styles";
 import { PurchaseInfoItems } from "../PurchaseInfoItems";
-import { useRecoilValue } from "recoil";
-import {
-	PaymentDataState,
-} from "../../../../Recoil/OrderAtomState";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { PaymentDataState } from "../../../../Recoil/OrderAtomState";
 import { FormProvider, useForm } from "react-hook-form";
 import { FormValues } from "../../../../Interfaces/DataInterfaces";
 
@@ -63,13 +61,15 @@ export function OrderForm() {
 	};
 
 	// const { handleSubmit } = useForm<FormValues>();
-	const paymentData = useRecoilValue(PaymentDataState);
+	const [paymentData, setPaymentData] = useRecoilState(PaymentDataState);
 
 	const onSubmit = (data: FormValues) => {
-		alert("clicked");
-		console.log(data);
+		setPaymentData((prevData) => ({
+			...prevData,
+			reservationInfo: data.reservationInfo,
+			guestInfo: data.guestInfo,
+		}));
 	};
-
 	const methods = useForm<FormValues>({
 		defaultValues: {
 			reservationInfo: {
