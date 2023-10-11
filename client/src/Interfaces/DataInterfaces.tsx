@@ -89,27 +89,9 @@ export interface PaymentInfo {
 	endDate: Date;
 	orderDateTime: Date;
 	ticketList: Array<SelectedTicket>;
-	reservationInfo: {
-		reservationNameKR: string;
-		reservationBirthday: string;
-		reservationFirstNameEN: string;
-		reservationLastNameEN: string;
-		reservationPhoneCode: number;
-		reservationPhoneNumber: string;
-		reservationEmail: string;
-		reservationPassportNumber?: string;
-	};
+	reservationInfo: ReservationInfo;
 	//호텔이면
-	guestInfo: {
-		guestNameKR: string;
-		guestBirthday: string;
-		guestFirstNameEN: string;
-		guestLastNameEN: string;
-		guestPhoneCode: number;
-		guestPhoneNumber: string;
-		guestEmail: string;
-		guestPassportNumber?: string;
-	};
+	guestInfo: GuestInfo;
 	additionalInfo: string;
 	paymentMethod: string;
 	totalAmount: number;
@@ -118,4 +100,39 @@ export interface PaymentInfo {
 
 export interface UserPoint {
 	myPoint: number;
+}
+
+export interface ReservationInfo {
+	reservationNameKR: string;
+	reservationBirthday: string;
+	reservationFirstNameEN: string;
+	reservationLastNameEN: string;
+	reservationPhoneCode: number;
+	reservationPhoneNumber: string;
+	reservationEmail: string;
+	reservationPassportNumber: string;
+}
+export interface GuestInfo {
+	guestNameKR: string;
+	guestBirthday: string;
+	guestFirstNameEN: string;
+	guestLastNameEN: string;
+	guestPhoneCode: number;
+	guestPhoneNumber: string;
+	guestEmail: string;
+	guestPassportNumber: string;
+}
+
+export interface FormValues {
+	reservationInfo: {
+		reservationNameKR: string;
+		reservationBirthday: string;
+		reservationFirstNameEN: string;
+		reservationLastNameEN: string;
+		reservationPhoneCode: number;
+		reservationPhoneNumber: string;
+		reservationEmail: string;
+		reservationPassportNumber: string;
+	};
+	guestInfo: GuestInfo;
 }

@@ -9,14 +9,15 @@ import { PurchaseInfoItemsContainer } from "./styles";
 import { SubHeader } from "../../styles";
 import HorizontalLine from "../../../../components/Lines/HorizontalLine";
 import CancelPolicy from "./Sections/CancelPolicy/CancelPolicy";
-import WebButton from "../../../../components/Button/WebButton";
 import getSelectedPriceIndex from "../OrderDetail/Sections/ProductInfo/getSelectedPriceIndex";
 import { TicketData } from "../../../../Interfaces/DataInterfaces";
 import { useRecoilValue } from "recoil";
 import { PaymentDataState } from "../../../../Recoil/OrderAtomState";
+import { WebButton } from "../../../../components/Button/WebButton";
+import { useFormContext } from "react-hook-form";
 
 type Props = {
-	isLoading: boolean;
+	isLoading?: boolean;
 };
 
 export const PurchaseInfoItems = ({ isLoading }: Props) => {
@@ -38,10 +39,6 @@ export const PurchaseInfoItems = ({ isLoading }: Props) => {
 		0
 	);
 
-	const buyBtnClickAlert = () => {
-		console.log(paymentData);
-	};
-
 	const [isWeb, setIsWeb] = useState<boolean>(true);
 	const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
@@ -56,36 +53,6 @@ export const PurchaseInfoItems = ({ isLoading }: Props) => {
 		window.addEventListener("resize", handleResize);
 	}, [screenWidth]);
 
-	// useEffect(() => {
-	// 	if (privacy && takeVideo) {
-	// 		setBuyBtn(
-	// 			<button
-	// 				type="submit"
-	// 				form="orderForm"
-	// 				disabled={isLoading}
-	// 				style={{ fontFamily: "Pretendard-Regular" }}
-	// 			>
-	// 				{isLoading
-	// 					? "결제중"
-	// 					: `${(
-	// 							orderData.productPrice - orderData.point
-	// 					  ).toLocaleString("en")}원 결제`}
-	// 			</button>
-	// 		);
-	// 	} else {
-	// 		setBuyBtn(
-	// 			<AlertBtn
-	// 				onClick={() => {
-	// 					buyBtnClickAlert();
-	// 				}}
-	// 				style={{}}
-	// 			>
-	// 				{`결제 확인`}
-	// 			</AlertBtn>
-	// 		);
-	// 	}
-	// }, [privacy, takeVideo]);
-
 	return (
 		<PurchaseInfoItemsContainer>
 			{isWeb && <PaymentInfo />}
@@ -93,10 +60,11 @@ export const PurchaseInfoItems = ({ isLoading }: Props) => {
 			<CancelPolicy />
 			{!isWeb && <PaymentInfo />}
 			<WebButton
+				type="submit"
 				verticalPadding={18}
 				color="red"
 				fontSize={20}
-				onClick={buyBtnClickAlert}
+				isActive={true}
 			>
 				{(totalAmount - orderData.point).toLocaleString()}원 결제하기
 			</WebButton>

@@ -12,6 +12,9 @@ import {
 	currentUserPointState,
 } from "../../../../Recoil/OrderAtomState";
 import GuestInfo from "./Sections/GuestInfo/GuestInfo";
+import { Control } from "react-hook-form";
+import { FormValues } from "../../../../Interfaces/DataInterfaces";
+// import GuestInfo from "./Sections/GuestInfo/GuestInfo";
 
 type Props = {
 	isLoading: boolean;
@@ -25,10 +28,10 @@ export const OrderDetail = ({ isLoading }: Props) => {
 	return (
 		<OrderDetailContainer ref={ref}>
 			<ProductInfo />
-			<Point myPoint={currentUserPoint} />
 			<ReservationInfo />
 			{paymentData.itemType === "Hotel" && <GuestInfo />}
 			<AdditionalInfo />
+			<Point myPoint={currentUserPoint} />
 			<PaymentMethod />
 		</OrderDetailContainer>
 	);

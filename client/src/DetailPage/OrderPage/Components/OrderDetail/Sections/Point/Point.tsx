@@ -7,12 +7,13 @@ import { SubHeader } from "../../../../styles";
 import GrayBox from "../../../../../../components/Box/GrayBox";
 import styled from "@emotion/styled";
 import { Common, Pretendard } from "../../../../../../styles";
-import WebButton from "../../../../../../components/Button/WebButton";
+// import WebButton from "../../../../../../components/Button/WebButton";
 import {
 	Regular16Black,
 	Regular16Gray,
 } from "../../../../../../components/Text/Text";
 import { PointProps } from "../../../../../../Interfaces/PropsInterfaces";
+import { WebButton } from "../../../../../../components/Button/WebButton";
 
 export const Point = ({ myPoint }: PointProps) => {
 	const { orderData, setOrderData } = useOrderContext();
