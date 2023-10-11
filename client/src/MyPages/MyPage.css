@@ -1,11 +1,14 @@
 .myPage {
-    max-width: 1200px;
-    margin: auto;
-    margin-top: 30px;
-    display: flex;
+	max-width: 1200px;
+	margin: auto;
+	margin-top: 30px;
+	display: flex;
+	height: 100%;
 }
 
 .myPage_box {
-    padding: 15px;
-    margin: auto;
+	width: 100%;
+	height: 100%;
+	padding: 15px;
+	margin: auto;
 }

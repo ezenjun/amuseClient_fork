@@ -102,6 +102,10 @@ export const TicketLeft = styled.div`
 	width: 100%;
 	gap: 1.875rem;
 
+	.hide-on-mobile {
+		text-align: end;
+	}
+
 	@media (max-width: 768px) {
 		.hide-on-mobile {
 			display: none;
@@ -113,6 +117,7 @@ export const TicketInfo = styled.div`
 	flex-direction: column;
 	justify-content: space-between;
 	gap: 0.5rem;
+	max-width: 70%;
 `;
 
 export const TicketRight = styled.div`

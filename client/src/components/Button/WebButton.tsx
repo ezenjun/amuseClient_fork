@@ -3,38 +3,38 @@ import { ButtonProps } from "../../Interfaces/PropsInterfaces";
 import styled from "@emotion/styled";
 import { Common } from "../../styles";
 
-const WebButton = ({
-	children,
-	width,
-	color,
-	fontSize,
-	verticalPadding,
-	isActive,
-	onClick,
-}: ButtonProps) => {
-	return (
-		<ButtonContainer
-			width={width}
-			fontSize={fontSize}
-			color={color}
-			verticalPadding={verticalPadding}
-			isActive={isActive}
-			onClick={onClick}
-		>
-			{children}
-		</ButtonContainer>
-	);
-};
+// const WebButton = ({
+// 	children,
+// 	width,
+// 	color,
+// 	fontSize,
+// 	verticalPadding,
+// 	isActive,
+// 	onClick,
+// }: ButtonProps) => {
+// 	return (
+// 		<ButtonContainer
+// 			width={width}
+// 			fontSize={fontSize}
+// 			color={color}
+// 			verticalPadding={verticalPadding}
+// 			isActive={isActive}
+// 			onClick={onClick}
+// 		>
+// 			{children}
+// 		</ButtonContainer>
+// 	);
+// };
 
-export default WebButton;
+// export default WebButton;
 
-export const ButtonContainer = styled.div<{
+export const WebButton = styled.button<{
 	width?: number;
 	fontSize: number;
 	color: string;
 	verticalPadding: number;
 	isActive?: boolean;
-	onClick: () => void;
+	onClick?: () => void;
 }>`
 	display: flex;
 	flex-shrink: 0;
@@ -60,6 +60,7 @@ export const ButtonContainer = styled.div<{
 				return "transparent";
 		}
 	}};
+	font-family: "Pretendard";
 	color: ${(props) => {
 		switch (props.color) {
 			case "white":

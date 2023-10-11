@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-export const OrderInfoContainer = styled.div`
+export const OrderInfoContainer = styled.form`
 	display: flex;
 	flex-direction: row;
 	width: 100%;
