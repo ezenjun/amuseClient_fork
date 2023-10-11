@@ -5,7 +5,7 @@ import { CancelPolicyContainer } from "./styles";
 
 type Props = {};
 
-const CancelPolicy = (props: Props) => {
+export const CancelPolicy = (props: Props) => {
 	return (
 		<GrayBox verticalPadding={18} horizontalPadding={18}>
 			<SubHeader>결제 취소 규정</SubHeader>
@@ -28,5 +28,3 @@ const CancelPolicy = (props: Props) => {
 		</GrayBox>
 	);
 };
-
-export default CancelPolicy;

@@ -5,6 +5,8 @@ import { Point } from "./Sections/Point/Point";
 import { ReservationInfo } from "./Sections/ReservationInfo";
 import { AdditionalInfo } from "./Sections/AdditionalInfo";
 import { PaymentMethod } from "./Sections/PaymentMethod";
+import { Terms } from "./Sections/Terms";
+import { CancelPolicy } from "./Sections/CancelPolicy/CancelPolicy";
 import { OrderDetailContainer } from "./styles";
 import { useRecoilValue } from "recoil";
 import {
@@ -12,9 +14,6 @@ import {
 	currentUserPointState,
 } from "../../../../Recoil/OrderAtomState";
 import GuestInfo from "./Sections/GuestInfo/GuestInfo";
-import { Control } from "react-hook-form";
-import { FormValues } from "../../../../Interfaces/DataInterfaces";
-// import GuestInfo from "./Sections/GuestInfo/GuestInfo";
 
 type Props = {
 	isLoading: boolean;
@@ -33,6 +32,8 @@ export const OrderDetail = ({ isLoading }: Props) => {
 			<AdditionalInfo />
 			<Point myPoint={currentUserPoint} />
 			<PaymentMethod />
+			<Terms />
+			<CancelPolicy />
 		</OrderDetailContainer>
 	);
 };

@@ -1,20 +1,9 @@
-import { useState, useEffect } from "react";
-import styles from "./PurchaseInfoItems.module.scss";
-import { PointAccrual } from "./Sections/PointAccrual";
 import { PaymentInfo } from "./Sections/PaymentInfo";
-import { Terms } from "./Sections/Terms";
 import { useOrderContext } from "../../../Contexts/OrderContext";
-import { styled } from "styled-components";
 import { PurchaseInfoItemsContainer } from "./styles";
-import { SubHeader } from "../../styles";
-import HorizontalLine from "../../../../components/Lines/HorizontalLine";
-import CancelPolicy from "./Sections/CancelPolicy/CancelPolicy";
 import getSelectedPriceIndex from "../OrderDetail/Sections/ProductInfo/getSelectedPriceIndex";
 import { TicketData } from "../../../../Interfaces/DataInterfaces";
-import { useRecoilValue } from "recoil";
-import { PaymentDataState } from "../../../../Recoil/OrderAtomState";
 import { WebButton } from "../../../../components/Button/WebButton";
-import { useFormContext } from "react-hook-form";
 
 type Props = {
 	isLoading?: boolean;
@@ -22,7 +11,6 @@ type Props = {
 
 export const PurchaseInfoItems = ({ isLoading }: Props) => {
 	const { orderData, orderTicketData, orderRange } = useOrderContext();
-	const paymentData = useRecoilValue(PaymentDataState);
 
 	const totalAmount = orderTicketData.reduce(
 		(sum: number, ticket: TicketData) => {
@@ -39,26 +27,9 @@ export const PurchaseInfoItems = ({ isLoading }: Props) => {
 		0
 	);
 
-	const [isWeb, setIsWeb] = useState<boolean>(true);
-	const [screenWidth, setScreenWidth] = useState(window.innerWidth);
-
-	const handleResize = () => {
-		setScreenWidth(window.innerWidth);
-		screenWidth >= 1024 ? setIsWeb(true) : setIsWeb(false);
-		window.removeEventListener("resize", handleResize);
-	};
-
-	useEffect(() => {
-		handleResize();
-		window.addEventListener("resize", handleResize);
-	}, [screenWidth]);
-
 	return (
 		<PurchaseInfoItemsContainer>
-			{isWeb && <PaymentInfo />}
-			<Terms />
-			<CancelPolicy />
-			{!isWeb && <PaymentInfo />}
+			<PaymentInfo />
 			<WebButton
 				type="submit"
 				verticalPadding={18}
