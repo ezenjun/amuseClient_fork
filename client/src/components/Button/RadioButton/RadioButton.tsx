@@ -1,20 +1,12 @@
 import React from "react";
 import { RadioButtonProps } from "../../../Interfaces/PropsInterfaces";
 import styled from "@emotion/styled";
-
-import { ReactComponent as RadioOn } from "../../../assets/Icons/Radio/radio_on.svg";
-import { ReactComponent as RadioOff } from "../../../assets/Icons/Radio/radio_off.svg";
 import { Pretendard, Common } from "../../../styles";
 import Chips from "../../Chips/Chips";
 
 const RadioButton = ({ name, checked, label, onClick }: RadioButtonProps) => {
 	return (
-		<Container>
-			{checked ? (
-				<RadioOn onClick={onClick} />
-			) : (
-				<RadioOff onClick={onClick} />
-			)}
+		<Container checked={checked}>
 			<RadioInput
 				type="radio"
 				name={name}
@@ -29,10 +21,19 @@ const RadioButton = ({ name, checked, label, onClick }: RadioButtonProps) => {
 
 export default RadioButton;
 
-export const Container = styled.div`
+export const Container = styled.div<{ checked: boolean }>`
 	display: flex;
 	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	box-sizing: border-box;
 	cursor: pointer;
+	padding: 1.25rem 1.125rem;
+	border-radius: 0.5rem;
+	border: ${(props) =>
+		props.checked
+			? `1.5px solid ${Common.colors.appColor}`
+			: `1.5px solid ${Common.colors.gray2}`};
 
 	gap: 0.75rem;
 `;

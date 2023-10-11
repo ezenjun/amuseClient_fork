@@ -15,6 +15,11 @@ export const TermsBox = styled.div`
 	padding: 23px 1.0625rem 1.25rem 1.0625rem;
 	border-radius: 0.5rem;
 	border: 1px solid ${Common.colors.gray2};
+
+	@media screen and (max-width: 1023px) {
+		display: grid;
+		grid-template-columns: 1fr;
+	}
 `;
 
 export const TermsRow = styled.div`

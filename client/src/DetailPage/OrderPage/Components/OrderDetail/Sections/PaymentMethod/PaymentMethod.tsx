@@ -12,7 +12,7 @@ import {
 	Bold16DarkGray,
 	Regular16DarkGray,
 } from "../../../../../../components/Text/Text";
-import { EachPaymentNotice } from "./styles";
+import { EachPaymentNotice, PayMethodList } from "./styles";
 import RadioButton from "../../../../../../components/Button/RadioButton/RadioButton";
 import { useRecoilState } from "recoil";
 import { PaymentDataState } from "../../../../../../Recoil/OrderAtomState";
@@ -62,30 +62,32 @@ export function PaymentMethod() {
 					</Regular16DarkGray>
 				</EachPaymentNotice>
 			</GrayBox>
-			<RadioButton
-				name="pay_method"
-				checked={selectedOption === "신용/체크카드"}
-				label="신용/체크카드"
-				onClick={() => handleRadioChange("신용/체크카드")}
-			/>
-			<RadioButton
-				name="pay_method"
-				checked={selectedOption === "현금 결제"}
-				label="현금 결제"
-				onClick={() => handleRadioChange("현금 결제")}
-			/>
-			<RadioButton
-				name="pay_method"
-				checked={selectedOption === "카카오페이"}
-				label="카카오페이"
-				onClick={() => handleRadioChange("카카오페이")}
-			/>
-			<RadioButton
-				name="pay_method"
-				checked={selectedOption === "네이버페이"}
-				label="네이버페이"
-				onClick={() => handleRadioChange("네이버페이")}
-			/>
+			<PayMethodList>
+				<RadioButton
+					name="pay_method"
+					checked={selectedOption === "신용/체크카드"}
+					label="신용/체크카드"
+					onClick={() => handleRadioChange("신용/체크카드")}
+				/>
+				<RadioButton
+					name="pay_method"
+					checked={selectedOption === "현금 결제"}
+					label="현금 결제"
+					onClick={() => handleRadioChange("현금 결제")}
+				/>
+				<RadioButton
+					name="pay_method"
+					checked={selectedOption === "카카오페이"}
+					label="카카오페이"
+					onClick={() => handleRadioChange("카카오페이")}
+				/>
+				<RadioButton
+					name="pay_method"
+					checked={selectedOption === "네이버페이"}
+					label="네이버페이"
+					onClick={() => handleRadioChange("네이버페이")}
+				/>
+			</PayMethodList>
 		</DetailSectionContainer>
 	);
 }
