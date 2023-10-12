@@ -9,8 +9,10 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import { PaymentDataState } from "../../../../Recoil/OrderAtomState";
 import { FormProvider, useForm } from "react-hook-form";
 import { FormValues } from "../../../../Interfaces/DataInterfaces";
+import { useNavigate } from "react-router";
 
 export function OrderForm() {
+	const navigate = useNavigate();
 	const { orderData, setOrderData, orderTicketData } = useOrderContext();
 	const { name, setName, email, setEmail, phone, setPhone } =
 		useInfoContext();
@@ -69,6 +71,7 @@ export function OrderForm() {
 			reservationInfo: data.reservationInfo,
 			guestInfo: data.guestInfo,
 		}));
+		navigate("./complete");
 	};
 	const methods = useForm<FormValues>({
 		defaultValues: {

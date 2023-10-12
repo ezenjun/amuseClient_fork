@@ -19,6 +19,7 @@ import { OrderPage } from "./DetailPage/OrderPage";
 import { OrderContextProvider } from "./DetailPage/Contexts/OrderContext";
 import { CategoryContextProvider } from "./Headers/Contexts/CategoryContext";
 import { InfoContextProvider } from "./DetailPage/Contexts/InfoContext";
+import OrderCompletePage from "./DetailPage/OrderCompletePage/OrderCompletePage";
 
 function App() {
 	const [cookies, setCookie, deleteCookie] = useCookies(["__jwtkid__"]);
@@ -143,6 +144,10 @@ function App() {
 							<Route
 								path="/order"
 								element={<OrderPage />}
+							></Route>
+							<Route
+								path="/order/complete"
+								element={<OrderCompletePage />}
 							></Route>
 							<Route
 								path="/LogInAgree"
