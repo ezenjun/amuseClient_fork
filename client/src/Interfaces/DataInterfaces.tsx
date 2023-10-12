@@ -128,3 +128,17 @@ export interface FormValues {
 	reservationInfo: ReservationInfo;
 	guestInfo: GuestInfo;
 }
+
+export interface Term {
+	id: number;
+	type: string;
+	title: string;
+	sequenceNum: number;
+	mandatory: boolean;
+	content: string;
+}
+
+export interface TermsInterface {
+	type: string;
+	content: Array<Term>;
+}
