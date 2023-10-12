@@ -13,7 +13,7 @@ import {
 	Bold32AppColor,
 } from "../../../../../../components/Text/Text";
 
-export function PaymentInfo() {
+export const PaymentInfo = () => {
 	const { orderData, setOrderData, orderTicketData, orderRange } =
 		useOrderContext();
 
@@ -56,4 +56,4 @@ export function PaymentInfo() {
 			</OrderAmountContainer>
 		</PaymentInfoContainer>
 	);
-}
+};
