@@ -46,6 +46,14 @@ export const Regular16Gray = styled.span`
 	})}
 	line-height: 160%;
 `;
+export const Regular20Gray = styled.span`
+	${Pretendard({
+		size: 20,
+		weight: Common.bold.regular,
+		color: Common.colors.gray,
+	})}
+	line-height: 160%;
+`;
 export const Bold16DarkGray = styled.span`
 	${Pretendard({
 		size: 16,
@@ -56,6 +64,14 @@ export const Bold16DarkGray = styled.span`
 export const Regular16DarkGray = styled.span`
 	${Pretendard({
 		size: 16,
+		weight: Common.bold.regular,
+		color: Common.colors.darkGray,
+	})}
+	line-height: 160%;
+`;
+export const Regular20DarkGray = styled.span`
+	${Pretendard({
+		size: 20,
 		weight: Common.bold.regular,
 		color: Common.colors.darkGray,
 	})}
