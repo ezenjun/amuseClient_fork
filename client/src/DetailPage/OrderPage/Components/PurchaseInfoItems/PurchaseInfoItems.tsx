@@ -1,9 +1,9 @@
-import { PaymentInfo } from "./Sections/PaymentInfo";
 import { useOrderContext } from "../../../Contexts/OrderContext";
 import { PurchaseInfoItemsContainer } from "./styles";
 import getSelectedPriceIndex from "../OrderDetail/Sections/ProductInfo/getSelectedPriceIndex";
 import { TicketData } from "../../../../Interfaces/DataInterfaces";
 import { WebButton } from "../../../../components/Button/WebButton";
+import { PaymentInfo } from "./Sections/PaymentInfo/PaymentInfo";
 
 type Props = {
 	isLoading?: boolean;
