@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { IProps } from "../../../interfaces/PropsInterfaces";
-import { InfoData } from "../../../Types/DataTypes";
+import { InfoData } from "../../../types/DataTypes";
 
 const InfoContext = createContext<InfoData>({});
 

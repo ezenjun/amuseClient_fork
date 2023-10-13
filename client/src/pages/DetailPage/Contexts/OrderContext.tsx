@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { DateRange } from "react-day-picker";
-import { OrderData } from "../../../Types/DataTypes";
+import { OrderData } from "../../../types/DataTypes";
 import { OrderContextProps } from "../../../interfaces/PropsInterfaces";
 import { TicketData } from "../../../interfaces/DataInterfaces";
 
