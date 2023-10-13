@@ -1,5 +1,5 @@
 import { atom } from "recoil";
-import { atomKeys } from "../config/atomKeys";
+import { atomKeys } from "../configs/atomKeys";
 import { PaymentInfo, SelectedItemData } from "../interfaces/DataInterfaces";
 
 export const selectedItemState = atom<SelectedItemData>({
