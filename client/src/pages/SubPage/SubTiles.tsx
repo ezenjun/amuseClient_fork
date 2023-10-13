@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 // import { useNavigate } from "react-router-dom";
-import Style from "../pages/MainPage/MainTiles/MainTiles.module.css";
+import Style from "../MainPage/MainTiles/MainTiles.module.css";
 // import basicImg from "../MainPage/MainImgs/seoul.jpg";
 
 const Box = ({

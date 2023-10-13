@@ -1,10 +1,10 @@
 // import React, { ReactNode } from "react";
 // import { useNavigate } from "react-router-dom";
-import Header from "../../components/Headers/Header";
-import Footer from "../../components/Footers/Footer";
+import Header from "../../../components/Headers/Header";
+import Footer from "../../../components/Footers/Footer";
 import Style from "../SubPage.module.css";
 import ViewAllList from "./ViewAllList";
-import MainComponent from "../../MainComponent";
+import MainComponent from "../../../MainComponent";
 
 function ViewAll() {
   return (

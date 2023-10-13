@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Style from "../pages/MainPage/ListStyle.module.css";
+import Style from "../MainPage/ListStyle.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-regular-svg-icons";
 import { faHeart as fullHeart } from "@fortawesome/free-solid-svg-icons";
-import RightIcon from "../pages/MainPage/ArrowIcons/right.png";
-import NoRightIcon from "../pages/MainPage/ArrowIcons/right_no.png";
-import LeftIcon from "../pages/MainPage/ArrowIcons/left.png";
-import NoLeftIcon from "../pages/MainPage/ArrowIcons/left_no.png";
-import { BoxProps } from "../interfaces/PropsInterfaces";
-import { SubListsProps } from "../interfaces/PropsInterfaces";
+import RightIcon from "../MainPage/ArrowIcons/right.png";
+import NoRightIcon from "../MainPage/ArrowIcons/right_no.png";
+import LeftIcon from "../MainPage/ArrowIcons/left.png";
+import NoLeftIcon from "../MainPage/ArrowIcons/left_no.png";
+import { BoxProps } from "../../interfaces/PropsInterfaces";
+import { SubListsProps } from "../../interfaces/PropsInterfaces";
 import axios from "axios";
 import { useCookies } from "react-cookie";
 

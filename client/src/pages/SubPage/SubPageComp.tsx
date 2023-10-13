@@ -4,7 +4,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Style from "./SubPage.module.css";
 import ChildTitle from "./SubtitleImgs/ChildTitle.jpg";
-import Fade from "../Fade";
+import Fade from "../../Fade";
 import SubLists from "./SubLists";
 import SubBanners from "./SubBanners";
 import SubTiles from "./SubTiles";
@@ -13,9 +13,9 @@ import {
   ListProps,
   BoxProps,
   DropdownProps,
-} from "../interfaces/PropsInterfaces";
-import { CategoryData } from "../interfaces/DataInterfaces";
-import MainComponent from "../MainComponent";
+} from "../../interfaces/PropsInterfaces";
+import { CategoryData } from "../../interfaces/DataInterfaces";
+import MainComponent from "../../MainComponent";
 import { useCookies } from "react-cookie";
 
 interface TileProps {

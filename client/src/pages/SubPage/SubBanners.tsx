@@ -1,6 +1,6 @@
 import React from "react";
-import Style from "../pages/MainPage/MainBanner/MainBanner.module.css";
-import { SubBannersProps } from "../interfaces/PropsInterfaces";
+import Style from "../MainPage/MainBanner/MainBanner.module.css";
+import { SubBannersProps } from "../../interfaces/PropsInterfaces";
 
 const BigBox = ({
   backgroundColor,

@@ -8,7 +8,7 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import "./ViewAllList.css";
 import { useNavigate } from "react-router-dom";
-import { CategoryMenuProps } from "../../interfaces/PropsInterfaces";
+import { CategoryMenuProps } from "../../../interfaces/PropsInterfaces";
 
 export default function ViewAllList() {
   const navigate = useNavigate();

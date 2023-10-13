@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import Style from "../pages/MainPage/ListStyle.module.css";
-import AppStyle from "../App.module.css";
+import Style from "../MainPage/ListStyle.module.css";
+import AppStyle from "../../App.module.css";
 import axios from "axios";
-import MainComponent from "../MainComponent";
-import { BoxProps, DropdownProps } from "../interfaces/PropsInterfaces";
+import MainComponent from "../../MainComponent";
+import { BoxProps, DropdownProps } from "../../interfaces/PropsInterfaces";
 
 const numberWithCommas = (number: number | null): string => {
   if (number === null) {
