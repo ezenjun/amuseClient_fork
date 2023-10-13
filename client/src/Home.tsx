@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import _ from "lodash";
-import Style from "./SubPages/SubPage.module.css";
+import Style from "./SubPage/SubPage.module.css";
 // import AppStyle from "./App.module.css";
 // import MainLists from "./MainPage/MainLists/MainLists";
 // import MainBanner from "./MainPage/MainBanner/MainBanner";
@@ -14,10 +14,10 @@ import axios from "axios";
 import { CategoryData } from "./interfaces/DataInterfaces";
 import { ListProps, BannerProps } from "./interfaces/PropsInterfaces";
 import { useCategoryContext } from "./components/Headers/Contexts/CategoryContext";
-import ChildTitle from "./SubPages/SubtitleImgs/ChildTitle.jpg";
-import SubLists from "./SubPages/SubLists";
-import SubBanners from "./SubPages/SubBanners";
-import SubTiles from "./SubPages/SubTiles";
+import ChildTitle from "./SubPage/SubtitleImgs/ChildTitle.jpg";
+import SubLists from "./SubPage/SubLists";
+import SubBanners from "./SubPage/SubBanners";
+import SubTiles from "./SubPage/SubTiles";
 import MainComponent from "./MainComponent";
 import { useCookies } from "react-cookie";
 
