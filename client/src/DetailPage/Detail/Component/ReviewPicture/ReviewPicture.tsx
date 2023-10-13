@@ -2,14 +2,18 @@ import React, { useEffect, useState } from "react";
 import "./ReviewPicture.scss";
 import SubPicture from "../Picture/SubPicture/SubPicture";
 import axios from "axios";
-import { ItemIdProps } from "../../../../Interfaces/PropsInterfaces";
+import { ItemIdProps } from "../../../../interfaces/PropsInterfaces";
 
 function ReviewPicture({ itemId }: ItemIdProps) {
   /**
    * Review Picture Data
    */
-  const [reviewPictureData, setReviewPictureData] = useState<{ review_img: string }[]>([]);
-  const reviewPicture = reviewPictureData ? reviewPictureData.map((obj) => obj.review_img) : [];
+  const [reviewPictureData, setReviewPictureData] = useState<
+    { review_img: string }[]
+  >([]);
+  const reviewPicture = reviewPictureData
+    ? reviewPictureData.map((obj) => obj.review_img)
+    : [];
   const subReviewPicture = reviewPicture.slice(0, 3);
 
   /**
@@ -33,7 +37,12 @@ function ReviewPicture({ itemId }: ItemIdProps) {
       <p className="review-title">여행자 후기 사진</p>
       <div className="subpicture">
         {subReviewPicture.map((picture, idx) => (
-          <SubPicture src={picture} alt={picture} itemId={idx} modal={reviewPicture} />
+          <SubPicture
+            src={picture}
+            alt={picture}
+            itemId={idx}
+            modal={reviewPicture}
+          />
         ))}
       </div>
     </div>

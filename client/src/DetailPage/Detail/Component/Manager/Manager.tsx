@@ -3,11 +3,9 @@ import "./Manager.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope as solidFaEnelope } from "@fortawesome/free-solid-svg-icons";
 import { faEnvelope as regularFaEnelope } from "@fortawesome/free-regular-svg-icons";
-import { GuideData } from "../../../../Interfaces/DataInterfaces";
-import { ItemIdProps } from "../../../../Interfaces/PropsInterfaces";
+import { GuideData } from "../../../../interfaces/DataInterfaces";
+import { ItemIdProps } from "../../../../interfaces/PropsInterfaces";
 import axios from "axios";
-
-
 
 function Manager({ itemId }: ItemIdProps) {
   /**
@@ -47,7 +45,11 @@ function Manager({ itemId }: ItemIdProps) {
     <div className="Manager">
       <div className="manager-header">
         <div className="manager-profile">
-          <img className="manager-image" src={guideData?.profileImageUrl ?? "img"} alt="manager" />
+          <img
+            className="manager-image"
+            src={guideData?.profileImageUrl ?? "img"}
+            alt="manager"
+          />
           <p className="manager-name">{guideData?.userName ?? "name"}</p>
         </div>
 
@@ -57,7 +59,10 @@ function Manager({ itemId }: ItemIdProps) {
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
         >
-          <FontAwesomeIcon className="icon" icon={isHovered ? regularFaEnelope : solidFaEnelope} />
+          <FontAwesomeIcon
+            className="icon"
+            icon={isHovered ? regularFaEnelope : solidFaEnelope}
+          />
           <p className="inquiry">문의하기</p>
         </div>
       </div>

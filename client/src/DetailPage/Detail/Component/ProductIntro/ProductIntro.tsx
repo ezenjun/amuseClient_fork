@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./ProductIntro.scss";
 import axios from "axios";
-import { ItemIdProps } from "../../../../Interfaces/PropsInterfaces";
+import { ItemIdProps } from "../../../../interfaces/PropsInterfaces";
 
 interface ProductIntroData {
   content: string;
@@ -31,7 +31,9 @@ function ProductIntro({ itemId }: ItemIdProps) {
 
   return (
     <div className="product-introduction">
-      <div dangerouslySetInnerHTML={{ __html: productIntroData?.content ?? "" }}></div>
+      <div
+        dangerouslySetInnerHTML={{ __html: productIntroData?.content ?? "" }}
+      ></div>
     </div>
   );
 }

@@ -8,7 +8,7 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import "./ViewAllList.css";
 import { useNavigate } from "react-router-dom";
-import { CategoryMenuProps } from "../../Interfaces/PropsInterfaces";
+import { CategoryMenuProps } from "../../interfaces/PropsInterfaces";
 
 export default function ViewAllList() {
   const navigate = useNavigate();
@@ -30,7 +30,10 @@ export default function ViewAllList() {
       });
   }, []);
 
-  const CategoryMenu: React.FC<CategoryMenuProps> = ({ hashtagName, handleClick }) => (
+  const CategoryMenu: React.FC<CategoryMenuProps> = ({
+    hashtagName,
+    handleClick,
+  }) => (
     <ListItem disablePadding onClick={handleClick}>
       <ListItemButton>
         <ListItemText primary={hashtagName} />
@@ -47,7 +50,11 @@ export default function ViewAllList() {
         <nav aria-label="main mailbox folders">
           <List className="listbox">
             {hashtag.map((hashtagName: string, index: number) => (
-              <CategoryMenu key={index} hashtagName={hashtagName} handleClick={navigateToHear} />
+              <CategoryMenu
+                key={index}
+                hashtagName={hashtagName}
+                handleClick={navigateToHear}
+              />
             ))}
             {/* <ListItem disablePadding onClick={navigateToHear}>
               <ListItemButton>

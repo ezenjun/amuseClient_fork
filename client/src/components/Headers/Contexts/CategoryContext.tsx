@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { IProps } from "../../../Interfaces/PropsInterfaces";
+import { IProps } from "../../../interfaces/PropsInterfaces";
 import { CategoryInfoData } from "../../../Types/DataTypes";
 
 const CategoryContext = createContext<CategoryInfoData>({});

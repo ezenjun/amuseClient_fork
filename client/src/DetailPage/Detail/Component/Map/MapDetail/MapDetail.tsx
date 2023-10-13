@@ -2,8 +2,8 @@
 import "./MapDetail.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
-import { MapDataProps } from "../../../../../Interfaces/PropsInterfaces";
-import { MarkerProps } from "../../../../../Interfaces/PropsInterfaces";
+import { MapDataProps } from "../../../../../interfaces/PropsInterfaces";
+import { MarkerProps } from "../../../../../interfaces/PropsInterfaces";
 
 const Marker = ({ lat, lng, title }: MarkerProps) => (
   <div className="Marker">
@@ -15,7 +15,9 @@ const Marker = ({ lat, lng, title }: MarkerProps) => (
 );
 
 function MapDetail({ data }: MapDataProps) {
-  const hasInvalidCoordinates = data.some((marker) => marker.latitude === null || marker.longitude === null);
+  const hasInvalidCoordinates = data.some(
+    (marker) => marker.latitude === null || marker.longitude === null
+  );
 
   if (hasInvalidCoordinates) {
     return null;

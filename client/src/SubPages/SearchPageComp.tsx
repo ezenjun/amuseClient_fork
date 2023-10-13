@@ -5,7 +5,7 @@ import Style from "../MainPage/ListStyle.module.css";
 import AppStyle from "../App.module.css";
 import axios from "axios";
 import MainComponent from "../MainComponent";
-import { BoxProps, DropdownProps } from "../Interfaces/PropsInterfaces";
+import { BoxProps, DropdownProps } from "../interfaces/PropsInterfaces";
 
 const numberWithCommas = (number: number | null): string => {
   if (number === null) {
@@ -52,7 +52,6 @@ function SearchPageComp() {
     movePage(`/detail/${itemId}`);
   };
 
-
   useEffect(() => {
     const urlSearchParams = new URLSearchParams(window.location.search);
     const sortOption = urlSearchParams.get("sort") || "like_num_desc";
@@ -67,10 +66,9 @@ function SearchPageComp() {
     urlSearchParams.set("sort", searchSort);
     const newURL = `/search/${apiKey}?${urlSearchParams.toString()}`;
     window.history.pushState(null, "", newURL);
-    setNoResults(false)
+    setNoResults(false);
     fetchData(searchSort);
   }, [searchSort, apiKey]);
-
 
   const fetchData = (sortOption: string) => {
     axios

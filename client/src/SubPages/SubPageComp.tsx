@@ -13,8 +13,8 @@ import {
   ListProps,
   BoxProps,
   DropdownProps,
-} from "../Interfaces/PropsInterfaces";
-import { CategoryData } from "../Interfaces/DataInterfaces";
+} from "../interfaces/PropsInterfaces";
+import { CategoryData } from "../interfaces/DataInterfaces";
 import MainComponent from "../MainComponent";
 import { useCookies } from "react-cookie";
 

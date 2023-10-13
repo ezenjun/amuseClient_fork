@@ -8,8 +8,8 @@ import RightIcon from "../MainPage/ArrowIcons/right.png";
 import NoRightIcon from "../MainPage/ArrowIcons/right_no.png";
 import LeftIcon from "../MainPage/ArrowIcons/left.png";
 import NoLeftIcon from "../MainPage/ArrowIcons/left_no.png";
-import { BoxProps } from "../Interfaces/PropsInterfaces";
-import { SubListsProps } from "../Interfaces/PropsInterfaces";
+import { BoxProps } from "../interfaces/PropsInterfaces";
+import { SubListsProps } from "../interfaces/PropsInterfaces";
 import axios from "axios";
 import { useCookies } from "react-cookie";
 

@@ -14,7 +14,7 @@ import ReviewPicture from "./Component/ReviewPicture/ReviewPicture";
 import Calendar from "./Component/TicketSelect/Calendar/Calendar";
 import Style from "../../App.module.css";
 import ReservationBottom from "./Component/ReservationBottom/ReservationBottom";
-import { DetailProps } from "../../Interfaces/PropsInterfaces";
+import { DetailProps } from "../../interfaces/PropsInterfaces";
 import MainComponent from "../../MainComponent";
 
 function Detail({ itemId, productCode, startPrice, likeNum }: DetailProps) {

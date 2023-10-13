@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./CourseIntro.scss";
 import CourseIntroDetail from "./CourseIntroDetail/CourseIntroDetail";
-import { ItemIdProps } from "../../../../Interfaces/PropsInterfaces";
-import { CourseIntroData } from "../../../../Interfaces/DataInterfaces";
+import { ItemIdProps } from "../../../../interfaces/PropsInterfaces";
+import { CourseIntroData } from "../../../../interfaces/DataInterfaces";
 
 function CourseIntro({ itemId }: ItemIdProps) {
   /**

@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import "./Map.scss";
 // import MapDetail from "./MapDetail/MapDetail";
 import axios from "axios";
-import { ItemIdProps } from "../../../../Interfaces/PropsInterfaces";
-import { MapData } from "../../../../Interfaces/DataInterfaces";
+import { ItemIdProps } from "../../../../interfaces/PropsInterfaces";
+import { MapData } from "../../../../interfaces/DataInterfaces";
 import JsMap from "./MapDetail/JsMap";
 
 function Map({ itemId }: ItemIdProps) {
@@ -49,16 +49,26 @@ function Map({ itemId }: ItemIdProps) {
     <div className="Map">
       <div className="day-button">
         {uniqueDays.map((day) => {
-          if(Number(day) > 0)
-          return(
-            <button key={day} onClick={() => handleDayClick(day)} className={selectedDay === day ? "selected" : ""}>
-              {day + "일차"}
-            </button>
-          )
-        }
-        )}
+          if (Number(day) > 0)
+            return (
+              <button
+                key={day}
+                onClick={() => handleDayClick(day)}
+                className={selectedDay === day ? "selected" : ""}
+              >
+                {day + "일차"}
+              </button>
+            );
+        })}
       </div>
-      {selectedDay  ? <JsMap key={selectedDay} data={mapData.filter((item) => item.day === selectedDay)} />: <></>}
+      {selectedDay ? (
+        <JsMap
+          key={selectedDay}
+          data={mapData.filter((item) => item.day === selectedDay)}
+        />
+      ) : (
+        <></>
+      )}
     </div>
   );
 }
