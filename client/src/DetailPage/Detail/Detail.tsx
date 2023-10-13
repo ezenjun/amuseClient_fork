@@ -1,10 +1,10 @@
 import "./Detail.scss";
-import Header from "../../Headers/Header";
+import Header from "../../components/Headers/Header";
 import Reservation from "./Component/Reservation/Reservation";
 import Title from "./Component/Title/Title";
 import Picture from "./Component/Picture/Picture";
 import ProductIntro from "./Component/ProductIntro/ProductIntro";
-import Footer from "../../Footers/Footer";
+import Footer from "../../components/Footers/Footer";
 import CourseIntro from "./Component/CourseIntro/CourseIntro";
 import Map from "./Component/Map/Map";
 import OtherInfo from "./Component/OtherInfo/OtherInfo";

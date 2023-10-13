@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from "react";
 import _ from "lodash";
 import "./Header.css";
-import Style from "../App.module.css";
+import Style from "../../App.module.css";
 import { useNavigate } from "react-router-dom";
-import logoimage from "../MainPage/MainImgs/amuse_logo.png";
-import { isLoggedIn } from "../atoms";
+import logoimage from "../../MainPage/MainImgs/amuse_logo.png";
+import { isLoggedIn } from "../../atoms";
 import { useRecoilState } from "recoil";
-import MyPageMenu from "../MyPages/MyPageMenu";
+import MyPageMenu from "../../MyPages/MyPageMenu";
 import axios from "axios";
 import SearchIcon from "./search.png";
 import { useCookies } from "react-cookie";
 import moment from "moment";
 import { useCategoryContext } from "./Contexts/CategoryContext";
-import { CategoryNameMenuProps } from "../Interfaces/PropsInterfaces";
-import { useInfoContext } from "../DetailPage/Contexts/InfoContext";
+import { CategoryNameMenuProps } from "../../Interfaces/PropsInterfaces";
+import { useInfoContext } from "../../DetailPage/Contexts/InfoContext";
 
 interface MoreDropdownProps {
   // handleClick: () => void;
@@ -71,7 +71,7 @@ function Header() {
   const navigateToSearch = () => {
     const encodedKeyword = encodeURIComponent(searchKeyword);
     movePage(`/search/${encodedKeyword}`);
-    setSearchKeyword("")
+    setSearchKeyword("");
   };
 
   const navigateToLogIn = () => {

@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { IProps } from "../../Interfaces/PropsInterfaces";
-import { CategoryInfoData } from "../../Types/DataTypes";
+import { IProps } from "../../../Interfaces/PropsInterfaces";
+import { CategoryInfoData } from "../../../Types/DataTypes";
 
 const CategoryContext = createContext<CategoryInfoData>({});
 
@@ -12,9 +12,7 @@ export function CategoryContextProvider({ children }: IProps) {
   }, []);
 
   return (
-    <CategoryContext.Provider
-      value={{ categoriesInfo, setCategoriesInfo, }}
-    >
+    <CategoryContext.Provider value={{ categoriesInfo, setCategoriesInfo }}>
       {children}
     </CategoryContext.Provider>
   );

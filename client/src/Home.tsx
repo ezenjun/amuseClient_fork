@@ -13,7 +13,7 @@ import Fade from "./Fade";
 import axios from "axios";
 import { CategoryData } from "./Interfaces/DataInterfaces";
 import { ListProps, BannerProps } from "./Interfaces/PropsInterfaces";
-import { useCategoryContext } from "./Headers/Contexts/CategoryContext";
+import { useCategoryContext } from "./components/Headers/Contexts/CategoryContext";
 import ChildTitle from "./SubPages/SubtitleImgs/ChildTitle.jpg";
 import SubLists from "./SubPages/SubLists";
 import SubBanners from "./SubPages/SubBanners";

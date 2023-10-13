@@ -1,6 +1,6 @@
 import React, { ReactNode } from "react";
 import Style from "./Footer.module.css";
-import MainMoreAbout from "../MainPage/MainMoreAbout/MainMoreAbout";
+import MainMoreAbout from "../../MainPage/MainMoreAbout/MainMoreAbout";
 
 function Footer() {
   return (
@@ -9,9 +9,7 @@ function Footer() {
         <MainMoreAbout />
         <div className={Style["bottom_text"]}>
           고객센터
-          <span style={{color: "#e5003d"}}>
-            &nbsp;02-719-6811&nbsp;
-          </span>
+          <span style={{ color: "#e5003d" }}>&nbsp;02-719-6811&nbsp;</span>
           평일 오전9시 ~ 오후6시
           <br />
           (점심시간: 오후12시 ~ 오후1시)

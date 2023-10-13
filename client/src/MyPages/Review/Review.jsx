@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import "./Review.module.css";
-import Header from "../../Headers/Header";
+import Header from "../../components/Headers/Header";
 import MyPagelist from "../MyPageList";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
@@ -13,7 +13,11 @@ import MainComponent from "../../MainComponent";
 function ImagePreview({ image }) {
   return (
     <div>
-      <img src={image} alt="Preview" style={{ width: "150px", height: "150px", margin: "0 10px" }} />
+      <img
+        src={image}
+        alt="Preview"
+        style={{ width: "150px", height: "150px", margin: "0 10px" }}
+      />
     </div>
   );
 }
@@ -27,14 +31,18 @@ export default function Review() {
   const [rating, setRating] = useState(5);
 
   useEffect(() => {
-    axios.get(`${process.env.REACT_APP_AMUSE_API}/detail/${id}/picture`).then((res) => {
-      console.log(res);
-      setReviewItemImg(res.data.data.pictures[0]);
-    });
-    axios.get(`${process.env.REACT_APP_AMUSE_API}/detail/${id}/title`).then((res) => {
-      console.log(res);
-      setItemTitle(res.data.data.title);
-    });
+    axios
+      .get(`${process.env.REACT_APP_AMUSE_API}/detail/${id}/picture`)
+      .then((res) => {
+        console.log(res);
+        setReviewItemImg(res.data.data.pictures[0]);
+      });
+    axios
+      .get(`${process.env.REACT_APP_AMUSE_API}/detail/${id}/title`)
+      .then((res) => {
+        console.log(res);
+        setItemTitle(res.data.data.title);
+      });
   });
 
   const handleImageSelect = (e) => {
@@ -71,7 +79,13 @@ export default function Review() {
       },
     };
     // 리뷰 post 요청하기
-    axios.post(`${process.env.REACT_APP_AMUSE_API}/my-page/item/${id}/review`, data, config).then((res) => console.log(res));
+    axios
+      .post(
+        `${process.env.REACT_APP_AMUSE_API}/my-page/item/${id}/review`,
+        data,
+        config
+      )
+      .then((res) => console.log(res));
   };
 
   const handleRating = (newValue) => {
@@ -87,8 +101,16 @@ export default function Review() {
         <MyPagelist />
         <div style={{ padding: "35px" }}>
           <h2 style={{ marginBottom: "30px" }}>후기 남기기</h2>
-          <img src={reviewItemImg} alt="여행 상품 이미지" style={{ width: "500px", height: "310px" }} />
-          <p style={{ fontSize: "18px", fontWeight: 700, marginBottom: "30px" }}>상품명 : {itemTitle}</p>
+          <img
+            src={reviewItemImg}
+            alt="여행 상품 이미지"
+            style={{ width: "500px", height: "310px" }}
+          />
+          <p
+            style={{ fontSize: "18px", fontWeight: 700, marginBottom: "30px" }}
+          >
+            상품명 : {itemTitle}
+          </p>
           <p style={{ marginBottom: "30px" }}>
             <ReviewRating rating={rating} handleRating={handleRating} />
           </p>
@@ -112,7 +134,11 @@ export default function Review() {
               onChange={(e) => setReviewInput(e.target.value)}
             />
             <div>
-              <Button variant="contained" sx={{ marginLeft: "10px" }} onClick={submitRating}>
+              <Button
+                variant="contained"
+                sx={{ marginLeft: "10px" }}
+                onClick={submitRating}
+              >
                 제출하기
               </Button>
             </div>
