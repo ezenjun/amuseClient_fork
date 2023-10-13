@@ -13,7 +13,7 @@ import { useCookies } from "react-cookie";
 import moment from "moment";
 import { useCategoryContext } from "./Contexts/CategoryContext";
 import { CategoryNameMenuProps } from "../../interfaces/PropsInterfaces";
-import { useInfoContext } from "../../DetailPage/Contexts/InfoContext";
+import { useInfoContext } from "../../pages/DetailPage/Contexts/InfoContext";
 
 interface MoreDropdownProps {
   // handleClick: () => void;

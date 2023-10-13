@@ -6,7 +6,7 @@ import MyPage from "./pages/MyPage/MyPage";
 import Login from "./LogIn/LogIn";
 import LoginAgree from "./LogIn/LoginAgree";
 import SignUp from "./SignUp/SignUp";
-import Detail from "./DetailPage/Detail/Detail";
+import Detail from "./pages/DetailPage/Detail/Detail";
 import Review from "./pages/MyPage/Review/Review";
 import ViewAll from "./pages/SubPage/ViewAllPages/ViewAll";
 import SearchPageComp from "./pages/SubPage/SearchPageComp";
@@ -15,11 +15,11 @@ import { useCookies } from "react-cookie";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import AboutAmuse from "./pages/SubPage/AboutAmuse/AboutAmuse";
-import { OrderPage } from "./DetailPage/OrderPage";
-import { OrderContextProvider } from "./DetailPage/Contexts/OrderContext";
+import { OrderPage } from "./pages/DetailPage/OrderPage";
+import { OrderContextProvider } from "./pages/DetailPage/Contexts/OrderContext";
 import { CategoryContextProvider } from "./components/Headers/Contexts/CategoryContext";
-import { InfoContextProvider } from "./DetailPage/Contexts/InfoContext";
-import OrderCompletePage from "./DetailPage/OrderCompletePage/OrderCompletePage";
+import { InfoContextProvider } from "./pages/DetailPage/Contexts/InfoContext";
+import OrderCompletePage from "./pages/DetailPage/OrderCompletePage/OrderCompletePage";
 
 function App() {
   const [cookies, setCookie, deleteCookie] = useCookies(["__jwtkid__"]);
