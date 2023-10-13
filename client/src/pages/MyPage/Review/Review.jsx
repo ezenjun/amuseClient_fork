@@ -1,13 +1,13 @@
 import { useParams } from "react-router-dom";
 import "./Review.module.css";
-import Header from "../../components/Headers/Header";
+import Header from "../../../components/Headers/Header";
 import MyPagelist from "../MyPageList";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import ReviewRating from "./ReviewRating";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import MainComponent from "../../MainComponent";
+import MainComponent from "../../../MainComponent";
 
 //이미지 미리보기를 위한 컴포넌트
 function ImagePreview({ image }) {
