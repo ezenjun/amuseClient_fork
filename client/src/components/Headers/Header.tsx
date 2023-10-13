@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import logoimage from "../../MainPage/MainImgs/amuse_logo.png";
 import { isLoggedIn } from "../../atoms";
 import { useRecoilState } from "recoil";
-import MyPageMenu from "../../MyPages/MyPageMenu";
+import MyPageMenu from "../../MyPage/MyPageMenu";
 import axios from "axios";
 import SearchIcon from "./search.png";
 import { useCookies } from "react-cookie";
