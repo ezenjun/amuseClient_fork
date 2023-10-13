@@ -1,5 +1,5 @@
 import React from "react";
-import Style from "../MainPage/MainBanner/MainBanner.module.css";
+import Style from "../pages/MainPage/MainBanner/MainBanner.module.css";
 import { SubBannersProps } from "../interfaces/PropsInterfaces";
 
 const BigBox = ({

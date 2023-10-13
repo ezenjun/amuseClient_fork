@@ -10,7 +10,7 @@ import NoRightIcon from "../ArrowIcons/right_no.png";
 import LeftIcon from "../ArrowIcons/left.png";
 import NoLeftIcon from "../ArrowIcons/left_no.png";
 import DefaultImg from "../MainBanner/default.jpg";
-import { BoxProps } from "../../interfaces/PropsInterfaces";
+import { BoxProps } from "../../../interfaces/PropsInterfaces";
 
 const numberWithCommas = (number: number | null): string => {
   if (number === null) {

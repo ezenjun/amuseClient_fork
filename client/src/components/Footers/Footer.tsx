@@ -1,6 +1,6 @@
 import React, { ReactNode } from "react";
 import Style from "./Footer.module.css";
-import MainMoreAbout from "../../MainPage/MainMoreAbout/MainMoreAbout";
+import MainMoreAbout from "../../pages/MainPage/MainMoreAbout/MainMoreAbout";
 
 function Footer() {
   return (

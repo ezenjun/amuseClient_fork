@@ -3,7 +3,7 @@ import _ from "lodash";
 import "./Header.css";
 import Style from "../../App.module.css";
 import { useNavigate } from "react-router-dom";
-import logoimage from "../../MainPage/MainImgs/amuse_logo.png";
+import logoimage from "../../pages/MainPage/MainImgs/amuse_logo.png";
 import { isLoggedIn } from "../../atoms";
 import { useRecoilState } from "recoil";
 import MyPageMenu from "../../MyPage/MyPageMenu";
