@@ -5,7 +5,7 @@ import SubPageComp from "./pages/SubPage/SubPageComp";
 import MyPage from "./pages/MyPage/MyPage";
 import Login from "./LogIn/LogIn";
 import LoginAgree from "./LogIn/LoginAgree";
-import SignUp from "./SignUp/SignUp";
+import SignUp from "./pages/SignUpPage/SignUp";
 import Detail from "./pages/DetailPage/Detail/Detail";
 import Review from "./pages/MyPage/Review/Review";
 import ViewAll from "./pages/SubPage/ViewAllPages/ViewAll";

@@ -1,14 +1,18 @@
 import React from "react";
 import GoogleIcon from "@mui/icons-material/Google";
-import MainComponent from "../MainComponent";
+import MainComponent from "../../MainComponent";
 
 export default function SignUp() {
-  const redirectU = "http://amusetravel.wheelgo.net/LoginAgree"
+  const redirectU = "http://amusetravel.wheelgo.net/LoginAgree";
   return (
     <MainComponent>
       <div className="login_body">
         <div className="amuse_login_title">
-          <img className="amuse_logo" src="http://cdn.amusetravel.com/assets/headers/logo.png" alt="어뮤즈 이미지" />
+          <img
+            className="amuse_logo"
+            src="http://cdn.amusetravel.com/assets/headers/logo.png"
+            alt="어뮤즈 이미지"
+          />
           <h2 className="amuse_title_top">모두가 즐거운 여행</h2>
           <h2 className="amuse_title_bottom">어뮤즈 트래블</h2>
         </div>
