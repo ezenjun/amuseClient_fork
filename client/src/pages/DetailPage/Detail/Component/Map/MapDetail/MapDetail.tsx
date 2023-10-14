@@ -2,39 +2,39 @@
 import "./MapDetail.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
-import { MapDataProps } from "../../../../../../interfaces/PropsInterfaces";
-import { MarkerProps } from "../../../../../../interfaces/PropsInterfaces";
+import { MapDataProps } from "../../../../../../Interfaces/PropsInterfaces";
+import { MarkerProps } from "../../../../../../Interfaces/PropsInterfaces";
 
 const Marker = ({ lat, lng, title }: MarkerProps) => (
-  <div className="Marker">
-    <div className="marker-content">
-      <div className="title">{title}</div>
-      <FontAwesomeIcon className="icon-location" icon={faLocationDot} />
-    </div>
-  </div>
+	<div className="Marker">
+		<div className="marker-content">
+			<div className="title">{title}</div>
+			<FontAwesomeIcon className="icon-location" icon={faLocationDot} />
+		</div>
+	</div>
 );
 
 function MapDetail({ data }: MapDataProps) {
-  const hasInvalidCoordinates = data.some(
-    (marker) => marker.latitude === null || marker.longitude === null
-  );
+	const hasInvalidCoordinates = data.some(
+		(marker) => marker.latitude === null || marker.longitude === null
+	);
 
-  if (hasInvalidCoordinates) {
-    return null;
-  }
+	if (hasInvalidCoordinates) {
+		return null;
+	}
 
-  // const API_KEY = process.env.REACT_APP_GOOGLE_API_KEY_MAP;
+	// const API_KEY = process.env.REACT_APP_GOOGLE_API_KEY_MAP;
 
-  // const markerCount = data.length;
-  // const sumLat = data.reduce((sum, marker) => sum + marker.latitude!, 0);
-  // const sumLng = data.reduce((sum, marker) => sum + marker.longitude!, 0);
-  // const centerLat = sumLat / markerCount;
-  // const centerLng = sumLng / markerCount;
+	// const markerCount = data.length;
+	// const sumLat = data.reduce((sum, marker) => sum + marker.latitude!, 0);
+	// const sumLng = data.reduce((sum, marker) => sum + marker.longitude!, 0);
+	// const centerLat = sumLat / markerCount;
+	// const centerLng = sumLng / markerCount;
 
-  return (
-    <div className="MapDetail">
-      <div className="google-map">
-        {/* <GoogleMapReact
+	return (
+		<div className="MapDetail">
+			<div className="google-map">
+				{/* <GoogleMapReact
           bootstrapURLKeys={{ key: API_KEY || "" }}
           defaultCenter={{ lat: centerLat, lng: centerLng }}
           defaultZoom={15}
@@ -47,9 +47,9 @@ function MapDetail({ data }: MapDataProps) {
               )
           )}
         </GoogleMapReact> */}
-      </div>
-    </div>
-  );
+			</div>
+		</div>
+	);
 }
 
 export default MapDetail;
