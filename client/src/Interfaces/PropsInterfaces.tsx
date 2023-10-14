@@ -170,3 +170,5 @@ export interface onClickProps {
 export interface PointProps {
 	myPoint: number;
 }
+
+// commit용 주석

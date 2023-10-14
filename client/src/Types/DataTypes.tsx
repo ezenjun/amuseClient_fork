@@ -22,3 +22,5 @@ export type CategoryInfoData = {
 	categoriesInfo?: Array<any>;
 	setCategoriesInfo?: any;
 };
+
+// commit용 주석

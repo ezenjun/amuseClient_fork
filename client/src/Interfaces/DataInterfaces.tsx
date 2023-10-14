@@ -142,3 +142,5 @@ export interface TermsInterface {
 	type: string;
 	content: Array<Term>;
 }
+
+// commit용 주석
