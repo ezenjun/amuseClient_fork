@@ -1,45 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import MainComponent from "../../../MainComponent";
 import { PageName } from "../OrderPage/styles";
-import { OrderCompletePageContainer, OrderedItemContainer } from "./styles";
-import GrayBox from "../../../components/Box/GrayBox";
 import {
-	ProductInfoContainer,
-	ProductInfoTextContainer,
-} from "../OrderPage/Components/OrderDetail/Sections/ProductInfo/styles";
-import SquareImage from "../../../components/Images/SquareImage";
-import {
-	Bold16Black,
-	Bold20DarkGray,
-	Bold24Black,
-	Regular16Gray,
-	Regular20DarkGray,
-	Regular20Gray,
-} from "../../../components/Text/Text";
-import { useRecoilValue } from "recoil";
-import { selectedItemState } from "../../../Recoil/OrderAtomState";
-import { formatDate } from "../../../utils/DateFunctions";
-import { TicketData } from "../../../Interfaces/DataInterfaces";
-import { useOrderContext } from "../Contexts/OrderContext";
-import getSelectedPriceIndex from "../OrderPage/Components/OrderDetail/Sections/ProductInfo/getSelectedPriceIndex";
-import {
-	TicketContainer,
-	TicketInfo,
-	TicketLeft,
-	TicketRight,
-} from "../OrderPage/Components/OrderDetail/Sections/ProductInfo/components/TicketList";
+	BottomButtonContainer,
+	OrderCompletePageContainer,
+	OrderInfoContainer,
+} from "./styles";
 import OrderedItem from "./Sections/OrderedItem";
+import UsedPoint from "./Sections/UsedPoint";
+import TotalAmount from "./Sections/TotalAmount";
+import { WebButton } from "../../../components/Button/WebButton";
+import { useNavigate } from "react-router";
+import { Regular20Gray } from "../../../components/Text/Text";
 
-type Props = {};
+const OrderCompletePage = () => {
+	const navigate = useNavigate();
 
-const OrderCompletePage = (props: Props) => {
-	const selectedItem = useRecoilValue(selectedItemState);
-	const [ticketData, setTicketData] = useState<TicketData[]>([]);
-	const { orderTicketData, orderRange } = useOrderContext();
-
-	useEffect(() => {
-		setTicketData(orderTicketData);
-	}, [orderTicketData]);
 	return (
 		<MainComponent>
 			<OrderCompletePageContainer>
@@ -48,7 +24,30 @@ const OrderCompletePage = (props: Props) => {
 					결제 완료되었으며 결제 여부 확인 중입니다. 영업일 기준
 					24시간 이내로 확정 여부를 알려드립니다.
 				</Regular20Gray>
-				<OrderedItem></OrderedItem>
+
+				<OrderInfoContainer>
+					<OrderedItem />
+					<UsedPoint />
+					<TotalAmount />
+				</OrderInfoContainer>
+				<BottomButtonContainer>
+					<WebButton
+						fontSize={18}
+						verticalPadding={18}
+						color="white"
+						onClick={() => navigate("/")}
+					>
+						홈으로 가기
+					</WebButton>
+					<WebButton
+						fontSize={18}
+						verticalPadding={18}
+						color="red"
+						onClick={() => console.log("clicked")}
+					>
+						결제 상세 정보 보기
+					</WebButton>
+				</BottomButtonContainer>
 			</OrderCompletePageContainer>
 		</MainComponent>
 	);

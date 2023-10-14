@@ -37,7 +37,6 @@ export const WebButton = styled.button<{
 	onClick?: () => void;
 }>`
 	display: flex;
-	flex-shrink: 0;
 	justify-content: center;
 	align-items: center;
 	width: ${(props) => (props.width ? `${props.width * 0.0625}rem` : "100%")};
@@ -79,5 +78,6 @@ export const WebButton = styled.button<{
 	}};
 	font-size: ${(props) => props.fontSize * 0.0625}rem;
 	font-weight: bold;
+	white-space: nowrap;
 	cursor: ${(props) => (props.isActive ? "pointer" : "not-allowed")};
 `;

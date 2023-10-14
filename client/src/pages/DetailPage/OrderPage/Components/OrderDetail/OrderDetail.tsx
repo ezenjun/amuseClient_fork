@@ -10,30 +10,29 @@ import { CancelPolicy } from "./Sections/CancelPolicy/CancelPolicy";
 import { OrderDetailContainer } from "./styles";
 import { useRecoilValue } from "recoil";
 import {
-  currentUserPointState,
-  selectedItemState,
+	currentUserPointState,
+	selectedItemState,
 } from "../../../../../Recoil/OrderAtomState";
 import GuestInfo from "./Sections/GuestInfo/GuestInfo";
 
 type Props = {
-  isLoading: boolean;
+	isLoading: boolean;
 };
 
 export const OrderDetail = ({ isLoading }: Props) => {
-  const ref = useRef<HTMLDivElement>(null);
-  const currentUserPoint = useRecoilValue(currentUserPointState);
-  const selectedItem = useRecoilValue(selectedItemState);
+	const currentUserPoint = useRecoilValue(currentUserPointState);
+	const selectedItem = useRecoilValue(selectedItemState);
 
-  return (
-    <OrderDetailContainer ref={ref}>
-      <ProductInfo />
-      <ReservationInfo />
-      {selectedItem.itemType === "Hotel" && <GuestInfo />}
-      <AdditionalInfo />
-      <Point myPoint={currentUserPoint} />
-      <PaymentMethod />
-      <Terms />
-      <CancelPolicy />
-    </OrderDetailContainer>
-  );
+	return (
+		<OrderDetailContainer>
+			<ProductInfo />
+			{/* <ReservationInfo /> */}
+			{selectedItem.itemType === "Hotel" && <GuestInfo />}
+			{/* <AdditionalInfo /> */}
+			<Point myPoint={currentUserPoint} />
+			<PaymentMethod />
+			<Terms />
+			<CancelPolicy />
+		</OrderDetailContainer>
+	);
 };
