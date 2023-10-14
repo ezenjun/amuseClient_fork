@@ -1,14 +1,14 @@
-import Header from "./Headers/Header";
-import Footer from "./Footers/Footer";
-import { IProps } from "./Interfaces/PropsInterfaces";
+import Header from "./components/Headers/Header";
+import Footer from "./components/Footers/Footer";
+import { IProps } from "./interfaces/PropsInterfaces";
 
 const MainComponent = ({ children }: IProps) => {
-	return (
-		<div>
-			<Header />
-			{children}
-			{/* <Footer /> */}
-		</div>
-	);
+  return (
+    <div>
+      <Header />
+      {children}
+      {/* <Footer /> */}
+    </div>
+  );
 };
 export default MainComponent;

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import _ from "lodash";
-import Style from "./SubPages/SubPage.module.css";
+import Style from "./pages/SubPage/SubPage.module.css";
 // import AppStyle from "./App.module.css";
 // import MainLists from "./MainPage/MainLists/MainLists";
 // import MainBanner from "./MainPage/MainBanner/MainBanner";
@@ -11,13 +11,13 @@ import Style from "./SubPages/SubPage.module.css";
 // import { redirect, useLocation } from "react-router-dom";
 import Fade from "./Fade";
 import axios from "axios";
-import { CategoryData } from "./Interfaces/DataInterfaces";
-import { ListProps, BannerProps } from "./Interfaces/PropsInterfaces";
-import { useCategoryContext } from "./Headers/Contexts/CategoryContext";
-import ChildTitle from "./SubPages/SubtitleImgs/ChildTitle.jpg";
-import SubLists from "./SubPages/SubLists";
-import SubBanners from "./SubPages/SubBanners";
-import SubTiles from "./SubPages/SubTiles";
+import { CategoryData } from "./interfaces/DataInterfaces";
+import { ListProps, BannerProps } from "./interfaces/PropsInterfaces";
+import { useCategoryContext } from "./components/Headers/Contexts/CategoryContext";
+import ChildTitle from "./pages/SubPage/SubtitleImgs/ChildTitle.jpg";
+import SubLists from "./pages/SubPage/SubLists";
+import SubBanners from "./pages/SubPage/SubBanners";
+import SubTiles from "./pages/SubPage/SubTiles";
 import MainComponent from "./MainComponent";
 import { useCookies } from "react-cookie";
 
