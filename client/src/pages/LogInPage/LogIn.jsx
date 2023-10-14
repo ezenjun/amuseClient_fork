@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
 import "./LogIn.css";
-import Header from "../components/Headers/Header";
+import Header from "../../components/Headers/Header";
 import { Link, redirect, useSearchParams } from "react-router-dom";
 import PasswordInput from "./PasswordInput";
 import EmailInput from "./EmailInput";
 import GoogleIcon from "@mui/icons-material/Google";
 import { useRecoilState } from "recoil";
-import { isLoggedIn } from "../atoms";
+import { isLoggedIn } from "../../atoms";
 import { useNavigate } from "react-router-dom";
-import AppStyle from "../App.module.css";
+import AppStyle from "../../App.module.css";
 import axios from "axios";
-import MainComponent from "../MainComponent";
+import MainComponent from "../../MainComponent";
 
 export default function Login() {
   const [email, setEmail] = useState("");
