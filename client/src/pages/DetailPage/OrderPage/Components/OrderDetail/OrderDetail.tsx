@@ -26,13 +26,11 @@ export const OrderDetail = ({ isLoading }: Props) => {
 	return (
 		<OrderDetailContainer>
 			<ProductInfo />
-			{/* <ReservationInfo /> */}
+			<ReservationInfo />
 			{selectedItem.itemType === "Hotel" && <GuestInfo />}
-			{/* <AdditionalInfo /> */}
+			<AdditionalInfo />
 			<Point myPoint={currentUserPoint} />
 			<PaymentMethod />
-			<Terms />
-			<CancelPolicy />
 		</OrderDetailContainer>
 	);
 };
