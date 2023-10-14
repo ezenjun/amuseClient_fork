@@ -38,7 +38,7 @@ export const reset = css`
 	body {
 		margin: 0;
 		padding: 0;
-		font-family: -apple-system, sans-serif, Roboto;
+		font-family: Pretendard, -apple-system, sans-serif, Roboto;
 
 		-ms-user-select: none;
 		-moz-user-select: -moz-none;
