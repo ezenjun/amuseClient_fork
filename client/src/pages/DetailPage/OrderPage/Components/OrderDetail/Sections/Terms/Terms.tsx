@@ -7,7 +7,7 @@ import { Regular16DarkGray } from "../../../../../../../components/Text/Text";
 import RightArrow from "../../../../../../../components/RightArrow";
 import { useCookies } from "react-cookie";
 import axios from "axios";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { PaymentDataState } from "../../../../../../../Recoil/OrderAtomState";
 import { Term } from "../../../../../../../Interfaces/DataInterfaces";
 import { ReactComponent as ArrowDown } from "../../../../../../../assets/Icons/Arrow/arrow_down_24.svg";
@@ -17,26 +17,82 @@ export const Terms = () => {
 	const [showTerms, setShowTerms] = useState(true);
 	const [showModal, setShowModal] = useState(false);
 	const [termsList, setTermsList] = useState<Term[]>([]);
-	const [termChecked, setTermChecked] = useState<boolean[]>([
-		false,
-		false,
-		false,
-		false,
-	]);
-	const paymentData = useRecoilValue(PaymentDataState);
+	const [paymentData, setPaymentData] = useRecoilState(PaymentDataState);
 
 	const handleTermCheckboxChange = (index: number) => {
-		setTermChecked((prevTermChecked) => {
-			const newTermChecked = [...prevTermChecked];
-			newTermChecked[index] = !newTermChecked[index];
-			return newTermChecked;
-		});
+		switch (index) {
+			case 0:
+				setPaymentData((prevData) => ({
+					...prevData,
+					termsAgreement: {
+						...prevData.termsAgreement,
+						privacyCollection:
+							!prevData.termsAgreement.privacyCollection,
+					},
+				}));
+				break;
+			case 1:
+				setPaymentData((prevData) => ({
+					...prevData,
+					termsAgreement: {
+						...prevData.termsAgreement,
+						privacyToThirdParty:
+							!prevData.termsAgreement.privacyToThirdParty,
+					},
+				}));
+				break;
+			case 2:
+				setPaymentData((prevData) => ({
+					...prevData,
+					termsAgreement: {
+						...prevData.termsAgreement,
+						ageOver14: !prevData.termsAgreement.ageOver14,
+					},
+				}));
+				break;
+			case 3:
+				setPaymentData((prevData) => ({
+					...prevData,
+					termsAgreement: {
+						...prevData.termsAgreement,
+						stayRule: !prevData.termsAgreement.stayRule,
+					},
+				}));
+				break;
+		}
 	};
-
 	const handleAgreeAll = () => {
-		setTermChecked((prevTermChecked) =>
-			prevTermChecked.map(() => !prevTermChecked[0])
+		const allTermsAgreed = Object.values(paymentData.termsAgreement).every(
+			(term) => term
 		);
+
+		if (allTermsAgreed) {
+			// If all terms are already agreed, set all of them to false
+			const updatedTermsAgreement = {
+				privacyCollection: false,
+				privacyToThirdParty: false,
+				ageOver14: false,
+				stayRule: false,
+			};
+
+			setPaymentData((prevData) => ({
+				...prevData,
+				termsAgreement: updatedTermsAgreement,
+			}));
+		} else {
+			// If not all terms are agreed, set all of them to true
+			const updatedTermsAgreement = {
+				privacyCollection: true,
+				privacyToThirdParty: true,
+				ageOver14: true,
+				stayRule: true,
+			};
+
+			setPaymentData((prevData) => ({
+				...prevData,
+				termsAgreement: updatedTermsAgreement,
+			}));
+		}
 	};
 
 	const [cookies] = useCookies(["__jwtkid__"]);
@@ -87,7 +143,9 @@ export const Terms = () => {
 				<>
 					<TermsRow>
 						<CheckButton
-							isActive={termChecked.every((term) => term)}
+							isActive={Object.values(
+								paymentData.termsAgreement
+							).every((term) => term)}
 							onClick={handleAgreeAll}
 						></CheckButton>
 						<Regular16DarkGray onClick={handleAgreeAll}>
@@ -99,7 +157,11 @@ export const Terms = () => {
 							termsList.map((term, index) => (
 								<TermsRow key={term.id}>
 									<CheckButton
-										isActive={termChecked[index]}
+										isActive={
+											Object.values(
+												paymentData.termsAgreement
+											)[index]
+										}
 										onClick={() =>
 											handleTermCheckboxChange(index)
 										}

@@ -159,7 +159,8 @@ export function ReservationInfo() {
 						/>
 					</EachReservationField>
 					<EachReservationField></EachReservationField>
-					{selectedItem.itemType === "Hotel" && (
+					{(selectedItem.itemType === "International" ||
+						selectedItem.itemType === "InternationalHotel") && (
 						<EachReservationField className="fullWidth">
 							<Bold20DarkGray>여권번호</Bold20DarkGray>
 							<StyledInputField
