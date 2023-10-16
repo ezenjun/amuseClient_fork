@@ -20,7 +20,7 @@ const OrderCompletePage = () => {
 		<MainComponent>
 			<OrderCompletePageContainer>
 				<PageName>결제 접수 완료</PageName>
-				<Regular20Gray>
+				<Regular20Gray style={{ marginTop: "1.625rem" }}>
 					결제 완료되었으며 결제 여부 확인 중입니다. 영업일 기준
 					24시간 이내로 확정 여부를 알려드립니다.
 				</Regular20Gray>

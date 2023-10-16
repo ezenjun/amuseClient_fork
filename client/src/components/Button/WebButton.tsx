@@ -1,32 +1,6 @@
 import React from "react";
-import { ButtonProps } from "../../Interfaces/PropsInterfaces";
 import styled from "@emotion/styled";
 import { Common } from "../../styles";
-
-// const WebButton = ({
-// 	children,
-// 	width,
-// 	color,
-// 	fontSize,
-// 	verticalPadding,
-// 	isActive,
-// 	onClick,
-// }: ButtonProps) => {
-// 	return (
-// 		<ButtonContainer
-// 			width={width}
-// 			fontSize={fontSize}
-// 			color={color}
-// 			verticalPadding={verticalPadding}
-// 			isActive={isActive}
-// 			onClick={onClick}
-// 		>
-// 			{children}
-// 		</ButtonContainer>
-// 	);
-// };
-
-// export default WebButton;
 
 export const WebButton = styled.button<{
 	width?: number;
@@ -79,5 +53,5 @@ export const WebButton = styled.button<{
 	font-size: ${(props) => props.fontSize * 0.0625}rem;
 	font-weight: bold;
 	white-space: nowrap;
-	cursor: ${(props) => (props.isActive ? "pointer" : "not-allowed")};
+	cursor: pointer;
 `;
