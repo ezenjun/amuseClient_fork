@@ -7,21 +7,23 @@ import { RecoilRoot } from "recoil";
 import { CookiesProvider } from "react-cookie";
 import { Global } from "@emotion/react";
 import { reset } from "./styles";
+import { ScrollToTop } from "./utils/ScrollToTop";
 
 // const google_id: string = process.env.REACT_APP_GOOGLE_API_KEY ?? "";
 
 const root = ReactDOM.createRoot(
-  document.getElementById("root") as HTMLElement
+	document.getElementById("root") as HTMLElement
 );
 root.render(
-  <RecoilRoot>
-    <CookiesProvider>
-      <BrowserRouter>
-        <Global styles={reset} />
-        <App />
-      </BrowserRouter>
-    </CookiesProvider>
-  </RecoilRoot>
+	<RecoilRoot>
+		<CookiesProvider>
+			<BrowserRouter>
+				<Global styles={reset} />
+				<ScrollToTop />
+				<App />
+			</BrowserRouter>
+		</CookiesProvider>
+	</RecoilRoot>
 );
 
 // If you want to start measuring performance in your app, pass a function

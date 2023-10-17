@@ -7,6 +7,7 @@ const GrayBox = ({
 	verticalPadding,
 	horizontalPadding,
 	borderRadius,
+	gap,
 	children,
 }: GrayBoxProps) => {
 	return (
@@ -14,6 +15,7 @@ const GrayBox = ({
 			verticalPadding={verticalPadding}
 			horizontalPadding={horizontalPadding}
 			borderRadius={borderRadius}
+			gap={gap}
 		>
 			{children}
 		</GrayBoxContainer>
@@ -26,10 +28,12 @@ export const GrayBoxContainer = styled.div<{
 	verticalPadding: number;
 	horizontalPadding: number;
 	borderRadius?: number;
+	gap?: number;
 }>`
 	display: flex;
 	flex-direction: column;
 	width: 100%;
+	gap: ${({ gap }) => (gap ? `${gap * 0.0625}rem` : "0")};
 	border-radius: ${({ borderRadius }) =>
 		borderRadius ? `${borderRadius * 0.0625}rem` : "0.5rem"};
 	padding: ${({ verticalPadding, horizontalPadding }) =>
