@@ -11,6 +11,7 @@ import { useInfoContext } from "../../pages/DetailPage/Contexts/InfoContext";
 import Login from "./Components/Login";
 import Logo from "./Components/Logo";
 import Menu from "./Components/Menu";
+import Hamburger from "./Components/Hamburger";
 
 // mobileHeader === 1 모바일
 // mobileHeader === 0 pc
@@ -129,16 +130,14 @@ function Header() {
         <div>
           {mobileHeader === 1 && (
             <div style={{ paddingTop: "5px", paddingBottom: "10px" }}>
-              {/* <Login
+              <Hamburger
                 name={name}
                 loggedIn={loggedIn}
                 setLoggedIn={setLoggedIn}
                 cookies={cookies}
                 setCookie={setCookie}
                 removeCookie={removeCookie}
-              /> */}
-              <Logo />
-              {/* <Menu /> */}
+              />
             </div>
           )}
 
