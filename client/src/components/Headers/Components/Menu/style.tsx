@@ -13,7 +13,8 @@ export const Menu = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 10px;
+  margin-top: 30px;
+  margin-bottom: 15px;
   font-family: Pretendard;
   font-size: 16px;
   font-style: normal;
