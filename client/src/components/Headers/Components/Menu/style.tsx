@@ -1,4 +1,13 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
+
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+`;
 
 export const Menu = styled.div`
   display: flex;
@@ -42,6 +51,7 @@ export const Dropdown = styled.div`
   z-index: 9;
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  animation: ${fadeIn} 0.1s ease;
 `;
 
 export const DropdownItem = styled.div`
