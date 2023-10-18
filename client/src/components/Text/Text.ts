@@ -54,6 +54,14 @@ export const Regular20Gray = styled.span`
 	})}
 	line-height: 160%;
 `;
+export const Bold20Gray = styled.span`
+	${Pretendard({
+		size: 20,
+		weight: Common.bold.bold,
+		color: Common.colors.gray,
+	})}
+	line-height: 160%;
+`;
 export const Bold16DarkGray = styled.span`
 	${Pretendard({
 		size: 16,
@@ -97,6 +105,13 @@ export const Regular12AppColor = styled.span`
 export const Bold20AppColor = styled.span`
 	${Pretendard({
 		size: 20,
+		weight: Common.bold.bold,
+		color: Common.colors.appColor,
+	})}
+`;
+export const Bold24AppColor = styled.span`
+	${Pretendard({
+		size: 24,
 		weight: Common.bold.bold,
 		color: Common.colors.appColor,
 	})}

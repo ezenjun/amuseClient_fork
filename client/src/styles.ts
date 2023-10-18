@@ -29,16 +29,16 @@ export const reset = css`
       /* Tablet styles */
       font-size: 15px; /* Adjust as needed */
     }
-
-    @media (min-width: 1141px) {
-      /* Desktop styles */
-      font-size: 16px; /* Adjust as needed */
-    }
-  }
-  body {
-    margin: 0;
-    padding: 0;
-    font-family: -apple-system, sans-serif, Roboto;
+    
+		@media (min-width: 1141px) {
+			/* Desktop styles */
+			font-size: 16px; /* Adjust as needed */
+		}
+	}
+	body {
+		margin: 0;
+		padding: 0;
+		font-family: Pretendard, -apple-system, sans-serif, Roboto;
 
     -ms-user-select: none;
     -moz-user-select: -moz-none;
