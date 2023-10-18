@@ -69,7 +69,7 @@ function Login({
       {loggedIn ? (
         <MyPageMenu />
       ) : (
-        <S.Button onClick={navigateToSignUP}>{C.LOGIN.JOIN}</S.Button>
+        <S.JoinButton onClick={navigateToSignUP}>{C.LOGIN.JOIN}</S.JoinButton>
       )}
     </S.Login>
   );
