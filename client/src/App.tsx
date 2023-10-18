@@ -103,7 +103,7 @@ function App() {
     <OrderContextProvider>
       <CategoryContextProvider>
         <InfoContextProvider>
-          <div style={{ fontFamily: "Pretendard-Regular" }}>
+          <div style={{ fontFamily: "Pretendard" }}>
             <Routes>
               <Route path="/" element={<Home />} />
 
