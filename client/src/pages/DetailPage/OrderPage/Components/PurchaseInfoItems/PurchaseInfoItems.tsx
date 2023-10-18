@@ -4,6 +4,8 @@ import getSelectedPriceIndex from "../OrderDetail/Sections/ProductInfo/getSelect
 import { TicketData } from "../../../../../Interfaces/DataInterfaces";
 import { WebButton } from "../../../../../components/Button/WebButton";
 import { PaymentInfo } from "./Sections/PaymentInfo/PaymentInfo";
+import { Terms } from "../OrderDetail/Sections/Terms";
+import { CancelPolicy } from "../OrderDetail/Sections/CancelPolicy/CancelPolicy";
 
 type Props = {
 	isLoading?: boolean;
@@ -30,6 +32,8 @@ export const PurchaseInfoItems = ({ isLoading }: Props) => {
 	return (
 		<PurchaseInfoItemsContainer>
 			<PaymentInfo />
+			<Terms />
+			<CancelPolicy />
 			<WebButton
 				type="submit"
 				verticalPadding={18}

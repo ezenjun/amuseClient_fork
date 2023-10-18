@@ -126,6 +126,7 @@ export interface GrayBoxProps extends IProps {
 	verticalPadding: number;
 	horizontalPadding: number;
 	borderRadius?: number;
+	gap?: number;
 }
 
 export interface ButtonProps extends IProps {

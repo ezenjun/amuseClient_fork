@@ -37,7 +37,7 @@ const OrderedItem = (props: Props) => {
 		setTicketData(orderTicketData);
 	}, [orderTicketData]);
 	return (
-		<GrayBox verticalPadding={32} horizontalPadding={25}>
+		<GrayBox verticalPadding={31} horizontalPadding={31}>
 			<OrderedItemContainer>
 				<Bold20DarkGray>결제 상품 내역</Bold20DarkGray>
 				<ProductInfoContainer>
