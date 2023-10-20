@@ -64,7 +64,7 @@ export function ReservationInfo() {
 									pattern: {
 										value: /^\d{8}$/,
 										message:
-											"올바른 생년월일 형식이 아닙니다 YYYYMMDDdurnj",
+											"올바른 생년월일 형식이 아닙니다 YYYYMMDD",
 									},
 								}
 							)}
