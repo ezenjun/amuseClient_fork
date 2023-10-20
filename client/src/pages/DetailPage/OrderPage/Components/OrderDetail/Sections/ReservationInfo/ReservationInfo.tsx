@@ -35,13 +35,20 @@ export function ReservationInfo() {
 							type="text"
 							placeholder="이름"
 							{...register("reservationInfo.reservationNameKR", {
-								required: true,
+								required: "이름을 입력해주세요",
+								pattern: {
+									value: /^[가-힣]{2,4}$/,
+									message: "2자 이상의 한글을 입력해주세요",
+								},
 							})}
 							error={!!errors.reservationInfo?.reservationNameKR}
 						/>
 						{errors.reservationInfo?.reservationNameKR && (
 							<Regular12AppColor>
-								이름을 입력해주세요
+								{
+									errors.reservationInfo?.reservationNameKR
+										.message
+								}
 							</Regular12AppColor>
 						)}
 					</EachReservationField>
@@ -53,7 +60,12 @@ export function ReservationInfo() {
 							{...register(
 								"reservationInfo.reservationBirthday",
 								{
-									required: true,
+									required: "생년월일을 입력해주세요",
+									pattern: {
+										value: /^\d{8}$/,
+										message:
+											"올바른 생년월일 형식이 아닙니다 YYYYMMDDdurnj",
+									},
 								}
 							)}
 							error={
@@ -62,7 +74,10 @@ export function ReservationInfo() {
 						/>
 						{errors.reservationInfo?.reservationBirthday && (
 							<Regular12AppColor>
-								생년월일을 입력해주세요
+								{
+									errors.reservationInfo?.reservationBirthday
+										.message
+								}{" "}
 							</Regular12AppColor>
 						)}
 					</EachReservationField>
@@ -74,7 +89,12 @@ export function ReservationInfo() {
 							{...register(
 								"reservationInfo.reservationFirstNameEN",
 								{
-									required: true,
+									required: "영문 이름을 입력해주세요",
+									pattern: {
+										value: /^[a-zA-Z\s]+$/,
+										message:
+											"올바른 영문 이름 형식이 아닙니다",
+									},
 								}
 							)}
 							error={
@@ -83,7 +103,10 @@ export function ReservationInfo() {
 						/>
 						{errors.reservationInfo?.reservationFirstNameEN && (
 							<Regular12AppColor>
-								영문 이름을 입력해주세요
+								{
+									errors.reservationInfo
+										?.reservationFirstNameEN.message
+								}
 							</Regular12AppColor>
 						)}
 					</EachReservationField>
@@ -95,7 +118,12 @@ export function ReservationInfo() {
 							{...register(
 								"reservationInfo.reservationLastNameEN",
 								{
-									required: true,
+									required: "영문 성을 입력해주세요",
+									pattern: {
+										value: /^[a-zA-Z]+$/,
+										message:
+											"올바른 영문 이름 형식이 아닙니다",
+									},
 								}
 							)}
 							error={
@@ -104,7 +132,10 @@ export function ReservationInfo() {
 						/>
 						{errors.reservationInfo?.reservationLastNameEN && (
 							<Regular12AppColor>
-								영문 성을 입력해주세요
+								{
+									errors.reservationInfo
+										?.reservationLastNameEN.message
+								}
 							</Regular12AppColor>
 						)}
 					</EachReservationField>
@@ -133,7 +164,12 @@ export function ReservationInfo() {
 							{...register(
 								"reservationInfo.reservationPhoneNumber",
 								{
-									required: true,
+									required: "전화번호를 입력해주세요",
+									pattern: {
+										value: /^0[1-9]\d{8}$/,
+										message:
+											"올바른 전화번호 형식이 아닙니다",
+									},
 								}
 							)}
 							error={
@@ -142,7 +178,10 @@ export function ReservationInfo() {
 						/>
 						{errors.reservationInfo?.reservationPhoneNumber && (
 							<Regular12AppColor>
-								전화번호를 입력해주세요
+								{
+									errors.reservationInfo
+										?.reservationPhoneNumber.message
+								}
 							</Regular12AppColor>
 						)}
 					</EachReservationField>
@@ -153,10 +192,23 @@ export function ReservationInfo() {
 							type="text"
 							placeholder="example@example.com"
 							{...register("reservationInfo.reservationEmail", {
-								required: true,
+								required: "이메일을 입력해주세요",
+								pattern: {
+									value: /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i,
+									message:
+										"올바른 이메일 형식을 입력해주세요",
+								},
 							})}
 							error={!!errors.reservationInfo?.reservationEmail}
 						/>
+						{errors.reservationInfo?.reservationEmail && (
+							<Regular12AppColor>
+								{
+									errors.reservationInfo.reservationEmail
+										?.message
+								}
+							</Regular12AppColor>
+						)}
 					</EachReservationField>
 					<EachReservationField></EachReservationField>
 					{(selectedItem.itemType === "International" ||
