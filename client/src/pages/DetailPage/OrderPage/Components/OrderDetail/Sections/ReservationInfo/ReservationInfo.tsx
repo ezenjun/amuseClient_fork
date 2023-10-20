@@ -166,7 +166,7 @@ export function ReservationInfo() {
 								{
 									required: "전화번호를 입력해주세요",
 									pattern: {
-										value: /^0[1-9]\d{8}$/,
+										value: /^0[1-9]\d{8,9}$/,
 										message:
 											"올바른 전화번호 형식이 아닙니다",
 									},
