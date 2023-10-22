@@ -173,6 +173,7 @@ export const Terms = () => {
 											}
 										>
 											{term.title}
+											{term.mandatory && " (필수)"}
 										</Regular16DarkGray>
 										<RightArrow
 											onClick={() =>

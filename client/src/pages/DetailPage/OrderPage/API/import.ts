@@ -1,4 +1,5 @@
-export const requestPay = (data: any, callback: (rsp: any) => void) => {
+import { PaymentInfo } from "../../../../Interfaces/DataInterfaces";
+export const requestPay = (data: PaymentInfo, callback: (rsp: any) => void) => {
 	const { IMP } = window as any;
 
 	const generatePaymentUid = () => {
@@ -26,12 +27,10 @@ export const requestPay = (data: any, callback: (rsp: any) => void) => {
 	const updatePGCode = (value: string) => {
 		console.log(value, process.env.REACT_APP_IMPORT_KAKAO_PG);
 		switch (value) {
-			case "계좌이체":
-				return "html5_inicis";
+			case "현금 결제":
+				return "html5_inicis.INIpayTest";
 			case "신용/체크카드":
-				return "html5_inicis";
-			case "토스페이":
-				return "tosspayments.iamporttest_3";
+				return "html5_inicis.INIpayTest";
 			case "카카오페이":
 				return "kakaopay";
 			case "네이버페이":
@@ -41,14 +40,12 @@ export const requestPay = (data: any, callback: (rsp: any) => void) => {
 
 	const getPaymentCode = (value: string) => {
 		switch (value) {
-			case "계좌이체":
+			case "현금 결제":
 				return "trans";
 			case "신용/체크카드":
 				return "card";
-			case "토스페이":
-				return "tosspay";
 			case "카카오페이":
-				return "card";
+				return "kakaopay";
 			case "네이버페이":
 				return "naverpay";
 		}
@@ -58,16 +55,14 @@ export const requestPay = (data: any, callback: (rsp: any) => void) => {
 	IMP.request_pay(
 		{
 			// param
-			pg: updatePGCode(data.pay_method),
-			pay_method: "card",
+			pg: updatePGCode(data.paymentMethod),
+			pay_method: getPaymentCode(data.paymentMethod),
 			merchant_uid: generatePaymentUid(), //가맹점 주문번호(동일한 주문번호로 중복결제 불가)
-			name: data.products,
-			amount: 500, //data.productPrice - data.point,
-			buyer_email: data.email,
-			buyer_name: data.name,
-			// buyer_tel: "010-4242-4242",
-			// buyer_addr: "서울특별시 강남구 신사동",
-			// buyer_postcode: "01181",
+			name: data.reservationInfo.reservationNameKR,
+			amount: data.totalAmount,
+			buyer_email: data.reservationInfo.reservationEmail,
+			buyer_name: data.reservationInfo.reservationNameKR,
+			buyer_tel: data.reservationInfo.reservationPhoneNumber,
 			bypass: {
 				acceptmethod: "cardpoint",
 			},
