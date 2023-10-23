@@ -8,7 +8,7 @@ export const WebButton = styled.button<{
 	color: string;
 	verticalPadding: number;
 	isActive?: boolean;
-	onClick?: () => void;
+	onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }>`
 	display: flex;
 	justify-content: center;

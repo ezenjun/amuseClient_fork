@@ -25,14 +25,13 @@ export const requestPay = (data: PaymentInfo, callback: (rsp: any) => void) => {
 	};
 
 	const updatePGCode = (value: string) => {
-		console.log(value, process.env.REACT_APP_IMPORT_KAKAO_PG);
 		switch (value) {
 			case "현금 결제":
-				return "html5_inicis.INIpayTest";
+				return `html5_inicis.${process.env.REACT_APP_IMPORT_KG_PG}`;
 			case "신용/체크카드":
-				return "html5_inicis.INIpayTest";
+				return `html5_inicis.${process.env.REACT_APP_IMPORT_KG_PG}`;
 			case "카카오페이":
-				return "kakaopay";
+				return `kakaopay.${process.env.REACT_APP_IMPORT_KAKAO_PG}`;
 			case "네이버페이":
 				return "naverpay";
 		}
@@ -51,6 +50,7 @@ export const requestPay = (data: PaymentInfo, callback: (rsp: any) => void) => {
 		}
 	};
 
+	console.log("final data", data);
 	IMP.init(process.env.REACT_APP_IMPORT_CODE);
 	IMP.request_pay(
 		{
@@ -58,8 +58,9 @@ export const requestPay = (data: PaymentInfo, callback: (rsp: any) => void) => {
 			pg: updatePGCode(data.paymentMethod),
 			pay_method: getPaymentCode(data.paymentMethod),
 			merchant_uid: generatePaymentUid(), //가맹점 주문번호(동일한 주문번호로 중복결제 불가)
-			name: data.reservationInfo.reservationNameKR,
-			amount: data.totalAmount,
+			name: data.itemName,
+			// amount: data.payAmount,
+			amount: 200,
 			buyer_email: data.reservationInfo.reservationEmail,
 			buyer_name: data.reservationInfo.reservationNameKR,
 			buyer_tel: data.reservationInfo.reservationPhoneNumber,
