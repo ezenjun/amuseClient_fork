@@ -85,7 +85,6 @@ export interface PaymentInfo {
 	userId: number;
 	itemId: number;
 	itemType: string;
-	// orderid: number;
 	startDate: Date;
 	endDate: Date;
 	orderDateTime: Date;
@@ -97,6 +96,12 @@ export interface PaymentInfo {
 	paymentMethod: string;
 	totalAmount: number;
 	pointUsed: number;
+	termsAgreement: {
+		privacyCollection: boolean;
+		privacyToThirdParty: boolean;
+		ageOver14: boolean;
+		stayRule: boolean;
+	};
 }
 
 export interface UserPoint {

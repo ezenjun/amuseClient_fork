@@ -84,12 +84,9 @@ export const OrderPage = () => {
 
 	return (
 		<MainComponent>
-			{/* {isShow && ( */}
 			<OrderPageContainer>
 				<PageName>결제하기</PageName>
-				{/* <OrderInfoContainer> */}
 				<OrderForm />
-				{/* </OrderInfoContainer> */}
 			</OrderPageContainer>
 			{/* )} */}
 		</MainComponent>

@@ -53,5 +53,11 @@ export const PaymentDataState = atom<PaymentInfo>({
 		paymentMethod: "신용/체크카드",
 		totalAmount: 0,
 		pointUsed: 0,
+		termsAgreement: {
+			privacyCollection: false,
+			privacyToThirdParty: false,
+			ageOver14: false,
+			stayRule: false,
+		},
 	},
 });
