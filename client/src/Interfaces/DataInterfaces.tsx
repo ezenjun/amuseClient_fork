@@ -84,6 +84,7 @@ export interface SelectedTicket {
 export interface PaymentInfo {
 	userId: number;
 	itemId: number;
+	itemName: string;
 	itemType: string;
 	startDate: Date;
 	endDate: Date;
@@ -96,6 +97,7 @@ export interface PaymentInfo {
 	paymentMethod: string;
 	totalAmount: number;
 	pointUsed: number;
+	payAmount: number;
 	termsAgreement: {
 		privacyCollection: boolean;
 		privacyToThirdParty: boolean;
