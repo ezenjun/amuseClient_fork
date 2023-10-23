@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCategoryContext } from "../../Contexts/CategoryContext";
 import { CategoryNameMenuProps } from "../../../../Interfaces/PropsInterfaces";
-import ArrowDown from "./arrow_down.svg";
+import ArrowDown from "../../../../assets/Icons/Arrow/arrow_down_24.svg";
 import _ from "lodash";
 import axios from "axios";
 import * as S from "./style";
