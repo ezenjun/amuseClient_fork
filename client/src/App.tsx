@@ -20,6 +20,7 @@ import { OrderContextProvider } from "./pages/DetailPage/Contexts/OrderContext";
 import { CategoryContextProvider } from "./components/Headers/Contexts/CategoryContext";
 import { InfoContextProvider } from "./pages/DetailPage/Contexts/InfoContext";
 import OrderCompletePage from "./pages/DetailPage/OrderCompletePage/OrderCompletePage";
+import PaymentDetailPage from "./pages/DetailPage/PaymentDetailPage/PaymentDetailPage";
 
 function App() {
   const [cookies, setCookie, deleteCookie] = useCookies(["__jwtkid__"]);
@@ -110,6 +111,7 @@ function App() {
             {/* <Route path="/Concierge" element={<Concierge />}></Route>
           <Route path="/ChildCare" element={<ChildCare />}></Route>
           <Route path="/SeniorCare" element={<SeniorCare />}></Route> */}
+
             <Route path="/LogIn" element={<Login />}></Route>
             <Route path="/SignUp" element={<SignUp />}></Route>
             <Route path="/MyPage/:category" element={<MyPage />}></Route>
@@ -122,6 +124,10 @@ function App() {
             <Route
               path="/order/complete"
               element={<OrderCompletePage />}
+            ></Route>
+            <Route
+              path="/payment/:paymentId"
+              element={<PaymentDetailPage />}
             ></Route>
             <Route path="/LogInAgree" element={<LoginAgree />}></Route>
 
