@@ -40,6 +40,7 @@ export const Header = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+  margin-bottom: 10px;
 `;
 
 export const Title = styled.div`
