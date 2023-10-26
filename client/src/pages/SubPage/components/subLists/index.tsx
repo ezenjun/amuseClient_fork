@@ -130,7 +130,7 @@ function SubLists({ title, itemInfos }: SubListsProps) {
         <S.Title>{title}</S.Title>
         <S.Count>{`${bestItemIds.length}개`}</S.Count>
       </S.Header>
-      <div className={Style["container"]}>
+      <S.BoxList>
         {displayedItemIds.map((itemId: number, index: number) => (
           <Box
             key={itemId}
@@ -142,7 +142,7 @@ function SubLists({ title, itemInfos }: SubListsProps) {
             imageUrl={bestItemImageUrl[index + currentIndex]}
           />
         ))}
-      </div>
+      </S.BoxList>
       {(!isNextDisabled || !isPrevDisabled) && (
         <div
           style={{

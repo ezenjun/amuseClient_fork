@@ -65,6 +65,7 @@ export const Count = styled.div`
 
 export const Box = styled.div`
   position: relative;
+  flex-shrink: 0;
   width: 250px;
   height: 270px;
   border-radius: 20px;
@@ -114,4 +115,32 @@ export const BoxPrice = styled.div`
   line-height: normal;
   z-index: 5;
   cursor: pointer;
+`;
+
+export const BoxList = styled.div`
+  @media (max-width: 768px) {
+    /* Mobile styles */
+    display: flex;
+    flex-direction: row;
+    overflow: auto;
+    gap: 15px;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  @media (min-width: 769px) and (max-width: 1023px) {
+    /* Tablet styles */
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+
+  @media (min-width: 1024px) {
+    /* Desktop styles */
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+  }
 `;
