@@ -66,7 +66,6 @@ function SubLists({ title, itemInfos }: SubListsProps) {
       });
   };
 
-  // !FIX 문제임 이 길이가
   const Box: React.FC<BoxProps> = ({
     itemId,
     handleClick,
