@@ -1,6 +1,6 @@
 import "./Detail.scss";
 import Header from "../../../components/Headers/Header";
-import Reservation from "./Component/Reservation/Reservation";
+import Reservation from "./Component/Reservation";
 import Title from "./Component/Title/Title";
 import Picture from "./Component/Picture/Picture";
 import ProductIntro from "./Component/ProductIntro/ProductIntro";

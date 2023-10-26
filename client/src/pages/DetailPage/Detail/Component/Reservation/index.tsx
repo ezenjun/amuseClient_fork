@@ -11,7 +11,6 @@ import Share from "./share.svg";
 import Heart from "./wish.svg";
 import * as S from "./style";
 import axios from "axios";
-import "./Reservation.scss";
 
 interface ReservationProps {
   itemId: number | null;
@@ -141,11 +140,9 @@ function Reservation({ itemId, productCode, likeNum }: ReservationProps) {
         </S.Inquiry>
       </S.Manager>
 
-      {/* 상품코드 div */}
-      <div className="product-code">
-        <span>상품코드 : &nbsp;</span>
-        <span>{productCode}</span>
-      </div>
+      <S.ProductCode>
+        <S.ProductCodeText>상품코드 : {productCode}</S.ProductCodeText>
+      </S.ProductCode>
     </S.Reservation>
   );
 }

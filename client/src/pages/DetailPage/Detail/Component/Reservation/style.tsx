@@ -154,3 +154,24 @@ export const InquiryText = styled.div`
   font-weight: 600;
   line-height: normal;
 `;
+
+export const ProductCode = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 12px;
+  width: 320px;
+  height: 38px;
+  border-radius: 35px;
+  background: #f9f9f9;
+`;
+
+export const ProductCodeText = styled.div`
+  color: #676c75;
+  text-align: center;
+  font-family: "Pretendard";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+`;
