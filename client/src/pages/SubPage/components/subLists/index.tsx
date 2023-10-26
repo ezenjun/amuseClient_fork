@@ -74,39 +74,30 @@ function SubLists({ title, itemInfos }: SubListsProps) {
     startPrice,
     imageUrl,
   }) => (
-    <div className={Style["box"]}>
-      <div
-        className={Style["box_before"]}
-        onClick={handleClick}
-        style={{ backgroundImage: `url(${imageUrl})`, cursor: "pointer" }}
-      ></div>
-      <div className={Style["like_count"]}>
+    <S.Box>
+      <S.BoxImage src={imageUrl} onClick={handleClick} />
+      <S.BoxLike>
         <FontAwesomeIcon
           icon={isLiked[itemId] ? fullHeart : faHeart}
           style={{
             color: "#ffffff",
-            width: "24px",
-            height: "24px",
-            marginLeft: "4px",
-            marginTop: "4px",
-            justifyItems: "center",
+            width: "20px",
+            height: "20px",
             zIndex: "9",
             cursor: "pointer",
           }}
           onClick={() => handleLikeClick(itemId)}
         />
-      </div>
-      <p className={Style["tripTitle"]} onClick={handleClick}>
-        {title}
-      </p>
-      <div className={Style["tripCost"]} onClick={handleClick}>
+      </S.BoxLike>
+      <S.BoxTitle onClick={handleClick}>{title}</S.BoxTitle>
+      <S.BoxPrice onClick={handleClick}>
         {startPrice !== "N/A" ? (
           <p style={{ margin: 0 }}>가격 : {startPrice}원 ~</p>
         ) : (
           <></>
         )}
-      </div>
-    </div>
+      </S.BoxPrice>
+    </S.Box>
   );
 
   const movePage = useNavigate();
