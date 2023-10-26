@@ -9,8 +9,8 @@ export const Reservation = styled.div`
 `;
 
 export const Main = styled.div`
-  width: 367px;
-  height: 291px;
+  width: 320px;
+  height: 280px;
   padding: 30px;
   flex-shrink: 0;
   border-radius: 8px;
@@ -20,7 +20,7 @@ export const Main = styled.div`
 export const StartPrice = styled.div`
   color: #909090;
   font-family: "Pretendard";
-  font-size: 18px;
+  font-size: 15px;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
@@ -40,7 +40,7 @@ export const Price = styled.div`
 
 export const PriceNum = styled.div`
   font-family: "Pretendard";
-  font-size: 32px;
+  font-size: 28px;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
@@ -49,7 +49,7 @@ export const PriceNum = styled.div`
 export const PriceMin = styled.div`
   color: #909090;
   font-family: Pretendard;
-  font-size: 32px;
+  font-size: 28px;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
@@ -61,14 +61,14 @@ export const Share = styled.img`
 `;
 
 export const Payment = styled.button`
-  margin-top: 12px;
-  width: 314px;
-  height: 60px;
-  border-radius: 10px;
+  margin-top: 15px;
+  width: 260px;
+  height: 55px;
+  border-radius: 8px;
   color: #fff;
   text-align: center;
   font-family: "Pretendard";
-  font-size: 20px;
+  font-size: 18px;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
@@ -82,14 +82,14 @@ export const Wish = styled.button`
   align-items: center;
   justify-content: center;
   margin-top: 8px;
-  width: 314px;
-  height: 60px;
+  width: 260px;
+  height: 55px;
   gap: 10px;
-  border-radius: 10px;
+  border-radius: 8px;
   border: 1px solid #ccc;
   color: #36393e;
   font-family: "Pretendard";
-  font-size: 18px;
+  font-size: 16px;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
@@ -104,7 +104,52 @@ export const HeartCount = styled.div`
   color: #ccc;
   text-align: center;
   font-family: "Pretendard";
-  font-size: 14px;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+`;
+
+export const Manager = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-top: 12px;
+  width: 320px;
+  height: 65px;
+  padding: 11.5px 15px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+`;
+
+export const Profile = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 12px;
+`;
+
+export const ProfileImg = styled.img`
+  width: 40px;
+`;
+
+export const ProfileName = styled.div`
+  font-family: "Pretendard";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+`;
+
+export const Inquiry = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: #fb5984;
+`;
+
+export const InquiryText = styled.div`
+  color: #fb5984;
+  font-family: Inter;
+  font-size: 15px;
   font-style: normal;
   font-weight: 600;
   line-height: normal;

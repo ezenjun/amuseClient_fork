@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart, faShareNodes } from "@fortawesome/free-solid-svg-icons";
 import { faEnvelope as solidFaEnelope } from "@fortawesome/free-solid-svg-icons";
 import { faEnvelope as regularFaEnelope } from "@fortawesome/free-regular-svg-icons";
-import { CopyToClipboard } from "react-copy-to-clipboard";
 import { useOrderContext } from "../../../Contexts/OrderContext";
 import { GuideData } from "../../../../../Interfaces/DataInterfaces";
 import { useCookies } from "react-cookie";
@@ -25,9 +24,7 @@ function Reservation({ itemId, productCode, likeNum }: ReservationProps) {
   const movePage = useNavigate();
   const { orderData, setOrderData, orderTicketData } = useOrderContext();
 
-  /**
-   * startPrice API
-   */
+  // startPrice API
   const [startPrice, setStartPrice] = useState(0);
   useEffect(() => {
     axios
@@ -41,15 +38,11 @@ function Reservation({ itemId, productCode, likeNum }: ReservationProps) {
       });
   }, [itemId]);
 
-  /**
-   * Manager Data
-   */
+  // Manager Data
   const [guideData, setGuideData] = useState<GuideData>();
   const [isHovered, setIsHovered] = useState(false);
 
-  /**
-   * Manager API
-   */
+  // Manager API
   useEffect(() => {
     axios
       .get(`${process.env.REACT_APP_AMUSE_API}/detail/${itemId}/guide-info`)
@@ -63,9 +56,7 @@ function Reservation({ itemId, productCode, likeNum }: ReservationProps) {
       });
   }, [itemId]);
 
-  /**
-   * Email Connect
-   */
+  // Email Connect
   const handleInquiryClick = () => {
     if (guideData && guideData.email) {
       const subject = encodeURIComponent(`[어뮤즈트래블 상품 문의하기]`);
@@ -82,9 +73,7 @@ function Reservation({ itemId, productCode, likeNum }: ReservationProps) {
     setShowTooltip(!showTooltip);
   };
 
-  /**
-   * Ticket Button
-   */
+  // Ticket Button
   const handleButtonClick = () => {
     handleBuyTicket();
   };
@@ -133,18 +122,13 @@ function Reservation({ itemId, productCode, likeNum }: ReservationProps) {
         </S.HeartCount>
       </S.Main>
 
-      {/* 담당자, 문의하기 div */}
-      <div className="manager" style={{ marginTop: 32 }}>
-        <div className="manager-profile">
-          <img
-            className="manager-image"
-            src={guideData?.profileImageUrl ?? "img"}
-            alt="manager"
-          />
-          <p className="manager-name">{guideData?.userName ?? "name"}</p>
-        </div>
-        <div
-          className="manager-inquiry"
+      <S.Manager>
+        <S.Profile>
+          <S.ProfileImg src={guideData?.profileImageUrl ?? "img"} />
+          <S.ProfileName>{guideData?.userName ?? "name"}</S.ProfileName>
+        </S.Profile>
+
+        <S.Inquiry
           onClick={handleInquiryClick}
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
@@ -153,9 +137,10 @@ function Reservation({ itemId, productCode, likeNum }: ReservationProps) {
             className="icon"
             icon={isHovered ? regularFaEnelope : solidFaEnelope}
           />
-          <p className="inquiry">문의하기</p>
-        </div>
-      </div>
+          <S.InquiryText>문의하기</S.InquiryText>
+        </S.Inquiry>
+      </S.Manager>
+
       {/* 상품코드 div */}
       <div className="product-code">
         <span>상품코드 : &nbsp;</span>
