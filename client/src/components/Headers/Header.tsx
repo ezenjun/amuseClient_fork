@@ -4,7 +4,7 @@ import "./Header.css";
 import Style from "../../App.module.css";
 import { useNavigate } from "react-router-dom";
 import logoimage from "../../pages/MainPage/MainImgs/amuse_logo.png";
-import { isLoggedIn } from "../../atoms";
+import { accessTokenState, isLoggedIn } from "../../atoms";
 import { useRecoilState } from "recoil";
 import MyPageMenu from "../../pages/MyPage/MyPageMenu";
 import axios from "axios";
@@ -287,10 +287,54 @@ function Header() {
 		removeCookie("__jwtkid__", { path: "/", maxAge: 0 });
 		removeCookie("__usrN__", { path: "/", maxAge: 0 });
 		navigateToHome();
+		localStorage.removeItem("accessToken"); // localStorage 임시 사용
 	};
 	// if(!name){
 	//   setName(cookies.__usrN__)
 	// }
+
+
+	// 어뮤즈 자체 로그인 정보 가져오기
+	const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
+	const getAmuseUserInfo = async () => {
+		await axios
+			.get(`${process.env.REACT_APP_AMUSE_API}/api/v1/user/info`, {
+				headers: {
+					"Content-Type": "application/json",
+					Authorization: `Bearer ${accessToken}`,
+				},
+			})
+			.then((response) => {
+				let userData = response.data.data;
+				setName(response.data.data?.name);
+				setLoggedIn(true);
+				// navigateToHome();
+				// const expires = moment().add("8", "h").toDate();
+				// setCookie("__usrN__", response.data.data?.name, { expires });
+				// if (!userData?.advertisementTrue) {
+				// 	setLoggedIn(false);
+				// 	// setManager(false);
+				// 	movePage("/LoginAgree");
+				// }
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+	};
+
+	// localStorage 임시 사용
+	useEffect(() => {
+		const result = localStorage.getItem("accessToken");
+		if (result) { setAccessToken(result); }
+	}, []);
+
+	useEffect(() => {
+		if (accessToken) {
+			getAmuseUserInfo();
+		}
+	}, [accessToken]);
+
+
 	return (
 		<div>
 			<div className={Style["App"]}>
@@ -402,7 +446,7 @@ function Header() {
 														handleClick={() =>
 															navigateToSubPageComp(
 																categoryIds[
-																	index
+																index
 																],
 																categoryName
 															)
@@ -535,7 +579,7 @@ function Header() {
 														handleClick={() =>
 															navigateToSubPageComp(
 																categoryIds[
-																	index
+																index
 																],
 																categoryName
 															)

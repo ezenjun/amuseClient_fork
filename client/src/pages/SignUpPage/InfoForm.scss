@@ -1,0 +1,86 @@
+.info_body {
+  .info_form {
+    .info_note {
+      color: #000;
+      font-family: Pretendard;
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: normal;
+      margin-bottom: 20px;
+
+      .color_red {
+        color: #E6003E;
+      }
+    }
+
+    .flex_box_sub {
+      display: flex;
+      justify-content: space-between;
+
+      .input_name {
+        width: 597px;
+      }
+
+      .input_gender input[type="radio"] {
+        display: none;
+      }
+
+      .input_gender label {
+        height: 43px;
+        display: inline-block;
+        padding: 13px 16.2px;
+        font-size: 16px;
+        cursor: pointer;
+      }
+
+      .input_gender label.first_label {
+        border-radius: 8px 0 0 8px;
+        border: 1px solid #DDD;
+        background: #FFF;
+      }
+
+      .input_gender label.last_label {
+        border-radius: 0 8px 8px 0;
+        border: 1px solid #DDD;
+        background: #FFF;
+      }
+
+      .input_gender input[type="radio"]:checked+label {
+        background-color: #3498db;
+        color: #fff;
+      }
+
+
+      .foreign_box {
+        margin-left: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 40px;
+
+        .foreign_check {
+          content: url(../LogInPage/Icons/check_icon.png);
+          width: 20px;
+          margin: 0 10px 0 0;
+        }
+  
+        .foreign_check:checked {
+          content: url(../LogInPage/Icons/checked_icon.png);
+        }
+  
+        .foreign_text {
+          width: 32px;
+          color: #383838;
+          font-family: Pretendard;
+          font-size: 12px;
+          font-style: normal;
+          font-weight: 500;
+          line-height: normal;
+        }
+      }
+
+      
+    }
+  }
+}
