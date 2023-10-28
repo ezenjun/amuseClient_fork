@@ -1,19 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import { CategoryData } from "../../Interfaces/DataInterfaces";
-import {
-  BannerProps,
-  ListProps,
-  BoxProps,
-  DropdownProps,
-} from "../../Interfaces/PropsInterfaces";
+import { BannerProps, ListProps } from "../../Interfaces/PropsInterfaces";
 import axios from "axios";
 import Style from "./SubPage.module.css";
-import ChildTitle from "./SubtitleImgs/ChildTitle.jpg";
 import Fade from "../../Fade";
-import SubLists from "./SubLists";
+import SubLists from "./components/subLists";
 import SubBanners from "./SubBanners";
 import SubTiles from "./SubTiles";
 import MainComponent from "../../MainComponent";
@@ -34,49 +27,7 @@ interface tileList {
   itemInfos: [];
 }
 
-const Box: React.FC<BoxProps> = ({
-  marginRight,
-  itemId,
-  handleClick,
-  title,
-  startPrice,
-  imageUrl,
-}) => (
-  <div className={Style["box"]} style={{ marginRight }} onClick={handleClick}>
-    <div
-      className={Style["box_before"]}
-      style={{ backgroundImage: `url(${imageUrl})` }}
-    ></div>
-    <div className={Style["like_count"]}></div>
-    <p className={Style["tripTitle"]}>{title}</p>
-    <p className={Style["tripCost"]}>가격 : {startPrice}원 ~</p>
-  </div>
-);
-
-const Dropdown: React.FC<DropdownProps> = ({ onChange }) => {
-  const [selectedOption, setSelectedOption] = useState("like_num_desc");
-
-  const handleDropdownChange = (
-    event: React.ChangeEvent<HTMLSelectElement>
-  ) => {
-    const selectedValue = event.target.value;
-    setSelectedOption(selectedValue);
-    onChange(selectedValue);
-  };
-
-  return (
-    <div className={Style["dropdown"]} style={{ float: "right" }}>
-      <select value={selectedOption} onChange={handleDropdownChange}>
-        <option value="best-item">좋아요 순</option>
-        <option value="current-item">최신순</option>
-      </select>
-    </div>
-  );
-};
-
 function SubPageComp() {
-  const movePage = useNavigate();
-
   const { apiKey } = useParams() as { apiKey: string };
   const [categoryData, setCategoryData] = useState<CategoryData | null>(null);
   const [cookies] = useCookies(["__jwtkid__"]);

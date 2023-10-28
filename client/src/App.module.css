@@ -14,9 +14,8 @@
 }
 .App {
   display: flex;
-  align-items: center;
   justify-content: center;
-  /* width: 1060px; */
+  align-items: center;
   margin: 0;
 }
 
