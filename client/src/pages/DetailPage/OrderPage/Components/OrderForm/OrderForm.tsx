@@ -1,83 +1,104 @@
-import { FormEvent, useState } from "react";
+import { useEffect, useState } from "react";
 import { requestPay } from "../../API/import";
 import { useOrderContext } from "../../../Contexts/OrderContext";
 import { OrderDetail } from "../OrderDetail";
-import { useInfoContext } from "../../../Contexts/InfoContext";
 import { OrderInfoContainer } from "./styles";
 import { PurchaseInfoItems } from "../PurchaseInfoItems";
-import { useRecoilState, useRecoilValue } from "recoil";
-import { PaymentDataState } from "../../../../../Recoil/OrderAtomState";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import {
+	PaymentDataState,
+	currentUserPointState,
+} from "../../../../../Recoil/OrderAtomState";
 import { FormProvider, useForm } from "react-hook-form";
+import { useCookies } from "react-cookie";
 import { FormValues } from "../../../../../Interfaces/DataInterfaces";
 import { useNavigate } from "react-router";
+import axios from "axios";
 
 export function OrderForm() {
 	const navigate = useNavigate();
-	const { orderData, setOrderData, orderTicketData } = useOrderContext();
-	const { name, setName, email, setEmail, phone, setPhone } =
-		useInfoContext();
 	const [isLoading, setLoading] = useState(false);
-
-	const ticketNameAndCount = () => {
-		let count = -1;
-		let product = orderTicketData[0]?.title;
-		for (let item of orderTicketData) {
-			count = count + item.count;
-		}
-		if (count > 0) {
-			return product + " 외 " + count.toString() + "개";
-		} else {
-			return product;
-		}
-		// return
-	};
-
-	const submitHandler = (e: FormEvent<HTMLFormElement>) => {
-		console.log("orderForm");
-		e.preventDefault();
-		setLoading(true);
-		let products = ticketNameAndCount();
-		let data = { ...orderData, name, email, products };
-		console.log("data", data);
-		requestPay(data, (rsp: any) => {
-			if (rsp.success) {
-				// axios로 HTTP 요청
-				// axios({
-				//   url: `http://localhost:3000/detail/${orderData.productId}`,
-				//   method: "post",
-				//   headers: { "Content-Type": "application/json" },
-				//   data: {
-				//     imp_uid: rsp.imp_uid,
-				//     merchant_uid: rsp.merchant_uid,
-				//   },
-				// }).then((data) => {
-				//   // 서버 결제 API 성공시 로직
-				//   axios.post("url", { orderData });
-				// });
-				console.log(rsp);
-			} else {
-				alert(`${rsp.error_msg}`);
-			}
-			setLoading(false);
-		});
-	};
-
-	// const { handleSubmit } = useForm<FormValues>();
 	const [paymentData, setPaymentData] = useRecoilState(PaymentDataState);
 
-	const onSubmit = (data: FormValues) => {
-		setPaymentData((prevData) => ({
-			...prevData,
+	// 최종 결제 api
+	const onSubmit = async (data: FormValues) => {
+		const updatedPaymentData = {
+			...paymentData,
 			reservationInfo: data.reservationInfo,
 			guestInfo: data.guestInfo,
-		}));
-		navigate("./complete");
+			payAmount: paymentData.totalAmount - paymentData.pointUsed,
+		};
+		setPaymentData(updatedPaymentData);
+
+		const allTermsAgreed = Object.values(paymentData.termsAgreement).every(
+			(term) => term
+		);
+		if (allTermsAgreed && paymentData.totalAmount > 0) {
+			requestPay(updatedPaymentData, (rsp: any) => {
+				if (rsp.success) {
+					navigate("./complete");
+				} else {
+					alert(`${rsp.error_msg}`);
+					navigate(-1);
+				}
+			});
+		} else {
+			if (allTermsAgreed) {
+				alert("올바르지 않은 가격입니다");
+			} else {
+				alert("필수 약관을 모두 동의해주세요");
+			}
+		}
 	};
-	const methods = useForm<FormValues>({
-		defaultValues: {
+
+	const setCurrentUserPoint = useSetRecoilState(currentUserPointState);
+	// 유저 정보 (이름, 생일, 전화번호 등)
+	const [cookies] = useCookies(["__jwtkid__"]);
+	const getPaymentUserInfo = async () => {
+		const token = cookies.__jwtkid__;
+		if (token) {
+			axios
+				.get(`${process.env.REACT_APP_AMUSE_API}/api/payment`, {
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: `${token}`,
+					},
+				})
+				.then((response) => {
+					const data = response.data.data;
+					console.log("getPaymentUserInfo", data);
+					setPaymentData((prevData) => ({
+						...prevData,
+						reservationInfo: {
+							...prevData.reservationInfo,
+							reservationNameKR: data.userName,
+							reservationBirthday: data.userBirthDay.replace(
+								/-/g,
+								""
+							),
+							reservationPhoneNumber: data.userPhoneNumber,
+							reservationEmail: data.userEmail,
+						},
+					}));
+					setCurrentUserPoint(data.userPoint ? data.userPoint : 0);
+				})
+				.catch((err) => {
+					console.log(err);
+				});
+		}
+	};
+	useEffect(() => {
+		getPaymentUserInfo();
+	}, []);
+
+	// 결제 예약자 정보 초기화
+	const methods = useForm<FormValues>();
+
+	useEffect(() => {
+		methods.reset({
 			reservationInfo: {
 				reservationNameKR:
-					paymentData.reservationInfo?.reservationNameKR || "",
+					paymentData.reservationInfo.reservationNameKR || "",
 				reservationBirthday:
 					paymentData.reservationInfo?.reservationBirthday || "",
 				reservationFirstNameEN:
@@ -89,14 +110,14 @@ export function OrderForm() {
 				reservationPhoneNumber:
 					paymentData.reservationInfo?.reservationPhoneNumber || "",
 				reservationEmail:
-					paymentData.reservationInfo?.reservationEmail || "",
+					paymentData.reservationInfo.reservationEmail || "",
 				reservationPassportNumber:
 					paymentData.reservationInfo?.reservationPassportNumber ||
 					"",
 			},
 			guestInfo: {},
-		},
-	});
+		});
+	}, [methods, paymentData.reservationInfo.reservationNameKR]);
 
 	return (
 		<FormProvider {...methods}>

@@ -27,7 +27,10 @@ export const OrderDetail = ({ isLoading }: Props) => {
 		<OrderDetailContainer>
 			<ProductInfo />
 			<ReservationInfo />
-			{selectedItem.itemType === "Hotel" && <GuestInfo />}
+			{(selectedItem.itemType === "DomesticHotel" ||
+				selectedItem.itemType === "InternationalHotel") && (
+				<GuestInfo />
+			)}
 			<AdditionalInfo />
 			<Point myPoint={currentUserPoint} />
 			<PaymentMethod />

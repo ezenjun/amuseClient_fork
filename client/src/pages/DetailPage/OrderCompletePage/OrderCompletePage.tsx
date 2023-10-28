@@ -15,7 +15,7 @@ import { Regular20Gray } from "../../../components/Text/Text";
 
 const OrderCompletePage = () => {
 	const navigate = useNavigate();
-
+	const id = 1;
 	return (
 		<MainComponent>
 			<OrderCompletePageContainer>
@@ -43,7 +43,7 @@ const OrderCompletePage = () => {
 						fontSize={18}
 						verticalPadding={18}
 						color="red"
-						onClick={() => console.log("clicked")}
+						onClick={() => navigate(`/payment/${id}`)}
 					>
 						결제 상세 정보 보기
 					</WebButton>
