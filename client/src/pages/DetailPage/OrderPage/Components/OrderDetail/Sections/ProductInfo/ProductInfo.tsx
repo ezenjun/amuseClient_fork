@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import { SubHeader } from "../../../../styles";
 import { DetailSectionContainer } from "../../styles";
@@ -13,8 +13,15 @@ import {
 	Bold24DarkGray,
 } from "../../../../../../../components/Text/Text";
 import { TotalPriceContainer } from "./styles";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import {
+	PaymentDataState,
+	selectedItemState,
+} from "../../../../../../../Recoil/OrderAtomState";
 
 export function ProductInfo() {
+	const setPaymentData = useSetRecoilState(PaymentDataState);
+	const selectedItem = useRecoilValue(selectedItemState);
 	const { orderTicketData, orderRange } = useOrderContext();
 	const totalAmount = orderTicketData.reduce(
 		(sum: number, ticket: TicketData) => {
@@ -30,6 +37,13 @@ export function ProductInfo() {
 		},
 		0
 	);
+	useEffect(() => {
+		setPaymentData((prevData) => ({
+			...prevData,
+			totalAmount: totalAmount,
+			itemName: selectedItem.title,
+		}));
+	}, []);
 	return (
 		<DetailSectionContainer>
 			<SubHeader>상품정보</SubHeader>

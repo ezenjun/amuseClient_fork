@@ -33,7 +33,7 @@ function ProductIntro({ itemId }: ItemIdProps) {
 	}, [itemId]);
 
 	return (
-		<div className="product-introduction">
+		<div className="product-introduction" style={{ whiteSpace: "pre-wrap" }}>
 			<div
 				dangerouslySetInnerHTML={{
 					__html: productIntroData?.content ?? "",

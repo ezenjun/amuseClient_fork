@@ -1,7 +1,5 @@
-import React, { ChangeEvent } from "react";
+import React, { ChangeEvent, MouseEvent } from "react";
 import { useOrderContext } from "../../../../../Contexts/OrderContext";
-import { CommonHeader } from "../../../CommonHeader";
-import styles from "./Point.module.scss";
 import { DetailSectionContainer } from "../../styles";
 import { SubHeader } from "../../../../styles";
 import GrayBox from "../../../../../../../components/Box/GrayBox";
@@ -14,9 +12,12 @@ import {
 } from "../../../../../../../components/Text/Text";
 import { PointProps } from "../../../../../../../Interfaces/PropsInterfaces";
 import { WebButton } from "../../../../../../../components/Button/WebButton";
+import { useSetRecoilState } from "recoil";
+import { PaymentDataState } from "../../../../../../../Recoil/OrderAtomState";
 
 export const Point = ({ myPoint }: PointProps) => {
 	const { orderData, setOrderData } = useOrderContext();
+	const setPaymentData = useSetRecoilState(PaymentDataState);
 
 	const pointHandler = (e: ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = e.target;
@@ -24,18 +25,34 @@ export const Point = ({ myPoint }: PointProps) => {
 		if (Number(value) > myPoint) {
 			data["point"] = myPoint;
 			setOrderData(data);
+			setPaymentData((prevData) => ({
+				...prevData,
+				pointUsed: myPoint,
+				payAmount: prevData.totalAmount - myPoint,
+			}));
 			return;
 		} else {
-			data[name] = value;
+			data["point"] = value;
 			setOrderData(data);
+			setPaymentData((prevData) => ({
+				...prevData,
+				pointUsed: Number(value),
+				payAmount: prevData.totalAmount - Number(value),
+			}));
 		}
 	};
-	const onClickUseAll = () => {
+	const onClickUseAll = (e: MouseEvent<HTMLButtonElement>) => {
+		e.preventDefault();
 		const data = { ...orderData };
 		if (orderData.point >= myPoint) {
 			return;
 		} else {
 			data["point"] = myPoint;
+			setPaymentData((prevData) => ({
+				...prevData,
+				pointUsed: myPoint,
+				payAmount: prevData.totalAmount - myPoint,
+			}));
 			setOrderData(data);
 		}
 	};
