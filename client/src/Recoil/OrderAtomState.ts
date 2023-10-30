@@ -23,6 +23,7 @@ export const PaymentDataState = atom<PaymentInfo>({
 	default: {
 		userId: 0,
 		itemId: 0,
+		itemName: "",
 		itemType: "",
 		startDate: new Date(),
 		endDate: new Date(),
@@ -53,5 +54,12 @@ export const PaymentDataState = atom<PaymentInfo>({
 		paymentMethod: "신용/체크카드",
 		totalAmount: 0,
 		pointUsed: 0,
+		payAmount: 0,
+		termsAgreement: {
+			privacyCollection: false,
+			privacyToThirdParty: false,
+			ageOver14: false,
+			stayRule: false,
+		},
 	},
 });
