@@ -256,7 +256,7 @@ function Header() {
 
 	const getUserInfoAsToken = async (token: string) => {
 		axios
-			.get(`${process.env.REACT_APP_AMUSE_API}/api/v1/user/login/info`, {
+			.get(`${process.env.REACT_APP_AMUSE_API}/api/v1/user/info`, {
 				headers: {
 					"Content-Type": "application/json",
 					Authorization: `${token}`,

@@ -20,7 +20,7 @@ const LoginAgree = () => {
     const getUserInfoAsToken = async () => {
 
         axios
-            .get(`${process.env.REACT_APP_AMUSE_API}/api/v1/user/login/info`, {
+            .get(`${process.env.REACT_APP_AMUSE_API}/api/v1/user/info`, {
                 headers: {
                     "Content-Type": "application/json",
                     Authorization: `${cookies.__jwtkid__}`,
@@ -59,10 +59,10 @@ const LoginAgree = () => {
                 "Authorization": `${token}`,
             },
         }).then((response) => {
-            // console.log(response)
-            movePage("/")
+            console.log(response)
+            movePage("/");
         }).catch((err) => {
-
+            console.log(err);
         })
     }
     const handleLogout = () => {

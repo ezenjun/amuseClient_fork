@@ -23,10 +23,10 @@ const Login: React.FC = () => {
 	const [loggedIn, setLoggedIn] = useRecoilState<boolean>(isLoggedIn);
 	const navigate = useNavigate();
 
-	let redirectUri = "http://localhost:3000/";
-	if (process.env.REACT_APP_AMUSE_API === "https://amuseapi.wheelgo.net") {
-		redirectUri = "http://localhost:3000/";
-	}
+	const redirectUrl = process.env.REACT_APP_REDIRECT_URL
+	// if (process.env.REACT_APP_AMUSE_API === "https://amuseapi.wheelgo.net") {
+	// 	redirectUrl = "http://localhost:3000/";
+	// }
 	const axiosInstance = axios.create({
 		withCredentials: true,
 	});
@@ -113,20 +113,20 @@ const Login: React.FC = () => {
 					<div className="OAuth">
 						<a
 							className="login_google"
-							href={`${process.env.REACT_APP_AMUSE_API}/oauth2/authorization/google?redirect_uri=${redirectUri}`}
+							href={`${process.env.REACT_APP_AMUSE_API}/oauth2/authorization/google?redirect_uri=${redirectUrl}`}
 						>
 							<img src={GoogleIcon} alt="구글 로고" className="sns_logo" />
 						</a>
 
 						<a
 							className="login_naver"
-							href={`${process.env.REACT_APP_AMUSE_API}/oauth2/authorization/naver?redirect_uri=${redirectUri}`}
+							href={`${process.env.REACT_APP_AMUSE_API}/oauth2/authorization/naver?redirect_uri=${redirectUrl}`}
 						>
 							<img src={NaverIcon} alt="네이버 로고" className="sns_logo" />
 						</a>
 						<a
 							className="login_kakao"
-							href={`${process.env.REACT_APP_AMUSE_API}/oauth2/authorization/kakao?redirect_uri=${redirectUri}`}
+							href={`${process.env.REACT_APP_AMUSE_API}/oauth2/authorization/kakao?redirect_uri=${redirectUrl}`}
 						>
 							<img src={KakaoIcon} alt="카카오 로고" className="sns_logo" />
 						</a>
