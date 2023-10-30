@@ -7,12 +7,12 @@ const SingleSignOn = async () => {
     var IMP = window.IMP;
     IMP.init("imp38885874");
     console.log('성공ㅇ이ㅏ이ㅏ어ㅣ라ㅓㅣㅏ');
-
+    const redirect_url = process.env.REACT_APP_REDIRECT_URL
     return new Promise((resolve, reject) => {
         IMP.certification({
             pg: 'inicis_unified.{CPID}',
             merchant_uid: "ORD20180131-0000011",
-            m_redirect_url: "http://localhost:3000/SignUpAmuse",
+            m_redirect_url: `${redirect_url}/SignUpAmuse`,
         }, function (rsp) {
             console.log(rsp)
             if (rsp.success) {

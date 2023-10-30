@@ -8,7 +8,7 @@ import NaverIcon from "../LogInPage/Icons/naver_logo.png";
 import AmuseIcon from "../LogInPage/Icons/amuse_logo.png";
 
 export default function SignUp() {
-  const redirectU = "http://amusetravel.wheelgo.net/LoginAgree"
+  const redirectU = `${process.env.REACT_APP_REDIRECT_URL}/LoginAgree`
   return (
     <MainComponent>
       <div className="login_body">
