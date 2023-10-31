@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { ItemIdProps } from "../../../../../Interfaces/PropsInterfaces";
-import "./ProductIntro.scss";
+import * as S from "./style";
 import axios from "axios";
 
 interface ProductIntroData {
@@ -8,14 +8,10 @@ interface ProductIntroData {
 }
 
 function ProductIntro({ itemId }: ItemIdProps) {
-  /**
-   * ProductIntro Data
-   */
+  // ProductIntro Data
   const [productIntroData, setProductIntroData] = useState<ProductIntroData>();
 
-  /**
-   * ProductIntro API
-   */
+  // ProductIntro API
   useEffect(() => {
     axios
       .get(`${process.env.REACT_APP_AMUSE_API}/detail/${itemId}/product-intro`)
@@ -28,13 +24,13 @@ function ProductIntro({ itemId }: ItemIdProps) {
   }, [itemId]);
 
   return (
-    <div className="product-introduction" style={{ whiteSpace: "pre-wrap" }}>
+    <S.ProductIntro>
       <div
         dangerouslySetInnerHTML={{
           __html: productIntroData?.content ?? "",
         }}
-      ></div>
-    </div>
+      />
+    </S.ProductIntro>
   );
 }
 
