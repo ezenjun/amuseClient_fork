@@ -12,7 +12,7 @@ export const Date = styled.div`
   font-size: 15px;
   font-weight: 600;
   color: #343a40;
-  margin: 12px 0;
+  margin-bottom: 15px;
 `;
 
 export const Ticket = styled.div`
