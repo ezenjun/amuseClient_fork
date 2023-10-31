@@ -9,7 +9,7 @@ import {
   DayClickEventHandler,
   ClassNames,
 } from "react-day-picker";
-import TicketList from "../TicketList/TicketList";
+import TicketList from "../TicketList";
 import axios from "axios";
 import { useOrderContext } from "../../../../Contexts/OrderContext";
 import { useSetRecoilState } from "recoil";
