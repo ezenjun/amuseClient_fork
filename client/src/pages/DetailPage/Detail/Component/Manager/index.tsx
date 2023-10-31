@@ -1,22 +1,18 @@
 import React, { useEffect, useState } from "react";
-import "./Manager.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope as solidFaEnelope } from "@fortawesome/free-solid-svg-icons";
 import { faEnvelope as regularFaEnelope } from "@fortawesome/free-regular-svg-icons";
 import { GuideData } from "../../../../../Interfaces/DataInterfaces";
 import { ItemIdProps } from "../../../../../Interfaces/PropsInterfaces";
 import axios from "axios";
+import * as S from "./style";
 
 function Manager({ itemId }: ItemIdProps) {
-  /**
-   * Manager Data
-   */
+  // Manager Data
   const [guideData, setGuideData] = useState<GuideData>();
   const [isHovered, setIsHovered] = useState(false);
 
-  /**
-   * Manager API
-   */
+  // Manager API
   useEffect(() => {
     axios
       .get(`${process.env.REACT_APP_AMUSE_API}/detail/${itemId}/guide-info`)
@@ -28,9 +24,7 @@ function Manager({ itemId }: ItemIdProps) {
       });
   }, [itemId]);
 
-  /**
-   * Email Connect
-   */
+  // Email Connect
   const handleInquiryClick = () => {
     if (guideData && guideData.email) {
       const subject = encodeURIComponent(`[어뮤즈트래블 상품 문의하기]`);
@@ -42,19 +36,14 @@ function Manager({ itemId }: ItemIdProps) {
   };
 
   return (
-    <div className="Manager">
-      <div className="manager-header">
-        <div className="manager-profile">
-          <img
-            className="manager-image"
-            src={guideData?.profileImageUrl ?? "img"}
-            alt="manager"
-          />
-          <p className="manager-name">{guideData?.userName ?? "name"}</p>
-        </div>
+    <S.Manager>
+      <S.Header>
+        <S.Profile>
+          <S.Image src={guideData?.profileImageUrl ?? "img"} alt="manager" />
+          <S.Name>{guideData?.userName ?? "name"}</S.Name>
+        </S.Profile>
 
-        <div
-          className="manager-inquiry"
+        <S.Inquiry
           onClick={handleInquiryClick}
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
@@ -63,14 +52,12 @@ function Manager({ itemId }: ItemIdProps) {
             className="icon"
             icon={isHovered ? regularFaEnelope : solidFaEnelope}
           />
-          <p className="inquiry">문의하기</p>
-        </div>
-      </div>
+          <S.Text>문의하기</S.Text>
+        </S.Inquiry>
+      </S.Header>
 
-      <div className="manager-info">
-        <p>{guideData?.guide_comment_by_item ?? ""}</p>
-      </div>
-    </div>
+      <S.Info>{guideData?.guide_comment_by_item ?? ""}</S.Info>
+    </S.Manager>
   );
 }
 
