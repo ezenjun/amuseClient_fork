@@ -11,15 +11,16 @@ import OtherInfo from "./Component/OtherInfo/OtherInfo";
 import Manager from "./Component/Manager/Manager";
 import Review from "./Component/Review/Review";
 import ReviewPicture from "./Component/ReviewPicture/ReviewPicture";
-import Calendar from "./Component/TicketSelect/Calendar/Calendar";
+import Calendar from "./Component/TicketSelect/Calendar";
 import ReservationBottom from "./Component/ReservationBottom/ReservationBottom";
 import { DetailProps } from "../../../Interfaces/PropsInterfaces";
 import MainComponent from "../../../MainComponent";
+import * as S from "./style";
 
 function Detail({ itemId, productCode, startPrice, likeNum }: DetailProps) {
   return (
     <MainComponent>
-      <div className="Detail">
+      <S.Detail>
         <div className="page">
           {/* 상세페이지 컨텐츠 */}
           <div className="content">
@@ -40,7 +41,6 @@ function Detail({ itemId, productCode, startPrice, likeNum }: DetailProps) {
             <Reservation
               itemId={itemId}
               productCode={productCode}
-              // startPrice={startPrice}
               likeNum={likeNum}
             />
           </div>
@@ -49,7 +49,7 @@ function Detail({ itemId, productCode, startPrice, likeNum }: DetailProps) {
             <ReservationBottom itemId={itemId} />
           </div>
         </div>
-      </div>
+      </S.Detail>
     </MainComponent>
   );
 }
