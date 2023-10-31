@@ -22,7 +22,7 @@ function TitleDetail({
   review_count,
 }: TitleDetailProps) {
   return (
-    <>
+    <S.TitleDetail>
       <S.Location>
         {country}
         <FontAwesomeIcon icon={faChevronRight} />
@@ -44,7 +44,7 @@ function TitleDetail({
           <FontAwesomeIcon icon={faChevronRight} />
         </S.Right>
       </S.Review>
-    </>
+    </S.TitleDetail>
   );
 }
 

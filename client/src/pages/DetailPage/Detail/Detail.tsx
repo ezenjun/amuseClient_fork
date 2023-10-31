@@ -23,7 +23,7 @@ function Detail({ itemId, productCode, startPrice, likeNum }: DetailProps) {
       <S.Detail>
         <div className="page">
           {/* 상세페이지 컨텐츠 */}
-          <div className="content">
+          <S.Content>
             <Title itemId={itemId} />
             <Picture itemId={itemId} />
             <Calendar itemId={itemId} numberOfmonth={2} />
@@ -35,7 +35,7 @@ function Detail({ itemId, productCode, startPrice, likeNum }: DetailProps) {
             <ReviewPicture itemId={itemId} />
             <Review itemId={itemId} />
             {/* <Footer /> 상세페이지 푸터 */}
-          </div>
+          </S.Content>
           {/* 상세페이지 사이드 바 */}
           <div className="side">
             <Reservation

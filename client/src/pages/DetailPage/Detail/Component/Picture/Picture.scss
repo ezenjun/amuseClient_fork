@@ -1,8 +1,6 @@
 @use "../../Detail.scss" as detail;
 
 .Picture {
-  padding: detail.$padding;
-
   .subpicture {
     display: flex;
     flex-direction: row;

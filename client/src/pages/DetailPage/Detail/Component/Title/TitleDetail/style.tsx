@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+export const TitleDetail = styled.div``;
+
 export const Location = styled.div`
   display: flex;
   align-items: center;
@@ -19,7 +21,7 @@ export const Title = styled.div`
   display: flex;
   align-items: center;
   text-align: left;
-  margin: 20px 0;
+  margin: 18px 0;
   font-size: 24px;
   font-weight: 700;
   color: #343a40;

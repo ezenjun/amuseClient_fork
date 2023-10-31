@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
-export const Calendar = styled.div`
+export const Calendar = styled.div``;
+
+export const Date = styled.div`
   padding: 30px 0;
   border: 1px solid #e9ecef;
   display: flex;

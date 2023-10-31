@@ -155,9 +155,9 @@ function Calendar({
     setOrderRange(range);
   }, [range]);
   return (
-    <>
+    <S.Calendar>
       <S.Title>일자</S.Title>
-      <S.Calendar>
+      <S.Date>
         <style>{`.custom-select { color: white; background-color: #F184A1; }`}</style>
         <DayPicker
           locale={ko}
@@ -170,7 +170,7 @@ function Calendar({
           disabled={{ before: today }}
           classNames={classNames}
         />
-      </S.Calendar>
+      </S.Date>
       <TicketList
         range={range}
         itemId={itemId}
@@ -179,7 +179,7 @@ function Calendar({
         classTicketPrice={classTicketPrice}
         classTicketCnt={classTicketCnt}
       />
-    </>
+    </S.Calendar>
   );
 }
 
