@@ -1,22 +1,17 @@
 import React, { useEffect, useState } from "react";
-import "./OtherInfo.scss";
-import OtherInfoDetail from "./OtherInfoDetail/OtherInfoDetail";
-import axios from "axios";
 import { ItemIdProps } from "../../../../../Interfaces/PropsInterfaces";
+import axios from "axios";
+import * as S from "./style";
 
 interface OtherInfoData {
   content: string;
 }
 
 function OtherInfo({ itemId }: ItemIdProps) {
-  /**
-   * OtherInfo Data
-   */
+  // OtherInfo Data
   const [otherInfoData, setOtherInfoData] = useState<OtherInfoData>();
 
-  /**
-   * OtherInfo API
-   */
+  // OtherInfo API
   useEffect(() => {
     axios
       .get(`${process.env.REACT_APP_AMUSE_API}/detail/${itemId}/other-info`)
@@ -29,13 +24,13 @@ function OtherInfo({ itemId }: ItemIdProps) {
   }, [itemId]);
 
   return (
-    <div className="other-info">
+    <S.OtherInfo>
       <div
         dangerouslySetInnerHTML={{
           __html: otherInfoData?.content ?? "",
         }}
-      ></div>
-    </div>
+      />
+    </S.OtherInfo>
   );
 }
 

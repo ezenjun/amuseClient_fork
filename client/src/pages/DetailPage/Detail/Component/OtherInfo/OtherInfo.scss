@@ -1,6 +1,0 @@
-@use "../../Detail.scss" as detail;
-
-.other-info {
-  padding: detail.$padding;
-  @include detail.line;
-}
