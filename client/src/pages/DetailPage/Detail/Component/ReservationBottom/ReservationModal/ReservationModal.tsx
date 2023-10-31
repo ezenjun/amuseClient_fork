@@ -2,8 +2,12 @@ import React, { useState, useEffect } from "react";
 import Modal from "react-modal";
 import "./ReservationModal.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronLeft, faChevronRight, faTimes } from "@fortawesome/free-solid-svg-icons";
-import Calendar from "../../TicketSelect/Calendar/Calendar";
+import {
+  faChevronLeft,
+  faChevronRight,
+  faTimes,
+} from "@fortawesome/free-solid-svg-icons";
+import Calendar from "../../TicketSelect/Calendar";
 import customModule from "../../TicketSelect/custom.module.scss";
 import axios from "axios";
 

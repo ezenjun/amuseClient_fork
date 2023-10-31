@@ -1,12 +1,11 @@
 @use "../../Detail.scss" as detail;
 
 .Picture {
-    padding: detail.$padding;
-    @include detail.line;
-    
-    .subpicture {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-    }
+  padding: detail.$padding;
+
+  .subpicture {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
 }

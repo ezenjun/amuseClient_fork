@@ -7,7 +7,6 @@ import {
   selectedItemState,
 } from "../../../../../Recoil/OrderAtomState";
 import TitleDetail from "./TitleDetail";
-import * as S from "./style";
 import axios from "axios";
 
 function Title({ itemId }: ItemIdProps) {
@@ -48,15 +47,13 @@ function Title({ itemId }: ItemIdProps) {
   }, [itemId]);
 
   return (
-    <S.Title>
-      <TitleDetail
-        country={titleData?.country ?? "country"}
-        city={titleData?.city ?? "city"}
-        title={titleData?.title ?? "title"}
-        rated={formattedRatedData ? Number(formattedRatedData) : 0.0}
-        review_count={titleData?.review_count ?? 0.0}
-      />
-    </S.Title>
+    <TitleDetail
+      country={titleData?.country ?? "country"}
+      city={titleData?.city ?? "city"}
+      title={titleData?.title ?? "title"}
+      rated={formattedRatedData ? Number(formattedRatedData) : 0.0}
+      review_count={titleData?.review_count ?? 0.0}
+    />
   );
 }
 
