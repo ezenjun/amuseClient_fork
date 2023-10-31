@@ -12,46 +12,61 @@ import {
 } from "../../../../../../../components/Text/Text";
 import { PointProps } from "../../../../../../../Interfaces/PropsInterfaces";
 import { WebButton } from "../../../../../../../components/Button/WebButton";
-import { useSetRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import { PaymentDataState } from "../../../../../../../Recoil/OrderAtomState";
 
 export const Point = ({ myPoint }: PointProps) => {
 	const { orderData, setOrderData } = useOrderContext();
-	const setPaymentData = useSetRecoilState(PaymentDataState);
+	const [paymentData, setPaymentData] = useRecoilState(PaymentDataState);
 
 	const pointHandler = (e: ChangeEvent<HTMLInputElement>) => {
-		const { name, value } = e.target;
+		const { value } = e.target;
 		const data = { ...orderData };
-		if (Number(value) > myPoint) {
-			data["point"] = myPoint;
+		// Convert value to a number
+		const enteredValue = Number(value);
+
+		if (enteredValue > myPoint || enteredValue > paymentData.totalAmount) {
+			if (myPoint <= paymentData.totalAmount) {
+				data["point"] = myPoint;
+			}
+			if (myPoint > paymentData.totalAmount) {
+				data["point"] = paymentData.totalAmount;
+			}
 			setOrderData(data);
 			setPaymentData((prevData) => ({
 				...prevData,
-				pointUsed: myPoint,
-				payAmount: prevData.totalAmount - myPoint,
+				pointUsed: paymentData.totalAmount,
+				payAmount: 0,
 			}));
-			return;
 		} else {
-			data["point"] = value;
+			data["point"] = enteredValue;
 			setOrderData(data);
 			setPaymentData((prevData) => ({
 				...prevData,
-				pointUsed: Number(value),
-				payAmount: prevData.totalAmount - Number(value),
+				pointUsed: enteredValue,
+				payAmount: prevData.totalAmount - enteredValue,
 			}));
 		}
 	};
+
 	const onClickUseAll = (e: MouseEvent<HTMLButtonElement>) => {
 		e.preventDefault();
 		const data = { ...orderData };
-		if (orderData.point >= myPoint) {
-			return;
-		} else {
+
+		if (myPoint <= paymentData.totalAmount) {
 			data["point"] = myPoint;
 			setPaymentData((prevData) => ({
 				...prevData,
 				pointUsed: myPoint,
 				payAmount: prevData.totalAmount - myPoint,
+			}));
+			setOrderData(data);
+		} else {
+			data["point"] = paymentData.totalAmount;
+			setPaymentData((prevData) => ({
+				...prevData,
+				pointUsed: paymentData.totalAmount,
+				payAmount: prevData.totalAmount - paymentData.totalAmount,
 			}));
 			setOrderData(data);
 		}
@@ -65,7 +80,7 @@ export const Point = ({ myPoint }: PointProps) => {
 					<InputContainer>
 						<PointInput
 							type="number"
-							min={0}
+							min={undefined}
 							max={myPoint}
 							placeholder="0"
 							name="point"
