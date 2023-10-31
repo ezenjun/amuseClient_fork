@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import styles from "../../../../../../../node_modules/react-day-picker/dist/style.module.css";
-import "./Calendar.scss";
+import styles from "react-day-picker/dist/style.module.css";
 import { addDays, format, isSameDay } from "date-fns";
 import { ko } from "date-fns/locale";
 import {
@@ -15,6 +14,7 @@ import axios from "axios";
 import { useOrderContext } from "../../../../Contexts/OrderContext";
 import { useSetRecoilState } from "recoil";
 import { selectedItemState } from "../../../../../../Recoil/OrderAtomState";
+import * as S from "./style";
 
 const seasonEmoji: Record<string, string> = {
   winter: "⛄️",
@@ -155,9 +155,9 @@ function Calendar({
     setOrderRange(range);
   }, [range]);
   return (
-    <div className={`select-date ${classContainer}`}>
-      <p className={`select-ticket-title ${classNone}`}>티켓 선택</p>
-      <div className="Calendar">
+    <>
+      <S.Title>일자</S.Title>
+      <S.Calendar>
         <style>{`.custom-select { color: white; background-color: #F184A1; }`}</style>
         <DayPicker
           locale={ko}
@@ -170,7 +170,7 @@ function Calendar({
           disabled={{ before: today }}
           classNames={classNames}
         />
-      </div>
+      </S.Calendar>
       <TicketList
         range={range}
         itemId={itemId}
@@ -179,7 +179,7 @@ function Calendar({
         classTicketPrice={classTicketPrice}
         classTicketCnt={classTicketCnt}
       />
-    </div>
+    </>
   );
 }
 
