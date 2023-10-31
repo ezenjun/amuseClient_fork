@@ -3,27 +3,16 @@ import { format, isSameDay, parseISO } from "date-fns";
 import { DateRange } from "react-day-picker";
 import { useOrderContext } from "../../../../Contexts/OrderContext";
 import { TicketData } from "../../../../../../Interfaces/DataInterfaces";
-import Ticket from "../Ticket/Ticket";
+import Ticket from "../Ticket";
 import axios from "axios";
 import * as S from "./style";
 
 type DateProps = {
   itemId: number | null;
   range: DateRange | undefined;
-  classNone?: string;
-  classTicketContainer?: string;
-  classTicketPrice?: string;
-  classTicketCnt?: string;
 };
 
-function TicketList({
-  range,
-  itemId,
-  classNone,
-  classTicketContainer,
-  classTicketPrice,
-  classTicketCnt,
-}: DateProps) {
+function TicketList({ range, itemId }: DateProps) {
   const [ticketData, setTicketData] = useState<TicketData[]>([]);
   const { orderTicketData, setOrderTicketData } = useOrderContext();
 
@@ -145,9 +134,6 @@ function TicketList({
             count={ticketInfo.count}
             handleMinus={() => handleMinus(index)}
             handlePlus={() => handlePlus(index, price)}
-            classTicketContainer={classTicketContainer}
-            classTicketPrice={classTicketPrice}
-            classTicketCnt={classTicketCnt}
           />
         );
       })}

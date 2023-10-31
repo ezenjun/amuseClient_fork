@@ -12,7 +12,7 @@ export const Date = styled.div`
 export const Title = styled.div`
   font-family: "Pretendard";
   color: #343a40;
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 700;
   margin-bottom: 16px;
 `;

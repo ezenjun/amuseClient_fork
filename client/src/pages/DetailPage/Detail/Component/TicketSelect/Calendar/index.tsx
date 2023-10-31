@@ -46,22 +46,9 @@ const formatCaption: DateFormatter = (month, options) => {
 type CalendarProps = {
   itemId: number | null;
   numberOfmonth: number;
-  classNone?: string;
-  classContainer?: string;
-  classTicketContainer?: string;
-  classTicketPrice?: string;
-  classTicketCnt?: string;
 };
 
-function Calendar({
-  itemId,
-  numberOfmonth,
-  classNone,
-  classContainer,
-  classTicketContainer,
-  classTicketPrice,
-  classTicketCnt,
-}: CalendarProps) {
+function Calendar({ itemId, numberOfmonth }: CalendarProps) {
   // duration data
   interface CalendarData {
     duration: number;
@@ -171,14 +158,7 @@ function Calendar({
           classNames={classNames}
         />
       </S.Date>
-      <TicketList
-        range={range}
-        itemId={itemId}
-        classNone={classNone}
-        classTicketContainer={classTicketContainer}
-        classTicketPrice={classTicketPrice}
-        classTicketCnt={classTicketCnt}
-      />
+      <TicketList range={range} itemId={itemId} />
     </S.Calendar>
   );
 }
