@@ -22,4 +22,5 @@ export const Payment = styled.div`
   float: right;
   width: 173px;
   height: 60px;
+  margin-bottom: 15px;
 `;

@@ -23,7 +23,6 @@ function Reservation({ itemId, productCode, likeNum }: ReservationProps) {
       .get(`${process.env.REACT_APP_AMUSE_API}/detail/${itemId}/title`)
       .then((response) => {
         setStartPrice(response.data.data.startPrice);
-        console.log(response.data.data);
       })
       .catch((error) => {
         console.log("연결 실패");
@@ -40,8 +39,6 @@ function Reservation({ itemId, productCode, likeNum }: ReservationProps) {
       .get(`${process.env.REACT_APP_AMUSE_API}/detail/${itemId}/guide-info`)
       .then((response) => {
         setGuideData(response.data.data);
-
-        console.log(response.data.data);
       })
       .catch((error) => {
         console.log("연결 실패");
