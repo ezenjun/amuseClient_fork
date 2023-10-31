@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart, faShareNodes } from "@fortawesome/free-solid-svg-icons";
 import { faEnvelope as solidFaEnelope } from "@fortawesome/free-solid-svg-icons";
 import { faEnvelope as regularFaEnelope } from "@fortawesome/free-regular-svg-icons";
-import { useOrderContext } from "../../../Contexts/OrderContext";
 import { GuideData } from "../../../../../Interfaces/DataInterfaces";
-import { useCookies } from "react-cookie";
+import Payment from "../../../../../components/Payment";
 import Share from "./share.svg";
 import Heart from "./wish.svg";
 import * as S from "./style";
@@ -19,10 +16,6 @@ interface ReservationProps {
 }
 
 function Reservation({ itemId, productCode, likeNum }: ReservationProps) {
-  const [cookies, setCookie, removeCookie] = useCookies(["__jwtkid__"]);
-  const movePage = useNavigate();
-  const { orderData, setOrderData, orderTicketData } = useOrderContext();
-
   // startPrice API
   const [startPrice, setStartPrice] = useState(0);
   useEffect(() => {
@@ -72,24 +65,6 @@ function Reservation({ itemId, productCode, likeNum }: ReservationProps) {
     setShowTooltip(!showTooltip);
   };
 
-  // Ticket Button
-  const handleButtonClick = () => {
-    handleBuyTicket();
-  };
-
-  const handleBuyTicket = () => {
-    if (cookies.__jwtkid__) {
-      let count = 0;
-      for (let i = 0; i < orderTicketData.length; i++) {
-        if (orderTicketData[i].count) count += 1;
-      }
-      if (count > 0) movePage("/order");
-      else alert("티켓을 선택해 주세요");
-    } else {
-      alert("로그인이 필요합니다.");
-    }
-  };
-
   return (
     <S.Reservation>
       <S.Main>
@@ -110,7 +85,7 @@ function Reservation({ itemId, productCode, likeNum }: ReservationProps) {
             <S.Share src={Share} onClick={handleTooltipToggle} />
           </S.Info>
         )}
-        <S.Payment onClick={handleButtonClick}>결제</S.Payment>
+        <Payment />
         <S.Wish>
           <S.Heart src={Heart} />
           위시리스트

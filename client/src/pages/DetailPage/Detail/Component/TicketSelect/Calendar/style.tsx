@@ -16,3 +16,10 @@ export const Title = styled.div`
   font-weight: 700;
   margin-bottom: 16px;
 `;
+
+export const Payment = styled.div`
+  display: flex;
+  float: right;
+  width: 173px;
+  height: 60px;
+`;

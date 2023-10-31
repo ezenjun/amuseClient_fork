@@ -14,8 +14,8 @@ import axios from "axios";
 import { useOrderContext } from "../../../../Contexts/OrderContext";
 import { useSetRecoilState } from "recoil";
 import { selectedItemState } from "../../../../../../Recoil/OrderAtomState";
+import Payment from "../../../../../../components/Payment";
 import * as S from "./style";
-
 const seasonEmoji: Record<string, string> = {
   winter: "⛄️",
   spring: "🌸",
@@ -159,6 +159,9 @@ function Calendar({ itemId, numberOfmonth }: CalendarProps) {
         />
       </S.Date>
       <TicketList range={range} itemId={itemId} />
+      <S.Payment>
+        <Payment />
+      </S.Payment>
     </S.Calendar>
   );
 }
