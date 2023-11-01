@@ -5,7 +5,7 @@ import { selectedItemState } from "../../../../../Recoil/OrderAtomState";
 import _ from "lodash";
 import axios from "axios";
 import MainPicture from "./MainPicture";
-import SubPicture from "./SubPicture/SubPicture";
+import SubPicture from "./SubPicture";
 import * as S from "./style";
 
 function Picture({ itemId }: ItemIdProps) {
