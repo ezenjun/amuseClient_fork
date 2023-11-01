@@ -2,7 +2,7 @@ import React, { FC } from "react";
 import * as S from "./style";
 import * as C from "../constants";
 
-interface TicketProps {
+interface SelectProps {
   name: string;
   detail: string;
   price: number;
@@ -11,7 +11,7 @@ interface TicketProps {
   handleMinus: () => void;
 }
 
-const Ticket: FC<TicketProps> = ({
+const Select: FC<SelectProps> = ({
   name,
   detail,
   price,
@@ -22,7 +22,7 @@ const Ticket: FC<TicketProps> = ({
   const formattedCount = count !== undefined ? count : 0;
 
   return (
-    <S.Ticket>
+    <S.Select>
       <S.Content>
         <S.Name>{name}</S.Name>
         <S.Detail>{detail}</S.Detail>
@@ -48,8 +48,8 @@ const Ticket: FC<TicketProps> = ({
           {C.TICKET.PLUS}
         </S.PlusBtn>
       </S.Count>
-    </S.Ticket>
+    </S.Select>
   );
 };
 
-export default Ticket;
+export default Select;

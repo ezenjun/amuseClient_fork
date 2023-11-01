@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { format, isSameDay, parseISO } from "date-fns";
 import { DateRange } from "react-day-picker";
-import { useOrderContext } from "../../../../Contexts/OrderContext";
 import { TicketData } from "../../../../../../Interfaces/DataInterfaces";
-import Ticket from "../Ticket";
+import Ticket from "../Select";
 import axios from "axios";
 import * as S from "./style";
 import * as C from "../constants";
@@ -13,9 +12,8 @@ type DateProps = {
   range: DateRange | undefined;
 };
 
-function TicketList({ range, itemId }: DateProps) {
+function List({ range, itemId }: DateProps) {
   const [ticketData, setTicketData] = useState<TicketData[]>([]);
-  const { orderTicketData, setOrderTicketData } = useOrderContext();
 
   // Ticket API
   useEffect(() => {
@@ -48,9 +46,6 @@ function TicketList({ range, itemId }: DateProps) {
       });
     }
   };
-  useEffect(() => {
-    setOrderTicketData(ticketData);
-  }, [ticketData]);
 
   // minus button function
   const handleMinus = (index: number) => {
@@ -110,8 +105,7 @@ function TicketList({ range, itemId }: DateProps) {
     return sum + ticket.count * price;
   }, 0);
   return (
-    <S.TicketList>
-      {/*print selected date*/}
+    <S.List>
       <S.Date>
         {range?.from ? format(range.from, "yyyy년 LL월 dd일") : ""}
       </S.Date>
@@ -172,8 +166,8 @@ function TicketList({ range, itemId }: DateProps) {
           </S.Amount>
         </S.Total>
       )}
-    </S.TicketList>
+    </S.List>
   );
 }
 
-export default TicketList;
+export default List;

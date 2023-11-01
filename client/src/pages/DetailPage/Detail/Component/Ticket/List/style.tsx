@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const TicketList = styled.div`
+export const List = styled.div`
   border: 1px solid #e9ecef;
   background-color: #f8f9fa;
   padding: 24px;

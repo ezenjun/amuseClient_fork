@@ -11,7 +11,7 @@ import OtherInfo from "./Component/OtherInfo";
 import Manager from "./Component/Manager";
 import Review from "./Component/Review/Review";
 import ReviewPicture from "./Component/ReviewPicture/ReviewPicture";
-import Calendar from "./Component/TicketSelect/Calendar";
+import Calendar from "./Component/Ticket/Calendar";
 import ReservationBottom from "./Component/ReservationBottom/ReservationBottom";
 import { DetailProps } from "../../../Interfaces/PropsInterfaces";
 import MainComponent from "../../../MainComponent";
