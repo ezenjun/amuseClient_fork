@@ -4,7 +4,6 @@ import "./LogIn.css";
 import { Link, redirect, useRoutes, useSearchParams, } from "react-router-dom";
 import PasswordInput from "./PasswordInput";
 import EmailInput from "./EmailInput";
-// import GoogleIcon from "@mui/icons-material/Google";
 import { useRecoilState } from "recoil";
 import { accessTokenState, isLoggedIn } from "../../atoms";
 import { useNavigate } from "react-router-dom";
@@ -15,6 +14,7 @@ import GoogleIcon from "./Icons/google_logo.png";
 import KakaoIcon from "./Icons/kakao_logo.png";
 import NaverIcon from "./Icons/naver_logo.png";
 import SignUpIcon from "./Icons/signup_icon.png";
+import { useCookies } from "react-cookie";
 
 
 const Login: React.FC = () => {
@@ -24,15 +24,14 @@ const Login: React.FC = () => {
 	const navigate = useNavigate();
 
 	const redirectUrl = process.env.REACT_APP_REDIRECT_URL
-	// if (process.env.REACT_APP_AMUSE_API === "https://amuseapi.wheelgo.net") {
-	// 	redirectUrl = "http://localhost:3000/";
-	// }
+
 	const axiosInstance = axios.create({
 		withCredentials: true,
 	});
 
 	const handleChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setEmail(e.target.value);
+		// setUserid(e.target.value);
 		console.log(e.target.value);
 	};
 
@@ -42,11 +41,35 @@ const Login: React.FC = () => {
 	};
 
 
+	// 아이디 저장 기능
+	const [rememberId, setRememberId] = useState<boolean>(false);
+	useEffect(() => {
+		const storedEmail = localStorage.getItem("savedEmail");
+		const storedRememberId = localStorage.getItem("rememberId") === "true";
+
+		if (storedRememberId && storedEmail) {
+			setEmail(storedEmail);
+			setRememberId(storedRememberId);
+		}
+	}, []);
+
+	const handlerememberIdChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		setRememberId(e.target.checked);
+	};
+
 	// 어뮤즈 자체 로그인 API
 	const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
-
 	const handleLogin = async (event: { preventDefault: () => void; }) => {
 		event.preventDefault();
+
+		if (rememberId) {
+			localStorage.setItem("savedEmail", email);
+			localStorage.setItem("rememberId", "true");
+		} else {
+			localStorage.removeItem("savedEmail");
+			localStorage.setItem("rememberId", "false");
+		}
+
 		await axios
 			.get(`${process.env.REACT_APP_AMUSE_API}/api/v1/auth/user/login?id=${email}&password=${password}`)
 			.then((response) => {
@@ -60,13 +83,6 @@ const Login: React.FC = () => {
 				console.log(error.response.data.message);
 			});
 	}
-
-	useEffect(() => {
-		if (loggedIn) {
-			alert("이미 로그인 하였습니다.");
-			navigate("/");
-		}
-	}, []);
 
 
 	return (
@@ -83,7 +99,7 @@ const Login: React.FC = () => {
 						</div>
 					</div>
 					<div className="keep_id">
-						<input type="checkbox" id="keep" className="keep_id_check" />
+						<input type="checkbox" id="keep" className="keep_id_check" checked={rememberId} onChange={handlerememberIdChange}/>
 						<label htmlFor="keep" className="keep_id_text">아이디 저장</label>
 					</div>
 					<div className="login_btn_box">

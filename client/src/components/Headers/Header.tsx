@@ -3,12 +3,7 @@ import "./Header.css";
 import axios from "axios";
 import moment from "moment";
 import Style from "../../App.module.css";
-
-// import logoimage from "../../pages/MainPage/MainImgs/amuse_logo.png";
-// import MyPageMenu from "../../pages/MyPage/MyPageMenu";
-// import SearchIcon from "./search.png";
 import { accessTokenState, isLoggedIn } from "../../atoms";
-
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
@@ -51,7 +46,6 @@ function Header() {
 
 	useEffect(() => {
 		let getToken: string | null = cookies.__jwtkid__;
-		console.log("getToken ", getToken);
 		if (
 			cookies.__usrN__ &&
 			(!cookies.__jwtkid__ || cookies.__jwtkid__ === "undefined")
@@ -142,14 +136,6 @@ function Header() {
 				let userData = response.data.data;
 				setName(response.data.data?.name);
 				setLoggedIn(true);
-				// navigateToHome();
-				// const expires = moment().add("8", "h").toDate();
-				// setCookie("__usrN__", response.data.data?.name, { expires });
-				// if (!userData?.advertisementTrue) {
-				// 	setLoggedIn(false);
-				// 	// setManager(false);
-				// 	movePage("/LoginAgree");
-				// }
 			})
 			.catch((err) => {
 				console.log(err);
@@ -166,7 +152,7 @@ function Header() {
 		if (accessToken) {
 			getAmuseUserInfo();
 		}
-	}, [accessToken]);
+	}, []);
 
 
 	return (

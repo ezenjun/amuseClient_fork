@@ -3,6 +3,8 @@ import moment from "moment";
 import MyPageMenu from "../../../../pages/MyPage/MyPageMenu";
 import * as S from "./style";
 import * as C from "./constants";
+import { useRecoilState } from "recoil";
+import { accessTokenState } from "../../../../atoms";
 
 interface LoginProps {
   name: string | undefined;
@@ -42,14 +44,16 @@ function Login({
     movePage("/SignUP");
   };
 
+  const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
   const handleLogout = () => {
     let token = cookies.__jwtkid__;
+    localStorage.removeItem("accessToken"); // localStorage 임시 사용
     setLoggedIn(false);
+    setAccessToken("");
     const expires = moment().add("1", "m").toDate();
     setCookie("__igjwtk__", token, { expires });
     removeCookie("__jwtkid__", { path: "/", maxAge: 0 });
     removeCookie("__usrN__", { path: "/", maxAge: 0 });
-    localStorage.removeItem("accessToken"); // localStorage 임시 사용
     navigateToHome();
   };
 
