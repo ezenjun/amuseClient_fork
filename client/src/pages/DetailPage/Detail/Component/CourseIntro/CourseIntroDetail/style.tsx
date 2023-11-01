@@ -10,7 +10,7 @@ export const CourseIntro = styled.div`
 `;
 
 export const Image = styled.img`
-  width: 270px;
+  width: 250px;
   height: 220px;
   border-radius: 8px;
   object-fit: cover;
