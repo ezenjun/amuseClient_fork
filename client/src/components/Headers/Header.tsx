@@ -44,28 +44,29 @@ function Header() {
 		};
 	}, []);
 
-	useEffect(() => {
-		let getToken: string | null = cookies.__jwtkid__;
-		if (
-			cookies.__usrN__ &&
-			(!cookies.__jwtkid__ || cookies.__jwtkid__ === "undefined")
-		) {
-			removeCookie("__usrN__");
-		}
-		if (cookies.__jwtkid__) {
-			setLoggedIn(true);
-		} else {
-			setLoggedIn(false);
-		}
-		if (
-			!cookies.__usrN__ ||
-			cookies.__usrN__ === "undefined" ||
-			!cookies.__jwtkid__ ||
-			cookies.__jwtkid__ === "undefined"
-		) {
-			setLoggedIn(false);
-		}
-	}, [cookies]);
+
+  useEffect(() => {
+    let getToken: string | null = cookies.__jwtkid__;
+    if (
+      cookies.__usrN__ &&
+      (!cookies.__jwtkid__ || cookies.__jwtkid__ === "undefined")
+    ) {
+      removeCookie("__usrN__");
+    }
+    if (cookies.__jwtkid__) {
+      setLoggedIn(true);
+    } else {
+      setLoggedIn(false);
+    }
+    if (
+      !cookies.__usrN__ ||
+      cookies.__usrN__ === "undefined" ||
+      !cookies.__jwtkid__ ||
+      cookies.__jwtkid__ === "undefined"
+    ) {
+      setLoggedIn(false);
+    }
+  }, [cookies]);
 
 	useEffect(() => {
 		let locationString = window.location.toString();
