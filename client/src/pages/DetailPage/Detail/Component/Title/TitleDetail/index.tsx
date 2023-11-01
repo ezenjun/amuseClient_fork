@@ -31,9 +31,7 @@ function TitleDetail({
           {city}
         </S.City>
       </S.Location>
-
       <S.Title>{title}</S.Title>
-
       <S.Review>
         <S.Star>
           <FontAwesomeIcon icon={faStar} />

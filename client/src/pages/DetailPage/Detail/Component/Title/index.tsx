@@ -10,18 +10,14 @@ import TitleDetail from "./TitleDetail";
 import axios from "axios";
 
 function Title({ itemId }: ItemIdProps) {
-  /**
-   * Title Data
-   */
+  // Title Data
   const [titleData, setTitleData] = useState<TitleData>();
   const formattedRated = titleData?.rated;
   const formattedRatedData = formattedRated?.toFixed(1) ?? "0.0";
   const setSelectedItemTitle = useSetRecoilState(selectedItemState);
   const setPaymentData = useSetRecoilState(PaymentDataState);
 
-  /**
-   * Title API
-   */
+  // Title API
   useEffect(() => {
     axios
       .get(`${process.env.REACT_APP_AMUSE_API}/detail/${itemId}/title`)
@@ -42,7 +38,7 @@ function Title({ itemId }: ItemIdProps) {
         }));
       })
       .catch((error) => {
-        console.log("연결 실패");
+        console.log("Title 연결 실패");
       });
   }, [itemId]);
 
