@@ -29,7 +29,7 @@ const LoginAgree = () => {
             .then((response) => {
                 let userData = response.data.data
                 console.log(userData)
-                if (userData?.advertisementTrue === true) {
+                if (userData?.personalInformationAgreement === true) {
                     movePage("/")
                 } else {
                     setIsShow(true)
@@ -46,6 +46,7 @@ const LoginAgree = () => {
         const token = cookies["__jwtkid__"]
         const requestBody = {
             advertisement_true: marketingAgree,
+            personalInformationAgreement: privacy,
             "phone_number": "",
             "over_14_age_true": false
         };
@@ -100,19 +101,19 @@ const LoginAgree = () => {
                         {"아래 약관에 대한 동의가 필요합니다."}
                     </div>
                 </div>
-                <div style={{ border: "2px solid #828282", borderBottom: "0px", width: "90%", maxWidth: "360px", minHeight: "180px" }}>
-                    <div style={{ display: "flex", flexDirection: "row", alignItems: "center", height: "28px", marginTop: "28px" }}>
-                        <input type="checkbox" style={{ margin: "0px", marginLeft: 24 }} value={marketingAgree} onChange={() => { setPrivacy(!privacy) }} />
+                <div style={{ border: "2px solid #828282", width: "90%", maxWidth: "360px", minHeight: "120px" }}>
+                    <div style={{ display: "flex", flexDirection: "row", alignItems: "center", height: "28px", marginTop: "20px" }}>
+                        <input type="checkbox" style={{ margin: "0px", marginLeft: 24 }} value={privacy} onChange={() => { setPrivacy(!privacy) }} />
                         <div style={{ marginLeft: 24, width: "calc(100% - 100px)" }}>{"개인정보 활용동의 (필수)"}</div>
                         <ReadText>보기</ReadText>
                     </div>
-                    <div style={{ display: "flex", flexDirection: "row", alignItems: "center", height: "28px", marginTop: "28px" }}>
+                    <div style={{ display: "flex", flexDirection: "row", alignItems: "center", height: "28px", marginTop: "20px" }}>
                         <input type="checkbox" style={{ margin: "0px", marginLeft: 24 }} value={marketingAgree} onChange={() => { setMarketingAgree(!marketingAgree) }} />
                         <div style={{ marginLeft: 24, width: "calc(100% - 100px)" }}>{"마케팅정보 활용동의 (선택)"}</div>
                         <ReadText>보기</ReadText>
                     </div>
                 </div>
-                <AgreeButton onClick={() => { submitAgree() }}>
+                <AgreeButton onClick={() => { submitAgree() }} disabled={!privacy}>
                     {"확인"}
                 </AgreeButton>
             </div>
@@ -122,23 +123,27 @@ const LoginAgree = () => {
 }
 export default LoginAgree
 
-const AgreeButton = styled.div`
-    width:90%;
-    max-width: 360px;
-    height: 56px;
+const AgreeButton = styled.button`
+    &:disabled {
+        color:#fff;
+        background-color:#828282;
+        cursor: not-allowed;
+    }
+    width: 327px;
+    height: 46px;
     display:flex;
     justify-content:center;
     align-items:center;
-    background-color:#e6003d;
+    border-radius: 8px;
+    background: #E6003E;
     color:#fff;
     font-size:20px;
-    border:2px solid #828282;
-    border-top:0px;
+    font-family: Pretendard;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
     cursor:pointer;
-
-    &:hover{
-        background-color:#828282;
-    }
+    margin-top: 10px;
 `;
 const ReadText = styled.div`
     display:flex;

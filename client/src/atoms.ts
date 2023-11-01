@@ -27,3 +27,8 @@ export const accessTokenState = atom({
     key: "accessTokenState",
     default: "",
 });
+
+export const impUid = atom({
+    key: "impUid",
+    default: "",
+})

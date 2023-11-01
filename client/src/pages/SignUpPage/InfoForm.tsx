@@ -1,24 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import "./InfoForm.scss";
 import TextInput from "../LogInPage/TextInput";
 import PasswordInput from "../LogInPage/PasswordInput";
 import axios from "axios";
+import { useRecoilState } from "recoil";
+import { impUid } from "../../atoms";
+import * as S from "./InfoFormStyle";
 
 interface InfoFormProps {
     onNextStep: () => void;
     imp_uid: string | null;
 }
 
-
-interface UserInfoData {
-    name: string;
-    phone: string;
-    gender: string;
-    birth: string;
-}
-
 const InfoForm: React.FC<InfoFormProps> = (props) => {
+    // 유효성 검사
     const emailValidation = (value: string): string => {
         return value.replace(/[^A-Za-z0-9_\.\-]+@[^A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/g, '');
     };
@@ -35,6 +30,7 @@ const InfoForm: React.FC<InfoFormProps> = (props) => {
         return value.replace(/[^0-9]/g, '').slice(0, 11);
     };
 
+    // 비밀번호 입력
     const [password, setPassword] = useState<string>("");
     const [checkPassword, setCheckPassword] = useState<string>("");
     const [isValidPassword, setIsValidPassword] = useState<boolean>(true);
@@ -72,50 +68,64 @@ const InfoForm: React.FC<InfoFormProps> = (props) => {
     };
 
 
-
-    const [UserInfo, setUserInfoData] = useState<UserInfoData>();
+    // 인증된 정보 가져오기
+    const [impUidData, setImpUid] = useRecoilState(impUid);
+    const [birth, setBirth] = useState<string>("");
+    const [name, setName] = useState<string>("");
+    const [phone, setPhone] = useState<string>("");
     useEffect(() => {
-        if (props.imp_uid !== null) {
+        if (impUidData !== null) {
             axios
-                .get(`${process.env.REACT_APP_AMUSE_API}/api/v1/user/verification/portone?imp_uid=${props.imp_uid}`)
+                .get(`${process.env.REACT_APP_AMUSE_API}/api/v1/user/verification/portone?imp_uid=${impUidData}`)
                 .then((response) => {
-                    console.log(response.data);
-                    setUserInfoData(response.data);
+                    let userInfo = response.data.data;
+                    setName(userInfo.name);
+                    setBirth(userInfo.birth);
+                    setPhone(userInfo.phone);
                 })
                 .catch((error) => {
-                    console.log("연결 실패");
+                    console.log("정보 없음");
                 });
         }
-    }, [props.imp_uid]);
+    }, [impUidData]);
 
     return (
         <div className="info_body">
             <form action="" method="post" className="info_form">
-                <div className="info_note">
-                    <span className="color_red">어뮤즈</span>는 고객님의 정보를 안전하게 관리합니다.
-                </div>
                 <div>
-                    <TextInput disable={false} customValidation={emailValidation} onInputChange={handleInputChange} labelText="아이디(이메일계정)" placeText="ex) example123@example.com" inputType="email" width="702px" margin="16px" />
-                    <div className="flex_box_sub">
-                        <TextInput disable={false} customValidation={nameValidation} onInputChange={handleInputChange} labelText="이름" placeText="이름" inputType="text" width="597px" margin="16px" />
-                        <div className="input_gender">
-                            <input type="radio" name="gender" id="male" />
-                            <label htmlFor="male" className="first_label">남</label>
-                            <input type="radio" name="gender" id="female" />
-                            <label htmlFor="female" className="last_label">여</label>
+                    <S.InputTitle>아이디</S.InputTitle>
+                    <TextInput disable={false} customValidation={nameValidation} onInputChange={handleInputChange} labelText="아이디" placeText="아이디" inputType="text" width="702px" margin="16px" />
+                    <S.InputTitle>비밀번호</S.InputTitle>
+                    <PasswordInput password={password} handleChangePassword={handleChangePassword} labelText="비밀번호" design="outlined" width="702px" margin='' margin_b='16px' isValid={isValidPassword} errorText="8자 이상, 영문 대/소문자, 숫자, 특수문자 중 두 종류 이상의 조합으로 설정해 주세요" inputSize='small' />
+                    <S.InputTitle>비밀번호 재확인</S.InputTitle>
+                    <PasswordInput password={checkPassword} handleChangePassword={handleChangeCheckPassword} labelText="비밀번호 재확인" design="outlined" width="702px" margin='' margin_b='16px' isValid={isValidCheckPassword} errorText="일치하지 않습니다" inputSize='small' />
+                    <S.FlexBox>
+                        <div>
+                            <S.InputTitle>이름</S.InputTitle>
+                            <TextInput disable={name !== ""} customValidation={nameValidation} onInputChange={handleInputChange} labelText="이름" placeText="이름" value={name} inputType="text" width="597px" margin="16px" />
                         </div>
-                    </div>
-                    <TextInput disable={false} customValidation={numValidation} onInputChange={handleInputChange} labelText="생년월일" placeText="ex) 010203" inputType="text" width="702px" margin="16px" />
-                    <div className="flex_box_sub">
-                        <TextInput disable={false} customValidation={pnumValidation} onInputChange={handleInputChange} labelText="휴대폰번호" placeText="ex) 01012345678" inputType="text" width="702px" margin="16px" />
-                        <div className="foreign_box">
-                            <input type="checkbox" id="foreign" className="foreign_check" />
-                            <label htmlFor="foreign" className="foreign_text">외국인</label>
+                        <div>
+                            <S.InputTitle>성별</S.InputTitle>
+                            <S.RadioButtonContainer>
+                                <div className="input_gender">
+                                    <input type="radio" name="gender" id="male" />
+                                    <label htmlFor="male" className="first_label">남</label>
+                                    <input type="radio" name="gender" id="female" />
+                                    <label htmlFor="female" className="last_label">여</label>
+                                </div>
+                            </S.RadioButtonContainer>
                         </div>
+                    </S.FlexBox>
+
+                    <S.InputTitle>생년월일</S.InputTitle>
+                    <TextInput disable={birth !== ""} customValidation={numValidation} onInputChange={handleInputChange} labelText="생년월일" placeText="ex) 010203" value={birth} inputType="text" width="702px" margin="16px" />
+                    <S.InputTitle>본인 확인 이메일</S.InputTitle>
+                    <TextInput disable={false} customValidation={emailValidation} onInputChange={handleInputChange} labelText="본인확인 이메일" placeText="ex) example@example.com" inputType="email" width="702px" margin="16px" />
+                    <S.InputTitle>전화번호</S.InputTitle>
+                    <div className="">
+                        <TextInput disable={phone !== ""} customValidation={pnumValidation} onInputChange={handleInputChange} labelText="휴대폰번호" placeText="ex) 01012345678" value={phone} inputType="text" width="702px" margin="16px" />
                     </div>
                 </div>
-                <PasswordInput password={password} handleChangePassword={handleChangePassword} labelText="비밀번호" design="outlined" width="702px" margin='' margin_b='16px' isValid={isValidPassword} errorText="8자 이상, 영문 대/소문자, 숫자, 특수문자 중 두 종류 이상의 조합으로 설정해 주세요" inputSize='small' />
-                <PasswordInput password={checkPassword} handleChangePassword={handleChangeCheckPassword} labelText="비밀번호 확인" design="outlined" width="702px" margin='' margin_b='16px' isValid={isValidCheckPassword} errorText="일치하지 않습니다" inputSize='small' />
             </form >
             <button className="login_btn" onClick={() => {
                 props.onNextStep();
@@ -127,7 +137,3 @@ const InfoForm: React.FC<InfoFormProps> = (props) => {
 }
 
 export default InfoForm;
-
-// function useEffect(arg0: () => void, arg1: any[]) {
-//     throw new Error("Function not implemented.");
-// }

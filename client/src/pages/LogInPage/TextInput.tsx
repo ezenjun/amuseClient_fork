@@ -13,9 +13,10 @@ interface TextInputProps {
     customValidation: (value: string) => string;
     onInputChange: (value: string) => void;
     onBlur?: () => void;
+    value?: string;
 }
 
-const TextInput: React.FC<TextInputProps> = ({ disable, onBlur, customValidation, onInputChange, labelText, placeText, inputType, width, margin }) => {
+const TextInput: React.FC<TextInputProps> = ({ disable, onBlur, customValidation, onInputChange, labelText, placeText, value, inputType, width, margin }) => {
     const [inputValue, setInputValue] = useState<string>('');
 
     const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -32,7 +33,7 @@ const TextInput: React.FC<TextInputProps> = ({ disable, onBlur, customValidation
                 label={labelText}
                 placeholder={placeText}
                 type={inputType}
-                value={inputValue}
+                value={inputValue || value}
                 onChange={handleInputChange}
                 variant="outlined"
                 size="small"

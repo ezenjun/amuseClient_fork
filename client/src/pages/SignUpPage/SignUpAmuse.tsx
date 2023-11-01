@@ -12,6 +12,9 @@ import CloseIcon from "../LogInPage/Icons/close_icon.png";
 import "./SignUp.css";
 import CertificationForm from "../LogInPage/CertificationForm";
 import InfoForm from "./InfoForm";
+import * as S from "./SignUpAmuseStyle";
+import Certification from "../LogInPage/Certification";
+import { impUid } from "../../atoms";
 
 const SignUpAmuse: React.FC = () => {
     const [allAgreed, setAllAgreed] = useState<boolean>(false);
@@ -52,17 +55,19 @@ const SignUpAmuse: React.FC = () => {
 
     // 다음 버튼 클릭 시
     const [currentStep, setCurrentStep] = useState<number>(1);
-    const [impUidData, setImpUid] = useState<string | null>(null);
+    // const [impUidData, setImpUid] = useState<string | null>(null);
     const movePage = useNavigate();
+
+    const [impUidData, setImpUid] = useRecoilState(impUid);
 
     const handleNextClick = () => {
         setCurrentStep(currentStep + 1);
     };
 
-    const handleNextClickId = (impUid: React.SetStateAction<string | null>) => {
-        setImpUid(impUid); 
-        setCurrentStep(currentStep + 1);
-    }
+    // const handleNextClickId = (impUid: React.SetStateAction<string | null>) => {
+    //     setImpUid(impUid);
+    //     setCurrentStep(currentStep + 1);
+    // }
 
     const handleContinueClick = () => {
         movePage("/LogIn");
@@ -70,11 +75,12 @@ const SignUpAmuse: React.FC = () => {
 
     return (
         <MainComponent>
-            <div className="login_body">
+            <S.SignUpBody>
                 {/* 약관동의 */}
                 {currentStep === 1 &&
                     <div>
-                        <h1 className="login_title">약관동의</h1>
+                        <S.SignUpTitle>약관동의</S.SignUpTitle>
+                        {/* <h1 className="login_title">약관동의</h1> */}
                         <div className="all_agree_box">
                             <input type="checkbox" id="all_agree" className="agree_check" onChange={handleAllAgreeChange} checked={allAgreed} />
                             <label htmlFor="all_agree" className="all_agree_text">전체동의</label>
@@ -95,32 +101,32 @@ const SignUpAmuse: React.FC = () => {
                                 동의
                             </label>
                         </div>
-                        <button className="login_btn" onClick={handleNextClick} disabled={!personalInfoAgreed}>
-                            <i className="fa-solid fa-door-open"></i>다음
-                        </button>
+                        <S.NextButton onClick={handleNextClick} disabled={!personalInfoAgreed}>다음</S.NextButton>
                     </div>
                 }
 
                 {/* 본인인증 */}
-                {currentStep === 2 &&
+                {/* {currentStep === 2 &&
                     <div>
                         <h1 className="login_title">본인인증</h1>
                         <CertificationForm onFindPasswordClick={function (): void {
                             throw new Error("Function not implemented.");
-                        }} showPwForm={false} showFindBtn={false} onNextStep={handleNextClickId} titleText="인증"/>
+                        }} showPwForm={false} showFindBtn={false} onNextStep={handleNextClickId} titleText="인증" />
                     </div>
-                }
+                } */}
 
-                {/* 정보입력 */}
-                {currentStep === 3 && (
+                {/* 본인인증 & 정보입력 */}
+                {currentStep === 2 && (
                     <div>
-                        <h1 className="login_title">정보입력</h1>
-                        <InfoForm onNextStep={handleNextClick} imp_uid={impUidData}/>
+                        <Certification />
+                        <S.SignUpTitle>정보입력</S.SignUpTitle>
+                        {/* <h1 className="login_title">정보입력</h1> */}
+                        <InfoForm onNextStep={handleNextClick} imp_uid={impUidData} />
                     </div>
                 )}
 
                 {/* 완료 */}
-                {currentStep === 4 && (
+                {currentStep === 3 && (
                     <div>
                         <h1 className="login_title">회원가입완료</h1>
                         <div className="done_text">~~님 반가워요!<br /> 회원가입이 완료되었어요</div>
@@ -170,7 +176,7 @@ const SignUpAmuse: React.FC = () => {
                         </div>
                     </Modal>
                 </div>
-            </div>
+            </S.SignUpBody>
         </MainComponent >
     );
 }
