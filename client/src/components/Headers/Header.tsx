@@ -144,17 +144,8 @@ function Header() {
 			});
 	};
 
-	// localStorage 임시 사용
-	// useEffect(() => {
-	// 	const result = localStorage.getItem("accessToken");
-	// 	if (result) { setAccessToken(result); }
-	// }, []);
-
 	useEffect(() => {
-		console.log("쿠키 access",cookies.accessToken);
 		if (cookies.accessToken) {
-			// setAccessToken(cookies.accessToken);
-			// console.log("받아온 토큰", accessToken);
 			getAmuseUserInfo();
 		}
 	}, []);

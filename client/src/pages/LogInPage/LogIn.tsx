@@ -31,7 +31,6 @@ const Login: React.FC = () => {
 
 	const handleChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setEmail(e.target.value);
-		// setUserid(e.target.value);
 		console.log(e.target.value);
 	};
 
@@ -43,6 +42,7 @@ const Login: React.FC = () => {
 
 	// 아이디 저장 기능
 	const [rememberId, setRememberId] = useState<boolean>(false);
+
 	useEffect(() => {
 		const storedEmail = localStorage.getItem("savedEmail");
 		const storedRememberId = localStorage.getItem("rememberId") === "true";
@@ -57,6 +57,7 @@ const Login: React.FC = () => {
 		setRememberId(e.target.checked);
 	};
 
+	
 	// 어뮤즈 자체 로그인 API
 	const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
 	const [error, setError] = useState<string | null>(null);
@@ -78,14 +79,10 @@ const Login: React.FC = () => {
 			.then((response) => {
 				const accessToken = response.data.data.accessToken;
 				setAccessToken(accessToken);
-				// 임시 사용 (refresh token으로 변경 예정)
-				// localStorage.setItem("accessToken", accessToken);
-				console.log("로그인 시 처음 토큰",accessToken);
 				setCookie('accessToken', accessToken);
 				navigate("/");
 			})
 			.catch((error) => {
-				console.log(error.response.data.message);
 				if (error.response) {
 					setError(error.response.data.message);
 				}

@@ -47,7 +47,6 @@ function Login({
   const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
   const handleLogout = () => {
     let token = cookies.__jwtkid__;
-    // localStorage.removeItem("accessToken"); // localStorage 임시 사용
     setLoggedIn(false);
     removeCookie("accessToken");
     setAccessToken("");
