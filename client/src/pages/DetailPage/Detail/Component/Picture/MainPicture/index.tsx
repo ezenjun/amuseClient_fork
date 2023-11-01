@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import PictureModal from '../PictureModal/PictureModal';
-import './MainPicture.scss';
+import React, { useState } from "react";
+import PictureModal from "../PictureModal/PictureModal";
+import * as S from "./style";
 
 interface MainPictureProps {
   src: string;
@@ -9,7 +9,7 @@ interface MainPictureProps {
   modal: string[];
 }
 
-function MainPicture({ src, alt, itemId, modal } : MainPictureProps){
+function MainPicture({ src, alt, itemId, modal }: MainPictureProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => {
@@ -21,13 +21,13 @@ function MainPicture({ src, alt, itemId, modal } : MainPictureProps){
   };
 
   return (
-    <div className="MainPicture">
-      <img className="image" src={src} alt={alt} onClick={openModal} />
+    <S.MainPicture>
+      <S.Image src={src} alt={alt} onClick={openModal} />
       {isModalOpen && (
         <PictureModal onClose={closeModal} itemId={itemId} images={modal} />
       )}
-    </div>
+    </S.MainPicture>
   );
-};
+}
 
 export default MainPicture;

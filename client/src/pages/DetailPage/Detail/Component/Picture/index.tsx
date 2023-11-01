@@ -4,7 +4,7 @@ import { useSetRecoilState } from "recoil";
 import { selectedItemState } from "../../../../../Recoil/OrderAtomState";
 import _ from "lodash";
 import axios from "axios";
-import MainPicture from "./MainPicture/MainPicture";
+import MainPicture from "./MainPicture";
 import SubPicture from "./SubPicture/SubPicture";
 import * as S from "./style";
 
