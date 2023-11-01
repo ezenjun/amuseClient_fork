@@ -19,7 +19,7 @@ function OtherInfo({ itemId }: ItemIdProps) {
         setOtherInfoData(response.data.data);
       })
       .catch((error) => {
-        console.log("연결 실패");
+        console.log("OtherInfo 연결 실패");
       });
   }, [itemId]);
 

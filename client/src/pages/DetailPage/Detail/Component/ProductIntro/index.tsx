@@ -19,7 +19,7 @@ function ProductIntro({ itemId }: ItemIdProps) {
         setProductIntroData(response.data.data);
       })
       .catch((error) => {
-        console.log("연결 실패");
+        console.log("ProductIntro 연결 실패");
       });
   }, [itemId]);
 
