@@ -111,11 +111,6 @@ const Login: React.FC = () => {
 					<S.LoginButton onClick={handleLogin}>
 						<i className="fa-solid fa-door-open"></i>로그인
 					</S.LoginButton>
-					{/* <div className="login_btn_box">
-						<button className="login_btn" onClick={handleLogin}>
-							<i className="fa-solid fa-door-open"></i>로그인
-						</button>
-					</div> */}
 				</form>
 				<S.FunctionBox>
 					<div className="find_btn">
@@ -129,22 +124,6 @@ const Login: React.FC = () => {
 						</S.NoDecorationLink>
 					</S.SignUpButton>
 				</S.FunctionBox>
-				{/* <div className="login_function_box">
-					<div className="find_btn">
-						<Link to="/LogIn/FindId" className="no_decoration">
-							<span className="find_id">아이디 찾기</span>
-						</Link>
-						<Link to="/LogIn/FindPw" className="no_decoration">
-							<span className="find_pw separator">비밀번호 찾기</span>
-						</Link>
-					</div>
-					<div className="signup_btn_box">
-						<Link to="/SignUp" className="no_decoration">
-							<img src={SignUpIcon} className="signup_icon" />
-							<span className="signup_link">회원가입</span>
-						</Link>
-					</div>
-				</div> */}
 				<S.VBox>
 					<div>간편 로그인</div>
 					<S.OAuthContainer>
@@ -159,30 +138,6 @@ const Login: React.FC = () => {
 						</a>
 					</S.OAuthContainer>
 				</S.VBox>
-				{/* <div className="v_box">
-					<div>간편 로그인</div>
-					<div className="OAuth">
-						<a
-							className="login_google"
-							href={`${process.env.REACT_APP_AMUSE_API}/oauth2/authorization/google?redirect_uri=${redirectUrl}`}
-						>
-							<img src={GoogleIcon} alt="구글 로고" className="sns_logo" />
-						</a>
-
-						<a
-							className="login_naver"
-							href={`${process.env.REACT_APP_AMUSE_API}/oauth2/authorization/naver?redirect_uri=${redirectUrl}`}
-						>
-							<img src={NaverIcon} alt="네이버 로고" className="sns_logo" />
-						</a>
-						<a
-							className="login_kakao"
-							href={`${process.env.REACT_APP_AMUSE_API}/oauth2/authorization/kakao?redirect_uri=${redirectUrl}`}
-						>
-							<img src={KakaoIcon} alt="카카오 로고" className="sns_logo" />
-						</a>
-					</div>
-				</div> */}
 			</S.LoginBody>
 		</MainComponent>
 	);

@@ -119,7 +119,7 @@ const InfoForm: React.FC<InfoFormProps> = (props) => {
     // 이메일 확인
     const [email, setEmail] = useState<string>("");
     const [checkEmail, setCheckEmail] = useState<boolean>(false);
-    const emailValidation = (value: string): boolean  => {
+    const emailValidation = (value: string): boolean => {
         const emailRegex = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+$/;
         return emailRegex.test(value);
     };
@@ -130,6 +130,8 @@ const InfoForm: React.FC<InfoFormProps> = (props) => {
         setEmail(inputValue);
         if (validatedEmail) {
             setCheckEmail(true);
+        } else {
+            setCheckEmail(false);
         }
     };
 
@@ -142,10 +144,34 @@ const InfoForm: React.FC<InfoFormProps> = (props) => {
     // 다음 버튼 활성화
     const [isNextButtonDisabled, setIsNextButtonDisabled] = useState(true);
     useEffect(() => {
-        const isFieldsValid = impUid  && checkId && password && checkPassword !== "" && isValidCheckPassword && name && birth && phone && checkEmail && gender !== "";
+        const isFieldsValid = impUid && checkId && password && checkPassword !== "" && isValidCheckPassword && name && birth && phone && checkEmail && gender !== "";
         setIsNextButtonDisabled(!isFieldsValid);
     }, [impUid, checkId, password, checkPassword, isValidCheckPassword, name, birth, phone, checkEmail, gender]);
 
+    // 회원 가입 정보 POST
+    const handleClickBtn = () => {
+        const birthWithoutHyphens = birth.replace(/-/g, '');
+        const requestBody = {
+            "id": id,
+            "email": email,
+            "password": password,
+            "name": name,
+            "gender": gender,
+            "birthday": birthWithoutHyphens,
+            "phoneNumber": phone,
+        };
+        const apiEndpoint = `${process.env.REACT_APP_AMUSE_API}/api/v1/auth/user/signup`;
+
+        axios.post(apiEndpoint, requestBody)
+            .then((response) => {
+                console.log('가입 성공');
+                console.log(response.data);
+                props.onNextStep();
+            })
+            .catch((error) => {
+                console.error('API 요청 실패:', error);
+            })
+    };
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     };
@@ -173,10 +199,10 @@ const InfoForm: React.FC<InfoFormProps> = (props) => {
                             <S.InputTitle>성별</S.InputTitle>
                             <S.RadioButtonContainer>
                                 <div className="input_gender">
-                                    <input type="radio" name="gender" id="male" value="male" checked={gender === "male"} onChange={handleGenderChange}/>
-                                    <label htmlFor="male" className="first_label">남</label>
-                                    <input type="radio" name="gender" id="female" value="female" checked={gender === "female"} onChange={handleGenderChange}/>
-                                    <label htmlFor="female" className="last_label">여</label>
+                                    <input type="radio" name="gender" id="MAN" value="MAN" checked={gender === "MAN"} onChange={handleGenderChange} />
+                                    <label htmlFor="MAN" className="first_label">남</label>
+                                    <input type="radio" name="gender" id="WOMAN" value="WOMAN" checked={gender === "WOMAN"} onChange={handleGenderChange} />
+                                    <label htmlFor="WOMAN" className="last_label">여</label>
                                 </div>
                             </S.RadioButtonContainer>
                         </div>
@@ -192,7 +218,7 @@ const InfoForm: React.FC<InfoFormProps> = (props) => {
                     </div>
                 </div>
             </form >
-            <S.NextButton onClick={() => { props.onNextStep(); }} disabled={isNextButtonDisabled}>
+            <S.NextButton onClick={handleClickBtn} disabled={isNextButtonDisabled}>
                 다음
             </S.NextButton>
         </div >

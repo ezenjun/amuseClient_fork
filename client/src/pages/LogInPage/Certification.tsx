@@ -7,8 +7,6 @@ import { impUid } from "../../atoms";
 
 const Certification: React.FC = () => {
     const [checkAuthCode, setCheckAuthCode] = useState<boolean>(false);
-
-    // const [impUidData, setImpUid] = useState<string | null>(null);
     const [impUidData, setImpUid] = useRecoilState(impUid);
     
     const handleButtonClick = async (event: { preventDefault: () => void; }) => {

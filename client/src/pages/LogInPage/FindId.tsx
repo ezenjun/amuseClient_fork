@@ -34,11 +34,11 @@ const FindId: React.FC<FindIdProps> = () => {
                     </ul>
                 </nav>
                 <div>
-                    <CertificationForm onFindPasswordClick={function (): void {
+                    {/* <CertificationForm onFindPasswordClick={function (): void {
                         throw new Error("Function not implemented.");
                     } } showPwForm={false} showFindBtn={true} onNextStep={function (): void {
                         throw new Error("Function not implemented.");
-                    } } titleText="찾기"/>
+                    } } titleText="찾기"/> */}
                 </div>
             </div>
         </MainComponent>

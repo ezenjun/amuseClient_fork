@@ -71,11 +71,11 @@ const FindPw: React.FC<FindPwProps> = (props) => {
                                 <li className={selectedTab === "findPw" ? "selected" : ""} onClick={navigateToFindPw}>비밀번호 찾기</li>
                             </ul>
                         </nav>
-                        <div>
+                        {/* <div>
                             <CertificationForm showPwForm={selectedTab === "findPw"} onFindPasswordClick={() => setShowResetForm(true)} showFindBtn={true} onNextStep={function (): void {
                                 throw new Error("Function not implemented.");
                             } } titleText="찾기"/>
-                        </div>
+                        </div> */}
                     </div>
                 )}
                 {/* 비밀번호 재설정 폼 */}

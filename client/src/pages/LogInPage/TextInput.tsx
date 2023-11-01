@@ -2,7 +2,6 @@ import React, { ChangeEvent, useState } from "react";
 import FormControl from '@mui/material/FormControl';
 import TextField, { TextFieldVariants } from '@mui/material/TextField';
 
-
 interface TextInputProps {
     labelText: string;
     placeText: string;
@@ -10,8 +9,6 @@ interface TextInputProps {
     width: string;
     margin: string;
     disable: boolean;
-    // customValidation: (value: string) => string;
-    // onInputChange: (value: string) => void;
     onBlur?: () => void;
     value?: string;
     onInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
@@ -19,14 +16,7 @@ interface TextInputProps {
     errorText?: string;
 }
 
-    const TextInput: React.FC<TextInputProps> = ({ disable, onBlur, onInputChange, labelText, placeText, value, inputType, isValid = true, errorText = "", width, margin }) => {
-    // const [inputValue, setInputValue] = useState<string>('');
-
-    // const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    //     const validationValue: string = customValidation(e.target.value);
-    //     setInputValue(validationValue);
-    //     onInputChange(validationValue);
-    // };
+const TextInput: React.FC<TextInputProps> = ({ disable, onBlur, onInputChange, labelText, placeText, value, inputType, isValid = true, errorText = "", width, margin }) => {
 
     return (
         <FormControl sx={{ mb: margin, width: width }} variant="outlined">

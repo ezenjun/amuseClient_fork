@@ -49,10 +49,7 @@ const SignUpAmuse: React.FC = () => {
 
     // 다음 버튼 클릭 시
     const [currentStep, setCurrentStep] = useState<number>(1);
-    // const [impUidData, setImpUid] = useState<string | null>(null);
     const movePage = useNavigate();
-
-    const [impUidData, setImpUid] = useRecoilState(impUid);
 
     const handleNextClick = () => {
         setCurrentStep(currentStep + 1);

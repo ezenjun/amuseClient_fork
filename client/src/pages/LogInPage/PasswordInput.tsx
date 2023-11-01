@@ -31,27 +31,6 @@ const PasswordInput: React.FC<PasswordInputProps> = ({ password, handleChangePas
   };
 
   return (
-    // <FormControl sx={{ m: 1, width: '680px' }} variant="standard">
-    //   <InputLabel htmlFor={design}>{labelText}</InputLabel>
-    //   <Input
-    //     id={design}
-    //     type={showPassword ? 'text' : 'password'}
-    //     value={password}
-    //     onChange={handleChangePassword}
-    //     endAdornment={
-    //       <InputAdornment position="end">
-    //         <IconButton
-    //           aria-label="toggle password visibility"
-    //           onClick={handleClickShowPassword}
-    //           onMouseDown={handleMouseDownPassword}
-    //         >
-    //           {showPassword ? <VisibilityOff /> : <Visibility />}
-    //         </IconButton>
-    //       </InputAdornment>
-    //     }
-
-    //   />
-    // </FormControl>
     <FormControl sx={{ m: margin, width: width, mb: margin_b}} variant="outlined">
       <TextField
         id="input-password"

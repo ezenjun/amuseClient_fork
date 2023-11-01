@@ -1,7 +1,4 @@
 import React, { useState, useEffect } from "react";
-// import styled from 'styled-components';
-// import axios from "axios";
-// import SignUpAmuse from "../SignUpPage/SignUpAmuse";
 
 const SingleSignOn = async () => {
     var IMP = window.IMP;
