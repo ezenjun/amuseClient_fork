@@ -16,6 +16,8 @@ import { useSetRecoilState } from "recoil";
 import { selectedItemState } from "../../../../../../Recoil/OrderAtomState";
 import Payment from "../../../../../../components/Payment";
 import * as S from "./style";
+import * as C from "../constants";
+
 const seasonEmoji: Record<string, string> = {
   winter: "⛄️",
   spring: "🌸",
@@ -142,7 +144,7 @@ function Calendar({ itemId, numberOfmonth }: CalendarProps) {
   }, [range]);
   return (
     <S.Calendar>
-      <S.Title>일자</S.Title>
+      <S.Title>{C.TICKET.TITLE}</S.Title>
       <S.Date>
         <style>{`.custom-select { color: white; background-color: #F184A1; }`}</style>
         <DayPicker

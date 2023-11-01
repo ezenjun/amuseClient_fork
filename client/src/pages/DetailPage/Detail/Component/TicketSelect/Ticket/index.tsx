@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 import * as S from "./style";
+import * as C from "../constants";
 
 interface TicketProps {
   name: string;
@@ -29,7 +30,7 @@ const Ticket: FC<TicketProps> = ({
 
       <S.Price>
         <S.Number>{price.toLocaleString("en")}</S.Number>
-        <S.Won>원</S.Won>
+        <S.Won>{C.TICKET.WON}</S.Won>
       </S.Price>
 
       <S.Count>
@@ -37,14 +38,14 @@ const Ticket: FC<TicketProps> = ({
           className={`${formattedCount === 0 ? "gray" : ""}`}
           onClick={handleMinus}
         >
-          -
+          {C.TICKET.MINUS}
         </S.MinusBtn>
         {formattedCount}
         <S.PlusBtn
           className={`${price === 0 ? "gray" : ""}`}
           onClick={handlePlus}
         >
-          +
+          {C.TICKET.PLUS}
         </S.PlusBtn>
       </S.Count>
     </S.Ticket>

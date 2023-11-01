@@ -6,7 +6,7 @@ import { TicketData } from "../../../../../../Interfaces/DataInterfaces";
 import Ticket from "../Ticket";
 import axios from "axios";
 import * as S from "./style";
-import * as C from "./constants";
+import * as C from "../constants";
 
 type DateProps = {
   itemId: number | null;
