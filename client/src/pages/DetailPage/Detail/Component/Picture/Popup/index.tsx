@@ -14,24 +14,18 @@ interface PopupProps {
   clickId: number;
 }
 
-const onAfterOpen = () => {
-  document.body.style.overflow = "hidden";
-};
-
 function Popup({ onClose, images, clickId }: PopupProps) {
   const pictures = images;
   const [currentPictureIndex, setCurrentPictureIndex] = useState(clickId);
-
+  const onAfterOpen = () => (document.body.style.overflow = "hidden");
   const showNextPicture = () => {
     setCurrentPictureIndex((prevIndex) => (prevIndex + 1) % pictures.length);
   };
-
   const showPreviousPicture = () => {
     setCurrentPictureIndex(
       (prevIndex) => (prevIndex - 1 + pictures.length) % pictures.length
     );
   };
-
   const onCloseModal = () => {
     document.body.style.overflow = "auto";
     onClose();
