@@ -1,25 +1,21 @@
 import React, { useEffect, useState } from "react";
+import { ItemIdProps } from "../../../../../Interfaces/PropsInterfaces";
+import { useSetRecoilState } from "recoil";
+import { selectedItemState } from "../../../../../Recoil/OrderAtomState";
 import _ from "lodash";
 import axios from "axios";
 import MainPicture from "./MainPicture/MainPicture";
 import SubPicture from "./SubPicture/SubPicture";
-import "./Picture.scss";
-import { ItemIdProps } from "../../../../../Interfaces/PropsInterfaces";
-import { useSetRecoilState } from "recoil";
-import { selectedItemState } from "../../../../../Recoil/OrderAtomState";
+import * as S from "./style";
 
 function Picture({ itemId }: ItemIdProps) {
-  /**
-   * Picture Data
-   */
+  // Picture Data
   const [pictureData, setPictureData] = useState<string[]>([]);
   const mainPicture = pictureData ? pictureData.shift() : null;
   const subPicture = pictureData.slice(0, 3);
   const setSelectedItemImg = useSetRecoilState(selectedItemState);
 
-  /**
-   * Picture API
-   */
+  // Picture API
   useEffect(() => {
     axios
       .get(`${process.env.REACT_APP_AMUSE_API}/detail/${itemId}/picture`)
@@ -39,13 +35,13 @@ function Picture({ itemId }: ItemIdProps) {
         }));
       })
       .catch((error) => {
-        console.log("연결 실패");
+        console.log("Picture 연결 실패");
       });
   }, [itemId]);
 
   return (
-    <div className="Picture">
-      <div className="mainpicture">
+    <S.Picture>
+      <S.MainPicture>
         {mainPicture && (
           <MainPicture
             src={mainPicture}
@@ -54,8 +50,8 @@ function Picture({ itemId }: ItemIdProps) {
             modal={pictureData}
           />
         )}
-      </div>
-      <div className="subpicture">
+      </S.MainPicture>
+      <S.SubPicture>
         {subPicture.map((picture, key) => (
           <SubPicture
             key={itemId + key.toString()}
@@ -65,8 +61,8 @@ function Picture({ itemId }: ItemIdProps) {
             modal={pictureData}
           />
         ))}
-      </div>
-    </div>
+      </S.SubPicture>
+    </S.Picture>
   );
 }
 

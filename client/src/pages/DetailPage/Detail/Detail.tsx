@@ -2,7 +2,7 @@ import "./Detail.scss";
 import Header from "../../../components/Headers/Header";
 import Reservation from "./Component/Reservation";
 import Title from "./Component/Title";
-import Picture from "./Component/Picture/Picture";
+import Picture from "./Component/Picture";
 import ProductIntro from "./Component/ProductIntro";
 import Footer from "../../../components/Footers/Footer";
 import CourseIntro from "./Component/CourseIntro";
