@@ -46,7 +46,6 @@ function Header() {
 
   useEffect(() => {
     let getToken: string | null = cookies.__jwtkid__;
-    console.log("getToken ", getToken);
     if (
       cookies.__usrN__ &&
       (!cookies.__jwtkid__ || cookies.__jwtkid__ === "undefined")

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import styles from "../../../../../../../node_modules/react-day-picker/dist/style.module.css";
-import "./Calendar.scss";
+import styles from "react-day-picker/dist/style.module.css";
 import { addDays, format, isSameDay } from "date-fns";
 import { ko } from "date-fns/locale";
 import {
@@ -10,11 +9,14 @@ import {
   DayClickEventHandler,
   ClassNames,
 } from "react-day-picker";
-import TicketList from "../TicketList/TicketList";
+import TicketList from "../TicketList";
 import axios from "axios";
 import { useOrderContext } from "../../../../Contexts/OrderContext";
 import { useSetRecoilState } from "recoil";
 import { selectedItemState } from "../../../../../../Recoil/OrderAtomState";
+import Payment from "../../../../../../components/Payment";
+import * as S from "./style";
+import * as C from "../constants";
 
 const seasonEmoji: Record<string, string> = {
   winter: "⛄️",
@@ -46,22 +48,9 @@ const formatCaption: DateFormatter = (month, options) => {
 type CalendarProps = {
   itemId: number | null;
   numberOfmonth: number;
-  classNone?: string;
-  classContainer?: string;
-  classTicketContainer?: string;
-  classTicketPrice?: string;
-  classTicketCnt?: string;
 };
 
-function Calendar({
-  itemId,
-  numberOfmonth,
-  classNone,
-  classContainer,
-  classTicketContainer,
-  classTicketPrice,
-  classTicketCnt,
-}: CalendarProps) {
+function Calendar({ itemId, numberOfmonth }: CalendarProps) {
   // duration data
   interface CalendarData {
     duration: number;
@@ -80,7 +69,7 @@ function Calendar({
         }));
       })
       .catch((error) => {
-        console.log("연결 실패");
+        console.log("Calendar 연결 실패");
       });
   }, [itemId]);
 
@@ -110,7 +99,6 @@ function Calendar({
       console.log(CalendarData);
       if (modifiers.selected && range?.from) {
         if (isSameDay(day, range?.from)) {
-          // setRange(undefined);
         } else {
           let insertTo = CalendarData?.duration - 1;
           if (insertTo < 0) {
@@ -155,9 +143,9 @@ function Calendar({
     setOrderRange(range);
   }, [range]);
   return (
-    <div className={`select-date ${classContainer}`}>
-      <p className={`select-ticket-title ${classNone}`}>티켓 선택</p>
-      <div className="Calendar">
+    <S.Calendar>
+      <S.Title>{C.TICKET.TITLE}</S.Title>
+      <S.Date>
         <style>{`.custom-select { color: white; background-color: #F184A1; }`}</style>
         <DayPicker
           locale={ko}
@@ -170,16 +158,12 @@ function Calendar({
           disabled={{ before: today }}
           classNames={classNames}
         />
-      </div>
-      <TicketList
-        range={range}
-        itemId={itemId}
-        classNone={classNone}
-        classTicketContainer={classTicketContainer}
-        classTicketPrice={classTicketPrice}
-        classTicketCnt={classTicketCnt}
-      />
-    </div>
+      </S.Date>
+      <TicketList range={range} itemId={itemId} />
+      <S.Payment>
+        <Payment />
+      </S.Payment>
+    </S.Calendar>
   );
 }
 
