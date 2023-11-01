@@ -1,37 +1,37 @@
 import React, { useEffect, useState } from "react";
 import { ItemIdProps } from "../../../../../Interfaces/PropsInterfaces";
-import * as S from "./style";
 import axios from "axios";
+import * as S from "./style";
 
-interface ProductIntroData {
+interface ItemInfoData {
   content: string;
 }
 
-function ProductIntro({ itemId }: ItemIdProps) {
-  // ProductIntro Data
-  const [productIntroData, setProductIntroData] = useState<ProductIntroData>();
+function ItemInfo({ itemId }: ItemIdProps) {
+  // ItemInfo Data
+  const [ItemInfoData, setItemInfoData] = useState<ItemInfoData>();
 
-  // ProductIntro API
+  // ItemInfo API
   useEffect(() => {
     axios
       .get(`${process.env.REACT_APP_AMUSE_API}/detail/${itemId}/product-intro`)
       .then((response) => {
-        setProductIntroData(response.data.data);
+        setItemInfoData(response.data.data);
       })
       .catch((error) => {
-        console.log("ProductIntro 연결 실패");
+        console.log("ItemInfo 연결 실패");
       });
   }, [itemId]);
 
   return (
-    <S.ProductIntro>
+    <S.ItemInfo>
       <div
         dangerouslySetInnerHTML={{
-          __html: productIntroData?.content ?? "",
+          __html: ItemInfoData?.content ?? "",
         }}
       />
-    </S.ProductIntro>
+    </S.ItemInfo>
   );
 }
 
-export default ProductIntro;
+export default ItemInfo;

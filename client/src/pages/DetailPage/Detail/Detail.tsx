@@ -3,7 +3,7 @@ import Header from "../../../components/Headers/Header";
 import Side from "./Component/Side";
 import Title from "./Component/Title";
 import Picture from "./Component/Picture";
-import ProductIntro from "./Component/ProductIntro";
+import ItemInfo from "./Component/ItemInfo";
 import Footer from "../../../components/Footers/Footer";
 import CourseIntro from "./Component/CourseIntro";
 import Map from "./Component/Map";
@@ -27,7 +27,7 @@ function Detail({ itemId, productCode, startPrice, likeNum }: DetailProps) {
             <Title itemId={itemId} />
             <Picture itemId={itemId} />
             <Calendar itemId={itemId} numberOfmonth={2} />
-            <ProductIntro itemId={itemId} />
+            <ItemInfo itemId={itemId} />
             <CourseIntro itemId={itemId} />
             <Map itemId={itemId} />
             <OtherInfo itemId={itemId} />
