@@ -12,12 +12,12 @@ interface LoginProps {
   setLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
   cookies: any;
   setCookie: (
-    name: "__jwtk__" | "__igjwtk__" | "__jwtkid__" | "__usrN__",
+    name: "__jwtk__" | "__igjwtk__" | "__jwtkid__" | "__usrN__" | "accessToken",
     value: any,
     options?: object | undefined
   ) => void;
   removeCookie: (
-    name: "__jwtk__" | "__igjwtk__" | "__jwtkid__" | "__usrN__",
+    name: "__jwtk__" | "__igjwtk__" | "__jwtkid__" | "__usrN__" | "accessToken",
     options?: object | undefined
   ) => void;
 }
@@ -47,8 +47,9 @@ function Login({
   const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
   const handleLogout = () => {
     let token = cookies.__jwtkid__;
-    localStorage.removeItem("accessToken"); // localStorage 임시 사용
+    // localStorage.removeItem("accessToken"); // localStorage 임시 사용
     setLoggedIn(false);
+    removeCookie("accessToken");
     setAccessToken("");
     const expires = moment().add("1", "m").toDate();
     setCookie("__igjwtk__", token, { expires });

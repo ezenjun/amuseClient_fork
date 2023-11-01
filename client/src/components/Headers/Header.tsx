@@ -25,6 +25,7 @@ function Header() {
 		"__igjwtk__",
 		"__jwtkid__",
 		"__usrN__",
+		"accessToken",
 	]);
 	const [mobileHeader, setMobileHeader] = useState(0);
 	const handleResize = () => {
@@ -45,28 +46,28 @@ function Header() {
 	}, []);
 
 
-  useEffect(() => {
-    let getToken: string | null = cookies.__jwtkid__;
-    if (
-      cookies.__usrN__ &&
-      (!cookies.__jwtkid__ || cookies.__jwtkid__ === "undefined")
-    ) {
-      removeCookie("__usrN__");
-    }
-    if (cookies.__jwtkid__) {
-      setLoggedIn(true);
-    } else {
-      setLoggedIn(false);
-    }
-    if (
-      !cookies.__usrN__ ||
-      cookies.__usrN__ === "undefined" ||
-      !cookies.__jwtkid__ ||
-      cookies.__jwtkid__ === "undefined"
-    ) {
-      setLoggedIn(false);
-    }
-  }, [cookies]);
+	useEffect(() => {
+		let getToken: string | null = cookies.__jwtkid__;
+		if (
+			cookies.__usrN__ &&
+			(!cookies.__jwtkid__ || cookies.__jwtkid__ === "undefined")
+		) {
+			removeCookie("__usrN__");
+		}
+		if (cookies.__jwtkid__) {
+			setLoggedIn(true);
+		} else {
+			setLoggedIn(false);
+		}
+		if (
+			!cookies.__usrN__ ||
+			cookies.__usrN__ === "undefined" ||
+			!cookies.__jwtkid__ ||
+			cookies.__jwtkid__ === "undefined"
+		) {
+			setLoggedIn(false);
+		}
+	}, [cookies]);
 
 	useEffect(() => {
 		let locationString = window.location.toString();
@@ -124,13 +125,13 @@ function Header() {
 	};
 
 	// 어뮤즈 자체 로그인 정보 가져오기
-	const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
+	// const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
 	const getAmuseUserInfo = async () => {
 		await axios
 			.get(`${process.env.REACT_APP_AMUSE_API}/api/v1/user/info`, {
 				headers: {
 					"Content-Type": "application/json",
-					Authorization: `Bearer ${accessToken}`,
+					Authorization: `Bearer ${cookies.accessToken}`,
 				},
 			})
 			.then((response) => {
@@ -144,13 +145,16 @@ function Header() {
 	};
 
 	// localStorage 임시 사용
-	useEffect(() => {
-		const result = localStorage.getItem("accessToken");
-		if (result) { setAccessToken(result); }
-	}, []);
+	// useEffect(() => {
+	// 	const result = localStorage.getItem("accessToken");
+	// 	if (result) { setAccessToken(result); }
+	// }, []);
 
 	useEffect(() => {
-		if (accessToken) {
+		console.log("쿠키 access",cookies.accessToken);
+		if (cookies.accessToken) {
+			// setAccessToken(cookies.accessToken);
+			// console.log("받아온 토큰", accessToken);
 			getAmuseUserInfo();
 		}
 	}, []);

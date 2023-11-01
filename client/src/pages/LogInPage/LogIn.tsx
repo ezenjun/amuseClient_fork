@@ -60,6 +60,7 @@ const Login: React.FC = () => {
 	// 어뮤즈 자체 로그인 API
 	const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
 	const [error, setError] = useState<string | null>(null);
+	const [cookies, setCookie] = useCookies(['accessToken']);
 
 	const handleLogin = async (event: { preventDefault: () => void; }) => {
 		event.preventDefault();
@@ -78,7 +79,9 @@ const Login: React.FC = () => {
 				const accessToken = response.data.data.accessToken;
 				setAccessToken(accessToken);
 				// 임시 사용 (refresh token으로 변경 예정)
-				localStorage.setItem("accessToken", accessToken);
+				// localStorage.setItem("accessToken", accessToken);
+				console.log("로그인 시 처음 토큰",accessToken);
+				setCookie('accessToken', accessToken);
 				navigate("/");
 			})
 			.catch((error) => {
