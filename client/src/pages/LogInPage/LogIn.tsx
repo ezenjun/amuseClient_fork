@@ -59,6 +59,8 @@ const Login: React.FC = () => {
 
 	// 어뮤즈 자체 로그인 API
 	const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
+	const [error, setError] = useState<string | null>(null);
+
 	const handleLogin = async (event: { preventDefault: () => void; }) => {
 		event.preventDefault();
 
@@ -81,6 +83,9 @@ const Login: React.FC = () => {
 			})
 			.catch((error) => {
 				console.log(error.response.data.message);
+				if (error.response) {
+					setError(error.response.data.message);
+				}
 			});
 	}
 
@@ -98,8 +103,9 @@ const Login: React.FC = () => {
 							<PasswordInput password={password} handleChangePassword={handleChangePassword} labelText="비밀번호" design="standard" width="680px" margin='8px' margin_b='' isValid={true} errorText="" inputSize="medium" />
 						</div>
 					</div>
+					{error && <div className="error-message">이메일 또는 비밀번호가 올바르지 않습니다.</div>}
 					<div className="keep_id">
-						<input type="checkbox" id="keep" className="keep_id_check" checked={rememberId} onChange={handlerememberIdChange}/>
+						<input type="checkbox" id="keep" className="keep_id_check" checked={rememberId} onChange={handlerememberIdChange} />
 						<label htmlFor="keep" className="keep_id_text">아이디 저장</label>
 					</div>
 					<div className="login_btn_box">

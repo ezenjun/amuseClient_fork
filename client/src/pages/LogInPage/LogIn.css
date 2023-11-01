@@ -23,6 +23,11 @@
   border-radius: 8px;
 }
 
+.error-message {
+  color: red;
+  margin-top: 8px;
+}
+
 .keep_id {
   margin: 15px;
   display: flex;
