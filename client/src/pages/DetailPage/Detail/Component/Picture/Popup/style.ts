@@ -16,13 +16,15 @@ export const List = styled.div`
 `;
 
 export const MainImage = styled.img`
-  max-width: 60%;
-  max-height: 60%;
+  width: 800px;
+  height: 500px;
+  object-fit: cover;
+  margin-top: -50px;
 `;
 
 export const SubImage = styled.img`
-  height: 90px;
-  width: 110px;
+  height: 100px;
+  width: 130px;
   margin: 0 3px 6px;
 `;
 

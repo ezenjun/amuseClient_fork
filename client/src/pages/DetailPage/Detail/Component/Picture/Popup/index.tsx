@@ -10,17 +10,17 @@ import * as S from "./style";
 
 interface PopupProps {
   onClose: () => void;
-  itemId: number | null;
   images: string[];
+  clickId: number;
 }
 
 const onAfterOpen = () => {
   document.body.style.overflow = "hidden";
 };
 
-function Popup({ onClose, itemId, images }: PopupProps) {
+function Popup({ onClose, images, clickId }: PopupProps) {
   const pictures = images;
-  const [currentPictureIndex, setCurrentPictureIndex] = useState(0);
+  const [currentPictureIndex, setCurrentPictureIndex] = useState(clickId);
 
   const showNextPicture = () => {
     setCurrentPictureIndex((prevIndex) => (prevIndex + 1) % pictures.length);

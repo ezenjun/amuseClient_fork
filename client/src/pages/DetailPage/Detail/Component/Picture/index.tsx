@@ -42,9 +42,7 @@ function Picture({ itemId }: ItemIdProps) {
   return (
     <S.Picture>
       <S.Main>
-        {main && (
-          <Main src={main} alt={main} itemId={itemId} modal={pictureData} />
-        )}
+        {main && <Main src={main} alt={main} modal={pictureData} clickId={0} />}
       </S.Main>
       <S.Sub>
         {sub.map((picture, key) => (
@@ -52,8 +50,8 @@ function Picture({ itemId }: ItemIdProps) {
             key={itemId + key.toString()}
             src={picture}
             alt={picture}
-            itemId={itemId}
             modal={pictureData}
+            clickId={key + 1}
           />
         ))}
       </S.Sub>

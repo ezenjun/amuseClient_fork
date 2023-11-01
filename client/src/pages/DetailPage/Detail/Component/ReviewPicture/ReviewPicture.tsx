@@ -40,8 +40,8 @@ function ReviewPicture({ itemId }: ItemIdProps) {
           <SubPicture
             src={picture}
             alt={picture}
-            itemId={idx}
             modal={reviewPicture}
+            clickId={0}
           />
         ))}
       </div>

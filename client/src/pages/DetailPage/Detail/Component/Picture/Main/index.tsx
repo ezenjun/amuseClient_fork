@@ -1,15 +1,15 @@
 import React, { useState } from "react";
-import PictureModal from "../Popup";
+import Popup from "../Popup";
 import * as S from "./style";
 
 interface MainProps {
   src: string;
   alt: string;
-  itemId: number | null;
   modal: string[];
+  clickId: number;
 }
 
-function Main({ src, alt, itemId, modal }: MainProps) {
+function Main({ src, alt, modal, clickId }: MainProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => {
@@ -24,7 +24,7 @@ function Main({ src, alt, itemId, modal }: MainProps) {
     <S.Main>
       <S.Image src={src} alt={alt} onClick={openModal} />
       {isModalOpen && (
-        <PictureModal onClose={closeModal} itemId={itemId} images={modal} />
+        <Popup onClose={closeModal} images={modal} clickId={clickId} />
       )}
     </S.Main>
   );

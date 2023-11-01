@@ -5,11 +5,11 @@ import * as S from "./style";
 interface SubProps {
   src: string;
   alt: string;
-  itemId: number | null;
   modal: string[];
+  clickId: number;
 }
 
-function Sub({ src, alt, itemId, modal }: SubProps) {
+function Sub({ src, alt, modal, clickId }: SubProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => {
@@ -24,7 +24,7 @@ function Sub({ src, alt, itemId, modal }: SubProps) {
     <S.Sub>
       <S.Image src={src} alt={alt} onClick={openModal} />
       {isModalOpen && (
-        <PictureModal onClose={closeModal} itemId={itemId} images={modal} />
+        <PictureModal onClose={closeModal} images={modal} clickId={clickId} />
       )}
     </S.Sub>
   );
