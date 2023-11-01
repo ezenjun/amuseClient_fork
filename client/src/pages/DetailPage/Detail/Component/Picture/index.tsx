@@ -11,8 +11,8 @@ import * as S from "./style";
 function Picture({ itemId }: ItemIdProps) {
   // Picture Data
   const [pictureData, setPictureData] = useState<string[]>([]);
-  const main = pictureData ? pictureData.shift() : null;
-  const sub = pictureData.slice(0, 3);
+  const [main, setMain] = useState<string>("");
+  const [sub, setSub] = useState<string[]>([]);
   const setSelectedItemImg = useSetRecoilState(selectedItemState);
 
   // Picture API
@@ -21,23 +21,23 @@ function Picture({ itemId }: ItemIdProps) {
       .get(`${process.env.REACT_APP_AMUSE_API}/detail/${itemId}/picture`)
       .then((response) => {
         let pictures = response.data.data.pictures;
-        pictures = _.sortBy(pictures, "sequence");
         let result: any[] = [];
-        pictures.map((item: any) => {
-          result.push(item.imgUrl);
-        });
+        pictures = _.sortBy(pictures, "sequence");
+        pictures.map((item: any) => result.push(item.imgUrl));
+        setMain(result[0]);
+        setSub(result.slice(1, 4));
         setPictureData(result);
 
         // 현재 아이템 대표사진 설정(결제용)
         setSelectedItemImg((prevSelectedItem) => ({
           ...prevSelectedItem,
-          img: result.shift() || "",
+          img: result.length > 0 ? result[0] : "",
         }));
       })
       .catch((error) => {
         console.log("Picture 연결 실패");
       });
-  }, [itemId]);
+  }, [itemId, setSelectedItemImg]);
 
   return (
     <S.Picture>
