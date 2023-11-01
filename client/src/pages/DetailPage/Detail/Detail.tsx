@@ -1,6 +1,6 @@
 import "./Detail.scss";
 import Header from "../../../components/Headers/Header";
-import Reservation from "./Component/Reservation";
+import Side from "./Component/Side";
 import Title from "./Component/Title";
 import Picture from "./Component/Picture";
 import ProductIntro from "./Component/ProductIntro";
@@ -38,11 +38,7 @@ function Detail({ itemId, productCode, startPrice, likeNum }: DetailProps) {
           </S.Content>
           {/* 상세페이지 사이드 바 */}
           <div className="side">
-            <Reservation
-              itemId={itemId}
-              productCode={productCode}
-              likeNum={likeNum}
-            />
+            <Side itemId={itemId} productCode={productCode} likeNum={likeNum} />
           </div>
           {/* 상세페이지 모바일 티켓선택 */}
           <div className="bottom-btn">
