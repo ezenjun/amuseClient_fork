@@ -2,9 +2,8 @@ import React, { useState, useEffect } from "react";
 import Modal from "react-modal";
 import "./ReservationModal.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronLeft, faChevronRight, faTimes } from "@fortawesome/free-solid-svg-icons";
-import Calendar from "../../TicketSelect/Calendar/Calendar";
-import customModule from "../../TicketSelect/custom.module.scss";
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
+import Calendar from "../../TicketSelect/Calendar";
 import axios from "axios";
 
 interface ModalProps {
@@ -74,15 +73,7 @@ function ReservationModal({ onClose, itemId }: ModalProps) {
           </button>
         </header>
         <div className="modal-section">
-          <Calendar
-            itemId={itemId}
-            numberOfmonth={1}
-            classNone={customModule["invisible"]}
-            classContainer={customModule["container"]}
-            classTicketContainer={customModule["ticket-container"]}
-            classTicketPrice={customModule["ticket-container-price"]}
-            classTicketCnt={customModule["ticket-container-cnt"]}
-          />
+          <Calendar itemId={itemId} numberOfmonth={1} />
         </div>
       </div>
     </Modal>
