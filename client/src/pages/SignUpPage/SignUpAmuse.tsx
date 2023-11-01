@@ -55,6 +55,12 @@ const SignUpAmuse: React.FC = () => {
         setCurrentStep(currentStep + 1);
     };
 
+
+    const [name, setName] = useState<string>('');
+    const handleNextClickInfo = (name: string) => {
+        setName(name);
+        setCurrentStep(currentStep + 1);
+    };
     // const handleNextClickId = (impUid: React.SetStateAction<string | null>) => {
     //     setImpUid(impUid);
     //     setCurrentStep(currentStep + 1);
@@ -106,7 +112,7 @@ const SignUpAmuse: React.FC = () => {
                     <div>
                         <Certification />
                         <S.SignUpTitle>정보입력</S.SignUpTitle>
-                        <InfoForm onNextStep={handleNextClick} />
+                        <InfoForm onNextStep={handleNextClickInfo} />
                     </div>
                 )}
 
@@ -114,7 +120,7 @@ const SignUpAmuse: React.FC = () => {
                 {currentStep === 3 && (
                     <div>
                         <S.SignUpTitle>회원가입완료</S.SignUpTitle>
-                        <S.DoneText>~~님 반가워요!<br /> 회원가입이 완료되었어요</S.DoneText>
+                        <S.DoneText>{name}님 반가워요!<br /> 회원가입이 완료되었어요</S.DoneText>
                         <S.WelcomeText>누구나 갈 수 있는, 모두가 즐거운 여행</S.WelcomeText>
                         <S.NextButton onClick={handleContinueClick}>계속하기</S.NextButton>
                     </div>

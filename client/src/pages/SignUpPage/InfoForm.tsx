@@ -8,8 +8,7 @@ import { impUid } from "../../atoms";
 import * as S from "./InfoFormStyle";
 
 interface InfoFormProps {
-    onNextStep: () => void;
-    // imp_uid: string | null;
+    onNextStep: (name: string) => void;
 }
 
 const InfoForm: React.FC<InfoFormProps> = (props) => {
@@ -104,7 +103,6 @@ const InfoForm: React.FC<InfoFormProps> = (props) => {
                         setCheckId(false);
                         setId("");
                     } else {
-                        console.log(id);
                         console.log("사용 가능한 ID입니다.");
                         setIsValidId(true);
                         setCheckId(true);
@@ -166,7 +164,7 @@ const InfoForm: React.FC<InfoFormProps> = (props) => {
             .then((response) => {
                 console.log('가입 성공');
                 console.log(response.data);
-                props.onNextStep();
+                props.onNextStep(name);
             })
             .catch((error) => {
                 console.error('API 요청 실패:', error);
