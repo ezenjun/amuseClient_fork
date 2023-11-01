@@ -67,7 +67,7 @@ function Calendar({ itemId, numberOfmonth }: CalendarProps) {
         }));
       })
       .catch((error) => {
-        console.log("연결 실패");
+        console.log("Calendar 연결 실패");
       });
   }, [itemId]);
 
@@ -97,7 +97,6 @@ function Calendar({ itemId, numberOfmonth }: CalendarProps) {
       console.log(CalendarData);
       if (modifiers.selected && range?.from) {
         if (isSameDay(day, range?.from)) {
-          // setRange(undefined);
         } else {
           let insertTo = CalendarData?.duration - 1;
           if (insertTo < 0) {

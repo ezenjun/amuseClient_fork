@@ -6,6 +6,7 @@ import { TicketData } from "../../../../../../Interfaces/DataInterfaces";
 import Ticket from "../Ticket";
 import axios from "axios";
 import * as S from "./style";
+import * as C from "./constants";
 
 type DateProps = {
   itemId: number | null;
@@ -30,7 +31,7 @@ function TicketList({ range, itemId }: DateProps) {
         setTicketData(dataWithCount);
       })
       .catch((error) => {
-        console.log("연결 실패");
+        console.log("Ticket List 연결 실패");
       });
   }, [itemId]);
 
@@ -99,10 +100,7 @@ function TicketList({ range, itemId }: DateProps) {
     });
   }
 
-  /**
-   * Ticket Button
-   */
-
+  // Ticket Button
   const totalAmount = ticketData.reduce((sum, ticket) => {
     const selectedPriceIndex = getSelectedPriceIndex(ticket, range);
     const price =
@@ -151,9 +149,15 @@ function TicketList({ range, itemId }: DateProps) {
             <S.Ticket key={index}>
               <S.Count>{ticket.title}</S.Count>
               <S.Count>
-                {ticket.count} X {price.toLocaleString("en")}원
+                {ticket.count}
+                {C.TICKET.MUIT}
+                {price.toLocaleString("en")}
+                {C.TICKET.WON}
               </S.Count>
-              <S.Price>{(ticket.count * price).toLocaleString("en")}원</S.Price>
+              <S.Price>
+                {(ticket.count * price).toLocaleString("en")}
+                {C.TICKET.WON}
+              </S.Price>
             </S.Ticket>
           );
         })}
@@ -161,8 +165,11 @@ function TicketList({ range, itemId }: DateProps) {
       {/* total amount */}
       {ticketData.some((ticket) => ticket.count > 0) && (
         <S.Total>
-          <S.Title>총 여행 금액</S.Title>
-          <S.Amount>{totalAmount.toLocaleString("en")}원</S.Amount>
+          <S.Title>{C.TICKET.SUM}</S.Title>
+          <S.Amount>
+            {totalAmount.toLocaleString("en")}
+            {C.TICKET.WON}
+          </S.Amount>
         </S.Total>
       )}
     </S.TicketList>
