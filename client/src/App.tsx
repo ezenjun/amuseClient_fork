@@ -4,8 +4,11 @@ import Home from "../src/Home";
 import SubPageComp from "./pages/SubPage/SubPageComp";
 import MyPage from "./pages/MyPage/MyPage";
 import Login from "./pages/LogInPage/LogIn";
+import FindId from "./pages/LogInPage/FindId";
+import FindPw from "./pages/LogInPage/FindPw";
 import LoginAgree from "./pages/LogInPage/LoginAgree";
 import SignUp from "./pages/SignUpPage/SignUp";
+import SignUpAmuse from "./pages/SignUpPage/SignUpAmuse";
 import Detail from "./pages/DetailPage/Detail/Detail";
 import Review from "./pages/MyPage/Review/Review";
 import ViewAll from "./pages/SubPage/ViewAllPages/ViewAll";
@@ -113,7 +116,10 @@ function App() {
           <Route path="/SeniorCare" element={<SeniorCare />}></Route> */}
 
             <Route path="/LogIn" element={<Login />}></Route>
+            <Route path="/LogIn/FindId" element={<FindId />}></Route>
+						<Route path="/LogIn/FindPw" element={<FindPw />}></Route>
             <Route path="/SignUp" element={<SignUp />}></Route>
+            <Route path="/SignUpAmuse" element={<SignUpAmuse />}></Route>
             <Route path="/MyPage/:category" element={<MyPage />}></Route>
             <Route path="/Review/:id" element={<Review />}></Route>
             {/* <Route path="/OnlineTour" element={<OnlineTour />}></Route> */}

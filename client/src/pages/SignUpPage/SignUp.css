@@ -1,84 +1,131 @@
-.login_body {
-    flex-direction: column;
-    align-items: center;
-    max-width: 530px;
-    border: solid 3px lightgray;
-    border-radius: 6px;
-    margin: 30px auto;
-    padding: 48px;
-  }
-  
-  .amuse_logo {
-    width: 300px;
-    height: 80px;
-  }
-  
-  .amuse_login_title {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .amuse_title_bottom {
-    color: #EB1749;
-    margin: 10px 0;
-  }
-  
-  .login_btn {
-    background-color:#e9ecf2;
-    width: 95px;
-    height: 28px;
-    border-radius: 4px;
-    border: none;
-  }
-  
-  .amuse_title_top {
-    margin: 40px 0 0 0;
-  }
-  
-  .signup_link, .password_reset_link {
-    color: #EB1749;
-    margin-left: 15px;
-  }
-  
-  .email_input, .password_input, .user_name_input {
-    width: 380px;
-    height: 42px;
-    border-style: none;
-    font-size: 16px;
-    display: flex;
-    align-items: center;
-    width: 100%;
-    padding: 4px;
-    margin: 8px 0;
-  }
+/* 약관동의 css */
+.all_agree_box {
+  height: 60px;
+  margin: 15px 0;
+  display: flex;
+  align-items: center;
+  border-radius: 8px;
+  background: #FFF;
+  box-shadow: 0px 0px 4px 3px #F5F5F5;
+  padding: 20px 16px;
+}
 
-  .email_input {
-    width: 100%
-  }
-  
-  .input {
-    padding: 6px 20px;
-  }
-  
-  .signup_box, .password_reset_box {
-    display: flex;
-    justify-content: baseline;
-    margin: 3px 0;
-  }
-  
-  .login_function_box {
-    display: flex;
-    flex-direction: column;
-    align-items: baseline;
-    margin: 25px 0 0 0;
-  }
-  
-  .v_box {
-    display: flex;
-    flex-direction: column;
-    max-width: 450px;
-    padding: 15px;
-    align-items: baseline;
-    margin: auto;
-  }
+.agree_check {
+  content: url(../LogInPage/Icons/check_icon.png);
+  width: 20px;
+  margin: 0 10px 0 0;
+}
+
+.agree_check:checked {
+  content: url(../LogInPage/Icons/checked_icon.png);
+}
+
+.all_agree_text {
+  color: #000;
+  font-family: Pretendard;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  /* font-size: 12px;
+  font-weight: 500;
+  line-height: normal; */
+}
+
+.agree_box {
+  display: flex;
+  align-items: center;
+  margin: 7px 16px;
+}
+
+.agree_text {
+  color: #9C9C9C;
+  font-family: Pretendard;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.content_btn {
+  color: #4A87FF;
+  font-family: Pretendard;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  text-decoration-line: underline;
+  cursor: pointer;
+}
+
+.next_btn {
+  margin: 25px 0;
+}
+
+/* 약관동의 Modal */
+.modal_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal_title {
+  color: var(--, #000);
+  font-family: Pretendard;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 150%;
+  letter-spacing: -0.64px;
+}
+
+.modal_content {
+  margin: 30px 0;
+}
+
+.agree_btn {
+  width: 659px;
+  height: 60px;
+  background-color: #E6003D;
+  border: none;
+  border-radius: 8px;
+  background: #E6003E;
+  color: #FFF;
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: -0.4px;
+  position: fixed;
+  bottom: 42px;
+}
+
+/* 완료 */
+.done_text {
+  color: #000;
+  font-family: Pretendard;
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.welcome_text {
+  color: #000;
+  font-family: Pretendard;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  margin: 30px 0;
+}
+
+
+/* 다음 버튼 비활성화 */
+button:disabled {
+  background-color: #cccccc;
+  color: #666666;
+  cursor: not-allowed;
+}
