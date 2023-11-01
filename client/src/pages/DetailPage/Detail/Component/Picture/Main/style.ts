@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const MainPicture = styled.div`
+export const Main = styled.div`
   position: relative;
   padding-bottom: 62%;
   margin-bottom: 5px;

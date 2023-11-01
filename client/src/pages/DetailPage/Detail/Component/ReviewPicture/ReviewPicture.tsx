@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./ReviewPicture.scss";
-import SubPicture from "../Picture/SubPicture";
+import SubPicture from "../Picture/Sub";
 import axios from "axios";
 import { ItemIdProps } from "../../../../../Interfaces/PropsInterfaces";
 

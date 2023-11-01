@@ -4,15 +4,15 @@ import { useSetRecoilState } from "recoil";
 import { selectedItemState } from "../../../../../Recoil/OrderAtomState";
 import _ from "lodash";
 import axios from "axios";
-import MainPicture from "./MainPicture";
-import SubPicture from "./SubPicture";
+import Main from "./Main";
+import Sub from "./Sub";
 import * as S from "./style";
 
 function Picture({ itemId }: ItemIdProps) {
   // Picture Data
   const [pictureData, setPictureData] = useState<string[]>([]);
-  const mainPicture = pictureData ? pictureData.shift() : null;
-  const subPicture = pictureData.slice(0, 3);
+  const main = pictureData ? pictureData.shift() : null;
+  const sub = pictureData.slice(0, 3);
   const setSelectedItemImg = useSetRecoilState(selectedItemState);
 
   // Picture API
@@ -41,19 +41,14 @@ function Picture({ itemId }: ItemIdProps) {
 
   return (
     <S.Picture>
-      <S.MainPicture>
-        {mainPicture && (
-          <MainPicture
-            src={mainPicture}
-            alt={mainPicture}
-            itemId={itemId}
-            modal={pictureData}
-          />
+      <S.Main>
+        {main && (
+          <Main src={main} alt={main} itemId={itemId} modal={pictureData} />
         )}
-      </S.MainPicture>
-      <S.SubPicture>
-        {subPicture.map((picture, key) => (
-          <SubPicture
+      </S.Main>
+      <S.Sub>
+        {sub.map((picture, key) => (
+          <Sub
             key={itemId + key.toString()}
             src={picture}
             alt={picture}
@@ -61,7 +56,7 @@ function Picture({ itemId }: ItemIdProps) {
             modal={pictureData}
           />
         ))}
-      </S.SubPicture>
+      </S.Sub>
     </S.Picture>
   );
 }

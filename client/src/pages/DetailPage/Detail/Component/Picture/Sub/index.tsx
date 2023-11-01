@@ -1,15 +1,15 @@
 import React, { useState } from "react";
-import PictureModal from "../PictureModal/PictureModal";
+import PictureModal from "../Popup";
 import * as S from "./style";
 
-interface MainPictureProps {
+interface SubProps {
   src: string;
   alt: string;
   itemId: number | null;
   modal: string[];
 }
 
-function MainPicture({ src, alt, itemId, modal }: MainPictureProps) {
+function Sub({ src, alt, itemId, modal }: SubProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => {
@@ -21,13 +21,13 @@ function MainPicture({ src, alt, itemId, modal }: MainPictureProps) {
   };
 
   return (
-    <S.MainPicture>
+    <S.Sub>
       <S.Image src={src} alt={alt} onClick={openModal} />
       {isModalOpen && (
         <PictureModal onClose={closeModal} itemId={itemId} images={modal} />
       )}
-    </S.MainPicture>
+    </S.Sub>
   );
 }
 
-export default MainPicture;
+export default Sub;
