@@ -5,7 +5,7 @@ import Title from "./Component/Title";
 import Picture from "./Component/Picture/Picture";
 import ProductIntro from "./Component/ProductIntro";
 import Footer from "../../../components/Footers/Footer";
-import CourseIntro from "./Component/CourseIntro/CourseIntro";
+import CourseIntro from "./Component/CourseIntro";
 import Map from "./Component/Map";
 import OtherInfo from "./Component/OtherInfo";
 import Manager from "./Component/Manager";
