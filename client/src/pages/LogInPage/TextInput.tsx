@@ -10,20 +10,23 @@ interface TextInputProps {
     width: string;
     margin: string;
     disable: boolean;
-    customValidation: (value: string) => string;
-    onInputChange: (value: string) => void;
+    // customValidation: (value: string) => string;
+    // onInputChange: (value: string) => void;
     onBlur?: () => void;
     value?: string;
+    onInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    isValid?: boolean;
+    errorText?: string;
 }
 
-const TextInput: React.FC<TextInputProps> = ({ disable, onBlur, customValidation, onInputChange, labelText, placeText, value, inputType, width, margin }) => {
-    const [inputValue, setInputValue] = useState<string>('');
+    const TextInput: React.FC<TextInputProps> = ({ disable, onBlur, onInputChange, labelText, placeText, value, inputType, isValid = true, errorText = "", width, margin }) => {
+    // const [inputValue, setInputValue] = useState<string>('');
 
-    const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-        const validationValue: string = customValidation(e.target.value);
-        setInputValue(validationValue);
-        onInputChange(validationValue);
-    };
+    // const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    //     const validationValue: string = customValidation(e.target.value);
+    //     setInputValue(validationValue);
+    //     onInputChange(validationValue);
+    // };
 
     return (
         <FormControl sx={{ mb: margin, width: width }} variant="outlined">
@@ -33,12 +36,14 @@ const TextInput: React.FC<TextInputProps> = ({ disable, onBlur, customValidation
                 label={labelText}
                 placeholder={placeText}
                 type={inputType}
-                value={inputValue || value}
-                onChange={handleInputChange}
+                value={value}
+                onChange={onInputChange}
                 variant="outlined"
                 size="small"
                 sx={{ padding: 0 }}
                 onBlur={onBlur}
+                error={!isValid}
+                helperText={!isValid ? errorText : ""}
             />
         </FormControl>
     );

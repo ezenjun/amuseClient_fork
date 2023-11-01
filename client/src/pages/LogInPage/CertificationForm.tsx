@@ -154,39 +154,40 @@ function VerificationForm(props: VerificationFormProps) {
 
 
     return (
-        <div className={`inn_box ${option}_box_sub ${selectedOption === option ? "show" : "hide"}`}>
-            {showPwForm && (
-                <TextInput disable={false} customValidation={emailValidation} onInputChange={handleInputChange} labelText="아이디(이메일계정)" placeText="ex) example123@example.com" inputType="email" width="702px" margin="16px" />
-                // <input type="text" className="input_text" placeholder="아이디(이메일계정)" />
-            )}
-            <div className="flex_box_sub">
-                <TextInput disable={isNameDisabled} onBlur={handleNameBlur} customValidation={nameValidation} onInputChange={handleNameInputChange} labelText="이름" placeText="이름" inputType="text" width="597px" margin="16px" />
-                {/* <input type="text" className="input_text input_name" placeholder="이름" /> */}
-                {isNameInputValid && <img src={InputCheckIcon} alt="" className="input_check" />}
-                <div className={`input_gender ${option === 'sms' ? 'sms_style_box':'email_style_box'} `}>
-                    <input type="radio" name="gender" id="male" checked={inputGender === 'male'} onChange={handleSexBoxClick} />
-                    <label htmlFor="male" className="first_label" >남</label>
-                    <input type="radio" name="gender" id="female" checked={inputGender === 'female'} onChange={handleSexBoxClick} />
-                    <label htmlFor="female" className="last_label" >여</label>
-                </div>
-            </div>
-            <div className="birth_box">
-                <TextInput disable={false} customValidation={birthValidation} onInputChange={handleBirstInputChange} labelText="생년월일" placeText="ex) 20230505" inputType="text" width="702px" margin="16px" />
-                {/* <input type="text" className="input_text" placeholder="생년월일" maxLength={6} /> */}
-                <button className="inn_btn name_request_btn">실명인증 요청</button>
-            </div>
-            <div className={`${option}_box`}>
-                <TextInput disable={!isNameInputValid && !isBirthInputValid || isNumberInputDisabled} customValidation={option === "email" ? emailValidation : pnumValidation} onInputChange={handleInputOptionBoxChange} labelText={option === "email" ? "이메일" : "전화번호"} placeText={option === "email" ? "ex) example123@example.com" : "ex) 01012345678"} inputType={option === "email" ? "email" : "text"} width="702px" margin="16px" />
-                {/* <input type="text" className="input_text" placeholder={option === "email" ? "이메일" : "전화번호"} /> */}
-                <button className={`inn_btn auth_request_btn ${authButtonText === '재요청' ? `retry_btn` : ``}`} onClick={handleAuthRequest} disabled={!isNameInputValid && !isBirthInputValid}>{authButtonText}</button>
-                {isNumberInputDisabled && <img src={InputCheckIcon} alt="" className="input_check" />}
-            </div>
-            <div className="auth_box">
-                <TextInput disable={isAuthInputValid} customValidation={codeValidation} onInputChange={handleAuthInputChange} labelText="인증번호" placeText="6자리" inputType="text" width="702px" margin="16px" />
-                {/* <input type="text" className="input_text" placeholder="인증번호" maxLength={6} /> */}
-                <button className="inn_btn auth_btn" onClick={handleAuthButtonClick} disabled={isAuthButtonValid}>인증하기</button>
-            </div>
-        </div>
+        <div></div>
+        // <div className={`inn_box ${option}_box_sub ${selectedOption === option ? "show" : "hide"}`}>
+        //     {showPwForm && (
+        //         <TextInput disable={false} customValidation={emailValidation} onInputChange={handleInputChange} labelText="아이디(이메일계정)" placeText="ex) example123@example.com" inputType="email" width="702px" margin="16px" />
+        //         // <input type="text" className="input_text" placeholder="아이디(이메일계정)" />
+        //     )}
+        //     <div className="flex_box_sub">
+        //         <TextInput disable={isNameDisabled} onBlur={handleNameBlur} customValidation={nameValidation} onInputChange={handleNameInputChange} labelText="이름" placeText="이름" inputType="text" width="597px" margin="16px" />
+        //         {/* <input type="text" className="input_text input_name" placeholder="이름" /> */}
+        //         {isNameInputValid && <img src={InputCheckIcon} alt="" className="input_check" />}
+        //         <div className={`input_gender ${option === 'sms' ? 'sms_style_box':'email_style_box'} `}>
+        //             <input type="radio" name="gender" id="male" checked={inputGender === 'male'} onChange={handleSexBoxClick} />
+        //             <label htmlFor="male" className="first_label" >남</label>
+        //             <input type="radio" name="gender" id="female" checked={inputGender === 'female'} onChange={handleSexBoxClick} />
+        //             <label htmlFor="female" className="last_label" >여</label>
+        //         </div>
+        //     </div>
+        //     <div className="birth_box">
+        //         <TextInput disable={false} customValidation={birthValidation} onInputChange={handleBirstInputChange} labelText="생년월일" placeText="ex) 20230505" inputType="text" width="702px" margin="16px" />
+        //         {/* <input type="text" className="input_text" placeholder="생년월일" maxLength={6} /> */}
+        //         <button className="inn_btn name_request_btn">실명인증 요청</button>
+        //     </div>
+        //     <div className={`${option}_box`}>
+        //         <TextInput disable={!isNameInputValid && !isBirthInputValid || isNumberInputDisabled} customValidation={option === "email" ? emailValidation : pnumValidation} onInputChange={handleInputOptionBoxChange} labelText={option === "email" ? "이메일" : "전화번호"} placeText={option === "email" ? "ex) example123@example.com" : "ex) 01012345678"} inputType={option === "email" ? "email" : "text"} width="702px" margin="16px" />
+        //         {/* <input type="text" className="input_text" placeholder={option === "email" ? "이메일" : "전화번호"} /> */}
+        //         <button className={`inn_btn auth_request_btn ${authButtonText === '재요청' ? `retry_btn` : ``}`} onClick={handleAuthRequest} disabled={!isNameInputValid && !isBirthInputValid}>{authButtonText}</button>
+        //         {isNumberInputDisabled && <img src={InputCheckIcon} alt="" className="input_check" />}
+        //     </div>
+        //     <div className="auth_box">
+        //         <TextInput disable={isAuthInputValid} customValidation={codeValidation} onInputChange={handleAuthInputChange} labelText="인증번호" placeText="6자리" inputType="text" width="702px" margin="16px" />
+        //         {/* <input type="text" className="input_text" placeholder="인증번호" maxLength={6} /> */}
+        //         <button className="inn_btn auth_btn" onClick={handleAuthButtonClick} disabled={isAuthButtonValid}>인증하기</button>
+        //     </div>
+        // </div>
     );
 }
 

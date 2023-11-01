@@ -11,6 +11,18 @@ export const InputTitle = styled.div`
     margin-bottom: 11px;
 `;
 
+export const InnBtn = styled.button`
+    height: 25px;
+    border: none;
+    border-radius: 8px;
+    background: #EDEDED;
+    font-size: 12px;
+    font-weight: 600;
+    margin-top: 11px;
+    z-index: 100;
+    margin-left: -100px;
+`;
+
 export const FlexBox = styled.div`
     display: flex;
     justify-content: space-between;
@@ -45,3 +57,19 @@ export const RadioButtonContainer = styled.div`
     }
 `;
 
+export const NextButton = styled.button`
+    width: 699px;
+    height: 51px;
+    border: none;
+    border-radius: 8px;
+    background: #E6003E;
+    color: #FFF;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: normal;
+    &:disabled {
+        background-color: #cccccc;
+        color: #666666;
+        cursor: not-allowed;
+    }
+`;

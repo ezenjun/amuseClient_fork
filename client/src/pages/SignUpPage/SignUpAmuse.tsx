@@ -109,8 +109,7 @@ const SignUpAmuse: React.FC = () => {
                     <div>
                         <Certification />
                         <S.SignUpTitle>정보입력</S.SignUpTitle>
-                        {/* <h1 className="login_title">정보입력</h1> */}
-                        <InfoForm onNextStep={handleNextClick} imp_uid={impUidData} />
+                        <InfoForm onNextStep={handleNextClick} />
                     </div>
                 )}
 

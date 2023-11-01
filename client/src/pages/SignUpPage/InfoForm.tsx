@@ -9,15 +9,11 @@ import * as S from "./InfoFormStyle";
 
 interface InfoFormProps {
     onNextStep: () => void;
-    imp_uid: string | null;
+    // imp_uid: string | null;
 }
 
 const InfoForm: React.FC<InfoFormProps> = (props) => {
     // 유효성 검사
-    const emailValidation = (value: string): string => {
-        return value.replace(/[^A-Za-z0-9_\.\-]+@[^A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/g, '');
-    };
-
     const nameValidation = (value: string): string => {
         return value.slice(0, 50);
     };
@@ -30,7 +26,7 @@ const InfoForm: React.FC<InfoFormProps> = (props) => {
         return value.replace(/[^0-9]/g, '').slice(0, 11);
     };
 
-    // 비밀번호 입력
+    // 비밀번호 확인
     const [password, setPassword] = useState<string>("");
     const [checkPassword, setCheckPassword] = useState<string>("");
     const [isValidPassword, setIsValidPassword] = useState<boolean>(true);
@@ -64,10 +60,6 @@ const InfoForm: React.FC<InfoFormProps> = (props) => {
         }
     };
 
-    const handleInputChange = (value: string) => {
-    };
-
-
     // 인증된 정보 가져오기
     const [impUidData, setImpUid] = useRecoilState(impUid);
     const [birth, setBirth] = useState<string>("");
@@ -89,12 +81,85 @@ const InfoForm: React.FC<InfoFormProps> = (props) => {
         }
     }, [impUidData]);
 
+
+    // 아이디 중복 확인
+    const [id, setId] = useState<string>("");
+    const [isValidId, setIsValidId] = useState<boolean>(true);
+    const [checkId, setCheckId] = useState<boolean>(false);
+    const handleChangeId = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const checkInput = nameValidation(e.target.value);
+        setId(checkInput);
+    };
+
+    const handleDuplicateClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+        event.preventDefault();
+        if (id !== "") {
+            axios.get(`${process.env.REACT_APP_AMUSE_API}/api/v1/auth/user/id/duplicate/check?id=${id}`)
+                .then((response) => {
+                    const result = response.data.data;
+                    console.log(result);
+                    if (result === "duplicate") {
+                        console.log("중복되는 아이디가 존재합니다.");
+                        setIsValidId(false);
+                        setCheckId(false);
+                        setId("");
+                    } else {
+                        console.log(id);
+                        console.log("사용 가능한 ID입니다.");
+                        setIsValidId(true);
+                        setCheckId(true);
+                    }
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        }
+    };
+
+    // 이메일 확인
+    const [email, setEmail] = useState<string>("");
+    const [checkEmail, setCheckEmail] = useState<boolean>(false);
+    const emailValidation = (value: string): boolean  => {
+        const emailRegex = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+$/;
+        return emailRegex.test(value);
+    };
+
+    const handleChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const inputValue = e.target.value;
+        const validatedEmail = emailValidation(inputValue);
+        setEmail(inputValue);
+        if (validatedEmail) {
+            setCheckEmail(true);
+        }
+    };
+
+    // 성별 확인
+    const [gender, setGender] = useState("");
+    const handleGenderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setGender(e.target.value);
+    };
+
+    // 다음 버튼 활성화
+    const [isNextButtonDisabled, setIsNextButtonDisabled] = useState(true);
+    useEffect(() => {
+        const isFieldsValid = impUid  && checkId && password && checkPassword !== "" && isValidCheckPassword && name && birth && phone && checkEmail && gender !== "";
+        setIsNextButtonDisabled(!isFieldsValid);
+    }, [impUid, checkId, password, checkPassword, isValidCheckPassword, name, birth, phone, checkEmail, gender]);
+
+
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    };
+
+
     return (
         <div className="info_body">
             <form action="" method="post" className="info_form">
                 <div>
                     <S.InputTitle>아이디</S.InputTitle>
-                    <TextInput disable={false} customValidation={nameValidation} onInputChange={handleInputChange} labelText="아이디" placeText="아이디" inputType="text" width="702px" margin="16px" />
+                    <S.FlexBox>
+                        <TextInput disable={id !== "" && isValidId && checkId} value={id} onInputChange={handleChangeId} labelText="아이디" placeText="아이디" inputType="text" isValid={isValidId} errorText="이미 사용중인 ID입니다." width="702px" margin="16px" />
+                        <S.InnBtn onClick={handleDuplicateClick}>중복 확인</S.InnBtn>
+                    </S.FlexBox>
                     <S.InputTitle>비밀번호</S.InputTitle>
                     <PasswordInput password={password} handleChangePassword={handleChangePassword} labelText="비밀번호" design="outlined" width="702px" margin='' margin_b='16px' isValid={isValidPassword} errorText="8자 이상, 영문 대/소문자, 숫자, 특수문자 중 두 종류 이상의 조합으로 설정해 주세요" inputSize='small' />
                     <S.InputTitle>비밀번호 재확인</S.InputTitle>
@@ -102,15 +167,15 @@ const InfoForm: React.FC<InfoFormProps> = (props) => {
                     <S.FlexBox>
                         <div>
                             <S.InputTitle>이름</S.InputTitle>
-                            <TextInput disable={name !== ""} customValidation={nameValidation} onInputChange={handleInputChange} labelText="이름" placeText="이름" value={name} inputType="text" width="597px" margin="16px" />
+                            <TextInput disable={name !== ""} onInputChange={handleInputChange} labelText="이름" placeText="이름" value={name} inputType="text" width="597px" margin="16px" />
                         </div>
                         <div>
                             <S.InputTitle>성별</S.InputTitle>
                             <S.RadioButtonContainer>
                                 <div className="input_gender">
-                                    <input type="radio" name="gender" id="male" />
+                                    <input type="radio" name="gender" id="male" value="male" checked={gender === "male"} onChange={handleGenderChange}/>
                                     <label htmlFor="male" className="first_label">남</label>
-                                    <input type="radio" name="gender" id="female" />
+                                    <input type="radio" name="gender" id="female" value="female" checked={gender === "female"} onChange={handleGenderChange}/>
                                     <label htmlFor="female" className="last_label">여</label>
                                 </div>
                             </S.RadioButtonContainer>
@@ -118,20 +183,18 @@ const InfoForm: React.FC<InfoFormProps> = (props) => {
                     </S.FlexBox>
 
                     <S.InputTitle>생년월일</S.InputTitle>
-                    <TextInput disable={birth !== ""} customValidation={numValidation} onInputChange={handleInputChange} labelText="생년월일" placeText="ex) 010203" value={birth} inputType="text" width="702px" margin="16px" />
+                    <TextInput disable={birth !== ""} onInputChange={handleInputChange} labelText="생년월일" placeText="ex) 010203" value={birth} inputType="text" width="702px" margin="16px" />
                     <S.InputTitle>본인 확인 이메일</S.InputTitle>
-                    <TextInput disable={false} customValidation={emailValidation} onInputChange={handleInputChange} labelText="본인확인 이메일" placeText="ex) example@example.com" inputType="email" width="702px" margin="16px" />
+                    <TextInput disable={false} value={email} onInputChange={handleChangeEmail} labelText="본인확인 이메일" placeText="ex) example@example.com" inputType="email" width="702px" margin="16px" />
                     <S.InputTitle>전화번호</S.InputTitle>
                     <div className="">
-                        <TextInput disable={phone !== ""} customValidation={pnumValidation} onInputChange={handleInputChange} labelText="휴대폰번호" placeText="ex) 01012345678" value={phone} inputType="text" width="702px" margin="16px" />
+                        <TextInput disable={phone !== ""} onInputChange={handleInputChange} labelText="휴대폰번호" placeText="ex) 01012345678" value={phone} inputType="text" width="702px" margin="16px" />
                     </div>
                 </div>
             </form >
-            <button className="login_btn" onClick={() => {
-                props.onNextStep();
-            }} disabled={false}>
-                <i className="fa-solid fa-door-open"></i>다음
-            </button>
+            <S.NextButton onClick={() => { props.onNextStep(); }} disabled={isNextButtonDisabled}>
+                다음
+            </S.NextButton>
         </div >
     );
 }
