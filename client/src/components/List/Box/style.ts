@@ -2,9 +2,10 @@ import styled from "styled-components";
 
 export const Box = styled.div`
   position: relative;
-  flex-shrink: 0;
-  width: 250px;
-  height: 270px;
+  width: 18.95vw;
+  min-width: 160px;
+  height: 19.5vw;
+  min-height: 180px;
   border-radius: 20px;
   border: 2px solid #efefef;
 `;
@@ -22,7 +23,7 @@ export const BoxImage = styled.img`
 export const BoxLike = styled.div`
   position: absolute;
   top: 15px;
-  right: 15px;
+  left: 15px;
   background-color: rgba(0, 0, 0, 0);
   color: #ffffff;
   z-index: 9;
@@ -32,7 +33,7 @@ export const BoxLike = styled.div`
 export const BoxTitle = styled.div`
   position: absolute;
   margin-left: 12.5px;
-  margin-top: 180px;
+  margin-top: 190px;
   width: 90%;
   font-family: "Pretendard";
   font-size: 13px;
@@ -47,7 +48,7 @@ export const BoxPrice = styled.div`
   position: absolute;
   font-size: 15px;
   margin-left: 12.5px;
-  margin-top: 230px;
+  margin-top: 240px;
   width: 90%;
   font-family: "Pretendard";
   font-style: normal;
