@@ -3,12 +3,7 @@ import "./Header.css";
 import axios from "axios";
 import moment from "moment";
 import Style from "../../App.module.css";
-
-// import logoimage from "../../pages/MainPage/MainImgs/amuse_logo.png";
-// import MyPageMenu from "../../pages/MyPage/MyPageMenu";
-// import SearchIcon from "./search.png";
 import { accessTokenState, isLoggedIn } from "../../atoms";
-
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
@@ -30,6 +25,7 @@ function Header() {
 		"__igjwtk__",
 		"__jwtkid__",
 		"__usrN__",
+		"accessToken",
 	]);
 	const [mobileHeader, setMobileHeader] = useState(0);
 	const handleResize = () => {
@@ -49,9 +45,9 @@ function Header() {
 		};
 	}, []);
 
+
 	useEffect(() => {
 		let getToken: string | null = cookies.__jwtkid__;
-		console.log("getToken ", getToken);
 		if (
 			cookies.__usrN__ &&
 			(!cookies.__jwtkid__ || cookies.__jwtkid__ === "undefined")
@@ -129,44 +125,30 @@ function Header() {
 	};
 
 	// 어뮤즈 자체 로그인 정보 가져오기
-	const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
+	// const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
 	const getAmuseUserInfo = async () => {
 		await axios
 			.get(`${process.env.REACT_APP_AMUSE_API}/api/v1/user/info`, {
 				headers: {
 					"Content-Type": "application/json",
-					Authorization: `Bearer ${accessToken}`,
+					Authorization: `Bearer ${cookies.accessToken}`,
 				},
 			})
 			.then((response) => {
 				let userData = response.data.data;
 				setName(response.data.data?.name);
 				setLoggedIn(true);
-				// navigateToHome();
-				// const expires = moment().add("8", "h").toDate();
-				// setCookie("__usrN__", response.data.data?.name, { expires });
-				// if (!userData?.advertisementTrue) {
-				// 	setLoggedIn(false);
-				// 	// setManager(false);
-				// 	movePage("/LoginAgree");
-				// }
 			})
 			.catch((err) => {
 				console.log(err);
 			});
 	};
 
-	// localStorage 임시 사용
 	useEffect(() => {
-		const result = localStorage.getItem("accessToken");
-		if (result) { setAccessToken(result); }
-	}, []);
-
-	useEffect(() => {
-		if (accessToken) {
+		if (cookies.accessToken) {
 			getAmuseUserInfo();
 		}
-	}, [accessToken]);
+	}, []);
 
 
 	return (

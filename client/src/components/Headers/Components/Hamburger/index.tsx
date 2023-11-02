@@ -14,12 +14,12 @@ interface HamburgerProps {
   setLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
   cookies: any;
   setCookie: (
-    name: "__jwtk__" | "__igjwtk__" | "__jwtkid__" | "__usrN__",
+    name: "__jwtk__" | "__igjwtk__" | "__jwtkid__" | "__usrN__" | "accessToken",
     value: any,
     options?: object | undefined
   ) => void;
   removeCookie: (
-    name: "__jwtk__" | "__igjwtk__" | "__jwtkid__" | "__usrN__",
+    name: "__jwtk__" | "__igjwtk__" | "__jwtkid__" | "__usrN__" | "accessToken",
     options?: object | undefined
   ) => void;
 }

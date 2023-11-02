@@ -1,9 +1,0 @@
-@use "../../Detail.scss" as detail;
-
-.Title{
-    padding: detail.$padding;
-    @include detail.line;
-}
-
-@media (max-width: 1060px) {
-}

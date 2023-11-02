@@ -3,6 +3,8 @@ import moment from "moment";
 import MyPageMenu from "../../../../pages/MyPage/MyPageMenu";
 import * as S from "./style";
 import * as C from "./constants";
+import { useRecoilState } from "recoil";
+import { accessTokenState } from "../../../../atoms";
 
 interface LoginProps {
   name: string | undefined;
@@ -10,12 +12,12 @@ interface LoginProps {
   setLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
   cookies: any;
   setCookie: (
-    name: "__jwtk__" | "__igjwtk__" | "__jwtkid__" | "__usrN__",
+    name: "__jwtk__" | "__igjwtk__" | "__jwtkid__" | "__usrN__" | "accessToken",
     value: any,
     options?: object | undefined
   ) => void;
   removeCookie: (
-    name: "__jwtk__" | "__igjwtk__" | "__jwtkid__" | "__usrN__",
+    name: "__jwtk__" | "__igjwtk__" | "__jwtkid__" | "__usrN__" | "accessToken",
     options?: object | undefined
   ) => void;
 }
@@ -42,14 +44,16 @@ function Login({
     movePage("/SignUP");
   };
 
+  const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
   const handleLogout = () => {
     let token = cookies.__jwtkid__;
     setLoggedIn(false);
+    removeCookie("accessToken");
+    setAccessToken("");
     const expires = moment().add("1", "m").toDate();
     setCookie("__igjwtk__", token, { expires });
     removeCookie("__jwtkid__", { path: "/", maxAge: 0 });
     removeCookie("__usrN__", { path: "/", maxAge: 0 });
-    localStorage.removeItem("accessToken"); // localStorage 임시 사용
     navigateToHome();
   };
 
