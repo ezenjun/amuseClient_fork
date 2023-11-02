@@ -2,17 +2,17 @@ import React, { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import { CategoryData } from "./Interfaces/DataInterfaces";
 import { ListProps, BannerProps } from "./Interfaces/PropsInterfaces";
-import { useCategoryContext } from "./components/Headers/Contexts/CategoryContext";
+import { useCategoryContext } from "./components/Header/Contexts/CategoryContext";
 import _ from "lodash";
 import Style from "./pages/SubPage/SubPage.module.css";
 import Fade from "./Fade";
 import axios from "axios";
 import ChildTitle from "./pages/SubPage/SubtitleImgs/ChildTitle.jpg";
-import SubLists from "./pages/SubPage/components/subLists";
-import SubBanners from "./pages/SubPage/SubBanners";
+import SubLists from "./pages/SubPage/Component/subLists";
+import Banner from "./components/Banner";
 import SubTiles from "./pages/SubPage/SubTiles";
 import MainComponent from "./MainComponent";
-import Banner from "./components/Banner";
+import MainBanner from "./components/MainBanner";
 
 function Home() {
   interface TileProps {
@@ -126,7 +126,7 @@ function Home() {
     } else if (type === "배너") {
       const bannerItem: BannerProps = Items[index];
       return (
-        <SubBanners
+        <Banner
           key={index}
           title={bannerItem.title}
           content={bannerItem.content}
@@ -141,7 +141,7 @@ function Home() {
   return (
     <MainComponent>
       <Fade>
-        <Banner
+        <MainBanner
           categoryData={categoryData}
           categoryImg={categoryData?.categoryImg}
           mainDescription={categoryData?.mainDescription}
