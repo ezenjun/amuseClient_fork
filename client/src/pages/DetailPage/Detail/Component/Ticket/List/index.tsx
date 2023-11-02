@@ -37,23 +37,22 @@ function List({ range, itemId }: DateProps) {
 			});
 	}, [itemId]);
 
-	// plus button function
-	const handlePlus = (index: number, price: number) => {
-		if (price >= 0) {
-			setTicketData((prevData) => {
-				const updatedData = [...prevData];
-				updatedData[index] = {
-					...updatedData[index],
-					count: updatedData[index].count + 1,
-				};
-				return updatedData;
-			});
-		}
-	};
-	useEffect(() => {
-		setOrderTicketData(ticketData);
-		console.log(orderTicketData);
-	}, [ticketData]);
+  // plus button function
+  const handlePlus = (index: number, price: number) => {
+    if (price >= 0) {
+      setTicketData((prevData) => {
+        const updatedData = [...prevData];
+        updatedData[index] = {
+          ...updatedData[index],
+          count: updatedData[index].count + 1,
+        };
+        return updatedData;
+      });
+    }
+  };
+  useEffect(() => {
+    setOrderTicketData(ticketData);
+  }, [setOrderTicketData, ticketData]);
 
 	// minus button function
 	const handleMinus = (index: number) => {
