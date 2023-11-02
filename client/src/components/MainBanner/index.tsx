@@ -3,14 +3,14 @@ import Style from "../../pages/SubPage/SubPage.module.css";
 import ChildTitle from "../../pages/SubPage/SubtitleImgs/ChildTitle.jpg";
 import * as S from "./style";
 
-interface BannerProps {
+interface MainBannerProps {
   categoryData: CategoryData | null;
   categoryImg: string | undefined;
   mainDescription: string | undefined;
   subDescription: string | undefined;
 }
 
-function Banners(categoryData: BannerProps) {
+function MainBanner(categoryData: MainBannerProps) {
   return (
     categoryData && (
       <div className={Style["subTitleContainer"]}>
@@ -26,4 +26,4 @@ function Banners(categoryData: BannerProps) {
   );
 }
 
-export default Banners;
+export default MainBanner;
