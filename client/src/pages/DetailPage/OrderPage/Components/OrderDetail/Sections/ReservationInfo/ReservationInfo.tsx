@@ -145,6 +145,7 @@ export function ReservationInfo() {
 						<StyledInputField
 							type="text"
 							placeholder="82"
+							readOnly
 							{...register(
 								"reservationInfo.reservationPhoneCode",
 								{

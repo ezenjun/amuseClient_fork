@@ -12,7 +12,7 @@ import {
 } from "../../../../../../../components/Text/Text";
 import { PointProps } from "../../../../../../../Interfaces/PropsInterfaces";
 import { WebButton } from "../../../../../../../components/Button/WebButton";
-import { useRecoilState, useSetRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
 import { PaymentDataState } from "../../../../../../../Recoil/OrderAtomState";
 
 export const Point = ({ myPoint }: PointProps) => {
