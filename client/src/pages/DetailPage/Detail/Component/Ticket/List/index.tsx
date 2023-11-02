@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { format, isSameDay, parseISO } from "date-fns";
 import { DateRange } from "react-day-picker";
 import { TicketData } from "../../../../../../Interfaces/DataInterfaces";
+import { useOrderContext } from "../../../../Contexts/OrderContext";
 import Ticket from "../Select";
 import axios from "axios";
 import * as S from "./style";
@@ -14,6 +15,7 @@ type DateProps = {
 
 function List({ range, itemId }: DateProps) {
   const [ticketData, setTicketData] = useState<TicketData[]>([]);
+  const { orderTicketData, setOrderTicketData } = useOrderContext();
 
   // Ticket API
   useEffect(() => {
@@ -46,6 +48,9 @@ function List({ range, itemId }: DateProps) {
       });
     }
   };
+  useEffect(() => {
+    setOrderTicketData(ticketData);
+  }, [setOrderTicketData, ticketData]);
 
   // minus button function
   const handleMinus = (index: number) => {
