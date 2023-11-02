@@ -6,7 +6,7 @@ import { BannerProps, ListProps } from "../../Interfaces/PropsInterfaces";
 import axios from "axios";
 import Style from "./SubPage.module.css";
 import Fade from "../../Fade";
-import SubLists from "./Component/subLists";
+import List from "../../components/List";
 import Banner from "../../components/Banner";
 import SubTiles from "./SubTiles";
 import MainComponent from "../../MainComponent";
@@ -114,7 +114,7 @@ function SubPageComp() {
     if (type === "리스트") {
       const listItem: ListProps = Items[index];
       return (
-        <SubLists
+        <List
           key={index}
           title={listItem.title}
           itemInfos={listItem.itemInfos}

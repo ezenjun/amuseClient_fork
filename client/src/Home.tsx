@@ -8,7 +8,7 @@ import Style from "./pages/SubPage/SubPage.module.css";
 import Fade from "./Fade";
 import axios from "axios";
 import ChildTitle from "./pages/SubPage/SubtitleImgs/ChildTitle.jpg";
-import SubLists from "./pages/SubPage/Component/subLists";
+import List from "./components/List";
 import Banner from "./components/Banner";
 import SubTiles from "./pages/SubPage/SubTiles";
 import MainComponent from "./MainComponent";
@@ -107,7 +107,7 @@ function Home() {
     if (type === "리스트") {
       const listItem: ListProps = Items[index];
       return (
-        <SubLists
+        <List
           key={index}
           title={listItem.title}
           itemInfos={listItem.itemInfos}
