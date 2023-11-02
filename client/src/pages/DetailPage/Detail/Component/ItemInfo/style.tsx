@@ -1,5 +1,5 @@
 import styled from "styled-components";
 
-export const ProductIntro = styled.div`
+export const ItemInfo = styled.div`
   white-space: pre-wrap;
 `;

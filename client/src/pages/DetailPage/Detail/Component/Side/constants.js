@@ -3,7 +3,7 @@ export const EMAIL = {
   BODY: "안녕하세요, AmuseTravel 입니다 :-)\n\n아래에 문의 내용을 입력해주세요.\n\n감사합니다.\n\n---------------------\n\n",
 };
 
-export const RESERVATION = {
+export const Side = {
   START_PRICE: "시작가",
   WON: "원",
   PREPARE: "상품 준비중",

@@ -9,12 +9,11 @@ import {
   DayClickEventHandler,
   ClassNames,
 } from "react-day-picker";
-import TicketList from "../TicketList";
-import axios from "axios";
-import { useOrderContext } from "../../../../Contexts/OrderContext";
 import { useSetRecoilState } from "recoil";
 import { selectedItemState } from "../../../../../../Recoil/OrderAtomState";
+import List from "../List";
 import Payment from "../../../../../../components/Payment";
+import axios from "axios";
 import * as S from "./style";
 import * as C from "../constants";
 
@@ -51,11 +50,11 @@ type CalendarProps = {
 };
 
 function Calendar({ itemId, numberOfmonth }: CalendarProps) {
-  // duration data
-  interface CalendarData {
+  interface CalendarType {
     duration: number;
   }
-  const [CalendarData, setCalendarData] = useState<CalendarData>();
+  const [CalendarData, setCalendarData] = useState<CalendarType>();
+  const [range, setRange] = useState<DateRange | undefined>(undefined);
   const setSelectedItemState = useSetRecoilState(selectedItemState);
 
   useEffect(() => {
@@ -71,10 +70,8 @@ function Calendar({ itemId, numberOfmonth }: CalendarProps) {
       .catch((error) => {
         console.log("Calendar 연결 실패");
       });
-  }, [itemId]);
+  }, [itemId, setSelectedItemState]);
 
-  // default date
-  const [range, setRange] = useState<DateRange | undefined>(undefined);
   useEffect(() => {
     if (CalendarData) {
       const today = new Date();
@@ -92,7 +89,7 @@ function Calendar({ itemId, numberOfmonth }: CalendarProps) {
         startDate: today,
       }));
     }
-  }, [CalendarData]);
+  }, [CalendarData, setSelectedItemState]);
 
   const handleDayClick: DayClickEventHandler = (day, modifiers) => {
     if (CalendarData) {
@@ -138,10 +135,6 @@ function Calendar({ itemId, numberOfmonth }: CalendarProps) {
   };
   const today = new Date();
 
-  const { orderRange, setOrderRange } = useOrderContext();
-  useEffect(() => {
-    setOrderRange(range);
-  }, [range]);
   return (
     <S.Calendar>
       <S.Title>{C.TICKET.TITLE}</S.Title>
@@ -159,7 +152,7 @@ function Calendar({ itemId, numberOfmonth }: CalendarProps) {
           classNames={classNames}
         />
       </S.Date>
-      <TicketList range={range} itemId={itemId} />
+      <List range={range} itemId={itemId} />
       <S.Payment>
         <Payment />
       </S.Payment>

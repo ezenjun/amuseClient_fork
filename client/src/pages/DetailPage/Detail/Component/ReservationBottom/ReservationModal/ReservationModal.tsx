@@ -3,7 +3,7 @@ import Modal from "react-modal";
 import "./ReservationModal.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
-import Calendar from "../../TicketSelect/Calendar";
+import Calendar from "../../Ticket/Calendar";
 import axios from "axios";
 
 interface ModalProps {

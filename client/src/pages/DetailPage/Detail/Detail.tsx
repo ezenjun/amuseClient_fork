@@ -1,9 +1,9 @@
 import "./Detail.scss";
 import Header from "../../../components/Headers/Header";
-import Reservation from "./Component/Reservation";
+import Side from "./Component/Side";
 import Title from "./Component/Title";
-import Picture from "./Component/Picture/Picture";
-import ProductIntro from "./Component/ProductIntro";
+import Picture from "./Component/Picture";
+import ItemInfo from "./Component/ItemInfo";
 import Footer from "../../../components/Footers/Footer";
 import CourseIntro from "./Component/CourseIntro";
 import Map from "./Component/Map";
@@ -11,7 +11,7 @@ import OtherInfo from "./Component/OtherInfo";
 import Manager from "./Component/Manager";
 import Review from "./Component/Review/Review";
 import ReviewPicture from "./Component/ReviewPicture/ReviewPicture";
-import Calendar from "./Component/TicketSelect/Calendar";
+import Calendar from "./Component/Ticket/Calendar";
 import ReservationBottom from "./Component/ReservationBottom/ReservationBottom";
 import { DetailProps } from "../../../Interfaces/PropsInterfaces";
 import MainComponent from "../../../MainComponent";
@@ -27,7 +27,7 @@ function Detail({ itemId, productCode, startPrice, likeNum }: DetailProps) {
             <Title itemId={itemId} />
             <Picture itemId={itemId} />
             <Calendar itemId={itemId} numberOfmonth={2} />
-            <ProductIntro itemId={itemId} />
+            <ItemInfo itemId={itemId} />
             <CourseIntro itemId={itemId} />
             <Map itemId={itemId} />
             <OtherInfo itemId={itemId} />
@@ -38,11 +38,7 @@ function Detail({ itemId, productCode, startPrice, likeNum }: DetailProps) {
           </S.Content>
           {/* 상세페이지 사이드 바 */}
           <div className="side">
-            <Reservation
-              itemId={itemId}
-              productCode={productCode}
-              likeNum={likeNum}
-            />
+            <Side itemId={itemId} productCode={productCode} likeNum={likeNum} />
           </div>
           {/* 상세페이지 모바일 티켓선택 */}
           <div className="bottom-btn">
