@@ -19,7 +19,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { OrderPage } from "./pages/DetailPage/OrderPage";
 import { OrderContextProvider } from "./pages/DetailPage/Contexts/OrderContext";
-import { CategoryContextProvider } from "./components/Headers/Contexts/CategoryContext";
+import { CategoryContextProvider } from "./components/Header/Contexts/CategoryContext";
 import { InfoContextProvider } from "./pages/DetailPage/Contexts/InfoContext";
 import OrderCompletePage from "./pages/DetailPage/OrderCompletePage/OrderCompletePage";
 import PaymentDetailPage from "./pages/DetailPage/PaymentDetailPage/PaymentDetailPage";

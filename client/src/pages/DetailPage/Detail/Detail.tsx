@@ -1,10 +1,10 @@
 import "./Detail.scss";
-import Header from "../../../components/Headers/Header";
+import Header from "../../../components/Header/Header";
 import Side from "./Component/Side";
 import Title from "./Component/Title";
 import Picture from "./Component/Picture";
 import ItemInfo from "./Component/ItemInfo";
-import Footer from "../../../components/Footers/Footer";
+import Footer from "../../../components/Footer/Footer";
 import CourseIntro from "./Component/CourseIntro";
 import Map from "./Component/Map";
 import OtherInfo from "./Component/OtherInfo";

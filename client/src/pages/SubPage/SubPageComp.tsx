@@ -6,11 +6,11 @@ import { BannerProps, ListProps } from "../../Interfaces/PropsInterfaces";
 import axios from "axios";
 import Style from "./SubPage.module.css";
 import Fade from "../../Fade";
-import SubLists from "./components/subLists";
-import SubBanners from "./SubBanners";
+import SubLists from "./Component/subLists";
+import Banner from "../../components/Banner";
 import SubTiles from "./SubTiles";
 import MainComponent from "../../MainComponent";
-import Banner from "../../components/Banner";
+import MainBanner from "../../components/MainBanner";
 
 interface TileProps {
   page_component_id: string;
@@ -133,7 +133,7 @@ function SubPageComp() {
     } else if (type === "배너") {
       const bannerItem: BannerProps = Items[index];
       return (
-        <SubBanners
+        <Banner
           key={index}
           title={bannerItem.title}
           content={bannerItem.content}
@@ -149,7 +149,7 @@ function SubPageComp() {
     <MainComponent>
       {categoryData ? (
         <Fade>
-          <Banner
+          <MainBanner
             categoryData={categoryData}
             categoryImg={categoryData?.categoryImg}
             mainDescription={categoryData?.mainDescription}
