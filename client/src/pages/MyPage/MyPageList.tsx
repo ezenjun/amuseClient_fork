@@ -18,30 +18,17 @@ import { useNavigate } from "react-router-dom";
 export default function MyPagelist() {
 	const navigate = useNavigate();
 	const navigateToSettings = () => {
-		navigate("/MyPage/Settings");
+		navigate("./settings");
 	};
 	const navigateToLikes = () => {
-		navigate("/MyPage/Likes");
+		navigate("./likes");
 	};
 	const navigateToSecession = () => {
-		navigate("/MyPage/Likes");
+		navigate("./payment");
 	};
-	const navigateToNotifications = () => {
-		navigate("/MyPage/Notifications");
-	};
-
-	// const navigateToInquiries = () => {
-	//   navigate("/MyPage/Inquiries");
-	// };
 	const navigateToOrders = () => {
 		navigate("/MyPage/PaymentList");
 	};
-	// const navigateToQuotes = () => {
-	//   navigate("/MyPage/Quotes");
-	// };
-	// const navigateToBills = () => {
-	//   navigate("/MyPage/Bills");
-	// };
 	return (
 		<>
 			<Box
@@ -70,29 +57,6 @@ export default function MyPagelist() {
 								<ListItemText primary="관심상품" />
 							</ListItemButton>
 						</ListItem>
-						{/* <ListItem disablePadding onClick={navigateToSecession}>
-            <ListItemButton>
-              <ListItemIcon>
-              </ListItemIcon>
-              <ListItemText primary="회원탈퇴" />
-            </ListItemButton>
-          </ListItem> */}
-						{/* <ListItem disablePadding onClick={navigateToNotifications}>
-            <ListItemButton>
-              <ListItemIcon>
-                <NotificationsIcon />
-              </ListItemIcon>
-              <ListItemText primary="알림" />
-            </ListItemButton>
-          </ListItem> */}
-						{/* <ListItem disablePadding onClick={navigateToInquiries}>
-            <ListItemButton>
-              <ListItemIcon>
-                <RoomServiceIcon />
-              </ListItemIcon>
-              <ListItemText primary="문의" />
-            </ListItemButton>
-          </ListItem> */}
 						<ListItem disablePadding onClick={navigateToOrders}>
 							<ListItemButton>
 								<ListItemIcon>
@@ -101,22 +65,6 @@ export default function MyPagelist() {
 								<ListItemText primary="결제 내역" />
 							</ListItemButton>
 						</ListItem>
-						{/* <ListItem disablePadding onClick={navigateToQuotes}>
-            <ListItemButton>
-              <ListItemIcon>
-                <CreditCardIcon />
-              </ListItemIcon>
-              <ListItemText primary="상품견적" />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding onClick={navigateToBills}>
-            <ListItemButton>
-              <ListItemIcon>
-                <AssignmentIcon />
-              </ListItemIcon>
-              <ListItemText primary="맞춤견적" />
-            </ListItemButton>
-          </ListItem> */}
 					</List>
 				</nav>
 			</Box>
