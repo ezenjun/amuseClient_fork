@@ -18,6 +18,7 @@ export const Terms = () => {
 	const [showModal, setShowModal] = useState(false);
 	const [termsList, setTermsList] = useState<Term[]>([]);
 	const [paymentData, setPaymentData] = useRecoilState(PaymentDataState);
+	const [selectedTerm, setSelectedTerm] = useState<Term>();
 
 	const handleTermCheckboxChange = (index: number) => {
 		switch (index) {
@@ -101,7 +102,7 @@ export const Terms = () => {
 		if (token) {
 			axios
 				.get(
-					`${process.env.REACT_APP_AMUSE_API}/test/api/terms-of-service-info-type?type=${paymentData.itemType}`,
+					`${process.env.REACT_APP_AMUSE_API}/test/api/terms-of-service-info-type?type=Domestic`,
 					{
 						headers: {
 							"Content-Type": "application/json",
@@ -123,8 +124,9 @@ export const Terms = () => {
 		getTerms();
 	}, []);
 
-	const onClickShowMore = (termName: string) => {
-		alert(termName);
+	const onClickShowMore = (term: Term) => {
+		setShowModal(true);
+		setSelectedTerm(term);
 	};
 
 	return (
@@ -134,9 +136,13 @@ export const Terms = () => {
 				{showTerms ? (
 					<ArrowDown
 						onClick={() => setShowTerms(!showTerms)}
+						style={{ cursor: "pointer" }}
 					></ArrowDown>
 				) : (
-					<ArrowUp onClick={() => setShowTerms(!showTerms)}></ArrowUp>
+					<ArrowUp
+						onClick={() => setShowTerms(!showTerms)}
+						style={{ cursor: "pointer" }}
+					></ArrowUp>
 				)}
 			</TermsRight>
 			{showTerms && (
@@ -177,7 +183,7 @@ export const Terms = () => {
 										</Regular16DarkGray>
 										<RightArrow
 											onClick={() =>
-												onClickShowMore("personalInfo")
+												onClickShowMore(term)
 											}
 										></RightArrow>
 									</TermsRight>
@@ -187,7 +193,13 @@ export const Terms = () => {
 				</>
 			)}
 
-			{showModal && <TermsModal setShowModal={setShowModal} />}
+			{showModal && (
+				<TermsModal
+					setShowModal={setShowModal}
+					title={selectedTerm?.title}
+					content={selectedTerm?.content}
+				/>
+			)}
 		</TermsContainer>
 	);
 };

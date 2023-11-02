@@ -12,10 +12,12 @@ import {
 	Regular16DarkGray,
 	Bold32AppColor,
 } from "../../../../../../../components/Text/Text";
+import { useRecoilValue } from "recoil";
+import { PaymentDataState } from "../../../../../../../Recoil/OrderAtomState";
 
 export const PaymentInfo = () => {
-	const { orderData, setOrderData, orderTicketData, orderRange } =
-		useOrderContext();
+	const { orderData, orderTicketData, orderRange } = useOrderContext();
+	const paymentData = useRecoilValue(PaymentDataState);
 
 	const totalAmount = orderTicketData.reduce(
 		(sum: number, ticket: TicketData) => {
@@ -45,7 +47,9 @@ export const PaymentInfo = () => {
 			{orderData.point > 0 && (
 				<OrderAmountContainer>
 					<Regular16DarkGray>포인트 사용</Regular16DarkGray>
-					<Regular16DarkGray>{orderData.point}</Regular16DarkGray>
+					<Regular16DarkGray>
+						- {paymentData.pointUsed.toLocaleString()}원
+					</Regular16DarkGray>
 				</OrderAmountContainer>
 			)}
 			<OrderAmountContainer>

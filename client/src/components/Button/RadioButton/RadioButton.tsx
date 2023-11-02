@@ -52,4 +52,5 @@ export const Label = styled.span`
 		weight: Common.bold.regular,
 		color: Common.colors.darkGray,
 	})}
+	white-space: nowrap;
 `;
