@@ -25,7 +25,7 @@ export default function Settings() {
   const getUserInfoAsToken = async () => {
     const token = cookies["__jwtkid__"];
     axios
-      .get(`${process.env.REACT_APP_AMUSE_API}/api/v1/user/login/info`, {
+      .get(`${process.env.REACT_APP_AMUSE_API}/api/v1/user/info`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `${token}`,
@@ -50,7 +50,7 @@ export default function Settings() {
         "Content-Type": "application/json",
         "Authorization": `${token}`,
       })
-    axios.post(`${process.env.REACT_APP_AMUSE_API}/api/v1/user/login/info`, requestBody, {
+    axios.post(`${process.env.REACT_APP_AMUSE_API}/api/v1/user/info`, requestBody, {
         headers: {
           "Content-Type": "application/json",
           "Authorization": `${token}`,

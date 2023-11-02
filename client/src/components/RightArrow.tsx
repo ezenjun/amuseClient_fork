@@ -8,11 +8,17 @@ const RightArrow = ({ onClick }: onClickProps) => {
 	const screenWidth = window.innerWidth;
 
 	if (screenWidth >= 1024) {
-		return <ArrowRightWeb onClick={onClick} />;
+		return (
+			<ArrowRightWeb onClick={onClick} style={{ cursor: "pointer" }} />
+		);
 	} else if (screenWidth >= 768) {
-		return <ArrowRightTablet onClick={onClick} />;
+		return (
+			<ArrowRightTablet onClick={onClick} style={{ cursor: "pointer" }} />
+		);
 	} else {
-		return <ArrowRightMobile onClick={onClick} />;
+		return (
+			<ArrowRightMobile onClick={onClick} style={{ cursor: "pointer" }} />
+		);
 	}
 };
 

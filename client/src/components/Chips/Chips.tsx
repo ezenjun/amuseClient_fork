@@ -19,4 +19,5 @@ export const ChipContainer = styled.div`
 		weight: Common.bold.regular,
 		color: Common.colors.appColor,
 	})};
+	white-space: nowrap;
 `;
