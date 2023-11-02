@@ -8,11 +8,10 @@ export const Banner = styled.div`
 export const Image = styled.img`
   object-fit: cover;
   cursor: pointer;
-  min-width: 100%;
-  max-height: 140px;
+  width: 100%;
+  height: 140px;
 
-  @media (max-width: 769px) {
-    /* Tablet styles */
-    max-height: 100px;
+  @media (max-width: 768px) {
+    height: 100px;
   }
 `;
