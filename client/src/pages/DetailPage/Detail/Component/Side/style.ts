@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Reservation = styled.div`
+export const Side = styled.div`
   width: 320px;
   position: sticky;
   top: 100px;

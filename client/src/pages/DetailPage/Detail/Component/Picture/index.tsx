@@ -1,72 +1,61 @@
 import React, { useEffect, useState } from "react";
-import _ from "lodash";
-import axios from "axios";
-import MainPicture from "./MainPicture/MainPicture";
-import SubPicture from "./SubPicture/SubPicture";
-import "./Picture.scss";
 import { ItemIdProps } from "../../../../../Interfaces/PropsInterfaces";
 import { useSetRecoilState } from "recoil";
 import { selectedItemState } from "../../../../../Recoil/OrderAtomState";
+import _ from "lodash";
+import axios from "axios";
+import Main from "./Main";
+import Sub from "./Sub";
+import * as S from "./style";
 
 function Picture({ itemId }: ItemIdProps) {
-  /**
-   * Picture Data
-   */
+  // Picture Data
   const [pictureData, setPictureData] = useState<string[]>([]);
-  const mainPicture = pictureData ? pictureData.shift() : null;
-  const subPicture = pictureData.slice(0, 3);
+  const [main, setMain] = useState<string>("");
+  const [sub, setSub] = useState<string[]>([]);
   const setSelectedItemImg = useSetRecoilState(selectedItemState);
 
-  /**
-   * Picture API
-   */
+  // Picture API
   useEffect(() => {
     axios
       .get(`${process.env.REACT_APP_AMUSE_API}/detail/${itemId}/picture`)
       .then((response) => {
         let pictures = response.data.data.pictures;
-        pictures = _.sortBy(pictures, "sequence");
         let result: any[] = [];
-        pictures.map((item: any) => {
-          result.push(item.imgUrl);
-        });
+        pictures = _.sortBy(pictures, "sequence");
+        pictures.map((item: any) => result.push(item.imgUrl));
+        setMain(result[0]);
+        setSub(result.slice(1, 4));
         setPictureData(result);
 
         // 현재 아이템 대표사진 설정(결제용)
         setSelectedItemImg((prevSelectedItem) => ({
           ...prevSelectedItem,
-          img: result.shift() || "",
+          img: result.length > 0 ? result[0] : "",
         }));
       })
       .catch((error) => {
-        console.log("연결 실패");
+        console.log("Picture 연결 실패");
       });
-  }, [itemId]);
+  }, [itemId, setSelectedItemImg]);
 
   return (
-    <div className="Picture">
-      <div className="mainpicture">
-        {mainPicture && (
-          <MainPicture
-            src={mainPicture}
-            alt={mainPicture}
-            itemId={itemId}
-            modal={pictureData}
-          />
-        )}
-      </div>
-      <div className="subpicture">
-        {subPicture.map((picture, key) => (
-          <SubPicture
+    <S.Picture>
+      <S.Main>
+        {main && <Main src={main} alt={main} modal={pictureData} clickId={0} />}
+      </S.Main>
+      <S.Sub>
+        {sub.map((picture, key) => (
+          <Sub
             key={itemId + key.toString()}
             src={picture}
             alt={picture}
-            itemId={itemId}
             modal={pictureData}
+            clickId={key + 1}
           />
         ))}
-      </div>
-    </div>
+      </S.Sub>
+    </S.Picture>
   );
 }
 

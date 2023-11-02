@@ -11,7 +11,7 @@ interface TitleDetailProps {
   city: string;
   title: string;
   rated: number;
-  review_count: number;
+  review: number;
 }
 
 function TitleDetail({
@@ -19,7 +19,7 @@ function TitleDetail({
   city,
   title,
   rated,
-  review_count,
+  review,
 }: TitleDetailProps) {
   return (
     <S.TitleDetail>
@@ -37,7 +37,7 @@ function TitleDetail({
           <FontAwesomeIcon icon={faStar} />
         </S.Star>
         {rated}
-        <S.Count>({review_count})</S.Count>
+        <S.Count>({review})</S.Count>
         <S.Right>
           <FontAwesomeIcon icon={faChevronRight} />
         </S.Right>

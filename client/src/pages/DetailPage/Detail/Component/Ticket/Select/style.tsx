@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Ticket = styled.div`
+export const Select = styled.div`
   display: grid;
   grid-template-columns: minmax(280px, auto);
   grid-template-rows: repeat(2, minmax(30px, auto));

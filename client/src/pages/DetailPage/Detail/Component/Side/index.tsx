@@ -4,19 +4,19 @@ import { faEnvelope as solidFaEnelope } from "@fortawesome/free-solid-svg-icons"
 import { faEnvelope as regularFaEnelope } from "@fortawesome/free-regular-svg-icons";
 import { GuideData } from "../../../../../Interfaces/DataInterfaces";
 import Payment from "../../../../../components/Payment";
-import Share from "./share.svg";
-import Heart from "./wish.svg";
+import Share from "./Icons/share.svg";
+import Heart from "./Icons/wish.svg";
 import * as S from "./style";
 import * as C from "./constants";
 import axios from "axios";
 
-interface ReservationProps {
+interface SideProps {
   itemId: number | null;
   productCode: number;
   likeNum: number;
 }
 
-function Reservation({ itemId, productCode, likeNum }: ReservationProps) {
+function Side({ itemId, productCode, likeNum }: SideProps) {
   // startPrice API
   const [startPrice, setStartPrice] = useState(0);
   useEffect(() => {
@@ -26,7 +26,7 @@ function Reservation({ itemId, productCode, likeNum }: ReservationProps) {
         setStartPrice(response.data.data.startPrice);
       })
       .catch((error) => {
-        console.log("Reservation, startPrice 연결 실패");
+        console.log("Side, startPrice 연결 실패");
       });
   }, [itemId]);
 
@@ -42,7 +42,7 @@ function Reservation({ itemId, productCode, likeNum }: ReservationProps) {
         setGuideData(response.data.data);
       })
       .catch((error) => {
-        console.log("Reservation, Manager 연결 실패");
+        console.log("Side, Manager 연결 실패");
       });
   }, [itemId]);
 
@@ -55,23 +55,23 @@ function Reservation({ itemId, productCode, likeNum }: ReservationProps) {
     }
   };
 
-  // Share btn
+  // Share button
   const [showTooltip, setShowTooltip] = useState(false);
   const handleTooltipToggle = () => {
     setShowTooltip(!showTooltip);
   };
 
   return (
-    <S.Reservation>
+    <S.Side>
       <S.Main>
         {startPrice ? (
           <>
-            <S.StartPrice>{C.RESERVATION.START_PRICE}</S.StartPrice>
+            <S.StartPrice>{C.Side.START_PRICE}</S.StartPrice>
             <S.Info>
               <S.Price>
                 <S.PriceNum>
                   {startPrice.toLocaleString("en")}
-                  {C.RESERVATION.WON}
+                  {C.Side.WON}
                 </S.PriceNum>
                 <S.PriceMin>~</S.PriceMin>
               </S.Price>
@@ -80,18 +80,18 @@ function Reservation({ itemId, productCode, likeNum }: ReservationProps) {
           </>
         ) : (
           <S.Info>
-            <S.StartPrice>{C.RESERVATION.PREPARE}</S.StartPrice>
+            <S.StartPrice>{C.Side.PREPARE}</S.StartPrice>
             <S.Share src={Share} onClick={handleTooltipToggle} />
           </S.Info>
         )}
         <Payment />
         <S.Wish>
           <S.Heart src={Heart} />
-          {C.RESERVATION.WISH}
+          {C.Side.WISH}
         </S.Wish>
         <S.HeartCount>
           {likeNum === undefined ? 0 : likeNum}
-          {C.RESERVATION.WISH_NUMBER}
+          {C.Side.WISH_NUMBER}
         </S.HeartCount>
       </S.Main>
 
@@ -110,18 +110,18 @@ function Reservation({ itemId, productCode, likeNum }: ReservationProps) {
             className="icon"
             icon={isHovered ? regularFaEnelope : solidFaEnelope}
           />
-          <S.InquiryText>{C.RESERVATION.INQUIRY}</S.InquiryText>
+          <S.InquiryText>{C.Side.INQUIRY}</S.InquiryText>
         </S.Inquiry>
       </S.Manager>
 
       <S.ProductCode>
         <S.ProductCodeText>
-          {C.RESERVATION.CODE}
+          {C.Side.CODE}
           {productCode}
         </S.ProductCodeText>
       </S.ProductCode>
-    </S.Reservation>
+    </S.Side>
   );
 }
 
-export default Reservation;
+export default Side;

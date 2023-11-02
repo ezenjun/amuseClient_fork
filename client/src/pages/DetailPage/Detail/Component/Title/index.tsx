@@ -6,7 +6,7 @@ import {
   PaymentDataState,
   selectedItemState,
 } from "../../../../../Recoil/OrderAtomState";
-import TitleDetail from "./TitleDetail";
+import TitleDetail from "./Detail";
 import axios from "axios";
 
 function Title({ itemId }: ItemIdProps) {
@@ -40,7 +40,7 @@ function Title({ itemId }: ItemIdProps) {
       .catch((error) => {
         console.log("Title 연결 실패");
       });
-  }, [itemId]);
+  }, [itemId, setPaymentData, setSelectedItemTitle]);
 
   return (
     <TitleDetail
@@ -48,7 +48,7 @@ function Title({ itemId }: ItemIdProps) {
       city={titleData?.city ?? "city"}
       title={titleData?.title ?? "title"}
       rated={formattedRatedData ? Number(formattedRatedData) : 0.0}
-      review_count={titleData?.review_count ?? 0.0}
+      review={titleData?.review_count ?? 0.0}
     />
   );
 }
