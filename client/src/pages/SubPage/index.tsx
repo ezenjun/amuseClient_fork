@@ -31,20 +31,17 @@ function SubPageComp() {
   const { apiKey } = useParams() as { apiKey: string };
   const [categoryData, setCategoryData] = useState<CategoryData | null>(null);
   const [cookies] = useCookies(["__jwtkid__"]);
-
-  // console.log("apiKey = " + apiKey);
   const apiKeyNumber: number = Number(apiKey);
+
   useEffect(() => {
     axios
       .get(`${process.env.REACT_APP_AMUSE_API}/main/category`)
       .then((response) => {
         const hashtagAll = response.data.data.categories;
-        // console.log("hash ", hashtagAll);
         let matchedIndex = -1;
         for (let i = 0; i < hashtagAll.length; i++) {
           if (hashtagAll[i].categoryId === apiKeyNumber) {
             matchedIndex = i;
-            // console.log("idx = " + matchedIndex);
             break;
           }
         }
@@ -57,27 +54,6 @@ function SubPageComp() {
         console.log("subpage 연결 실패");
       });
   }, [apiKeyNumber]);
-
-  const [displayedItemCount, setDisplayedItemCount] = useState(3);
-
-  const handleResize = () => {
-    const windowWidth = window.innerWidth;
-    if (windowWidth >= 992) {
-      setDisplayedItemCount(3);
-    } else if (windowWidth >= 700) {
-      setDisplayedItemCount(2);
-    } else {
-      setDisplayedItemCount(1);
-    }
-  };
-
-  useEffect(() => {
-    handleResize(); // Call initially
-    window.addEventListener("resize", handleResize); // Add event listener for window resize
-    return () => {
-      window.removeEventListener("resize", handleResize); // Clean up event listener on component unmount
-    };
-  }, []);
 
   const [comTypes, setComTypes] = useState<[]>([]);
   const [Items, setItems] = useState<[]>([]);
@@ -147,18 +123,16 @@ function SubPageComp() {
 
   return (
     <MainComponent>
-      {categoryData ? (
+      {categoryData && (
         <Fade>
           <MainBanner
             categoryData={categoryData}
-            categoryImg={categoryData?.categoryImg}
-            mainDescription={categoryData?.mainDescription}
-            subDescription={categoryData?.subDescription}
+            categoryImg={categoryData.categoryImg || ""}
+            mainDescription={categoryData.mainDescription || ""}
+            subDescription={categoryData.subDescription || ""}
           />
           <S.Render>{renderedComponents}</S.Render>
         </Fade>
-      ) : (
-        <h3 style={{ margin: "1rem" }}>존재하지 않는 페이지입니다.</h3>
       )}
     </MainComponent>
   );

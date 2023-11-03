@@ -13,21 +13,22 @@ import MainComponent from "./MainComponent";
 import MainBanner from "./components/MainBanner";
 import * as S from "./styles";
 
-function Home() {
-  interface TileProps {
-    page_component_id: string;
-    type: string;
-    title: string;
-    tileCount: number;
-    tileList: tileList[];
-  }
+interface TileProps {
+  page_component_id: string;
+  type: string;
+  title: string;
+  tileCount: number;
+  tileList: tileList[];
+}
 
-  interface tileList {
-    tile_id: number;
-    tile_name: string;
-    tile_images: string;
-    itemInfos: [];
-  }
+interface tileList {
+  tile_id: number;
+  tile_name: string;
+  tile_images: string;
+  itemInfos: [];
+}
+
+function Home() {
   const { categoriesInfo } = useCategoryContext();
   const [apiKeyNumber, setApiKeyNumber] = useState(0);
   const [categoryData, setCategoryData] = useState<CategoryData | null>(null);
@@ -40,7 +41,6 @@ function Home() {
     }
     if (categoriesInfo?.length) {
       const info = categoriesInfo[infoIndex];
-      // console.log(info);
       setApiKeyNumber(info.categoryId);
     }
   }, [categoriesInfo]);
@@ -50,7 +50,6 @@ function Home() {
       .get(`${process.env.REACT_APP_AMUSE_API}/main/category`)
       .then((response) => {
         const hashtagAll = response.data.data.categories;
-
         let matchedIndex = -1;
         for (let i = 0; i < hashtagAll.length; i++) {
           if (hashtagAll[i].categoryId === apiKeyNumber) {
@@ -95,10 +94,9 @@ function Home() {
         setItems(items);
         const types = items.map((item: any) => item.type);
         setComTypes(types);
-        // console.log("컴포넌트", response.data.data);
       })
       .catch((error) => {
-        // console.log("subpage 컴포넌트 연결 실패");
+        console.log("subpage 컴포넌트 연결 실패");
       });
   };
 
