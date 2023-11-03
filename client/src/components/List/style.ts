@@ -47,3 +47,22 @@ export const BoxList = styled.div`
     flex-wrap: wrap;
   }
 `;
+
+export const Page = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #909090;
+  margin-top: 15px;
+`;
+
+export const Button = styled.button`
+  background-color: transparent;
+  border: transparent;
+  margin-top: 4px;
+  padding: 0 1%;
+
+  &:disabled {
+    background-color: transparent;
+  }
+`;

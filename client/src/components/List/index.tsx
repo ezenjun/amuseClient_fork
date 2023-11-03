@@ -73,32 +73,15 @@ function SubLists({ title, itemInfos }: SubListsProps) {
         ))}
       </S.BoxList>
       {(!isNextDisabled || !isPrevDisabled) && (
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            marginTop: "1rem",
-          }}
-        >
-          <button
-            onClick={handlePrevClick}
-            disabled={isPrevDisabled}
-            style={{ background: "transparent", border: "transparent" }}
-          >
+        <S.Page>
+          <S.Button onClick={handlePrevClick} disabled={isPrevDisabled}>
             {isPrevDisabled ? <NoLeft /> : <Left />}
-          </button>
-          <div>
-            {Math.ceil(currentIndex / 8) + 1} /
-            {Math.ceil(bestItemIds.length / 8)}
-          </div>
-          <button
-            onClick={handleNextClick}
-            disabled={isNextDisabled}
-            style={{ background: "transparent", border: "transparent" }}
-          >
+          </S.Button>
+          {Math.ceil(currentIndex / 8) + 1}
+          <S.Button onClick={handleNextClick} disabled={isNextDisabled}>
             {isNextDisabled ? <NoRight /> : <Right />}
-          </button>
-        </div>
+          </S.Button>
+        </S.Page>
       )}
     </S.List>
   );
