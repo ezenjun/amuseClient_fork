@@ -20,7 +20,7 @@ function Menu() {
   const CategoryMenu: React.FC<CategoryNameMenuProps> = ({
     categoryName: categoryName,
     handleClick,
-  }) => <div onClick={handleClick}>{categoryName}</div>;
+  }) => <S.Category onClick={handleClick}>{categoryName}</S.Category>;
 
   const navigateToSubPageComp = (apiKey: number, cName: string) => {
     const apiKeyString: string = apiKey.toString();

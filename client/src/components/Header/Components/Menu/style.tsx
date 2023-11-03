@@ -45,3 +45,9 @@ export const DropdownItem = styled.div`
   padding: 20px;
   cursor: pointer;
 `;
+
+export const Category = styled.div`
+  &:hover {
+    color: #e6003d;
+  }
+`;
