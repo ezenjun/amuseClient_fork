@@ -46,21 +46,26 @@ function Box({ itemId, handleClick, title, startPrice, imageUrl }: BoxProps) {
 
   return (
     <S.Box>
-      <S.BoxImage src={imageUrl} onClick={handleClick} />
-      <S.BoxLike>
-        <FontAwesomeIcon
-          icon={isLiked[itemId] ? fullHeart : faHeart}
-          style={{
-            width: "20px",
-            height: "20px",
-          }}
-          onClick={() => handleLikeClick(itemId)}
-        />
-      </S.BoxLike>
-      <S.BoxTitle onClick={handleClick}>{title}</S.BoxTitle>
-      <S.BoxPrice onClick={handleClick}>
-        {startPrice !== "N/A" ? <p>가격 : {startPrice}원 ~</p> : <></>}
-      </S.BoxPrice>
+      <S.Photo>
+        <S.BoxImage src={imageUrl} onClick={handleClick} />
+        <S.BoxLike>
+          <FontAwesomeIcon
+            icon={isLiked[itemId] ? fullHeart : faHeart}
+            style={{
+              width: "20px",
+              height: "20px",
+            }}
+            onClick={() => handleLikeClick(itemId)}
+          />
+        </S.BoxLike>
+      </S.Photo>
+
+      <S.Content>
+        <S.BoxTitle onClick={handleClick}>{title}</S.BoxTitle>
+        <S.BoxPrice onClick={handleClick}>
+          {startPrice !== "N/A" ? <p>가격 : {startPrice}원 ~</p> : <></>}
+        </S.BoxPrice>
+      </S.Content>
     </S.Box>
   );
 }

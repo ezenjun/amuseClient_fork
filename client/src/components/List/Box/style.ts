@@ -8,16 +8,7 @@ export const Box = styled.div`
   min-height: 180px;
   border-radius: 20px;
   border: 2px solid #efefef;
-`;
-
-export const BoxImage = styled.img`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 62.5%;
-  background-size: cover;
-  border-radius: 20px 20px 0 0;
+  cursor: pointer;
 `;
 
 export const BoxLike = styled.div`
@@ -30,30 +21,37 @@ export const BoxLike = styled.div`
   cursor: pointer;
 `;
 
+export const Photo = styled.div`
+  display: flex;
+`;
+
+export const BoxImage = styled.img`
+  width: 100%;
+  height: 11.5vw;
+  min-height: 100px;
+  background-size: cover;
+  border-radius: 20px 20px 0 0;
+`;
+
+export const Content = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 7.5vw;
+  min-height: 75px;
+`;
+
 export const BoxTitle = styled.div`
-  position: absolute;
-  margin-left: 12.5px;
-  margin-top: 190px;
-  width: 90%;
+  padding: 5% 5% 0 5%;
   font-family: "Pretendard";
-  font-size: 13px;
-  font-style: normal;
+  font-size: 0.9rem;
   font-weight: 600;
-  line-height: normal;
-  z-index: 5;
-  cursor: pointer;
 `;
 
 export const BoxPrice = styled.div`
-  position: absolute;
-  font-size: 15px;
-  margin-left: 12.5px;
-  margin-top: 240px;
-  width: 90%;
+  bottom: 0;
+  padding: 0 5% 5% 5%;
   font-family: "Pretendard";
-  font-style: normal;
+  font-size: 0.95rem;
   font-weight: 600;
-  line-height: normal;
-  z-index: 5;
-  cursor: pointer;
 `;
