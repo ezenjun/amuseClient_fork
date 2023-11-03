@@ -9,7 +9,7 @@ import FindPw from "./pages/LogInPage/FindPw";
 import LoginAgree from "./pages/LogInPage/LoginAgree";
 import SignUp from "./pages/SignUpPage/SignUp";
 import SignUpAmuse from "./pages/SignUpPage/SignUpAmuse";
-import Detail from "./pages/DetailPage/Detail/Detail";
+import Detail from "./pages/DetailPage/ItemPage/Detail";
 import Review from "./pages/MyPage/Review/Review";
 import SearchPageComp from "./pages/SubPage/SearchPage/SearchPageComp";
 // import NotFound from './NotFound';
