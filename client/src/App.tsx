@@ -11,7 +11,6 @@ import SignUp from "./pages/SignUpPage/SignUp";
 import SignUpAmuse from "./pages/SignUpPage/SignUpAmuse";
 import Detail from "./pages/DetailPage/Detail/Detail";
 import Review from "./pages/MyPage/Review/Review";
-import ViewAll from "./pages/SubPage/ViewAllPages/ViewAll";
 import SearchPageComp from "./pages/SubPage/SearchPageComp";
 // import NotFound from './NotFound';
 import { useCookies } from "react-cookie";
@@ -126,7 +125,6 @@ function App() {
             </Route>
             <Route path="/Review/:id" element={<Review />}></Route>
             {/* <Route path="/OnlineTour" element={<OnlineTour />}></Route> */}
-            <Route path="/ViewAll" element={<ViewAll />}></Route>
             <Route path="/Subtest" element={<SubPageComp />}></Route>
             <Route path="/order" element={<OrderPage />}></Route>
             <Route
