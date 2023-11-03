@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { SubListsProps } from "../../Interfaces/PropsInterfaces";
 import { useNavigate } from "react-router-dom";
-import RightIcon from "./Icons/right.png";
-import NoRightIcon from "./Icons/right_no.png";
-import LeftIcon from "./Icons/left.png";
-import NoLeftIcon from "./Icons/left_no.png";
+import { ReactComponent as Right } from "./Icons/right.svg";
+import { ReactComponent as Left } from "./Icons/left.svg";
+import { ReactComponent as NoRight } from "./Icons/right_no.svg";
+import { ReactComponent as NoLeft } from "./Icons/left_no.svg";
 import Box from "./Box";
 import * as S from "./style";
 
@@ -85,11 +85,7 @@ function SubLists({ title, itemInfos }: SubListsProps) {
             disabled={isPrevDisabled}
             style={{ background: "transparent", border: "transparent" }}
           >
-            <img
-              src={isPrevDisabled ? NoLeftIcon : LeftIcon}
-              alt="Previous"
-              style={{ width: "20px", height: "20px" }}
-            />
+            {isPrevDisabled ? <NoLeft /> : <Left />}
           </button>
           <div>
             {Math.ceil(currentIndex / 8) + 1} /
@@ -100,11 +96,7 @@ function SubLists({ title, itemInfos }: SubListsProps) {
             disabled={isNextDisabled}
             style={{ background: "transparent", border: "transparent" }}
           >
-            <img
-              src={isNextDisabled ? NoRightIcon : RightIcon}
-              alt="Next"
-              style={{ width: "20px", height: "20px" }}
-            />
+            {isNextDisabled ? <NoRight /> : <Right />}
           </button>
         </div>
       )}
