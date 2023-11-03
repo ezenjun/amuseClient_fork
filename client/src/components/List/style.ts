@@ -3,6 +3,10 @@ import styled from "styled-components";
 export const List = styled.div`
   width: 100%;
   padding: 0 10%;
+
+  @media (max-width: 768px) {
+    padding: 0 5%;
+  }
 `;
 
 export const Header = styled.div`

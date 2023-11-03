@@ -13,7 +13,7 @@ export const Hamburger = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 0 5%;
+  padding: 0 5%;
 `;
 
 export const Menu = styled.div`

@@ -5,6 +5,10 @@ export const Banner = styled.div`
   height: 100%;
   padding: 0 10%;
   border-radius: 8px;
+
+  @media (max-width: 768px) {
+    padding: 0 5%;
+  }
 `;
 
 export const Image = styled.img`
