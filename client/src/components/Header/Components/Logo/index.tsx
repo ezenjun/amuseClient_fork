@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import logoimage from "../../../../pages/MainPage/MainImgs/amuse_logo.png";
-import SearchIcon from "./search.svg";
+import logoimage from "../../../../assets/Images/amuse_logo.png";
+import SearchIcon from "../../Images/search.svg";
 import * as S from "./style";
 import * as C from "./constants";
 

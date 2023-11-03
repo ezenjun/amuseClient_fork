@@ -4,13 +4,11 @@ import { CategoryData } from "./Interfaces/DataInterfaces";
 import { ListProps, BannerProps } from "./Interfaces/PropsInterfaces";
 import { useCategoryContext } from "./components/Header/Contexts/CategoryContext";
 import _ from "lodash";
-import Style from "./pages/SubPage/SubPage.module.css";
 import Fade from "./Fade";
 import axios from "axios";
-import ChildTitle from "./pages/SubPage/SubtitleImgs/ChildTitle.jpg";
 import List from "./components/List";
 import Banner from "./components/Banner";
-import SubTiles from "./pages/SubPage/SubTiles";
+import SubTiles from "./components/Tile/SubTiles";
 import MainComponent from "./MainComponent";
 import MainBanner from "./components/MainBanner";
 
@@ -147,7 +145,7 @@ function Home() {
           mainDescription={categoryData?.mainDescription}
           subDescription={categoryData?.subDescription}
         />
-        <div className={Style["App"]}>{renderedComponents}</div>
+        {renderedComponents}
       </Fade>
     </MainComponent>
   );

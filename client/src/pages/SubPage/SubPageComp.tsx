@@ -4,11 +4,10 @@ import { useCookies } from "react-cookie";
 import { CategoryData } from "../../Interfaces/DataInterfaces";
 import { BannerProps, ListProps } from "../../Interfaces/PropsInterfaces";
 import axios from "axios";
-import Style from "./SubPage.module.css";
 import Fade from "../../Fade";
 import List from "../../components/List";
 import Banner from "../../components/Banner";
-import SubTiles from "./SubTiles";
+import SubTiles from "../../components/Tile/SubTiles";
 import MainComponent from "../../MainComponent";
 import MainBanner from "../../components/MainBanner";
 
@@ -155,7 +154,7 @@ function SubPageComp() {
             mainDescription={categoryData?.mainDescription}
             subDescription={categoryData?.subDescription}
           />
-          <div className={Style["App"]}>{renderedComponents}</div>
+          {renderedComponents}
         </Fade>
       ) : (
         <h3 style={{ margin: "1rem" }}>존재하지 않는 페이지입니다.</h3>

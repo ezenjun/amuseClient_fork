@@ -11,7 +11,7 @@ import SignUp from "./pages/SignUpPage/SignUp";
 import SignUpAmuse from "./pages/SignUpPage/SignUpAmuse";
 import Detail from "./pages/DetailPage/Detail/Detail";
 import Review from "./pages/MyPage/Review/Review";
-import SearchPageComp from "./pages/SubPage/SearchPageComp";
+import SearchPageComp from "./pages/SubPage/SearchPage/SearchPageComp";
 // import NotFound from './NotFound';
 import { useCookies } from "react-cookie";
 import { useEffect, useState } from "react";
