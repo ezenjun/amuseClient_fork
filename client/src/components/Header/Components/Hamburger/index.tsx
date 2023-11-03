@@ -4,7 +4,7 @@ import logoimage from "../../../../assets/Images/amuse_logo.png";
 import SearchIcon from "../../Images/search.svg";
 import HamburgerIcon from "../../Images/hamburger.svg";
 import * as S from "./style";
-import * as C from "./constants";
+import * as C from "../../constants";
 import Login from "../Login";
 import Menu from "../Menu";
 

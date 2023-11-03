@@ -4,7 +4,7 @@ import { accessTokenState } from "../../../../atoms";
 import moment from "moment";
 import MyPageMenu from "../../../../pages/MyPage/MyPageMenu";
 import * as S from "./style";
-import * as C from "./constants";
+import * as C from "../../constants";
 
 interface LoginProps {
   name: string | undefined;
