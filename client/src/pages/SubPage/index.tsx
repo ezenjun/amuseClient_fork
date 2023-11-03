@@ -10,6 +10,7 @@ import Banner from "../../components/Banner";
 import SubTiles from "../../components/Tile/SubTiles";
 import MainComponent from "../../MainComponent";
 import MainBanner from "../../components/MainBanner";
+import * as S from "../../styles";
 
 interface TileProps {
   page_component_id: string;
@@ -154,7 +155,7 @@ function SubPageComp() {
             mainDescription={categoryData?.mainDescription}
             subDescription={categoryData?.subDescription}
           />
-          {renderedComponents}
+          <S.Render>{renderedComponents}</S.Render>
         </Fade>
       ) : (
         <h3 style={{ margin: "1rem" }}>존재하지 않는 페이지입니다.</h3>

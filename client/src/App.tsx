@@ -1,7 +1,7 @@
 import _ from "lodash";
 import { Routes, Route } from "react-router-dom";
 import Home from "../src/Home";
-import SubPageComp from "./pages/SubPage/SubPageComp";
+import SubPageComp from "./pages/SubPage";
 import MyPage from "./pages/MyPage/MyPage";
 import Login from "./pages/LogInPage/LogIn";
 import FindId from "./pages/LogInPage/FindId";

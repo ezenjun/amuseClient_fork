@@ -11,6 +11,7 @@ import Banner from "./components/Banner";
 import SubTiles from "./components/Tile/SubTiles";
 import MainComponent from "./MainComponent";
 import MainBanner from "./components/MainBanner";
+import * as S from "./styles";
 
 function Home() {
   interface TileProps {
@@ -145,7 +146,7 @@ function Home() {
           mainDescription={categoryData?.mainDescription}
           subDescription={categoryData?.subDescription}
         />
-        {renderedComponents}
+        <S.Render>{renderedComponents}</S.Render>
       </Fade>
     </MainComponent>
   );
