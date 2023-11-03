@@ -1,6 +1,6 @@
+import { IProps } from "./Interfaces/PropsInterfaces";
 import Header from "./components/Header";
 import Footer from "./components/Footer/Footer";
-import { IProps } from "./Interfaces/PropsInterfaces";
 
 const MainComponent = ({ children }: IProps) => {
   return (
