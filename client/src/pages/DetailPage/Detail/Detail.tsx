@@ -1,5 +1,5 @@
 import "./Detail.scss";
-import Header from "../../../components/Header/Header";
+import Header from "../../../components/Header";
 import Side from "./Components/Side";
 import Title from "./Components/Title";
 import Picture from "./Components/Picture";

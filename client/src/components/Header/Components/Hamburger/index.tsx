@@ -85,9 +85,10 @@ function Hamburger({
           onKeyDown={handleKeyPress}
         />
         <S.Button onClick={navigateToSearch}>
-          <img src={SearchIcon} alt="Search Icon"></img>
+          <img src={SearchIcon} alt="Search Icon" />
         </S.Button>
       </S.Search>
+
       <S.Side className={isOpen ? "open" : ""}>
         <S.SideBack className={isOpen ? "open" : ""} onClick={closeSide} />
         <S.SideMenu className={isOpen ? "open" : ""}>

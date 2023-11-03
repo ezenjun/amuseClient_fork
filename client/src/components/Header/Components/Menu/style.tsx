@@ -21,20 +21,6 @@ export const Menu = styled.div`
   font-weight: 500;
   line-height: normal;
   color: #464646;
-
-  @media (max-width: 768px) {
-    /* Mobile styles */
-  }
-
-  @media (min-width: 769px) and (max-width: 1023px) {
-    /* Tablet styles */
-    width: 792px;
-  }
-
-  @media (min-width: 1024px) {
-    /* Desktop styles */
-    width: 1060px;
-  }
 `;
 
 export const More = styled.div`

@@ -45,7 +45,7 @@ function Logo() {
           onKeyDown={handleKeyPress}
         />
         <S.Button onClick={navigateToSearch}>
-          <img src={SearchIcon} alt="Search Icon"></img>
+          <img src={SearchIcon} alt="Search Icon" />
         </S.Button>
       </S.Search>
     </S.Logo>

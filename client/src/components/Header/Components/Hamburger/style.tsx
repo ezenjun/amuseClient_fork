@@ -10,25 +10,17 @@ const fadeIn = keyframes`
 `;
 
 export const Hamburger = styled.div`
-  @media (min-width: 768px) {
-    /* Desktop & Tablet styles */
-    display: flex;
-    align-items: center;
-    gap: 35px;
-  }
-
-  @media (max-width: 768px) {
-    /* Mobile styles */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 5%;
 `;
 
 export const Menu = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
+  margin-top: 15px;
 `;
 
 export const HamImage = styled.img`
@@ -52,19 +44,9 @@ export const Search = styled.div`
   padding-right: 10px;
   border-radius: 50px;
   border: 1px solid var(--2, #ccc);
-
-  @media (min-width: 768px) {
-    /* Desktop & Tablet styles */
-    width: 400px;
-    height: 42px;
-  }
-
-  @media (max-width: 768px) {
-    /* Mobile styles */
-    width: 400px;
-    height: 42px;
-    margin-top: 5px;
-  }
+  width: 100%;
+  height: 42px;
+  margin: 10px 0 20px 0;
 `;
 
 export const Input = styled.input`

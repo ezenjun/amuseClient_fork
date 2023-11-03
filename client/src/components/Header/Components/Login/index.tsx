@@ -1,10 +1,10 @@
 import { useNavigate } from "react-router-dom";
+import { useRecoilState } from "recoil";
+import { accessTokenState } from "../../../../atoms";
 import moment from "moment";
 import MyPageMenu from "../../../../pages/MyPage/MyPageMenu";
 import * as S from "./style";
 import * as C from "./constants";
-import { useRecoilState } from "recoil";
-import { accessTokenState } from "../../../../atoms";
 
 interface LoginProps {
   name: string | undefined;
@@ -59,12 +59,10 @@ function Login({
 
   return (
     <S.Login>
-      {loggedIn ? (
+      {loggedIn && (
         <S.Button>
           {name || cookies.__usrN__} {C.LOGIN.USER}
         </S.Button>
-      ) : (
-        ""
       )}
       {loggedIn ? (
         <S.Button onClick={handleLogout}>{C.LOGIN.LOGOUT}</S.Button>
@@ -74,7 +72,7 @@ function Login({
       {loggedIn ? (
         <MyPageMenu />
       ) : (
-        <S.JoinButton onClick={navigateToSignUP}>{C.LOGIN.JOIN}</S.JoinButton>
+        <S.Button onClick={navigateToSignUP}>{C.LOGIN.JOIN}</S.Button>
       )}
     </S.Login>
   );

@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import "./Review.module.css";
-import Header from "../../../components/Header/Header";
+import Header from "../../../components/Header";
 import MyPagelist from "../MyPageList";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
