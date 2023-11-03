@@ -1,6 +1,6 @@
 import { CategoryData } from "../../Interfaces/DataInterfaces";
 import Style from "../../pages/SubPage/SubPage.module.css";
-import ChildTitle from "../../pages/SubPage/SubtitleImgs/ChildTitle.jpg";
+import Banner from "./banner.jpg";
 import * as S from "./style";
 
 interface MainBannerProps {
@@ -16,7 +16,7 @@ function MainBanner(categoryData: MainBannerProps) {
       <div className={Style["subTitleContainer"]}>
         <S.Image
           className={Style["mainPicture.image"]}
-          src={categoryData.categoryImg ? categoryData.categoryImg : ChildTitle}
+          src={categoryData.categoryImg ? categoryData.categoryImg : Banner}
           alt="Title img"
         />
         <h2 className={Style["subTitle"]}>{categoryData.mainDescription}</h2>
