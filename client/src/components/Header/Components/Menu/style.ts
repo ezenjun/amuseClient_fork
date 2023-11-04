@@ -47,6 +47,7 @@ export const DropdownItem = styled.div`
 `;
 
 export const Category = styled.div`
+  cursor: pointer;
   &:hover {
     color: #e6003d;
   }
