@@ -14,7 +14,7 @@ export const Content = styled.div`
 `;
 
 export const Side = styled.div`
-  @media (max-width: 1170px) {
+  @media (max-width: 1169px) {
     display: none;
   }
 `;
