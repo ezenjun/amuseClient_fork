@@ -1,5 +1,5 @@
-import styled from "@emotion/styled";
 import { css } from "@emotion/react";
+import styled from "styled-components";
 
 interface IPretendard {
   size: number;
@@ -29,16 +29,16 @@ export const reset = css`
       /* Tablet styles */
       font-size: 15px; /* Adjust as needed */
     }
-    
-		@media (min-width: 1141px) {
-			/* Desktop styles */
-			font-size: 16px; /* Adjust as needed */
-		}
-	}
-	body {
-		margin: 0;
-		padding: 0;
-		font-family: Pretendard, -apple-system, sans-serif, Roboto;
+
+    @media (min-width: 1141px) {
+      /* Desktop styles */
+      font-size: 16px; /* Adjust as needed */
+    }
+  }
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: Pretendard, -apple-system, sans-serif, Roboto;
 
     -ms-user-select: none;
     -moz-user-select: -moz-none;
@@ -115,3 +115,10 @@ export const Common = {
     bold: 700,
   },
 } as const;
+
+export const Render = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-top: 25px;
+  gap: 50px;
+`;

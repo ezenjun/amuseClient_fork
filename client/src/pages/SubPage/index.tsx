@@ -1,17 +1,16 @@
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import { useCookies } from "react-cookie";
-import { CategoryData } from "./Interfaces/DataInterfaces";
-import { ListProps, BannerProps } from "./Interfaces/PropsInterfaces";
-import { useCategoryContext } from "./components/Header/Contexts/CategoryContext";
-import _ from "lodash";
-import Fade from "./Fade";
+import { CategoryData } from "../../Interfaces/DataInterfaces";
+import { BannerProps, ListProps } from "../../Interfaces/PropsInterfaces";
 import axios from "axios";
-import List from "./components/List";
-import Banner from "./components/Banner";
-import SubTiles from "./components/Tile/SubTiles";
-import MainComponent from "./MainComponent";
-import MainBanner from "./components/MainBanner";
-import * as S from "./styles";
+import Fade from "../../Fade";
+import List from "../../components/List";
+import Banner from "../../components/Banner";
+import SubTiles from "../../components/Tile/SubTiles";
+import MainComponent from "../../MainComponent";
+import MainBanner from "../../components/MainBanner";
+import * as S from "../../styles";
 
 interface TileProps {
   page_component_id: string;
@@ -28,22 +27,11 @@ interface tileList {
   itemInfos: [];
 }
 
-function Home() {
-  const { categoriesInfo } = useCategoryContext();
-  const [apiKeyNumber, setApiKeyNumber] = useState(0);
+function SubPageComp() {
+  const { apiKey } = useParams() as { apiKey: string };
   const [categoryData, setCategoryData] = useState<CategoryData | null>(null);
   const [cookies] = useCookies(["__jwtkid__"]);
-
-  useEffect(() => {
-    let infoIndex = _.findIndex(categoriesInfo, { categoryName: "home" });
-    if (infoIndex < 0) {
-      infoIndex = _.findIndex(categoriesInfo, { categoryName: "Home" });
-    }
-    if (categoriesInfo?.length) {
-      const info = categoriesInfo[infoIndex];
-      setApiKeyNumber(info.categoryId);
-    }
-  }, [categoriesInfo]);
+  const apiKeyNumber: number = Number(apiKey);
 
   useEffect(() => {
     axios
@@ -71,9 +59,7 @@ function Home() {
   const [Items, setItems] = useState<[]>([]);
 
   useEffect(() => {
-    if (apiKeyNumber > 0) {
-      fetchPageData(apiKeyNumber);
-    }
+    fetchPageData(apiKeyNumber);
   }, [apiKeyNumber]);
 
   const fetchPageData = (apiKeyNumber: number) => {
@@ -137,17 +123,19 @@ function Home() {
 
   return (
     <MainComponent>
-      <Fade>
-        <MainBanner
-          categoryData={categoryData}
-          categoryImg={categoryData?.categoryImg}
-          mainDescription={categoryData?.mainDescription}
-          subDescription={categoryData?.subDescription}
-        />
-        <S.Render>{renderedComponents}</S.Render>
-      </Fade>
+      {categoryData && (
+        <Fade>
+          <MainBanner
+            categoryData={categoryData}
+            categoryImg={categoryData.categoryImg || ""}
+            mainDescription={categoryData.mainDescription || ""}
+            subDescription={categoryData.subDescription || ""}
+          />
+          <S.Render>{renderedComponents}</S.Render>
+        </Fade>
+      )}
     </MainComponent>
   );
 }
 
-export default Home;
+export default SubPageComp;
