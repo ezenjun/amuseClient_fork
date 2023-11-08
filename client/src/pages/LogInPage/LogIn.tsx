@@ -100,7 +100,7 @@ const Login: React.FC = () => {
 							<EmailInput email={email} handleChangeEmail={handleChangeEmail} />
 						</div>
 						<div className="password">
-							<PasswordInput password={password} handleChangePassword={handleChangePassword} labelText="비밀번호" design="standard" width="680px" margin='8px' margin_b='' isValid={true} errorText="" inputSize="medium" />
+							<PasswordInput password={password} handleChangePassword={handleChangePassword} labelText="비밀번호" placeText="비밀번호" design="standard" width="680px" margin='8px' margin_b='' isValid={true} errorText="" inputSize="medium" />
 						</div>
 					</S.InputContainer>
 					{error && <S.ErrorMessage>이메일 또는 비밀번호가 올바르지 않습니다.</S.ErrorMessage>}

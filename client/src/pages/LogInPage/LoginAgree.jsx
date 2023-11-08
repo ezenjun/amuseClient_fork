@@ -47,8 +47,6 @@ const LoginAgree = () => {
         const requestBody = {
             advertisement_true: marketingAgree,
             personalInformationAgreement: privacy,
-            "phone_number": "",
-            "over_14_age_true": false
         };
         console.log(requestBody, {
             "Content-Type": "application/json",

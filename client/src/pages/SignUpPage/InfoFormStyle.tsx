@@ -12,15 +12,19 @@ export const InputTitle = styled.div`
 `;
 
 export const InnBtn = styled.button`
-    height: 25px;
-    border: none;
+    color: #FFF;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: -0.4px;
+    width: 174px;
+    height: 56px;
+    flex-shrink: 0;
     border-radius: 8px;
-    background: #EDEDED;
-    font-size: 12px;
-    font-weight: 600;
-    margin-top: 11px;
-    z-index: 100;
-    margin-left: -100px;
+    background-color: #909090;
 `;
 
 export const FlexBox = styled.div`
@@ -34,13 +38,18 @@ export const RadioButtonContainer = styled.div`
     }
 
     .input_gender label {
-        height: 43px;
-        display: inline-block;
-        padding: 13px 16.2px;
-        font-size: 16px;
+        width: 87px;
+        height: 56px;
         cursor: pointer;
         border: 1px solid #DDD;
         background: #FFF;
+        display: inline-block;
+        color: #909090;
+        text-align: center;
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 56px;
+        vertical-align: middle;
     }
 
     .input_gender label.first_label {
@@ -52,13 +61,14 @@ export const RadioButtonContainer = styled.div`
     }
 
     .input_gender input[type="radio"]:checked+label {
-        background-color: #3498db;
-        color: #fff;
+        border: 2px solid #000;
+        font-weight: 700;
+        color: #000;
     }
 `;
 
 export const NextButton = styled.button`
-    width: 699px;
+    width: 754px;
     height: 51px;
     border: none;
     border-radius: 8px;
@@ -67,6 +77,7 @@ export const NextButton = styled.button`
     font-size: 20px;
     font-weight: 700;
     line-height: normal;
+    margin: 45px 0;
     &:disabled {
         background-color: #cccccc;
         color: #666666;

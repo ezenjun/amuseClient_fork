@@ -21,6 +21,7 @@ const TextInput: React.FC<TextInputProps> = ({ disable, onBlur, onInputChange, l
     return (
         <FormControl sx={{ mb: margin, width: width }} variant="outlined">
             <TextField
+                hiddenLabel
                 disabled={disable}
                 id="input-text"
                 label={labelText}
@@ -29,7 +30,7 @@ const TextInput: React.FC<TextInputProps> = ({ disable, onBlur, onInputChange, l
                 value={value}
                 onChange={onInputChange}
                 variant="outlined"
-                size="small"
+                // size="Normal"
                 sx={{ padding: 0 }}
                 onBlur={onBlur}
                 error={!isValid}

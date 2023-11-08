@@ -85,10 +85,10 @@ const FindPw: React.FC<FindPwProps> = (props) => {
                             <h1 className="reset_title">비밀번호 재설정</h1>
                             <div className="reset_pw_box">
                                 <span className="input_pw_title">새 비밀번호</span>
-                                <PasswordInput password={password} handleChangePassword={handleChangePassword} labelText="새 비밀번호" design="outlined" width="702px" margin='0' margin_b='0' isValid={isValidPassword} errorText="8자 이상, 영문 대/소문자, 숫자, 특수문자 중 두 종류 이상의 조합으로 설정해 주세요" inputSize='medium' />
+                                <PasswordInput password={password} handleChangePassword={handleChangePassword} labelText="새 비밀번호" placeText="새 비밀번호" design="outlined" width="702px" margin='0' margin_b='0' isValid={isValidPassword} errorText="8자 이상, 영문 대/소문자, 숫자, 특수문자 중 두 종류 이상의 조합으로 설정해 주세요" inputSize='medium' />
                                 {/* <input type="password" className="input_pw" placeholder="새 비밀번호" /> */}
                                 <span className="input_pw_title">새 비밀번호 확인</span>
-                                <PasswordInput password={checkPassword} handleChangePassword={handleChangeCheckPassword} labelText="새 비밀번호 확인" design="outlined" width="702px" margin='0'  margin_b='0' isValid={isValidCheckPassword} errorText="일치하지 않습니다" inputSize='medium'/>
+                                <PasswordInput password={checkPassword} handleChangePassword={handleChangeCheckPassword} labelText="새 비밀번호 확인" placeText="새 비밀번호 확인" design="outlined" width="702px" margin='0'  margin_b='0' isValid={isValidCheckPassword} errorText="일치하지 않습니다" inputSize='medium'/>
                                 {/* <input type="password" className="input_pw" placeholder="새 비밀번호 확인" /> */}
                                 <div className="note_box">
                                     <p className="note_title">ℹ️ 유의사항</p>

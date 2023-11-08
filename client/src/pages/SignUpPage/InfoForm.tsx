@@ -28,11 +28,10 @@ const InfoForm: React.FC<InfoFormProps> = (props) => {
     // 비밀번호 확인
     const [password, setPassword] = useState<string>("");
     const [checkPassword, setCheckPassword] = useState<string>("");
-    const [isValidPassword, setIsValidPassword] = useState<boolean>(true);
-    const [isValidCheckPassword, setIsValidCheckPassword] = useState<boolean>(true);
+    const [isValidPassword, setIsValidPassword] = useState<boolean>(false);
+    const [isValidCheckPassword, setIsValidCheckPassword] = useState<boolean>(false);
 
     const handleChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setIsValidPassword(false);
         const newPassword = e.target.value;
         const isValid1 = /^(?=(?:[^A-Za-z]*[A-Za-z]){1,})(?=(?:\D*\d){1,})[A-Za-z\d\W_]{8,20}$/.test(newPassword);
         const isValid2 = /^(?=(?:[^A-Za-z]*[A-Za-z]){1,})(?=(?:[^\W_]*[\W_]){1,})[A-Za-z\d\W_]{8,20}$/.test(newPassword);
@@ -49,7 +48,6 @@ const InfoForm: React.FC<InfoFormProps> = (props) => {
     };
 
     const handleChangeCheckPassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setIsValidCheckPassword(false)
         if (password === e.target.value) {
             setCheckPassword(e.target.value);
             setIsValidCheckPassword(true)
@@ -83,11 +81,16 @@ const InfoForm: React.FC<InfoFormProps> = (props) => {
 
     // 아이디 중복 확인
     const [id, setId] = useState<string>("");
-    const [isValidId, setIsValidId] = useState<boolean>(true);
+    const [isValidId, setIsValidId] = useState<boolean>(false);
     const [checkId, setCheckId] = useState<boolean>(false);
+    const [errorText, setErrorText] = useState<string>("아이디를 입력해주세요");
     const handleChangeId = (e: React.ChangeEvent<HTMLInputElement>) => {
         const checkInput = nameValidation(e.target.value);
         setId(checkInput);
+        if (checkInput === "") {
+            setIsValidId(false);
+            setErrorText("아이디를 입력해주세요");
+        }
     };
 
     const handleDuplicateClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -99,6 +102,7 @@ const InfoForm: React.FC<InfoFormProps> = (props) => {
                     console.log(result);
                     if (result === "duplicate") {
                         console.log("중복되는 아이디가 존재합니다.");
+                        setErrorText("중복된 아이디입니다.");
                         setIsValidId(false);
                         setCheckId(false);
                         setId("");
@@ -111,6 +115,9 @@ const InfoForm: React.FC<InfoFormProps> = (props) => {
                 .catch((error) => {
                     console.log(error);
                 });
+        } else {
+            setIsValidId(false);
+            setErrorText("아이디를 입력해주세요");
         }
     };
 
@@ -176,22 +183,23 @@ const InfoForm: React.FC<InfoFormProps> = (props) => {
 
 
     return (
-        <div className="info_body">
+        <div className="info_body" style={{width: '754px'}}>
             <form action="" method="post" className="info_form">
                 <div>
                     <S.InputTitle>아이디</S.InputTitle>
                     <S.FlexBox>
-                        <TextInput disable={id !== "" && isValidId && checkId} value={id} onInputChange={handleChangeId} labelText="아이디" placeText="아이디" inputType="text" isValid={isValidId} errorText="이미 사용중인 ID입니다." width="702px" margin="16px" />
+                        {/* <TextInput disable={id !== "" && isValidId && checkId} value={id} onInputChange={handleChangeId} labelText="" placeText="아이디" inputType="text" isValid={isValidId} errorText={errorText} width="560px" margin="16px" /> */}
+                        <TextInput disable={false} value={id} onInputChange={handleChangeId} labelText="" placeText="아이디" inputType="text" isValid={isValidId} errorText={errorText} width="560px" margin="16px" />
                         <S.InnBtn onClick={handleDuplicateClick}>중복 확인</S.InnBtn>
                     </S.FlexBox>
                     <S.InputTitle>비밀번호</S.InputTitle>
-                    <PasswordInput password={password} handleChangePassword={handleChangePassword} labelText="비밀번호" design="outlined" width="702px" margin='' margin_b='16px' isValid={isValidPassword} errorText="8자 이상, 영문 대/소문자, 숫자, 특수문자 중 두 종류 이상의 조합으로 설정해 주세요" inputSize='small' />
+                    <PasswordInput password={password} handleChangePassword={handleChangePassword} labelText="" placeText="비밀번호" design="outlined" width="754px" margin='' margin_b='16px' isValid={isValidPassword} errorText="비밀번호는 8~16자의 영문, 숫자, 특수문자 중 두 종류 이상의 조합으로 입력해주세요" inputSize='small' />
                     <S.InputTitle>비밀번호 재확인</S.InputTitle>
-                    <PasswordInput password={checkPassword} handleChangePassword={handleChangeCheckPassword} labelText="비밀번호 재확인" design="outlined" width="702px" margin='' margin_b='16px' isValid={isValidCheckPassword} errorText="일치하지 않습니다" inputSize='small' />
+                    <PasswordInput password={checkPassword} handleChangePassword={handleChangeCheckPassword} labelText="" placeText="비밀번호 재확인" design="outlined" width="754px" margin='' margin_b='16px' isValid={isValidCheckPassword} errorText="비밀번호가 일치하지 않습니다" inputSize='small' />
                     <S.FlexBox>
                         <div>
                             <S.InputTitle>이름</S.InputTitle>
-                            <TextInput disable={name !== ""} onInputChange={handleInputChange} labelText="이름" placeText="이름" value={name} inputType="text" width="597px" margin="16px" />
+                            <TextInput disable={true} onInputChange={handleInputChange} labelText="" placeText="이름" value={name} inputType="text" width="561px" margin="16px" />
                         </div>
                         <div>
                             <S.InputTitle>성별</S.InputTitle>
@@ -207,17 +215,17 @@ const InfoForm: React.FC<InfoFormProps> = (props) => {
                     </S.FlexBox>
 
                     <S.InputTitle>생년월일</S.InputTitle>
-                    <TextInput disable={birth !== ""} onInputChange={handleInputChange} labelText="생년월일" placeText="ex) 010203" value={birth} inputType="text" width="702px" margin="16px" />
+                    <TextInput disable={true} onInputChange={handleInputChange} labelText="" placeText="생년월일" value={birth} inputType="text" width="754px" margin="16px" />
                     <S.InputTitle>본인 확인 이메일</S.InputTitle>
-                    <TextInput disable={false} value={email} onInputChange={handleChangeEmail} labelText="본인확인 이메일" placeText="ex) example@example.com" inputType="email" width="702px" margin="16px" />
+                    <TextInput disable={false} value={email} onInputChange={handleChangeEmail} labelText="" placeText="ex) example@example.com" inputType="email" isValid={checkEmail} errorText="이메일을 입력해주세요" width="754px" margin="16px" />
                     <S.InputTitle>전화번호</S.InputTitle>
                     <div className="">
-                        <TextInput disable={phone !== ""} onInputChange={handleInputChange} labelText="휴대폰번호" placeText="ex) 01012345678" value={phone} inputType="text" width="702px" margin="16px" />
+                        <TextInput disable={true} onInputChange={handleInputChange} labelText="" placeText="ex) 01012345678" value={phone} inputType="text" width="754px" margin="16px" />
                     </div>
                 </div>
             </form >
             <S.NextButton onClick={handleClickBtn} disabled={isNextButtonDisabled}>
-                다음
+                가입하기
             </S.NextButton>
         </div >
     );

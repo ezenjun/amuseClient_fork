@@ -7,7 +7,9 @@ import AmuseIcon from "../LogInPage/Icons/amuse_logo.png";
 import * as S from "./SignUpStyle";
 
 export default function SignUp(props: any) {
-  const redirectU = `${process.env.REACT_APP_REDIRECT_URL}LoginAgree`
+  // const redirectU = `${process.env.REACT_APP_REDIRECT_URL}LoginAgree`
+  const redirectU = `${process.env.REACT_APP_REDIRECT_URL}`
+  
   return (
     <MainComponent>
       <S.SignUpBody>

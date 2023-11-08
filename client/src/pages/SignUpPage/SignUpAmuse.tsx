@@ -120,8 +120,10 @@ const SignUpAmuse: React.FC = () => {
                 {currentStep === 3 && (
                     <div>
                         <S.SignUpTitle>회원가입완료</S.SignUpTitle>
-                        <S.DoneText>{name}님 반가워요!<br /> 회원가입이 완료되었어요</S.DoneText>
-                        <S.WelcomeText>누구나 갈 수 있는, 모두가 즐거운 여행</S.WelcomeText>
+                        <S.textBox>
+                            <S.DoneText>{name}님 반가워요!<br /> 회원가입이 완료되었어요</S.DoneText>
+                            <S.WelcomeText>누구나 갈 수 있는, 모두가 즐거운 여행</S.WelcomeText>
+                        </S.textBox>
                         <S.NextButton onClick={handleContinueClick}>계속하기</S.NextButton>
                     </div>
                 )}

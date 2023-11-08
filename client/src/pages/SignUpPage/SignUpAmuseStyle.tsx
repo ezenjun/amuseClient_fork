@@ -6,7 +6,7 @@ import checkedIcon from '../LogInPage/Icons/checked_icon.png';
 export const SignUpBody = styled.div`
     flex-direction: column;
     align-items: center;
-    max-width: 699px;
+    max-width: 754px;
     height: 506px;
     margin: 30px auto;
 `;
@@ -80,7 +80,7 @@ export const ContentBtn = styled.span`
 `;
 
 export const NextButton = styled.button`
-    width: 699px;
+    width: 754px;
     height: 51px;
     border: none;
     border-radius: 8px;
@@ -89,6 +89,7 @@ export const NextButton = styled.button`
     font-size: 20px;
     font-weight: 700;
     line-height: normal;
+    margin: 12px 0;
     &:disabled {
         background-color: #cccccc;
         color: #666666;
@@ -96,24 +97,31 @@ export const NextButton = styled.button`
     }
 `;
 
+export const textBox = styled.div`
+    width: 754px;
+    height: 164px;
+    background-color: #ececec;
+    padding: 32px;
+`
 
 export const DoneText = styled.div`
     color: #000;
+    text-align: center;
     font-family: Pretendard;
     font-size: 22px;
     font-style: normal;
-    font-weight: 500;
-    line-height: normal;
+    font-weight: 700;
 `;
 
 export const WelcomeText = styled.div`
-    color: #000;
+    margin: 30px 0;
+    color: #909090;
+    text-align: center;
     font-family: Pretendard;
     font-size: 16px;
     font-style: normal;
     font-weight: 500;
     line-height: normal;
-    margin: 30px 0;
 `;
 
 

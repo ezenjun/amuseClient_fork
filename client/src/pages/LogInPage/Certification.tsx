@@ -50,7 +50,7 @@ const CertificationTitle = styled.h1`
 `;
 
 const SingleSignBtn = styled.button`
-    width: 699px;
+    width: 754px;
     height: 60px;
     border-radius: 8px;
     border: 1px solid #CCC;
