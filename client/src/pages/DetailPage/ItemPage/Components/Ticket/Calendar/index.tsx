@@ -47,18 +47,17 @@ const formatCaption: DateFormatter = (month, options) => {
 
 type CalendarProps = {
   itemId: number | null;
-  numberOfmonth: number;
 };
 
-function Calendar({ itemId, numberOfmonth }: CalendarProps) {
+function Calendar({ itemId }: CalendarProps) {
   interface CalendarType {
     duration: number;
   }
   const [CalendarData, setCalendarData] = useState<CalendarType>();
   const [range, setRange] = useState<DateRange | undefined>(undefined);
   const setSelectedItemState = useSetRecoilState(selectedItemState);
-
   const { setOrderRange } = useOrderContext();
+
   useEffect(() => {
     setOrderRange(range);
   }, [range]);
@@ -135,11 +134,34 @@ function Calendar({ itemId, numberOfmonth }: CalendarProps) {
     }
   };
 
+  const today = new Date();
   const classNames: ClassNames = {
     ...styles,
     day_selected: "custom-select",
   };
-  const today = new Date();
+
+  const [month, setMonth] = useState(2);
+  const handleResize = () => {
+    let result;
+    switch (true) {
+      case window.innerWidth >= 1170:
+        result = 2;
+        break;
+      case window.innerWidth >= 1024:
+        result = 1;
+        break;
+      case window.innerWidth >= 768:
+        result = 2;
+        break;
+      default:
+        result = 1;
+    }
+    setMonth(result);
+  };
+  useEffect(() => {
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   return (
     <S.Calendar>
@@ -148,7 +170,7 @@ function Calendar({ itemId, numberOfmonth }: CalendarProps) {
         <style>{`.custom-select { color: white; background-color: #F184A1; }`}</style>
         <DayPicker
           locale={ko}
-          numberOfMonths={numberOfmonth}
+          numberOfMonths={month}
           pagedNavigation
           formatters={{ formatCaption }}
           mode="range"

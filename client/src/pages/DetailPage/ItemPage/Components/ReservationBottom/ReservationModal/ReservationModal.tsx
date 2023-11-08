@@ -73,7 +73,7 @@ function ReservationModal({ onClose, itemId }: ModalProps) {
           </button>
         </header>
         <div className="modal-section">
-          <Calendar itemId={itemId} numberOfmonth={1} />
+          <Calendar itemId={itemId} />
         </div>
       </div>
     </Modal>

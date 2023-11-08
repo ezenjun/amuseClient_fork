@@ -21,7 +21,7 @@ function Detail({ itemId, productCode, startPrice, likeNum }: DetailProps) {
         <S.Content>
           <Title itemId={itemId} />
           <Picture itemId={itemId} />
-          <Calendar itemId={itemId} numberOfmonth={2} />
+          <Calendar itemId={itemId} />
           <ItemInfo itemId={itemId} />
           <CourseIntro itemId={itemId} />
           <Map itemId={itemId} />

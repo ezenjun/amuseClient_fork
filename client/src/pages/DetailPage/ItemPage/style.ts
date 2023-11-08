@@ -4,6 +4,10 @@ export const Detail = styled.div`
   display: flex;
   padding: 50px 10%;
   gap: 20px;
+
+  @media (max-width: 768px) {
+    padding: 50px 5%;
+  }
 `;
 
 export const Content = styled.div`
@@ -14,7 +18,7 @@ export const Content = styled.div`
 `;
 
 export const Side = styled.div`
-  @media (max-width: 1169px) {
+  @media (max-width: 1023px) {
     display: none;
   }
 `;
