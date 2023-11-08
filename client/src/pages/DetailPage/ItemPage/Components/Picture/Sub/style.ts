@@ -12,6 +12,7 @@ export const Image = styled.img`
   position: absolute;
   width: 100%;
   height: 100%;
+  border-radius: 8px;
 
   &:hover {
     opacity: 0.9;
