@@ -21,7 +21,7 @@ export const Title = styled.div`
   display: flex;
   align-items: center;
   text-align: left;
-  margin: 18px 0;
+  margin: 18px 0 10px 0;
   font-size: 24px;
   font-weight: 700;
   color: #343a40;
