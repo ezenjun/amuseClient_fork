@@ -4,11 +4,10 @@ export const Select = styled.div`
   display: grid;
   grid-template-columns: minmax(280px, auto);
   grid-template-rows: repeat(2, minmax(30px, auto));
-  gap: 5px;
+  gap: 20px;
   background-color: #ffffff;
   padding: 32px 24px;
   display: flex;
-  justify-content: space-between;
   margin-bottom: 8px;
   border-radius: 4px;
   box-sizing: border-box;
@@ -20,7 +19,6 @@ export const Content = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 310px;
   margin-bottom: 4px;
 `;
 
@@ -37,9 +35,6 @@ export const Detail = styled.div`
 `;
 
 export const Price = styled.div`
-  grid-row: 2/3;
-  grid-column: 2/3;
-  min-width: 115px;
   display: flex;
   align-items: center;
 `;
@@ -62,6 +57,7 @@ export const Count = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 5px;
 `;
 
 export const MinusBtn = styled.button`

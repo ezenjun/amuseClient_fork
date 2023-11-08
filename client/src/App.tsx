@@ -10,7 +10,7 @@ import axios from "axios";
 import Home from "../src/Home";
 import SubPage from "./pages/SubPage";
 import MyPage from "./pages/MyPage/MyPage";
-import Detail from "./pages/DetailPage/ItemPage/Detail";
+import ItemPage from "./pages/DetailPage/ItemPage";
 import Review from "./pages/MyPage/Review/Review";
 import Login from "./pages/LogInPage/LogIn";
 import FindId from "./pages/LogInPage/FindId";
@@ -112,7 +112,7 @@ function App() {
                 key={currentItemId}
                 path={`/detail/${currentItemId}`}
                 element={
-                  <Detail
+                  <ItemPage
                     itemId={currentItemId}
                     productCode={currentItemProductCodes[index]}
                     startPrice={currentItemStartPrices[index]}

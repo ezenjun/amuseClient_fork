@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
-import "./ReviewPicture.scss";
+import { ItemIdProps } from "../../../../../Interfaces/PropsInterfaces";
 import SubPicture from "../Picture/Sub";
 import axios from "axios";
-import { ItemIdProps } from "../../../../../Interfaces/PropsInterfaces";
+import * as S from "./style";
+import * as C from "./constants";
 
 function ReviewPicture({ itemId }: ItemIdProps) {
-  /**
-   * Review Picture Data
-   */
+  // Review Picture Data
   const [reviewPictureData, setReviewPictureData] = useState<
     { review_img: string }[]
   >([]);
@@ -16,26 +15,28 @@ function ReviewPicture({ itemId }: ItemIdProps) {
     : [];
   const subReviewPicture = reviewPicture.slice(0, 3);
 
-  /**
-   * Review Picture API
-   */
+  // Review Picture API
   useEffect(() => {
     axios
       .get(`${process.env.REACT_APP_AMUSE_API}/detail/${itemId}/review`)
       .then((response) => {
         setReviewPictureData(response.data.data.review_all_imgs);
-
-        //console.log(response.data.data.review_all_imgs)
       })
       .catch((error) => {
-        console.log("연결 실패");
+        console.log("Review 연결 실패");
       });
   }, [itemId]);
 
   return (
-    <div className="ReviewPicture">
-      <p className="review-title">여행자 후기 사진</p>
-      <div className="subpicture">
+    <S.Picture>
+      <S.Title>
+        <S.Content>{C.REVIEW.TITLE}</S.Content>
+        <S.Count>
+          {0}
+          {C.REVIEW.COUNT}
+        </S.Count>
+      </S.Title>
+      <S.SubPicture>
         {subReviewPicture.map((picture, idx) => (
           <SubPicture
             src={picture}
@@ -44,8 +45,8 @@ function ReviewPicture({ itemId }: ItemIdProps) {
             clickId={0}
           />
         ))}
-      </div>
-    </div>
+      </S.SubPicture>
+    </S.Picture>
   );
 }
 
