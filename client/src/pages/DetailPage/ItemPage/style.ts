@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Detail = styled.div`
   display: flex;
   padding: 50px 10%;
-  gap: 18px;
+  justify-content: space-between;
 `;
 
 export const Content = styled.div`
