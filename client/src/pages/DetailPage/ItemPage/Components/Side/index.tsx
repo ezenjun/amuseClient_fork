@@ -84,7 +84,7 @@ function Side({ itemId, productCode, likeNum }: SideProps) {
             <S.Share src={Share} onClick={handleTooltipToggle} />
           </S.Info>
         )}
-        <Payment />
+        <Payment version="ver1" />
         <S.Wish>
           <S.Heart src={Heart} />
           {C.Side.WISH}

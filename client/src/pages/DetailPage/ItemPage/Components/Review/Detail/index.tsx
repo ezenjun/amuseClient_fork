@@ -1,13 +1,12 @@
-import './ReviewDetail.scss';
+import * as S from "./style";
 
 interface ReviewDetailProps {
   name: string;
   content: string;
   img: string;
-};
+}
 
 function Review({ name, content, img }: ReviewDetailProps) {
-
   return (
     <div className="ReviewDetail">
       <div className="name">{name}</div>

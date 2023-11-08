@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { ItemIdProps } from "../../../../../Interfaces/PropsInterfaces";
 import { MapData } from "../../../../../Interfaces/DataInterfaces";
 import axios from "axios";
-import JsMap from "./MapDetail/JsMap";
+import JsMap from "./Detail/JsMap";
 import * as S from "./style";
 
 function Map({ itemId }: ItemIdProps) {
@@ -35,7 +35,7 @@ function Map({ itemId }: ItemIdProps) {
   };
   return (
     <>
-      {mapData.length > 0 ? (
+      {mapData.length > 0 ?? (
         <>
           <S.Day>
             {uniqueDays.map((day) => {
@@ -58,8 +58,6 @@ function Map({ itemId }: ItemIdProps) {
             />
           )}
         </>
-      ) : (
-        <S.Map></S.Map>
       )}
     </>
   );
