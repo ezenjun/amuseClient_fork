@@ -5,7 +5,6 @@ export const Side = styled.div`
   position: sticky;
   top: 100px;
   left: 950px;
-  margin-top: 50px;
 `;
 
 export const Main = styled.div`

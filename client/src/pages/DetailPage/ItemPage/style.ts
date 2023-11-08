@@ -1,7 +1,9 @@
 import styled from "styled-components";
 
 export const Detail = styled.div`
-  padding: 24px 0;
+  display: flex;
+  padding: 50px 10%;
+  gap: 18px;
 `;
 
 export const Content = styled.div`
@@ -9,3 +11,5 @@ export const Content = styled.div`
   flex-direction: column;
   gap: 35px;
 `;
+
+export const Side = styled.div``;
