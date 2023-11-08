@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import "./Review.scss";
 import axios from "axios";
-import ReviewDetail from "./ReviewDetail/ReviewDetail";
+import ReviewDetail from "./Detail/ReviewDetail";
+import * as S from "./style";
+import * as C from "./constants";
 
 interface ReviewProps {
   itemId: number | null;
@@ -18,14 +19,10 @@ interface ReviewData {
 }
 
 function Review({ itemId }: ReviewProps) {
-  /**
-   * Review Data
-   */
+  // Review Data
   const [reviewData, setReviewData] = useState<ReviewData | null>(null);
 
-  /**
-   * Review API
-   */
+  // Review API
   useEffect(() => {
     axios
       .get(`${process.env.REACT_APP_AMUSE_API}/detail/${itemId}/review`)
@@ -38,18 +35,26 @@ function Review({ itemId }: ReviewProps) {
   }, [itemId]);
 
   return (
-    <div className="Review">
-      <div className="review-header">
-        <p className="review-title">후기</p>
-        <p className="review-number">{reviewData?.review_count}</p>
-      </div>
-      <div className="review-detail">
+    <S.Review>
+      <S.Review>
+        <S.Title>
+          <S.Content>{C.REVIEW.TITLE}</S.Content>
+          <S.Count>
+            {0}
+            {C.REVIEW.COUNT}
+          </S.Count>
+        </S.Title>
         {reviewData?.reviews &&
           reviewData.reviews.map((review, index) => (
-            <ReviewDetail key={index} name={review.user_name} content={review.review_content} img={review.images} />
+            <ReviewDetail
+              key={index}
+              name={review.user_name}
+              content={review.review_content}
+              img={review.images}
+            />
           ))}
-      </div>
-    </div>
+      </S.Review>
+    </S.Review>
   );
 }
 

@@ -9,8 +9,8 @@ import CourseIntro from "./Components/CourseIntro";
 import Map from "./Components/Map";
 import OtherInfo from "./Components/OtherInfo";
 import Manager from "./Components/Manager";
-import Review from "./Components/Review/Review";
-import ReviewPicture from "./Components/ReviewPicture/ReviewPicture";
+import Review from "./Components/Review";
+import ReviewPicture from "./Components/ReviewPicture";
 import MainComponent from "../../../MainComponent";
 import * as S from "./style";
 
