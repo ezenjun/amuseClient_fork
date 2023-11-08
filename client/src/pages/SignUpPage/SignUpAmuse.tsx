@@ -97,16 +97,6 @@ const SignUpAmuse: React.FC = () => {
                     </div>
                 }
 
-                {/* 본인인증 */}
-                {/* {currentStep === 2 &&
-                    <div>
-                        <h1 className="login_title">본인인증</h1>
-                        <CertificationForm onFindPasswordClick={function (): void {
-                            throw new Error("Function not implemented.");
-                        }} showPwForm={false} showFindBtn={false} onNextStep={handleNextClickId} titleText="인증" />
-                    </div>
-                } */}
-
                 {/* 본인인증 & 정보입력 */}
                 {currentStep === 2 && (
                     <div>

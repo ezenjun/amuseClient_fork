@@ -3,16 +3,19 @@ import axios from "axios";
 import SingleSignOn from "./SingleSignOn";
 import styled from 'styled-components';
 import { useRecoilState } from "recoil";
-import { impUid } from "../../atoms";
+import { impUid, isVisible } from "../../atoms";
+import Modal from "react-modal";
+import * as S from "./CertificationStyle";
 
 const Certification: React.FC = () => {
     const [checkAuthCode, setCheckAuthCode] = useState<boolean>(false);
     const [impUidData, setImpUid] = useRecoilState(impUid);
-    
+
     const handleButtonClick = async (event: { preventDefault: () => void; }) => {
         event.preventDefault();
         try {
             const impUid = await SingleSignOn();
+            openModal();
             setImpUid(impUid);
         } catch (error) {
             console.error(error);
@@ -20,45 +23,55 @@ const Certification: React.FC = () => {
         setCheckAuthCode(true);
     };
 
+    // 인증 완료 모달 창
+    const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+    const [isShow, setIsShow] = useRecoilState(isVisible);
+    const openModal = () => {
+        setIsModalOpen(true);
+    };
+
+    const closeModal = () => {
+        setIsModalOpen(false);
+        setIsShow(false);
+    };
+
+
     return (
-        <CertificationBody>
-            <CertificationTitle>본인인증</CertificationTitle>
-            <SingleSignBtn onClick={handleButtonClick}>간편인증</SingleSignBtn>
-        </CertificationBody>
+        <S.CertificationBody>
+            <S.CertificationTitle>본인인증</S.CertificationTitle>
+            <S.SingleSignBtn onClick={handleButtonClick}>간편인증</S.SingleSignBtn>
+
+            <div className="modal">
+                <Modal
+                    isOpen={isModalOpen}
+                    onRequestClose={closeModal}
+                    style={{
+                        content: {
+                            top: "50%",
+                            left: "50%",
+                            transform: "translate(-50%, -50%)",
+                            backgroundColor: "#FFF",
+                            width: "300px",
+                            height: "170px",
+                            borderRadius: "8px",
+                            padding: "0",
+                        },
+                        overlay: {
+                            backgroundColor: "rgba(0, 0, 0, 0.5)",
+                            width: "100%",
+                            height: "100%",
+                            transition: "opacity 0.3s ease-out",
+                        },
+                    }}
+                >
+                    <div className="complete_modal">
+                        <S.ModalContent>본인인증이<br />완료되었습니다.</S.ModalContent>
+                        <S.ModalBtn onClick={closeModal}>확인</S.ModalBtn>
+                    </div>
+                </Modal>
+            </div>
+        </S.CertificationBody>
     );
 }
 
 export default Certification;
-
-
-const CertificationBody = styled.div`
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    padding: 60px 0;
-    border-bottom: 6px solid rgba(204, 204, 204, 0.1);
-`;
-
-const CertificationTitle = styled.h1`
-    display: flex;
-    justify-content: center;
-    color: #000;
-    font-size: 24px;
-    font-weight: 600;
-    line-height: normal;
-    margin-bottom: 20px;
-`;
-
-const SingleSignBtn = styled.button`
-    width: 754px;
-    height: 60px;
-    border-radius: 8px;
-    border: 1px solid #CCC;
-    color: var(--01, #464646);
-    font-family: Pretendard;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
-    letter-spacing: -0.32px;
-`;

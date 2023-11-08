@@ -14,7 +14,7 @@ import KakaoIcon from "./Icons/kakao_logo.png";
 import NaverIcon from "./Icons/naver_logo.png";
 import SignUpIcon from "./Icons/signup_icon.png";
 import { useCookies } from "react-cookie";
-import * as S from "./style";
+import * as S from "./LoginStyle";
 
 
 const Login: React.FC = () => {
