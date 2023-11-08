@@ -16,6 +16,7 @@ function Map({ itemId }: ItemIdProps) {
       .get(`${process.env.REACT_APP_AMUSE_API}/detail/${itemId}/course-intro`)
       .then((response) => {
         setMapData(response.data.data.course);
+        console.log(mapData.length > 0);
       })
       .catch((error) => {
         console.log("연결 실패");
@@ -35,7 +36,7 @@ function Map({ itemId }: ItemIdProps) {
   };
   return (
     <>
-      {mapData.length > 0 ? (
+      {mapData.length > 0 ?? (
         <>
           <S.Day>
             {uniqueDays.map((day) => {
@@ -58,8 +59,6 @@ function Map({ itemId }: ItemIdProps) {
             />
           )}
         </>
-      ) : (
-        <S.Map></S.Map>
       )}
     </>
   );
