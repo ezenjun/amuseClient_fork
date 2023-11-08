@@ -16,7 +16,6 @@ function Map({ itemId }: ItemIdProps) {
       .get(`${process.env.REACT_APP_AMUSE_API}/detail/${itemId}/course-intro`)
       .then((response) => {
         setMapData(response.data.data.course);
-        console.log(mapData.length > 0);
       })
       .catch((error) => {
         console.log("연결 실패");
