@@ -34,16 +34,17 @@ export const Score = styled.div`
   gap: 10px;
   color: #909090;
   font-family: "Pretendard";
-  font-size: 30px;
+  font-size: 1.87rem;
 `;
 
 export const StarIcon = styled.img`
-  width: 30px;
+  width: 2vw;
+  min-width: 20px;
 `;
 
 export const ItemScore = styled.div`
   color: #000;
-  font-size: 40px;
+  font-size: 2.5rem;
   font-weight: 700;
 `;
 
@@ -67,7 +68,8 @@ export const TotalStar = styled.div`
 `;
 
 export const TotalIcon = styled.img`
-  width: 20px;
+  width: 1.4vw;
+  min-width: 14px;
 `;
 
 export const TotalCount = styled.div`
