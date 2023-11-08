@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 export const CourseIntro = styled.div`
   display: flex;
-  width: 700px;
   height: 260px;
   padding: 20px;
   border-radius: 12px;
@@ -10,7 +9,7 @@ export const CourseIntro = styled.div`
 `;
 
 export const Image = styled.img`
-  min-width: 250px;
+  min-width: 260px;
   min-height: 220px;
   border-radius: 8px;
   object-fit: cover;
