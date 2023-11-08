@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
+import StarIcon from "../../../../../assets/Icons/star.svg";
 import axios from "axios";
-import ReviewDetail from "./Detail/ReviewDetail";
+import ReviewDetail from "./Detail";
 import * as S from "./style";
 import * as C from "./constants";
 
@@ -36,24 +37,46 @@ function Review({ itemId }: ReviewProps) {
 
   return (
     <S.Review>
-      <S.Review>
-        <S.Title>
-          <S.Content>{C.REVIEW.TITLE}</S.Content>
-          <S.Count>
+      <S.Title>
+        <S.Content>{C.REVIEW.TITLE}</S.Content>
+        <S.Count>
+          {0}
+          {C.REVIEW.COUNT}
+        </S.Count>
+      </S.Title>
+
+      <S.Rated>
+        <S.Score>
+          <S.StarIcon src={StarIcon} alt="star" />
+          <S.ItemScore>{4.2}</S.ItemScore>
+          {C.REVIEW.RATED}
+        </S.Score>
+        <S.Divide />
+        <S.Total>
+          <S.TotalStar>
+            {/* !FIX 컴포넌트 빼기 */}
+            <S.TotalIcon src={StarIcon} alt="star" />
+            <S.TotalIcon src={StarIcon} alt="star" />
+            <S.TotalIcon src={StarIcon} alt="star" />
+            <S.TotalIcon src={StarIcon} alt="star" />
+            <S.TotalIcon src={StarIcon} alt="star" />
+          </S.TotalStar>
+          <S.TotalCount>
             {0}
-            {C.REVIEW.COUNT}
-          </S.Count>
-        </S.Title>
-        {reviewData?.reviews &&
-          reviewData.reviews.map((review, index) => (
-            <ReviewDetail
-              key={index}
-              name={review.user_name}
-              content={review.review_content}
-              img={review.images}
-            />
-          ))}
-      </S.Review>
+            {C.REVIEW.TOTAL}
+          </S.TotalCount>
+        </S.Total>
+      </S.Rated>
+
+      {reviewData?.reviews &&
+        reviewData.reviews.map((review, index) => (
+          <ReviewDetail
+            key={index}
+            name={review.user_name}
+            content={review.review_content}
+            img={review.images}
+          />
+        ))}
     </S.Review>
   );
 }

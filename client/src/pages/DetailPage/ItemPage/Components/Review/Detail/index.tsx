@@ -1,4 +1,4 @@
-import "./ReviewDetail.scss";
+import * as S from "./style";
 
 interface ReviewDetailProps {
   name: string;
