@@ -1,35 +1,29 @@
-import _ from "lodash";
 import { Routes, Route } from "react-router-dom";
+import { useCookies } from "react-cookie";
+import { useEffect, useState } from "react";
+import { OrderPage } from "./pages/DetailPage/OrderPage";
+import { OrderContextProvider } from "./pages/DetailPage/Contexts/OrderContext";
+import { CategoryContextProvider } from "./components/Header/Contexts/CategoryContext";
+import { InfoContextProvider } from "./pages/DetailPage/Contexts/InfoContext";
+import _ from "lodash";
+import axios from "axios";
 import Home from "../src/Home";
-import SubPageComp from "./pages/SubPage/SubPageComp";
+import SubPage from "./pages/SubPage";
 import MyPage from "./pages/MyPage/MyPage";
+import ItemPage from "./pages/DetailPage/ItemPage";
+import Review from "./pages/MyPage/Review/Review";
 import Login from "./pages/LogInPage/LogIn";
 import FindId from "./pages/LogInPage/FindId";
 import FindPw from "./pages/LogInPage/FindPw";
 import LoginAgree from "./pages/LogInPage/LoginAgree";
 import SignUp from "./pages/SignUpPage/SignUp";
 import SignUpAmuse from "./pages/SignUpPage/SignUpAmuse";
-import Detail from "./pages/DetailPage/Detail/Detail";
-import Review from "./pages/MyPage/Review/Review";
-import ViewAll from "./pages/SubPage/ViewAllPages/ViewAll";
-import SearchPageComp from "./pages/SubPage/SearchPageComp";
-// import NotFound from './NotFound';
-import { useCookies } from "react-cookie";
-import { useEffect, useState } from "react";
-import axios from "axios";
-import AboutAmuse from "./pages/SubPage/AboutAmuse/AboutAmuse";
-import { OrderPage } from "./pages/DetailPage/OrderPage";
-import { OrderContextProvider } from "./pages/DetailPage/Contexts/OrderContext";
-import { CategoryContextProvider } from "./components/Headers/Contexts/CategoryContext";
-import { InfoContextProvider } from "./pages/DetailPage/Contexts/InfoContext";
+import SearchPageComp from "./pages/SubPage/SearchPage/SearchPageComp";
 import OrderCompletePage from "./pages/DetailPage/OrderCompletePage/OrderCompletePage";
 import PaymentDetailPage from "./pages/DetailPage/PaymentDetailPage/PaymentDetailPage";
 
 function App() {
   const [cookies, setCookie, deleteCookie] = useCookies(["__jwtkid__"]);
-  /**
-   * Current Item API
-   */
   const [currentItemIds, setCurrentItemIds] = useState<number[]>([]);
   const [currentItemProductCodes, setCurrentItemProductCodes] = useState<
     number[]
@@ -39,7 +33,9 @@ function App() {
   >([]);
   const [currentItemLikeNums, setCurrentItemLikeNums] = useState<number[]>([]);
   const [activePageCount, setActivePageCount] = useState(1);
+  const [categoryIds, setCategoryIds] = useState<number[]>([]);
 
+  // Current Item API
   useEffect(() => {
     axios
       .get(`${process.env.REACT_APP_AMUSE_API}/item/all/display`, {
@@ -55,7 +51,6 @@ function App() {
         const prices = items.map((item: any) => item.startPrice);
         const likeNums = items.map((item: any) => item.likeNum);
 
-        // console.log( _.uniq([...currentItemIds,...ids]))
         setCurrentItemIds(_.uniq([...currentItemIds, ...ids]));
         setCurrentItemProductCodes(
           _.uniq([...currentItemProductCodes, ...codes])
@@ -68,27 +63,7 @@ function App() {
       });
   }, [activePageCount]);
 
-  // useEffect(() => {
-  //   axios
-  //     .get(`${process.env.REACT_APP_AMUSE_API}/test/api/product/getList/byDisplay`, {
-  //       params: {
-  //         limit: 8,
-  //         page: activePageCount,
-  //         displayStatus: "DISPLAY",
-  //       },
-  //     })
-  //     .then((res) => {
-  //       let pageCount = res.data.data.pageCount
-  //       for(let i = activePageCount; i< pageCount+1; i++){
-  //         setActivePageCount(pageCount)
-  //       }
-  //     });
-  // }, []);
-
-  /**
-   * Course API
-   */
-  const [categoryIds, setCategoryIds] = useState<number[]>([]);
+  // Course API
   useEffect(() => {
     axios
       .get(`${process.env.REACT_APP_AMUSE_API}/main/category`)
@@ -107,25 +82,19 @@ function App() {
     <OrderContextProvider>
       <CategoryContextProvider>
         <InfoContextProvider>
-          {/* <div style={{ fontFamily: "Pretendard" }}> */}
           <Routes>
             <Route path="/" element={<Home />} />
-
-            {/* <Route path="/Concierge" element={<Concierge />}></Route>
-          <Route path="/ChildCare" element={<ChildCare />}></Route>
-          <Route path="/SeniorCare" element={<SeniorCare />}></Route> */}
-
             <Route path="/LogIn" element={<Login />}></Route>
             <Route path="/LogIn/FindId" element={<FindId />}></Route>
-						<Route path="/LogIn/FindPw" element={<FindPw />}></Route>
+            <Route path="/LogIn/FindPw" element={<FindPw />}></Route>
             <Route path="/SignUp" element={<SignUp />}></Route>
             <Route path="/SignUpAmuse" element={<SignUpAmuse />}></Route>
-            <Route path="/MyPage/:category" element={<MyPage />}></Route>
+            <Route path="/MyPage" element={<MyPage />}>
+              <Route path="settings" element={<MyPage />} />
+              <Route path="like" element={<MyPage />} />
+              <Route path="payment" element={<MyPage />} />
+            </Route>
             <Route path="/Review/:id" element={<Review />}></Route>
-            {/* <Route path="/OnlineTour" element={<OnlineTour />}></Route> */}
-            <Route path="/ViewAll" element={<ViewAll />}></Route>
-            <Route path="/Subtest" element={<SubPageComp />}></Route>
-            <Route path="/aboutAmuse" element={<AboutAmuse />}></Route>
             <Route path="/order" element={<OrderPage />}></Route>
             <Route
               path="/order/complete"
@@ -137,15 +106,13 @@ function App() {
             ></Route>
             <Route path="/LogInAgree" element={<LoginAgree />}></Route>
 
-            {/**
-             * 상세페이지 Route
-             */}
+            {/* 상세페이지 Route */}
             {currentItemIds.map((currentItemId, index) => (
               <Route
                 key={currentItemId}
                 path={`/detail/${currentItemId}`}
                 element={
-                  <Detail
+                  <ItemPage
                     itemId={currentItemId}
                     productCode={currentItemProductCodes[index]}
                     startPrice={currentItemStartPrices[index]}
@@ -154,16 +121,10 @@ function App() {
                 }
               />
             ))}
-            {/**
-             * 서브페이지 Route
-             */}
-            <Route path="/category/:apiKey" element={<SubPageComp />} />
-            {/**
-             * 검색 시 Route
-             */}
+
+            <Route path="/category/:apiKey" element={<SubPage />} />
             <Route path="/search/:apiKey" element={<SearchPageComp />} />
           </Routes>
-          {/* </div> */}
         </InfoContextProvider>
       </CategoryContextProvider>
     </OrderContextProvider>

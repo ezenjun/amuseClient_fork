@@ -59,8 +59,7 @@ export const requestPay = (data: PaymentInfo, callback: (rsp: any) => void) => {
 			pay_method: getPaymentCode(data.paymentMethod),
 			merchant_uid: generatePaymentUid(), //가맹점 주문번호(동일한 주문번호로 중복결제 불가)
 			name: data.itemName,
-			// amount: data.payAmount,
-			amount: 200,
+			amount: data.payAmount,
 			buyer_email: data.reservationInfo.reservationEmail,
 			buyer_name: data.reservationInfo.reservationNameKR,
 			buyer_tel: data.reservationInfo.reservationPhoneNumber,

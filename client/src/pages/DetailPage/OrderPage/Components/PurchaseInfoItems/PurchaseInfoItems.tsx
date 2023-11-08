@@ -14,12 +14,10 @@ type Props = {
 
 export const PurchaseInfoItems = ({ isLoading }: Props) => {
 	const { orderData, orderTicketData, orderRange } = useOrderContext();
-	const [isWeb, setIsWeb] = useState<boolean>(true);
 	const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
 	const handleResize = () => {
 		setScreenWidth(window.innerWidth);
-		window.innerWidth >= 1024 ? setIsWeb(true) : setIsWeb(false);
 		window.removeEventListener("resize", handleResize);
 	};
 
