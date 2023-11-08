@@ -2,6 +2,8 @@ import styled from "styled-components";
 
 export const List = styled.div`
   border: 1px solid #e9ecef;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
   background-color: #f8f9fa;
   padding: 24px;
   color: #343a40;

@@ -3,7 +3,11 @@ import { useCookies } from "react-cookie";
 import { useOrderContext } from "../../pages/DetailPage/Contexts/OrderContext";
 import * as S from "./style";
 
-function Payment() {
+export interface PaymentProps {
+  version: string;
+}
+
+function Payment({ version }: PaymentProps) {
   const [cookies, setCookie, removeCookie] = useCookies(["__jwtkid__"]);
   const { orderData, setOrderData, orderTicketData } = useOrderContext();
   const movePage = useNavigate();
@@ -26,7 +30,11 @@ function Payment() {
     }
   };
 
-  return <S.Payment onClick={handleButtonClick}>결제</S.Payment>;
+  return (
+    <S.Payment className={version} onClick={handleButtonClick}>
+      결제
+    </S.Payment>
+  );
 }
 
 export default Payment;

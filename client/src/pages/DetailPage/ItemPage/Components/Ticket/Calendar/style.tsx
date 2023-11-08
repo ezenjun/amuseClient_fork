@@ -7,6 +7,8 @@ export const Date = styled.div`
   border: 1px solid #e9ecef;
   display: flex;
   justify-content: center;
+  border-top-right-radius: 8px;
+  border-top-left-radius: 8px;
 `;
 
 export const Title = styled.div`
@@ -20,7 +22,5 @@ export const Title = styled.div`
 export const Payment = styled.div`
   display: flex;
   float: right;
-  width: 173px;
-  height: 60px;
   margin-bottom: 15px;
 `;
