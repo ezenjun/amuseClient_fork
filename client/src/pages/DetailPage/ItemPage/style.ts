@@ -4,7 +4,7 @@ export const Detail = styled.div`
   display: flex;
   padding: 50px 10%;
   justify-content: space-between;
-  gap: 15px;
+  gap: 20px;
 `;
 
 export const Content = styled.div`

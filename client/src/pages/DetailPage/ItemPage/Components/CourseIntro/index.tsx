@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { ItemIdProps } from "../../../../../Interfaces/PropsInterfaces";
 import { CourseIntroData } from "../../../../../Interfaces/DataInterfaces";
-import CourseIntroDetail from "./CourseIntroDetail";
+import CourseIntroDetail from "./Detail";
 import axios from "axios";
 import * as S from "./style";
 import * as C from "./constants";

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { ItemIdProps } from "../../../../../Interfaces/PropsInterfaces";
 import { MapData } from "../../../../../Interfaces/DataInterfaces";
 import axios from "axios";
-import JsMap from "./MapDetail/JsMap";
+import JsMap from "./Detail/JsMap";
 import * as S from "./style";
 
 function Map({ itemId }: ItemIdProps) {
