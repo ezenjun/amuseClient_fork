@@ -2,16 +2,39 @@ import styled from "@emotion/styled";
 
 export const MyPageContainer = styled.div`
 	display: flex;
-	flex-direction: column;
+	flex-direction: row;
 	width: 100%;
-	height: 100%;
+	height: 100vh;
 	box-sizing: border-box;
-	gap: 2rem;
-	padding: 4.6875rem 10% 7.5rem 10%;
+	gap: 32px;
+	border: 1px solid red;
+	padding: 4.6875rem 10% 3.125rem 10%;
 	::-webkit-scrollbar {
 		display: none;
 	}
 	@media (max-width: 768px) {
 		padding: 2.5rem 1rem;
+	}
+	@media (min-width: 769px) and (max-width: 1023px) {
+		gap: 1rem;
+	}
+`;
+
+export const OutletConatiner = styled.div`
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	height: 100%;
+`;
+
+export const PageContainer = styled.div`
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	height: 100%;
+
+	@media (min-width: 769px) and (max-width: 1023px) {
+		/* Tablet styles */
+		min-width: 36.875rem;
 	}
 `;

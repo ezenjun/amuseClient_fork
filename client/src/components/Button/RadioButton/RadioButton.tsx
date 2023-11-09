@@ -15,7 +15,9 @@ const RadioButton = ({ name, checked, label, onClick }: RadioButtonProps) => {
 				onChange={onClick}
 			/>
 			<Label onClick={onClick}>{label}</Label>
-			{label === "현금 결제" && <Chips>결제 시 포인트 적립</Chips>}
+			{label === "현금 결제" && (
+				<Chips color="red">결제 시 포인트 적립</Chips>
+			)}
 			{label === "카카오페이" && (
 				<KakaopayIcon width={"4.0625rem"} height={"1.6875rem"} />
 			)}

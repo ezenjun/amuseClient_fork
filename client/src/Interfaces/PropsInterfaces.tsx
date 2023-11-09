@@ -172,4 +172,8 @@ export interface PointProps {
 	myPoint: number;
 }
 
+export interface ChipProps extends IProps {
+	color: string;
+}
+
 // commit용 주석

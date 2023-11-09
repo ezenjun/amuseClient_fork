@@ -21,53 +21,48 @@ export default function MyPagelist() {
 		navigate("./settings");
 	};
 	const navigateToLikes = () => {
-		navigate("./likes");
-	};
-	const navigateToSecession = () => {
-		navigate("./payment");
+		navigate("./like");
 	};
 	const navigateToOrders = () => {
-		navigate("/MyPage/PaymentList");
+		navigate("/MyPage/payment-history");
 	};
 	return (
-		<>
-			<Box
-				sx={{
-					width: "100%",
-					maxWidth: 270,
-					bgcolor: "background.paper",
-				}}
-			>
-				<h2 className="title">마이페이지</h2>
-				<nav aria-label="main mailbox folders">
-					<List>
-						<ListItem disablePadding onClick={navigateToSettings}>
-							<ListItemButton>
-								<ListItemIcon>
-									<SettingsIcon />
-								</ListItemIcon>
-								<ListItemText primary="설정" />
-							</ListItemButton>
-						</ListItem>
-						<ListItem disablePadding onClick={navigateToLikes}>
-							<ListItemButton>
-								<ListItemIcon>
-									<FavoriteIcon />
-								</ListItemIcon>
-								<ListItemText primary="관심상품" />
-							</ListItemButton>
-						</ListItem>
-						<ListItem disablePadding onClick={navigateToOrders}>
-							<ListItemButton>
-								<ListItemIcon>
-									<CreditCardIcon />
-								</ListItemIcon>
-								<ListItemText primary="결제 내역" />
-							</ListItemButton>
-						</ListItem>
-					</List>
-				</nav>
-			</Box>
-		</>
+		<Box
+			sx={{
+				width: "100%",
+				maxWidth: 270,
+				bgcolor: "background.paper",
+			}}
+		>
+			<h2 className="title">마이페이지</h2>
+			<nav aria-label="main mailbox folders">
+				<List>
+					<ListItem disablePadding onClick={navigateToSettings}>
+						<ListItemButton>
+							<ListItemIcon>
+								<SettingsIcon />
+							</ListItemIcon>
+							<ListItemText primary="설정" />
+						</ListItemButton>
+					</ListItem>
+					<ListItem disablePadding onClick={navigateToLikes}>
+						<ListItemButton>
+							<ListItemIcon>
+								<FavoriteIcon />
+							</ListItemIcon>
+							<ListItemText primary="관심상품" />
+						</ListItemButton>
+					</ListItem>
+					<ListItem disablePadding onClick={navigateToOrders}>
+						<ListItemButton>
+							<ListItemIcon>
+								<CreditCardIcon />
+							</ListItemIcon>
+							<ListItemText primary="결제 내역" />
+						</ListItemButton>
+					</ListItem>
+				</List>
+			</nav>
+		</Box>
 	);
 }

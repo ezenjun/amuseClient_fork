@@ -10,6 +10,15 @@ export const Regular12AppColor = styled.span`
 	})}
 `;
 
+// Regular14
+export const Regular14Gray = styled.span`
+	${Pretendard({
+		size: 14,
+		weight: Common.bold.regular,
+		color: Common.colors.gray,
+	})}
+`;
+
 // Regular 16
 export const Regular16Gray = styled.span`
 	${Pretendard({
@@ -98,6 +107,14 @@ export const Bold20AppColor = styled.span`
 		weight: Common.bold.bold,
 		color: Common.colors.appColor,
 	})}
+`;
+export const Bold20Black = styled.span`
+	${Pretendard({
+		size: 20,
+		weight: Common.bold.bold,
+		color: Common.colors.black,
+	})}
+	line-height: 160%;
 `;
 
 // BOLD 24

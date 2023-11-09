@@ -23,4 +23,15 @@ export type CategoryInfoData = {
 	setCategoriesInfo?: any;
 };
 
+export type PaymentHistoryData = {
+	mainPaymentId: number;
+	itemName: string;
+	itemImage: string;
+	travelStartDate: string;
+	travelEndDate: string;
+	payStatus: string;
+	reservationDateTime: string;
+	itemPayPrice: number;
+};
+
 // commit용 주석

@@ -1,19 +1,11 @@
 import React, { useEffect } from "react";
-import { Outlet, useParams } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import MyPagelist from "./MyPageList";
-import Settings from "./MyPage/Settings/Settings";
-import Likes from "./MyPage/Likes";
-import Notifications from "./MyPage/Notifications";
-// import Inquiries from "./MyPage/Inquiries";
-import Orders from "./MyPage/Orders";
-// import Quotes from "./MyPage/Quotes";
-// import Bills from "./MyPage/Bills";
-import "./MyPage.css";
+
 import { useRecoilState } from "recoil";
 import { isLoggedIn } from "../../atoms";
 import { useNavigate } from "react-router-dom";
 import MainComponent from "../../MainComponent";
-import PaymentList from "./MyPage/PaymentList/PaymentList";
 import { MyPageContainer } from "./styles";
 
 export default function MyPage() {
