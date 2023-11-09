@@ -1,0 +1,97 @@
+import React, { useEffect, useState } from "react";
+import { PageContainer } from "../../../../styles";
+import {
+	Bold32Black,
+	Regular16Gray,
+	Bold40Black,
+} from "../../../../../../components/Text/Text";
+import axios from "axios";
+import { useCookies } from "react-cookie";
+import { useLocation } from "react-router";
+import { PaymentDetailInterface } from "../../../../../../Interfaces/DataInterfaces";
+import {
+	DetailContainer,
+	ReservationIdContainer,
+	ReservationInfoContainer,
+} from "./styles";
+import EachPaymentWeb from "../EachPaymentInSize/EachPaymentWeb";
+import PaymentInformation from "./Section/PaymentInformation/PaymentInformation";
+import ItemInformation from "./Section/ItemInformation/ItemInformation";
+import Details from "./Section/Details/Details";
+import CancelPayment from "./Section/CancelPayment/CancelPayment";
+
+type Props = {};
+
+const PaymentHistoryDetail = (props: Props) => {
+	const [data, setData] = useState<PaymentDetailInterface>();
+	const [cookies] = useCookies(["__jwtkid__"]);
+	const { state } = useLocation();
+	const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+
+	const handleResize = () => {
+		setScreenWidth(window.innerWidth);
+		window.removeEventListener("resize", handleResize);
+	};
+
+	const getPaymentHistoryDetail = async () => {
+		const token = cookies.__jwtkid__;
+		if (token && state) {
+			axios
+				.get(
+					`${process.env.REACT_APP_AMUSE_API}/api/payment/${state}`,
+					{
+						headers: {
+							"Content-Type": "application/json",
+							Authorization: `${token}`,
+						},
+					}
+				)
+				.then((response) => {
+					const data = response.data.data;
+					console.log(data);
+					setData(data);
+				})
+				.catch((err) => {
+					console.log(err);
+				});
+		}
+	};
+	useEffect(() => {
+		handleResize();
+		window.addEventListener("resize", handleResize);
+	}, [window.innerWidth, screenWidth]);
+	useEffect(() => {
+		getPaymentHistoryDetail();
+	}, [state]);
+	return (
+		<PageContainer>
+			<Bold40Black>결제 상세 내역</Bold40Black>
+			<DetailContainer>
+				<ReservationInfoContainer>
+					<ReservationIdContainer>
+						<Regular16Gray>예약 번호</Regular16Gray>
+						<Regular16Gray>
+							{
+								data?.paymentDetailTopItemInfoResponseDto
+									.reservationNumber
+							}
+						</Regular16Gray>
+					</ReservationIdContainer>
+				</ReservationInfoContainer>
+				{/* 결제 상세 정보 */}
+				<PaymentInformation data={data?.paymentDetailInfoResponseDto} />
+				{/* 상품 정보 */}
+				<ItemInformation />
+				{/* 세부 사항 */}
+				<Details />
+				{/* 결제 취소 */}
+				<CancelPayment />
+				<ReservationInfoContainer>
+					<Bold32Black>결제 정보</Bold32Black>
+				</ReservationInfoContainer>
+			</DetailContainer>
+		</PageContainer>
+	);
+};
+
+export default PaymentHistoryDetail;

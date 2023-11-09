@@ -150,4 +150,51 @@ export interface TermsInterface {
 	content: Array<Term>;
 }
 
+export interface PaymentDetailInterface {
+	paymentDetailTopItemInfoResponseDto: {
+		reservationNumber: string;
+		itemName: string;
+		itemImage: string;
+		travelStartDate: string;
+		travelEndDate: string;
+	};
+	paymentDetailInfoResponseDto: {
+		bookerName: string;
+		bookerBirthDay: string;
+		bookerFirstNameEN: string;
+		bookerLastNameEN: string;
+		bookerPhoneNumber: string;
+		bookerEmail: string;
+		guestName: string;
+		guestBirthDay: string;
+		guestFirstNameEN: string;
+		guestLastNameEN: string;
+		guestPhoneNumber: string;
+		guestEmail: string;
+		additionalRequest: string;
+	};
+	paymentDetailItemResponseDto: {
+		itemName: string;
+		reservationDateTime: string;
+		itemPayPrice: number;
+		informationResponseDtoList: [
+			{
+				ticketName: string;
+				ticketSubName: string;
+				ticketPrice: number;
+				ticketCount: number;
+			}
+		];
+		itemIntroduceInformation: string;
+	};
+	paymentDetailMatterResponseDto: {
+		reservationNumber: string;
+		reservationDateTime: string;
+		itemAdditionalInformation: string;
+	};
+	paymentCancelRuleResponseDto: {
+		content: string;
+	};
+}
+
 // commit용 주석

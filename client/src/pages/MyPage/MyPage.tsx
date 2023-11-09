@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import MainComponent from "../../MainComponent";
 import { MyPageContainer } from "./styles";
 
+
 export default function MyPage() {
 	const [loggedIn, setLoggedIn] = useRecoilState(isLoggedIn);
 	const navigate = useNavigate();

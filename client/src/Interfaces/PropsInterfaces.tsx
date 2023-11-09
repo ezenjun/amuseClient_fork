@@ -176,4 +176,19 @@ export interface ChipProps extends IProps {
 	color: string;
 }
 
+export interface PaymentInformationProps {
+	bookerName: string;
+	bookerBirthDay: string;
+	bookerFirstNameEN: string;
+	bookerLastNameEN: string;
+	bookerPhoneNumber: string;
+	bookerEmail: string;
+	guestName: string;
+	guestBirthDay: string;
+	guestFirstNameEN: string;
+	guestLastNameEN: string;
+	guestPhoneNumber: string;
+	guestEmail: string;
+	additionalRequest: string;
+}
 // commit용 주석
