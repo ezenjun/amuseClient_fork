@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import axios from "axios";
 import _ from "lodash";
 // import logoimage from "../MainPage/MainImgs/logo.png";
-import logoimage from "../MainPage/MainImgs/amuse_logo.png";
+import logoimage from "../../assets/Images/amuse_logo.png";
 import { useRecoilState } from "recoil";
 import { isLoggedIn } from "../../atoms";
 import { useCookies } from "react-cookie";

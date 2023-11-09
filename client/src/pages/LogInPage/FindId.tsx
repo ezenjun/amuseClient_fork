@@ -32,7 +32,6 @@ const FindId: React.FC<FindIdProps> = () => {
                     setName(userInfo.name);
                     setBirth(birthWithoutHyphens);
                     setPhone(userInfo.phone);
-                    console.log(userInfo);
                 })
                 .catch((error) => {
                     console.log("정보 없음");
@@ -41,17 +40,19 @@ const FindId: React.FC<FindIdProps> = () => {
     }, [impUidData]);
 
     // 아이디 찾기 api
-    // useEffect(() => {
-    //     if (birth && name && phone) {
-    //         axios.get(`${process.env.REACT_APP_AMUSE_API}/api/v1/user/search/id?name=${name}&birthday=${birth}&gender=MAN`)
-    //             .then((response) => {
-    //                 console.log(response.data.data);
-    //             })
-    //             .catch((error) => {
-    //                 console.log(error.message);
-    //             });
-    //     }
-    // })
+    const [ids, setIds] = useState([]);
+
+    useEffect(() => {
+        if (name && birth && phone) {
+            axios.get(`${process.env.REACT_APP_AMUSE_API}/api/v1/user/search/id?name=${name}&birthday=${birth}&phonenumber=${phone}`)
+                .then((response) => {
+                    setIds(response.data.data.ids);
+                })
+                .catch((error) => {
+                    console.log(error.message);
+                });
+        }
+    }, [name, birth, phone])
 
     return (
         <MainComponent>
@@ -61,8 +62,8 @@ const FindId: React.FC<FindIdProps> = () => {
                     <div>
                         <S.FindTitle>아이디 찾기</S.FindTitle>
                         <S.FirstText>회원님!<br /> 아이디를 찾았어요.</S.FirstText>
-                        <S.SecondText>회원님의 정보로 1개의 아이디를 찾았어요.</S.SecondText>
-                        <S.ResultBox>찾은 아이디 작성될 곳</S.ResultBox>
+                        <S.SecondText>회원님의 정보로 {ids.length}개의 아이디를 찾았어요.</S.SecondText>
+                        <S.ResultBox>{ids.join(', ')}</S.ResultBox>
                         <S.ContinueButton onClick={navigateToLogin}>확인</S.ContinueButton>
                     </div>
                 )}
