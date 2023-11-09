@@ -30,7 +30,11 @@ export const reset = css`
 			font-size: 15px; /* Adjust as needed */
 		}
 
-<<<<<<< HEAD
+		@media (min-width: 1024px) and (max-width: 1140px) {
+			/* Tablet styles */
+			font-size: 15px; /* Adjust as needed */
+		}
+
 		@media (min-width: 1141px) {
 			/* Desktop styles */
 			font-size: 16px; /* Adjust as needed */
@@ -40,22 +44,6 @@ export const reset = css`
 		margin: 0;
 		padding: 0;
 		font-family: Pretendard, -apple-system, sans-serif, Roboto;
-=======
-    @media (min-width: 1024px) and (max-width: 1140px) {
-      /* Tablet styles */
-      font-size: 15px; /* Adjust as needed */
-    }
-
-    @media (min-width: 1141px) {
-      /* Desktop styles */
-      font-size: 16px; /* Adjust as needed */
-    }
-  }
-  body {
-    margin: 0;
-    padding: 0;
-    font-family: Pretendard, -apple-system, sans-serif, Roboto;
->>>>>>> 2666ef4109603ae999c3b1d82a4081e3ffb3df48
 
 		-ms-user-select: none;
 		-moz-user-select: -moz-none;
@@ -135,8 +123,8 @@ export const Common = {
 } as const;
 
 export const Render = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-top: 25px;
-  gap: 50px;
+	display: flex;
+	flex-direction: column;
+	margin-top: 25px;
+	gap: 50px;
 `;

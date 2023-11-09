@@ -11,6 +11,7 @@ export default Chips;
 
 export const ChipContainer = styled.div<{ color: string }>`
 	display: flex;
+	width: min-content;
 	padding: 0.1875rem 0.625rem;
 	background-color: rgba(230, 0, 61, 15%);
 	border-radius: 0.5rem;

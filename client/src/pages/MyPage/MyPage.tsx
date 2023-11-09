@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 import MyPagelist from "./MyPageList";
 
@@ -11,6 +11,17 @@ import { MyPageContainer } from "./styles";
 export default function MyPage() {
 	const [loggedIn, setLoggedIn] = useRecoilState(isLoggedIn);
 	const navigate = useNavigate();
+	const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+
+	const handleResize = () => {
+		setScreenWidth(window.innerWidth);
+		window.removeEventListener("resize", handleResize);
+	};
+
+	useEffect(() => {
+		handleResize();
+		window.addEventListener("resize", handleResize);
+	}, [window.innerWidth, screenWidth]);
 
 	useEffect(() => {
 		if (!loggedIn) {
@@ -22,7 +33,7 @@ export default function MyPage() {
 	return (
 		<MainComponent>
 			<MyPageContainer>
-				<MyPagelist />
+				{screenWidth > 768 && <MyPagelist />}
 				<Outlet />
 			</MyPageContainer>
 		</MainComponent>

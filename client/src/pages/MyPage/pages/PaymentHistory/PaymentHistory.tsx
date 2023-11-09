@@ -59,7 +59,6 @@ const PaymentHistory = (props: Props) => {
 					});
 
 					setPaymentHistoryList(groupedData);
-					console.log(groupedData);
 				})
 				.catch((err) => {
 					console.log(err);
