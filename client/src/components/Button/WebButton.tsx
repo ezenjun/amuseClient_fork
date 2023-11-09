@@ -11,6 +11,8 @@ export const WebButton = styled.button<{
 	onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }>`
 	display: flex;
+	flex-grow: 0;
+	height: min-content;
 	justify-content: center;
 	align-items: center;
 	width: ${(props) => (props.width ? `${props.width * 0.0625}rem` : "100%")};
@@ -29,6 +31,8 @@ export const WebButton = styled.button<{
 				return Common.colors.lightGray;
 			case "gray":
 				return Common.colors.gray;
+			case "gray2":
+				return Common.colors.gray2;
 			default:
 				return "transparent";
 		}
@@ -53,5 +57,7 @@ export const WebButton = styled.button<{
 	font-size: ${(props) => props.fontSize * 0.0625}rem;
 	font-weight: bold;
 	white-space: nowrap;
+	box-sizing: border-box;
+
 	cursor: pointer;
 `;

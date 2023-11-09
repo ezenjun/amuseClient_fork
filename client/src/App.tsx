@@ -21,6 +21,9 @@ import SignUpAmuse from "./pages/SignUpPage/SignUpAmuse";
 import SearchPageComp from "./pages/SubPage/SearchPage/SearchPageComp";
 import OrderCompletePage from "./pages/DetailPage/OrderCompletePage/OrderCompletePage";
 import PaymentDetailPage from "./pages/DetailPage/PaymentDetailPage/PaymentDetailPage";
+import PaymentHistory from "./pages/MyPage/pages/PaymentHistory/PaymentHistory";
+import Likes from "./pages/MyPage/MyPage/Likes";
+import Settings from "./pages/MyPage/MyPage/Settings/Settings";
 
 function App() {
   const [cookies, setCookie, deleteCookie] = useCookies(["__jwtkid__"]);
@@ -90,9 +93,12 @@ function App() {
             <Route path="/SignUp" element={<SignUp />}></Route>
             <Route path="/SignUpAmuse" element={<SignUpAmuse />}></Route>
             <Route path="/MyPage" element={<MyPage />}>
-              <Route path="settings" element={<MyPage />} />
-              <Route path="like" element={<MyPage />} />
-              <Route path="payment" element={<MyPage />} />
+              <Route path="settings" element={<Settings />} />
+              <Route path="like" element={<Likes />} />
+              <Route
+								path="payment-history"
+								element={<PaymentHistory />}
+							/>
             </Route>
             <Route path="/Review/:id" element={<Review />}></Route>
             <Route path="/order" element={<OrderPage />}></Route>

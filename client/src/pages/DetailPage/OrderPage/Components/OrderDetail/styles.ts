@@ -7,7 +7,7 @@ export const OrderDetailContainer = styled.div`
 	height: 100%;
 	box-sizing: border-box;
 	gap: 4.6875rem;
-	padding-bottom: 2.5rem;
+	padding-bottom: 3.125rem;
 	.fullWidth {
 		grid-template-columns: 1fr;
 	}

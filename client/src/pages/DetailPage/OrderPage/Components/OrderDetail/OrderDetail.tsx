@@ -27,8 +27,8 @@ export const OrderDetail = ({ isLoading }: Props) => {
 		<OrderDetailContainer>
 			<ProductInfo />
 			<ReservationInfo />
-			{(selectedItem.itemType === "DomesticHotel" ||
-				selectedItem.itemType === "InternationalHotel") && (
+			{(selectedItem.itemType === "Domestic_Hotel" ||
+				selectedItem.itemType === "International_Hotel") && (
 				<GuestInfo />
 			)}
 			<AdditionalInfo />

@@ -4,6 +4,7 @@ import { Common, Pretendard } from "../../../styles";
 export const OrderPageContainer = styled.div`
 	display: flex;
 	flex-direction: column;
+	flex-shrink: 0;
 	width: 100%;
 	height: 100%;
 	box-sizing: border-box;
