@@ -1,29 +1,20 @@
-import { CategoryData } from "../../Interfaces/DataInterfaces";
-import Style from "../../pages/SubPage/SubPage.module.css";
-import ChildTitle from "../../pages/SubPage/SubtitleImgs/ChildTitle.jpg";
 import * as S from "./style";
 
-interface BannerProps {
-  categoryData: CategoryData | null;
-  categoryImg: string | undefined;
-  mainDescription: string | undefined;
-  subDescription: string | undefined;
+export interface BannerProps {
+  title: string;
+  content: string;
+  bannerUrl: string;
+  bannerLink: string;
 }
 
-function Banners(categoryData: BannerProps) {
+function Banner({ title, content, bannerUrl, bannerLink }: BannerProps) {
+  const handleClick = () => window.open(bannerLink, "_blank", "noopener");
+
   return (
-    categoryData && (
-      <div className={Style["subTitleContainer"]}>
-        <S.Image
-          className={Style["mainPicture.image"]}
-          src={categoryData.categoryImg ? categoryData.categoryImg : ChildTitle}
-          alt="Title img"
-        />
-        <h2 className={Style["subTitle"]}>{categoryData.mainDescription}</h2>
-        <h3 className={Style["subContent"]}>{categoryData.subDescription}</h3>
-      </div>
-    )
+    <S.Banner>
+      <S.Image src={bannerUrl} onClick={handleClick} />
+    </S.Banner>
   );
 }
 
-export default Banners;
+export default Banner;

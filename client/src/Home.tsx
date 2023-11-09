@@ -2,33 +2,33 @@ import React, { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import { CategoryData } from "./Interfaces/DataInterfaces";
 import { ListProps, BannerProps } from "./Interfaces/PropsInterfaces";
-import { useCategoryContext } from "./components/Headers/Contexts/CategoryContext";
+import { useCategoryContext } from "./components/Header/Contexts/CategoryContext";
 import _ from "lodash";
-import Style from "./pages/SubPage/SubPage.module.css";
 import Fade from "./Fade";
 import axios from "axios";
-import ChildTitle from "./pages/SubPage/SubtitleImgs/ChildTitle.jpg";
-import SubLists from "./pages/SubPage/components/subLists";
-import SubBanners from "./pages/SubPage/SubBanners";
-import SubTiles from "./pages/SubPage/SubTiles";
-import MainComponent from "./MainComponent";
+import List from "./components/List";
 import Banner from "./components/Banner";
+import SubTiles from "./components/Tile/SubTiles";
+import MainComponent from "./MainComponent";
+import MainBanner from "./components/MainBanner";
+import * as S from "./styles";
+
+interface TileProps {
+  page_component_id: string;
+  type: string;
+  title: string;
+  tileCount: number;
+  tileList: tileList[];
+}
+
+interface tileList {
+  tile_id: number;
+  tile_name: string;
+  tile_images: string;
+  itemInfos: [];
+}
 
 function Home() {
-  interface TileProps {
-    page_component_id: string;
-    type: string;
-    title: string;
-    tileCount: number;
-    tileList: tileList[];
-  }
-
-  interface tileList {
-    tile_id: number;
-    tile_name: string;
-    tile_images: string;
-    itemInfos: [];
-  }
   const { categoriesInfo } = useCategoryContext();
   const [apiKeyNumber, setApiKeyNumber] = useState(0);
   const [categoryData, setCategoryData] = useState<CategoryData | null>(null);
@@ -41,7 +41,6 @@ function Home() {
     }
     if (categoriesInfo?.length) {
       const info = categoriesInfo[infoIndex];
-      // console.log(info);
       setApiKeyNumber(info.categoryId);
     }
   }, [categoriesInfo]);
@@ -51,7 +50,6 @@ function Home() {
       .get(`${process.env.REACT_APP_AMUSE_API}/main/category`)
       .then((response) => {
         const hashtagAll = response.data.data.categories;
-
         let matchedIndex = -1;
         for (let i = 0; i < hashtagAll.length; i++) {
           if (hashtagAll[i].categoryId === apiKeyNumber) {
@@ -96,10 +94,9 @@ function Home() {
         setItems(items);
         const types = items.map((item: any) => item.type);
         setComTypes(types);
-        // console.log("컴포넌트", response.data.data);
       })
       .catch((error) => {
-        // console.log("subpage 컴포넌트 연결 실패");
+        console.log("subpage 컴포넌트 연결 실패");
       });
   };
 
@@ -107,7 +104,7 @@ function Home() {
     if (type === "리스트") {
       const listItem: ListProps = Items[index];
       return (
-        <SubLists
+        <List
           key={index}
           title={listItem.title}
           itemInfos={listItem.itemInfos}
@@ -126,7 +123,7 @@ function Home() {
     } else if (type === "배너") {
       const bannerItem: BannerProps = Items[index];
       return (
-        <SubBanners
+        <Banner
           key={index}
           title={bannerItem.title}
           content={bannerItem.content}
@@ -141,13 +138,13 @@ function Home() {
   return (
     <MainComponent>
       <Fade>
-        <Banner
+        <MainBanner
           categoryData={categoryData}
           categoryImg={categoryData?.categoryImg}
           mainDescription={categoryData?.mainDescription}
           subDescription={categoryData?.subDescription}
         />
-        <div className={Style["App"]}>{renderedComponents}</div>
+        <S.Render>{renderedComponents}</S.Render>
       </Fade>
     </MainComponent>
   );
