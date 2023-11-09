@@ -1,5 +1,6 @@
 import { IProps } from "./Interfaces/PropsInterfaces";
-<<<<<<< HEAD
+import Header from "./components/Header";
+import Footer from "./components/Footer/Footer";
 import styled from "@emotion/styled";
 
 const MainComponent = ({ children }: IProps) => {
@@ -10,19 +11,6 @@ const MainComponent = ({ children }: IProps) => {
 			{/* <Footer /> */}
 		</MainComponentStyle>
 	);
-=======
-import Header from "./components/Header";
-import Footer from "./components/Footer/Footer";
-
-const MainComponent = ({ children }: IProps) => {
-  return (
-    <div>
-      <Header />
-      {children}
-      {/* <Footer /> */}
-    </div>
-  );
->>>>>>> 2666ef4109603ae999c3b1d82a4081e3ffb3df48
 };
 export default MainComponent;
 
