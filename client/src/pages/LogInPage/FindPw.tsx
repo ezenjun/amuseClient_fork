@@ -96,7 +96,6 @@ const FindPw: React.FC<FindPwProps> = (props) => {
             axios
                 .get(`${process.env.REACT_APP_AMUSE_API}/api/v1/user/check/duplicate?name=${name}&birthday=${birth}&phonenumber=${phone}`)
                 .then((response) => {
-                    console.log(response.data.data);
                     const notExist =  response.data.data;
                     if (notExist === "가입된 사용자가 아닙니다.") {
                         movePage('/');
@@ -121,8 +120,6 @@ const FindPw: React.FC<FindPwProps> = (props) => {
 
         axios.post(apiEndpoint, requestBody)
             .then((response) => {
-                console.log('변경 성공');
-                console.log(response.data.data);
                 openModal();
             })
             .catch((error) => {

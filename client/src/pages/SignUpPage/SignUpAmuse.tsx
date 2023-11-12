@@ -1,14 +1,12 @@
 import React, { ChangeEvent, useEffect, useState } from "react";
-import { useRecoilState } from "recoil";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import MainComponent from "../../MainComponent";
 import Modal from "react-modal";
 import CloseIcon from "../LogInPage/Icons/close_icon.png";
 import InfoForm from "./InfoForm";
 import * as S from "./SignUpAmuseStyle";
 import Certification from "../LogInPage/Certification";
-import { impUid } from "../../atoms";
+
 
 const SignUpAmuse: React.FC = () => {
     const [allAgreed, setAllAgreed] = useState<boolean>(false);
@@ -61,10 +59,6 @@ const SignUpAmuse: React.FC = () => {
         setName(name);
         setCurrentStep(currentStep + 1);
     };
-    // const handleNextClickId = (impUid: React.SetStateAction<string | null>) => {
-    //     setImpUid(impUid);
-    //     setCurrentStep(currentStep + 1);
-    // }
 
     const handleContinueClick = () => {
         movePage("/LogIn");

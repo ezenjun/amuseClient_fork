@@ -90,7 +90,6 @@ const InfoForm: React.FC<InfoFormProps> = (props) => {
             axios
                 .get(`${process.env.REACT_APP_AMUSE_API}/api/v1/user/check/duplicate?name=${name}&birthday=${birth}&phonenumber=${phone}`)
                 .then((response) => {
-                    console.log(response.data.data);
                     if (response.data.data === "이미 가입된 사용자입니다.") {
                         openModal();
                     }
@@ -133,9 +132,7 @@ const InfoForm: React.FC<InfoFormProps> = (props) => {
             axios.get(`${process.env.REACT_APP_AMUSE_API}/api/v1/auth/user/id/duplicate/check?id=${id}`)
                 .then((response) => {
                     const result = response.data.data;
-                    console.log(result);
                     if (result === "duplicate") {
-                        console.log("중복되는 아이디가 존재합니다.");
                         setErrorText("중복된 아이디입니다.");
                         setIsValidId(false);
                         setCheckId(false);
@@ -189,7 +186,6 @@ const InfoForm: React.FC<InfoFormProps> = (props) => {
 
     // 회원 가입 정보 POST
     const handleClickBtn = () => {
-        // const birthWithoutHyphens = birth.replace(/-/g, '');
         const requestBody = {
             "id": id,
             "email": email,
@@ -204,7 +200,6 @@ const InfoForm: React.FC<InfoFormProps> = (props) => {
         axios.post(apiEndpoint, requestBody)
             .then((response) => {
                 console.log('가입 성공');
-                console.log(response.data);
                 props.onNextStep(name);
             })
             .catch((error) => {
@@ -222,7 +217,6 @@ const InfoForm: React.FC<InfoFormProps> = (props) => {
                 <div>
                     <S.InputTitle>아이디</S.InputTitle>
                     <S.FlexBox>
-                        {/* <TextInput disable={id !== "" && isValidId && checkId} value={id} onInputChange={handleChangeId} labelText="" placeText="아이디" inputType="text" isValid={isValidId} errorText={errorText} width="560px" margin="16px" /> */}
                         <TextInput disable={false} value={id} onInputChange={handleChangeId} labelText="" placeText="아이디" inputType="text" isValid={isValidId} errorText={errorText} width="560px" margin="16px" />
                         <S.InnBtn onClick={handleDuplicateClick}>중복 확인</S.InnBtn>
                     </S.FlexBox>

@@ -9,13 +9,6 @@ import * as S from "./SignUpStyle";
 
 export default function SignUp(props: any) {
   const redirectU = `${process.env.REACT_APP_REDIRECT_URL}LoginAgree`
-  // const redirectU = `${process.env.REACT_APP_REDIRECT_URL}`
-
-  // const handleSignupNaverClick = () => {
-  //   window.location.href = '/LoginAgree';
-  //   window.location.href = `${process.env.REACT_APP_AMUSE_API}/oauth2/authorization/naver?redirect_uri=${redirectU}`;
-  // };
-
   
   return (
     <MainComponent>
@@ -33,11 +26,6 @@ export default function SignUp(props: any) {
             네이버 아이디로 회원가입
             <S.SnsLogo src={NaverIcon} alt="네이버 로고" />
           </S.SignupButton>
-          {/* <S.SignupButton
-            className="signup_naver" onClick={handleSignupNaverClick}>
-            네이버 아이디로 회원가입
-            <S.SnsLogo src={NaverIcon} alt="네이버 로고" />
-          </S.SignupButton> */}
           <S.SignupButton
             className="signup_kakao"
             href={`${process.env.REACT_APP_AMUSE_API}/oauth2/authorization/kakao?redirect_uri=${redirectU}`}

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import SingleSignOn from "./SingleSignOn";
-import styled from 'styled-components';
 import { useRecoilState } from "recoil";
 import { impUid, isVisible } from "../../atoms";
 import Modal from "react-modal";
@@ -9,7 +8,6 @@ import * as S from "./CertificationStyle";
 import * as M from "../SignUpPage/SignUpAmuseStyle";
 
 const Certification: React.FC = () => {
-    const [checkAuthCode, setCheckAuthCode] = useState<boolean>(false);
     const [impUidData, setImpUid] = useRecoilState(impUid);
 
     const handleButtonClick = async (event: { preventDefault: () => void; }) => {
@@ -21,7 +19,6 @@ const Certification: React.FC = () => {
         } catch (error) {
             console.error(error);
         }
-        setCheckAuthCode(true);
     };
 
     // 인증 완료 모달 창

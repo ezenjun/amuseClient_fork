@@ -38,7 +38,6 @@ const LoginAgree: React.FC = () => {
             if (token === null) {
                 return;
             } else {
-                console.log("aaaaaaaaaaaaaaaaaaaa");
                 const expires = moment().add("8", "h").toDate();
                 setCookie("__jwtkid__", token, { expires });
                 setLoggedIn(true);
@@ -61,9 +60,7 @@ const LoginAgree: React.FC = () => {
     }, [cookies.__jwtkid__]);
 
 
-
     const getUserInfoAsToken = async () => {
-
         axios
             .get(`${process.env.REACT_APP_AMUSE_API}/api/v1/user/info`, {
                 headers: {
@@ -73,19 +70,15 @@ const LoginAgree: React.FC = () => {
             })
             .then((response) => {
                 let userData = response.data.data
-                console.log(userData)
                 setCookie("__usrN__", response.data.data?.name);
                 if (userData?.personalInformationAgreement === true) {
                     movePage("/");
                 } else {
-                    console.log("ddddddd");
                     setIsShow(true);
                 }
 
             })
             .catch((err) => {
-                console.log('qqqqqqqqqqqqqqqqqqq');
-                console.log(cookies.__jwtkid__);
                 console.log(err);
             });
     };
@@ -93,7 +86,6 @@ const LoginAgree: React.FC = () => {
 
     const submitAgree = async () => {
         const token = cookies["__jwtkid__"]
-        console.log(token);
         const requestBody = {
             advertisement_true: marketingInfoAgreed,
             personalInformationAgreement: personalInfoAgreed,
@@ -108,7 +100,6 @@ const LoginAgree: React.FC = () => {
                 "Authorization": `${token}`,
             },
         }).then((response) => {
-            console.log(response)
             movePage("/");
         }).catch((err) => {
             console.log(err);
@@ -204,43 +195,6 @@ const LoginAgree: React.FC = () => {
                     </AgreeButton>
                 </LoginAgreeContent>
             </LoginAgreeBody>
-
-
-            // <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
-            //     <CancelBtn onClick={() => { handleLogout() }}>취소</CancelBtn>
-            //     <div style={{
-            //         width: "90%", maxWidth: "348px", height: "auto", display: "flex", flexDirection: "column", justifyContent: "center",
-            //         alignItems: "center", textAlign: "center", fontSize: "18px", fontFamily: "yg-jalnan"
-            //     }}>
-            //         <img className="logo_mobile" style={{ marginTop: "28px" }} src={logoimage} alt="Amuse Travel Logo" />
-            //         <div style={{ marginTop: "20px" }}>{"모두를 위한 여행,"}</div>
-            //         <div>{"어뮤즈 트래블에 오신것을 "}</div>
-            //         <div>{"환영합니다"}</div>
-            //     </div>
-            //     <div style={{ width: "90%", maxWidth: "348px", height: "120px", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", textAlign: "center" }}>
-            //         <div>
-            //             {"당사의 서비스를 이용하시기 위해서는"}
-            //             <br />
-            //             {"아래 약관에 대한 동의가 필요합니다."}
-            //         </div>
-            //     </div>
-            //     <div style={{ border: "2px solid #828282", width: "90%", maxWidth: "360px", minHeight: "120px" }}>
-            //         <div style={{ display: "flex", flexDirection: "row", alignItems: "center", height: "28px", marginTop: "20px" }}>
-            //             <input type="checkbox" style={{ margin: "0px", marginLeft: 24 }} value={privacy} onChange={() => { setPrivacy(!privacy) }} />
-            //             <div style={{ marginLeft: 24, width: "calc(100% - 100px)" }}>{"개인정보 활용동의 (필수)"}</div>
-            //             <ReadText>보기</ReadText>
-            //         </div>
-            //         <div style={{ display: "flex", flexDirection: "row", alignItems: "center", height: "28px", marginTop: "20px" }}>
-            //             <input type="checkbox" style={{ margin: "0px", marginLeft: 24 }} value={marketingAgree} onChange={() => { setMarketingAgree(!marketingAgree) }} />
-            //             <div style={{ marginLeft: 24, width: "calc(100% - 100px)" }}>{"마케팅정보 활용동의 (선택)"}</div>
-            //             <ReadText>보기</ReadText>
-            //         </div>
-            //     </div>
-            //     <AgreeButton onClick={() => { submitAgree() }} disabled={!privacy}>
-            //         {"동의하고 계속하기"}
-            //     </AgreeButton>
-            // </div>
-
         )
     }
 }

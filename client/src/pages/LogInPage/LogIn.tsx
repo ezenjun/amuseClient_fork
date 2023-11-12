@@ -31,12 +31,10 @@ const Login: React.FC = () => {
 
 	const handleChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setEmail(e.target.value);
-		console.log(e.target.value);
 	};
 
 	const handleChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setPassword(e.target.value);
-		console.log(e.target.value);
 	};
 
 
