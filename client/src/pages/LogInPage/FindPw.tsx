@@ -6,6 +6,7 @@ import PasswordInput from "./PasswordInput";
 import Certification from "./Certification";
 import { useRecoilState } from "recoil";
 import { impUid, isVisible } from "../../atoms";
+import axios from "axios";
 import * as S from "./FindStyle";
 import * as M from "./CertificationStyle";
 
@@ -67,10 +68,66 @@ const FindPw: React.FC<FindPwProps> = (props) => {
         movePage("/LogIn");
     };
 
+    // 인증된 정보 가져오기
+    const [impUidData, setImpUid] = useRecoilState(impUid);
+    const [birth, setBirth] = useState<string>("");
+    const [name, setName] = useState<string>("");
+    const [phone, setPhone] = useState<string>("");
+    useEffect(() => {
+        if (impUidData !== null) {
+            axios
+                .get(`${process.env.REACT_APP_AMUSE_API}/api/v1/user/verification/portone?imp_uid=${impUidData}`)
+                .then((response) => {
+                    let userInfo = response.data.data;
+                    const birthWithoutHyphens = userInfo.birth.replace(/-/g, '');
+                    setName(userInfo.name);
+                    setBirth(birthWithoutHyphens);
+                    setPhone(userInfo.phone);
+                })
+                .catch((error) => {
+                    console.log("정보 없음");
+                });
+        }
+    }, [impUidData]);
+
+    // 가입 여부 확인 api
+    useEffect(() => {
+        if (impUidData) {
+            axios
+                .get(`${process.env.REACT_APP_AMUSE_API}/api/v1/user/check/duplicate?name=${name}&birthday=${birth}&phonenumber=${phone}`)
+                .then((response) => {
+                    console.log(response.data.data);
+                    const notExist =  response.data.data;
+                    if (notExist === "가입된 사용자가 아닙니다.") {
+                        movePage('/');
+                        alert("계정이 없습니다 회원가입을 진행해 주세요.");
+                    }
+                })
+                .catch((error) => {
+                    console.log(error.message);
+                })
+        }
+    }, [name, birth, phone])
+
     // 변경 버튼 클릭 시 실행
     const handleClick = () => {
-        // 비번변경 post 하기
-        openModal();
+        const requestBody = {
+            "userName": name,
+            "birthday": birth,
+            "phoneNumber": phone,
+            "password_for_change": password,
+        };
+        const apiEndpoint = `${process.env.REACT_APP_AMUSE_API}/api/v1/auth/user/password/change`;
+
+        axios.post(apiEndpoint, requestBody)
+            .then((response) => {
+                console.log('변경 성공');
+                console.log(response.data.data);
+                openModal();
+            })
+            .catch((error) => {
+                console.log(error);
+            })
     }
 
     return (

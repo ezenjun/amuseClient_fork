@@ -17,6 +17,10 @@ const FindId: React.FC<FindIdProps> = () => {
         movePage("/LogIn");
     };
 
+    const navigateToSignUp = () => {
+        movePage("/SignUp");
+    };
+
     // 인증된 정보 가져오기
     const [impUidData, setImpUid] = useRecoilState(impUid);
     const [birth, setBirth] = useState<string>("");
@@ -40,16 +44,16 @@ const FindId: React.FC<FindIdProps> = () => {
     }, [impUidData]);
 
     // 아이디 찾기 api
-    const [ids, setIds] = useState([]);
+    const [id, setId] = useState<string>("");
 
     useEffect(() => {
         if (name && birth && phone) {
             axios.get(`${process.env.REACT_APP_AMUSE_API}/api/v1/user/search/id?name=${name}&birthday=${birth}&phonenumber=${phone}`)
                 .then((response) => {
-                    setIds(response.data.data.ids);
+                    setId(response.data.data.id);
                 })
                 .catch((error) => {
-                    console.log(error.message);
+                    console.log(error.response.data.code);
                 });
         }
     }, [name, birth, phone])
@@ -61,10 +65,22 @@ const FindId: React.FC<FindIdProps> = () => {
                 {!isShow && (
                     <div>
                         <S.FindTitle>아이디 찾기</S.FindTitle>
-                        <S.FirstText>회원님!<br /> 아이디를 찾았어요.</S.FirstText>
-                        <S.SecondText>회원님의 정보로 {ids.length}개의 아이디를 찾았어요.</S.SecondText>
-                        <S.ResultBox>{ids.join(', ')}</S.ResultBox>
-                        <S.ContinueButton onClick={navigateToLogin}>확인</S.ContinueButton>
+                        {id && (
+                            <div>
+                                <S.FirstText>회원님!<br /> 아이디를 찾았어요.</S.FirstText>
+                                <S.SecondText>회원님의 정보로 아이디를 찾았어요.</S.SecondText>
+                                <S.ResultBox>{id}</S.ResultBox>
+                                <S.ContinueButton onClick={navigateToLogin}>확인</S.ContinueButton>
+                            </div>
+                        )}
+                        {!id && (
+                            <div>
+                                <S.FirstText>가입한 로그인 정보가 없습니다.<br />회원가입을 통해 더 다양한 서비스를 만나보세요!</S.FirstText>
+                                <S.SecondText></S.SecondText>
+                                <S.ResultBox></S.ResultBox>
+                                <S.ContinueButton onClick={navigateToSignUp}>회원가입 하기</S.ContinueButton>
+                            </div>
+                        )}
                     </div>
                 )}
             </S.FindBody>

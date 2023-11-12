@@ -79,9 +79,9 @@ const LoginAgree: React.FC = () => {
     //     movePage("/");
     // };
 
-    useEffect(() => {
-        getUserInfoAsToken()
-    }, [])
+    // useEffect(() => {
+    //     getUserInfoAsToken()
+    // }, [])
 
 
 

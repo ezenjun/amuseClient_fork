@@ -6,6 +6,7 @@ import { useRecoilState } from "recoil";
 import { impUid, isVisible } from "../../atoms";
 import Modal from "react-modal";
 import * as S from "./CertificationStyle";
+import * as M from "../SignUpPage/SignUpAmuseStyle";
 
 const Certification: React.FC = () => {
     const [checkAuthCode, setCheckAuthCode] = useState<boolean>(false);
@@ -42,34 +43,37 @@ const Certification: React.FC = () => {
             <S.SingleSignBtn onClick={handleButtonClick}>간편인증</S.SingleSignBtn>
 
             <div className="modal">
-                <Modal
-                    isOpen={isModalOpen}
-                    onRequestClose={closeModal}
-                    style={{
-                        content: {
-                            top: "50%",
-                            left: "50%",
-                            transform: "translate(-50%, -50%)",
-                            backgroundColor: "#FFF",
-                            width: "300px",
-                            height: "170px",
-                            borderRadius: "8px",
-                            padding: "0",
-                        },
-                        overlay: {
-                            backgroundColor: "rgba(0, 0, 0, 0.5)",
-                            width: "100%",
-                            height: "100%",
-                            transition: "opacity 0.3s ease-out",
-                        },
-                    }}
-                >
-                    <div className="complete_modal">
-                        <S.ModalContent>본인인증이<br />완료되었습니다.</S.ModalContent>
-                        <S.ModalBtn onClick={closeModal}>확인</S.ModalBtn>
-                    </div>
-                </Modal>
-            </div>
+                    <Modal
+                        isOpen={isModalOpen}
+                        onRequestClose={closeModal}
+                        style={{
+                            content: {
+                                top: "50%",
+                                left: "50%",
+                                transform: "translate(-50%, -50%)",
+                                backgroundColor: "#FFF",
+                                width: "754px",
+                                height: "389px",
+                                padding: "40px 43px"
+                            },
+                            overlay: {
+                                backgroundColor: "rgba(0, 0, 0, 0.5)",
+                                width: "100%",
+                                height: "100%",
+                                transition: "opacity 0.3s ease-out",
+                            },
+                        }}
+                    >
+                        <div className="agree_modal">
+                            <M.ModalHeader>
+                                <M.ModalTitle>본인 인증이 완료되었습니다.</M.ModalTitle>
+                            </M.ModalHeader>
+                            <div className="agree_btn_box">
+                                <M.AgreeBtn onClick={closeModal}>확인</M.AgreeBtn>
+                            </div>
+                        </div>
+                    </Modal>
+                </div>
         </S.CertificationBody>
     );
 }

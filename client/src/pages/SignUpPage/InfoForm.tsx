@@ -5,13 +5,18 @@ import PasswordInput from "../LogInPage/PasswordInput";
 import axios from "axios";
 import { useRecoilState } from "recoil";
 import { impUid } from "../../atoms";
+import Modal from "react-modal";
 import * as S from "./InfoFormStyle";
+import * as M from "./SignUpAmuseStyle";
+
 
 interface InfoFormProps {
     onNextStep: (name: string) => void;
 }
 
 const InfoForm: React.FC<InfoFormProps> = (props) => {
+    const movePage = useNavigate();
+
     // 유효성 검사
     const nameValidation = (value: string): string => {
         return value.slice(0, 50);
@@ -68,8 +73,9 @@ const InfoForm: React.FC<InfoFormProps> = (props) => {
                 .get(`${process.env.REACT_APP_AMUSE_API}/api/v1/user/verification/portone?imp_uid=${impUidData}`)
                 .then((response) => {
                     let userInfo = response.data.data;
+                    const birthWithoutHyphens = userInfo.birth.replace(/-/g, '')
                     setName(userInfo.name);
-                    setBirth(userInfo.birth);
+                    setBirth(birthWithoutHyphens);
                     setPhone(userInfo.phone);
                 })
                 .catch((error) => {
@@ -78,6 +84,34 @@ const InfoForm: React.FC<InfoFormProps> = (props) => {
         }
     }, [impUidData]);
 
+    // 가입 여부 확인 api
+    useEffect(() => {
+        if (impUidData) {
+            axios
+                .get(`${process.env.REACT_APP_AMUSE_API}/api/v1/user/check/duplicate?name=${name}&birthday=${birth}&phonenumber=${phone}`)
+                .then((response) => {
+                    console.log(response.data.data);
+                    if (response.data.data === "이미 가입된 사용자입니다.") {
+                        openModal();
+                    }
+                })
+                .catch((error) => {
+                    console.log(error);
+                })
+        }
+    }, [name, birth, phone])
+
+    // 약관 동의 Modal
+    const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+
+    const openModal = () => {
+        setIsModalOpen(true);
+    };
+
+    const closeModal = () => {
+        setIsModalOpen(false);
+        movePage("/Login");
+    };
 
     // 아이디 중복 확인
     const [id, setId] = useState<string>("");
@@ -155,14 +189,14 @@ const InfoForm: React.FC<InfoFormProps> = (props) => {
 
     // 회원 가입 정보 POST
     const handleClickBtn = () => {
-        const birthWithoutHyphens = birth.replace(/-/g, '');
+        // const birthWithoutHyphens = birth.replace(/-/g, '');
         const requestBody = {
             "id": id,
             "email": email,
             "password": password,
             "name": name,
             "gender": gender,
-            "birthday": birthWithoutHyphens,
+            "birthday": birth,
             "phoneNumber": phone,
         };
         const apiEndpoint = `${process.env.REACT_APP_AMUSE_API}/api/v1/auth/user/signup`;
@@ -227,6 +261,41 @@ const InfoForm: React.FC<InfoFormProps> = (props) => {
             <S.NextButton onClick={handleClickBtn} disabled={isNextButtonDisabled}>
                 가입하기
             </S.NextButton>
+
+
+            {/* 가입된 경우 모달 창 */}
+            <div className="modal">
+                    <Modal
+                        isOpen={isModalOpen}
+                        onRequestClose={closeModal}
+                        style={{
+                            content: {
+                                top: "50%",
+                                left: "50%",
+                                transform: "translate(-50%, -50%)",
+                                backgroundColor: "#FFF",
+                                width: "754px",
+                                height: "389px",
+                                padding: "40px 43px"
+                            },
+                            overlay: {
+                                backgroundColor: "rgba(0, 0, 0, 0.5)",
+                                width: "100%",
+                                height: "100%",
+                                transition: "opacity 0.3s ease-out",
+                            },
+                        }}
+                    >
+                        <div className="agree_modal">
+                            <M.ModalHeader>
+                                <M.ModalTitle>이미 가입된 로그인 정보가 존재합니다.</M.ModalTitle>
+                            </M.ModalHeader>
+                            <div className="agree_btn_box">
+                                <M.AgreeBtn onClick={closeModal}>확인</M.AgreeBtn>
+                            </div>
+                        </div>
+                    </Modal>
+                </div>
         </div >
     );
 }

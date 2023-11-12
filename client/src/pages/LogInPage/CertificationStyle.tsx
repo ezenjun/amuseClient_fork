@@ -22,7 +22,7 @@ export const SingleSignBtn = styled.button`
     width: 754px;
     height: 60px;
     border-radius: 8px;
-    border: 1px solid #CCC;
+    background: #DFDFDF;
     color: var(--01, #464646);
     font-family: Pretendard;
     font-size: 16px;
