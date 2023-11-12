@@ -108,7 +108,7 @@ function Header() {
         setName(response.data.data?.name);
         const expires = moment().add("8", "h").toDate();
         setCookie("__usrN__", response.data.data?.name, { expires });
-        if (!userData?.advertisementTrue) {
+        if (!userData?.personalInformationAgreement) {
           setLoggedIn(false);
           movePage("/LoginAgree");
         }

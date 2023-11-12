@@ -16,11 +16,51 @@ import checkedIcon from './Icons/checked_icon.png';
 
 const LoginAgree: React.FC = () => {
     const movePage = useNavigate();
-    const [cookies, setCookie, removeCookie] = useCookies(["__jwtkid__"]);
+    const [cookies, setCookie, removeCookie] = useCookies([
+        "__jwtk__",
+        "__igjwtk__",
+        "__jwtkid__",
+        "__usrN__",
+        "accessToken",
+    ]);
     const [loggedIn, setLoggedIn] = useRecoilState(isLoggedIn);
     const [privacy, setPrivacy] = useState(false)
     const [marketingAgree, setMarketingAgree] = useState(false)
-    const [isShow, setIsShow] = useState(true)
+    const [isShow, setIsShow] = useState(false)
+
+
+    useEffect(() => {
+        let locationString = window.location.toString();
+        if (locationString.includes("http://localhost:3000/LoginAgree?access-token")) {
+            let token: string | null = new URL(window.location.href).searchParams.get(
+                "access-token"
+            );
+            if (token === null) {
+                return;
+            } else {
+                console.log("aaaaaaaaaaaaaaaaaaaa");
+                const expires = moment().add("8", "h").toDate();
+                setCookie("__jwtkid__", token, { expires });
+                setLoggedIn(true);
+                getUserInfoAsToken();
+            }
+        } else if (locationString.includes("amusetravel.wheelgo.net/")) {
+            let token: string | null = cookies.__jwtk__;
+            let igToken: string | null = cookies.__igjwtk__;
+            if (!token && token !== "undefined") {
+                return;
+            } else if (igToken && igToken?.length > 0 && token === igToken) {
+                return;
+            } else {
+                const expires = moment().add("8", "h").toDate();
+                setCookie("__jwtkid__", token, { expires });
+                setLoggedIn(true);
+                getUserInfoAsToken();
+            }
+        }
+    }, [cookies.__jwtkid__]);
+
+
 
     const getUserInfoAsToken = async () => {
 
@@ -34,14 +74,18 @@ const LoginAgree: React.FC = () => {
             .then((response) => {
                 let userData = response.data.data
                 console.log(userData)
+                setCookie("__usrN__", response.data.data?.name);
                 if (userData?.personalInformationAgreement === true) {
-                    movePage("/")
+                    movePage("/");
                 } else {
-                    setIsShow(true)
+                    console.log("ddddddd");
+                    setIsShow(true);
                 }
 
             })
             .catch((err) => {
+                console.log('qqqqqqqqqqqqqqqqqqq');
+                console.log(cookies.__jwtkid__);
                 console.log(err);
             });
     };
@@ -49,6 +93,7 @@ const LoginAgree: React.FC = () => {
 
     const submitAgree = async () => {
         const token = cookies["__jwtkid__"]
+        console.log(token);
         const requestBody = {
             advertisement_true: marketingInfoAgreed,
             personalInformationAgreement: personalInfoAgreed,
@@ -132,7 +177,7 @@ const LoginAgree: React.FC = () => {
                         </AllAgreeTitleBox>
                         <AllAgreeContent>
                             전체동의는 어뮤즈 트래블 서비스 동의를 포함하고 있습 니다.
-                            전체동의는 선택목적에 대한 동의를 포함하고 있으며, 
+                            전체동의는 선택목적에 대한 동의를 포함하고 있으며,
                             선택 목적에 대한 동의를 거부해도 서비스 이용이 가능합니다.
                         </AllAgreeContent>
                     </AllAgreeBox>
@@ -159,6 +204,7 @@ const LoginAgree: React.FC = () => {
                     </AgreeButton>
                 </LoginAgreeContent>
             </LoginAgreeBody>
+
 
             // <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
             //     <CancelBtn onClick={() => { handleLogout() }}>취소</CancelBtn>
