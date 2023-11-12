@@ -14,9 +14,10 @@ interface TextInputProps {
     onInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
     isValid?: boolean;
     errorText?: string;
+    inputId?: boolean;
 }
 
-const TextInput: React.FC<TextInputProps> = ({ disable, onBlur, onInputChange, labelText, placeText, value, inputType, isValid = true, errorText = "", width, margin }) => {
+const TextInput: React.FC<TextInputProps> = ({ disable, onBlur, onInputChange, labelText, placeText, value, inputType, isValid = true, errorText = "", width, margin, inputId }) => {
 
     return (
         <FormControl sx={{ mb: margin, width: width }} variant="outlined">
@@ -34,7 +35,7 @@ const TextInput: React.FC<TextInputProps> = ({ disable, onBlur, onInputChange, l
                 sx={{ padding: 0 }}
                 onBlur={onBlur}
                 error={!isValid}
-                helperText={!isValid ? errorText : ""}
+                helperText={!isValid ? errorText : (inputId ? "사용가능한 ID입니다." : "")}
             />
         </FormControl>
     );

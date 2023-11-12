@@ -127,13 +127,13 @@ export const WelcomeText = styled.div`
 
 // 약관동의 Modal style
 export const ModalHeader = styled.div`
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 `;
 
 export const ModalTitle = styled.h2`
-    color: var(--, #000);
+    color: #000;
     font-family: Pretendard;
     font-size: 32px;
     font-style: normal;

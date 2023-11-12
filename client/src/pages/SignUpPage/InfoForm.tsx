@@ -217,7 +217,7 @@ const InfoForm: React.FC<InfoFormProps> = (props) => {
                 <div>
                     <S.InputTitle>아이디</S.InputTitle>
                     <S.FlexBox>
-                        <TextInput disable={false} value={id} onInputChange={handleChangeId} labelText="" placeText="아이디" inputType="text" isValid={isValidId} errorText={errorText} width="560px" margin="16px" />
+                        <TextInput disable={false} value={id} onInputChange={handleChangeId} labelText="" placeText="아이디" inputType="text" isValid={isValidId} errorText={errorText} inputId={true} width="560px" margin="16px" />
                         <S.InnBtn onClick={handleDuplicateClick}>중복 확인</S.InnBtn>
                     </S.FlexBox>
                     <S.InputTitle>비밀번호</S.InputTitle>

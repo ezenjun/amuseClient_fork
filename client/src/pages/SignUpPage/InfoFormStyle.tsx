@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const InputTitle = styled.div`
-    color: var(--01, #464646);
+    color: #464646;
     font-family: Pretendard;
     font-size: 16px;
     font-style: normal;
