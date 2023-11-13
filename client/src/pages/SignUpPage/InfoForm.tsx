@@ -1,28 +1,23 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import "./InfoForm.scss";
 import TextInput from "../LogInPage/TextInput";
 import PasswordInput from "../LogInPage/PasswordInput";
 import axios from "axios";
+import { useRecoilState } from "recoil";
+import { impUid } from "../../atoms";
+import Modal from "react-modal";
+import * as S from "./InfoFormStyle";
+import * as M from "./SignUpAmuseStyle";
+
 
 interface InfoFormProps {
-    onNextStep: () => void;
-    imp_uid: string | null;
-}
-
-
-interface UserInfoData {
-    name: string;
-    phone: string;
-    gender: string;
-    birth: string;
+    onNextStep: (name: string) => void;
 }
 
 const InfoForm: React.FC<InfoFormProps> = (props) => {
-    const emailValidation = (value: string): string => {
-        return value.replace(/[^A-Za-z0-9_\.\-]+@[^A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/g, '');
-    };
+    const movePage = useNavigate();
 
+    // 유효성 검사
     const nameValidation = (value: string): string => {
         return value.slice(0, 50);
     };
@@ -35,13 +30,13 @@ const InfoForm: React.FC<InfoFormProps> = (props) => {
         return value.replace(/[^0-9]/g, '').slice(0, 11);
     };
 
+    // 비밀번호 확인
     const [password, setPassword] = useState<string>("");
     const [checkPassword, setCheckPassword] = useState<string>("");
-    const [isValidPassword, setIsValidPassword] = useState<boolean>(true);
-    const [isValidCheckPassword, setIsValidCheckPassword] = useState<boolean>(true);
+    const [isValidPassword, setIsValidPassword] = useState<boolean>(false);
+    const [isValidCheckPassword, setIsValidCheckPassword] = useState<boolean>(false);
 
     const handleChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setIsValidPassword(false);
         const newPassword = e.target.value;
         const isValid1 = /^(?=(?:[^A-Za-z]*[A-Za-z]){1,})(?=(?:\D*\d){1,})[A-Za-z\d\W_]{8,20}$/.test(newPassword);
         const isValid2 = /^(?=(?:[^A-Za-z]*[A-Za-z]){1,})(?=(?:[^\W_]*[\W_]){1,})[A-Za-z\d\W_]{8,20}$/.test(newPassword);
@@ -58,7 +53,6 @@ const InfoForm: React.FC<InfoFormProps> = (props) => {
     };
 
     const handleChangeCheckPassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setIsValidCheckPassword(false)
         if (password === e.target.value) {
             setCheckPassword(e.target.value);
             setIsValidCheckPassword(true)
@@ -68,66 +62,236 @@ const InfoForm: React.FC<InfoFormProps> = (props) => {
         }
     };
 
-    const handleInputChange = (value: string) => {
+    // 인증된 정보 가져오기
+    const [impUidData, setImpUid] = useRecoilState(impUid);
+    const [birth, setBirth] = useState<string>("");
+    const [name, setName] = useState<string>("");
+    const [phone, setPhone] = useState<string>("");
+    useEffect(() => {
+        if (impUidData !== null) {
+            axios
+                .get(`${process.env.REACT_APP_AMUSE_API}/api/v1/user/verification/portone?imp_uid=${impUidData}`)
+                .then((response) => {
+                    let userInfo = response.data.data;
+                    const birthWithoutHyphens = userInfo.birth.replace(/-/g, '')
+                    setName(userInfo.name);
+                    setBirth(birthWithoutHyphens);
+                    setPhone(userInfo.phone);
+                })
+                .catch((error) => {
+                    console.log("정보 없음");
+                });
+        }
+    }, [impUidData]);
+
+    // 가입 여부 확인 api
+    useEffect(() => {
+        if (impUidData) {
+            axios
+                .get(`${process.env.REACT_APP_AMUSE_API}/api/v1/user/check/duplicate?name=${name}&birthday=${birth}&phonenumber=${phone}`)
+                .then((response) => {
+                    if (response.data.data === "이미 가입된 사용자입니다.") {
+                        openModal();
+                    }
+                })
+                .catch((error) => {
+                    console.log(error);
+                })
+        }
+    }, [name, birth, phone])
+
+    // 약관 동의 Modal
+    const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+
+    const openModal = () => {
+        setIsModalOpen(true);
+    };
+
+    const closeModal = () => {
+        setIsModalOpen(false);
+        movePage("/Login");
+    };
+
+    // 아이디 중복 확인
+    const [id, setId] = useState<string>("");
+    const [isValidId, setIsValidId] = useState<boolean>(false);
+    const [checkId, setCheckId] = useState<boolean>(false);
+    const [errorText, setErrorText] = useState<string>("아이디를 입력해주세요");
+    const handleChangeId = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const checkInput = nameValidation(e.target.value);
+        setId(checkInput);
+        if (checkInput === "") {
+            setIsValidId(false);
+            setErrorText("아이디를 입력해주세요");
+        }
+    };
+
+    const handleDuplicateClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+        event.preventDefault();
+        if (id !== "") {
+            axios.get(`${process.env.REACT_APP_AMUSE_API}/api/v1/auth/user/id/duplicate/check?id=${id}`)
+                .then((response) => {
+                    const result = response.data.data;
+                    if (result === "duplicate") {
+                        setErrorText("중복된 아이디입니다.");
+                        setIsValidId(false);
+                        setCheckId(false);
+                        setId("");
+                    } else {
+                        console.log("사용 가능한 ID입니다.");
+                        setIsValidId(true);
+                        setCheckId(true);
+                    }
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        } else {
+            setIsValidId(false);
+            setErrorText("아이디를 입력해주세요");
+        }
+    };
+
+    // 이메일 확인
+    const [email, setEmail] = useState<string>("");
+    const [checkEmail, setCheckEmail] = useState<boolean>(false);
+    const emailValidation = (value: string): boolean => {
+        const emailRegex = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+$/;
+        return emailRegex.test(value);
+    };
+
+    const handleChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const inputValue = e.target.value;
+        const validatedEmail = emailValidation(inputValue);
+        setEmail(inputValue);
+        if (validatedEmail) {
+            setCheckEmail(true);
+        } else {
+            setCheckEmail(false);
+        }
+    };
+
+    // 성별 확인
+    const [gender, setGender] = useState("");
+    const handleGenderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setGender(e.target.value);
+    };
+
+    // 다음 버튼 활성화
+    const [isNextButtonDisabled, setIsNextButtonDisabled] = useState(true);
+    useEffect(() => {
+        const isFieldsValid = impUid && checkId && password && checkPassword !== "" && isValidCheckPassword && name && birth && phone && checkEmail && gender !== "";
+        setIsNextButtonDisabled(!isFieldsValid);
+    }, [impUid, checkId, password, checkPassword, isValidCheckPassword, name, birth, phone, checkEmail, gender]);
+
+    // 회원 가입 정보 POST
+    const handleClickBtn = () => {
+        const requestBody = {
+            "id": id,
+            "email": email,
+            "password": password,
+            "name": name,
+            "gender": gender,
+            "birthday": birth,
+            "phoneNumber": phone,
+        };
+        const apiEndpoint = `${process.env.REACT_APP_AMUSE_API}/api/v1/auth/user/signup`;
+
+        axios.post(apiEndpoint, requestBody)
+            .then((response) => {
+                console.log('가입 성공');
+                props.onNextStep(name);
+            })
+            .catch((error) => {
+                console.error('API 요청 실패:', error);
+            })
+    };
+
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     };
 
 
-
-    const [UserInfo, setUserInfoData] = useState<UserInfoData>();
-    useEffect(() => {
-        if (props.imp_uid !== null) {
-            axios
-                .get(`${process.env.REACT_APP_AMUSE_API}/api/v1/user/verification/portone?imp_uid=${props.imp_uid}`)
-                .then((response) => {
-                    console.log(response.data);
-                    setUserInfoData(response.data);
-                })
-                .catch((error) => {
-                    console.log("연결 실패");
-                });
-        }
-    }, [props.imp_uid]);
-
     return (
-        <div className="info_body">
+        <div className="info_body" style={{width: '754px'}}>
             <form action="" method="post" className="info_form">
-                <div className="info_note">
-                    <span className="color_red">어뮤즈</span>는 고객님의 정보를 안전하게 관리합니다.
-                </div>
                 <div>
-                    <TextInput disable={false} customValidation={emailValidation} onInputChange={handleInputChange} labelText="아이디(이메일계정)" placeText="ex) example123@example.com" inputType="email" width="702px" margin="16px" />
-                    <div className="flex_box_sub">
-                        <TextInput disable={false} customValidation={nameValidation} onInputChange={handleInputChange} labelText="이름" placeText="이름" inputType="text" width="597px" margin="16px" />
-                        <div className="input_gender">
-                            <input type="radio" name="gender" id="male" />
-                            <label htmlFor="male" className="first_label">남</label>
-                            <input type="radio" name="gender" id="female" />
-                            <label htmlFor="female" className="last_label">여</label>
+                    <S.InputTitle>아이디</S.InputTitle>
+                    <S.FlexBox>
+                        <TextInput disable={false} value={id} onInputChange={handleChangeId} labelText="" placeText="아이디" inputType="text" isValid={isValidId} errorText={errorText} inputId={true} width="560px" margin="16px" />
+                        <S.InnBtn onClick={handleDuplicateClick}>중복 확인</S.InnBtn>
+                    </S.FlexBox>
+                    <S.InputTitle>비밀번호</S.InputTitle>
+                    <PasswordInput password={password} handleChangePassword={handleChangePassword} labelText="" placeText="비밀번호" design="outlined" width="754px" margin='' margin_b='16px' isValid={isValidPassword} errorText="비밀번호는 8~16자의 영문, 숫자, 특수문자 중 두 종류 이상의 조합으로 입력해주세요" inputSize='small' />
+                    <S.InputTitle>비밀번호 재확인</S.InputTitle>
+                    <PasswordInput password={checkPassword} handleChangePassword={handleChangeCheckPassword} labelText="" placeText="비밀번호 재확인" design="outlined" width="754px" margin='' margin_b='16px' isValid={isValidCheckPassword} errorText="비밀번호가 일치하지 않습니다" inputSize='small' />
+                    <S.FlexBox>
+                        <div>
+                            <S.InputTitle>이름</S.InputTitle>
+                            <TextInput disable={true} onInputChange={handleInputChange} labelText="" placeText="이름" value={name} inputType="text" width="561px" margin="16px" />
                         </div>
-                    </div>
-                    <TextInput disable={false} customValidation={numValidation} onInputChange={handleInputChange} labelText="생년월일" placeText="ex) 010203" inputType="text" width="702px" margin="16px" />
-                    <div className="flex_box_sub">
-                        <TextInput disable={false} customValidation={pnumValidation} onInputChange={handleInputChange} labelText="휴대폰번호" placeText="ex) 01012345678" inputType="text" width="702px" margin="16px" />
-                        <div className="foreign_box">
-                            <input type="checkbox" id="foreign" className="foreign_check" />
-                            <label htmlFor="foreign" className="foreign_text">외국인</label>
+                        <div>
+                            <S.InputTitle>성별</S.InputTitle>
+                            <S.RadioButtonContainer>
+                                <div className="input_gender">
+                                    <input type="radio" name="gender" id="MAN" value="MAN" checked={gender === "MAN"} onChange={handleGenderChange} />
+                                    <label htmlFor="MAN" className="first_label">남</label>
+                                    <input type="radio" name="gender" id="WOMAN" value="WOMAN" checked={gender === "WOMAN"} onChange={handleGenderChange} />
+                                    <label htmlFor="WOMAN" className="last_label">여</label>
+                                </div>
+                            </S.RadioButtonContainer>
                         </div>
+                    </S.FlexBox>
+
+                    <S.InputTitle>생년월일</S.InputTitle>
+                    <TextInput disable={true} onInputChange={handleInputChange} labelText="" placeText="생년월일" value={birth} inputType="text" width="754px" margin="16px" />
+                    <S.InputTitle>본인 확인 이메일</S.InputTitle>
+                    <TextInput disable={false} value={email} onInputChange={handleChangeEmail} labelText="" placeText="ex) example@example.com" inputType="email" isValid={checkEmail} errorText="이메일을 입력해주세요" width="754px" margin="16px" />
+                    <S.InputTitle>전화번호</S.InputTitle>
+                    <div className="">
+                        <TextInput disable={true} onInputChange={handleInputChange} labelText="" placeText="ex) 01012345678" value={phone} inputType="text" width="754px" margin="16px" />
                     </div>
                 </div>
-                <PasswordInput password={password} handleChangePassword={handleChangePassword} labelText="비밀번호" design="outlined" width="702px" margin='' margin_b='16px' isValid={isValidPassword} errorText="8자 이상, 영문 대/소문자, 숫자, 특수문자 중 두 종류 이상의 조합으로 설정해 주세요" inputSize='small' />
-                <PasswordInput password={checkPassword} handleChangePassword={handleChangeCheckPassword} labelText="비밀번호 확인" design="outlined" width="702px" margin='' margin_b='16px' isValid={isValidCheckPassword} errorText="일치하지 않습니다" inputSize='small' />
             </form >
-            <button className="login_btn" onClick={() => {
-                props.onNextStep();
-            }} disabled={false}>
-                <i className="fa-solid fa-door-open"></i>다음
-            </button>
+            <S.NextButton onClick={handleClickBtn} disabled={isNextButtonDisabled}>
+                가입하기
+            </S.NextButton>
+
+
+            {/* 가입된 경우 모달 창 */}
+            <div className="modal">
+                    <Modal
+                        isOpen={isModalOpen}
+                        onRequestClose={closeModal}
+                        style={{
+                            content: {
+                                top: "50%",
+                                left: "50%",
+                                transform: "translate(-50%, -50%)",
+                                backgroundColor: "#FFF",
+                                width: "754px",
+                                height: "389px",
+                                padding: "40px 43px"
+                            },
+                            overlay: {
+                                backgroundColor: "rgba(0, 0, 0, 0.5)",
+                                width: "100%",
+                                height: "100%",
+                                transition: "opacity 0.3s ease-out",
+                            },
+                        }}
+                    >
+                        <div className="agree_modal">
+                            <M.ModalHeader>
+                                <M.ModalTitle>이미 가입된 로그인 정보가 존재합니다.</M.ModalTitle>
+                            </M.ModalHeader>
+                            <div className="agree_btn_box">
+                                <M.AgreeBtn onClick={closeModal}>확인</M.AgreeBtn>
+                            </div>
+                        </div>
+                    </Modal>
+                </div>
         </div >
     );
 }
 
 export default InfoForm;
-
-// function useEffect(arg0: () => void, arg1: any[]) {
-//     throw new Error("Function not implemented.");
-// }
