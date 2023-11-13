@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
-// import Header from "../Headers/Header";
 import { Link, redirect, useRoutes, useSearchParams, } from "react-router-dom";
 import PasswordInput from "./PasswordInput";
-import EmailInput from "./EmailInput";
+import TextInput from "./TextInput";
 import { useRecoilState } from "recoil";
 import { accessTokenState, isLoggedIn } from "../../atoms";
 import { useNavigate } from "react-router-dom";
@@ -18,7 +17,7 @@ import * as S from "./LoginStyle";
 
 
 const Login: React.FC = () => {
-	const [email, setEmail] = useState<string>("");
+	const [id, setId] = useState<string>("");
 	const [password, setPassword] = useState<string>("");
 	const [loggedIn, setLoggedIn] = useRecoilState<boolean>(isLoggedIn);
 	const navigate = useNavigate();
@@ -29,8 +28,8 @@ const Login: React.FC = () => {
 		withCredentials: true,
 	});
 
-	const handleChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
-		setEmail(e.target.value);
+	const handleChangeId = (e: React.ChangeEvent<HTMLInputElement>) => {
+		setId(e.target.value);
 	};
 
 	const handleChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -42,11 +41,11 @@ const Login: React.FC = () => {
 	const [rememberId, setRememberId] = useState<boolean>(false);
 
 	useEffect(() => {
-		const storedEmail = localStorage.getItem("savedEmail");
+		const storedId = localStorage.getItem("savedId");
 		const storedRememberId = localStorage.getItem("rememberId") === "true";
 
-		if (storedRememberId && storedEmail) {
-			setEmail(storedEmail);
+		if (storedRememberId && storedId) {
+			setId(storedId);
 			setRememberId(storedRememberId);
 		}
 	}, []);
@@ -65,15 +64,15 @@ const Login: React.FC = () => {
 		event.preventDefault();
 
 		if (rememberId) {
-			localStorage.setItem("savedEmail", email);
+			localStorage.setItem("savedId", id);
 			localStorage.setItem("rememberId", "true");
 		} else {
-			localStorage.removeItem("savedEmail");
+			localStorage.removeItem("savedId");
 			localStorage.setItem("rememberId", "false");
 		}
 
 		await axios
-			.get(`${process.env.REACT_APP_AMUSE_API}/api/v1/auth/user/login?id=${email}&password=${password}`)
+			.get(`${process.env.REACT_APP_AMUSE_API}/api/v1/auth/user/login?id=${id}&password=${password}`)
 			.then((response) => {
 				const accessToken = response.data.data.accessToken;
 				setAccessToken(accessToken);
@@ -94,14 +93,14 @@ const Login: React.FC = () => {
 				<form className="login" action="/loginURL" method="post">
 					<S.LoginTitle>로그인</S.LoginTitle>
 					<S.InputContainer>
-						<div className="email">
-							<EmailInput email={email} handleChangeEmail={handleChangeEmail} />
+						<div className="id">
+							<TextInput disable={false} value={id} onInputChange={handleChangeId} labelText="아이디" placeText="아이디" inputType="text" width="680px" margin="" allMargin="8px" design="standard"/>
 						</div>
 						<div className="password">
 							<PasswordInput password={password} handleChangePassword={handleChangePassword} labelText="비밀번호" placeText="비밀번호" design="standard" width="680px" margin='8px' margin_b='' isValid={true} errorText="" inputSize="medium" />
 						</div>
 					</S.InputContainer>
-					{error && <S.ErrorMessage>이메일 또는 비밀번호가 올바르지 않습니다.</S.ErrorMessage>}
+					{error && <S.ErrorMessage>아이디 또는 비밀번호가 올바르지 않습니다.</S.ErrorMessage>}
 					<S.KeepIdContainer>
 						<S.KeepIdCheck id="keep" className="keep_id_check" checked={rememberId} onChange={handlerememberIdChange}></S.KeepIdCheck>
 						<S.KeepIdText htmlFor="keep" className="keep_id_text">아이디 저장</S.KeepIdText>

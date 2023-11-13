@@ -15,12 +15,14 @@ interface TextInputProps {
     isValid?: boolean;
     errorText?: string;
     inputId?: boolean;
+    design?: TextFieldVariants;
+    allMargin?: string;
 }
 
-const TextInput: React.FC<TextInputProps> = ({ disable, onBlur, onInputChange, labelText, placeText, value, inputType, isValid = true, errorText = "", width, margin, inputId }) => {
+const TextInput: React.FC<TextInputProps> = ({ disable, onBlur, onInputChange, labelText, placeText, value, inputType, isValid = true, errorText = "", width, margin, inputId, allMargin, design="outlined" }) => {
 
     return (
-        <FormControl sx={{ mb: margin, width: width }} variant="outlined">
+        <FormControl sx={{ mb: margin, width: width, m: allMargin }} variant="outlined">
             <TextField
                 hiddenLabel
                 disabled={disable}
@@ -30,7 +32,8 @@ const TextInput: React.FC<TextInputProps> = ({ disable, onBlur, onInputChange, l
                 type={inputType}
                 value={value}
                 onChange={onInputChange}
-                variant="outlined"
+                // variant="outlined"
+                variant={design}
                 // size="Normal"
                 sx={{ padding: 0 }}
                 onBlur={onBlur}
