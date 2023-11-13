@@ -2,14 +2,12 @@ import React, { useState, useEffect, ChangeEvent } from "react";
 import styled from 'styled-components';
 import axios from "axios";
 import _ from "lodash";
-// import logoimage from "../MainPage/MainImgs/logo.png";
 import logoimage from "../../assets/Images/amuse_logo.png";
 import { useRecoilState } from "recoil";
 import { isLoggedIn } from "../../atoms";
 import { useCookies } from "react-cookie";
 import moment from "moment";
 import { useNavigate } from "react-router";
-
 import checkIcon from './Icons/check_icon.png';
 import checkedIcon from './Icons/checked_icon.png';
 
