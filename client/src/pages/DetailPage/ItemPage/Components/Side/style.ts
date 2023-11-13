@@ -53,6 +53,7 @@ export const PriceMin = styled.div`
 export const Share = styled.img`
   width: 24px;
   height: 24px;
+  cursor: pointer;
 `;
 
 export const Wish = styled.button`
@@ -125,6 +126,7 @@ export const Inquiry = styled.div`
   align-items: center;
   gap: 5px;
   color: #fb5984;
+  cursor: pointer;
 `;
 
 export const InquiryText = styled.div`
