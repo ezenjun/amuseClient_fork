@@ -24,117 +24,150 @@ import PaymentDetailPage from "./pages/DetailPage/PaymentDetailPage/PaymentDetai
 import PaymentHistory from "./pages/MyPage/pages/PaymentHistory/PaymentHistory";
 import Likes from "./pages/MyPage/MyPage/Likes";
 import Settings from "./pages/MyPage/MyPage/Settings/Settings";
+import PaymentHistoryDetail from "./pages/MyPage/pages/PaymentHistory/components/PaymentHIstoryDetail/PaymentHistoryDetail";
 
 function App() {
-  const [cookies, setCookie, deleteCookie] = useCookies(["__jwtkid__"]);
-  const [currentItemIds, setCurrentItemIds] = useState<number[]>([]);
-  const [currentItemProductCodes, setCurrentItemProductCodes] = useState<
-    number[]
-  >([]);
-  const [currentItemStartPrices, setCurrentItemStartPrices] = useState<
-    number[]
-  >([]);
-  const [currentItemLikeNums, setCurrentItemLikeNums] = useState<number[]>([]);
-  const [activePageCount, setActivePageCount] = useState(1);
-  const [categoryIds, setCategoryIds] = useState<number[]>([]);
+	const [cookies, setCookie, deleteCookie] = useCookies(["__jwtkid__"]);
+	const [currentItemIds, setCurrentItemIds] = useState<number[]>([]);
+	const [currentItemProductCodes, setCurrentItemProductCodes] = useState<
+		number[]
+	>([]);
+	const [currentItemStartPrices, setCurrentItemStartPrices] = useState<
+		number[]
+	>([]);
+	const [currentItemLikeNums, setCurrentItemLikeNums] = useState<number[]>(
+		[]
+	);
+	const [activePageCount, setActivePageCount] = useState(1);
+	const [categoryIds, setCategoryIds] = useState<number[]>([]);
 
-  // Current Item API
-  useEffect(() => {
-    axios
-      .get(`${process.env.REACT_APP_AMUSE_API}/item/all/display`, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `${cookies.__jwtkid__}`,
-        },
-      })
-      .then((response) => {
-        const items = response.data.data.items;
-        const ids = items.map((item: any) => item.item_db_id);
-        const codes = items.map((item: any) => item.product_code);
-        const prices = items.map((item: any) => item.startPrice);
-        const likeNums = items.map((item: any) => item.likeNum);
+	// Current Item API
+	useEffect(() => {
+		axios
+			.get(`${process.env.REACT_APP_AMUSE_API}/item/all/display`, {
+				headers: {
+					"Content-Type": "application/json",
+					Authorization: `${cookies.__jwtkid__}`,
+				},
+			})
+			.then((response) => {
+				const items = response.data.data.items;
+				const ids = items.map((item: any) => item.item_db_id);
+				const codes = items.map((item: any) => item.product_code);
+				const prices = items.map((item: any) => item.startPrice);
+				const likeNums = items.map((item: any) => item.likeNum);
 
-        setCurrentItemIds(_.uniq([...currentItemIds, ...ids]));
-        setCurrentItemProductCodes(
-          _.uniq([...currentItemProductCodes, ...codes])
-        );
-        setCurrentItemStartPrices(_.uniq([currentItemStartPrices, ...prices]));
-        setCurrentItemLikeNums(_.uniq([...currentItemLikeNums, ...likeNums]));
-      })
-      .catch((error) => {
-        console.log("연결 실패", error);
-      });
-  }, [activePageCount]);
+				setCurrentItemIds(_.uniq([...currentItemIds, ...ids]));
+				setCurrentItemProductCodes(
+					_.uniq([...currentItemProductCodes, ...codes])
+				);
+				setCurrentItemStartPrices(
+					_.uniq([currentItemStartPrices, ...prices])
+				);
+				setCurrentItemLikeNums(
+					_.uniq([...currentItemLikeNums, ...likeNums])
+				);
+			})
+			.catch((error) => {
+				console.log("연결 실패", error);
+			});
+	}, [activePageCount]);
 
-  // Course API
-  useEffect(() => {
-    axios
-      .get(`${process.env.REACT_APP_AMUSE_API}/main/category`)
-      .then((response) => {
-        const categories = response.data.data.categories;
-        const ids = categories.map((category: any) => category.categoryId);
-        setCategoryIds(ids);
-        //console.log(response.data.data.categories);
-      })
-      .catch((error) => {
-        console.log("연결 실패");
-      });
-  }, []);
+	// Course API
+	useEffect(() => {
+		axios
+			.get(`${process.env.REACT_APP_AMUSE_API}/main/category`)
+			.then((response) => {
+				const categories = response.data.data.categories;
+				const ids = categories.map(
+					(category: any) => category.categoryId
+				);
+				setCategoryIds(ids);
+				//console.log(response.data.data.categories);
+			})
+			.catch((error) => {
+				console.log("연결 실패");
+			});
+	}, []);
 
-  return (
-    <OrderContextProvider>
-      <CategoryContextProvider>
-        <InfoContextProvider>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/LogIn" element={<Login />}></Route>
-            <Route path="/LogIn/FindId" element={<FindId />}></Route>
-            <Route path="/LogIn/FindPw" element={<FindPw />}></Route>
-            <Route path="/SignUp" element={<SignUp />}></Route>
-            <Route path="/SignUpAmuse" element={<SignUpAmuse />}></Route>
-            <Route path="/MyPage" element={<MyPage />}>
-              <Route path="settings" element={<Settings />} />
-              <Route path="like" element={<Likes />} />
-              <Route
+	return (
+		<OrderContextProvider>
+			<CategoryContextProvider>
+				<InfoContextProvider>
+					<Routes>
+						<Route path="/" element={<Home />} />
+						<Route path="/LogIn" element={<Login />}></Route>
+						<Route
+							path="/LogIn/FindId"
+							element={<FindId />}
+						></Route>
+						<Route
+							path="/LogIn/FindPw"
+							element={<FindPw />}
+						></Route>
+						<Route path="/SignUp" element={<SignUp />}></Route>
+						<Route
+							path="/SignUpAmuse"
+							element={<SignUpAmuse />}
+						></Route>
+						<Route path="/MyPage" element={<MyPage />}>
+							<Route path="settings" element={<Settings />} />
+							<Route path="like" element={<Likes />} />
+							<Route
 								path="payment-history"
 								element={<PaymentHistory />}
 							/>
-            </Route>
-            <Route path="/Review/:id" element={<Review />}></Route>
-            <Route path="/order" element={<OrderPage />}></Route>
-            <Route
-              path="/order/complete"
-              element={<OrderCompletePage />}
-            ></Route>
-            <Route
-              path="/payment/:paymentId"
-              element={<PaymentDetailPage />}
-            ></Route>
-            <Route path="/LogInAgree" element={<LoginAgree />}></Route>
+							<Route
+								path="payment-history/:id"
+								element={<PaymentHistoryDetail />}
+							/>
+							<Route path="review" element={<Review />} />
+						</Route>
+						<Route path="/Review/:id" element={<Review />}></Route>
+						<Route path="/order" element={<OrderPage />}></Route>
+						<Route
+							path="/order/complete"
+							element={<OrderCompletePage />}
+						></Route>
+						<Route
+							path="/payment/:paymentId"
+							element={<PaymentDetailPage />}
+						></Route>
+						<Route
+							path="/LogInAgree"
+							element={<LoginAgree />}
+						></Route>
 
-            {/* 상세페이지 Route */}
-            {currentItemIds.map((currentItemId, index) => (
-              <Route
-                key={currentItemId}
-                path={`/detail/${currentItemId}`}
-                element={
-                  <ItemPage
-                    itemId={currentItemId}
-                    productCode={currentItemProductCodes[index]}
-                    startPrice={currentItemStartPrices[index]}
-                    likeNum={currentItemLikeNums[index]}
-                  />
-                }
-              />
-            ))}
+						{/* 상세페이지 Route */}
+						{currentItemIds.map((currentItemId, index) => (
+							<Route
+								key={currentItemId}
+								path={`/detail/${currentItemId}`}
+								element={
+									<ItemPage
+										itemId={currentItemId}
+										productCode={
+											currentItemProductCodes[index]
+										}
+										startPrice={
+											currentItemStartPrices[index]
+										}
+										likeNum={currentItemLikeNums[index]}
+									/>
+								}
+							/>
+						))}
 
-            <Route path="/category/:apiKey" element={<SubPage />} />
-            <Route path="/search/:apiKey" element={<SearchPageComp />} />
-          </Routes>
-        </InfoContextProvider>
-      </CategoryContextProvider>
-    </OrderContextProvider>
-  );
+						<Route path="/category/:apiKey" element={<SubPage />} />
+						<Route
+							path="/search/:apiKey"
+							element={<SearchPageComp />}
+						/>
+					</Routes>
+				</InfoContextProvider>
+			</CategoryContextProvider>
+		</OrderContextProvider>
+	);
 }
 
 export default App;

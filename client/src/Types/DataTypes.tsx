@@ -32,6 +32,7 @@ export type PaymentHistoryData = {
 	payStatus: string;
 	reservationDateTime: string;
 	itemPayPrice: number;
+	reservationNumber?: number;
 };
 
 // commit용 주석

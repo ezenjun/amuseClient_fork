@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import { PageContainer } from "../../styles";
-import { Bold32Black, Regular16Gray } from "../../../../components/Text/Text";
+import {
+	Bold20Gray,
+	Bold32Black,
+	Regular16Gray,
+	Regular20Black,
+} from "../../../../components/Text/Text";
 import {
 	EachDayContainer,
 	HistoryContainer,
@@ -11,6 +16,11 @@ import EachPayment from "./components/EachPayment";
 import { PaymentHistoryData } from "../../../../Types/DataTypes";
 import axios from "axios";
 import { formatDate } from "../../../../utils/DateFunctions";
+import GrayBox from "../../../../components/Box/GrayBox";
+import {
+	GrayboxRow,
+	RowDetail,
+} from "./components/PaymentHIstoryDetail/Section/styles";
 
 type Props = {};
 
@@ -58,6 +68,8 @@ const PaymentHistory = (props: Props) => {
 						groupedData[currentDate].push(item);
 					});
 
+					
+
 					setPaymentHistoryList(groupedData);
 				})
 				.catch((err) => {
@@ -71,25 +83,33 @@ const PaymentHistory = (props: Props) => {
 	return (
 		<PageContainer>
 			<Bold32Black>결제내역</Bold32Black>
-			<HistoryContainer>
-				{Object.entries(paymentHistoryList || {}).map(
-					([date, payments]) => (
-						<EachDayContainer key={date}>
-							<Regular16Gray>
-								{formatDate(new Date(date))}
-							</Regular16Gray>
-							<PaymentListContainer>
-								{payments.map((payment) => (
-									<EachPayment
-										key={payment.mainPaymentId}
-										data={payment}
-									/>
-								))}
-							</PaymentListContainer>
-						</EachDayContainer>
-					)
-				)}
-			</HistoryContainer>
+			{paymentHistoryList ? (
+				<HistoryContainer>
+					{Object.entries(paymentHistoryList || {}).map(
+						([date, payments]) => (
+							<EachDayContainer key={date}>
+								<Regular16Gray>
+									{formatDate(new Date(date))}
+								</Regular16Gray>
+								<PaymentListContainer>
+									{payments.map((payment) => (
+										<EachPayment
+											key={payment.mainPaymentId}
+											data={payment}
+										/>
+									))}
+								</PaymentListContainer>
+							</EachDayContainer>
+						)
+					)}
+				</HistoryContainer>
+			) : (
+				<HistoryContainer>
+					<GrayBox verticalPadding={24} horizontalPadding={31}>
+						<Bold20Gray>결제 내역이 없습니다</Bold20Gray>
+					</GrayBox>
+				</HistoryContainer>
+			)}
 		</PageContainer>
 	);
 };

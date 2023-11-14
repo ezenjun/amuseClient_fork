@@ -91,3 +91,9 @@ export const ItemNameContainer = styled.div`
 		justify-content: space-between;
 	}
 `;
+
+export const MenuRight = styled.div`
+	display: flex;
+	flex-direction: row;
+	gap: 1.25rem;
+`;
