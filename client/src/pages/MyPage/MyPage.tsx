@@ -7,7 +7,7 @@ import { isLoggedIn } from "../../atoms";
 import { useNavigate } from "react-router-dom";
 import MainComponent from "../../MainComponent";
 import { MyPageContainer } from "./styles";
-
+import SideBarMenu from "./Components/SideBarMenu/SideBarMenu";
 
 export default function MyPage() {
 	const [loggedIn, setLoggedIn] = useRecoilState(isLoggedIn);
@@ -34,7 +34,7 @@ export default function MyPage() {
 	return (
 		<MainComponent>
 			<MyPageContainer>
-				{screenWidth > 768 && <MyPagelist />}
+				{screenWidth > 768 && <SideBarMenu />}
 				<Outlet />
 			</MyPageContainer>
 		</MainComponent>

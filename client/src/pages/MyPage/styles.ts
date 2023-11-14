@@ -6,7 +6,7 @@ export const MyPageContainer = styled.div`
 	width: 100%;
 	box-sizing: border-box;
 	gap: 32px;
-	padding: 4.6875rem 10% 3.125rem 10%;
+	padding: 4.6875rem 9.375rem 3.125rem 9.375rem;
 	::-webkit-scrollbar {
 		display: none;
 	}
@@ -15,6 +15,7 @@ export const MyPageContainer = styled.div`
 	}
 	@media (min-width: 769px) and (max-width: 1023px) {
 		gap: 1rem;
+		padding: 2.5rem 1.5rem 2.5rem 1.5rem;
 	}
 `;
 

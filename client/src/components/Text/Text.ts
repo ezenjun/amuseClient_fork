@@ -140,6 +140,13 @@ export const Bold24DarkGray = styled.span`
 		color: Common.colors.darkGray,
 	})}
 `;
+export const Bold24Gray = styled.span`
+	${Pretendard({
+		size: 24,
+		weight: Common.bold.bold,
+		color: Common.colors.gray,
+	})}
+`;
 export const Bold24AppColor = styled.span`
 	${Pretendard({
 		size: 24,
