@@ -90,7 +90,7 @@ const InfoForm: React.FC<InfoFormProps> = (props) => {
             axios
                 .get(`${process.env.REACT_APP_AMUSE_API}/api/v1/user/check/duplicate?name=${name}&birthday=${birth}&phonenumber=${phone}`)
                 .then((response) => {
-                    if (response.data.data === "이미 가입된 사용자입니다.") {
+                    if (response.data.data) {
                         openModal();
                     }
                 })

@@ -96,8 +96,7 @@ const FindPw: React.FC<FindPwProps> = (props) => {
             axios
                 .get(`${process.env.REACT_APP_AMUSE_API}/api/v1/user/check/duplicate?name=${name}&birthday=${birth}&phonenumber=${phone}`)
                 .then((response) => {
-                    const notExist =  response.data.data;
-                    if (notExist === "가입된 사용자가 아닙니다.") {
+                    if (!response.data.data) {
                         movePage('/');
                         alert("계정이 없습니다 회원가입을 진행해 주세요.");
                     }
