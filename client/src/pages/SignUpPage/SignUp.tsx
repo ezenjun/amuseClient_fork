@@ -6,8 +6,10 @@ import NaverIcon from "../LogInPage/Icons/naver_logo.png";
 import AmuseIcon from "../LogInPage/Icons/amuse_logo.png";
 import * as S from "./SignUpStyle";
 
+
 export default function SignUp(props: any) {
   const redirectU = `${process.env.REACT_APP_REDIRECT_URL}LoginAgree`
+  
   return (
     <MainComponent>
       <S.SignUpBody>

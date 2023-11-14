@@ -26,3 +26,13 @@ export const accessTokenState = atom({
   key: "accessTokenState",
   default: "",
 });
+
+export const impUid = atom({
+    key: "impUid",
+    default: "",
+})
+
+export const isVisible = atom<boolean>({
+    key: "isVisible",
+    default: true,
+});

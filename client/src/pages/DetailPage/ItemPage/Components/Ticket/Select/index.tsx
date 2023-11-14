@@ -28,26 +28,28 @@ const Select: FC<SelectProps> = ({
         <S.Detail>{detail}</S.Detail>
       </S.Content>
 
-      <S.Price>
-        <S.Number>{price.toLocaleString("en")}</S.Number>
-        <S.Won>{C.TICKET.WON}</S.Won>
-      </S.Price>
+      <S.Payment>
+        <S.Price>
+          <S.Number>{price.toLocaleString("en")}</S.Number>
+          <S.Won>{C.TICKET.WON}</S.Won>
+        </S.Price>
 
-      <S.Count>
-        <S.MinusBtn
-          className={`${formattedCount === 0 ? "gray" : ""}`}
-          onClick={handleMinus}
-        >
-          {C.TICKET.MINUS}
-        </S.MinusBtn>
-        {formattedCount}
-        <S.PlusBtn
-          className={`${price === 0 ? "gray" : ""}`}
-          onClick={handlePlus}
-        >
-          {C.TICKET.PLUS}
-        </S.PlusBtn>
-      </S.Count>
+        <S.Count>
+          <S.MinusBtn
+            className={`${formattedCount === 0 ? "gray" : ""}`}
+            onClick={handleMinus}
+          >
+            {C.TICKET.MINUS}
+          </S.MinusBtn>
+          {formattedCount}
+          <S.PlusBtn
+            className={`${price === 0 ? "gray" : ""}`}
+            onClick={handlePlus}
+          >
+            {C.TICKET.PLUS}
+          </S.PlusBtn>
+        </S.Count>
+      </S.Payment>
     </S.Select>
   );
 };
