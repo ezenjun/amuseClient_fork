@@ -150,6 +150,12 @@ export interface TermsInterface {
 	content: Array<Term>;
 }
 
+export interface paymentDetailMatterResponseDto {
+	reservationNumber: string;
+	reservationDateTime: string;
+	itemAdditionalInformation: string;
+}
+
 export interface PaymentDetailInterface {
 	paymentDetailTopItemInfoResponseDto: {
 		reservationNumber: string;
@@ -187,11 +193,7 @@ export interface PaymentDetailInterface {
 		];
 		itemIntroduceInformation: string;
 	};
-	paymentDetailMatterResponseDto: {
-		reservationNumber: string;
-		reservationDateTime: string;
-		itemAdditionalInformation: string;
-	};
+	paymentDetailMatterResponseDto: paymentDetailMatterResponseDto;
 	paymentCancelRuleResponseDto: {
 		content: string;
 	};

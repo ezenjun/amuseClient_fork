@@ -191,4 +191,19 @@ export interface PaymentInformationProps {
 	guestEmail: string;
 	additionalRequest: string;
 }
+
+export interface ItemInformationProps {
+	itemName: string;
+	reservationDateTime: string;
+	itemPayPrice: number;
+	informationResponseDtoList: [
+		{
+			ticketName: string;
+			ticketSubName: string;
+			ticketPrice: number;
+			ticketCount: number;
+		}
+	];
+	itemIntroduceInformation: string;
+}
 // commit용 주석

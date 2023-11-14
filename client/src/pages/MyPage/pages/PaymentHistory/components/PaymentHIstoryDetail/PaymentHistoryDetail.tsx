@@ -81,9 +81,9 @@ const PaymentHistoryDetail = (props: Props) => {
 				{/* 결제 상세 정보 */}
 				<PaymentInformation data={data?.paymentDetailInfoResponseDto} />
 				{/* 상품 정보 */}
-				<ItemInformation />
+				<ItemInformation data={data?.paymentDetailItemResponseDto} />
 				{/* 세부 사항 */}
-				<Details />
+				<Details data = {data?.paymentDetailMatterResponseDto}/>
 				{/* 결제 취소 */}
 				<CancelPayment />
 				<ReservationInfoContainer>
