@@ -121,6 +121,7 @@ function App() {
 								path="payment-history/:id"
 								element={<PaymentHistoryDetail />}
 							/>
+							<Route path="review" element={<Review />} />
 						</Route>
 						<Route path="/Review/:id" element={<Review />}></Route>
 						<Route path="/order" element={<OrderPage />}></Route>
