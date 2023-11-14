@@ -6,6 +6,13 @@ export const ReservationInfoContainer = styled.div`
 	gap: 1.25rem;
 `;
 
+export const ReservationInfoMenuContainer = styled.div`
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	gap: 1.25rem;
+`;
+
 export const ReservationIdContainer = styled.div`
 	display: flex;
 	flex-direction: row;
@@ -19,4 +26,19 @@ export const DetailContainer = styled.div`
 	gap: 5rem;
 	width: 100%;
 	height: 100%;
+`;
+
+export const MenuRightContainer = styled.div`
+	display: flex;
+	gap: 1.25rem;
+	align-items: center;
+	justify-content: space-between;
+	width: 50%;
+`;
+export const MobileButtonContainer = styled.div`
+	display: flex;
+	gap: 0.5rem;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
 `;

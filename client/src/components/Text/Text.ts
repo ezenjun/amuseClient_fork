@@ -162,6 +162,7 @@ export const Bold32Black = styled.span`
 		weight: Common.bold.bold,
 		color: Common.colors.black,
 	})}
+	white-space: nowrap;
 `;
 
 // BOLD 40

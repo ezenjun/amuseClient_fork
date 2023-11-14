@@ -13,12 +13,15 @@ import {
 	DetailContainer,
 	ReservationIdContainer,
 	ReservationInfoContainer,
+	ReservationInfoMenuContainer,
 } from "./styles";
 import EachPaymentWeb from "../EachPaymentInSize/EachPaymentWeb";
 import PaymentInformation from "./Section/PaymentInformation/PaymentInformation";
 import ItemInformation from "./Section/ItemInformation/ItemInformation";
 import Details from "./Section/Details/Details";
 import CancelPayment from "./Section/CancelPayment/CancelPayment";
+import EachPayment from "../EachPayment";
+import { WebButton } from "../../../../../../components/Button/WebButton";
 
 type Props = {};
 
@@ -48,7 +51,7 @@ const PaymentHistoryDetail = (props: Props) => {
 				)
 				.then((response) => {
 					const data = response.data.data;
-					console.log(data);
+					console.log("paymentdata", data);
 					setData(data);
 				})
 				.catch((err) => {
@@ -77,17 +80,48 @@ const PaymentHistoryDetail = (props: Props) => {
 							}
 						</Regular16Gray>
 					</ReservationIdContainer>
+					{data && (
+						<EachPayment
+							key={
+								data?.paymentDetailMatterResponseDto
+									.reservationNumber
+							}
+							data={data?.paymentDetailTopItemInfoResponseDto}
+						/>
+					)}
 				</ReservationInfoContainer>
+
 				{/* 결제 상세 정보 */}
 				<PaymentInformation data={data?.paymentDetailInfoResponseDto} />
 				{/* 상품 정보 */}
 				<ItemInformation data={data?.paymentDetailItemResponseDto} />
 				{/* 세부 사항 */}
-				<Details data = {data?.paymentDetailMatterResponseDto}/>
+				<Details data={data?.paymentDetailMatterResponseDto} />
 				{/* 결제 취소 */}
-				<CancelPayment />
+				<CancelPayment data={data?.paymentCancelRuleResponseDto} />
 				<ReservationInfoContainer>
-					<Bold32Black>결제 정보</Bold32Black>
+					<ReservationInfoMenuContainer>
+						<Bold32Black>결제 정보</Bold32Black>
+						{screenWidth > 768 && (
+							<WebButton
+								color="gray2"
+								fontSize={20}
+								verticalPadding={18}
+								width={270}
+							>
+								결제 정보 확인
+							</WebButton>
+						)}
+					</ReservationInfoMenuContainer>
+					{screenWidth <= 768 && (
+						<WebButton
+							color="gray2"
+							fontSize={20}
+							verticalPadding={18}
+						>
+							결제 정보 확인
+						</WebButton>
+					)}
 				</ReservationInfoContainer>
 			</DetailContainer>
 		</PageContainer>

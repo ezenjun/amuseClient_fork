@@ -4,10 +4,8 @@ export const MyPageContainer = styled.div`
 	display: flex;
 	flex-direction: row;
 	width: 100%;
-	height: 100vh;
 	box-sizing: border-box;
 	gap: 32px;
-	border: 1px solid red;
 	padding: 4.6875rem 10% 3.125rem 10%;
 	::-webkit-scrollbar {
 		display: none;

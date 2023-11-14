@@ -78,7 +78,7 @@ const EachPaymentWeb = ({ data }: Props) => {
 			)}
 			{data.payStatus === "PENDING" && (
 				<WebButton
-					color="gray2"
+					color="red"
 					verticalPadding={12}
 					fontSize={16}
 					width={140}

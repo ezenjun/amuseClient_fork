@@ -1,4 +1,5 @@
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
+import { PaymentHistoryData } from "../Types/DataTypes";
 
 export interface CategoryData {
 	categoryId: string;
@@ -156,14 +157,12 @@ export interface paymentDetailMatterResponseDto {
 	itemAdditionalInformation: string;
 }
 
+export interface paymentCancelContent {
+	content: string;
+}
+
 export interface PaymentDetailInterface {
-	paymentDetailTopItemInfoResponseDto: {
-		reservationNumber: string;
-		itemName: string;
-		itemImage: string;
-		travelStartDate: string;
-		travelEndDate: string;
-	};
+	paymentDetailTopItemInfoResponseDto: PaymentHistoryData;
 	paymentDetailInfoResponseDto: {
 		bookerName: string;
 		bookerBirthDay: string;
@@ -194,9 +193,7 @@ export interface PaymentDetailInterface {
 		itemIntroduceInformation: string;
 	};
 	paymentDetailMatterResponseDto: paymentDetailMatterResponseDto;
-	paymentCancelRuleResponseDto: {
-		content: string;
-	};
+	paymentCancelRuleResponseDto: paymentCancelContent;
 }
 
 // commit용 주석

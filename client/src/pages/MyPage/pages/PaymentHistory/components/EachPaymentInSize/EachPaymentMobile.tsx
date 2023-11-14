@@ -68,30 +68,24 @@ const EachPaymentMobile = ({ data }: Props) => {
 						{data.itemPayPrice.toLocaleString()} 원
 					</Bold16DarkGray>
 				</InfoTextContainer>
-				<PaymentButtonContainer>
-					{data.payStatus === "SUCCESS" && (
-						<WebButton
-							color="gray2"
-							verticalPadding={12}
-							fontSize={16}
-							width={140}
-						>
-							결제 취소
-						</WebButton>
-					)}
-					{data.payStatus === "PENDING" && (
-						<WebButton
-							color="red"
-							verticalPadding={12}
-							fontSize={16}
-							width={140}
-							onClick={() => navigate(`/detail/104`)}
-						>
-							다시 예약
-						</WebButton>
-					)}
-				</PaymentButtonContainer>
 			</ItemInfoTabletContainer>
+			<PaymentButtonContainer>
+				{data.payStatus === "SUCCESS" && (
+					<WebButton color="gray2" verticalPadding={15} fontSize={16}>
+						결제 취소
+					</WebButton>
+				)}
+				{data.payStatus === "PENDING" && (
+					<WebButton
+						color="red"
+						verticalPadding={15}
+						fontSize={16}
+						onClick={() => navigate(`/detail/104`)}
+					>
+						다시 예약
+					</WebButton>
+				)}
+			</PaymentButtonContainer>
 		</EachPaymentTabletContainer>
 	);
 };
