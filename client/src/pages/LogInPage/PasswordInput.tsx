@@ -12,6 +12,7 @@ interface PasswordInputProps {
   password: string;
   handleChangePassword: (event: React.ChangeEvent<HTMLInputElement>) => void;
   labelText: string;
+  placeText: string;
   design: TextFieldVariants;
   width: string;
   margin: string;
@@ -21,7 +22,7 @@ interface PasswordInputProps {
   inputSize: OverridableStringUnion<'small' | 'medium', TextFieldPropsSizeOverrides>;
 }
 
-const PasswordInput: React.FC<PasswordInputProps> = ({ password, handleChangePassword, labelText, design, width, margin, margin_b, isValid, errorText, inputSize }) => {
+const PasswordInput: React.FC<PasswordInputProps> = ({ password, handleChangePassword, labelText, placeText, design, width, margin, margin_b, isValid, errorText, inputSize }) => {
   const [showPassword, setShowPassword] = React.useState<boolean>(false);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -31,27 +32,6 @@ const PasswordInput: React.FC<PasswordInputProps> = ({ password, handleChangePas
   };
 
   return (
-    // <FormControl sx={{ m: 1, width: '680px' }} variant="standard">
-    //   <InputLabel htmlFor={design}>{labelText}</InputLabel>
-    //   <Input
-    //     id={design}
-    //     type={showPassword ? 'text' : 'password'}
-    //     value={password}
-    //     onChange={handleChangePassword}
-    //     endAdornment={
-    //       <InputAdornment position="end">
-    //         <IconButton
-    //           aria-label="toggle password visibility"
-    //           onClick={handleClickShowPassword}
-    //           onMouseDown={handleMouseDownPassword}
-    //         >
-    //           {showPassword ? <VisibilityOff /> : <Visibility />}
-    //         </IconButton>
-    //       </InputAdornment>
-    //     }
-
-    //   />
-    // </FormControl>
     <FormControl sx={{ m: margin, width: width, mb: margin_b}} variant="outlined">
       <TextField
         id="input-password"
@@ -73,8 +53,9 @@ const PasswordInput: React.FC<PasswordInputProps> = ({ password, handleChangePas
           )
         }}
         label={labelText}
+        placeholder={placeText}
         variant={design}
-        size={inputSize}
+        size="medium"
         // 유효성 검사 오류 시 추가
         error={!isValid}
         helperText={!isValid ? errorText : ""}

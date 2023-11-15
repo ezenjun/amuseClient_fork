@@ -172,4 +172,38 @@ export interface PointProps {
 	myPoint: number;
 }
 
+export interface ChipProps extends IProps {
+	color: string;
+}
+
+export interface PaymentInformationProps {
+	bookerName: string;
+	bookerBirthDay: string;
+	bookerFirstNameEN: string;
+	bookerLastNameEN: string;
+	bookerPhoneNumber: string;
+	bookerEmail: string;
+	guestName: string;
+	guestBirthDay: string;
+	guestFirstNameEN: string;
+	guestLastNameEN: string;
+	guestPhoneNumber: string;
+	guestEmail: string;
+	additionalRequest: string;
+}
+
+export interface ItemInformationProps {
+	itemName: string;
+	reservationDateTime: string;
+	itemPayPrice: number;
+	informationResponseDtoList: [
+		{
+			ticketName: string;
+			ticketSubName: string;
+			ticketPrice: number;
+			ticketCount: number;
+		}
+	];
+	itemIntroduceInformation: string;
+}
 // commit용 주석

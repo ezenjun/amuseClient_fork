@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useOrderContext } from "../../../../../../Contexts/OrderContext";
-import { TicketData } from "../../../../../../../../Interfaces/DataInterfaces";
+import {
+	PostTicketData,
+	TicketData,
+} from "../../../../../../../../Interfaces/DataInterfaces";
 import getSelectedPriceIndex from "../getSelectedPriceIndex";
 import styles from "../ProductInfo.module.scss";
 import styled from "@emotion/styled";
@@ -9,6 +12,8 @@ import {
 	Bold20DarkGray,
 	Regular16Gray,
 } from "../../../../../../../../components/Text/Text";
+import { useRecoilState } from "recoil";
+import { PaymentDataState } from "../../../../../../../../Recoil/OrderAtomState";
 
 type Props = {};
 
@@ -16,10 +21,54 @@ const TicketList = (props: Props) => {
 	const { orderData, setOrderData, orderTicketData, orderRange } =
 		useOrderContext();
 	const [ticketData, setTicketData] = useState<TicketData[]>([]);
+	const [paymentData, setPaymentData] = useRecoilState(PaymentDataState);
+	console.log("paymentData", paymentData);
 
 	useEffect(() => {
 		setTicketData(orderTicketData);
 	}, [orderTicketData]);
+
+	useEffect(() => {
+		// GPT modify this code
+		const updatedPaymentData = {
+			...paymentData,
+			ticketList: mapTicketDataToSelectedTicket(
+				orderTicketData,
+				orderRange
+			),
+		};
+		console.log(
+			"수정된 ticket data",
+			mapTicketDataToSelectedTicket(orderTicketData, orderRange)
+		);
+		setPaymentData(updatedPaymentData);
+	}, [orderTicketData]);
+
+	const mapTicketDataToSelectedTicket = (
+		ticketData: TicketData[],
+		orderRange: any
+	): PostTicketData[] => {
+		return ticketData
+			.filter((ticket) => ticket.count > 0)
+			.map((ticket) => {
+				const selectedPriceIndex = getSelectedPriceIndex(
+					ticket,
+					orderRange
+				);
+				const ticketPrice =
+					selectedPriceIndex !== -1
+						? ticket.priceList[selectedPriceIndex].price
+						: 0;
+
+				return {
+					ticketId: ticket.id, // Add the appropriate logic or ID mapping here
+					ticketCount: ticket.count,
+					ticketPrice: ticketPrice,
+					ticketName: ticket.title,
+					ticketSubName: ticket.content,
+				};
+			});
+	};
 
 	return (
 		<TicketListContainer>

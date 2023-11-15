@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import { CommonHeader } from "../../../CommonHeader";
 import styles from "./Payment.module.scss";
 import kakaoImage from "../../../../Images/kakao.png";
@@ -16,6 +16,9 @@ import { EachPaymentNotice, PayMethodList } from "./styles";
 import RadioButton from "../../../../../../../components/Button/RadioButton/RadioButton";
 import { useRecoilState } from "recoil";
 import { PaymentDataState } from "../../../../../../../Recoil/OrderAtomState";
+import { PayMethodDetail } from "../../../../../../../Interfaces/DataInterfaces";
+import { useCookies } from "react-cookie";
+import axios from "axios";
 
 export function PaymentMethod() {
 	const { orderData, setOrderData } = useOrderContext();
@@ -44,32 +47,59 @@ export function PaymentMethod() {
 		}));
 	}, [selectedOption]);
 
+	const [paymethodDetail, setPaymethodDetail] = useState<PayMethodDetail>();
+	const [cookies] = useCookies(["__jwtkid__"]);
+	const getPaymethodDetail = async () => {
+		const token = cookies.__jwtkid__;
+		if (token) {
+			axios
+				.get(
+					`${process.env.REACT_APP_AMUSE_API}/test/api/payment-method-info-type?type=${paymentData.itemType}`,
+					{
+						headers: {
+							"Content-Type": "application/json",
+							Authorization: `${token}`,
+						},
+					}
+				)
+				.then((response) => {
+					const data = response.data.data;
+					setPaymethodDetail(data);
+					console.log("paymethodDetail", data);
+				})
+				.catch((err) => {
+					console.log(err);
+				});
+		}
+	};
+
+	useEffect(() => {
+		getPaymethodDetail();
+	}, []);
+
 	return (
 		<DetailSectionContainer>
 			<SubHeader>결제 방법</SubHeader>
 			<GrayBox verticalPadding={20} horizontalPadding={30}>
-				<EachPaymentNotice>
-					<Bold16DarkGray>현장결제</Bold16DarkGray>
-					<Regular16DarkGray>
-						추가인원 비용들의 현장결제 발생 상품을 확인하세요.
-					</Regular16DarkGray>
-					<br />
-				</EachPaymentNotice>
-
-				<EachPaymentNotice>
-					<Bold16DarkGray>취소불가 및 수수료</Bold16DarkGray>
-					<Regular16DarkGray>
-						주소 및 환불규정에 따라 취소불가, 수수료가 발생 할 수
-						있습니다.
-					</Regular16DarkGray>
-					<br />
-				</EachPaymentNotice>
-				<EachPaymentNotice>
-					<Bold16DarkGray>미성년자 및 법정대리인 필수</Bold16DarkGray>
-					<Regular16DarkGray>
-						미성년자는 법정대리인 동행 없이 투숙이 불가능합니다.
-					</Regular16DarkGray>
-				</EachPaymentNotice>
+				{paymethodDetail?.content
+					?.split(/\n\n/)
+					.map((paragraph, index) => (
+						<React.Fragment key={index}>
+							{index > 0 && <br />}{" "}
+							{paragraph.split(/\n/).map((line, lineIndex) => (
+								<React.Fragment key={lineIndex}>
+									{lineIndex > 0 && <br />}
+									{lineIndex === 0 ? (
+										<Bold16DarkGray>{line}</Bold16DarkGray>
+									) : (
+										<Regular16DarkGray>
+											{line}
+										</Regular16DarkGray>
+									)}
+								</React.Fragment>
+							))}
+						</React.Fragment>
+					))}
 			</GrayBox>
 			<PayMethodList>
 				<RadioButton

@@ -18,7 +18,7 @@ export const Login = styled.div`
 `;
 
 export const Button = styled.button`
-  color: #9e9e9e;
+  color: #464646;
   font-family: "Pretendard";
   font-size: 12px;
   font-weight: 500;

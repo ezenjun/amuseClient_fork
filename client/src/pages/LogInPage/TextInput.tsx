@@ -2,7 +2,6 @@ import React, { ChangeEvent, useState } from "react";
 import FormControl from '@mui/material/FormControl';
 import TextField, { TextFieldVariants } from '@mui/material/TextField';
 
-
 interface TextInputProps {
     labelText: string;
     placeText: string;
@@ -10,34 +9,36 @@ interface TextInputProps {
     width: string;
     margin: string;
     disable: boolean;
-    customValidation: (value: string) => string;
-    onInputChange: (value: string) => void;
     onBlur?: () => void;
+    value?: string;
+    onInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    isValid?: boolean;
+    errorText?: string;
+    inputId?: boolean;
+    design?: TextFieldVariants;
+    allMargin?: string;
 }
 
-const TextInput: React.FC<TextInputProps> = ({ disable, onBlur, customValidation, onInputChange, labelText, placeText, inputType, width, margin }) => {
-    const [inputValue, setInputValue] = useState<string>('');
-
-    const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-        const validationValue: string = customValidation(e.target.value);
-        setInputValue(validationValue);
-        onInputChange(validationValue);
-    };
+const TextInput: React.FC<TextInputProps> = ({ disable, onBlur, onInputChange, labelText, placeText, value, inputType, isValid = true, errorText = "", width, margin, inputId, allMargin, design="outlined" }) => {
 
     return (
-        <FormControl sx={{ mb: margin, width: width }} variant="outlined">
+        <FormControl sx={{ mb: margin, width: width, m: allMargin }} variant="outlined">
             <TextField
+                hiddenLabel
                 disabled={disable}
                 id="input-text"
                 label={labelText}
                 placeholder={placeText}
                 type={inputType}
-                value={inputValue}
-                onChange={handleInputChange}
-                variant="outlined"
-                size="small"
+                value={value}
+                onChange={onInputChange}
+                // variant="outlined"
+                variant={design}
+                // size="Normal"
                 sx={{ padding: 0 }}
                 onBlur={onBlur}
+                error={!isValid}
+                helperText={!isValid ? errorText : (inputId ? "사용가능한 ID입니다." : "")}
             />
         </FormControl>
     );

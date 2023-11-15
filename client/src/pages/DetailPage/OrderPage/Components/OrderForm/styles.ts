@@ -6,6 +6,7 @@ export const OrderInfoContainer = styled.form`
 	width: 100%;
 	height: 100%;
 	gap: 1.25rem;
+	padding-bottom: 3.125rem;
 	box-sizing: border-box;
 	@media screen and (max-width: 1023px) {
 		display: grid;
