@@ -32,27 +32,27 @@ export const SingleSignBtn = styled.button`
     letter-spacing: -0.4px;
 `;
 
-export const ModalContent = styled.div`
-    width: 218px;
-    color: #000;
-    font-family: Pretendard;
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 600;
-    margin: 30px 41px;
-`;
+// export const ModalContent = styled.div`
+//     width: 218px;
+//     color: #000;
+//     font-family: Pretendard;
+//     font-size: 20px;
+//     font-style: normal;
+//     font-weight: 600;
+//     margin: 30px 41px;
+// `;
 
-export const ModalBtn = styled.button`
-    width: 100%;
-    color: #E6003D;
-    text-align: center;
-    font-family: Pretendard;
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
-    padding: 19px 0;
-    border-top: 1px solid #ECECEC;
-    position: absolute;
-    bottom: 0;
-`;
+// export const ModalBtn = styled.button`
+//     width: 100%;
+//     color: #E6003D;
+//     text-align: center;
+//     font-family: Pretendard;
+//     font-size: 20px;
+//     font-style: normal;
+//     font-weight: 700;
+//     line-height: normal;
+//     padding: 19px 0;
+//     border-top: 1px solid #ECECEC;
+//     position: absolute;
+//     bottom: 0;
+// `;

@@ -9,6 +9,9 @@ import Certification from "../LogInPage/Certification";
 
 
 const SignUpAmuse: React.FC = () => {
+    const movePage = useNavigate();
+
+    // 약관 동의
     const [allAgreed, setAllAgreed] = useState<boolean>(false);
     const [personalInfoAgreed, setPersonalInfoAgreed] = useState<boolean>(false);
     const [marketingInfoAgreed, setMarketingInfoAgreed] = useState<boolean>(false);
@@ -35,7 +38,6 @@ const SignUpAmuse: React.FC = () => {
     // 약관 동의 Modal
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
     const [modalContent, setModalContent] = useState<string>("");
-
     const openModal = (content: string) => {
         setModalContent(content);
         setIsModalOpen(true);
@@ -47,12 +49,9 @@ const SignUpAmuse: React.FC = () => {
 
     // 다음 버튼 클릭 시
     const [currentStep, setCurrentStep] = useState<number>(1);
-    const movePage = useNavigate();
-
     const handleNextClick = () => {
         setCurrentStep(currentStep + 1);
     };
-
 
     const [name, setName] = useState<string>('');
     const handleNextClickInfo = (name: string) => {
@@ -63,6 +62,7 @@ const SignUpAmuse: React.FC = () => {
     const handleContinueClick = () => {
         movePage("/LogIn");
     };
+
 
     return (
         <MainComponent>
@@ -94,7 +94,7 @@ const SignUpAmuse: React.FC = () => {
                 {/* 본인인증 & 정보입력 */}
                 {currentStep === 2 && (
                     <div>
-                        <Certification />
+                        <Certification onCalledBy="SignUp" />
                         <S.SignUpTitle>정보입력</S.SignUpTitle>
                         <InfoForm onNextStep={handleNextClickInfo} />
                     </div>
