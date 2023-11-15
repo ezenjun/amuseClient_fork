@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import { useOrderContext } from "../../../../../Contexts/OrderContext";
 import { CommonHeader } from "../../../CommonHeader";
 import styles from "./AdditionalInfo.module.scss";
@@ -12,6 +12,9 @@ import styled from "@emotion/styled";
 import { Common, Pretendard } from "../../../../../../../styles";
 import { useRecoilState } from "recoil";
 import { PaymentDataState } from "../../../../../../../Recoil/OrderAtomState";
+import { useCookies } from "react-cookie";
+import { AdditionalInfoDetail } from "../../../../../../../Interfaces/DataInterfaces";
+import axios from "axios";
 
 export function AdditionalInfo() {
 	const { orderData, setOrderData } = useOrderContext();
@@ -28,13 +31,42 @@ export function AdditionalInfo() {
 
 		setOrderData(data);
 	};
+
+	const [additionalInfoDetail, setAdditionalInfoDetail] =
+		useState<AdditionalInfoDetail>();
+	const [cookies] = useCookies(["__jwtkid__"]);
+	const getPaymethodDetail = async () => {
+		const token = cookies.__jwtkid__;
+		if (token) {
+			axios
+				.get(
+					`${process.env.REACT_APP_AMUSE_API}/test/api/item/reservation-info?item_id=${paymentData.itemId}`,
+					{
+						headers: {
+							"Content-Type": "application/json",
+							Authorization: `${token}`,
+						},
+					}
+				)
+				.then((response) => {
+					const data = response.data.data;
+					setAdditionalInfoDetail(data);
+					console.log("paymethodDetail", data);
+				})
+				.catch((err) => {
+					console.log(err);
+				});
+		}
+	};
+
+	useEffect(() => {
+		getPaymethodDetail();
+	}, []);
+
 	return (
 		<DetailSectionContainer>
 			<SubHeader>추가 요청사항</SubHeader>
-			<Regular16Gray>
-				1) 영문 성/이름 2)여권번호 3)생년월일 4)성별 5)여권만료일 6)출발
-				항공권 정보 7)유아 인원 순서대로 기입해주세요
-			</Regular16Gray>
+			<Regular16Gray>{additionalInfoDetail?.content}</Regular16Gray>
 			<div className={styles.additionalInfoContainer}>
 				<TextArea
 					className={styles.text}

@@ -266,3 +266,9 @@ export interface PayMethodDetail {
 	type: string;
 	content: string;
 }
+
+export interface AdditionalInfoDetail {
+	id: number;
+	name: string;
+	content: string;
+}
