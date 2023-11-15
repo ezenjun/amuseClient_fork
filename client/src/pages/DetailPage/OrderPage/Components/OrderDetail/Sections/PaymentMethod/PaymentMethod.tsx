@@ -100,29 +100,6 @@ export function PaymentMethod() {
 							))}
 						</React.Fragment>
 					))}
-
-				{/* <EachPaymentNotice>
-					<Bold16DarkGray>현장결제</Bold16DarkGray>
-					<Regular16DarkGray>
-						추가인원 비용들의 현장결제 발생 상품을 확인하세요.
-					</Regular16DarkGray>
-					<br />
-				</EachPaymentNotice>
-
-				<EachPaymentNotice>
-					<Bold16DarkGray>취소불가 및 수수료</Bold16DarkGray>
-					<Regular16DarkGray>
-						주소 및 환불규정에 따라 취소불가, 수수료가 발생 할 수
-						있습니다.
-					</Regular16DarkGray>
-					<br />
-				</EachPaymentNotice>
-				<EachPaymentNotice>
-					<Bold16DarkGray>미성년자 및 법정대리인 필수</Bold16DarkGray>
-					<Regular16DarkGray>
-						미성년자는 법정대리인 동행 없이 투숙이 불가능합니다.
-					</Regular16DarkGray>
-				</EachPaymentNotice> */}
 			</GrayBox>
 			<PayMethodList>
 				<RadioButton

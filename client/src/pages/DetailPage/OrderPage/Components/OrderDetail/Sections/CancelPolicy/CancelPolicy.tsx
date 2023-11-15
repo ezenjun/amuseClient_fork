@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import GrayBox from "../../../../../../../components/Box/GrayBox";
-import { SubHeader } from "../../../../styles";
 import { CancelPolicyContainer, TitleRow } from "./styles";
 import { useCookies } from "react-cookie";
 import axios from "axios";
-import { useRecoilValue } from "recoil";
+import { useRecoilState } from "recoil";
 import { PaymentDataState } from "../../../../../../../Recoil/OrderAtomState";
 import { ReactComponent as ArrowDown } from "../../../../../../../assets/Icons/Arrow/arrow_down_24.svg";
 import { ReactComponent as ArrowUp } from "../../../../../../../assets/Icons/Arrow/arrow_up_24.svg";
@@ -12,9 +11,9 @@ import { Bold24DarkGray } from "../../../../../../../components/Text/Text";
 
 export const CancelPolicy = () => {
 	const [showPolicy, setShowPolicy] = useState(true);
+	const [paymentData, setPaymentData] = useRecoilState(PaymentDataState);
 	const [cancelPolicy, setCancelPolicy] = useState<string>("");
 	const [cookies] = useCookies(["__jwtkid__"]);
-	const paymentData = useRecoilValue(PaymentDataState);
 	const getCancelPolicy = async () => {
 		const token = cookies.__jwtkid__;
 		if (token) {
@@ -31,7 +30,10 @@ export const CancelPolicy = () => {
 				.then((response) => {
 					const data = response.data.data;
 					setCancelPolicy(data.content);
-					console.log(data);
+					setPaymentData((prevPaymentData) => ({
+						...prevPaymentData,
+						cancelPolicy: data.content,
+					}));
 				})
 				.catch((err) => {
 					console.log(err);

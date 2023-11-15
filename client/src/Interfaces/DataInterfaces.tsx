@@ -106,6 +106,7 @@ export interface PaymentInfo {
 		ageOver14: boolean;
 		stayRule: boolean;
 	};
+	cancelPolicy: string;
 }
 
 export interface PostTicketData {
@@ -117,59 +118,57 @@ export interface PostTicketData {
 }
 
 export interface PaymentPostData {
-	paymentCompleteRequestDto: {
+	paymentItemInfoRequestDto: {
+		itemId: number;
+		travelStartDate: string;
+		travelEndDate: string;
+		additionalRequest: string;
+		itemCost: number;
+		itemPayPrice: number;
+		itemName: string;
+		itemImage: string;
+	};
+	paymentTicketRequestDtoList: Array<PostTicketData>;
+	paymentReservationInfoDto: {
+		bookerName: string;
+		bookerBirthDay: string;
+		bookerFirstNameEN: string;
+		bookerLastNameEN: string;
+		bookerPhoneNumber: string;
+		bookerPhoneNumberCode: number;
+		bookerEmail: string;
+		bookerPassportNumber: string;
 		reservationItemType: string;
 		reservationNumber: string;
-		paymentItemInfoRequestDto: {
-			itemId: number;
-			travelStartDate: string;
-			travelEndDate: string;
-			additionalRequest: string;
-			itemCost: number;
-			itemPayPrice: number;
-			itemName: string;
-			itemImage: string;
-		};
-		paymentTicketRequestDtoList: Array<PostTicketData>;
-		paymentReservationInfoDto: {
-			bookerName: string;
-			bookerBirthDay: string;
-			bookerFirstNameEN: string;
-			bookerLastNameEN: string;
-			bookerPhoneNumber: string;
-			bookerPhoneCode: number;
-			bookerEmail: string;
-			passportNumber: string;
-		};
-		paymentGuestInfoDto: {
-			guestName: string;
-			guestBirthDay: string;
-			guestFirstNameEN: string;
-			guestLastNameEN: string;
-			guestPhoneNumber: string;
-			guestPhoneCode: number;
-			guestEmail: string;
-			guestPassportNumber: string;
-		};
-		additionalRequest: string;
-		payType: string;
-		pointAcquire: number;
-		pointUse: number;
-		cardType: string;
-		discountRate: number;
-		payStatus: string;
-		paymentAgreementRequestDto: {
-			privacyCollection: number;
-			privacyToThirdParty: number;
-			conciergeRule: number;
-			ageOver14: number;
-			stayRule: number;
-		};
-		paymentCancelRuleRequestDto: {
-			content: string;
-		};
-		cardNumber: string;
 	};
+	paymentGuestInfoDto: {
+		guestName: string;
+		guestBirthDay: string;
+		guestFirstNameEN: string;
+		guestLastNameEN: string;
+		guestPhoneNumber: string;
+		guestPhoneNumberCode: number;
+		guestEmail: string;
+		guestPassportNumber: string;
+	};
+	additionalRequest: string;
+	payType: string;
+	pointAcquire: number;
+	pointUse: number;
+	cardType: string;
+	discountRate: number;
+	payStatus: string;
+	paymentAgreementRequestDto: {
+		privacyCollection: number;
+		privacyToThirdParty: number;
+		conciergeRule: number;
+		ageOver14: number;
+		stayRule: number;
+	};
+	paymentCancelRuleRequestDto: {
+		content: string;
+	};
+	cardNumber: string;
 }
 
 export interface UserPoint {
