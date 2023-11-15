@@ -1,5 +1,4 @@
 import React, { useState, useEffect, ChangeEvent } from "react";
-import styled from 'styled-components';
 import axios from "axios";
 import _ from "lodash";
 import logoimage from "../../assets/Images/amuse_logo.png";
@@ -8,8 +7,7 @@ import { isLoggedIn } from "../../atoms";
 import { useCookies } from "react-cookie";
 import moment from "moment";
 import { useNavigate } from "react-router";
-import checkIcon from './Icons/check_icon.png';
-import checkedIcon from './Icons/checked_icon.png';
+import * as S from "./LoginAgreeStyle";
 
 
 const LoginAgree: React.FC = () => {
@@ -118,7 +116,6 @@ const LoginAgree: React.FC = () => {
     // }, [])
 
 
-
     const [allAgreed, setAllAgreed] = useState<boolean>(false);
     const [personalInfoAgreed, setPersonalInfoAgreed] = useState<boolean>(false);
     const [marketingInfoAgreed, setMarketingInfoAgreed] = useState<boolean>(false);
@@ -151,193 +148,51 @@ const LoginAgree: React.FC = () => {
         setAllAgreed(isChecked && personalInfoAgreed && marketingInfoAgreed);
     };
 
+
     if (!isShow) {
         return (<></>)
     } else {
         return (
-            <LoginAgreeBody>
-                <LoginAgreeTitle>약관 동의</LoginAgreeTitle>
-                <LoginAgreeContent>
+            <S.LoginAgreeBody>
+                <S.LoginAgreeTitle>약관 동의</S.LoginAgreeTitle>
+                <S.LoginAgreeContent>
                     <img className="logo_mobile" style={{ paddingBottom: "17px", width: "139px" }} src={logoimage} alt="Amuse Travel Logo" />
-                    <AllAgreeBox>
-                        <AllAgreeTitleBox>
-                            <AgreeCheck id="all_agree" onChange={handleAllAgreeChange} checked={allAgreed}></AgreeCheck>
-                            <AllAgreeText htmlFor="all_agree">전체 동의하기</AllAgreeText>
-                        </AllAgreeTitleBox>
-                        <AllAgreeContent>
+                    <S.AllAgreeBox>
+                        <S.AllAgreeTitleBox>
+                            <S.AgreeCheck id="all_agree" onChange={handleAllAgreeChange} checked={allAgreed}></S.AgreeCheck>
+                            <S.AllAgreeText htmlFor="all_agree">전체 동의하기</S.AllAgreeText>
+                        </S.AllAgreeTitleBox>
+                        <S.AllAgreeContent>
                             전체동의는 어뮤즈 트래블 서비스 동의를 포함하고 있습 니다.
                             전체동의는 선택목적에 대한 동의를 포함하고 있으며,
                             선택 목적에 대한 동의를 거부해도 서비스 이용이 가능합니다.
-                        </AllAgreeContent>
-                    </AllAgreeBox>
-                    <AgreeBox>
-                        <AgreeCheck id="agree_age_info" onChange={handleAgeInfoAgreeChange} checked={ageInfoAgreed}></AgreeCheck>
-                        <AgreeText htmlFor="agree_age_info">
-                            (필수)<ContentBtn>만 14세 이상</ContentBtn>동의
-                        </AgreeText>
-                    </AgreeBox>
-                    <AgreeBox>
-                        <AgreeCheck id="agree_personal_info" onChange={handlePersonalInfoAgreeChange} checked={personalInfoAgreed}></AgreeCheck>
-                        <AgreeText htmlFor="agree_personal_info">
-                            (필수)<ContentBtn>개인정보 활용</ContentBtn>동의
-                        </AgreeText>
-                    </AgreeBox>
-                    <AgreeBox>
-                        <AgreeCheck id="agree_marketing_info" onChange={handleMarketingInfoAgreeChange} checked={marketingInfoAgreed}></AgreeCheck>
-                        <AgreeText htmlFor="agree_marketing_info">
-                            (선택)<ContentBtn>마케팅정보 활용</ContentBtn>동의
-                        </AgreeText>
-                    </AgreeBox>
-                    <AgreeButton onClick={() => { submitAgree() }} disabled={!(ageInfoAgreed && personalInfoAgreed)}>
+                        </S.AllAgreeContent>
+                    </S.AllAgreeBox>
+                    <S.AgreeBox>
+                        <S.AgreeCheck id="agree_age_info" onChange={handleAgeInfoAgreeChange} checked={ageInfoAgreed}></S.AgreeCheck>
+                        <S.AgreeText htmlFor="agree_age_info">
+                            (필수)<S.ContentBtn>만 14세 이상</S.ContentBtn>동의
+                        </S.AgreeText>
+                    </S.AgreeBox>
+                    <S.AgreeBox>
+                        <S.AgreeCheck id="agree_personal_info" onChange={handlePersonalInfoAgreeChange} checked={personalInfoAgreed}></S.AgreeCheck>
+                        <S.AgreeText htmlFor="agree_personal_info">
+                            (필수)<S.ContentBtn>개인정보 활용</S.ContentBtn>동의
+                        </S.AgreeText>
+                    </S.AgreeBox>
+                    <S.AgreeBox>
+                        <S.AgreeCheck id="agree_marketing_info" onChange={handleMarketingInfoAgreeChange} checked={marketingInfoAgreed}></S.AgreeCheck>
+                        <S.AgreeText htmlFor="agree_marketing_info">
+                            (선택)<S.ContentBtn>마케팅정보 활용</S.ContentBtn>동의
+                        </S.AgreeText>
+                    </S.AgreeBox>
+                    <S.AgreeButton onClick={() => { submitAgree() }} disabled={!(ageInfoAgreed && personalInfoAgreed)}>
                         {"동의하고 계속하기"}
-                    </AgreeButton>
-                </LoginAgreeContent>
-            </LoginAgreeBody>
+                    </S.AgreeButton>
+                </S.LoginAgreeContent>
+            </S.LoginAgreeBody>
         )
     }
 }
+
 export default LoginAgree
-
-const LoginAgreeBody = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-`;
-
-const LoginAgreeTitle = styled.h1`
-    display: flex;
-    justify-content: center;
-    color: #000;
-    font-size: 24px;
-    font-weight: 600;
-    line-height: normal;
-    margin-bottom: 20px;
-    margin-top: 60px;
-`;
-
-const LoginAgreeContent = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 446px;
-    height: 510px;
-    border: 1px solid #E3E3E3;
-    padding: 40px 60px;
-`;
-
-const AllAgreeBox = styled.div`
-
-    border-top: 1px solid #E4E4E4;
-    border-bottom: 1px solid #E4E4E4;
-    padding: 12px 7px;
-`;
-
-const AllAgreeTitleBox = styled.div`
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-`;
-
-const AllAgreeContent = styled.div`
-    color: #000;
-    font-family: Pretendard;
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: normal;
-    padding-left: 30px;
-`;
-
-const AgreeCheck = styled.input.attrs({ type: 'checkbox' })`
-    content: url(${checkIcon});
-    width: 20px;
-    margin: 0 10px 0 0;
-    &:checked {
-        content: url(${checkedIcon});
-    }
-`;
-
-const AllAgreeText = styled.label`
-    color: #000;
-    font-family: Pretendard;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: normal;
-`;
-
-const AgreeBox = styled.div`
-    display: flex;
-    align-items: center;
-    margin: 7px 16px;
-`;
-
-const AgreeText = styled.label`
-    color: #9C9C9C;
-    font-family: Pretendard;
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: normal;
-`;
-
-const ContentBtn = styled.span`
-    color: #4A87FF;
-    font-family: Pretendard;
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: normal;
-    text-decoration-line: underline;
-    cursor: pointer;
-`;
-
-
-const AgreeButton = styled.button`
-    &:disabled {
-        color:#fff;
-        background-color:#828282;
-        cursor: not-allowed;
-    }
-    width: 327px;
-    height: 46px;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    border-radius: 8px;
-    background: #E6003E;
-    color:#fff;
-    font-size:20px;
-    font-family: Pretendard;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
-    cursor:pointer;
-    margin-top: 10px;
-`;
-// const ReadText = styled.div`
-//     display:flex;
-//     align-items:center;
-//     width:32;
-//     height:24;
-//     font-size:12px;
-//     cursor:pointer;
-//     color:rgb(120,120,120);
-
-//     &:hover{
-//         color:#e6003d;
-//     }
-// `;
-// const CancelBtn = styled.div`
-//     width: 100%;
-//     max-width: 348px;
-//     display: flex;
-//     flex-direction: row-reverse;
-//     margin-top: 20px;
-//     margin-right: 12px;
-
-//     &:hover{
-//         color :#e6003d;
-//     }
-// `;
