@@ -48,6 +48,7 @@ export interface MapData {
 }
 
 export interface TicketData {
+	id: number;
 	title: string;
 	content: string;
 	priceList: { startDate: string; price: number }[];
@@ -90,7 +91,7 @@ export interface PaymentInfo {
 	startDate: Date;
 	endDate: Date;
 	orderDateTime: Date;
-	ticketList: Array<SelectedTicket>;
+	ticketList: Array<PostTicketData>;
 	reservationInfo: ReservationInfo;
 	//호텔이면
 	guestInfo: GuestInfo;
@@ -104,6 +105,70 @@ export interface PaymentInfo {
 		privacyToThirdParty: boolean;
 		ageOver14: boolean;
 		stayRule: boolean;
+	};
+}
+
+export interface PostTicketData {
+	ticketId: number;
+	ticketCount: number;
+	ticketPrice: number;
+	ticketName: string;
+	ticketSubName: string;
+}
+
+export interface PaymentPostData {
+	paymentCompleteRequestDto: {
+		reservationItemType: string;
+		reservationNumber: string;
+		paymentItemInfoRequestDto: {
+			itemId: number;
+			travelStartDate: string;
+			travelEndDate: string;
+			additionalRequest: string;
+			itemCost: number;
+			itemPayPrice: number;
+			itemName: string;
+			itemImage: string;
+		};
+		paymentTicketRequestDtoList: Array<PostTicketData>;
+		paymentReservationInfoDto: {
+			bookerName: string;
+			bookerBirthDay: string;
+			bookerFirstNameEN: string;
+			bookerLastNameEN: string;
+			bookerPhoneNumber: string;
+			bookerPhoneCode: number;
+			bookerEmail: string;
+			passportNumber: string;
+		};
+		paymentGuestInfoDto: {
+			guestName: string;
+			guestBirthDay: string;
+			guestFirstNameEN: string;
+			guestLastNameEN: string;
+			guestPhoneNumber: string;
+			guestPhoneCode: number;
+			guestEmail: string;
+			guestPassportNumber: string;
+		};
+		additionalRequest: string;
+		payType: string;
+		pointAcquire: number;
+		pointUse: number;
+		cardType: string;
+		discountRate: number;
+		payStatus: string;
+		paymentAgreementRequestDto: {
+			privacyCollection: number;
+			privacyToThirdParty: number;
+			conciergeRule: number;
+			ageOver14: number;
+			stayRule: number;
+		};
+		paymentCancelRuleRequestDto: {
+			content: string;
+		};
+		cardNumber: string;
 	};
 }
 

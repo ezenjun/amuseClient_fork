@@ -1,6 +1,10 @@
 import { atom } from "recoil";
 import { atomKeys } from "../configs/atomKeys";
-import { PaymentInfo, SelectedItemData } from "../Interfaces/DataInterfaces";
+import {
+	PaymentInfo,
+	SelectedItemData,
+	TicketData,
+} from "../Interfaces/DataInterfaces";
 
 export const selectedItemState = atom<SelectedItemData>({
 	key: atomKeys.selectedItemState,
