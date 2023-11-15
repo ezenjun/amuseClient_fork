@@ -163,7 +163,14 @@ const SignUpAmuse: React.FC = () => {
                                         <img src={CloseIcon} className="close_icon" />
                                     </button>
                                 </S.ModalHeader>
-                                <S.ModalContent>{`${terms[modalContent].content}`}</S.ModalContent>
+                                <S.ModalContent>
+                                    {terms[modalContent].content.split('\n').map((line, index) => (
+                                        <React.Fragment key={index}>
+                                            {line}
+                                            <br />
+                                        </React.Fragment>
+                                    ))}
+                                </S.ModalContent>
                                 <S.AgreeBtn onClick={closeModal}>확인</S.AgreeBtn>
                             </S.ModalBody>
                         )}
