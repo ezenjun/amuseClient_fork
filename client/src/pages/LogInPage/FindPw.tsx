@@ -8,11 +8,9 @@ import { useRecoilState } from "recoil";
 import { impUid, isVisible } from "../../atoms";
 import axios from "axios";
 import * as S from "./FindStyle";
-import * as M from "./CertificationStyle";
+import * as M from "../SignUpPage/SignUpAmuseStyle";
 
-interface FindPwProps { }
-
-const FindPw: React.FC<FindPwProps> = (props) => {
+const FindPw: React.FC = () => {
     const movePage = useNavigate();
     const [isShow, setIsShow] = useRecoilState(isVisible);
 
@@ -57,7 +55,7 @@ const FindPw: React.FC<FindPwProps> = (props) => {
         setIsNextButtonDisabled(!isFieldsValid);
     }, [isValidPassword, isValidCheckPassword]);
 
-    // 변경 완료 모달 창
+    // 변경 완료 Modal
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
     const openModal = () => {
         setIsModalOpen(true);
@@ -91,23 +89,23 @@ const FindPw: React.FC<FindPwProps> = (props) => {
     }, [impUidData]);
 
     // 가입 여부 확인 api
-    useEffect(() => {
-        if (impUidData) {
-            axios
-                .get(`${process.env.REACT_APP_AMUSE_API}/api/v1/user/check/duplicate?name=${name}&birthday=${birth}&phonenumber=${phone}`)
-                .then((response) => {
-                    if (!response.data.data) {
-                        movePage('/');
-                        alert("계정이 없습니다 회원가입을 진행해 주세요.");
-                    }
-                })
-                .catch((error) => {
-                    console.log(error.message);
-                })
-        }
-    }, [name, birth, phone])
+    // useEffect(() => {
+    //     if (impUidData) {
+    //         axios
+    //             .get(`${process.env.REACT_APP_AMUSE_API}/api/v1/user/check/duplicate?name=${name}&birthday=${birth}&phonenumber=${phone}`)
+    //             .then((response) => {
+    //                 if (!response.data.data) {
+    //                     movePage('/');
+    //                     alert("계정이 없습니다 회원가입을 진행해 주세요.");
+    //                 }
+    //             })
+    //             .catch((error) => {
+    //                 console.log(error.message);
+    //             })
+    //     }
+    // }, [name, birth, phone])
 
-    // 변경 버튼 클릭 시 실행
+    // 비번 변경 POST
     const handleClick = () => {
         const requestBody = {
             "userName": name,
@@ -126,10 +124,11 @@ const FindPw: React.FC<FindPwProps> = (props) => {
             })
     }
 
+
     return (
         <MainComponent>
             <S.FindBody>
-                {isShow && <Certification></Certification>}
+                {isShow && <Certification onCalledBy="Find"></Certification>}
                 {!isShow && (
                     <div>
                         <S.FindTitle>비밀번호 재설정</S.FindTitle>
@@ -150,7 +149,7 @@ const FindPw: React.FC<FindPwProps> = (props) => {
                     </div>
                 )}
 
-
+                {/* 비번 변경 Modal */}
                 <div className="modal">
                     <Modal
                         isOpen={isModalOpen}
@@ -161,10 +160,9 @@ const FindPw: React.FC<FindPwProps> = (props) => {
                                 left: "50%",
                                 transform: "translate(-50%, -50%)",
                                 backgroundColor: "#FFF",
-                                width: "300px",
-                                height: "170px",
-                                borderRadius: "8px",
-                                padding: "0",
+                                width: "754px",
+                                height: "389px",
+                                padding: "40px 43px"
                             },
                             overlay: {
                                 backgroundColor: "rgba(0, 0, 0, 0.5)",
@@ -174,9 +172,13 @@ const FindPw: React.FC<FindPwProps> = (props) => {
                             },
                         }}
                     >
-                        <div className="complete_modal">
-                            <M.ModalContent>새로운 비밀번호로 변경이<br />완료되었습니다.</M.ModalContent>
-                            <M.ModalBtn onClick={closeModal}>확인</M.ModalBtn>
+                        <div className="agree_modal">
+                            <M.ModalHeader>
+                                <M.ModalTitle>새로운 비밀번호로 변경이 완료되었습니다.</M.ModalTitle>
+                            </M.ModalHeader>
+                            <div className="agree_btn_box">
+                                <M.AgreeBtn onClick={closeModal}>확인</M.AgreeBtn>
+                            </div>
                         </div>
                     </Modal>
                 </div>

@@ -7,9 +7,7 @@ import { useRecoilState } from "recoil";
 import { impUid, isVisible } from "../../atoms";
 import * as S from "./FindStyle";
 
-interface FindIdProps { }
-
-const FindId: React.FC<FindIdProps> = () => {
+const FindId: React.FC = () => {
     const movePage = useNavigate();
     const [isShow, setIsShow] = useRecoilState(isVisible);
 
@@ -45,7 +43,6 @@ const FindId: React.FC<FindIdProps> = () => {
 
     // 아이디 찾기 api
     const [id, setId] = useState<string>("");
-
     useEffect(() => {
         if (name && birth && phone) {
             axios.get(`${process.env.REACT_APP_AMUSE_API}/api/v1/user/search/id?name=${name}&birthday=${birth}&phonenumber=${phone}`)
@@ -58,10 +55,11 @@ const FindId: React.FC<FindIdProps> = () => {
         }
     }, [name, birth, phone])
 
+
     return (
         <MainComponent>
             <S.FindBody>
-                {isShow && <Certification></Certification>}
+                {isShow && <Certification onCalledBy="Find"></Certification>}
                 {!isShow && (
                     <div>
                         <S.FindTitle>아이디 찾기</S.FindTitle>
