@@ -41,7 +41,7 @@ const PaymentHistoryDetail = (props: Props) => {
 		if (token && state) {
 			axios
 				.get(
-					`${process.env.REACT_APP_AMUSE_API}/api/payment/${state}`,
+					`${process.env.REACT_APP_AMUSE_API}/api/payment/detail/${state}`,
 					{
 						headers: {
 							"Content-Type": "application/json",

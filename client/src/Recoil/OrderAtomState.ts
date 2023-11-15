@@ -65,5 +65,6 @@ export const PaymentDataState = atom<PaymentInfo>({
 			ageOver14: false,
 			stayRule: false,
 		},
+		cancelPolicy: "",
 	},
 });

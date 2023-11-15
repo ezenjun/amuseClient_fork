@@ -44,24 +44,25 @@ export function OrderForm() {
 						selectedItem,
 						rsp
 					);
-					console.log(convertedData);
-					// axios
-					// 	.post(
-					// 		`${process.env.REACT_APP_AMUSE_API}/api/payment`,
-					// 		convertedData,
-					// 		{
-					// 			headers: {
-					// 				"Content-Type": "application/json",
-					// 				Authorization: `${token}`,
-					// 			},
-					// 		}
-					// 	)
-					// 	.then((response) => {
-					// 		console.log(response);
-					// 		alert("변경되었습니다.");
-					// 		window.location.reload();
-					// 	})
-					// 	.catch((err) => {});
+					console.log("convertedData", convertedData);
+					axios
+						.post(
+							`${process.env.REACT_APP_AMUSE_API}/api/payment`,
+							{ paymentCompleteRequestDto: convertedData },
+							{
+								headers: {
+									"Content-Type": "application/json",
+									Authorization: `${token}`,
+								},
+							}
+						)
+						.then((response) => {
+							console.log(response);
+							navigate("./complete", { state: { response } });
+						})
+						.catch((err) => {
+							console.log(err);
+						});
 					navigate("./complete");
 				} else if (rsp.status === "fail") {
 					alert("결제가 취소되었습니다.");
