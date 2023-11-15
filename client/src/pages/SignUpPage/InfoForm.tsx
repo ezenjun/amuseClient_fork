@@ -1,13 +1,10 @@
 import React, { useState, useEffect } from "react";
-// import { useNavigate } from "react-router-dom";
 import TextInput from "../LogInPage/TextInput";
 import PasswordInput from "../LogInPage/PasswordInput";
 import axios from "axios";
 import { useRecoilState } from "recoil";
 import { impUid } from "../../atoms";
-// import Modal from "react-modal";
 import * as S from "./InfoFormStyle";
-// import * as M from "./SignUpAmuseStyle";
 
 interface InfoFormProps {
     onNextStep: (name: string) => void;
@@ -80,34 +77,6 @@ const InfoForm: React.FC<InfoFormProps> = (props) => {
                 });
         }
     }, [impUidData]);
-
-    // 가입 여부 확인 api
-    // useEffect(() => {
-    //     if (impUidData) {
-    //         axios
-    //             .get(`${process.env.REACT_APP_AMUSE_API}/api/v1/user/check/duplicate?name=${name}&birthday=${birth}&phonenumber=${phone}`)
-    //             .then((response) => {
-    //                 if (response.data.data) {
-    //                     // openModal();
-    //                 }
-    //             })
-    //             .catch((error) => {
-    //                 console.log(error);
-    //             })
-    //     }
-    // }, [name, birth, phone])
-
-    // 가입 여부 Modal
-    // const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-
-    // const openModal = () => {
-    //     setIsModalOpen(true);
-    // };
-
-    // const closeModal = () => {
-    //     setIsModalOpen(false);
-    //     movePage("/Login");
-    // };
 
     // 아이디 중복 확인
     const [id, setId] = useState<string>("");
@@ -228,6 +197,7 @@ const InfoForm: React.FC<InfoFormProps> = (props) => {
                         </div>
                         <div>
                             <S.InputTitle>성별</S.InputTitle>
+                            
                             <S.RadioButtonContainer>
                                 <div className="input_gender">
                                     <input type="radio" name="gender" id="MAN" value="MAN" checked={gender === "MAN"} onChange={handleGenderChange} />
@@ -236,6 +206,7 @@ const InfoForm: React.FC<InfoFormProps> = (props) => {
                                     <label htmlFor="WOMAN" className="last_label">여</label>
                                 </div>
                             </S.RadioButtonContainer>
+                            {gender === "" && <span style={{ color: '#E6003D', fontSize: '12px' }}>성별을 선택해주세요.</span>}
                         </div>
                     </S.FlexBox>
 
@@ -252,41 +223,6 @@ const InfoForm: React.FC<InfoFormProps> = (props) => {
             <S.NextButton onClick={handleClickBtn} disabled={isNextButtonDisabled}>
                 가입하기
             </S.NextButton>
-
-
-            {/* 가입된 경우 모달 창 */}
-            {/* <div className="modal">
-                <Modal
-                    isOpen={isModalOpen}
-                    onRequestClose={closeModal}
-                    style={{
-                        content: {
-                            top: "50%",
-                            left: "50%",
-                            transform: "translate(-50%, -50%)",
-                            backgroundColor: "#FFF",
-                            width: "754px",
-                            height: "389px",
-                            padding: "40px 43px"
-                        },
-                        overlay: {
-                            backgroundColor: "rgba(0, 0, 0, 0.5)",
-                            width: "100%",
-                            height: "100%",
-                            transition: "opacity 0.3s ease-out",
-                        },
-                    }}
-                >
-                    <div className="agree_modal">
-                        <M.ModalHeader>
-                            <M.ModalTitle>이미 가입된 로그인 정보가 존재합니다.</M.ModalTitle>
-                        </M.ModalHeader>
-                        <div className="agree_btn_box">
-                            <M.AgreeBtn onClick={closeModal}>확인</M.AgreeBtn>
-                        </div>
-                    </div>
-                </Modal>
-            </div> */}
         </div >
     );
 }
