@@ -52,8 +52,8 @@ const SignUpAmuse: React.FC = () => {
     // 약관 동의 Modal
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
     const [modalContent, setModalContent] = useState<number | null>(null);
-    const openModal = (content: number) => {
-        setModalContent(content);
+    const openModal = (index: number) => {
+        setModalContent(index);
         setIsModalOpen(true);
     };
 
@@ -133,6 +133,7 @@ const SignUpAmuse: React.FC = () => {
                     </div>
                 )}
 
+                {/* 약관 동의 modal */}
                 <div className="modal">
                     <Modal
                         isOpen={isModalOpen}
