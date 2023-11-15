@@ -13,6 +13,7 @@ import KakaoIcon from "./Icons/kakao_logo.png";
 import NaverIcon from "./Icons/naver_logo.png";
 import SignUpIcon from "./Icons/signup_icon.png";
 import { useCookies } from "react-cookie";
+import moment from "moment";
 import * as S from "./LoginStyle";
 
 
@@ -60,7 +61,7 @@ const Login: React.FC = () => {
 	// 어뮤즈 자체 로그인 API
 	const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
 	const [error, setError] = useState<string | null>(null);
-	const [cookies, setCookie] = useCookies(['accessToken']);
+	const [cookies, setCookie] = useCookies(['accessToken','__jwtkid__']);
 
 	const handleLogin = async (event: { preventDefault: () => void; }) => {
 		event.preventDefault();
@@ -79,6 +80,11 @@ const Login: React.FC = () => {
 				const accessToken = response.data.data.accessToken;
 				setAccessToken(accessToken);
 				setCookie('accessToken', accessToken);
+				
+				const expires = moment().add("8", "h").toDate();
+				setCookie("__jwtkid__", accessToken, { expires });
+				setLoggedIn(true);
+
 				navigate("/");
 			})
 			.catch((error) => {
