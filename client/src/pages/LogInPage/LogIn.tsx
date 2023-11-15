@@ -22,7 +22,9 @@ const Login: React.FC = () => {
 	const [loggedIn, setLoggedIn] = useRecoilState<boolean>(isLoggedIn);
 	const navigate = useNavigate();
 
-	const redirectUrl = process.env.REACT_APP_REDIRECT_URL
+	// const redirectUrl = process.env.REACT_APP_REDIRECT_URL
+	const redirectUrl = `${process.env.REACT_APP_REDIRECT_URL}LoginAgree`
+	
 
 	const axiosInstance = axios.create({
 		withCredentials: true,
