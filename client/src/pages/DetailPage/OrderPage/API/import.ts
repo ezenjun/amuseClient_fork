@@ -1,4 +1,13 @@
-import { PaymentInfo } from "../../../../Interfaces/DataInterfaces";
+import { useCookies } from "react-cookie";
+import {
+	PaymentInfo,
+	PaymentPostData,
+	SelectedItemData,
+} from "../../../../Interfaces/DataInterfaces";
+import axios from "axios";
+import { useRecoilValue } from "recoil";
+import { selectedItemState } from "../../../../Recoil/OrderAtomState";
+
 export const requestPay = (data: PaymentInfo, callback: (rsp: any) => void) => {
 	const { IMP } = window as any;
 
@@ -69,4 +78,72 @@ export const requestPay = (data: PaymentInfo, callback: (rsp: any) => void) => {
 		},
 		callback
 	);
+};
+
+export const updatePostInfo = (
+	data: PaymentInfo,
+	selectedItem: SelectedItemData,
+	pgResp: any
+): PaymentPostData => {
+	const convertedData: PaymentPostData = {
+		paymentCompleteRequestDto: {
+			reservationItemType: data.itemType,
+			reservationNumber: pgResp.merchant_uid,
+			paymentItemInfoRequestDto: {
+				itemId: data.itemId,
+				travelStartDate: data.startDate.toISOString(),
+				travelEndDate: data.endDate.toISOString(),
+				additionalRequest: data.additionalInfo,
+				itemCost: data.totalAmount,
+				itemPayPrice: data.payAmount,
+				itemName: selectedItem.title,
+				itemImage: selectedItem.img,
+			},
+			paymentTicketRequestDtoList: data.ticketList,
+			paymentReservationInfoDto: {
+				bookerName: data.reservationInfo.reservationNameKR,
+				bookerBirthDay: data.reservationInfo.reservationBirthday,
+				bookerFirstNameEN: data.reservationInfo.reservationFirstNameEN,
+				bookerLastNameEN: data.reservationInfo.reservationLastNameEN,
+				bookerPhoneCode: data.reservationInfo.reservationPhoneCode,
+				bookerPhoneNumber: data.reservationInfo.reservationPhoneNumber,
+				bookerEmail: data.reservationInfo.reservationEmail,
+				passportNumber: data.reservationInfo.reservationPassportNumber,
+			},
+			paymentGuestInfoDto: {
+				guestName: data.guestInfo.guestNameKR,
+				guestBirthDay: data.guestInfo.guestBirthday,
+				guestFirstNameEN: data.guestInfo.guestFirstNameEN,
+				guestLastNameEN: data.guestInfo.guestLastNameEN,
+				guestPhoneCode: data.guestInfo.guestPhoneCode,
+				guestPhoneNumber: data.guestInfo.guestPhoneNumber,
+				guestPassportNumber: data.guestInfo.guestPassportNumber,
+				guestEmail: data.guestInfo.guestEmail,
+			},
+			additionalRequest: data.additionalInfo,
+			payType: pgResp.pay_method,
+			pointAcquire: 0,
+			pointUse: data.pointUsed,
+			cardType: pgResp.card_name,
+			discountRate: 0,
+			payStatus: pgResp.success,
+			paymentAgreementRequestDto: {
+				privacyCollection: data.termsAgreement.privacyCollection
+					? 1
+					: 0,
+				privacyToThirdParty: data.termsAgreement.privacyToThirdParty
+					? 1
+					: 0,
+				conciergeRule: 0,
+				ageOver14: data.termsAgreement.ageOver14 ? 1 : 0,
+				stayRule: data.termsAgreement.stayRule ? 1 : 0,
+			},
+			paymentCancelRuleRequestDto: {
+				content: "",
+			},
+			cardNumber: pgResp.card_number,
+		},
+	};
+
+	return convertedData;
 };

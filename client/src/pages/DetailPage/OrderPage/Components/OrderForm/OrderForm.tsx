@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
-import { requestPay } from "../../API/import";
+import { requestPay, updatePostInfo } from "../../API/import";
 import { useOrderContext } from "../../../Contexts/OrderContext";
 import { OrderDetail } from "../OrderDetail";
 import { OrderInfoContainer } from "./styles";
 import { PurchaseInfoItems } from "../PurchaseInfoItems";
-import { useRecoilState, useSetRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import {
 	PaymentDataState,
 	currentUserPointState,
+	selectedItemState,
 } from "../../../../../Recoil/OrderAtomState";
 import { FormProvider, useForm } from "react-hook-form";
 import { useCookies } from "react-cookie";
@@ -19,7 +20,9 @@ export function OrderForm() {
 	const navigate = useNavigate();
 	const [isLoading, setLoading] = useState(false);
 	const [paymentData, setPaymentData] = useRecoilState(PaymentDataState);
-
+	const selectedItem = useRecoilValue(selectedItemState);
+	const [cookies] = useCookies(["__jwtkid__"]);
+	const token = cookies["__jwtkid__"];
 	// 최종 결제 api
 	const onSubmit = async (data: FormValues) => {
 		const updatedPaymentData = {
@@ -36,10 +39,36 @@ export function OrderForm() {
 		if (allTermsAgreed && paymentData.totalAmount > 0) {
 			requestPay(updatedPaymentData, (rsp: any) => {
 				if (rsp.success) {
+					const convertedData = updatePostInfo(
+						updatedPaymentData,
+						selectedItem,
+						rsp
+					);
+					console.log(convertedData);
+					// axios
+					// 	.post(
+					// 		`${process.env.REACT_APP_AMUSE_API}/api/payment`,
+					// 		convertedData,
+					// 		{
+					// 			headers: {
+					// 				"Content-Type": "application/json",
+					// 				Authorization: `${token}`,
+					// 			},
+					// 		}
+					// 	)
+					// 	.then((response) => {
+					// 		console.log(response);
+					// 		alert("변경되었습니다.");
+					// 		window.location.reload();
+					// 	})
+					// 	.catch((err) => {});
 					navigate("./complete");
+				} else if (rsp.status === "fail") {
+					alert("결제가 취소되었습니다.");
+					navigate("/order");
 				} else {
 					alert(`${rsp.error_msg}`);
-					navigate(-1);
+					navigate("/order");
 				}
 			});
 		} else {
@@ -53,7 +82,6 @@ export function OrderForm() {
 
 	const setCurrentUserPoint = useSetRecoilState(currentUserPointState);
 	// 유저 정보 (이름, 생일, 전화번호 등)
-	const [cookies] = useCookies(["__jwtkid__"]);
 	const getPaymentUserInfo = async () => {
 		const token = cookies.__jwtkid__;
 		if (token) {
