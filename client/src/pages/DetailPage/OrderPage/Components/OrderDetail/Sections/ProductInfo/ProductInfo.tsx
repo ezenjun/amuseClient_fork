@@ -18,6 +18,7 @@ import {
 	PaymentDataState,
 	selectedItemState,
 } from "../../../../../../../Recoil/OrderAtomState";
+import { useParams } from "react-router";
 
 export function ProductInfo() {
 	const setPaymentData = useSetRecoilState(PaymentDataState);
