@@ -121,12 +121,12 @@ export const updatePostInfo = (
 				guestEmail: data.guestInfo.guestEmail,
 			},
 			additionalRequest: data.additionalInfo,
-			payType: data.paymentMethod,
-			pointAcquire: 0, // You might want to add logic to calculate point acquire
+			payType: pgResp.pay_method,
+			pointAcquire: 0,
 			pointUse: data.pointUsed,
-			cardType: pgResp.pay_method, // Add logic to get card type if available
-			discountRate: 0, // You might want to add logic to calculate discount rate
-			payStatus: pgResp.success, // Add logic to set pay status
+			cardType: pgResp.card_name,
+			discountRate: 0,
+			payStatus: pgResp.success,
 			paymentAgreementRequestDto: {
 				privacyCollection: data.termsAgreement.privacyCollection
 					? 1
@@ -134,79 +134,16 @@ export const updatePostInfo = (
 				privacyToThirdParty: data.termsAgreement.privacyToThirdParty
 					? 1
 					: 0,
-				conciergeRule: 0, // You might want to add logic to set concierge rule
+				conciergeRule: 0,
 				ageOver14: data.termsAgreement.ageOver14 ? 1 : 0,
 				stayRule: data.termsAgreement.stayRule ? 1 : 0,
 			},
 			paymentCancelRuleRequestDto: {
-				content: "", // Add logic to set cancel rule content
+				content: "",
 			},
-			cardNumber: pgResp.card_number, // Add logic to get card number if available
+			cardNumber: pgResp.card_number,
 		},
 	};
 
 	return convertedData;
 };
-
-export interface postData {
-	paymentCompleteRequestDto: {
-		paymentItemInfoRequestDto: {
-			itemId: number;
-			travelStartDate: string;
-			travelEndDate: string;
-			additionalRequest: string;
-			itemCost: number;
-			itemPayPrice: number;
-			itemName: string;
-			itemImage: string;
-		};
-		paymentTicketRequestDtoList: [
-			{
-				ticketId: number;
-				ticketCount: number;
-				ticketPrice: number;
-				ticketName: string;
-				ticketSubName: string;
-			}
-		];
-		paymentReservationInfoDto: {
-			bookerName: string;
-			bookerBirthDay: string;
-			bookerFirstNameEN: string;
-			bookerLastNameEN: string;
-			bookerPhoneNumber: string;
-			bookerEmail: string;
-			passportNumber: string;
-			reservationItemType: string;
-			reservationNumber: string;
-		};
-		paymentGuestInfoDto: {
-			guestName: string;
-			guestBirthDay: string;
-			guestFirstNameEN: string;
-			guestLastNameEN: string;
-			guestPhoneNumber: string;
-			guestEmail: string;
-		};
-		additionalRequest: string;
-		payType: string;
-		pointAcquire: number;
-		pointUse: number;
-		cardType: string;
-		discountRate: number;
-		payStatus: string;
-		paymentAgreementRequestDto: {
-			privacyCollection: number;
-			privacyToThirdParty: number;
-			conciergeRule: number;
-			ageOver14: number;
-			stayRule: number;
-		};
-		paymentCancelRuleRequestDto: {
-			content: string;
-		};
-		cardNumber: string;
-	};
-}
-
-

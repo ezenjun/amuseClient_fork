@@ -261,4 +261,8 @@ export interface PaymentDetailInterface {
 	paymentCancelRuleResponseDto: paymentCancelContent;
 }
 
-// commit용 주석
+export interface PayMethodDetail {
+	id: number;
+	type: string;
+	content: string;
+}
