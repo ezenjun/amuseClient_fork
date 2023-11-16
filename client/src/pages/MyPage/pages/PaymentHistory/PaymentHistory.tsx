@@ -5,7 +5,6 @@ import {
 	Bold20Gray,
 	Bold32Black,
 	Regular16Gray,
-	Regular20Black,
 } from "../../../../components/Text/Text";
 import {
 	EachDayContainer,
@@ -17,14 +16,12 @@ import { PaymentHistoryData } from "../../../../Types/DataTypes";
 import axios from "axios";
 import { formatDate } from "../../../../utils/DateFunctions";
 import GrayBox from "../../../../components/Box/GrayBox";
-import {
-	GrayboxRow,
-	RowDetail,
-} from "./components/PaymentHIstoryDetail/Section/styles";
+import { useLocation } from "react-router";
 
 type Props = {};
 
 const PaymentHistory = (props: Props) => {
+	const location = useLocation();
 	const [paymentHistoryList, setPaymentHistoryList] =
 		useState<Record<string, PaymentHistoryData[]>>();
 
@@ -77,7 +74,7 @@ const PaymentHistory = (props: Props) => {
 	};
 	useEffect(() => {
 		getPaymentHistoryList();
-	}, []);
+	}, [location.pathname]);
 	return (
 		<PageContainer>
 			<Bold32Black>결제내역</Bold32Black>

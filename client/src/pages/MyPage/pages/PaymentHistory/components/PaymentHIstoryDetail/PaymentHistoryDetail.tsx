@@ -7,7 +7,7 @@ import {
 } from "../../../../../../components/Text/Text";
 import axios from "axios";
 import { useCookies } from "react-cookie";
-import { useLocation } from "react-router";
+import { useLocation, useParams } from "react-router";
 import { PaymentDetailInterface } from "../../../../../../Interfaces/DataInterfaces";
 import {
 	DetailContainer,
@@ -15,7 +15,6 @@ import {
 	ReservationInfoContainer,
 	ReservationInfoMenuContainer,
 } from "./styles";
-import EachPaymentWeb from "../EachPaymentInSize/EachPaymentWeb";
 import PaymentInformation from "./Section/PaymentInformation/PaymentInformation";
 import ItemInformation from "./Section/ItemInformation/ItemInformation";
 import Details from "./Section/Details/Details";
@@ -26,9 +25,9 @@ import { WebButton } from "../../../../../../components/Button/WebButton";
 type Props = {};
 
 const PaymentHistoryDetail = (props: Props) => {
+	const { id } = useParams();
 	const [data, setData] = useState<PaymentDetailInterface>();
 	const [cookies] = useCookies(["__jwtkid__"]);
-	const { state } = useLocation();
 	const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
 	const handleResize = () => {
@@ -38,10 +37,10 @@ const PaymentHistoryDetail = (props: Props) => {
 
 	const getPaymentHistoryDetail = async () => {
 		const token = cookies.__jwtkid__;
-		if (token && state) {
+		if (token) {
 			axios
 				.get(
-					`${process.env.REACT_APP_AMUSE_API}/api/payment/detail/${state}`,
+					`${process.env.REACT_APP_AMUSE_API}/api/payment/detail/${id}`,
 					{
 						headers: {
 							"Content-Type": "application/json",
@@ -51,7 +50,6 @@ const PaymentHistoryDetail = (props: Props) => {
 				)
 				.then((response) => {
 					const data = response.data.data;
-					console.log("paymentdata", data);
 					setData(data);
 				})
 				.catch((err) => {
@@ -65,7 +63,7 @@ const PaymentHistoryDetail = (props: Props) => {
 	}, [window.innerWidth, screenWidth]);
 	useEffect(() => {
 		getPaymentHistoryDetail();
-	}, [state]);
+	}, []);
 	return (
 		<PageContainer>
 			<Bold40Black>결제 상세 내역</Bold40Black>
