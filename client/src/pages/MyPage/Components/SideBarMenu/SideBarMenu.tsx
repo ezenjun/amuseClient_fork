@@ -52,17 +52,23 @@ const SideBarMenu = () => {
 				</EachMenu>
 				<EachMenu
 					onClick={() => navigate("/MyPage/payment-history")}
-					active={location.pathname === "/MyPage/payment-history"}
+					active={location.pathname.includes(
+						"/MyPage/payment-history"
+					)}
 				>
 					<Payment
 						fill={
-							location.pathname === "/MyPage/payment-history"
+							location.pathname.includes(
+								"/MyPage/payment-history"
+							)
 								? `${Common.colors.black}`
 								: `${Common.colors.gray}`
 						}
 					/>
 					<MenuText
-						active={location.pathname === "/MyPage/payment-history"}
+						active={location.pathname.includes(
+							"/MyPage/payment-history"
+						)}
 					>
 						결제 내역
 					</MenuText>

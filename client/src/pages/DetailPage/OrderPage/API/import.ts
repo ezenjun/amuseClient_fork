@@ -23,9 +23,6 @@ export const requestPay = (data: PaymentInfo, callback: (rsp: any) => void) => {
 			3,
 			"0"
 		);
-		console.log(
-			`${year}${month}${day}${hours}${minutes}${seconds}${milliseconds}`
-		);
 		return `${year}${month}${day}${hours}${minutes}${seconds}${milliseconds}`;
 	};
 
@@ -55,7 +52,6 @@ export const requestPay = (data: PaymentInfo, callback: (rsp: any) => void) => {
 		}
 	};
 
-	console.log("final data", data);
 	IMP.init(process.env.REACT_APP_IMPORT_CODE);
 	IMP.request_pay(
 		{
@@ -117,12 +113,12 @@ export const updatePostInfo = (
 			guestEmail: data.guestInfo.guestEmail,
 		},
 		additionalRequest: data.additionalInfo,
-		payType: pgResp.pay_method,
+		payType: pgResp.pay_method.toUpperCase(),
 		pointAcquire: 0,
 		pointUse: data.pointUsed,
 		cardType: pgResp.card_name,
 		discountRate: 0,
-		payStatus: pgResp.success,
+		payStatus: pgResp.success ? "SUCCESS" : "PENDING",
 		paymentAgreementRequestDto: {
 			privacyCollection: data.termsAgreement.privacyCollection ? 1 : 0,
 			privacyToThirdParty: data.termsAgreement.privacyToThirdParty

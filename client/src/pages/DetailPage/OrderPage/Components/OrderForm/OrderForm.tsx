@@ -48,7 +48,7 @@ export function OrderForm() {
 					axios
 						.post(
 							`${process.env.REACT_APP_AMUSE_API}/api/payment`,
-							{ paymentCompleteRequestDto: convertedData },
+							convertedData,
 							{
 								headers: {
 									"Content-Type": "application/json",
@@ -57,13 +57,16 @@ export function OrderForm() {
 							}
 						)
 						.then((response) => {
-							console.log(response);
-							navigate("./complete", { state: { response } });
+							
+							if (response.status === 200)
+								navigate("./complete", {
+									state: response.data,
+								});
 						})
 						.catch((err) => {
 							console.log(err);
 						});
-					navigate("./complete");
+					// navigate("./complete");
 				} else if (rsp.status === "fail") {
 					alert("결제가 취소되었습니다.");
 					navigate("/order");
@@ -144,7 +147,10 @@ export function OrderForm() {
 					paymentData.reservationInfo?.reservationPassportNumber ||
 					"",
 			},
-			guestInfo: {},
+			guestInfo: {
+				guestPassportNumber:
+					paymentData.guestInfo?.guestPassportNumber || "",
+			},
 		});
 	}, [methods, paymentData.reservationInfo.reservationNameKR]);
 

@@ -17,7 +17,6 @@ const OrderCompletePage = () => {
 	const navigate = useNavigate();
 	const location = useLocation();
 	const { state } = location;
-	const id = 1;
 	return (
 		<MainComponent>
 			<OrderCompletePageContainer>
@@ -47,7 +46,7 @@ const OrderCompletePage = () => {
 						color="red"
 						onClick={() =>
 							navigate(
-								`/MyPage/payment-history/${state.mainPaymentId}`
+								`/MyPage/payment-history/${state.data.mainPaymentId}`
 							)
 						}
 					>
