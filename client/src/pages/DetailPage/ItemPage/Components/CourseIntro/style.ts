@@ -13,3 +13,10 @@ export const Title = styled.div`
   font-weight: 700;
   margin-bottom: 16px;
 `;
+
+export const DayTitle = styled.div`
+  font-family: "Pretendard";
+  color: #6a6a6a;
+  font-size: 18px;
+  font-weight: 600;
+`;
