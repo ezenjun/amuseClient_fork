@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { ItemIdProps } from "../../../../../Interfaces/PropsInterfaces";
-import SubPicture from "../Picture/Sub";
+import Sub from "../Picture/Sub";
 import axios from "axios";
 import * as S from "./style";
 import * as C from "./constants";
@@ -13,7 +13,7 @@ function ReviewPicture({ itemId }: ItemIdProps) {
   const reviewPicture = reviewPictureData
     ? reviewPictureData.map((obj) => obj.review_img)
     : [];
-  const subReviewPicture = reviewPicture.slice(0, 3);
+  const subReviewPicture = reviewPicture.slice(0, 4);
 
   // Review Picture API
   useEffect(() => {
@@ -36,16 +36,16 @@ function ReviewPicture({ itemId }: ItemIdProps) {
           {C.REVIEW.COUNT}
         </S.Count>
       </S.Title>
-      <S.SubPicture>
-        {subReviewPicture.map((picture, idx) => (
-          <SubPicture
+      <S.Sub>
+        {subReviewPicture.map((picture, key) => (
+          <Sub
             src={picture}
             alt={picture}
             modal={reviewPicture}
-            clickId={0}
+            clickId={key + 1}
           />
         ))}
-      </S.SubPicture>
+      </S.Sub>
     </S.Picture>
   );
 }
