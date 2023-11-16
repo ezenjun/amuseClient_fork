@@ -13,8 +13,8 @@ export const reset = css`
 	html {
 		margin: 0;
 		padding: 0;
-		width: 100vw;
-		height: 100vh;
+		/* width: 100vw;
+		height: 100vh; */
 		@media (max-width: 768px) {
 			/* Mobile styles */
 			font-size: 14px;

@@ -126,6 +126,10 @@ export const WelcomeText = styled.div`
 
 
 // 약관동의 Modal style
+export const ModalBody = styled.div`
+    display: block;
+`;
+
 export const ModalHeader = styled.div`
     display: flex;
     justify-content: space-between;
@@ -144,6 +148,8 @@ export const ModalTitle = styled.h2`
 
 export const ModalContent = styled.div`
     margin: 30px 0;
+    max-height: 33vh;
+    overflow-y: auto;
 `;
 
 export const AgreeBtn = styled.button`

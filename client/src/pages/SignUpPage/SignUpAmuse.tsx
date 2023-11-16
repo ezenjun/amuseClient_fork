@@ -1,43 +1,59 @@
 import React, { ChangeEvent, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import MainComponent from "../../MainComponent";
 import Modal from "react-modal";
+import axios from "axios";
+import MainComponent from "../../MainComponent";
 import CloseIcon from "../LogInPage/Icons/close_icon.png";
 import InfoForm from "./InfoForm";
 import * as S from "./SignUpAmuseStyle";
 import Certification from "../LogInPage/Certification";
 
+interface TermData {
+    id: number;
+    title: string;
+    content: string;
+    mandatory: boolean;
+}
 
 const SignUpAmuse: React.FC = () => {
-    const [allAgreed, setAllAgreed] = useState<boolean>(false);
-    const [personalInfoAgreed, setPersonalInfoAgreed] = useState<boolean>(false);
-    const [marketingInfoAgreed, setMarketingInfoAgreed] = useState<boolean>(false);
+    const movePage = useNavigate();
 
+    // 약관 동의 api
+    const [terms, setTerms] = useState<TermData[]>([]);
+    const [termAgreeStatus, setTermAgreeStatus] = useState<number[]>([]);
+    useEffect(() => {
+        axios.get(`${process.env.REACT_APP_AMUSE_API}/test/api/terms-of-service-info-type?type=SignUp`)
+            .then((response) => {
+                const initialAgreeStatus = response.data.data.content.map(() => 0);
+                setTermAgreeStatus(initialAgreeStatus);
+                setTerms(response.data.data.content);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }, [])
+
+    // 약관 동의 버튼
+    const [allAgreed, setAllAgreed] = useState<boolean>(false);
     const handleAllAgreeChange = (e: ChangeEvent<HTMLInputElement>) => {
         const isChecked: boolean = e.target.checked;
+        const newAgreeStatus = termAgreeStatus.map(() => (isChecked ? 1 : 0));
+        setTermAgreeStatus(newAgreeStatus);
         setAllAgreed(isChecked);
-        setPersonalInfoAgreed(isChecked);
-        setMarketingInfoAgreed(isChecked);
     };
 
-    const handlePersonalInfoAgreeChange = (e: ChangeEvent<HTMLInputElement>) => {
-        const isChecked: boolean = e.target.checked;
-        setPersonalInfoAgreed(isChecked);
-        setAllAgreed(isChecked && marketingInfoAgreed);
-    };
-
-    const handleMarketingInfoAgreeChange = (e: ChangeEvent<HTMLInputElement>) => {
-        const isChecked: boolean = e.target.checked;
-        setMarketingInfoAgreed(isChecked);
-        setAllAgreed(personalInfoAgreed && isChecked);
+    const handleTermAgreeChange = (index: number) => {
+        const newAgreeStatus = [...termAgreeStatus];
+        newAgreeStatus[index] = newAgreeStatus[index] === 1 ? 0 : 1;
+        setTermAgreeStatus(newAgreeStatus);
+        setAllAgreed(newAgreeStatus.every((status) => status === 1));
     };
 
     // 약관 동의 Modal
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-    const [modalContent, setModalContent] = useState<string>("");
-
-    const openModal = (content: string) => {
-        setModalContent(content);
+    const [modalContent, setModalContent] = useState<number | null>(null);
+    const openModal = (index: number) => {
+        setModalContent(index);
         setIsModalOpen(true);
     };
 
@@ -47,12 +63,9 @@ const SignUpAmuse: React.FC = () => {
 
     // 다음 버튼 클릭 시
     const [currentStep, setCurrentStep] = useState<number>(1);
-    const movePage = useNavigate();
-
     const handleNextClick = () => {
         setCurrentStep(currentStep + 1);
     };
-
 
     const [name, setName] = useState<string>('');
     const handleNextClickInfo = (name: string) => {
@@ -63,6 +76,7 @@ const SignUpAmuse: React.FC = () => {
     const handleContinueClick = () => {
         movePage("/LogIn");
     };
+
 
     return (
         <MainComponent>
@@ -75,26 +89,33 @@ const SignUpAmuse: React.FC = () => {
                             <S.AgreeCheck id="all_agree" onChange={handleAllAgreeChange} checked={allAgreed}></S.AgreeCheck>
                             <S.AllAgreeText htmlFor="all_agree">전체동의</S.AllAgreeText>
                         </S.AllAgreeBox>
-                        <S.AgreeBox>
-                            <S.AgreeCheck id="agree_personal_info" onChange={handlePersonalInfoAgreeChange} checked={personalInfoAgreed}></S.AgreeCheck>
-                            <S.AgreeText htmlFor="agree_personal_info">
-                                (필수)<S.ContentBtn onClick={() => openModal("personalInfo")}>개인정보 활용</S.ContentBtn>동의
-                            </S.AgreeText>
-                        </S.AgreeBox>
-                        <S.AgreeBox>
-                            <S.AgreeCheck id="agree_marketing_info" onChange={handleMarketingInfoAgreeChange} checked={marketingInfoAgreed}></S.AgreeCheck>
-                            <S.AgreeText htmlFor="agree_marketing_info">
-                                (선택)<S.ContentBtn onClick={() => openModal("marketingInfo")}>마케팅정보 활용</S.ContentBtn>동의
-                            </S.AgreeText>
-                        </S.AgreeBox>
-                        <S.NextButton onClick={handleNextClick} disabled={!personalInfoAgreed}>다음</S.NextButton>
+
+                        {terms.map((term, index) => (
+                            <S.AgreeBox key={`${term.id}`}>
+                                <S.AgreeCheck id={`agree_${term.id}`} onChange={() => handleTermAgreeChange(index)} checked={termAgreeStatus[index] === 1}></S.AgreeCheck>
+                                <S.AgreeText htmlFor={`agree_${term.id}`}>
+                                    {`(${term.mandatory ? '필수' : '선택'})`}
+                                    <S.ContentBtn onClick={() => openModal(index)}>{`${term.title}`}</S.ContentBtn>
+                                </S.AgreeText>
+                            </S.AgreeBox>
+                        ))}
+
+                        <S.NextButton
+                            onClick={handleNextClick}
+                            disabled={
+                                terms
+                                    .filter((term, index) => term.mandatory && termAgreeStatus[index] !== 1)
+                                    .length > 0
+                            }>
+                            다음
+                        </S.NextButton>
                     </div>
                 }
 
                 {/* 본인인증 & 정보입력 */}
                 {currentStep === 2 && (
                     <div>
-                        <Certification />
+                        <Certification onCalledBy="SignUp" />
                         <S.SignUpTitle>정보입력</S.SignUpTitle>
                         <InfoForm onNextStep={handleNextClickInfo} />
                     </div>
@@ -112,6 +133,7 @@ const SignUpAmuse: React.FC = () => {
                     </div>
                 )}
 
+                {/* 약관 동의 modal */}
                 <div className="modal">
                     <Modal
                         isOpen={isModalOpen}
@@ -134,18 +156,25 @@ const SignUpAmuse: React.FC = () => {
                             },
                         }}
                     >
-                        <div className="agree_modal">
-                            <S.ModalHeader>
-                                <S.ModalTitle>{modalContent === "personalInfo" ? "개인정보 활용 동의 (필수)" : "마케팅정보 활용 동의 (선택)"}</S.ModalTitle>
-                                <button className="modal_btn_close" onClick={closeModal}>
-                                    <img src={CloseIcon} className="close_icon" />
-                                </button>
-                            </S.ModalHeader>
-                            <S.ModalContent>내용 추가 예정</S.ModalContent>
-                            <div className="agree_btn_box">
+                        {modalContent !== null && (
+                            <S.ModalBody>
+                                <S.ModalHeader>
+                                    <S.ModalTitle>{`${terms[modalContent].title}(${terms[modalContent].mandatory ? '필수' : '선택'})`}</S.ModalTitle>
+                                    <button className="modal_btn_close" onClick={closeModal}>
+                                        <img src={CloseIcon} className="close_icon" />
+                                    </button>
+                                </S.ModalHeader>
+                                <S.ModalContent>
+                                    {terms[modalContent].content.split('\n').map((line, index) => (
+                                        <React.Fragment key={index}>
+                                            {line}
+                                            <br />
+                                        </React.Fragment>
+                                    ))}
+                                </S.ModalContent>
                                 <S.AgreeBtn onClick={closeModal}>확인</S.AgreeBtn>
-                            </div>
-                        </div>
+                            </S.ModalBody>
+                        )}
                     </Modal>
                 </div>
             </S.SignUpBody>

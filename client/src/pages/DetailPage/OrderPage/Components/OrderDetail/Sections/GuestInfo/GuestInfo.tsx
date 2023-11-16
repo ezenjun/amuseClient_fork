@@ -28,7 +28,7 @@ const GuestInfo = () => {
 	return (
 		<DetailSectionContainer>
 			<SubHeader>
-				예약자 정보 &nbsp;<Regular16Black>(필수)</Regular16Black>
+				투숙자 정보 &nbsp;<Regular16Black>(필수)</Regular16Black>
 			</SubHeader>
 			<GrayBox verticalPadding={42} horizontalPadding={30}>
 				<ReservationGrid>

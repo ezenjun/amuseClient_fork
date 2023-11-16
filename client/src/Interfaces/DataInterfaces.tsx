@@ -1,4 +1,5 @@
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
+import { PaymentHistoryData } from "../Types/DataTypes";
 
 export interface CategoryData {
 	categoryId: string;
@@ -47,6 +48,7 @@ export interface MapData {
 }
 
 export interface TicketData {
+	id: number;
 	title: string;
 	content: string;
 	priceList: { startDate: string; price: number }[];
@@ -89,7 +91,7 @@ export interface PaymentInfo {
 	startDate: Date;
 	endDate: Date;
 	orderDateTime: Date;
-	ticketList: Array<SelectedTicket>;
+	ticketList: Array<PostTicketData>;
 	reservationInfo: ReservationInfo;
 	//호텔이면
 	guestInfo: GuestInfo;
@@ -104,6 +106,69 @@ export interface PaymentInfo {
 		ageOver14: boolean;
 		stayRule: boolean;
 	};
+	cancelPolicy: string;
+}
+
+export interface PostTicketData {
+	ticketId: number;
+	ticketCount: number;
+	ticketPrice: number;
+	ticketName: string;
+	ticketSubName: string;
+}
+
+export interface PaymentPostData {
+	paymentItemInfoRequestDto: {
+		itemId: number;
+		travelStartDate: string;
+		travelEndDate: string;
+		additionalRequest: string;
+		itemCost: number;
+		itemPayPrice: number;
+		itemName: string;
+		itemImage: string;
+	};
+	paymentTicketRequestDtoList: Array<PostTicketData>;
+	paymentReservationInfoDto: {
+		bookerName: string;
+		bookerBirthDay: string;
+		bookerFirstNameEN: string;
+		bookerLastNameEN: string;
+		bookerPhoneNumber: string;
+		bookerPhoneNumberCode: number;
+		bookerEmail: string;
+		bookerPassportNumber: string;
+		reservationItemType: string;
+		reservationNumber: string;
+	};
+	paymentGuestInfoDto: {
+		guestName: string;
+		guestBirthDay: string;
+		guestFirstNameEN: string;
+		guestLastNameEN: string;
+		guestPhoneNumber: string;
+		guestPhoneNumberCode: number;
+		guestEmail: string;
+		guestPassportNumber: string;
+	};
+	additionalRequest: string;
+	payType: string;
+	pointAcquire: number;
+	pointUse: number;
+	cardType: string;
+	discountRate: number;
+	payStatus: string;
+	paymentAgreementRequestDto: {
+		privacyCollection: number;
+		privacyToThirdParty: number;
+		conciergeRule: number;
+		ageOver14: number;
+		stayRule: number;
+	};
+	paymentCancelRuleRequestDto: {
+		content: string;
+	};
+	cardNumber: string;
 }
 
 export interface UserPoint {
@@ -150,4 +215,59 @@ export interface TermsInterface {
 	content: Array<Term>;
 }
 
-// commit용 주석
+export interface paymentDetailMatterResponseDto {
+	reservationNumber: string;
+	reservationDateTime: string;
+	itemAdditionalInformation: string;
+}
+
+export interface paymentCancelContent {
+	content: string;
+}
+
+export interface PaymentDetailInterface {
+	paymentDetailTopItemInfoResponseDto: PaymentHistoryData;
+	paymentDetailInfoResponseDto: {
+		bookerName: string;
+		bookerBirthDay: string;
+		bookerFirstNameEN: string;
+		bookerLastNameEN: string;
+		bookerPhoneNumber: string;
+		bookerEmail: string;
+		guestName: string;
+		guestBirthDay: string;
+		guestFirstNameEN: string;
+		guestLastNameEN: string;
+		guestPhoneNumber: string;
+		guestEmail: string;
+		additionalRequest: string;
+	};
+	paymentDetailItemResponseDto: {
+		itemName: string;
+		reservationDateTime: string;
+		itemPayPrice: number;
+		informationResponseDtoList: [
+			{
+				ticketName: string;
+				ticketSubName: string;
+				ticketPrice: number;
+				ticketCount: number;
+			}
+		];
+		itemIntroduceInformation: string;
+	};
+	paymentDetailMatterResponseDto: paymentDetailMatterResponseDto;
+	paymentCancelRuleResponseDto: paymentCancelContent;
+}
+
+export interface PayMethodDetail {
+	id: number;
+	type: string;
+	content: string;
+}
+
+export interface AdditionalInfoDetail {
+	id: number;
+	name: string;
+	content: string;
+}

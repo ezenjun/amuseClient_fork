@@ -10,11 +10,13 @@ import OrderedItem from "./Sections/OrderedItem";
 import UsedPoint from "./Sections/UsedPoint";
 import TotalAmount from "./Sections/TotalAmount";
 import { WebButton } from "../../../components/Button/WebButton";
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import { Regular20Gray } from "../../../components/Text/Text";
 
 const OrderCompletePage = () => {
 	const navigate = useNavigate();
+	const location = useLocation();
+	const { state } = location;
 	const id = 1;
 	return (
 		<MainComponent>
@@ -43,7 +45,11 @@ const OrderCompletePage = () => {
 						fontSize={18}
 						verticalPadding={18}
 						color="red"
-						onClick={() => navigate(`/payment/${id}`)}
+						onClick={() =>
+							navigate(
+								`/MyPage/payment-history/${state.mainPaymentId}`
+							)
+						}
 					>
 						결제 상세 정보 보기
 					</WebButton>

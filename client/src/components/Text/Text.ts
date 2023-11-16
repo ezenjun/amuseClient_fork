@@ -61,7 +61,14 @@ export const Regular20DarkGray = styled.span`
 	})}
 	line-height: 160%;
 `;
-
+export const Regular20Black = styled.span`
+	${Pretendard({
+		size: 20,
+		weight: Common.bold.regular,
+		color: Common.colors.black,
+	})}
+	line-height: 160%;
+`;
 // BOLD 16
 export const Bold16Black = styled.span`
 	${Pretendard({
@@ -133,6 +140,13 @@ export const Bold24DarkGray = styled.span`
 		color: Common.colors.darkGray,
 	})}
 `;
+export const Bold24Gray = styled.span`
+	${Pretendard({
+		size: 24,
+		weight: Common.bold.bold,
+		color: Common.colors.gray,
+	})}
+`;
 export const Bold24AppColor = styled.span`
 	${Pretendard({
 		size: 24,
@@ -152,6 +166,16 @@ export const Bold32AppColor = styled.span`
 export const Bold32Black = styled.span`
 	${Pretendard({
 		size: 32,
+		weight: Common.bold.bold,
+		color: Common.colors.black,
+	})}
+	white-space: nowrap;
+`;
+
+// BOLD 40
+export const Bold40Black = styled.span`
+	${Pretendard({
+		size: 40,
 		weight: Common.bold.bold,
 		color: Common.colors.black,
 	})}
