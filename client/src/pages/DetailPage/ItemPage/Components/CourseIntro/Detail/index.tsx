@@ -8,7 +8,6 @@ function CourseIntroDetail({
   time,
   content,
   imageSrc,
-  day,
 }: CourseIntroDetailProps) {
   return (
     <S.CourseIntro>

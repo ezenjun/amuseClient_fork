@@ -16,6 +16,7 @@ function CourseIntro({ itemId }: ItemIdProps) {
       .get(`${process.env.REACT_APP_AMUSE_API}/detail/${itemId}/course-intro`)
       .then((response) => {
         setCourseIntroData(response.data.data.course);
+        console.log(response.data.data.course);
       })
       .catch((error) => {
         console.log("CourseIntro 연결 실패");
@@ -25,17 +26,22 @@ function CourseIntro({ itemId }: ItemIdProps) {
   return (
     <S.CourseIntro>
       <S.Title>{C.CourseIntro.TITLE}</S.Title>
-      {/* !!FIX 일차별로 묶기*/}
       {courseIntroData.map((courseIntro) => {
         return (
-          <Detail
-            key={courseIntro.title}
-            title={courseIntro.title}
-            time={courseIntro.timeCost}
-            content={courseIntro.content}
-            imageSrc={courseIntro.imageUrl}
-            day={courseIntro.day}
-          />
+          <>
+            {courseIntro.day}일차
+            {courseIntro.dayCourseList.map((course) => {
+              return (
+                <Detail
+                  key={course.id}
+                  title={course.title}
+                  time={course.timeCost}
+                  content={course.content}
+                  imageSrc={course.image}
+                />
+              );
+            })}
+          </>
         );
       })}
     </S.CourseIntro>
