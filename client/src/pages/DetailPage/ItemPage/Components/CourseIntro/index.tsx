@@ -29,7 +29,10 @@ function CourseIntro({ itemId }: ItemIdProps) {
       {courseIntroData.map((courseIntro) => {
         return (
           <>
-            {courseIntro.day}일차
+            <S.DayTitle>
+              {courseIntro.day}
+              {C.CourseIntro.DAY}
+            </S.DayTitle>
             {courseIntro.dayCourseList.map((course) => {
               return (
                 <Detail
