@@ -68,8 +68,6 @@ const PaymentHistory = (props: Props) => {
 						groupedData[currentDate].push(item);
 					});
 
-					
-
 					setPaymentHistoryList(groupedData);
 				})
 				.catch((err) => {
@@ -83,7 +81,8 @@ const PaymentHistory = (props: Props) => {
 	return (
 		<PageContainer>
 			<Bold32Black>결제내역</Bold32Black>
-			{paymentHistoryList ? (
+			{paymentHistoryList &&
+			Object.keys(paymentHistoryList).length > 0 ? (
 				<HistoryContainer>
 					{Object.entries(paymentHistoryList || {}).map(
 						([date, payments]) => (
