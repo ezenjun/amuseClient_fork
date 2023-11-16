@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import PictureModal from "../Popup";
+import Popup from "../Popup";
 import * as S from "./style";
 
 interface SubProps {
@@ -18,7 +18,7 @@ function Sub({ src, alt, modal, clickId }: SubProps) {
     <S.Sub>
       <S.Image src={src} alt={alt} onClick={openModal} />
       {isModalOpen && (
-        <PictureModal onClose={closeModal} images={modal} clickId={clickId} />
+        <Popup onClose={closeModal} images={modal} clickId={clickId} />
       )}
     </S.Sub>
   );

@@ -16,4 +16,4 @@ export const Count = styled.div`
   color: #e6003d;
 `;
 
-export const SubPicture = styled.div``;
+export const Sub = styled.div``;
