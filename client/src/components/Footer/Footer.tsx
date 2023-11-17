@@ -1,6 +1,7 @@
 import React, { ReactNode } from "react";
 import Style from "./Footer.module.css";
 import MainMoreAbout from "./MainMoreAbout/MainMoreAbout";
+import styled from "styled-components";
 
 function Footer() {
   return (
@@ -24,8 +25,8 @@ function Footer() {
             전화 : 02-719-6811~5 / 이메일 : info@amusetravel.com <br />
             개인정보관리책임 : 신우주
             <div className={Style["docsBtn"]}>
-              <span>이용약관&nbsp;</span>
-              <span>개인정보취급정책</span>
+              <TermsBtn href="/Terms">이용약관</TermsBtn>
+              <PrivacyBtn href="/Privacy">개인정보취급정책</PrivacyBtn>
             </div>
           </div>
         </div>
@@ -35,3 +36,18 @@ function Footer() {
 }
 
 export default Footer;
+
+const TermsBtn = styled.a`
+  padding-right: 5px;
+  margin-right: 5px;
+  border-right: 1px solid #a3a3a3;
+  &:hover {
+    text-decoration: underline;
+  }
+`;
+
+const PrivacyBtn = styled.a`
+  &:hover {
+    text-decoration: underline;
+  }
+`;
