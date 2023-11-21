@@ -7,6 +7,7 @@ import CloseIcon from "../LogInPage/Icons/close_icon.png";
 import InfoForm from "./InfoForm";
 import * as S from "./SignUpAmuseStyle";
 import Certification from "../LogInPage/Certification";
+import { useCookies } from "react-cookie";
 
 interface TermData {
     id: number;
@@ -17,6 +18,9 @@ interface TermData {
 
 const SignUpAmuse: React.FC = () => {
     const movePage = useNavigate();
+    const [cookies, setCookie, removeCookie] = useCookies([
+        "terms",
+    ]);
 
     // 약관 동의 api
     const [terms, setTerms] = useState<TermData[]>([]);
@@ -64,6 +68,8 @@ const SignUpAmuse: React.FC = () => {
     // 다음 버튼 클릭 시
     const [currentStep, setCurrentStep] = useState<number>(1);
     const handleNextClick = () => {
+        setCookie("terms", termAgreeStatus);
+        console.log(termAgreeStatus);
         setCurrentStep(currentStep + 1);
     };
 

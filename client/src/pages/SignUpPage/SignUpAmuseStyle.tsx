@@ -7,8 +7,8 @@ export const SignUpBody = styled.div`
     flex-direction: column;
     align-items: center;
     max-width: 754px;
-    height: 506px;
-    margin: 30px auto;
+    // height: 506px;
+    margin: 30px auto 200px;
 `;
 
 export const SignUpTitle = styled.h1`

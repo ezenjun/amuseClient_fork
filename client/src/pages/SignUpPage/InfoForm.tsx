@@ -5,12 +5,17 @@ import axios from "axios";
 import { useRecoilState } from "recoil";
 import { impUid } from "../../atoms";
 import * as S from "./InfoFormStyle";
+import { useCookies } from "react-cookie";
 
 interface InfoFormProps {
     onNextStep: (name: string) => void;
 }
 
 const InfoForm: React.FC<InfoFormProps> = (props) => {
+    const [cookies, setCookie, removeCookie] = useCookies([
+        "terms",
+    ]);
+
     // 유효성 검사
     const nameValidation = (value: string): string => {
         return value.slice(0, 50);
@@ -166,11 +171,42 @@ const InfoForm: React.FC<InfoFormProps> = (props) => {
         axios.post(apiEndpoint, requestBody)
             .then((response) => {
                 console.log('가입 성공');
+                postTerms(response.data.data.accessToken);
                 props.onNextStep(name);
             })
             .catch((error) => {
                 console.error('API 요청 실패:', error);
             })
+
+    };
+
+    // 약관 동의 정보 post
+    const postTerms = (token: string) => {
+        const newAgreedArray = cookies.terms.map((value: number, index: number) => ({
+            number: index + 1,
+            agreed: value === 1,
+        }));
+
+        const requestBody = {
+            "type": "SignUp",
+            "content": newAgreedArray,
+        };
+
+        const apiEndpoint = `${process.env.REACT_APP_AMUSE_API}/api/v1/user/terms_of_service`;
+        axios
+            .post(apiEndpoint, requestBody, {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `${token}`,
+                },
+            })
+            .then((response) => {
+                console.log(response.data.data);
+                removeCookie("terms");
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     };
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -197,7 +233,7 @@ const InfoForm: React.FC<InfoFormProps> = (props) => {
                         </div>
                         <div>
                             <S.InputTitle>성별</S.InputTitle>
-                            
+
                             <S.RadioButtonContainer>
                                 <div className="input_gender">
                                     <input type="radio" name="gender" id="MAN" value="MAN" checked={gender === "MAN"} onChange={handleGenderChange} />

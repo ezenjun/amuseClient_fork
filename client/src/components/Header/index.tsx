@@ -109,19 +109,42 @@ function Header() {
         setName(response.data.data?.name);
         const expires = moment().add("8", "h").toDate();
         setCookie("__usrN__", response.data.data?.name, { expires });
-        if (!userData?.personalInformationAgreement) {
-          setLoggedIn(false);
-          // movePage("/LoginAgree");
-        }
-        if (userData?.personalInformationAgreement) {
-          setLoggedIn(true);
-          movePage('/');
-        }
+
+        checkAgree().then((result) => {
+          if (result) {
+            setLoggedIn(true);
+            movePage("/");
+          } else {
+            setLoggedIn(false);
+          }
+        })
       })
       .catch((err) => {
         console.log(err);
       });
   };
+
+  // 약관 동의 여부 확인 api
+  const checkAgree = () => {
+    if (cookies.__jwtkid__) {
+      return axios
+        .get(`${process.env.REACT_APP_AMUSE_API}/api/v1/user/terms_of_service?type=SignUp`, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `${cookies.__jwtkid__}`,
+          },
+        })
+        .then((response) => {
+          console.log(response.data.data);
+          return response.data.data;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+
+    return Promise.resolve(false);
+  }
 
   // 어뮤즈 자체 로그인 정보 가져오기
   const getAmuseUserInfo = async () => {
@@ -147,6 +170,7 @@ function Header() {
       getAmuseUserInfo();
     }
   }, []);
+
 
   return (
     <S.Header>
