@@ -13,7 +13,8 @@ function ReviewPicture({ itemId }: ItemIdProps) {
   const reviewPicture = reviewPictureData
     ? reviewPictureData.map((obj) => obj.review_img)
     : [];
-  const subReviewPicture = reviewPicture.slice(0, 4);
+  const subReviewPicture = reviewPicture.slice(0, 5);
+  const [reviewPictureCount, setReviewPictureCount] = useState<number>(0);
 
   // Review Picture API
   useEffect(() => {
@@ -21,6 +22,7 @@ function ReviewPicture({ itemId }: ItemIdProps) {
       .get(`${process.env.REACT_APP_AMUSE_API}/detail/${itemId}/review`)
       .then((response) => {
         setReviewPictureData(response.data.data.review_all_imgs);
+        setReviewPictureCount(response.data.data.review_all_imgs.length);
       })
       .catch((error) => {
         console.log("Review 연결 실패");
@@ -32,7 +34,7 @@ function ReviewPicture({ itemId }: ItemIdProps) {
       <S.Title>
         <S.Content>{C.REVIEW.TITLE}</S.Content>
         <S.Count>
-          {0}
+          {reviewPictureCount}
           {C.REVIEW.COUNT}
         </S.Count>
       </S.Title>

@@ -8,6 +8,7 @@ export const Title = styled.div`
   font-family: "Pretendard";
   font-size: 20px;
   font-weight: 700;
+  margin-bottom: 16px;
 `;
 
 export const Content = styled.div``;
@@ -16,4 +17,7 @@ export const Count = styled.div`
   color: #e6003d;
 `;
 
-export const Sub = styled.div``;
+export const Sub = styled.div`
+  display: flex;
+  gap: 15px;
+`;
