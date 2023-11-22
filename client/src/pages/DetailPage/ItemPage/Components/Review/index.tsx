@@ -22,6 +22,8 @@ interface ReviewData {
 function Review({ itemId }: ReviewProps) {
   // Review Data
   const [reviewData, setReviewData] = useState<ReviewData | null>(null);
+  const [reviewRated, setReviewRated] = useState<number>(0);
+  const [reviewCount, setReviewCount] = useState<number>(0);
 
   // Review API
   useEffect(() => {
@@ -29,6 +31,8 @@ function Review({ itemId }: ReviewProps) {
       .get(`${process.env.REACT_APP_AMUSE_API}/detail/${itemId}/review`)
       .then((response) => {
         setReviewData(response.data.data);
+        setReviewRated(response.data.data.rated.toFixed(1));
+        setReviewCount(response.data.data.review_count);
       })
       .catch((error) => {
         console.log("연결 실패");
@@ -40,7 +44,7 @@ function Review({ itemId }: ReviewProps) {
       <S.Title>
         <S.Content>{C.REVIEW.TITLE}</S.Content>
         <S.Count>
-          {0}
+          {reviewCount}
           {C.REVIEW.COUNT}
         </S.Count>
       </S.Title>
@@ -48,7 +52,7 @@ function Review({ itemId }: ReviewProps) {
       <S.Rated>
         <S.Score>
           <S.StarIcon src={StarIcon} alt="star" />
-          <S.ItemScore>{4.2}</S.ItemScore>
+          <S.ItemScore>{reviewRated}</S.ItemScore>
           {C.REVIEW.RATED}
         </S.Score>
         <S.Divide />
@@ -62,7 +66,7 @@ function Review({ itemId }: ReviewProps) {
             <S.TotalIcon src={StarIcon} alt="star" />
           </S.TotalStar>
           <S.TotalCount>
-            {0}
+            {reviewCount}
             {C.REVIEW.TOTAL}
           </S.TotalCount>
         </S.Total>
