@@ -5,9 +5,21 @@ import checkedIcon from './Icons/checked_icon.png';
 export const LoginBody = styled.div`
     flex-direction: column;
     align-items: center;
-    max-width: 699px;
+    // max-width: 699px;
     height: 506px;
     margin: 30px auto;
+
+    @media (min-width: 1024px) {
+        width: 699px;
+    }
+
+    @media (max-width: 1023px){
+        width: 522px;
+    }
+
+    @media (max-width: 768px) {
+        width: 333px;
+    }
 `;
 
 export const LoginTitle = styled.h1`
@@ -21,7 +33,7 @@ export const LoginTitle = styled.h1`
 `;
 
 export const InputContainer = styled.div`
-    width: 699px;
+    width: 100%;
     height: 150px;
     border: solid 1px #DDDDDD;
     border-radius: 8px;
@@ -53,7 +65,7 @@ export const KeepIdText = styled.label`
 `;
 
 export const LoginButton = styled.button`
-    width: 699px;
+    width: 100%;
     height: 51px;
     border: none;
     border-radius: 8px;

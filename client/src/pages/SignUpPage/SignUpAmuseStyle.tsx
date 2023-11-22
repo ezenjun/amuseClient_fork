@@ -2,24 +2,48 @@ import styled from "styled-components";
 import checkIcon from '../LogInPage/Icons/check_icon.png';
 import checkedIcon from '../LogInPage/Icons/checked_icon.png';
 
-
 export const SignUpBody = styled.div`
     flex-direction: column;
     align-items: center;
-    max-width: 754px;
-    // height: 506px;
+    height: 506px;
     margin: 30px auto 200px;
+    position: relative;
+
+    @media (min-width: 1024px) {
+        width: 754px;
+    }
+
+    @media (max-width: 1023px){
+        width: 522px;
+    }
+
+    @media (max-width: 768px) {
+        width: 333px;
+    }
 `;
 
 export const SignUpTitle = styled.h1`
     display: flex;
     justify-content: center;
     color: #000;
-    font-size: 24px;
     font-weight: 600;
     line-height: normal;
     margin-bottom: 20px;
-    margin-top: 60px;
+
+    @media (min-width: 1024px) {
+        font-size: 24px;
+        margin-top: 40px;
+    }
+
+    @media (max-width: 1023px){
+        font-size: 24px;
+        margin-top: 20px;
+    }
+
+    @media (max-width: 768px) {
+        font-size: 20px;
+        margin-top: 10px;
+    }
 `;
 
 // 약관 동의 style
@@ -80,7 +104,7 @@ export const ContentBtn = styled.span`
 `;
 
 export const NextButton = styled.button`
-    width: 754px;
+    width: 100%;
     height: 51px;
     border: none;
     border-radius: 8px;
@@ -95,10 +119,16 @@ export const NextButton = styled.button`
         color: #666666;
         cursor: not-allowed;
     }
+
+    @media (max-width: 768px) {
+        width: 333px;
+        position: absolute;
+        bottom: 20px;
+    }
 `;
 
 export const textBox = styled.div`
-    width: 754px;
+    width: 100%;
     height: 164px;
     background-color: #ececec;
     padding: 32px;
@@ -134,27 +164,56 @@ export const ModalHeader = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    @media (max-width: 768px) {
+        padding-bottom: 7px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    }
 `;
 
 export const ModalTitle = styled.h2`
     color: #000;
     font-family: Pretendard;
-    font-size: 32px;
     font-style: normal;
     font-weight: 700;
     line-height: 150%;
-    letter-spacing: -0.64px;
+
+    @media (min-width: 1024px) {
+        font-size: 30px;
+        letter-spacing: -0.64px;
+    }
+
+    @media (max-width: 1023px){
+        font-size: 24px;
+        letter-spacing: -0.48px;
+    }
+
+    @media (max-width: 768px) {
+        font-size: 20px;
+        letter-spacing: -0.4px;
+    }
 `;
 
 export const ModalContent = styled.div`
-    margin: 30px 0;
-    max-height: 33vh;
     overflow-y: auto;
+
+    @media (min-width: 1024px) {
+        margin: 30px 0;
+        max-height: 33vh;
+    }
+
+    @media (max-width: 1023px){
+        margin: 25px 0;
+        max-height: 33vh;
+    }
+
+    @media (max-width: 768px) {
+        margin: 20px 0;
+        max-height: calc(80vh - 15vw);
+    }
 `;
 
 export const AgreeBtn = styled.button`
-    width: 659px;
-    height: 60px;
     background-color: #E6003D;
     border: none;
     border-radius: 8px;
@@ -162,12 +221,35 @@ export const AgreeBtn = styled.button`
     color: #FFF;
     text-align: center;
     font-family: Pretendard;
-    font-size: 20px;
     font-style: normal;
     font-weight: 700;
     line-height: normal;
-    letter-spacing: -0.4px;
     position: fixed;
-    bottom: 42px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    @media (min-width: 1024px) {
+        width: 666px;
+        height: 60px;
+        font-size: 20px;
+        letter-spacing: -0.4px;
+        bottom: 42px;
+    }
+
+    @media (max-width: 1023px){
+        width: 460px;
+        height: 48px;
+        font-size: 16px;
+        letter-spacing: -0.32px;
+        bottom: 26px;
+    }
+
+    @media (max-width: 768px) {
+        width: 94%;
+        height: 48px;
+        font-size: 16px;
+        letter-spacing: -0.32px;
+        bottom: 20px;
+    }
 `;
 

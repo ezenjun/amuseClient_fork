@@ -3,9 +3,20 @@ import styled from "styled-components";
 export const SignUpBody = styled.div`
     flex-direction: column;
     align-items: center;
-    width: 699px;
     height: 506px;
     margin: 30px auto;
+
+    @media (min-width: 1024px) {
+        width: 699px;
+    }
+
+    @media (max-width: 1023px){
+        width: 522px;
+    }
+
+    @media (max-width: 768px) {
+        width: 333px;
+    }
 `;
 
 export const SignUpTitle = styled.h1`
@@ -54,13 +65,38 @@ export const SignupButton = styled.a`
     &.signup_naver {
         background: #1DC800; color: #FFF;
     }
+
+
+    @media (min-width: 1024px) {
+        font-size: 20px;
+    }
+
+    @media (max-width: 1023px){
+        font-size: 20px;
+    }
+
+    @media (max-width: 768px) {
+        font-size: 16px;
+    }
 `;
 
-
 export const SnsLogo = styled.img`
-    width: 38px;
     position: absolute;
-    right: 41px;
     top: 50%;
     transform: translateY(-50%);
+
+    @media (min-width: 1024px) {
+        width: 38px;
+        right: 41px;
+    }
+
+    @media (max-width: 1023px){
+        width: 38px;
+        right: 41px;
+    }
+
+    @media (max-width: 768px) {
+        width: 30px;
+        right: 25px;
+    }
 `;

@@ -8,7 +8,7 @@ const MainComponent = ({ children }: IProps) => {
 		<MainComponentStyle>
 			<Header />
 			{children}
-			<Footer />
+			{/* <Footer /> */}
 		</MainComponentStyle>
 	);
 };
