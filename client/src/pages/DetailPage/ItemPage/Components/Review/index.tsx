@@ -76,14 +76,19 @@ function Review({ itemId }: ReviewProps) {
 
       {reviewData?.reviews &&
         reviewData.reviews.map((review, index) => (
-          <ReviewDetail
-            key={index}
-            name={review.user_name}
-            content={review.review_content}
-            rate={review.user_rate}
-            date={review.create_date}
-            img={review.images}
-          />
+          <S.ReviewData>
+            <ReviewDetail
+              key={index}
+              name={review.user_name}
+              content={review.review_content}
+              rate={review.user_rate}
+              date={review.create_date}
+              img={review.images}
+            />
+            {index === reviewData.reviews.length - 1 && (
+              <S.LastReview>{C.REVIEW.LAST}</S.LastReview>
+            )}
+          </S.ReviewData>
         ))}
     </S.Review>
   );

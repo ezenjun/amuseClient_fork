@@ -1,12 +1,13 @@
 import styled from "styled-components";
 
-export const Review = styled.div``;
+export const Review = styled.div`
+  font-family: "Pretendard";
+`;
 
 export const Title = styled.div`
   display: flex;
   gap: 10px;
   margin-bottom: 16px;
-  font-family: "Pretendard";
   font-size: 20px;
   font-weight: 700;
 `;
@@ -74,7 +75,27 @@ export const TotalIcon = styled.img`
 
 export const TotalCount = styled.div`
   color: #909090;
-  font-family: "Pretendard";
   font-size: 16px;
   font-weight: 500;
+`;
+
+export const ReviewData = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+`;
+
+export const LastReview = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  height: 30px;
+  gap: 10px;
+  border-radius: 91px;
+  font-size: 16px;
+  font-weight: 500;
+  background: #f8f9fa;
+  color: #909090;
 `;
