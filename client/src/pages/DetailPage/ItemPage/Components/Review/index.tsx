@@ -15,6 +15,8 @@ interface ReviewData {
   reviews: {
     user_name: string;
     review_content: string;
+    user_rate: number;
+    create_date: string;
     images: string;
   }[];
 }
@@ -78,6 +80,8 @@ function Review({ itemId }: ReviewProps) {
             key={index}
             name={review.user_name}
             content={review.review_content}
+            rate={review.user_rate}
+            date={review.create_date}
             img={review.images}
           />
         ))}
