@@ -1,12 +1,14 @@
+import { number } from "prop-types";
 import styled from "styled-components";
 
-export const Review = styled.div``;
+export const Review = styled.div`
+  font-family: "Pretendard";
+`;
 
 export const Title = styled.div`
   display: flex;
   gap: 10px;
   margin-bottom: 16px;
-  font-family: "Pretendard";
   font-size: 20px;
   font-weight: 700;
 `;
@@ -57,24 +59,56 @@ export const Divide = styled.div`
 export const Total = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
   gap: 10px;
 `;
 
-export const TotalStar = styled.div`
+export const TotalStar = styled.div<{ width?: number }>`
   display: flex;
-  gap: 2.5px;
+  position: absolute;
+  width: ${(props) => props.width}px;
+  overflow: hidden;
+  padding-bottom: 30px;
+  gap: 3px;
+`;
+
+export const BackStar = styled.div`
+  display: flex;
+  position: absolute;
+  padding-bottom: 30px;
+  gap: 3px;
+  fill: #ccc;
+  color: #ccc;
 `;
 
 export const TotalIcon = styled.img`
-  width: 1.4vw;
-  min-width: 14px;
+  width: 20px;
 `;
 
 export const TotalCount = styled.div`
+  padding-top: 30px;
   color: #909090;
-  font-family: "Pretendard";
   font-size: 16px;
   font-weight: 500;
+`;
+
+export const ReviewData = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+`;
+
+export const LastReview = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  height: 30px;
+  gap: 10px;
+  border-radius: 91px;
+  font-size: 16px;
+  font-weight: 500;
+  background: #f8f9fa;
+  color: #909090;
 `;
