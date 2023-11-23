@@ -6,7 +6,7 @@ import { useRecoilState } from "recoil";
 import { impUid } from "../../atoms";
 import * as S from "./InfoFormStyle";
 import { useCookies } from "react-cookie";
-import TextField, { TextFieldPropsSizeOverrides, TextFieldVariants } from '@mui/material/TextField';
+import { TextFieldPropsSizeOverrides } from '@mui/material/TextField';
 import { OverridableStringUnion } from '@mui/types';
 
 interface InfoFormProps {

@@ -9,6 +9,8 @@ import { impUid, isVisible } from "../../atoms";
 import axios from "axios";
 import * as S from "./FindStyle";
 import * as M from "../SignUpPage/SignUpAmuseStyle";
+import { TextFieldPropsSizeOverrides } from '@mui/material/TextField';
+import { OverridableStringUnion } from '@mui/types';
 
 const FindPw: React.FC = () => {
     const movePage = useNavigate();
@@ -125,6 +127,81 @@ const FindPw: React.FC = () => {
     }
 
 
+    // 반응형 TextInput, Modal
+    interface TextInputStyles {
+        size: OverridableStringUnion<'small' | 'medium', TextFieldPropsSizeOverrides>;
+        margin: string;
+    }
+    
+    const [textInputStyles, setTextInputStyles] = useState<TextInputStyles>({
+        size: "medium", margin: "16px" 
+    });
+
+    const [modalStyles, setModalStyles] = useState({
+        content: {
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            backgroundColor: "#FFF",
+            width: "754px",
+            height: "389px",
+            padding: "40px 43px"
+        },
+        overlay: {
+            backgroundColor: "rgba(0, 0, 0, 0.5)",
+            width: "100%",
+            height: "100%",
+            transition: "opacity 0.3s ease-out",
+        },
+    });
+
+    const updateStyles = () => {
+        const screenWidth = window.innerWidth;
+        if (screenWidth <= 768) {
+            setTextInputStyles({size: "small", margin: "20px"});
+            setModalStyles(prevStyles => ({
+                ...prevStyles,
+                content: {
+                    ...prevStyles.content,
+                    width: "90%",
+                    height: "212px",
+                    padding: "24px 22px",
+                },
+            }));
+        } else if (screenWidth <= 1023) {
+            setTextInputStyles({size: "medium", margin: "30px"});
+            setModalStyles(prevStyles => ({
+                ...prevStyles,
+                content: {
+                    ...prevStyles.content,
+                    width: "522px",
+                    height: "250px",
+                    padding: "25px 30px",
+                },
+            }));
+        } else {
+            setTextInputStyles({size: "medium", margin: "30px"});
+            setModalStyles(prevStyles => ({
+                ...prevStyles,
+                content: {
+                    ...prevStyles.content,
+                    width: "754px",
+                    height: "389px",
+                    padding: "40px 43px",
+                },
+            }));
+        }
+    };
+
+    useEffect(() => {
+        updateStyles();
+        window.addEventListener('resize', updateStyles);
+        return () => {
+            window.removeEventListener('resize', updateStyles);
+        };
+    }, []);
+
+
     return (
         <MainComponent>
             <S.FindBody>
@@ -134,9 +211,9 @@ const FindPw: React.FC = () => {
                         <S.FindTitle>비밀번호 재설정</S.FindTitle>
                         <div>
                             <S.InputTitle>새 비밀번호</S.InputTitle>
-                            <PasswordInput password={password} handleChangePassword={handleChangePassword} labelText="" placeText="새 비밀번호" design="outlined" width="754px" margin='0' margin_b='30px' isValid={isValidPassword} errorText={errorText} inputSize='medium' />
+                            <PasswordInput password={password} handleChangePassword={handleChangePassword} labelText="" placeText="새 비밀번호" design="outlined" width="100%" margin='0' margin_b={textInputStyles.margin} inputSize={textInputStyles.size} isValid={isValidPassword} errorText={errorText} />
                             <S.InputTitle>새 비밀번호 확인</S.InputTitle>
-                            <PasswordInput password={checkPassword} handleChangePassword={handleChangeCheckPassword} labelText="" placeText="새 비밀번호 확인" design="outlined" width="754px" margin='0' margin_b='30px' isValid={isValidCheckPassword} errorText="비밀번호가 일치하지 않습니다" inputSize='medium' />
+                            <PasswordInput password={checkPassword} handleChangePassword={handleChangeCheckPassword} labelText="" placeText="새 비밀번호 확인" design="outlined" width="100%" margin='0' margin_b={textInputStyles.margin} inputSize={textInputStyles.size} isValid={isValidCheckPassword} errorText="비밀번호가 일치하지 않습니다" />
                         </div>
                         <S.NoteBox>
                             <S.NoteTitle>ℹ️ 유의사항</S.NoteTitle>
@@ -154,23 +231,7 @@ const FindPw: React.FC = () => {
                     <Modal
                         isOpen={isModalOpen}
                         onRequestClose={closeModal}
-                        style={{
-                            content: {
-                                top: "50%",
-                                left: "50%",
-                                transform: "translate(-50%, -50%)",
-                                backgroundColor: "#FFF",
-                                width: "754px",
-                                height: "389px",
-                                padding: "40px 43px"
-                            },
-                            overlay: {
-                                backgroundColor: "rgba(0, 0, 0, 0.5)",
-                                width: "100%",
-                                height: "100%",
-                                transition: "opacity 0.3s ease-out",
-                            },
-                        }}
+                        style={modalStyles}
                     >
                         <div className="agree_modal">
                             <M.ModalHeader>
