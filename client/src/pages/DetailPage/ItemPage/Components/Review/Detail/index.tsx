@@ -1,4 +1,5 @@
 import StarIcon from "../../../../../../assets/Icons/star.svg";
+import Sub from "../../Picture/Sub";
 import * as S from "./style";
 import * as C from "../constants";
 
@@ -7,10 +8,12 @@ interface ReviewDetailProps {
   content: string;
   rate: number;
   date: string;
-  img: string;
+  img: { review_img: string }[];
 }
 
 function ReviewDetail({ name, content, rate, date, img }: ReviewDetailProps) {
+  const reviewPicture = img ? img.map((obj) => obj.review_img) : [];
+  const subReviewPicture = reviewPicture.slice(0, 5);
   const hideName =
     name.length <= 1 ? name : name[0] + "*".repeat(name.length - 1);
 
@@ -28,6 +31,16 @@ function ReviewDetail({ name, content, rate, date, img }: ReviewDetailProps) {
         <S.Date>{date}</S.Date>
       </S.Title>
       <S.Content>{content}</S.Content>
+      <S.Sub>
+        {subReviewPicture.map((picture, key) => (
+          <Sub
+            src={picture}
+            alt={picture}
+            modal={reviewPicture}
+            clickId={key + 1}
+          />
+        ))}
+      </S.Sub>
       <S.Divider />
     </S.ReviewDetail>
   );

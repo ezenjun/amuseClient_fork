@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import StarIcon from "../../../../../assets/Icons/star.svg";
 import BackStarIcon from "../../../../../assets/Icons/star_back.svg";
-import axios from "axios";
 import ReviewDetail from "./Detail";
+import axios from "axios";
 import * as S from "./style";
 import * as C from "./constants";
 
@@ -18,7 +18,7 @@ interface ReviewData {
     review_content: string;
     user_rate: number;
     create_date: string;
-    images: string;
+    images: { review_img: string }[];
   }[];
 }
 

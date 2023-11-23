@@ -57,6 +57,11 @@ export const Content = styled.div`
   line-height: 138%;
 `;
 
+export const Sub = styled.div`
+  display: flex;
+  gap: 15px;
+`;
+
 export const Divider = styled.div`
   width: 100%;
   height: 1px;
