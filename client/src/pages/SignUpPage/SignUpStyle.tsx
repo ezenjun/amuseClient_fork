@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const SignUpBody = styled.div`
     flex-direction: column;
     align-items: center;
-    height: 506px;
+    height: 75vh;
     margin: 30px auto;
 
     @media (min-width: 1024px) {

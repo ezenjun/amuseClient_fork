@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const FindBody = styled.div`
     flex-direction: column;
     align-items: center;
-    height: 80vh;
+    height: 75vh;
     margin: 0 auto;
     position: relative;
 

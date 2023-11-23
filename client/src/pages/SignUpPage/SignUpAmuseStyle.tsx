@@ -5,7 +5,7 @@ import checkedIcon from '../LogInPage/Icons/checked_icon.png';
 export const SignUpBody = styled.div`
     flex-direction: column;
     align-items: center;
-    height: 506px;
+    height: 75vh;
     margin: 30px auto 200px;
     position: relative;
 

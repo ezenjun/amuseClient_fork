@@ -6,7 +6,7 @@ export const LoginBody = styled.div`
     flex-direction: column;
     align-items: center;
     // max-width: 699px;
-    height: 506px;
+    height: 75vh;
     margin: 30px auto;
 
     @media (min-width: 1024px) {
@@ -19,6 +19,7 @@ export const LoginBody = styled.div`
 
     @media (max-width: 768px) {
         width: 333px;
+        position: relative;
     }
 `;
 
@@ -132,6 +133,12 @@ export const VBox = styled.div`
     align-items: center;
     color: #797979;
     font-size: 15px;
+
+    @media (max-width: 768px) {
+        width: 100%;
+        position: absolute;
+        bottom: 20px;
+    }
 `;
 
 export const OAuthContainer = styled.div`
