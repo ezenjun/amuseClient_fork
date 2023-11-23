@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import StarIcon from "../../../../../assets/Icons/star.svg";
+import BackStarIcon from "../../../../../assets/Icons/star_back.svg";
 import axios from "axios";
 import ReviewDetail from "./Detail";
 import * as S from "./style";
@@ -26,6 +27,7 @@ function Review({ itemId }: ReviewProps) {
   const [reviewData, setReviewData] = useState<ReviewData | null>(null);
   const [reviewRated, setReviewRated] = useState<number>(0);
   const [reviewCount, setReviewCount] = useState<number>(0);
+  const reviewStar = 112 * (reviewRated / 5);
 
   // Review API
   useEffect(() => {
@@ -59,14 +61,21 @@ function Review({ itemId }: ReviewProps) {
         </S.Score>
         <S.Divide />
         <S.Total>
-          <S.TotalStar>
-            {/* !FIX 컴포넌트 빼기 */}
+          <S.BackStar>
+            <S.TotalIcon src={BackStarIcon} alt="star" />
+            <S.TotalIcon src={BackStarIcon} alt="star" />
+            <S.TotalIcon src={BackStarIcon} alt="star" />
+            <S.TotalIcon src={BackStarIcon} alt="star" />
+            <S.TotalIcon src={BackStarIcon} alt="star" />
+          </S.BackStar>
+          <S.TotalStar width={reviewStar}>
             <S.TotalIcon src={StarIcon} alt="star" />
             <S.TotalIcon src={StarIcon} alt="star" />
             <S.TotalIcon src={StarIcon} alt="star" />
             <S.TotalIcon src={StarIcon} alt="star" />
             <S.TotalIcon src={StarIcon} alt="star" />
           </S.TotalStar>
+
           <S.TotalCount>
             {reviewCount}
             {C.REVIEW.TOTAL}
