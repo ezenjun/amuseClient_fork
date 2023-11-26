@@ -5,7 +5,7 @@ export const TitleDetail = styled.div``;
 export const Location = styled.div`
   display: flex;
   align-items: center;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 600;
   color: #848c94;
   gap: 12px;
@@ -31,14 +31,14 @@ export const Review = styled.div`
   display: flex;
   align-items: center;
   text-align: center;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 600;
   gap: 8px;
 `;
 
 export const Star = styled.div`
   margin-bottom: 1px;
-  font-size: 10px;
+  font-size: 12px;
   color: #e6003d;
 `;
 
