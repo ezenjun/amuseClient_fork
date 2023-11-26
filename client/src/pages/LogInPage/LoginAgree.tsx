@@ -9,6 +9,16 @@ import moment from "moment";
 import { useNavigate } from "react-router";
 import * as S from "./LoginAgreeStyle";
 
+import * as M from "../SignUpPage/SignUpAmuseStyle";
+import Modal from "react-modal";
+import CloseIcon from "./Icons/close_icon.png";
+
+interface TermData {
+    id: number;
+    title: string;
+    content: string;
+    mandatory: boolean;
+}
 
 const LoginAgree: React.FC = () => {
     const movePage = useNavigate();
@@ -68,13 +78,15 @@ const LoginAgree: React.FC = () => {
                 .then((response) => {
                     let userData = response.data.data
                     setCookie("__usrN__", response.data.data?.name);
-                    if (userData?.personalInformationAgreement === true) {
-                        setLoggedIn(true);
-                        movePage("/");
-                    } else {
-                        setLoggedIn(false);
-                        setIsShow(true);
-                    }
+                    checkAgree().then((result) => {
+                        if (result) {
+                            setLoggedIn(true);
+                            movePage("/");
+                        } else {
+                            setLoggedIn(false);
+                            setIsShow(true);
+                        }
+                    })
                 })
                 .catch((err) => {
                     console.log(err);
@@ -82,73 +94,108 @@ const LoginAgree: React.FC = () => {
         }
     };
 
+    // 약관 동의 여부 확인 api
+    const checkAgree = () => {
+        if (cookies.__jwtkid__) {
+            return axios
+                .get(`${process.env.REACT_APP_AMUSE_API}/api/v1/user/terms_of_service?type=SignUp`, {
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `${cookies.__jwtkid__}`,
+                    },
+                })
+                .then((response) => {
+                    console.log(response.data.data);
+                    return response.data.data;
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        }
 
-    const submitAgree = async () => {
-        const token = cookies["__jwtkid__"]
-        const requestBody = {
-            advertisement_true: marketingInfoAgreed,
-            personalInformationAgreement: personalInfoAgreed,
-        };
-        console.log(requestBody, {
-            "Content-Type": "application/json",
-            "Authorization": `${token}`,
-        })
-        axios.post(`${process.env.REACT_APP_AMUSE_API}/api/v1/user/login/info`, requestBody, {
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `${token}`,
-            },
-        }).then((response) => {
-            movePage("/");
-        }).catch((err) => {
-            console.log(err);
-        })
+        return Promise.resolve(false);
     }
 
-    // const handleLogout = () => {
-    //     setLoggedIn(false)
-    //     let token = cookies.__jwtkid__
-    //     const expires = moment().add("1", "m").toDate();
-    //     setCookie("__igjwtk__", token, { expires });
-    //     removeCookie("__jwtkid__", { path: "/", maxAge: 0 });
-    //     movePage("/");
-    // };
+    // 약관 동의 post api
+    const submitAgree = async () => {
+        const token = cookies["__jwtkid__"]
+        const newAgreedArray = termAgreeStatus.map((value: number, index: number) => ({
+            number: index + 1,
+            agreed: value === 1,
+        }));
 
-    // useEffect(() => {
-    //     getUserInfoAsToken()
-    // }, [])
+        const requestBody = {
+            "type": "SignUp",
+            "content": newAgreedArray,
+        };
+
+        const apiEndpoint = `${process.env.REACT_APP_AMUSE_API}/api/v1/user/terms_of_service`;
+        axios
+            .post(apiEndpoint, requestBody, {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `${token}`,
+                },
+            })
+            .then((response) => {
+                movePage("/");
+                console.log(response.data.data);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    };
 
 
+    // 약관 동의 api
+    const [terms, setTerms] = useState<TermData[]>([]);
+    const [termAgreeStatus, setTermAgreeStatus] = useState<number[]>([]);
+    useEffect(() => {
+        axios.get(`${process.env.REACT_APP_AMUSE_API}/test/api/terms-of-service-info-type?type=SignUp`)
+            .then((response) => {
+                const initialAgreeStatus = response.data.data.content.map(() => 0);
+                setTermAgreeStatus(initialAgreeStatus);
+                setTerms(response.data.data.content);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }, [])
+
+    // 약관 동의 버튼
     const [allAgreed, setAllAgreed] = useState<boolean>(false);
-    const [personalInfoAgreed, setPersonalInfoAgreed] = useState<boolean>(false);
-    const [marketingInfoAgreed, setMarketingInfoAgreed] = useState<boolean>(false);
     const [ageInfoAgreed, setAgeInfoAgreed] = useState<boolean>(false);
-
-
     const handleAllAgreeChange = (e: ChangeEvent<HTMLInputElement>) => {
         const isChecked: boolean = e.target.checked;
+        const newAgreeStatus = termAgreeStatus.map(() => (isChecked ? 1 : 0));
+        setTermAgreeStatus(newAgreeStatus);
         setAllAgreed(isChecked);
-        setPersonalInfoAgreed(isChecked);
-        setMarketingInfoAgreed(isChecked);
         setAgeInfoAgreed(isChecked);
     };
 
-    const handlePersonalInfoAgreeChange = (e: ChangeEvent<HTMLInputElement>) => {
-        const isChecked: boolean = e.target.checked;
-        setPersonalInfoAgreed(isChecked);
-        setAllAgreed(isChecked && marketingInfoAgreed && ageInfoAgreed);
-    };
-
-    const handleMarketingInfoAgreeChange = (e: ChangeEvent<HTMLInputElement>) => {
-        const isChecked: boolean = e.target.checked;
-        setMarketingInfoAgreed(isChecked);
-        setAllAgreed(isChecked && personalInfoAgreed && ageInfoAgreed);
+    const handleTermAgreeChange = (index: number) => {
+        const newAgreeStatus = [...termAgreeStatus];
+        newAgreeStatus[index] = newAgreeStatus[index] === 1 ? 0 : 1;
+        setTermAgreeStatus(newAgreeStatus);
+        setAllAgreed(newAgreeStatus.every((status) => status === 1) && ageInfoAgreed);
     };
 
     const handleAgeInfoAgreeChange = (e: ChangeEvent<HTMLInputElement>) => {
         const isChecked: boolean = e.target.checked;
         setAgeInfoAgreed(isChecked);
-        setAllAgreed(isChecked && personalInfoAgreed && marketingInfoAgreed);
+        setAllAgreed(isChecked && termAgreeStatus.every((status) => status === 1));
+    };
+
+    // 약관 동의 Modal
+    const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+    const [modalContent, setModalContent] = useState<number | null>(null);
+    const openModal = (index: number) => {
+        setModalContent(index);
+        setIsModalOpen(true);
+    };
+
+    const closeModal = () => {
+        setIsModalOpen(false);
     };
 
 
@@ -177,22 +224,70 @@ const LoginAgree: React.FC = () => {
                             (필수)<S.ContentBtn>만 14세 이상</S.ContentBtn>동의
                         </S.AgreeText>
                     </S.AgreeBox>
-                    <S.AgreeBox>
-                        <S.AgreeCheck id="agree_personal_info" onChange={handlePersonalInfoAgreeChange} checked={personalInfoAgreed}></S.AgreeCheck>
-                        <S.AgreeText htmlFor="agree_personal_info">
-                            (필수)<S.ContentBtn>개인정보 활용</S.ContentBtn>동의
-                        </S.AgreeText>
-                    </S.AgreeBox>
-                    <S.AgreeBox>
-                        <S.AgreeCheck id="agree_marketing_info" onChange={handleMarketingInfoAgreeChange} checked={marketingInfoAgreed}></S.AgreeCheck>
-                        <S.AgreeText htmlFor="agree_marketing_info">
-                            (선택)<S.ContentBtn>마케팅정보 활용</S.ContentBtn>동의
-                        </S.AgreeText>
-                    </S.AgreeBox>
-                    <S.AgreeButton onClick={() => { submitAgree() }} disabled={!(ageInfoAgreed && personalInfoAgreed)}>
+
+                    {terms.map((term, index) => (
+                        <S.AgreeBox key={`${term.id}`}>
+                            <S.AgreeCheck id={`agree_${term.id}`} onChange={() => handleTermAgreeChange(index)} checked={termAgreeStatus[index] === 1}></S.AgreeCheck>
+                            <S.AgreeText htmlFor={`agree_${term.id}`}>
+                                {`(${term.mandatory ? '필수' : '선택'})`}
+                                <M.ContentBtn onClick={() => openModal(index)}>{`${term.title}`}</M.ContentBtn>
+                            </S.AgreeText>
+                        </S.AgreeBox>
+                    ))}
+
+                    <S.AgreeButton
+                        onClick={() => { submitAgree() }}
+                        disabled={!(ageInfoAgreed && !(terms
+                            .filter((term, index) => term.mandatory && termAgreeStatus[index] !== 1)
+                            .length > 0))}>
                         {"동의하고 계속하기"}
                     </S.AgreeButton>
                 </S.LoginAgreeContent>
+
+                {/* 약관 동의 modal */}
+                <div className="modal">
+                    <Modal
+                        isOpen={isModalOpen}
+                        onRequestClose={closeModal}
+                        style={{
+                            content: {
+                                top: "50%",
+                                left: "50%",
+                                transform: "translate(-50%, -50%)",
+                                backgroundColor: "#FFF",
+                                width: "754px",
+                                height: "486px",
+                                padding: "40px 43px"
+                            },
+                            overlay: {
+                                backgroundColor: "rgba(0, 0, 0, 0.5)",
+                                width: "100%",
+                                height: "100%",
+                                transition: "opacity 0.3s ease-out",
+                            },
+                        }}
+                    >
+                        {modalContent !== null && (
+                            <M.ModalBody>
+                                <M.ModalHeader>
+                                    <M.ModalTitle>{`${terms[modalContent].title}(${terms[modalContent].mandatory ? '필수' : '선택'})`}</M.ModalTitle>
+                                    <button className="modal_btn_close" onClick={closeModal}>
+                                        <img src={CloseIcon} className="close_icon" />
+                                    </button>
+                                </M.ModalHeader>
+                                <M.ModalContent>
+                                    {terms[modalContent].content.split('\n').map((line, index) => (
+                                        <React.Fragment key={index}>
+                                            {line}
+                                            <br />
+                                        </React.Fragment>
+                                    ))}
+                                </M.ModalContent>
+                                <M.AgreeBtn onClick={closeModal}>확인</M.AgreeBtn>
+                            </M.ModalBody>
+                        )}
+                    </Modal>
+                </div>
             </S.LoginAgreeBody>
         )
     }

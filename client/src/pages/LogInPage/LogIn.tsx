@@ -98,14 +98,14 @@ const Login: React.FC = () => {
 	return (
 		<MainComponent>
 			<S.LoginBody>
-				<form className="login" action="/loginURL" method="post">
+				{/* <form className="login" action="/loginURL" method="post"> */}
 					<S.LoginTitle>로그인</S.LoginTitle>
 					<S.InputContainer>
 						<div className="id">
-							<TextInput disable={false} value={id} onInputChange={handleChangeId} labelText="아이디" placeText="아이디" inputType="text" width="680px" margin="" allMargin="8px" design="standard"/>
+							<TextInput disable={false} value={id} onInputChange={handleChangeId} labelText="아이디" placeText="아이디" inputType="text" width="97%" margin="" allMargin="8px" design="standard"/>
 						</div>
 						<div className="password">
-							<PasswordInput password={password} handleChangePassword={handleChangePassword} labelText="비밀번호" placeText="비밀번호" design="standard" width="680px" margin='8px' margin_b='' isValid={true} errorText="" inputSize="medium" />
+							<PasswordInput password={password} handleChangePassword={handleChangePassword} labelText="비밀번호" placeText="비밀번호" design="standard" width="97%" margin='8px' margin_b='' isValid={true} errorText="" inputSize="medium" />
 						</div>
 					</S.InputContainer>
 					{error && <S.ErrorMessage>아이디 또는 비밀번호가 올바르지 않습니다.</S.ErrorMessage>}
@@ -116,7 +116,7 @@ const Login: React.FC = () => {
 					<S.LoginButton onClick={handleLogin}>
 						<i className="fa-solid fa-door-open"></i>로그인
 					</S.LoginButton>
-				</form>
+				{/* </form> */}
 				<S.FunctionBox>
 					<div className="find_btn">
 						<S.FindIdButton href="/LogIn/FindId">아이디 찾기</S.FindIdButton>
