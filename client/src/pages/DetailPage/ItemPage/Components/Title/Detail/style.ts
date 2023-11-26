@@ -27,6 +27,11 @@ export const Title = styled.div`
   color: #343a40;
 `;
 
+export const Info = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
 export const Review = styled.div`
   display: flex;
   align-items: center;
@@ -48,6 +53,31 @@ export const Count = styled.div`
 
 export const Right = styled.div`
   margin-top: 1.5px;
-  font-size: 10px;
+  font-size: 12px;
   color: #848c94;
+`;
+
+export const StartPrice = styled.div`
+  display: flex;
+  align-items: center;
+  color: #909090;
+  font-family: "Pretendard";
+  font-size: 14px;
+  font-weight: 500;
+  gap: 6px;
+`;
+
+export const Text = styled.div`
+  margin: 2px 2px 0 0;
+`;
+
+export const Price = styled.div`
+  color: #000;
+  font-size: 20px;
+  font-weight: 600;
+`;
+
+export const Start = styled.div`
+  font-size: 20px;
+  font-weight: 600;
 `;
