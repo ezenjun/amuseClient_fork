@@ -13,12 +13,16 @@ import { paymentCancelContent } from "../../../../../../../../Interfaces/DataInt
 import { WebButton } from "../../../../../../../../components/Button/WebButton";
 import GrayBox from "../../../../../../../../components/Box/GrayBox";
 import { GrayboxRow, RowDetail, RowName } from "../styles";
+import { Modal } from "../../../../../../../../components/Modal/Modal";
+import CancelPolicyModal from "../../../../../../../../components/Modal/PaymentDetailModals/CancelPolicyModal";
 
 interface CancelPaymentProps {
 	data: paymentCancelContent | undefined;
 }
 
 const CancelPayment = ({ data }: CancelPaymentProps) => {
+	const [showModal, setShowModal] = useState(false);
+
 	const additionalInfoHTML = {
 		__html: data?.content || "",
 	};
@@ -44,6 +48,7 @@ const CancelPayment = ({ data }: CancelPaymentProps) => {
 							color="white"
 							fontSize={20}
 							verticalPadding={18}
+							onClick={() => setShowModal(!showModal)}
 						>
 							환불 규정 확인
 						</WebButton>
@@ -70,13 +75,25 @@ const CancelPayment = ({ data }: CancelPaymentProps) => {
 			)}
 			{screenWidth < 768 && (
 				<MobileButtonContainer>
-					<WebButton color="white" fontSize={20} verticalPadding={15}>
+					<WebButton
+						color="white"
+						fontSize={20}
+						verticalPadding={15}
+						onClick={() => setShowModal(!showModal)}
+					>
 						환불 규정 확인
 					</WebButton>
 					<WebButton color="gray2" fontSize={20} verticalPadding={15}>
 						취소 요청
 					</WebButton>
 				</MobileButtonContainer>
+			)}
+			{showModal && data?.content && (
+				<Modal setShowModal={setShowModal} title="취소 및 환불 규정">
+					<CancelPolicyModal
+						content={data?.content}
+					></CancelPolicyModal>
+				</Modal>
 			)}
 		</ReservationInfoContainer>
 	);
