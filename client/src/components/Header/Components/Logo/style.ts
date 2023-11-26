@@ -19,7 +19,7 @@ export const Search = styled.div`
   padding-left: 22px;
   padding-right: 10px;
   border-radius: 50px;
-  border: 1px solid var(--2, #ccc);
+  border: 1px solid #ccc;
   width: 400px;
   height: 42px;
 `;
