@@ -36,7 +36,7 @@ const LoginAgree: React.FC = () => {
             } else {
                 const expires = moment().add("8", "h").toDate();
                 setCookie("__jwtkid__", token, { expires });
-                setLoggedIn(true);
+                // setLoggedIn(true);
                 getUserInfoAsToken();
             }
         } else if (locationString.includes("amusetravel.wheelgo.net/")) {
@@ -49,7 +49,7 @@ const LoginAgree: React.FC = () => {
             } else {
                 const expires = moment().add("8", "h").toDate();
                 setCookie("__jwtkid__", token, { expires });
-                setLoggedIn(true);
+                // setLoggedIn(true);
                 getUserInfoAsToken();
             }
         }
@@ -57,26 +57,29 @@ const LoginAgree: React.FC = () => {
 
 
     const getUserInfoAsToken = async () => {
-        axios
-            .get(`${process.env.REACT_APP_AMUSE_API}/api/v1/user/info`, {
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `${cookies.__jwtkid__}`,
-                },
-            })
-            .then((response) => {
-                let userData = response.data.data
-                setCookie("__usrN__", response.data.data?.name);
-                if (userData?.personalInformationAgreement === true) {
-                    movePage("/");
-                } else {
-                    setIsShow(true);
-                }
-
-            })
-            .catch((err) => {
-                console.log(err);
-            });
+        if (cookies.__jwtkid__) {
+            axios
+                .get(`${process.env.REACT_APP_AMUSE_API}/api/v1/user/info`, {
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `${cookies.__jwtkid__}`,
+                    },
+                })
+                .then((response) => {
+                    let userData = response.data.data
+                    setCookie("__usrN__", response.data.data?.name);
+                    if (userData?.personalInformationAgreement === true) {
+                        setLoggedIn(true);
+                        movePage("/");
+                    } else {
+                        setLoggedIn(false);
+                        setIsShow(true);
+                    }
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        }
     };
 
 
