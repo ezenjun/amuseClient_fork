@@ -16,7 +16,6 @@ function CourseIntro({ itemId }: ItemIdProps) {
       .get(`${process.env.REACT_APP_AMUSE_API}/detail/${itemId}/course-intro`)
       .then((response) => {
         setCourseIntroData(response.data.data.course);
-        console.log(response.data.data.course);
       })
       .catch((error) => {
         console.log("CourseIntro 연결 실패");

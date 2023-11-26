@@ -17,7 +17,7 @@ export const BoxLike = styled.div`
   left: 15px;
   background-color: rgba(0, 0, 0, 0);
   color: #ffffff;
-  z-index: 9;
+  z-index: 2;
   cursor: pointer;
 `;
 
