@@ -146,13 +146,15 @@ function List({ range, itemId }: DateProps) {
               : 0;
           return (
             <S.Ticket key={index}>
-              <S.Count>{ticket.title}</S.Count>
-              <S.Count>
-                {ticket.count}
-                {C.TICKET.MUIT}
-                {price.toLocaleString("en")}
-                {C.TICKET.WON}
-              </S.Count>
+              <S.Info>
+                <S.Count>{ticket.title}</S.Count>
+                <S.Count>
+                  {ticket.count}
+                  {C.TICKET.MUIT}
+                  {price.toLocaleString("en")}
+                  {C.TICKET.WON}
+                </S.Count>
+              </S.Info>
               <S.Price>
                 {(ticket.count * price).toLocaleString("en")}
                 {C.TICKET.WON}
