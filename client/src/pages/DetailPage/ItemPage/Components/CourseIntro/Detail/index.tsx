@@ -12,20 +12,23 @@ function CourseIntroDetail({
   return (
     <S.CourseIntro>
       <S.Image src={imageSrc} alt={title} />
-      <S.Divide>
-        <S.Icon>
-          <FontAwesomeIcon icon={faLocationDot} />
-        </S.Icon>
-        <S.Line></S.Line>
-      </S.Divide>
 
-      <S.Content>
-        <S.Header>
-          <S.Title>{title}</S.Title>
-          <S.Time>{time}</S.Time>
-        </S.Header>
-        <S.Body>{content}</S.Body>
-      </S.Content>
+      <S.Info>
+        <S.Divide>
+          <S.Icon>
+            <FontAwesomeIcon icon={faLocationDot} />
+          </S.Icon>
+          <S.Line></S.Line>
+        </S.Divide>
+
+        <S.Content>
+          <S.Header>
+            <S.Title>{title}</S.Title>
+            <S.Time>{time}</S.Time>
+          </S.Header>
+          <S.Body>{content}</S.Body>
+        </S.Content>
+      </S.Info>
     </S.CourseIntro>
   );
 }

@@ -44,7 +44,7 @@ export const Input = styled.input`
   width: 100%;
   color: #909090;
   font-family: "Pretendard";
-  font-size: 12px;
+  font-size: 12.5px;
   font-style: normal;
   font-weight: 500;
   line-height: normal;

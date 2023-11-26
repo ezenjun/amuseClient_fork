@@ -42,11 +42,11 @@ function Menu({ type }: MenuProps) {
       </S.DropButton>
 
       <S.DropContent className="dropdown-content">
-        {categories.slice(4).map((categoryName: string, index: number) => (
+        {categories.slice(5).map((categoryName: string, index: number) => (
           <S.Item
             key={index}
             onClick={() =>
-              navigateToSubPageComp(categoryIds[index + 4], categoryName)
+              navigateToSubPageComp(categoryIds[index + 5], categoryName)
             }
           >
             {categoryName}

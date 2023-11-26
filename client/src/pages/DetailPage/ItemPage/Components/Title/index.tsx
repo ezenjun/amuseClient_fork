@@ -49,6 +49,7 @@ function Title({ itemId }: ItemIdProps) {
       title={titleData?.title ?? "title"}
       rated={formattedRatedData ? Number(formattedRatedData) : 0.0}
       review={titleData?.review_count ?? 0.0}
+      startPrice={titleData?.startPrice ?? 0}
     />
   );
 }

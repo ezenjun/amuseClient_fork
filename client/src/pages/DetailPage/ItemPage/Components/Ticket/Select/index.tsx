@@ -30,8 +30,8 @@ const Select: FC<SelectProps> = ({
 
       <S.Payment>
         <S.Price>
-          <S.Number>{price.toLocaleString("en")}</S.Number>
-          <S.Won>{C.TICKET.WON}</S.Won>
+          {price.toLocaleString("en")}
+          {C.TICKET.WON}
         </S.Price>
 
         <S.Count>

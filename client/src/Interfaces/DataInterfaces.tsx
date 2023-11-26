@@ -64,6 +64,7 @@ export interface TitleData {
   title: string;
   rated: number;
   review_count: number;
+  startPrice: number;
 }
 
 export interface SelectedItemData {

@@ -30,7 +30,7 @@ export const DropContent = styled.div`
   padding: 12px 0;
   left: -25px;
   background-color: #fff;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.05);
 `;
 
 export const Dropdown = styled.div`

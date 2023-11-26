@@ -14,7 +14,7 @@ export const Login = styled.div`
     flex-direction: column;
     margin-top: 0;
     left: 15px;
-    gap: 7px;
+    gap: 10px;
   }
 `;
 
