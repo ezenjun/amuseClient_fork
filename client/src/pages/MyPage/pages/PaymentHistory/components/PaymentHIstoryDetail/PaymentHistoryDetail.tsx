@@ -21,6 +21,7 @@ import Details from "./Section/Details/Details";
 import CancelPayment from "./Section/CancelPayment/CancelPayment";
 import EachPayment from "../EachPayment";
 import { WebButton } from "../../../../../../components/Button/WebButton";
+import { Modal } from "../../../../../../components/Modal/Modal";
 
 type Props = {};
 
@@ -29,6 +30,7 @@ const PaymentHistoryDetail = (props: Props) => {
 	const [data, setData] = useState<PaymentDetailInterface>();
 	const [cookies] = useCookies(["__jwtkid__"]);
 	const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+	const [showModal, setShowModal] = useState(false);
 
 	const handleResize = () => {
 		setScreenWidth(window.innerWidth);
@@ -119,6 +121,12 @@ const PaymentHistoryDetail = (props: Props) => {
 						>
 							결제 정보 확인
 						</WebButton>
+					)}
+					{showModal && (
+						<Modal
+							setShowModal={setShowModal}
+							title="취소 및 환불 규정"
+						></Modal>
 					)}
 				</ReservationInfoContainer>
 			</DetailContainer>
