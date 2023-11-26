@@ -10,6 +10,12 @@ export const List = styled.div`
   color: #343a40;
 `;
 
+export const Select = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+`;
+
 export const Date = styled.div`
   font-size: 16px;
   font-weight: 700;

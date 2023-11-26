@@ -5,7 +5,6 @@ export const Select = styled.div`
   justify-content: space-between;
   gap: 20px;
   padding: 20px;
-  margin-bottom: 10px;
   border-radius: 8px;
   box-sizing: border-box;
   background-color: #f8f9fa;

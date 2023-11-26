@@ -116,24 +116,26 @@ function List({ range, itemId }: DateProps) {
       </S.Date>
 
       {/* ticket list */}
-      {ticketData.map((ticketInfo, index) => {
-        const selectedPriceIndex = getSelectedPriceIndex(ticketInfo, range);
-        const price =
-          selectedPriceIndex !== -1
-            ? ticketInfo.priceList[selectedPriceIndex].price
-            : 0;
-        return (
-          <Select
-            key={index}
-            name={ticketInfo.title}
-            detail={ticketInfo.content}
-            price={price}
-            count={ticketInfo.count}
-            handleMinus={() => handleMinus(index)}
-            handlePlus={() => handlePlus(index, price)}
-          />
-        );
-      })}
+      <S.Select>
+        {ticketData.map((ticketInfo, index) => {
+          const selectedPriceIndex = getSelectedPriceIndex(ticketInfo, range);
+          const price =
+            selectedPriceIndex !== -1
+              ? ticketInfo.priceList[selectedPriceIndex].price
+              : 0;
+          return (
+            <Select
+              key={index}
+              name={ticketInfo.title}
+              detail={ticketInfo.content}
+              price={price}
+              count={ticketInfo.count}
+              handleMinus={() => handleMinus(index)}
+              handlePlus={() => handlePlus(index, price)}
+            />
+          );
+        })}
+      </S.Select>
 
       {/* selected ticket price */}
       {ticketData
