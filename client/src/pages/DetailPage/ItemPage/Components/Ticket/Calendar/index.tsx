@@ -60,7 +60,7 @@ function Calendar({ itemId }: CalendarProps) {
 
   useEffect(() => {
     setOrderRange(range);
-  }, [range]);
+  }, [range, setOrderRange]);
 
   useEffect(() => {
     axios
@@ -160,6 +160,7 @@ function Calendar({ itemId }: CalendarProps) {
   };
   useEffect(() => {
     window.addEventListener("resize", handleResize);
+    handleResize();
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
