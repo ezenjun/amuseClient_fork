@@ -26,20 +26,14 @@ function TitleDetail({
 }: TitleDetailProps) {
   const [mobileHeader, setMobileHeader] = useState(0);
   const handleResize = () => {
-    const windowWidth = window.innerWidth;
-    if (windowWidth > 768) {
-      setMobileHeader(0);
-    } else {
-      setMobileHeader(1);
-    }
+    if (window.innerWidth > 768) setMobileHeader(0);
+    else setMobileHeader(1);
   };
 
   useEffect(() => {
-    handleResize();
     window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
+    handleResize();
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   return (
@@ -64,12 +58,13 @@ function TitleDetail({
             <FontAwesomeIcon icon={faChevronRight} />
           </S.Right>
         </S.Review>
-
-        <S.StartPrice>
-          <S.Text>시작가</S.Text>
-          <S.Price>{startPrice.toLocaleString("en")}원</S.Price>
-          <S.Start>~</S.Start>
-        </S.StartPrice>
+        {mobileHeader === 1 && (
+          <S.StartPrice>
+            <S.Text>시작가</S.Text>
+            <S.Price>{startPrice.toLocaleString("en")}원</S.Price>
+            <S.Start>~</S.Start>
+          </S.StartPrice>
+        )}
       </S.Info>
     </S.TitleDetail>
   );
