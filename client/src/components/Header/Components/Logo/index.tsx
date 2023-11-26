@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import logoimage from "../../../../assets/Images/amuse_logo.png";
+import logoImage from "../../../../assets/Images/amuse_logo.png";
 import SearchIcon from "../../Images/search.svg";
 import * as S from "./style";
 import * as C from "../../constants";
@@ -32,7 +32,7 @@ function Logo() {
   return (
     <S.Logo>
       <S.Image
-        src={logoimage}
+        src={logoImage}
         alt="Amuse Travel Logo"
         onClick={navigateToHome}
       />

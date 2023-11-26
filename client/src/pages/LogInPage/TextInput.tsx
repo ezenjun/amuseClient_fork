@@ -1,6 +1,7 @@
 import React, { ChangeEvent, useState } from "react";
 import FormControl from '@mui/material/FormControl';
-import TextField, { TextFieldVariants } from '@mui/material/TextField';
+import TextField, { TextFieldPropsSizeOverrides, TextFieldVariants } from '@mui/material/TextField';
+import { OverridableStringUnion } from '@mui/types';
 
 interface TextInputProps {
     labelText: string;
@@ -17,9 +18,10 @@ interface TextInputProps {
     inputId?: boolean;
     design?: TextFieldVariants;
     allMargin?: string;
+    size?: OverridableStringUnion<'small' | 'medium', TextFieldPropsSizeOverrides>;
 }
 
-const TextInput: React.FC<TextInputProps> = ({ disable, onBlur, onInputChange, labelText, placeText, value, inputType, isValid = true, errorText = "", width, margin, inputId, allMargin, design="outlined" }) => {
+const TextInput: React.FC<TextInputProps> = ({ disable, onBlur, onInputChange, labelText, placeText, value, inputType, isValid = true, errorText = "", width, margin, inputId, allMargin, design="outlined", size="medium" }) => {
 
     return (
         <FormControl sx={{ mb: margin, width: width, m: allMargin }} variant="outlined">
@@ -34,7 +36,7 @@ const TextInput: React.FC<TextInputProps> = ({ disable, onBlur, onInputChange, l
                 onChange={onInputChange}
                 // variant="outlined"
                 variant={design}
-                // size="Normal"
+                size={size}
                 sx={{ padding: 0 }}
                 onBlur={onBlur}
                 error={!isValid}

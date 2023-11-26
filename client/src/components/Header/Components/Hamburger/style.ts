@@ -1,13 +1,4 @@
-import styled, { keyframes } from "styled-components";
-
-const fadeIn = keyframes`
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-`;
+import styled from "styled-components";
 
 export const Hamburger = styled.div`
   display: flex;
@@ -16,7 +7,7 @@ export const Hamburger = styled.div`
   padding: 0 5%;
 `;
 
-export const Menu = styled.div`
+export const Logo = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
@@ -52,7 +43,7 @@ export const Search = styled.div`
 export const Input = styled.input`
   width: 100%;
   color: #909090;
-  font-family: Pretendard;
+  font-family: "Pretendard";
   font-size: 12px;
   font-style: normal;
   font-weight: 500;
@@ -69,14 +60,7 @@ export const Button = styled.button`
 `;
 
 export const Side = styled.div`
-  display: none;
-  position: fixed;
-  overflow: hidden;
   z-index: 3;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
   &.open {
     display: block;
   }
@@ -85,8 +69,6 @@ export const Side = styled.div`
 export const SideBack = styled.div`
   display: none;
   position: fixed;
-  overflow: hidden;
-  z-index: 3;
   top: 0;
   left: 0;
   width: 100%;
@@ -94,23 +76,19 @@ export const SideBack = styled.div`
   &.open {
     display: block;
     background-color: rgba(0, 0, 0, 0.5);
-    animation: ${fadeIn} 0.1s ease;
   }
 `;
 
 export const SideMenu = styled.div`
   display: none;
   position: fixed;
-  overflow: hidden;
-  z-index: 3;
   top: 0;
   left: 0;
   background-color: white;
   &.open {
     display: block;
-    width: 50%;
+    width: 290px;
     height: 100%;
-    animation: ${fadeIn} 0.1s ease;
   }
 `;
 
@@ -118,6 +96,6 @@ export const SideImage = styled.img`
   position: relative;
   width: 158px;
   height: 59px;
-  left: 17.5%;
-  margin: 20px 0px;
+  left: 66px;
+  margin: 15px 0px 7px 0px;
 `;

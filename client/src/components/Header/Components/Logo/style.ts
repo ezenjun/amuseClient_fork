@@ -7,6 +7,7 @@ export const Logo = styled.div`
 `;
 
 export const Image = styled.img`
+  cursor: pointer;
   width: 158px;
   height: 59px;
 `;
@@ -18,7 +19,7 @@ export const Search = styled.div`
   padding-left: 22px;
   padding-right: 10px;
   border-radius: 50px;
-  border: 1px solid var(--2, #ccc);
+  border: 1px solid #ccc;
   width: 400px;
   height: 42px;
 `;
@@ -26,8 +27,8 @@ export const Search = styled.div`
 export const Input = styled.input`
   width: 100%;
   color: #909090;
-  font-family: Pretendard;
-  font-size: 12px;
+  font-family: "Pretendard";
+  font-size: 12.5px;
   font-style: normal;
   font-weight: 500;
   line-height: normal;

@@ -5,12 +5,19 @@ import axios from "axios";
 import { useRecoilState } from "recoil";
 import { impUid } from "../../atoms";
 import * as S from "./InfoFormStyle";
+import { useCookies } from "react-cookie";
+import { TextFieldPropsSizeOverrides } from '@mui/material/TextField';
+import { OverridableStringUnion } from '@mui/types';
 
 interface InfoFormProps {
     onNextStep: (name: string) => void;
 }
 
 const InfoForm: React.FC<InfoFormProps> = (props) => {
+    const [cookies, setCookie, removeCookie] = useCookies([
+        "terms",
+    ]);
+
     // 유효성 검사
     const nameValidation = (value: string): string => {
         return value.slice(0, 50);
@@ -166,38 +173,99 @@ const InfoForm: React.FC<InfoFormProps> = (props) => {
         axios.post(apiEndpoint, requestBody)
             .then((response) => {
                 console.log('가입 성공');
+                postTerms(response.data.data.accessToken);
                 props.onNextStep(name);
             })
             .catch((error) => {
                 console.error('API 요청 실패:', error);
             })
+
+    };
+
+    // 약관 동의 정보 post
+    const postTerms = (token: string) => {
+        const newAgreedArray = cookies.terms.map((value: number, index: number) => ({
+            number: index + 1,
+            agreed: value === 1,
+        }));
+
+        const requestBody = {
+            "type": "SignUp",
+            "content": newAgreedArray,
+        };
+
+        const apiEndpoint = `${process.env.REACT_APP_AMUSE_API}/api/v1/user/terms_of_service`;
+        axios
+            .post(apiEndpoint, requestBody, {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `${token}`,
+                },
+            })
+            .then((response) => {
+                console.log(response.data.data);
+                removeCookie("terms");
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     };
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     };
 
 
+    // 반응형 TextInput
+    interface TextInputStyles {
+        width: string;
+        size: OverridableStringUnion<'small' | 'medium', TextFieldPropsSizeOverrides>;
+        margin: string;
+    }
+    
+    const [textInputStyles, setTextInputStyles] = useState<TextInputStyles>({
+        width: "75%", size: "medium", margin: "16px" 
+    });
+
+    const updateTextInputStyles = () => {
+        const screenWidth = window.innerWidth;
+        if (screenWidth <= 768) {
+            setTextInputStyles({width: "100%", size: "small", margin: "2px"});
+        } else if (screenWidth <= 1023) {
+            setTextInputStyles({width: "75%", size: "medium", margin: "16px"});
+        } else {
+            setTextInputStyles({width: "75%", size: "medium", margin: "16px"});
+        }
+    };
+
+    useEffect(() => {
+        updateTextInputStyles();
+        window.addEventListener('resize', updateTextInputStyles);
+        return () => {
+            window.removeEventListener('resize', updateTextInputStyles);
+        };
+    }, []);
+
+
     return (
-        <div className="info_body" style={{ width: '754px' }}>
+        <S.InfoBody>
             <form action="" method="post" className="info_form">
                 <div>
                     <S.InputTitle>아이디</S.InputTitle>
                     <S.FlexBox>
-                        <TextInput disable={false} value={id} onInputChange={handleChangeId} labelText="" placeText="아이디" inputType="text" isValid={isValidId} errorText={errorText} inputId={true} width="560px" margin="16px" />
-                        <S.InnBtn onClick={handleDuplicateClick}>중복 확인</S.InnBtn>
+                        <TextInput disable={false} value={id} onInputChange={handleChangeId} labelText="" placeText="아이디" inputType="text" isValid={isValidId} errorText={errorText} inputId={true} width={textInputStyles.width} margin={textInputStyles.margin} size={textInputStyles.size} />
+                        <S.InnBtn onClick={handleDuplicateClick}>중복 체크</S.InnBtn>
                     </S.FlexBox>
                     <S.InputTitle>비밀번호</S.InputTitle>
-                    <PasswordInput password={password} handleChangePassword={handleChangePassword} labelText="" placeText="비밀번호" design="outlined" width="754px" margin='' margin_b='16px' isValid={isValidPassword} errorText="비밀번호는 8~16자의 영문, 숫자, 특수문자 중 두 종류 이상의 조합으로 입력해주세요" inputSize='small' />
+                    <PasswordInput password={password} handleChangePassword={handleChangePassword} labelText="" placeText="비밀번호" design="outlined" width="100%" margin='' margin_b={textInputStyles.margin} inputSize={textInputStyles.size} isValid={isValidPassword} errorText="비밀번호는 8~16자의 영문, 숫자, 특수문자 중 두 종류 이상의 조합으로 입력해주세요" />
                     <S.InputTitle>비밀번호 재확인</S.InputTitle>
-                    <PasswordInput password={checkPassword} handleChangePassword={handleChangeCheckPassword} labelText="" placeText="비밀번호 재확인" design="outlined" width="754px" margin='' margin_b='16px' isValid={isValidCheckPassword} errorText="비밀번호가 일치하지 않습니다" inputSize='small' />
+                    <PasswordInput password={checkPassword} handleChangePassword={handleChangeCheckPassword} labelText="" placeText="비밀번호 재확인" design="outlined" width="100%" margin='' margin_b={textInputStyles.margin} inputSize={textInputStyles.size} isValid={isValidCheckPassword} errorText="비밀번호가 일치하지 않습니다" />
                     <S.FlexBox>
-                        <div>
+                        <div style={{width: textInputStyles.width}}>
                             <S.InputTitle>이름</S.InputTitle>
-                            <TextInput disable={true} onInputChange={handleInputChange} labelText="" placeText="이름" value={name} inputType="text" width="561px" margin="16px" />
+                            <TextInput disable={true} onInputChange={handleInputChange} labelText="" placeText="이름" value={name} inputType="text" width="100%" margin={textInputStyles.margin} size={textInputStyles.size} />
                         </div>
                         <div>
                             <S.InputTitle>성별</S.InputTitle>
-                            
                             <S.RadioButtonContainer>
                                 <div className="input_gender">
                                     <input type="radio" name="gender" id="MAN" value="MAN" checked={gender === "MAN"} onChange={handleGenderChange} />
@@ -211,19 +279,19 @@ const InfoForm: React.FC<InfoFormProps> = (props) => {
                     </S.FlexBox>
 
                     <S.InputTitle>생년월일</S.InputTitle>
-                    <TextInput disable={true} onInputChange={handleInputChange} labelText="" placeText="생년월일" value={birth} inputType="text" width="754px" margin="16px" />
+                    <TextInput disable={true} onInputChange={handleInputChange} labelText="" placeText="생년월일" value={birth} inputType="text" width="100%" margin={textInputStyles.margin} size={textInputStyles.size}/>
                     <S.InputTitle>본인 확인 이메일</S.InputTitle>
-                    <TextInput disable={false} value={email} onInputChange={handleChangeEmail} labelText="" placeText="ex) example@example.com" inputType="email" isValid={checkEmail} errorText="이메일을 입력해주세요" width="754px" margin="16px" />
+                    <TextInput disable={false} value={email} onInputChange={handleChangeEmail} labelText="" placeText="ex) example@example.com" inputType="email" isValid={checkEmail} errorText="이메일을 입력해주세요" width="100%" margin={textInputStyles.margin} size={textInputStyles.size} />
                     <S.InputTitle>전화번호</S.InputTitle>
                     <div className="">
-                        <TextInput disable={true} onInputChange={handleInputChange} labelText="" placeText="ex) 01012345678" value={phone} inputType="text" width="754px" margin="16px" />
+                        <TextInput disable={true} onInputChange={handleInputChange} labelText="" placeText="ex) 01012345678" value={phone} inputType="text" width="100%" margin={textInputStyles.margin} size={textInputStyles.size} />
                     </div>
                 </div>
             </form >
             <S.NextButton onClick={handleClickBtn} disabled={isNextButtonDisabled}>
                 가입하기
             </S.NextButton>
-        </div >
+        </S.InfoBody>
     );
 }
 

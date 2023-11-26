@@ -14,41 +14,79 @@ export const Menu = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-top: 30px;
-  margin-bottom: 15px;
-  font-family: Pretendard;
+  font-family: "Pretendard";
   font-size: 16px;
-  font-style: normal;
   font-weight: 500;
-  line-height: normal;
   color: #464646;
 `;
 
-export const More = styled.div`
-  display: flex;
-  align-items: center;
-  padding: 15px;
+export const DropContent = styled.div`
+  display: none;
+  position: absolute;
+  z-index: 1;
+  width: 200px;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  padding: 12px 0;
+  left: -25px;
+  background-color: #fff;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
 `;
 
 export const Dropdown = styled.div`
-  position: absolute;
-  display: none;
-  top: 165px;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
-  z-index: 9;
-  background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  animation: ${fadeIn} 0.1s ease;
+  position: relative;
+  display: inline-block;
+
+  &:hover ${DropContent} {
+    display: block;
+    animation: ${fadeIn} 0.5s;
+  }
 `;
 
-export const DropdownItem = styled.div`
-  padding: 20px;
+export const DropButton = styled.div`
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding-bottom: 15px;
+`;
+
+export const Item = styled.div`
+  cursor: pointer;
+  display: block;
+  padding: 15px 20px;
+
+  &:hover {
+    background-color: #f2f2f2;
+  }
 `;
 
 export const Category = styled.div`
   cursor: pointer;
+  padding-bottom: 15px;
   &:hover {
     color: #e6003d;
   }
+
+  @media (max-width: 768px) {
+    /* Mobile styles */
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding-bottom: 0;
+    left: 15px;
+    height: 60px;
+    font-size: 16px;
+    font-weight: 500;
+  }
+`;
+
+export const Divider = styled.div`
+  position: relative;
+  width: 100%;
+  height: 1px;
+  background-color: #e9e9e9;
+`;
+
+export const MobileMenu = styled.div`
+  margin-top: 25px;
 `;

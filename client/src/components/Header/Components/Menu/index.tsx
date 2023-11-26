@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCategoryContext } from "../../Contexts/CategoryContext";
 import { CategoryNameMenuProps } from "../../../../Interfaces/PropsInterfaces";
-import ArrowDown from "../../../../assets/Icons/Arrow/arrow_down_24.svg";
+import ArrowIcon from "../../Images/arrow.svg";
 import _ from "lodash";
 import axios from "axios";
 import * as S from "./style";
@@ -12,7 +12,11 @@ interface MoreDropdownProps {
   // count: number;
 }
 
-function Menu() {
+interface MenuProps {
+  type: string;
+}
+
+function Menu({ type }: MenuProps) {
   const movePage = useNavigate();
   const { setCategoriesInfo } = useCategoryContext();
   const [categories, setCategories] = useState([]);
@@ -32,17 +36,23 @@ function Menu() {
 
   const MoreDropdown: React.FC<MoreDropdownProps> = () => (
     <S.Dropdown className="dropdown">
-      {categories.slice(4).map((categoryName: string, index: number) => (
-        <S.DropdownItem
-          className="dropdown-item"
-          key={index}
-          onClick={() =>
-            navigateToSubPageComp(categoryIds[index + 4], categoryName)
-          }
-        >
-          {categoryName}
-        </S.DropdownItem>
-      ))}
+      <S.DropButton className="dropbtn">
+        더보기
+        <img src={ArrowIcon} alt="Arrow Down" />
+      </S.DropButton>
+
+      <S.DropContent className="dropdown-content">
+        {categories.slice(4).map((categoryName: string, index: number) => (
+          <S.Item
+            key={index}
+            onClick={() =>
+              navigateToSubPageComp(categoryIds[index + 4], categoryName)
+            }
+          >
+            {categoryName}
+          </S.Item>
+        ))}
+      </S.DropContent>
     </S.Dropdown>
   );
 
@@ -64,36 +74,54 @@ function Menu() {
   }, []);
 
   return (
-    <S.Menu>
-      {categories.length <= 5 ? (
-        categories.map((categoryName: string, index: number) => (
-          <CategoryMenu
-            key={index}
-            categoryName={categoryName}
-            handleClick={() =>
-              navigateToSubPageComp(categoryIds[index], categoryName)
-            }
-          />
-        ))
+    <>
+      {type === "pc" ? (
+        <S.Menu>
+          {categories.length <= 5 ? (
+            categories.map((categoryName: string, index: number) => (
+              <CategoryMenu
+                key={index}
+                categoryName={categoryName}
+                handleClick={() =>
+                  navigateToSubPageComp(categoryIds[index], categoryName)
+                }
+              />
+            ))
+          ) : (
+            <>
+              {categories
+                .slice(0, 5)
+                .map((categoryName: string, index: number) => (
+                  <CategoryMenu
+                    key={index}
+                    categoryName={categoryName}
+                    handleClick={() =>
+                      navigateToSubPageComp(categoryIds[index], categoryName)
+                    }
+                  />
+                ))}
+              <MoreDropdown />
+            </>
+          )}
+        </S.Menu>
       ) : (
-        <>
-          {categories.slice(0, 5).map((categoryName: string, index: number) => (
-            <CategoryMenu
-              key={index}
-              categoryName={categoryName}
-              handleClick={() =>
-                navigateToSubPageComp(categoryIds[index], categoryName)
-              }
-            />
+        <S.MobileMenu>
+          <S.Divider />
+          {categories.map((categoryName: string, index: number) => (
+            <>
+              <CategoryMenu
+                key={index}
+                categoryName={categoryName}
+                handleClick={() =>
+                  navigateToSubPageComp(categoryIds[index], categoryName)
+                }
+              />
+              <S.Divider />
+            </>
           ))}
-          <S.More className="menu-item more-dropdown">
-            더보기
-            <img src={ArrowDown} alt="Arrow Down" />
-            <MoreDropdown />
-          </S.More>
-        </>
+        </S.MobileMenu>
       )}
-    </S.Menu>
+    </>
   );
 }
 

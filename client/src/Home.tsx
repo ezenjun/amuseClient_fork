@@ -11,6 +11,7 @@ import Banner from "./components/Banner";
 import SubTiles from "./components/Tile/SubTiles";
 import MainComponent from "./MainComponent";
 import MainBanner from "./components/MainBanner";
+import Footer from "./components/Footer/Footer";
 import * as S from "./styles";
 
 interface TileProps {
@@ -146,6 +147,7 @@ function Home() {
         />
         <S.Render>{renderedComponents}</S.Render>
       </Fade>
+      <Footer />
     </MainComponent>
   );
 }

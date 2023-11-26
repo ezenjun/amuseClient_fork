@@ -7,6 +7,7 @@ import CloseIcon from "../LogInPage/Icons/close_icon.png";
 import InfoForm from "./InfoForm";
 import * as S from "./SignUpAmuseStyle";
 import Certification from "../LogInPage/Certification";
+import { useCookies } from "react-cookie";
 
 interface TermData {
     id: number;
@@ -17,6 +18,9 @@ interface TermData {
 
 const SignUpAmuse: React.FC = () => {
     const movePage = useNavigate();
+    const [cookies, setCookie, removeCookie] = useCookies([
+        "terms",
+    ]);
 
     // 약관 동의 api
     const [terms, setTerms] = useState<TermData[]>([]);
@@ -64,6 +68,8 @@ const SignUpAmuse: React.FC = () => {
     // 다음 버튼 클릭 시
     const [currentStep, setCurrentStep] = useState<number>(1);
     const handleNextClick = () => {
+        setCookie("terms", termAgreeStatus);
+        console.log(termAgreeStatus);
         setCurrentStep(currentStep + 1);
     };
 
@@ -76,6 +82,69 @@ const SignUpAmuse: React.FC = () => {
     const handleContinueClick = () => {
         movePage("/LogIn");
     };
+
+
+    // 반응형 modal
+    const [modalStyles, setModalStyles] = useState({
+        content: {
+            width: "754px",
+            height: "486px",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            backgroundColor: "#FFF",
+            padding: "40px 43px",
+        },
+        overlay: {
+            backgroundColor: "rgba(0, 0, 0, 0.5)",
+            width: "100%",
+            height: "100%",
+            transition: "opacity 0.3s ease-out",
+        },
+    });
+
+    const updateModalStyles = () => {
+        const screenWidth = window.innerWidth;
+        if (screenWidth <= 768) {
+            setModalStyles(prevStyles => ({
+                ...prevStyles,
+                content: {
+                    ...prevStyles.content,
+                    width: "100%",
+                    height: "100%",
+                    padding: "7px 16px",
+                },
+            }));
+        } else if (screenWidth <= 1023) {
+            setModalStyles(prevStyles => ({
+                ...prevStyles,
+                content: {
+                    ...prevStyles.content,
+                    width: "522px",
+                    height: "422px",
+                    padding: "25px 30px",
+                },
+            }));
+        } else {
+            setModalStyles(prevStyles => ({
+                ...prevStyles,
+                content: {
+                    ...prevStyles.content,
+                    width: "754px",
+                    height: "486px",
+                    padding: "40px 43px",
+                },
+            }));
+        }
+    };
+
+    useEffect(() => {
+        updateModalStyles();
+        window.addEventListener('resize', updateModalStyles);
+        return () => {
+            window.removeEventListener('resize', updateModalStyles);
+        };
+    }, []);
 
 
     return (
@@ -138,23 +207,7 @@ const SignUpAmuse: React.FC = () => {
                     <Modal
                         isOpen={isModalOpen}
                         onRequestClose={closeModal}
-                        style={{
-                            content: {
-                                top: "50%",
-                                left: "50%",
-                                transform: "translate(-50%, -50%)",
-                                backgroundColor: "#FFF",
-                                width: "754px",
-                                height: "486px",
-                                padding: "40px 43px"
-                            },
-                            overlay: {
-                                backgroundColor: "rgba(0, 0, 0, 0.5)",
-                                width: "100%",
-                                height: "100%",
-                                transition: "opacity 0.3s ease-out",
-                            },
-                        }}
+                        style={modalStyles}
                     >
                         {modalContent !== null && (
                             <S.ModalBody>

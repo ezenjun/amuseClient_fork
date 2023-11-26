@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { useCookies } from "react-cookie";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart } from "@fortawesome/free-regular-svg-icons";
-import { faHeart as fullHeart } from "@fortawesome/free-solid-svg-icons";
+import HeartIcon from "../Icons/heart.svg";
+import HeartFullIcon from "../Icons/heart_full.svg";
 import axios from "axios";
 import * as S from "./style";
 
@@ -49,12 +48,9 @@ function Box({ itemId, handleClick, title, startPrice, imageUrl }: BoxProps) {
       <S.Photo>
         <S.BoxImage src={imageUrl} onClick={handleClick} />
         <S.BoxLike>
-          <FontAwesomeIcon
-            icon={isLiked[itemId] ? fullHeart : faHeart}
-            style={{
-              width: "20px",
-              height: "20px",
-            }}
+          <S.HeartIcon
+            src={isLiked[itemId] ? HeartFullIcon : HeartIcon}
+            alt="heartIcon"
             onClick={() => handleLikeClick(itemId)}
           />
         </S.BoxLike>

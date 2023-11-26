@@ -67,6 +67,7 @@ export const requestPay = (data: PaymentInfo, callback: (rsp: any) => void) => {
 			bypass: {
 				acceptmethod: "cardpoint",
 			},
+			m_redirect_url: "http://localhost:3000/order",
 		},
 		callback
 	);
