@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Main = styled.div`
   position: relative;
   padding-bottom: 62%;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
 `;
 
 export const Image = styled.img`

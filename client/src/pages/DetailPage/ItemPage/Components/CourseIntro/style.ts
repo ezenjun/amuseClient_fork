@@ -11,7 +11,6 @@ export const Title = styled.div`
   color: #343a40;
   font-size: 20px;
   font-weight: 700;
-  margin-bottom: 16px;
 `;
 
 export const DayTitle = styled.div`

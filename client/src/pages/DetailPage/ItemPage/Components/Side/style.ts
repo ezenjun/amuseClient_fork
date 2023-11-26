@@ -3,6 +3,8 @@ import styled from "styled-components";
 export const Side = styled.div`
   position: sticky;
   top: 50px;
+  font-family: "Pretendard";
+  font-weight: 600;
 `;
 
 export const Main = styled.div`
@@ -16,8 +18,7 @@ export const Main = styled.div`
 
 export const StartPrice = styled.div`
   color: #909090;
-  font-family: "Pretendard";
-  font-size: 0.9rem;
+  font-size: 15px;
   font-weight: 500;
   margin-bottom: 5px;
 `;
@@ -34,20 +35,12 @@ export const Price = styled.div`
 `;
 
 export const PriceNum = styled.div`
-  font-family: "Pretendard";
   font-size: 28px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
 `;
 
 export const PriceMin = styled.div`
   color: #909090;
-  font-family: Pretendard;
   font-size: 28px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
 `;
 
 export const Share = styled.img`
@@ -69,9 +62,7 @@ export const Wish = styled.button`
   border-radius: 8px;
   border: 1px solid #ccc;
   color: #36393e;
-  font-family: "Pretendard";
   font-size: 16px;
-  font-weight: 600;
 `;
 
 export const Heart = styled.img`
@@ -82,11 +73,7 @@ export const HeartCount = styled.div`
   margin-top: 12px;
   color: #909090;
   text-align: center;
-  font-family: "Pretendard";
   font-size: 13px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
 `;
 
 export const Manager = styled.div`
@@ -114,11 +101,7 @@ export const ProfileImg = styled.img`
 `;
 
 export const ProfileName = styled.div`
-  font-family: "Pretendard";
   font-size: 15px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
 `;
 
 export const Inquiry = styled.div`
@@ -131,11 +114,7 @@ export const Inquiry = styled.div`
 
 export const InquiryText = styled.div`
   color: #fb5984;
-  font-family: Inter;
   font-size: 15px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
 `;
 
 export const ProductCode = styled.div`
@@ -153,9 +132,5 @@ export const ProductCode = styled.div`
 export const ProductCodeText = styled.div`
   color: #464646;
   text-align: center;
-  font-family: "Pretendard";
   font-size: 16px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
 `;

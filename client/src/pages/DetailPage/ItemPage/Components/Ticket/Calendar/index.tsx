@@ -168,7 +168,7 @@ function Calendar({ itemId }: CalendarProps) {
     <S.Calendar>
       <S.Title>{C.TICKET.TITLE}</S.Title>
       <S.Date>
-        <style>{`.custom-select { color: white; background-color: #F184A1; }`}</style>
+        <style>{`.custom-select { color: white; background-color: #E6003D; }`}</style>
         <DayPicker
           locale={ko}
           numberOfMonths={month}
