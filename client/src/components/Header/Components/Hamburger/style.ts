@@ -52,7 +52,7 @@ export const Search = styled.div`
 export const Input = styled.input`
   width: 100%;
   color: #909090;
-  font-family: Pretendard;
+  font-family: "Pretendard";
   font-size: 12px;
   font-style: normal;
   font-weight: 500;
