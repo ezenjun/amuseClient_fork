@@ -21,6 +21,8 @@ export const BoxLike = styled.div`
   cursor: pointer;
 `;
 
+export const HeartIcon = styled.img``;
+
 export const Photo = styled.div`
   display: flex;
 `;

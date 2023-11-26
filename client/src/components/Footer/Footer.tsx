@@ -21,9 +21,9 @@ function Footer() {
             주소 : 서울시 중구 청계천로 40 한국관광공사 서울센터 <br />
             사업자등록번호 : 707-86-00503 <br />
             관광사업등록번호 : 제 2019-000091호 <br />
-            통신판매업신고번호 : 제 2019-서울마포-2624호 <br />
+            통신판매업신고번호 : 2022-서울중구-0720 <br />
             전화 : 02-719-6811~5 / 이메일 : info@amusetravel.com <br />
-            개인정보관리책임 : 신우주
+            개인정보관리책임 : 김찬중
             <div className={Style["docsBtn"]}>
               <TermsBtn href="/Terms">이용약관</TermsBtn>
               <PrivacyBtn href="/Privacy">개인정보취급정책</PrivacyBtn>

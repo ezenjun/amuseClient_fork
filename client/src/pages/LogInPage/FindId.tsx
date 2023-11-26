@@ -66,19 +66,19 @@ const FindId: React.FC = () => {
                         {id && (
                             <div>
                                 <S.FirstText>회원님!<br /> 아이디를 찾았어요.</S.FirstText>
-                                <S.SecondText>회원님의 정보로 아이디를 찾았어요.</S.SecondText>
+                                <S.SecondText>회원님의 정보로 1개의 아이디를 찾았어요.</S.SecondText>
                                 <S.ResultBox>{id}</S.ResultBox>
                                 <S.ContinueButton onClick={navigateToLogin}>확인</S.ContinueButton>
                             </div>
                         )}
-                        {!id && (
+                        {/* {!id && (
                             <div>
                                 <S.FirstText>가입한 로그인 정보가 없습니다.<br />회원가입을 통해 더 다양한 서비스를 만나보세요!</S.FirstText>
                                 <S.SecondText></S.SecondText>
                                 <S.ResultBox></S.ResultBox>
                                 <S.ContinueButton onClick={navigateToSignUp}>회원가입 하기</S.ContinueButton>
                             </div>
-                        )}
+                        )} */}
                     </div>
                 )}
             </S.FindBody>

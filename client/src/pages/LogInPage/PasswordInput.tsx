@@ -19,10 +19,10 @@ interface PasswordInputProps {
   margin_b: string;
   isValid: boolean;
   errorText: string;
-  inputSize: OverridableStringUnion<'small' | 'medium', TextFieldPropsSizeOverrides>;
+  inputSize?: OverridableStringUnion<'small' | 'medium', TextFieldPropsSizeOverrides>;
 }
 
-const PasswordInput: React.FC<PasswordInputProps> = ({ password, handleChangePassword, labelText, placeText, design, width, margin, margin_b, isValid, errorText, inputSize }) => {
+const PasswordInput: React.FC<PasswordInputProps> = ({ password, handleChangePassword, labelText, placeText, design, width, margin, margin_b, isValid, errorText, inputSize="medium" }) => {
   const [showPassword, setShowPassword] = React.useState<boolean>(false);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -55,7 +55,7 @@ const PasswordInput: React.FC<PasswordInputProps> = ({ password, handleChangePas
         label={labelText}
         placeholder={placeText}
         variant={design}
-        size="medium"
+        size={inputSize}
         // 유효성 검사 오류 시 추가
         error={!isValid}
         helperText={!isValid ? errorText : ""}

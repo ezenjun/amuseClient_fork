@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCategoryContext } from "../../Contexts/CategoryContext";
 import { CategoryNameMenuProps } from "../../../../Interfaces/PropsInterfaces";
-import ArrowDown from "../../../../assets/Icons/Arrow/arrow_down_24.svg";
+import ArrowIcon from "../../Images/arrow.svg";
 import _ from "lodash";
 import axios from "axios";
 import * as S from "./style";
@@ -32,17 +32,23 @@ function Menu() {
 
   const MoreDropdown: React.FC<MoreDropdownProps> = () => (
     <S.Dropdown className="dropdown">
-      {categories.slice(4).map((categoryName: string, index: number) => (
-        <S.DropdownItem
-          className="dropdown-item"
-          key={index}
-          onClick={() =>
-            navigateToSubPageComp(categoryIds[index + 4], categoryName)
-          }
-        >
-          {categoryName}
-        </S.DropdownItem>
-      ))}
+      <S.DropButton className="dropbtn">
+        더보기
+        <img src={ArrowIcon} alt="Arrow Down" />
+      </S.DropButton>
+
+      <S.DropContent className="dropdown-content">
+        {categories.slice(4).map((categoryName: string, index: number) => (
+          <S.Item
+            key={index}
+            onClick={() =>
+              navigateToSubPageComp(categoryIds[index + 4], categoryName)
+            }
+          >
+            {categoryName}
+          </S.Item>
+        ))}
+      </S.DropContent>
     </S.Dropdown>
   );
 
@@ -86,11 +92,7 @@ function Menu() {
               }
             />
           ))}
-          <S.More className="menu-item more-dropdown">
-            더보기
-            <img src={ArrowDown} alt="Arrow Down" />
-            <MoreDropdown />
-          </S.More>
+          <MoreDropdown />
         </>
       )}
     </S.Menu>
