@@ -8,7 +8,7 @@ export const Title = styled.div`
   font-family: "Pretendard";
   font-size: 20px;
   font-weight: 700;
-  margin-bottom: 16px;
+  margin-bottom: 20px;
 `;
 
 export const Content = styled.div``;

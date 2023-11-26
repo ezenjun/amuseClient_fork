@@ -1,4 +1,3 @@
-import { number } from "prop-types";
 import styled from "styled-components";
 
 export const Review = styled.div`
@@ -8,7 +7,7 @@ export const Review = styled.div`
 export const Title = styled.div`
   display: flex;
   gap: 10px;
-  margin-bottom: 16px;
+  margin-bottom: 20px;
   font-size: 20px;
   font-weight: 700;
 `;
