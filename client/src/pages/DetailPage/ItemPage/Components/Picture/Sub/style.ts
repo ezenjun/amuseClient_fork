@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Sub = styled.div`
   position: relative;
-  width: 32.8%;
+  width: 32.4%;
   padding-bottom: 24%;
 `;
 
