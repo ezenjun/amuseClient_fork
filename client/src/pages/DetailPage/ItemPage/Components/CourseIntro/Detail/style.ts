@@ -34,6 +34,7 @@ export const Info = styled.div`
   @media (max-width: 768px) {
     /* Mobile styles */
     margin-bottom: 20px;
+    min-height: 100px;
   }
 `;
 
