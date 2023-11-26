@@ -12,7 +12,11 @@ interface MoreDropdownProps {
   // count: number;
 }
 
-function Menu() {
+interface MenuProps {
+  type: string;
+}
+
+function Menu({ type }: MenuProps) {
   const movePage = useNavigate();
   const { setCategoriesInfo } = useCategoryContext();
   const [categories, setCategories] = useState([]);
@@ -70,32 +74,54 @@ function Menu() {
   }, []);
 
   return (
-    <S.Menu>
-      {categories.length <= 5 ? (
-        categories.map((categoryName: string, index: number) => (
-          <CategoryMenu
-            key={index}
-            categoryName={categoryName}
-            handleClick={() =>
-              navigateToSubPageComp(categoryIds[index], categoryName)
-            }
-          />
-        ))
+    <>
+      {type === "pc" ? (
+        <S.Menu>
+          {categories.length <= 5 ? (
+            categories.map((categoryName: string, index: number) => (
+              <CategoryMenu
+                key={index}
+                categoryName={categoryName}
+                handleClick={() =>
+                  navigateToSubPageComp(categoryIds[index], categoryName)
+                }
+              />
+            ))
+          ) : (
+            <>
+              {categories
+                .slice(0, 5)
+                .map((categoryName: string, index: number) => (
+                  <CategoryMenu
+                    key={index}
+                    categoryName={categoryName}
+                    handleClick={() =>
+                      navigateToSubPageComp(categoryIds[index], categoryName)
+                    }
+                  />
+                ))}
+              <MoreDropdown />
+            </>
+          )}
+        </S.Menu>
       ) : (
-        <>
-          {categories.slice(0, 5).map((categoryName: string, index: number) => (
-            <CategoryMenu
-              key={index}
-              categoryName={categoryName}
-              handleClick={() =>
-                navigateToSubPageComp(categoryIds[index], categoryName)
-              }
-            />
+        <S.MobileMenu>
+          <S.Divider />
+          {categories.map((categoryName: string, index: number) => (
+            <>
+              <CategoryMenu
+                key={index}
+                categoryName={categoryName}
+                handleClick={() =>
+                  navigateToSubPageComp(categoryIds[index], categoryName)
+                }
+              />
+              <S.Divider />
+            </>
           ))}
-          <MoreDropdown />
-        </>
+        </S.MobileMenu>
       )}
-    </S.Menu>
+    </>
   );
 }
 

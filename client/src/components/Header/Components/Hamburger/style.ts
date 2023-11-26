@@ -7,7 +7,7 @@ export const Hamburger = styled.div`
   padding: 0 5%;
 `;
 
-export const Menu = styled.div`
+export const Logo = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;

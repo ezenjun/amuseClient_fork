@@ -66,7 +66,7 @@ function Hamburger({
 
   return (
     <S.Hamburger>
-      <S.Menu>
+      <S.Logo>
         <S.HamImage src={HamburgerIcon} alt="hamburger" onClick={openSide} />
         <S.Image
           src={logoimage}
@@ -74,7 +74,7 @@ function Hamburger({
           onClick={navigateToHome}
         />
         <S.Blank />
-      </S.Menu>
+      </S.Logo>
 
       <S.Search>
         <S.Input
@@ -105,6 +105,8 @@ function Hamburger({
             setCookie={setCookie}
             removeCookie={removeCookie}
           />
+          {/* 카테고리 메뉴 */}
+          <Menu type={"mobile"} />
         </S.SideMenu>
       </S.Side>
     </S.Hamburger>

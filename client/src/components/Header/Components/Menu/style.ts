@@ -66,4 +66,27 @@ export const Category = styled.div`
   &:hover {
     color: #e6003d;
   }
+
+  @media (max-width: 768px) {
+    /* Mobile styles */
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding-bottom: 0;
+    left: 15px;
+    height: 60px;
+    font-size: 16px;
+    font-weight: 500;
+  }
+`;
+
+export const Divider = styled.div`
+  position: relative;
+  width: 100%;
+  height: 1px;
+  background-color: #e9e9e9;
+`;
+
+export const MobileMenu = styled.div`
+  margin-top: 25px;
 `;
