@@ -20,7 +20,7 @@ export const Login = styled.div`
 export const Button = styled.button`
   color: #464646;
   font-family: "Pretendard";
-  font-size: 12px;
+  font-size: 13.5px;
   font-weight: 500;
 
   @media (max-width: 768px) {
