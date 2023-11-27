@@ -19,6 +19,7 @@ export const HamImage = styled.img`
 `;
 
 export const Image = styled.img`
+  cursor: pointer;
   width: 158px;
   height: 59px;
 `;
