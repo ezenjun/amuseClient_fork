@@ -60,6 +60,11 @@ export const Content = styled.div`
 export const Sub = styled.div`
   display: flex;
   gap: 15px;
+
+  @media (max-width: 768px) {
+    /* Mobile styles */
+    gap: 8px;
+  }
 `;
 
 export const Divider = styled.div`

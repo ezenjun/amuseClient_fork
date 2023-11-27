@@ -32,7 +32,7 @@ function ReviewDetail({ name, content, rate, date, img }: ReviewDetailProps) {
       </S.Title>
       <S.Content>{content}</S.Content>
       <S.Sub>
-        {/* {subReviewPicture.map((picture, key) => (
+        {subReviewPicture.map((picture, key) => (
           <Sub
             src={picture}
             alt={picture}
@@ -40,7 +40,7 @@ function ReviewDetail({ name, content, rate, date, img }: ReviewDetailProps) {
             clickId={key + 1}
             type="review"
           />
-        ))} */}
+        ))}
       </S.Sub>
       <S.Divider />
     </S.ReviewDetail>
