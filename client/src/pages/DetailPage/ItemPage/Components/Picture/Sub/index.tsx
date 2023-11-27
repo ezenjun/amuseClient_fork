@@ -7,15 +7,16 @@ interface SubProps {
   alt: string;
   modal: string[];
   clickId: number;
+  type: string;
 }
 
-function Sub({ src, alt, modal, clickId }: SubProps) {
+function Sub({ src, alt, modal, clickId, type }: SubProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
 
   return (
-    <S.Sub>
+    <S.Sub type={type}>
       <S.Image src={src} alt={alt} onClick={openModal} />
       {isModalOpen && (
         <Popup onClose={closeModal} images={modal} clickId={clickId} />

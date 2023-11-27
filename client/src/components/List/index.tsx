@@ -77,7 +77,7 @@ function SubLists({ title, itemInfos }: SubListsProps) {
           <S.Button onClick={handlePrevClick} disabled={isPrevDisabled}>
             {isPrevDisabled ? <NoLeft /> : <Left />}
           </S.Button>
-          {Math.ceil(currentIndex / 8) + 1}
+          {Math.ceil(currentIndex / displayedItemCount) + 1}
           <S.Button onClick={handleNextClick} disabled={isNextDisabled}>
             {isNextDisabled ? <NoRight /> : <Right />}
           </S.Button>
