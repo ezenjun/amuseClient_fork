@@ -6,7 +6,7 @@ export const Box = styled.div`
   min-width: 160px;
   height: 19.5vw;
   min-height: 180px;
-  border-radius: 20px;
+  border-radius: 8px;
   border: 2px solid #efefef;
   cursor: pointer;
 `;
@@ -32,7 +32,7 @@ export const BoxImage = styled.img`
   height: 11.5vw;
   min-height: 100px;
   background-size: cover;
-  border-radius: 20px 20px 0 0;
+  border-radius: 8px 8px 0 0;
 `;
 
 export const Content = styled.div`

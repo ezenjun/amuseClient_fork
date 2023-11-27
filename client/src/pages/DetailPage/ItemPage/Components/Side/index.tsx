@@ -56,9 +56,8 @@ function Side({ itemId, productCode, likeNum }: SideProps) {
   };
 
   // Share button
-  const [showTooltip, setShowTooltip] = useState(false);
-  const handleTooltipToggle = () => {
-    setShowTooltip(!showTooltip);
+  const handleTooltipToggle = async () => {
+    await navigator.clipboard.writeText(window.location.href);
   };
 
   return (
