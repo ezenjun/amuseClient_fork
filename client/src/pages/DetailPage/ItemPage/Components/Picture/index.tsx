@@ -52,6 +52,7 @@ function Picture({ itemId }: ItemIdProps) {
             alt={picture}
             modal={pictureData}
             clickId={key + 1}
+            type="picture"
           />
         ))}
       </S.Sub>

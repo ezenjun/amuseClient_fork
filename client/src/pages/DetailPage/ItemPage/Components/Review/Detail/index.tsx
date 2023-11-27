@@ -13,7 +13,7 @@ interface ReviewDetailProps {
 
 function ReviewDetail({ name, content, rate, date, img }: ReviewDetailProps) {
   const reviewPicture = img ? img.map((obj) => obj.review_img) : [];
-  const subReviewPicture = reviewPicture.slice(0, 5);
+  const subReviewPicture = reviewPicture.slice(0, 4);
   const hideName =
     name.length <= 1 ? name : name[0] + "*".repeat(name.length - 1);
 
@@ -32,14 +32,15 @@ function ReviewDetail({ name, content, rate, date, img }: ReviewDetailProps) {
       </S.Title>
       <S.Content>{content}</S.Content>
       <S.Sub>
-        {subReviewPicture.map((picture, key) => (
+        {/* {subReviewPicture.map((picture, key) => (
           <Sub
             src={picture}
             alt={picture}
             modal={reviewPicture}
             clickId={key + 1}
+            type="review"
           />
-        ))}
+        ))} */}
       </S.Sub>
       <S.Divider />
     </S.ReviewDetail>

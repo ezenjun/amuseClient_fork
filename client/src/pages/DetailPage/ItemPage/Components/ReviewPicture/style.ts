@@ -17,7 +17,31 @@ export const Count = styled.div`
   color: #e6003d;
 `;
 
-export const Sub = styled.div`
+export const List = styled.div`
   display: flex;
   gap: 15px;
+
+  @media (max-width: 768px) {
+    /* Mobile styles */
+    gap: 8px;
+  }
+`;
+
+export const Page = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #909090;
+  margin-top: 15px;
+`;
+
+export const Button = styled.button`
+  background-color: transparent;
+  border: transparent;
+  margin-top: 4px;
+  padding: 0 1%;
+
+  &:disabled {
+    background-color: transparent;
+  }
 `;
