@@ -36,7 +36,7 @@ function Review({ itemId }: ReviewProps) {
   // paging
   const [displayedItemCount, setDisplayedItemCount] = useState(5);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const subReviewData = reviewData?.reviews.slice(
+  const subReviewData = reviewData?.reviews?.slice(
     currentIndex,
     currentIndex + displayedItemCount
   );
