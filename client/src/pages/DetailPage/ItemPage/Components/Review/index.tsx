@@ -1,4 +1,8 @@
 import React, { useEffect, useState } from "react";
+import { ReactComponent as Right } from "../ReviewPicture/Icons/right.svg";
+import { ReactComponent as Left } from "../ReviewPicture/Icons/left.svg";
+import { ReactComponent as NoRight } from "../ReviewPicture/Icons/right_no.svg";
+import { ReactComponent as NoLeft } from "../ReviewPicture/Icons/left_no.svg";
 import StarIcon from "../../../../../assets/Icons/star.svg";
 import BackStarIcon from "../../../../../assets/Icons/star_back.svg";
 import ReviewDetail from "./Detail";
@@ -28,6 +32,25 @@ function Review({ itemId }: ReviewProps) {
   const [reviewRated, setReviewRated] = useState<number>(0);
   const [reviewCount, setReviewCount] = useState<number>(0);
   const reviewStar = 112 * (reviewRated / 5);
+
+  // paging
+  const [displayedItemCount, setDisplayedItemCount] = useState(5);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const subReviewData = reviewData?.reviews.slice(
+    currentIndex,
+    currentIndex + displayedItemCount
+  );
+  const isPrevDisabled = currentIndex === 0;
+  const isNextDisabled =
+    !reviewData?.reviews ||
+    currentIndex + displayedItemCount >= reviewData.reviews.length;
+
+  const handleNextClick = () => {
+    setCurrentIndex((prevIndex) => prevIndex + displayedItemCount);
+  };
+  const handlePrevClick = () => {
+    setCurrentIndex((prevIndex) => prevIndex - displayedItemCount);
+  };
 
   // Review API
   useEffect(() => {
@@ -84,7 +107,7 @@ function Review({ itemId }: ReviewProps) {
       </S.Rated>
 
       {reviewData?.reviews &&
-        reviewData.reviews.map((review, index) => (
+        subReviewData?.map((review, index) => (
           <S.ReviewData>
             <ReviewDetail
               key={index}
@@ -94,11 +117,23 @@ function Review({ itemId }: ReviewProps) {
               date={review.create_date}
               img={review.images}
             />
-            {index === reviewData.reviews.length - 1 && (
+            {isNextDisabled === true && subReviewData.length - 1 === index && (
               <S.LastReview>{C.REVIEW.LAST}</S.LastReview>
             )}
           </S.ReviewData>
         ))}
+
+      {(!isNextDisabled || !isPrevDisabled) && (
+        <S.Page>
+          <S.Button onClick={handlePrevClick} disabled={isPrevDisabled}>
+            {isPrevDisabled ? <NoLeft /> : <Left />}
+          </S.Button>
+          {Math.ceil(currentIndex / displayedItemCount) + 1}
+          <S.Button onClick={handleNextClick} disabled={isNextDisabled}>
+            {isNextDisabled ? <NoRight /> : <Right />}
+          </S.Button>
+        </S.Page>
+      )}
     </S.Review>
   );
 }
