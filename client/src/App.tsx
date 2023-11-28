@@ -37,9 +37,7 @@ function App() {
   const [currentItemStartPrices, setCurrentItemStartPrices] = useState<
     number[]
   >([]);
-  const [currentItemLikeNums, setCurrentItemLikeNums] = useState<number[]>(
-    []
-  );
+  const [currentItemLikeNums, setCurrentItemLikeNums] = useState<number[]>([]);
   const [activePageCount, setActivePageCount] = useState(1);
   const [categoryIds, setCategoryIds] = useState<number[]>([]);
 
@@ -54,8 +52,8 @@ function App() {
       })
       .then((response) => {
         const items = response.data.data.items;
-        const ids = items.map((item: any) => item.item_db_id);
-        const codes = items.map((item: any) => item.product_code);
+        const ids = items.map((item: any) => item.itemDbId);
+        const codes = items.map((item: any) => item.productCode);
         const prices = items.map((item: any) => item.startPrice);
         const likeNums = items.map((item: any) => item.likeNum);
 
@@ -63,12 +61,8 @@ function App() {
         setCurrentItemProductCodes(
           _.uniq([...currentItemProductCodes, ...codes])
         );
-        setCurrentItemStartPrices(
-          _.uniq([currentItemStartPrices, ...prices])
-        );
-        setCurrentItemLikeNums(
-          _.uniq([...currentItemLikeNums, ...likeNums])
-        );
+        setCurrentItemStartPrices(_.uniq([currentItemStartPrices, ...prices]));
+        setCurrentItemLikeNums(_.uniq([...currentItemLikeNums, ...likeNums]));
       })
       .catch((error) => {
         console.log("연결 실패", error);
@@ -81,9 +75,7 @@ function App() {
       .get(`${process.env.REACT_APP_AMUSE_API}/main/category`)
       .then((response) => {
         const categories = response.data.data.categories;
-        const ids = categories.map(
-          (category: any) => category.categoryId
-        );
+        const ids = categories.map((category: any) => category.categoryId);
         setCategoryIds(ids);
         //console.log(response.data.data.categories);
       })
@@ -99,26 +91,14 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/LogIn" element={<Login />}></Route>
-            <Route
-              path="/LogIn/FindId"
-              element={<FindId />}
-            ></Route>
-            <Route
-              path="/LogIn/FindPw"
-              element={<FindPw />}
-            ></Route>
+            <Route path="/LogIn/FindId" element={<FindId />}></Route>
+            <Route path="/LogIn/FindPw" element={<FindPw />}></Route>
             <Route path="/SignUp" element={<SignUp />}></Route>
-            <Route
-              path="/SignUpAmuse"
-              element={<SignUpAmuse />}
-            ></Route>
+            <Route path="/SignUpAmuse" element={<SignUpAmuse />}></Route>
             <Route path="/MyPage" element={<MyPage />}>
               <Route path="settings" element={<Settings />} />
               <Route path="like" element={<Likes />} />
-              <Route
-                path="payment-history"
-                element={<PaymentHistory />}
-              />
+              <Route path="payment-history" element={<PaymentHistory />} />
               <Route
                 path="payment-history/:id"
                 element={<PaymentHistoryDetail />}
@@ -135,10 +115,7 @@ function App() {
               path="/payment/:paymentId"
               element={<PaymentDetailPage />}
             ></Route>
-            <Route
-              path="/LogInAgree"
-              element={<LoginAgree />}
-            ></Route>
+            <Route path="/LogInAgree" element={<LoginAgree />}></Route>
 
             <Route path="/Terms" element={<Terms />}></Route>
             <Route path="/Privacy" element={<Privacy />}></Route>
@@ -151,12 +128,8 @@ function App() {
                 element={
                   <ItemPage
                     itemId={currentItemId}
-                    productCode={
-                      currentItemProductCodes[index]
-                    }
-                    startPrice={
-                      currentItemStartPrices[index]
-                    }
+                    productCode={currentItemProductCodes[index]}
+                    startPrice={currentItemStartPrices[index]}
                     likeNum={currentItemLikeNums[index]}
                   />
                 }
@@ -164,10 +137,7 @@ function App() {
             ))}
 
             <Route path="/category/:apiKey" element={<SubPage />} />
-            <Route
-              path="/search/:apiKey"
-              element={<SearchPageComp />}
-            />
+            <Route path="/search/:apiKey" element={<SearchPageComp />} />
           </Routes>
         </InfoContextProvider>
       </CategoryContextProvider>
