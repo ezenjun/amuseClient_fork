@@ -57,7 +57,9 @@ function Side({ itemId, productCode, likeNum }: SideProps) {
 
   // Share button
   const handleTooltipToggle = async () => {
-    await navigator.clipboard.writeText(window.location.href);
+    await navigator.clipboard.writeText(window.location.href).then(() => {
+      alert("링크가 복사되었습니다. :)");
+    });
   };
 
   return (
