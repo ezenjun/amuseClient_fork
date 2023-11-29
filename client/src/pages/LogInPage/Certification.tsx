@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import SingleSignOn from "./SingleSignOn";
 import { useRecoilState } from "recoil";
@@ -16,12 +16,43 @@ const Certification: React.FC<CertificationProps> = ({ onCalledBy }) => {
     const movePage = useNavigate();
     const [impUidData, setImpUid] = useRecoilState(impUid);
 
+    const location = useLocation();
+    const [prevPageUrl, setPrevPageUrl] = useState<string | null>(null);
+    useEffect(() => {
+        setPrevPageUrl(location.pathname);
+    }, [location.pathname]);
+
+    const SingleSignOn = async () => {
+        const { IMP } = window as any;
+        IMP.init("imp38885874");
+        const redirect_url = process.env.REACT_APP_REDIRECT_URL;
+        return new Promise((resolve, reject) => {
+            IMP.certification({
+                pg: 'inicis_unified.{CPID}',
+                merchant_uid: "ORD20180131-0000011",
+                m_redirect_url: `${redirect_url}Login/FindId`,
+            }, function (rsp: { success: any; imp_uid: any; error_msg: string; }) {
+                if (rsp.success) {
+                    setImpUid(rsp.imp_uid);
+                    resolve(rsp.imp_uid);
+                } else {
+                    alert("인증에 실패하였습니다. 에러 내용: " + rsp.error_msg);
+                }
+            });
+        });
+    }
+
     // 본인 인증 실행
     const handleButtonClick = async (event: { preventDefault: () => void; }) => {
         event.preventDefault();
         try {
-            const impUid = await SingleSignOn();
-            setImpUid(impUid);
+            if (prevPageUrl !== null) {
+                // const currentUrl = prevPageUrl.slice(1);
+                // console.log(currentUrl);
+                // const impUid = await SingleSignOn(`${currentUrl}`);
+                // setImpUid(impUid);
+                await SingleSignOn();
+            }
         } catch (error) {
             console.error(error);
         }
@@ -73,9 +104,30 @@ const Certification: React.FC<CertificationProps> = ({ onCalledBy }) => {
         }
     }, [impUidData]);
 
+    const urlSearchParams = new URLSearchParams(window.location.search);
+    const params = Object.fromEntries(urlSearchParams.entries());
+    const impUidFromURL = params.imp_uid;
+    useEffect(() => {
+        if (impUidFromURL) {
+            axios
+                .get(`${process.env.REACT_APP_AMUSE_API}/api/v1/user/verification/portone?imp_uid=${impUidFromURL}`)
+                .then((response) => {
+                    let userInfo = response.data.data;
+                    const birthWithoutHyphens = userInfo.birth.replace(/-/g, '');
+                    setName(userInfo.name);
+                    setBirth(birthWithoutHyphens);
+                    setPhone(userInfo.phone);
+                })
+                .catch((error) => {
+                    console.log("정보 없음");
+                });
+        }
+    }, []);
+
+
     // 가입 여부 확인 api
     useEffect(() => {
-        if (impUidData) {
+        if (impUidData || impUidFromURL) {
             axios
                 .get(`${process.env.REACT_APP_AMUSE_API}/api/v1/user/check/duplicate?name=${name}&birthday=${birth}&phonenumber=${phone}`)
                 .then((response) => {

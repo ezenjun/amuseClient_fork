@@ -158,6 +158,8 @@ export const WelcomeText = styled.div`
 // 약관동의 Modal style
 export const ModalBody = styled.div`
     display: block;
+    width: 100%;
+    height: 100%;
 `;
 
 export const ModalHeader = styled.div`
@@ -195,16 +197,22 @@ export const ModalTitle = styled.h2`
 `;
 
 export const ModalContent = styled.div`
-    overflow-y: auto;
+    display: flex;
+	flex-direction: column;
+	width: 100%;
+	height: 100%;
+	overflow-y: scroll;
+	border: 1px solid gray;
+	padding: 0.625rem;
 
     @media (min-width: 1024px) {
         margin: 30px 0;
-        max-height: 33vh;
+        max-height: 60%;
     }
 
     @media (max-width: 1023px){
         margin: 25px 0;
-        max-height: 33vh;
+        max-height: 60%;
     }
 
     @media (max-width: 768px) {
@@ -224,16 +232,17 @@ export const AgreeBtn = styled.button`
     font-style: normal;
     font-weight: 700;
     line-height: normal;
+    display: flex;
+	justify-content: center;
+	align-items: center;
     position: fixed;
-    left: 50%;
-    transform: translateX(-50%);
+    bottom: 30px;
 
     @media (min-width: 1024px) {
         width: 666px;
         height: 60px;
         font-size: 20px;
         letter-spacing: -0.4px;
-        bottom: 42px;
     }
 
     @media (max-width: 1023px){
@@ -241,15 +250,19 @@ export const AgreeBtn = styled.button`
         height: 48px;
         font-size: 16px;
         letter-spacing: -0.32px;
-        bottom: 26px;
     }
 
     @media (max-width: 768px) {
-        width: 94%;
+        width: 93%;
         height: 48px;
         font-size: 16px;
         letter-spacing: -0.32px;
-        bottom: 20px;
+    }
+
+    @media (max-height: 350px) {
+        position: relative;
+        top: 0;
+        width: 100%;
     }
 `;
 
