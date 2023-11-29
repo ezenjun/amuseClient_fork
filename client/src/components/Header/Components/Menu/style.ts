@@ -87,6 +87,4 @@ export const Divider = styled.div`
   background-color: #e9e9e9;
 `;
 
-export const MobileMenu = styled.div`
-  margin-top: 25px;
-`;
+export const MobileMenu = styled.div``;

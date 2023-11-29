@@ -3,6 +3,7 @@ import { useRecoilState } from "recoil";
 import { accessTokenState } from "../../../../atoms";
 import moment from "moment";
 import MyPageMenu from "../../../../pages/MyPage/MyPageMenu";
+import Menu from "../../Components/Menu";
 import * as S from "./style";
 import * as C from "../../constants";
 
@@ -59,18 +60,25 @@ function Login({
 
   return (
     <S.Login>
-      {loggedIn && (
-        <S.Button>
-          {name || cookies.__usrN__} {C.LOGIN.USER}
-        </S.Button>
-      )}
+      <S.UserMenu>
+        {loggedIn && (
+          <S.User>
+            {name || cookies.__usrN__} {C.LOGIN.USER}
+          </S.User>
+        )}
+        {loggedIn ? (
+          <MyPageMenu />
+        ) : (
+          <S.Button onClick={navigateToLogIn}>{C.LOGIN.LOGIN}</S.Button>
+        )}
+      </S.UserMenu>
       {loggedIn ? (
-        <S.Button onClick={handleLogout}>{C.LOGIN.LOGOUT}</S.Button>
-      ) : (
-        <S.Button onClick={navigateToLogIn}>{C.LOGIN.LOGIN}</S.Button>
-      )}
-      {loggedIn ? (
-        <MyPageMenu />
+        <S.Scroll>
+          <S.Menu>
+            <Menu type={"mobile"} />
+          </S.Menu>
+          <S.Logout onClick={handleLogout}>{C.LOGIN.LOGOUT}</S.Logout>
+        </S.Scroll>
       ) : (
         <S.Button type={"signup"} onClick={navigateToSignUP}>
           {C.LOGIN.JOIN}
