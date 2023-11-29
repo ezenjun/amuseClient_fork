@@ -80,9 +80,16 @@ function Login({
           <S.Logout onClick={handleLogout}>{C.LOGIN.LOGOUT}</S.Logout>
         </S.Scroll>
       ) : (
-        <S.Button type={"signup"} onClick={navigateToSignUP}>
-          {C.LOGIN.JOIN}
-        </S.Button>
+        <>
+          <S.Join type={"signup"} onClick={navigateToSignUP}>
+            {C.LOGIN.JOIN}
+          </S.Join>
+          <S.Scroll>
+            <S.Menu>
+              <Menu type={"mobile"} />
+            </S.Menu>
+          </S.Scroll>
+        </>
       )}
     </S.Login>
   );

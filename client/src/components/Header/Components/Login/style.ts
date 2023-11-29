@@ -17,7 +17,7 @@ export const Login = styled.div`
   }
 `;
 
-export const Button = styled.button<{ type?: string }>`
+export const Button = styled.button`
   color: #464646;
   font-family: "Pretendard";
   font-size: 13.5px;
@@ -25,6 +25,25 @@ export const Button = styled.button<{ type?: string }>`
 
   @media (max-width: 768px) {
     /* Mobile styles */
+    width: 260px;
+    height: 48px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 700;
+    color: #909090;
+  }
+`;
+
+export const Join = styled.button<{ type?: string }>`
+  color: #464646;
+  font-family: "Pretendard";
+  font-size: 13.5px;
+  font-weight: 500;
+
+  @media (max-width: 768px) {
+    /* Mobile styles */
+    margin-left: 15px;
     width: 260px;
     height: 48px;
     border: 1px solid #ccc;
@@ -100,7 +119,7 @@ export const UserMenu = styled.div`
     justify-content: space-between;
     gap: 0px;
     padding: 0 15px;
-    margin-bottom: 20px;
+    /* margin-bottom: 20px; */
   }
 `;
 
