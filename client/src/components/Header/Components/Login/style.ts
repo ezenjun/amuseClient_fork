@@ -133,7 +133,7 @@ export const Scroll = styled.div`
   @media (max-width: 768px) {
     align-items: flex-start;
     flex-direction: column;
-    height: 450px;
+    height: 370px;
     overflow-y: scroll;
 
     &::-webkit-scrollbar {
