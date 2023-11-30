@@ -20,7 +20,7 @@ function SubLists({ title, itemInfos }: SubListsProps) {
   const [bestItemImageUrl, setBestItemImageUrl] = useState<string[]>([]);
 
   useEffect(() => {
-    const ids = itemInfos.map((item: any) => item.item_db_id);
+    const ids = itemInfos.map((item: any) => item.itemDbId);
     const titles = itemInfos.map((item: any) => item.title);
     const startPrices = itemInfos.map((item: any) => item.startPrice);
     const imgUrl = itemInfos.map((item: any) => item.imageUrl);

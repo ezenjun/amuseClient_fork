@@ -18,40 +18,36 @@ import { PaymentDataState } from "../../../Recoil/OrderAtomState";
 import { useEffect } from "react";
 
 function Detail({ itemId, productCode, startPrice, likeNum }: DetailProps) {
-	const setPaymentData = useSetRecoilState(PaymentDataState);
+  const setPaymentData = useSetRecoilState(PaymentDataState);
 
-	useEffect(() => {
-		setPaymentData((prevData) => ({
-			...prevData,
-			itemId: itemId,
-		}));
-	}, [itemId, setPaymentData]);
-	return (
-		<MainComponent>
-			<S.Detail>
-				<S.Content>
-					<Title itemId={itemId} />
-					<Picture itemId={itemId} />
-					<Calendar itemId={itemId} />
-					<ItemInfo itemId={itemId} />
-					<CourseIntro itemId={itemId} />
-					<Map itemId={itemId} />
-					<OtherInfo itemId={itemId} />
-					<Manager itemId={itemId} />
-					<ReviewPicture itemId={itemId} />
-					<Review itemId={itemId} />
-				</S.Content>
-				<S.Side>
-					<Side
-						itemId={itemId}
-						productCode={productCode}
-						likeNum={likeNum}
-					/>
-				</S.Side>
-				{/* <ReservationBottom itemId={itemId} /> */}
-			</S.Detail>
-		</MainComponent>
-	);
+  useEffect(() => {
+    setPaymentData((prevData) => ({
+      ...prevData,
+      itemId: itemId,
+    }));
+  }, [itemId, setPaymentData]);
+  return (
+    <MainComponent>
+      <S.Detail>
+        <S.Content>
+          <Title itemId={itemId} />
+          <Picture itemId={itemId} />
+          <Calendar itemId={itemId} />
+          <ItemInfo itemId={itemId} />
+          <CourseIntro itemId={itemId} />
+          <Map itemId={itemId} />
+          <OtherInfo itemId={itemId} />
+          <Manager itemId={itemId} />
+          <ReviewPicture itemId={itemId} />
+          <Review itemId={itemId} />
+        </S.Content>
+        <S.Side>
+          <Side itemId={itemId} productCode={productCode} likeNum={likeNum} />
+        </S.Side>
+        {/* <ReservationBottom itemId={itemId} /> */}
+      </S.Detail>
+    </MainComponent>
+  );
 }
 
 export default Detail;
