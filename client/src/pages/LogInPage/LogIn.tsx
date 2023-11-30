@@ -85,7 +85,7 @@ const Login: React.FC = () => {
 				setCookie("__jwtkid__", accessToken, { expires });
 				// setLoggedIn(true);
 
-				// navigate("/");
+				navigate("/");
 			})
 			.catch((error) => {
 				if (error.response) {
