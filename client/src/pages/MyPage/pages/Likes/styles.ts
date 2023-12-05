@@ -17,13 +17,18 @@ export const GridItem = styled.div`
 	overflow: hidden;
 	border: 1px solid #efefef;
 	border-radius: 0.5rem;
-	background-color: grey;
+	cursor: pointer;
 `;
 
-export const ItemTop = styled.div`
+export const ItemTop = styled.div<{ imgUrl: string }>`
+	display: flex;
 	flex-shrink: 0;
 	width: 100%;
 	height: 10.1875rem;
+	background-image: url(${(props) => props.imgUrl});
+	background-size: cover;
+	background-position: 50%;
+	padding: 0.6875rem 0.875rem;
 `;
 export const ItemBottom = styled.div`
 	display: flex;

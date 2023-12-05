@@ -287,3 +287,15 @@ export interface UserInfo {
 	phoneNumber: string;
 	loginType: string;
 }
+
+export interface LikeItem {
+	city: string;
+	country: string;
+	duration: number;
+	imageUrl: string;
+	itemDbId: number;
+	likeNum: number;
+	productCode: string;
+	startPrice: number;
+	title: string;
+}

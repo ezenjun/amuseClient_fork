@@ -32,6 +32,7 @@ const CurrentUserInfo = () => {
 			})
 			.then((response) => {
 				const res = response.data.data;
+				console.log(res);
 				setUserData(res);
 			})
 			.catch((err) => {
