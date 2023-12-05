@@ -8,6 +8,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import "./MyPageMenu.css";
+import * as S from "../../components/Header/Components/Login/style";
 
 export default function MyPageMenu() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -39,25 +40,7 @@ export default function MyPageMenu() {
 
   return (
     <>
-      <Button
-        id="basic-button"
-        className="basic-button"
-        aria-controls={open ? "basic-menu" : undefined}
-        aria-haspopup="true"
-        aria-expanded={open ? "true" : undefined}
-        onClick={handleClick}
-        style={{
-          border: "none",
-          backgroundColor: "transparent",
-          cursor: "pointer",
-          color: "#464646",
-          fontSize: "13.5px",
-          fontFamily: "Pretendard",
-          padding: "0px",
-        }}
-      >
-        마이페이지
-      </Button>
+      <S.MyPage onClick={handleClick}>마이페이지</S.MyPage>
       <Menu
         id="basic-menu"
         anchorEl={anchorEl}

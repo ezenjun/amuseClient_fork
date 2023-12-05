@@ -105,8 +105,6 @@ function Hamburger({
             setCookie={setCookie}
             removeCookie={removeCookie}
           />
-          {/* 카테고리 메뉴 */}
-          <Menu type={"mobile"} />
         </S.SideMenu>
       </S.Side>
     </S.Hamburger>
