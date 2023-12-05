@@ -22,7 +22,7 @@ import SearchPageComp from "./pages/SubPage/SearchPage/SearchPageComp";
 import OrderCompletePage from "./pages/DetailPage/OrderCompletePage/OrderCompletePage";
 import PaymentDetailPage from "./pages/DetailPage/PaymentDetailPage/PaymentDetailPage";
 import PaymentHistory from "./pages/MyPage/pages/PaymentHistory/PaymentHistory";
-import Likes from "./pages/MyPage/MyPage/Likes";
+import Likes from "./pages/MyPage/pages/Likes/Likes"
 // import Settings from "./pages/MyPage/MyPage/Settings/Settings";
 import PaymentHistoryDetail from "./pages/MyPage/pages/PaymentHistory/components/PaymentHIstoryDetail/PaymentHistoryDetail";
 import Terms from "./pages/PolicyPage/Terms";

@@ -69,6 +69,24 @@ export const Regular20Black = styled.span`
 	})}
 	line-height: 160%;
 `;
+
+// SemiBOLD 13
+export const SemiBold13Black = styled.span`
+	${Pretendard({
+		size: 13,
+		weight: Common.bold.semiBold,
+		color: Common.colors.black,
+	})}
+`;
+
+export const SemiBold16Black = styled.span`
+	${Pretendard({
+		size: 16,
+		weight: Common.bold.semiBold,
+		color: Common.colors.black,
+	})}
+`;
+
 // BOLD 16
 export const Bold16Black = styled.span`
 	${Pretendard({
