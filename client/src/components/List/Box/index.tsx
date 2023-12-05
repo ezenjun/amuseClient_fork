@@ -11,9 +11,17 @@ export interface BoxProps {
   title: string;
   startPrice: string;
   imageUrl: string;
+  hashTags?: string[];
 }
 
-function Box({ itemId, handleClick, title, startPrice, imageUrl }: BoxProps) {
+function Box({
+  itemId,
+  handleClick,
+  title,
+  startPrice,
+  imageUrl,
+  hashTags,
+}: BoxProps) {
   const [isLiked, setIsLiked] = useState<boolean[]>([]);
   const [cookies, setCookie, removeCookie] = useCookies(["__jwtkid__"]);
 
