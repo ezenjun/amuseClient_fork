@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { PageContainer } from "../../styles";
 import {
 	Bold32Black,
+	Regular20DarkGray,
 	SemiBold13Black,
 	SemiBold16Black,
 } from "../../../../components/Text/Text";
@@ -98,7 +99,7 @@ const Likes = () => {
 					setActiveTab={setSelectedTab}
 				></Tabs>
 				<GridContainer>
-					{likeData &&
+					{likeData ? (
 						likeData.map((item) => {
 							return (
 								<GridItem
@@ -140,7 +141,12 @@ const Likes = () => {
 									</ItemBottom>
 								</GridItem>
 							);
-						})}
+						})
+					) : (
+						<Regular20DarkGray>
+							세션이 만료되었습니다. <br /> 다시 로그인 해주세요.
+						</Regular20DarkGray>
+					)}
 				</GridContainer>
 			</SettingsContainer>
 		</PageContainer>
