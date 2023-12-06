@@ -13,21 +13,24 @@ const numberWithCommas = (number: number | null): string => {
   return number.toLocaleString("en");
 };
 
-function SubLists({ title, itemInfos }: SubListsProps) {
+function List({ title, itemInfos }: SubListsProps) {
   const [bestItemIds, setBestItemIds] = useState<number[]>([]);
   const [bestItemTitle, setBestItemTitle] = useState<string[]>([]);
   const [bestItemPrice, setBestItemPrice] = useState<number[]>([]);
   const [bestItemImageUrl, setBestItemImageUrl] = useState<string[]>([]);
+  const [bestHashTag, setBestHashTag] = useState<string[][]>([]);
 
   useEffect(() => {
     const ids = itemInfos.map((item: any) => item.itemDbId);
     const titles = itemInfos.map((item: any) => item.title);
     const startPrices = itemInfos.map((item: any) => item.startPrice);
     const imgUrl = itemInfos.map((item: any) => item.imageUrl);
+    const hashTags = itemInfos.map((item: any) => item.hashTags);
     setBestItemIds(ids);
     setBestItemTitle(titles);
     setBestItemPrice(startPrices);
     setBestItemImageUrl(imgUrl);
+    setBestHashTag(hashTags);
   }, [itemInfos]);
 
   const movePage = useNavigate();
@@ -69,6 +72,7 @@ function SubLists({ title, itemInfos }: SubListsProps) {
             startPrice={numberWithCommas(bestItemPrice[index + currentIndex])}
             handleClick={() => navigateToDetail(itemId)}
             imageUrl={bestItemImageUrl[index + currentIndex]}
+            hashTags={bestHashTag[index + currentIndex]}
           />
         ))}
       </S.BoxList>
@@ -87,4 +91,4 @@ function SubLists({ title, itemInfos }: SubListsProps) {
   );
 }
 
-export default SubLists;
+export default List;

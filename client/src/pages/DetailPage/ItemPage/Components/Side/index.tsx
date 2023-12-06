@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useCookies } from "react-cookie";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope as solidFaEnelope } from "@fortawesome/free-solid-svg-icons";
 import { faEnvelope as regularFaEnelope } from "@fortawesome/free-regular-svg-icons";
@@ -11,7 +12,7 @@ import * as C from "./constants";
 import axios from "axios";
 
 interface SideProps {
-  itemId: number | null;
+  itemId: number;
   productCode: number;
   likeNum: number;
 }
@@ -19,11 +20,13 @@ interface SideProps {
 function Side({ itemId, productCode, likeNum }: SideProps) {
   // startPrice API
   const [startPrice, setStartPrice] = useState(0);
+  const [hashTags, setHashTags] = useState<string[]>([]);
   useEffect(() => {
     axios
       .get(`${process.env.REACT_APP_AMUSE_API}/detail/${itemId}/title`)
       .then((response) => {
         setStartPrice(response.data.data.startPrice);
+        setHashTags(response.data.data.hashTagInfoList);
       })
       .catch((error) => {
         console.log("Side, startPrice 연결 실패");
@@ -62,6 +65,44 @@ function Side({ itemId, productCode, likeNum }: SideProps) {
     });
   };
 
+  // WishList
+  const [isLiked, setIsLiked] = useState<boolean[]>([]);
+  const [cookies, setCookie, removeCookie] = useCookies(["__jwtkid__"]);
+
+  const handleLikeClick = (itemId: number) => {
+    const updatedIsLiked = [...isLiked];
+    updatedIsLiked[itemId] = !updatedIsLiked[itemId];
+    setIsLiked(updatedIsLiked);
+    const token = cookies["__jwtkid__"];
+    const data = {
+      categoryName: hashTags,
+    };
+    if (token) {
+      axios
+        .post(
+          `${process.env.REACT_APP_AMUSE_API}/detail/${itemId}/like-plus`,
+          data,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `${token}`,
+            },
+          }
+        )
+        .then((response) => {
+          alert(
+            "관심상품에 등록되었습니다.\n관심상품 관리는 마이페이지에서 가능합니다."
+          );
+        })
+        .catch((error) => {
+          console.error("Side 위시리스트 에러", error);
+        });
+    }
+    if (token === undefined) {
+      alert("로그인이 필요합니다.");
+    }
+  };
+
   return (
     <S.Side>
       <S.Main>
@@ -86,7 +127,7 @@ function Side({ itemId, productCode, likeNum }: SideProps) {
           </S.Info>
         )}
         <Payment version="ver1" />
-        <S.Wish>
+        <S.Wish onClick={() => handleLikeClick(itemId)}>
           <S.Heart src={Heart} />
           {C.Side.WISH}
         </S.Wish>
