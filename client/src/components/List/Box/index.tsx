@@ -30,11 +30,14 @@ function Box({
     updatedIsLiked[itemId] = !updatedIsLiked[itemId];
     setIsLiked(updatedIsLiked);
     const token = cookies["__jwtkid__"];
+    const data = {
+      categoryName: hashTags,
+    };
     if (token) {
       axios
         .post(
           `${process.env.REACT_APP_AMUSE_API}/detail/${itemId}/like-plus`,
-          null,
+          data,
           {
             headers: {
               "Content-Type": "application/json",
