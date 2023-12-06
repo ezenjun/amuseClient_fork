@@ -3,9 +3,16 @@ import styled from "@emotion/styled";
 import { SquareImageProps } from "../../Interfaces/PropsInterfaces";
 import { Common } from "../../styles";
 
-const SquareImage = ({ size, imgUrl, borderRadius }: SquareImageProps) => {
+const SquareImage = ({
+	size,
+	imgUrl,
+	borderRadius,
+	children,
+}: SquareImageProps) => {
 	return (
-		<SquareImg size={size} imgUrl={imgUrl} borderRadius={borderRadius} />
+		<SquareImg size={size} imgUrl={imgUrl} borderRadius={borderRadius}>
+			{children}
+		</SquareImg>
 	);
 };
 
@@ -25,4 +32,5 @@ export const SquareImg = styled.div<{
 	background-position: 50%;
 	background-image: url(${(props) => props.imgUrl});
 	background-color: ${Common.colors.gray};
+	position: relative;
 `;

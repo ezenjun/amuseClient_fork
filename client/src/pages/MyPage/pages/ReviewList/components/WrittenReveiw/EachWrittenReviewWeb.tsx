@@ -20,6 +20,7 @@ import {
 	ItemNameContainer,
 } from "../../../PaymentHistory/components/styles";
 import HorizontalLine from "../../../../../../components/Lines/HorizontalLine";
+import { Common } from "../../../../../../styles";
 
 type Props = {
 	data: ReviewData;
@@ -57,7 +58,11 @@ const EachWrittenReviewWeb = ({ data }: Props) => {
 			<HorizontalLine></HorizontalLine>
 			<S.ReviewContent>
 				<S.StarContainer>
-					<Star></Star>
+					<Star
+						width={22}
+						height={22}
+						fill={Common.colors.appColor}
+					></Star>
 					<S.ScoreContainer>
 						<Bold24Black>4.8</Bold24Black>
 						<Regular16Gray> / 5</Regular16Gray>

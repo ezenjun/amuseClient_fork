@@ -119,6 +119,7 @@ export interface SquareImageProps {
 	size: number;
 	imgUrl: string;
 	borderRadius: number;
+	children?: any;
 }
 
 export interface GrayBoxProps extends IProps {

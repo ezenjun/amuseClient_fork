@@ -28,6 +28,7 @@ import PaymentHistoryDetail from "./pages/MyPage/pages/PaymentHistory/components
 import Terms from "./pages/PolicyPage/Terms";
 import Privacy from "./pages/PolicyPage/Privacy";
 import SettingsComponent from "./pages/MyPage/pages/SettingsComponent/SettingsComponent";
+import WriteReview from "./pages/MyPage/pages/WriteReview/WriteReview";
 
 function App() {
 	const [cookies, setCookie, deleteCookie] = useCookies(["__jwtkid__"]);
@@ -128,6 +129,10 @@ function App() {
 								element={<PaymentHistoryDetail />}
 							/>
 							<Route path="review" element={<ReviewHistory />} />
+							<Route
+								path="review/create"
+								element={<WriteReview />}
+							/>
 						</Route>
 						{/* <Route path="/Review/:id" element={<Review />}></Route> */}
 						<Route path="/order" element={<OrderPage />}></Route>

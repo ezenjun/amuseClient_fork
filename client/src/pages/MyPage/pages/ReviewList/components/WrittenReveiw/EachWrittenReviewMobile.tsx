@@ -61,7 +61,7 @@ const EachWrittenReviewMobile = ({ data }: Props) => {
 			</ItemInfoTabletContainer>
 			<HorizontalLine></HorizontalLine>
 			<S.StarContainer>
-				<Star></Star>
+				<Star width={22} height={22}></Star>
 				<S.ScoreContainer>
 					<Bold24Black>4.8</Bold24Black>
 					<Regular16Gray> / 5</Regular16Gray>

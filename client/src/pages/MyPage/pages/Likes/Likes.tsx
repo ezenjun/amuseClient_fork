@@ -23,6 +23,30 @@ const Likes = () => {
 	const [userLikedItems, setUserLikedItems] = useState<number[]>([]); // 현재 사용자가 좋아요한 아이템 목록
 	const [likeData, setLikeData] = useState<LikeItem[]>();
 	const [cookies] = useCookies(["__jwtkid__"]);
+	const getTotalLikeData = async () => {
+		const token = cookies["__jwtkid__"];
+		axios
+			.get(`${process.env.REACT_APP_AMUSE_API}/my-page/like/all`, {
+				headers: {
+					"Content-Type": "application/json",
+					Authorization: `${token}`,
+				},
+				params: {
+					page: 1,
+					size: 30,
+				},
+			})
+			.then((response) => {
+				const res = response.data.data.itemInfoList;
+				console.log(res);
+				setLikeData(res);
+				const likedItemIds = res.map((item: LikeItem) => item.itemDbId);
+				setUserLikedItems(likedItemIds);
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+	};
 	const getLikeData = async () => {
 		const token = cookies["__jwtkid__"];
 		axios
@@ -31,9 +55,14 @@ const Likes = () => {
 					"Content-Type": "application/json",
 					Authorization: `${token}`,
 				},
+				params: {
+					"category-name": selectedTab,
+					page: 1,
+					size: 30,
+				},
 			})
 			.then((response) => {
-				const res = response.data.data.likeItems;
+				const res = response.data.data.itemInfoList;
 				console.log(res);
 				setLikeData(res);
 				const likedItemIds = res.map((item: LikeItem) => item.itemDbId);
@@ -51,11 +80,13 @@ const Likes = () => {
 				axios
 					.post(
 						`${process.env.REACT_APP_AMUSE_API}/detail/${itemId}/like-minus`,
-						null,
 						{
 							headers: {
 								"Content-Type": "application/json",
 								Authorization: `${token}`,
+							},
+							params: {
+								"category-id": 1,
 							},
 						}
 					)
@@ -68,7 +99,6 @@ const Likes = () => {
 				axios
 					.post(
 						`${process.env.REACT_APP_AMUSE_API}/detail/${itemId}/like-plus`,
-						null,
 						{
 							headers: {
 								"Content-Type": "application/json",
@@ -86,8 +116,12 @@ const Likes = () => {
 		}
 	};
 	useEffect(() => {
-		getLikeData();
-	}, []);
+		if (selectedTab === "전체") {
+			getTotalLikeData();
+		} else {
+			getLikeData();
+		}
+	}, [selectedTab]);
 	return (
 		<PageContainer>
 			<Bold32Black>관심 상품</Bold32Black>
@@ -99,7 +133,7 @@ const Likes = () => {
 					setActiveTab={setSelectedTab}
 				></Tabs>
 				<GridContainer>
-					{likeData ? (
+					{likeData && likeData.length > 0 ? (
 						likeData.map((item) => {
 							return (
 								<GridItem
@@ -144,7 +178,7 @@ const Likes = () => {
 						})
 					) : (
 						<Regular20DarkGray>
-							세션이 만료되었습니다. <br /> 다시 로그인 해주세요.
+							관심상품 데이터가 존재하지 않습니다.
 						</Regular20DarkGray>
 					)}
 				</GridContainer>
