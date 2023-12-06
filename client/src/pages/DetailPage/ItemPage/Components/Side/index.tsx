@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useCookies } from "react-cookie";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope as solidFaEnelope } from "@fortawesome/free-solid-svg-icons";
 import { faEnvelope as regularFaEnelope } from "@fortawesome/free-regular-svg-icons";
@@ -11,7 +12,7 @@ import * as C from "./constants";
 import axios from "axios";
 
 interface SideProps {
-  itemId: number | null;
+  itemId: number;
   productCode: number;
   likeNum: number;
 }
@@ -24,6 +25,7 @@ function Side({ itemId, productCode, likeNum }: SideProps) {
       .get(`${process.env.REACT_APP_AMUSE_API}/detail/${itemId}/title`)
       .then((response) => {
         setStartPrice(response.data.data.startPrice);
+        console.log(response.data.data, "요고 테스트요");
       })
       .catch((error) => {
         console.log("Side, startPrice 연결 실패");
@@ -60,6 +62,44 @@ function Side({ itemId, productCode, likeNum }: SideProps) {
     await navigator.clipboard.writeText(window.location.href).then(() => {
       alert("링크가 복사되었습니다. :)");
     });
+  };
+
+  // WishList
+  const [isLiked, setIsLiked] = useState<boolean[]>([]);
+  const [cookies, setCookie, removeCookie] = useCookies(["__jwtkid__"]);
+
+  const handleLikeClick = (itemId: number) => {
+    const updatedIsLiked = [...isLiked];
+    updatedIsLiked[itemId] = !updatedIsLiked[itemId];
+    setIsLiked(updatedIsLiked);
+    const token = cookies["__jwtkid__"];
+    const data = {
+      // categoryName: hashTags,
+    };
+    if (token) {
+      axios
+        .post(
+          `${process.env.REACT_APP_AMUSE_API}/detail/${itemId}/like-plus`,
+          data,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `${token}`,
+            },
+          }
+        )
+        .then((response) => {
+          alert(
+            "관심상품에 등록되었습니다.\n관심상품 관리는 마이페이지에서 가능합니다."
+          );
+        })
+        .catch((error) => {
+          console.error("Side 위시리스트 에러", error);
+        });
+    }
+    if (token === undefined) {
+      alert("로그인이 필요합니다.");
+    }
   };
 
   return (
@@ -110,6 +150,7 @@ function Side({ itemId, productCode, likeNum }: SideProps) {
           <FontAwesomeIcon
             className="icon"
             icon={isHovered ? regularFaEnelope : solidFaEnelope}
+            onClick={() => handleLikeClick(itemId)}
           />
           <S.InquiryText>{C.Side.INQUIRY}</S.InquiryText>
         </S.Inquiry>
