@@ -11,7 +11,7 @@ import Home from "../src/Home";
 import SubPage from "./pages/SubPage";
 import MyPage from "./pages/MyPage/MyPage";
 import ItemPage from "./pages/DetailPage/ItemPage";
-import Review from "./pages/MyPage/Review/Review";
+import ReviewHistory from "./pages/MyPage/pages/ReviewList/ReviewHistory";
 import Login from "./pages/LogInPage/LogIn";
 import FindId from "./pages/LogInPage/FindId";
 import FindPw from "./pages/LogInPage/FindPw";
@@ -22,7 +22,7 @@ import SearchPageComp from "./pages/SubPage/SearchPage/SearchPageComp";
 import OrderCompletePage from "./pages/DetailPage/OrderCompletePage/OrderCompletePage";
 import PaymentDetailPage from "./pages/DetailPage/PaymentDetailPage/PaymentDetailPage";
 import PaymentHistory from "./pages/MyPage/pages/PaymentHistory/PaymentHistory";
-import Likes from "./pages/MyPage/pages/Likes/Likes"
+import Likes from "./pages/MyPage/pages/Likes/Likes";
 // import Settings from "./pages/MyPage/MyPage/Settings/Settings";
 import PaymentHistoryDetail from "./pages/MyPage/pages/PaymentHistory/components/PaymentHIstoryDetail/PaymentHistoryDetail";
 import Terms from "./pages/PolicyPage/Terms";
@@ -127,9 +127,9 @@ function App() {
 								path="payment-history/:id"
 								element={<PaymentHistoryDetail />}
 							/>
-							<Route path="review" element={<Review />} />
+							<Route path="review" element={<ReviewHistory />} />
 						</Route>
-						<Route path="/Review/:id" element={<Review />}></Route>
+						{/* <Route path="/Review/:id" element={<Review />}></Route> */}
 						<Route path="/order" element={<OrderPage />}></Route>
 						<Route
 							path="/order/complete"

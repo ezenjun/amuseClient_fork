@@ -7,9 +7,10 @@ interface TabsProps {
 	tabList: string[];
 	activeTab: string;
 	setActiveTab: React.Dispatch<React.SetStateAction<string>>;
+	width?: number;
 }
 
-const Tabs = ({ gap, tabList, activeTab, setActiveTab }: TabsProps) => {
+const Tabs = ({ gap, tabList, activeTab, setActiveTab, width }: TabsProps) => {
 	return (
 		<TabsContainer gap={gap}>
 			{tabList.map((tab) => {
@@ -17,6 +18,7 @@ const Tabs = ({ gap, tabList, activeTab, setActiveTab }: TabsProps) => {
 					<Tab
 						isActive={activeTab === tab}
 						onClick={() => setActiveTab(tab)}
+						width={width}
 					>
 						<span>{tab}</span>
 					</Tab>

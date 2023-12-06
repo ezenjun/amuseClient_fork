@@ -18,7 +18,8 @@ export const TabContainer = styled.div<{
 	flex-shrink: 0;
 	justify-content: center;
 	box-sizing: border-box-;
-	min-width: 7.5rem;
+	min-width: ${(props) =>
+		props.width ? `${props.width}*0.625rem` : `7.5rem`};
 	padding: 1rem;
 	align-items: center;
 	border: ${(props) =>

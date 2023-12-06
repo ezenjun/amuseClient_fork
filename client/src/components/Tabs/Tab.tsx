@@ -5,11 +5,12 @@ interface TabProps {
 	isActive: boolean;
 	onClick: () => void;
 	children: any;
+	width?: number;
 }
 
-const Tab = ({ isActive, onClick, children }: TabProps) => {
+const Tab = ({ isActive, onClick, children, width }: TabProps) => {
 	return (
-		<TabContainer isActive={isActive} onClick={onClick}>
+		<TabContainer isActive={isActive} onClick={onClick} width={width}>
 			{children}
 		</TabContainer>
 	);
