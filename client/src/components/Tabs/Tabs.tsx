@@ -16,7 +16,7 @@ const Tabs = ({ gap, tabList, activeTab, setActiveTab, width }: TabsProps) => {
 			{tabList.map((tab) => {
 				return (
 					<Tab
-						isActive={activeTab === tab}
+						isActive={tab.includes(activeTab)}
 						onClick={() => setActiveTab(tab)}
 						width={width}
 					>

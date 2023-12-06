@@ -9,6 +9,13 @@ export const Regular12AppColor = styled.span`
 		color: Common.colors.appColor,
 	})}
 `;
+export const Regular12Gray = styled.span`
+	${Pretendard({
+		size: 12,
+		weight: Common.bold.regular,
+		color: Common.colors.gray,
+	})}
+`;
 
 // Regular14
 export const Regular14Gray = styled.span`
@@ -41,6 +48,13 @@ export const Regular16Black = styled.span`
 		size: 16,
 		weight: Common.bold.regular,
 		color: Common.colors.black,
+	})}
+`;
+export const Regular16AppColor = styled.span`
+	${Pretendard({
+		size: 16,
+		weight: Common.bold.regular,
+		color: Common.colors.appColor,
 	})}
 `;
 
@@ -101,6 +115,14 @@ export const Bold16DarkGray = styled.span`
 		weight: Common.bold.bold,
 		color: Common.colors.darkGray,
 	})}
+`;
+export const Bold16AppColor = styled.span`
+	${Pretendard({
+		size: 16,
+		weight: Common.bold.bold,
+		color: Common.colors.appColor,
+	})}
+	flex-shrink: 0;
 `;
 
 // BOLD 20

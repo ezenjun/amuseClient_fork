@@ -28,7 +28,7 @@ type Props = {
 	data: ReviewData;
 };
 
-const EachPaymentMobile = ({ data }: Props) => {
+const EachUnwrittenReviewMobile = ({ data }: Props) => {
 	const navigate = useNavigate();
 	return (
 		<EachPaymentTabletContainer
@@ -43,7 +43,6 @@ const EachPaymentMobile = ({ data }: Props) => {
 				<InfoTextContainer>
 					<ItemNameContainer>
 						<Bold20Black>{data.itemName}</Bold20Black>
-						<ArrowRightMobile></ArrowRightMobile>
 					</ItemNameContainer>
 					<Regular14Gray>
 						{formatDate(new Date(data.travelStartDate))} ~{" "}
@@ -69,4 +68,4 @@ const EachPaymentMobile = ({ data }: Props) => {
 	);
 };
 
-export default EachPaymentMobile;
+export default EachUnwrittenReviewMobile;

@@ -3,20 +3,14 @@ import { useNavigate } from "react-router";
 import SquareImage from "../../../../../../components/Images/SquareImage";
 import {
 	Bold20Black,
-	Bold24DarkGray,
 	Regular14Gray,
 } from "../../../../../../components/Text/Text";
-import { ReactComponent as ArrowRightMobile } from "../../../../../../assets/Icons/Arrow/arrow_right_mobile.svg";
 import {
 	calculateNightStay,
 	formatDate,
 } from "../../../../../../utils/DateFunctions";
-import Chips from "../../../../../../components/Chips/Chips";
 import { WebButton } from "../../../../../../components/Button/WebButton";
-import {
-	PaymentHistoryData,
-	ReviewData,
-} from "../../../../../../Types/DataTypes";
+import { ReviewData } from "../../../../../../Types/DataTypes";
 import {
 	EachPaymentContainer,
 	InfoTextContainer,
@@ -43,7 +37,6 @@ const EachUnwrittenReviewWeb = ({ data }: Props) => {
 				<InfoTextContainer>
 					<ItemNameContainer>
 						<Bold20Black>{data.itemName}</Bold20Black>
-						<ArrowRightMobile></ArrowRightMobile>
 					</ItemNameContainer>
 
 					<Regular14Gray>

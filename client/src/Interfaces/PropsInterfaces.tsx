@@ -154,8 +154,8 @@ export interface RadioButtonProps {
 }
 
 export interface HorizontalLineProps {
-	marginTop: number;
-	marginBottom: number;
+	marginTop?: number;
+	marginBottom?: number;
 }
 
 export interface CheckButtonProps {

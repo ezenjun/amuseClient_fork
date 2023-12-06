@@ -14,13 +14,14 @@ import {
 	PaymentListContainer,
 } from "../PaymentHistory/styles";
 import { formatDate } from "../../../../utils/DateFunctions";
-import EachPayment from "../PaymentHistory/components/EachPayment";
 import GrayBox from "../../../../components/Box/GrayBox";
 import EachUnwrittenReview from "./components/UnwrittenReview/EachUnwrittenReview";
+import EachWrittenReview from "./components/WrittenReveiw/EachWrittenReview";
 
 const ReviewHistory = () => {
-	const [selectedTab, setSelectedTab] = useState("전체");
+	const [selectedTab, setSelectedTab] = useState("리뷰 작성");
 	const [reviewHistory, setReviewHistory] = useState({});
+	const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 	const number = 3;
 	const date = new Date();
 	const review = {
@@ -43,7 +44,7 @@ const ReviewHistory = () => {
 						`작성한 리뷰 (${number})`,
 					]}
 					gap={20}
-					width={270}
+					width={screenWidth < 768 ? 270 : undefined}
 					activeTab={selectedTab}
 					setActiveTab={setSelectedTab}
 				></Tabs>
@@ -51,19 +52,20 @@ const ReviewHistory = () => {
 					<HistoryContainer>
 						<EachDayContainer key={date.toDateString()}>
 							<Regular16Gray>
-								{formatDate(new Date(date))}
+								작성일 : {formatDate(new Date(date))}
 							</Regular16Gray>
 							<PaymentListContainer>
-								<EachUnwrittenReview
-									key={review.reviewId}
-									data={review}
-								/>
-								{/* {reviews.map((review) => (
-									<EachPayment
+								{selectedTab.includes("리뷰 작성") ? (
+									<EachUnwrittenReview
 										key={review.reviewId}
 										data={review}
 									/>
-								))} */}
+								) : (
+									<EachWrittenReview
+										key={review.reviewId}
+										data={review}
+									/>
+								)}
 							</PaymentListContainer>
 						</EachDayContainer>
 					</HistoryContainer>
