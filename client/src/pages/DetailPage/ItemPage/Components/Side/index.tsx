@@ -20,12 +20,13 @@ interface SideProps {
 function Side({ itemId, productCode, likeNum }: SideProps) {
   // startPrice API
   const [startPrice, setStartPrice] = useState(0);
+  const [hashTags, setHashTags] = useState<string[]>([]);
   useEffect(() => {
     axios
       .get(`${process.env.REACT_APP_AMUSE_API}/detail/${itemId}/title`)
       .then((response) => {
         setStartPrice(response.data.data.startPrice);
-        console.log(response.data.data, "요고 테스트요");
+        setHashTags(response.data.data.hashTagInfoList);
       })
       .catch((error) => {
         console.log("Side, startPrice 연결 실패");
@@ -74,7 +75,7 @@ function Side({ itemId, productCode, likeNum }: SideProps) {
     setIsLiked(updatedIsLiked);
     const token = cookies["__jwtkid__"];
     const data = {
-      // categoryName: hashTags,
+      categoryName: hashTags,
     };
     if (token) {
       axios
@@ -126,7 +127,7 @@ function Side({ itemId, productCode, likeNum }: SideProps) {
           </S.Info>
         )}
         <Payment version="ver1" />
-        <S.Wish>
+        <S.Wish onClick={() => handleLikeClick(itemId)}>
           <S.Heart src={Heart} />
           {C.Side.WISH}
         </S.Wish>
@@ -150,7 +151,6 @@ function Side({ itemId, productCode, likeNum }: SideProps) {
           <FontAwesomeIcon
             className="icon"
             icon={isHovered ? regularFaEnelope : solidFaEnelope}
-            onClick={() => handleLikeClick(itemId)}
           />
           <S.InquiryText>{C.Side.INQUIRY}</S.InquiryText>
         </S.Inquiry>
