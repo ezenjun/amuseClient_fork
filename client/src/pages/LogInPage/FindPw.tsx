@@ -113,7 +113,7 @@ const FindPw: React.FC = () => {
             "userName": name,
             "birthday": birth,
             "phoneNumber": phone,
-            "password_for_change": password,
+            "passwordForChange": password,
         };
         const apiEndpoint = `${process.env.REACT_APP_AMUSE_API}/api/v1/auth/user/password/change`;
 
