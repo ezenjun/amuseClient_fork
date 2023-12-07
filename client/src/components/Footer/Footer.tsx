@@ -18,7 +18,6 @@ function Footer() {
     axios
       .get(`${process.env.REACT_APP_AMUSE_API}/main/footer`)
       .then((response) => {
-        console.log(response.data.data.content);
         setFooterInfoData(response.data.data.content);
       })
       .catch((error) => {
@@ -33,30 +32,24 @@ function Footer() {
       .get(`${process.env.REACT_APP_AMUSE_API}/api/v1/partners`)
       .then((response) => {
         setPartnerInfoData(response.data.data.partnerInfoList);
-        setQueuedItems(response.data.data.partnerInfoList);
+        setItems(response.data.data.partnerInfoList);
       })
       .catch((error) => {
         console.log(error);
       });
   }, []);
 
-  const [queuedItems, setQueuedItems] = useState<PartnerData[]>([]);
+  const [items, setItems] = useState<PartnerData[]>([]);
   useEffect(() => {
-    if (queuedItems) {
-      const intervalId = setInterval(() => {
-        setQueuedItems((prevQueue) => {
-          const newQueue = [...prevQueue];
-          const firstItem = newQueue.shift();
-          if(firstItem != undefined){
-            newQueue.push(firstItem);
-          }
-          return newQueue;
-        });
-      }, 5000);
+    const interval = setInterval(() => {
+      setItems(prevItems => [
+        ...prevItems.slice(1),
+        prevItems[0]
+      ]);
+    }, 7000);
+    return () => clearInterval(interval);
+  }, []);
 
-      return () => clearInterval(intervalId);
-    }
-  }, [queuedItems]);
 
   return (
     <div className={Style["footer"]}>
@@ -76,19 +69,19 @@ function Footer() {
           {/* 업체 정보 */}
           <div className={Style["partnerInfo"]}>
             <p>어뮤즈트래블 협력업체 및 기관</p>
-            <div className={Style["gridBox"]}>
-              {queuedItems.slice(0,18).map((partner) => (
-                <div className={Style["item"]} id={`${partner.id}`}>
-                  <a href={partner.link} target="_blank" className={Style["tooltip"]}>
-                    <img src={partner.img} alt={partner.name} style={{ width: '70px', height: '70px' }} />
-                    <span className={Style["tooltipText"]}>{`${partner.name}`}</span>
-                  </a>
-                </div>
+              <div className={Style["gridBox"]}>
+              {items.slice(0, 18).map((partner, index) => (
+                  <div className={Style["item"]} id={`${partner.id}`}>
+                    <a href={partner.link} target="_blank" className={Style["tooltip"]}>
+                      <img src={partner.img} alt={partner.name} style={{ width: '70px', height: '70px' }} />
+                      <span className={Style["tooltipText"]}>{`${partner.name}`}</span>
+                    </a>
+                  </div>
               ))}
-            </div>
+              </div>
           </div>
         </div>
-
+        
       </div>
     </div>
   );
