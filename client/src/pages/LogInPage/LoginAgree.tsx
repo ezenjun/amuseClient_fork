@@ -12,6 +12,7 @@ import * as S from "./LoginAgreeStyle";
 import * as M from "../SignUpPage/SignUpAmuseStyle";
 import Modal from "react-modal";
 import CloseIcon from "./Icons/close_icon.png";
+import MainComponent from "../../MainComponent";
 
 interface TermData {
     id: number;
@@ -198,97 +199,131 @@ const LoginAgree: React.FC = () => {
         setIsModalOpen(false);
     };
 
+    // 반응형 버튼 위치
+    const [mobileBtnShow, setMobileBtnShow] = useState<boolean>(false);
+    const mobileButton = () => {
+        const screenWidth = window.innerWidth;
+        if (screenWidth <= 768) {
+            setMobileBtnShow(true);
+        } else {
+            setMobileBtnShow(false);
+        }
+    };
+
+    useEffect(() => {
+        mobileButton();
+        window.addEventListener('resize', mobileButton);
+        return () => {
+            window.removeEventListener('resize', mobileButton);
+        };
+    }, []);
+
 
     if (!isShow) {
         return (<></>)
     } else {
         return (
-            <S.LoginAgreeBody>
-                <S.LoginAgreeTitle>약관 동의</S.LoginAgreeTitle>
-                <S.LoginAgreeContent>
-                    <img className="logo_mobile" style={{ paddingBottom: "17px", width: "139px" }} src={logoimage} alt="Amuse Travel Logo" />
-                    <S.AllAgreeBox>
-                        <S.AllAgreeTitleBox>
-                            <S.AgreeCheck id="all_agree" onChange={handleAllAgreeChange} checked={allAgreed}></S.AgreeCheck>
-                            <S.AllAgreeText htmlFor="all_agree">전체 동의하기</S.AllAgreeText>
-                        </S.AllAgreeTitleBox>
-                        <S.AllAgreeContent>
-                            전체동의는 어뮤즈 트래블 서비스 동의를 포함하고 있습 니다.
-                            전체동의는 선택목적에 대한 동의를 포함하고 있으며,
-                            선택 목적에 대한 동의를 거부해도 서비스 이용이 가능합니다.
-                        </S.AllAgreeContent>
-                    </S.AllAgreeBox>
-                    <S.AgreeBox>
-                        <S.AgreeCheck id="agree_age_info" onChange={handleAgeInfoAgreeChange} checked={ageInfoAgreed}></S.AgreeCheck>
-                        <S.AgreeText htmlFor="agree_age_info">
-                            (필수)<S.ContentBtn>만 14세 이상</S.ContentBtn>동의
-                        </S.AgreeText>
-                    </S.AgreeBox>
-
-                    {terms.map((term, index) => (
-                        <S.AgreeBox key={`${term.id}`}>
-                            <S.AgreeCheck id={`agree_${term.id}`} onChange={() => handleTermAgreeChange(index)} checked={termAgreeStatus[index] === 1}></S.AgreeCheck>
-                            <S.AgreeText htmlFor={`agree_${term.id}`}>
-                                {`(${term.mandatory ? '필수' : '선택'})`}
-                                <M.ContentBtn onClick={() => openModal(index)}>{`${term.title}`}</M.ContentBtn>
+            <MainComponent>
+                <S.LoginAgreeBody>
+                    <S.LoginAgreeTitle>약관 동의</S.LoginAgreeTitle>
+                    <S.LoginAgreeContent>
+                        <img className="logo_mobile" style={{ paddingBottom: "17px", paddingLeft: "7px", width: "139px" }} src={logoimage} alt="Amuse Travel Logo" />
+                        <S.AllAgreeBox>
+                            <S.AllAgreeTitleBox>
+                                <S.AgreeCheck id="all_agree" onChange={handleAllAgreeChange} checked={allAgreed}></S.AgreeCheck>
+                                <S.AllAgreeText htmlFor="all_agree">전체 동의하기</S.AllAgreeText>
+                            </S.AllAgreeTitleBox>
+                            <S.AllAgreeContent>
+                                전체동의는 어뮤즈 트래블 서비스 동의를 포함하고 있습 니다.
+                                전체동의는 선택목적에 대한 동의를 포함하고 있으며,
+                                선택 목적에 대한 동의를 거부해도 서비스 이용이 가능합니다.
+                            </S.AllAgreeContent>
+                        </S.AllAgreeBox>
+                        <S.AgreeBox>
+                            <S.AgreeCheck id="agree_age_info" onChange={handleAgeInfoAgreeChange} checked={ageInfoAgreed}></S.AgreeCheck>
+                            <S.AgreeText htmlFor="agree_age_info">
+                                (필수)<S.ContentBtn>만 14세 이상</S.ContentBtn>동의
                             </S.AgreeText>
                         </S.AgreeBox>
-                    ))}
 
-                    <S.AgreeButton
-                        onClick={() => { submitAgree() }}
-                        disabled={!(ageInfoAgreed && !(terms
-                            .filter((term, index) => term.mandatory && termAgreeStatus[index] !== 1)
-                            .length > 0))}>
-                        {"동의하고 계속하기"}
-                    </S.AgreeButton>
-                </S.LoginAgreeContent>
+                        {terms.map((term, index) => (
+                            <S.AgreeBox key={`${term.id}`}>
+                                <S.AgreeCheck id={`agree_${term.id}`} onChange={() => handleTermAgreeChange(index)} checked={termAgreeStatus[index] === 1}></S.AgreeCheck>
+                                <S.AgreeText htmlFor={`agree_${term.id}`}>
+                                    {`(${term.mandatory ? '필수' : '선택'})`}
+                                    <M.ContentBtn onClick={() => openModal(index)}>{`${term.title}`}</M.ContentBtn>
+                                </S.AgreeText>
+                            </S.AgreeBox>
+                        ))}
 
-                {/* 약관 동의 modal */}
-                <div className="modal">
-                    <Modal
-                        isOpen={isModalOpen}
-                        onRequestClose={closeModal}
-                        style={{
-                            content: {
-                                top: "50%",
-                                left: "50%",
-                                transform: "translate(-50%, -50%)",
-                                backgroundColor: "#FFF",
-                                width: "754px",
-                                height: "486px",
-                                padding: "40px 43px"
-                            },
-                            overlay: {
-                                backgroundColor: "rgba(0, 0, 0, 0.5)",
-                                width: "100%",
-                                height: "100%",
-                                transition: "opacity 0.3s ease-out",
-                            },
-                        }}
-                    >
-                        {modalContent !== null && (
-                            <M.ModalBody>
-                                <M.ModalHeader>
-                                    <M.ModalTitle>{`${terms[modalContent].title}(${terms[modalContent].mandatory ? '필수' : '선택'})`}</M.ModalTitle>
-                                    <button className="modal_btn_close" onClick={closeModal}>
-                                        <img src={CloseIcon} className="close_icon" />
-                                    </button>
-                                </M.ModalHeader>
-                                <M.ModalContent>
-                                    {terms[modalContent].content.split('\n').map((line, index) => (
-                                        <React.Fragment key={index}>
-                                            {line}
-                                            <br />
-                                        </React.Fragment>
-                                    ))}
-                                </M.ModalContent>
-                                <M.AgreeBtn onClick={closeModal}>확인</M.AgreeBtn>
-                            </M.ModalBody>
+                        {!mobileBtnShow && (
+                            <S.AgreeButton
+                                onClick={() => { submitAgree() }}
+                                disabled={!(ageInfoAgreed && !(terms
+                                    .filter((term, index) => term.mandatory && termAgreeStatus[index] !== 1)
+                                    .length > 0))}>
+                                {"동의하고 계속하기"}
+                            </S.AgreeButton>
                         )}
-                    </Modal>
-                </div>
-            </S.LoginAgreeBody>
+                    </S.LoginAgreeContent>
+
+                    {mobileBtnShow && (
+                        <S.AgreeButton
+                            onClick={() => { submitAgree() }}
+                            disabled={!(ageInfoAgreed && !(terms
+                                .filter((term, index) => term.mandatory && termAgreeStatus[index] !== 1)
+                                .length > 0))}>
+                            {"동의하고 계속하기"}
+                        </S.AgreeButton>
+                    )}
+
+                    {/* 약관 동의 modal */}
+                    <div className="modal">
+                        <Modal
+                            isOpen={isModalOpen}
+                            onRequestClose={closeModal}
+                            style={{
+                                content: {
+                                    top: "50%",
+                                    left: "50%",
+                                    transform: "translate(-50%, -50%)",
+                                    backgroundColor: "#FFF",
+                                    width: "754px",
+                                    height: "486px",
+                                    padding: "40px 43px"
+                                },
+                                overlay: {
+                                    backgroundColor: "rgba(0, 0, 0, 0.5)",
+                                    width: "100%",
+                                    height: "100%",
+                                    transition: "opacity 0.3s ease-out",
+                                },
+                            }}
+                        >
+                            {modalContent !== null && (
+                                <M.ModalBody>
+                                    <M.ModalHeader>
+                                        <M.ModalTitle>{`${terms[modalContent].title}(${terms[modalContent].mandatory ? '필수' : '선택'})`}</M.ModalTitle>
+                                        <button className="modal_btn_close" onClick={closeModal}>
+                                            <img src={CloseIcon} className="close_icon" />
+                                        </button>
+                                    </M.ModalHeader>
+                                    <M.ModalContent>
+                                        {terms[modalContent].content.split('\n').map((line, index) => (
+                                            <React.Fragment key={index}>
+                                                {line}
+                                                <br />
+                                            </React.Fragment>
+                                        ))}
+                                    </M.ModalContent>
+                                    <M.AgreeBtn onClick={closeModal}>확인</M.AgreeBtn>
+                                </M.ModalBody>
+                            )}
+                        </Modal>
+                    </div>
+                </S.LoginAgreeBody>
+            </MainComponent>
+
         )
     }
 }

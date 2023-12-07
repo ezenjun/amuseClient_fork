@@ -3,6 +3,7 @@ import checkIcon from './Icons/check_icon.png';
 import checkedIcon from './Icons/checked_icon.png';
 
 export const LoginAgreeBody = styled.div`
+    height: 70%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -17,21 +18,36 @@ export const LoginAgreeTitle = styled.h1`
     font-weight: 600;
     line-height: normal;
     margin-bottom: 20px;
-    margin-top: 60px;
+    margin-top: 40px;
 `;
 
 export const LoginAgreeContent = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
-    width: 446px;
-    height: 510px;
     border: 1px solid #E3E3E3;
-    padding: 40px 60px;
+    border-radius: 8px;
+
+    @media (min-width: 1024px) {
+        width: 446px;
+        height: 410px;
+        padding: 20px 60px;
+    }
+
+    @media (max-width: 1023px){
+        width: 388px;
+        height: 410px;
+        padding: 20px 30px;
+    }
+
+    @media (max-width: 768px) {
+        width: 333px;
+        height: 310px;
+        padding: 10px 0;
+    }
 `;
 
 export const AllAgreeBox = styled.div`
-
     border-top: 1px solid #E4E4E4;
     border-bottom: 1px solid #E4E4E4;
     padding: 12px 7px;
@@ -104,19 +120,36 @@ export const AgreeButton = styled.button`
         background-color:#828282;
         cursor: not-allowed;
     }
-    width: 327px;
-    height: 46px;
-    display:flex;
-    justify-content:center;
-    align-items:center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border-radius: 8px;
     background: #E6003E;
-    color:#fff;
-    font-size:20px;
+    color: #fff;
     font-family: Pretendard;
     font-style: normal;
     font-weight: 700;
     line-height: normal;
-    cursor:pointer;
-    margin-top: 10px;
+    cursor: pointer;
+
+    @media (min-width: 1024px) {
+        width: 327px;
+        height: 46px;
+        font-size: 20px;
+        margin-top: 25px;
+    }
+
+    @media (max-width: 1023px){
+        width: 327px;
+        height: 46px;
+        font-size: 20px;
+        margin-top: 25px;
+    }
+
+    @media (max-width: 768px) {
+        width: 333px;
+        height: 48px;
+        font-size: 16px;
+        margin-top: 25px;
+    }
 `;
