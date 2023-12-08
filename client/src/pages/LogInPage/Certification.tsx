@@ -225,8 +225,8 @@ const Certification: React.FC<CertificationProps> = ({ onCalledBy }) => {
                 ...prevStyles,
                 content: {
                     ...prevStyles.content,
-                    width: "90%",
-                    height: "212px",
+                    width: "333px",
+                    height: "182px",
                     padding: "24px 22px",
                 },
             }));
@@ -236,7 +236,7 @@ const Certification: React.FC<CertificationProps> = ({ onCalledBy }) => {
                 content: {
                     ...prevStyles.content,
                     width: "522px",
-                    height: "250px",
+                    height: "211px",
                     padding: "25px 30px",
                 },
             }));

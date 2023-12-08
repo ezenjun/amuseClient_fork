@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import Style from "./Footer.module.css";
 import MainMoreAbout from "./MainMoreAbout/MainMoreAbout";
@@ -50,6 +50,26 @@ function Footer() {
     return () => clearInterval(interval);
   }, []);
 
+  const partnerInfoRef = useRef<HTMLDivElement>(null);
+  const [partnerInfoWidth, setPartnerInfoWidth] = useState(0);
+  useEffect(() => {
+    const handleResize = () => {
+      if (partnerInfoRef.current) {
+        setPartnerInfoWidth(partnerInfoRef.current.offsetWidth - 7);
+      }
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  const calculateSliceRange = () => {
+    return Math.min(18, Math.floor(partnerInfoWidth / 75)*3);
+  };
+
 
   return (
     <div className={Style["footer"]}>
@@ -67,10 +87,10 @@ function Footer() {
             </div>
           </div>
           {/* 업체 정보 */}
-          <div className={Style["partnerInfo"]}>
+          <div className={Style["partnerInfo"]} ref={partnerInfoRef}>
             <p>어뮤즈트래블 협력업체 및 기관</p>
               <div className={Style["gridBox"]}>
-              {items.slice(0, 18).map((partner, index) => (
+              {items.length > 0 &&  items.slice(0, calculateSliceRange()).map((partner, index) => (
                   <div className={Style["item"]} id={`${partner.id}`}>
                     <a href={partner.link} target="_blank" className={Style["tooltip"]}>
                       <img src={partner.img} alt={partner.name} style={{ width: '70px', height: '70px' }} />

@@ -163,8 +163,8 @@ const FindPw: React.FC = () => {
                 ...prevStyles,
                 content: {
                     ...prevStyles.content,
-                    width: "90%",
-                    height: "212px",
+                    width: "333px%",
+                    height: "182px",
                     padding: "24px 22px",
                 },
             }));
@@ -175,7 +175,7 @@ const FindPw: React.FC = () => {
                 content: {
                     ...prevStyles.content,
                     width: "522px",
-                    height: "250px",
+                    height: "211px",
                     padding: "25px 30px",
                 },
             }));
