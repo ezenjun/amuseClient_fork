@@ -236,7 +236,9 @@ export const AgreeBtn = styled.button`
 	justify-content: center;
 	align-items: center;
     position: fixed;
-    bottom: 30px;
+    bottom: 25px;
+    left: 50%;
+    transform: translateX(-50%);
 
     @media (min-width: 1024px) {
         width: 666px;
@@ -253,7 +255,7 @@ export const AgreeBtn = styled.button`
     }
 
     @media (max-width: 768px) {
-        width: 93%;
+        width: 288px;
         height: 48px;
         font-size: 16px;
         letter-spacing: -0.32px;
