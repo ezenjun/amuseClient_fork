@@ -36,6 +36,9 @@ export const LoginTitle = styled.h1`
 export const InputContainer = styled.div`
     width: 100%;
     height: 150px;
+    @media (max-width: 768px) {
+        padding-right: 8px;
+    }
     border: solid 1px #DDDDDD;
     border-radius: 8px;
 `;
@@ -54,6 +57,7 @@ export const KeepIdContainer = styled.div`
 export const KeepIdCheck = styled.input.attrs({ type: 'checkbox' })`
     content: url(${checkIcon});
     width: 20px;
+    height: 20px;
     margin: 0 10px 0 0;
 
     &:checked {
