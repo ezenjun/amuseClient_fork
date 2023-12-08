@@ -36,6 +36,9 @@ export const LoginTitle = styled.h1`
 export const InputContainer = styled.div`
     width: 100%;
     height: 150px;
+    @media (max-width: 768px) {
+        padding-rignt: 8px;
+    }
     border: solid 1px #DDDDDD;
     border-radius: 8px;
 `;
