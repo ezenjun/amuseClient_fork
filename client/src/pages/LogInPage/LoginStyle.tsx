@@ -54,6 +54,7 @@ export const KeepIdContainer = styled.div`
 export const KeepIdCheck = styled.input.attrs({ type: 'checkbox' })`
     content: url(${checkIcon});
     width: 20px;
+    height: 20px;
     margin: 0 10px 0 0;
 
     &:checked {
