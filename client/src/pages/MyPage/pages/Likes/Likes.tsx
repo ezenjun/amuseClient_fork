@@ -47,7 +47,7 @@ const Likes = () => {
 				console.log(err);
 			});
 	};
-	const getLikeData = async () => {
+	const getLikeData = async (selectedTab?: string) => {
 		const token = cookies["__jwtkid__"];
 		axios
 			.get(`${process.env.REACT_APP_AMUSE_API}/my-page/like`, {
@@ -72,7 +72,7 @@ const Likes = () => {
 				console.log(err);
 			});
 	};
-	const toggleLike = async (itemId: number) => {
+	const toggleLike = async (itemId: number, selectedTab: string) => {
 		try {
 			const token = cookies["__jwtkid__"];
 			if (userLikedItems.includes(itemId)) {
@@ -80,13 +80,11 @@ const Likes = () => {
 				axios
 					.post(
 						`${process.env.REACT_APP_AMUSE_API}/detail/${itemId}/like-minus`,
+						{ categoryName: selectedTab },
 						{
 							headers: {
 								"Content-Type": "application/json",
 								Authorization: `${token}`,
-							},
-							params: {
-								"category-id": 1,
 							},
 						}
 					)
@@ -99,6 +97,7 @@ const Likes = () => {
 				axios
 					.post(
 						`${process.env.REACT_APP_AMUSE_API}/detail/${itemId}/like-plus`,
+						{ categoryName: selectedTab },
 						{
 							headers: {
 								"Content-Type": "application/json",
@@ -119,7 +118,7 @@ const Likes = () => {
 		if (selectedTab === "전체") {
 			getTotalLikeData();
 		} else {
-			getLikeData();
+			getLikeData(selectedTab);
 		}
 	}, [selectedTab]);
 	return (
@@ -150,7 +149,10 @@ const Likes = () => {
 											<LikeAfter
 												onClick={(e) => {
 													e.stopPropagation();
-													toggleLike(item.itemDbId);
+													toggleLike(
+														item.itemDbId,
+														selectedTab
+													);
 												}}
 												style={{ cursor: "pointer" }}
 											/>
@@ -159,7 +161,10 @@ const Likes = () => {
 											<LikeBefore
 												onClick={(e) => {
 													e.stopPropagation();
-													toggleLike(item.itemDbId);
+													toggleLike(
+														item.itemDbId,
+														selectedTab
+													);
 												}}
 												style={{ cursor: "pointer" }}
 											/>
