@@ -113,7 +113,7 @@ const FindPw: React.FC = () => {
             "userName": name,
             "birthday": birth,
             "phoneNumber": phone,
-            "password_for_change": password,
+            "passwordForChange": password,
         };
         const apiEndpoint = `${process.env.REACT_APP_AMUSE_API}/api/v1/auth/user/password/change`;
 
@@ -163,8 +163,8 @@ const FindPw: React.FC = () => {
                 ...prevStyles,
                 content: {
                     ...prevStyles.content,
-                    width: "90%",
-                    height: "212px",
+                    width: "333px%",
+                    height: "182px",
                     padding: "24px 22px",
                 },
             }));
@@ -175,7 +175,7 @@ const FindPw: React.FC = () => {
                 content: {
                     ...prevStyles.content,
                     width: "522px",
-                    height: "250px",
+                    height: "211px",
                     padding: "25px 30px",
                 },
             }));

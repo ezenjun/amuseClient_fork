@@ -124,12 +124,14 @@ export const ContinueButton = styled.button`
     }
 
     @media (max-width: 1023px) {
-        position: absolute;
-        bottom: 20px;
+        position: relative;
+        bottom: -250px;
     }
 
     @media (max-width: 768px) {
         font-size: 16px;
+        position: relative;
+        bottom: -100px;
     }
 `;
 
@@ -160,7 +162,6 @@ export const NoteBox = styled.div`
     height: 84px;
     border-radius: 8px;
     background-color: #E9E9E9;
-    margin: 15px 0;
     padding: 14px;
 
     @media (max-width: 768px) {
