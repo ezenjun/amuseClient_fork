@@ -129,10 +129,6 @@ function App() {
 								element={<PaymentHistoryDetail />}
 							/>
 							<Route path="review" element={<ReviewHistory />} />
-							<Route
-								path="review/create"
-								element={<WriteReview />}
-							/>
 						</Route>
 						{/* <Route path="/Review/:id" element={<Review />}></Route> */}
 						<Route path="/order" element={<OrderPage />}></Route>

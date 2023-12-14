@@ -18,6 +18,12 @@ import {
 } from "../../../../../../utils/DateFunctions";
 import { WebButton } from "../../../../../../components/Button/WebButton";
 import { ReviewData, WrittenReview } from "../../../../../../Types/DataTypes";
+import { useSetRecoilState } from "recoil";
+import {
+	createReviewID,
+	createReviewVisibleState,
+	reviewItemID,
+} from "../../../../../../Recoil/ReveiwAtomState";
 
 type Props = {
 	data: ReviewData;
@@ -25,6 +31,20 @@ type Props = {
 
 const EachUnwrittenReviewTablet = ({ data }: Props) => {
 	const navigate = useNavigate();
+	const setCreateReviewModalVisible = useSetRecoilState(
+		createReviewVisibleState
+	);
+	const setCreateReviewID = useSetRecoilState(createReviewID);
+	const setCreateReviewItemID = useSetRecoilState(reviewItemID);
+
+	const handleWriteReview =
+		(reviewId: number, itemId: number) =>
+		(e: React.MouseEvent<HTMLButtonElement>) => {
+			e.stopPropagation();
+			setCreateReviewID(reviewId);
+			setCreateReviewItemID(itemId);
+			setCreateReviewModalVisible(true);
+		};
 	return (
 		<EachPaymentTabletContainer
 			onClick={() => navigate(`/detail/${data.itemId}`)}
@@ -51,7 +71,9 @@ const EachUnwrittenReviewTablet = ({ data }: Props) => {
 						verticalPadding={12}
 						fontSize={16}
 						width={140}
-						onClick={() => navigate(`/detail/104`)}
+						onClick={(e) =>
+							handleWriteReview(data.paymentId, data.itemId)(e)
+						}
 					>
 						리뷰 작성
 					</WebButton>

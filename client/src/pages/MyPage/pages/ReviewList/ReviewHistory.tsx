@@ -22,9 +22,14 @@ import { Review } from "../../../../Interfaces/DataInterfaces";
 import UnWrittenReveiw from "./components/UnwrittenReview/UnWrittenReveiw";
 import WrittenReviewComponent from "./components/WrittenReveiw/WrittenReviewComponent";
 import { WrittenReview } from "../../../../Types/DataTypes";
+import { useRecoilState } from "recoil";
+import { createReviewVisibleState } from "../../../../Recoil/ReveiwAtomState";
+import WriteReview from "../WriteReview/WriteReview";
 
 const ReviewHistory = () => {
 	const [selectedTab, setSelectedTab] = useState("리뷰 작성");
+	const [createReviewModalVisible, setCreateReviewModalVisible] =
+		useRecoilState(createReviewVisibleState);
 	const [unWrittenHistory, setUnWrittenHistory] = useState<Review[]>([]);
 	const [writtenHistory, setWrittenHistory] = useState<WrittenReview[]>([]);
 	const [screenWidth, setScreenWidth] = useState(window.innerWidth);
@@ -112,52 +117,7 @@ const ReviewHistory = () => {
 						data={writtenHistory}
 					></WrittenReviewComponent>
 				)}
-				{/* {reviewHistory ? (
-					<HistoryContainer>
-						{reviewHistory.map((review) => {
-							return (
-								<EachDayContainer key={review.paymentDate}>
-									<Regular16Gray>
-										작성일 :{" "}
-										{formatDate(
-											new Date(review.paymentDate)
-										)}
-									</Regular16Gray>
-
-									{selectedTab.includes("리뷰 작성") ? (
-										<PaymentListContainer>
-											{review.items.map((item) => {
-												return (
-													<EachUnwrittenReview
-														key={item.itemId}
-														data={item}
-													/>
-												);
-											})}
-										</PaymentListContainer>
-									) : (
-										<PaymentListContainer>
-											{review.items.map((item) => {
-												return (
-													<EachWrittenReview
-														key={item.itemId}
-														data={item}
-													/>
-												);
-											})}
-										</PaymentListContainer>
-									)}
-								</EachDayContainer>
-							);
-						})}
-					</HistoryContainer>
-				) : (
-					<HistoryContainer>
-						<GrayBox verticalPadding={24} horizontalPadding={31}>
-							<Bold20Gray>작성할 리뷰가 없습니다.</Bold20Gray>
-						</GrayBox>
-					</HistoryContainer>
-				)} */}
+				{createReviewModalVisible && <WriteReview />}
 			</SettingsContainer>
 		</PageContainer>
 	);

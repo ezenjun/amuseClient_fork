@@ -17,6 +17,12 @@ import {
 	ItemInfoContainer,
 	ItemNameContainer,
 } from "../../../PaymentHistory/components/styles";
+import { useSetRecoilState } from "recoil";
+import {
+	createReviewID,
+	createReviewVisibleState,
+	reviewItemID,
+} from "../../../../../../Recoil/ReveiwAtomState";
 
 type Props = {
 	data: ReviewData;
@@ -24,6 +30,21 @@ type Props = {
 
 const EachUnwrittenReviewWeb = ({ data }: Props) => {
 	const navigate = useNavigate();
+	console.log(data);
+
+	const setCreateReviewModalVisible = useSetRecoilState(
+		createReviewVisibleState
+	);
+	const setCreateReviewID = useSetRecoilState(createReviewID);
+	const setCreateReviewItemID = useSetRecoilState(reviewItemID);
+	const handleWriteReview =
+		(reviewId: number, itemId: number) =>
+		(e: React.MouseEvent<HTMLButtonElement>) => {
+			e.stopPropagation();
+			setCreateReviewID(reviewId);
+			setCreateReviewItemID(itemId);
+			setCreateReviewModalVisible(true);
+		};
 	return (
 		<EachPaymentContainer
 			onClick={() => navigate(`/detail/${data.itemId}`)}
@@ -51,6 +72,9 @@ const EachUnwrittenReviewWeb = ({ data }: Props) => {
 				verticalPadding={12}
 				fontSize={16}
 				width={140}
+				onClick={(e) =>
+					handleWriteReview(data.paymentId, data.itemId)(e)
+				}
 			>
 				리뷰 작성
 			</WebButton>

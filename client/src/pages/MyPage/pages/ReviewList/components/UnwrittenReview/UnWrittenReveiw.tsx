@@ -34,7 +34,7 @@ const UnWrittenReveiw = ({ data }: UnwrittenReivewProps) => {
 									return (
 										<PaymentListContainer>
 											<EachUnwrittenReview
-												key={item.reviewId}
+												key={item.paymentId}
 												data={item}
 											/>
 										</PaymentListContainer>

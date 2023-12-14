@@ -7,9 +7,12 @@ import {
 } from "./styles";
 import { Bold32Black } from "../Text/Text";
 import { ReactComponent as Close } from "../../assets/Icons/Close/Close_24.svg";
+import { SetterOrUpdater } from "recoil";
 
 interface ModalProps {
-	setShowModal: React.Dispatch<SetStateAction<boolean>>;
+	setShowModal:
+		| React.Dispatch<SetStateAction<boolean>>
+		| SetterOrUpdater<boolean>;
 	title: string | undefined;
 	children?: any;
 	width?: number;

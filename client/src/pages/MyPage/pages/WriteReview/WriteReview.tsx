@@ -1,5 +1,5 @@
 import { Rating, Typography } from "@mui/material";
-import React, { ChangeEvent, useRef, useState } from "react";
+import React, { ChangeEvent, useEffect, useRef, useState } from "react";
 import StarIcon from "@mui/icons-material/Star";
 import { ReactComponent as Star } from "../../../../assets/Icons/Star_22.svg";
 import { ReactComponent as Close } from "../../../../assets/Icons/Close/Close_24.svg";
@@ -17,41 +17,53 @@ import {
 } from "./style";
 import {
 	Bold16AppColor,
-	Bold16Black,
 	Regular14Gray,
 	Regular20Black,
 } from "../../../../components/Text/Text";
 import axios from "axios";
 import SquareImage from "../../../../components/Images/SquareImage";
 import { WebButton } from "../../../../components/Button/WebButton";
-
-type Props = {};
+import {
+	createReviewID,
+	createReviewVisibleState,
+	reviewItemID,
+} from "../../../../Recoil/ReveiwAtomState";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { useCookies } from "react-cookie";
 
 interface ReviewObject {
-	rating: number | null;
-	reviewContent: string;
-	images: Array<{
-		fileName: string;
-		base64Data: string;
-	}>;
+	paymentId?: number | undefined;
+	rate?: number | null | undefined;
+	reviewContent?: string | undefined;
+	reviewImgs?:
+		| Array<{
+				fileName: string;
+				base64Data: string;
+		  }>
+		| undefined;
 }
 
-const WriteReview = (props: Props) => {
+const WriteReview = () => {
+	const reviewId = useRecoilValue(createReviewID);
+	const itemId = useRecoilValue(reviewItemID);
+
+	const [cookies] = useCookies(["__jwtkid__"]);
+	const token = cookies["__jwtkid__"];
+	const [createReviewModalVisible, setCreateReviewModalVisible] =
+		useRecoilState(createReviewVisibleState);
 	const [rating, setRating] = useState<number | null>(5);
-	const [reviewObj, setReviewObj] = useState<ReviewObject>();
+	const [reviewObj, setReviewObj] = useState<ReviewObject | undefined>();
 	const [reviewContent, setReviewContent] = useState("");
 	const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
 	const [imagePreviews, setImagePreviews] = useState<string[]>([]);
 	const imgInput = useRef<HTMLInputElement>(null);
-
 	// 이미지 파일 선택 시 이벤트 핸들러
 	const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const files = e.target.files;
 		if (files) {
 			const newFiles = Array.from(files);
+			const updatedReviewObj = { ...reviewObj };
 			setSelectedFiles((prevFiles) => [...prevFiles, ...newFiles]);
-
-			// Optionally, create image previews here
 			const newPreviews = newFiles.map((file) =>
 				URL.createObjectURL(file)
 			);
@@ -59,41 +71,52 @@ const WriteReview = (props: Props) => {
 				...prevPreviews,
 				...newPreviews,
 			]);
-			for (let i = 0; i < files.length; i++) {
-				const reader = new FileReader();
-				reader.onload = (event) => {
-					if (event.target && event.target.result) {
-						newPreviews.push(event.target.result as string);
-						if (newPreviews.length === files.length) {
-							setImagePreviews([
-								...imagePreviews,
-								...newPreviews,
-							]);
-						}
-					}
-				};
-				reader.readAsDataURL(files[i]);
+			const updatedReviewImgs = newFiles.map((file) => ({
+				fileName: file.name,
+				base64Data: URL.createObjectURL(file),
+			}));
+			if (updatedReviewObj.reviewImgs) {
+				updatedReviewObj.reviewImgs = [
+					...(updatedReviewObj.reviewImgs || []),
+					...updatedReviewImgs,
+				];
+			} else {
+				updatedReviewObj.reviewImgs = updatedReviewImgs;
 			}
+			setReviewObj(updatedReviewObj);
 		}
 	};
+
+	const handleImageDelete = (indexToDelete: number) => {
+		const updatedPreviews = [...imagePreviews];
+		const updatedReviewObj = { ...(reviewObj || {}) };
+		updatedPreviews.splice(indexToDelete, 1);
+		setImagePreviews(updatedPreviews);
+		if (updatedReviewObj.reviewImgs) {
+			updatedReviewObj.reviewImgs.splice(indexToDelete, 1);
+		}
+		setReviewObj(updatedReviewObj);
+	};
+
 	const handleSubmit = async () => {
 		if (selectedFiles) {
-			const images: ReviewObject["images"] = [];
+			const reviewImgs: ReviewObject["reviewImgs"] = [];
 			for (let i = 0; i < selectedFiles.length; i++) {
 				const file = selectedFiles[i];
 				const reader = new FileReader();
 				reader.onload = () => {
 					if (reader.result) {
 						const base64data = reader.result as string;
-						images.push({
+						reviewImgs.push({
 							fileName: file.name,
 							base64Data: base64data,
 						});
-						if (images.length === selectedFiles.length) {
+						if (reviewImgs.length === selectedFiles.length) {
 							const reviewObject: ReviewObject = {
-								rating: rating,
+								paymentId: reviewId,
+								rate: rating,
 								reviewContent: reviewContent,
-								images: images,
+								reviewImgs: reviewObj?.reviewImgs,
 							};
 							setReviewObj(reviewObject);
 						}
@@ -101,8 +124,25 @@ const WriteReview = (props: Props) => {
 				};
 				reader.readAsDataURL(file);
 			}
-			console.log(reviewObj);
 		}
+		axios
+			.post(
+				`${process.env.REACT_APP_AMUSE_API}/my-page/item/${itemId}/review`,
+				reviewObj,
+				{
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: `${token}`,
+					},
+				}
+			)
+			.then((response) => {
+				console.log(response);
+				setCreateReviewModalVisible(false);
+			})
+			.catch((err) => {
+				console.log(err);
+			});
 	};
 
 	const [hover, setHover] = React.useState(-1);
@@ -112,115 +152,114 @@ const WriteReview = (props: Props) => {
 	) => {
 		setReviewContent(event.target.value);
 	};
-	const [showInfoModal, setShowInfoModal] = useState(true);
+
+	useEffect(() => {
+		const updatedReviewObject: ReviewObject = {
+			paymentId: reviewId,
+			rate: rating,
+			reviewContent: reviewContent,
+			reviewImgs: reviewObj?.reviewImgs || [],
+		};
+		setReviewObj(updatedReviewObject);
+	}, [rating, reviewContent, reviewId, reviewObj?.reviewImgs]);
 
 	return (
-		<div>
-			{showInfoModal && (
-				<Modal
-					setShowModal={setShowInfoModal}
-					title="리뷰 작성"
-					width={365}
-				>
-					<Regular20Black>
-						구매하신 상품은 만족하시나요?
-					</Regular20Black>
-					<GrayBox verticalPadding={16} horizontalPadding={47}>
-						<Rating
-							style={{
-								justifyContent: "center",
-								alignItems: "center",
-							}}
-							value={rating}
-							precision={1}
-							name="hover-feedback"
-							onChange={(event, newValue) => {
-								setRating(newValue);
-							}}
-							onChangeActive={(event, newHover) => {
-								setHover(newHover);
-							}}
-							icon={
-								<Star
-									width={43}
-									height={43}
-									fill={Common.colors.appColor}
-								></Star>
-							}
-							emptyIcon={
-								<Star
-									width={43}
-									height={43}
-									fill={Common.colors.buttonLG}
-								></Star>
-							}
-						/>
-					</GrayBox>
-					<Divider></Divider>
-					<Regular20Black>자세한 리뷰를 작성해주세요</Regular20Black>
-					<ReviewContentContainer>
-						<TextAreaContainer>
-							<TextArea
-								value={reviewContent}
-								onChange={handleInputChange}
-								placeholder="자세한 리뷰를 작성해주세요"
-								maxLength={1000}
-							></TextArea>
-							<Regular14Gray>
-								{reviewContent.length} / 1,000
-							</Regular14Gray>
-						</TextAreaContainer>
-						<AddButton onClick={() => imgInput.current?.click()}>
-							<input
-								id="photo-upload"
-								type="file"
-								multiple
-								onChange={handleImageChange}
-								style={{ display: "none" }}
-								ref={imgInput}
-							/>
-							<Bold16AppColor>사진 첨부하기</Bold16AppColor>
-						</AddButton>
+		<Modal
+			setShowModal={setCreateReviewModalVisible}
+			title="리뷰 작성"
+			width={365}
+		>
+			<Regular20Black>구매하신 상품은 만족하시나요?</Regular20Black>
+			<GrayBox verticalPadding={16} horizontalPadding={47}>
+				<Rating
+					style={{
+						justifyContent: "center",
+						alignItems: "center",
+					}}
+					value={rating}
+					precision={1}
+					name="hover-feedback"
+					onChange={(event, newValue) => {
+						setRating(newValue);
+					}}
+					onChangeActive={(event, newHover) => {
+						setHover(newHover);
+					}}
+					icon={
+						<Star
+							width={43}
+							height={43}
+							fill={Common.colors.appColor}
+						></Star>
+					}
+					emptyIcon={
+						<Star
+							width={43}
+							height={43}
+							fill={Common.colors.buttonLG}
+						></Star>
+					}
+				/>
+			</GrayBox>
+			<Divider></Divider>
+			<Regular20Black>자세한 리뷰를 작성해주세요</Regular20Black>
+			<ReviewContentContainer>
+				<TextAreaContainer>
+					<TextArea
+						value={reviewContent}
+						onChange={handleInputChange}
+						placeholder="자세한 리뷰를 작성해주세요"
+						maxLength={1000}
+					></TextArea>
+					<Regular14Gray>
+						{reviewContent.length} / 1,000
+					</Regular14Gray>
+				</TextAreaContainer>
+				<AddButton onClick={() => imgInput.current?.click()}>
+					<input
+						id="photo-upload"
+						type="file"
+						multiple
+						onChange={handleImageChange}
+						style={{ display: "none" }}
+						ref={imgInput}
+					/>
+					<Bold16AppColor>사진 첨부하기</Bold16AppColor>
+				</AddButton>
 
-						<ImgPreviewList>
-							{imagePreviews.map((preview, index) => (
-								<SquareImage
-									key={index}
-									imgUrl={preview}
-									size={106}
-									borderRadius={8}
-								>
-									<Close
-										style={{
-											position: "absolute",
-											right: "0.5rem",
-											top: "0.5rem",
-											cursor: "pointer",
-										}}
-										onClick={(e) => {
-											e.stopPropagation(); // Prevent event propagation
-											const updatedPreviews = [
-												...imagePreviews,
-											];
-											updatedPreviews.splice(index, 1); // Remove the image at the index
-											setImagePreviews(updatedPreviews); // Update the state with the modified array
-										}}
-									></Close>
-								</SquareImage>
-							))}
-						</ImgPreviewList>
-					</ReviewContentContainer>
-					<WebButton
-						verticalPadding={15}
-						color="red"
-						fontSize={16}
-						onClick={handleSubmit}
-					>
-						리뷰 등록하기
-					</WebButton>
-				</Modal>
-			)}
-		</div>
+				<ImgPreviewList>
+					{imagePreviews.map((preview, index) => (
+						<SquareImage
+							key={index}
+							imgUrl={preview}
+							size={106}
+							borderRadius={8}
+						>
+							<Close
+								style={{
+									position: "absolute",
+									right: "0.5rem",
+									top: "0.5rem",
+									cursor: "pointer",
+								}}
+								onClick={(e) => {
+									e.stopPropagation(); // Prevent event propagation
+									handleImageDelete(index); // Call the new function to delete the image
+								}}
+							></Close>
+						</SquareImage>
+					))}
+				</ImgPreviewList>
+			</ReviewContentContainer>
+			<WebButton
+				verticalPadding={15}
+				color="red"
+				fontSize={16}
+				onClick={handleSubmit}
+			>
+				리뷰 등록하기
+			</WebButton>
+		</Modal>
 	);
 };
 

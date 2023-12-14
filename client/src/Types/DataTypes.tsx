@@ -36,7 +36,7 @@ export type PaymentHistoryData = {
 };
 
 export type ReviewData = {
-	reviewId: number;
+	paymentId: number;
 	itemId: number;
 	title: string;
 	imageUrl: string;
