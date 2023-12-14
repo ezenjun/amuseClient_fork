@@ -1,5 +1,9 @@
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
-import { PaymentHistoryData } from "../Types/DataTypes";
+import {
+	PaymentHistoryData,
+	ReviewData,
+	WrittenReview,
+} from "../Types/DataTypes";
 
 export interface CategoryData {
 	categoryId: string;
@@ -298,4 +302,9 @@ export interface LikeItem {
 	productCode: string;
 	startPrice: number;
 	title: string;
+}
+
+export interface Review {
+	paymentDate: string;
+	items: Array<ReviewData>;
 }

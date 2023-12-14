@@ -13,7 +13,7 @@ import {
 	calculateNightStay,
 	formatDate,
 } from "../../../../../../utils/DateFunctions";
-import { ReviewData } from "../../../../../../Types/DataTypes";
+import { ReviewData, WrittenReview } from "../../../../../../Types/DataTypes";
 import * as S from "./styles";
 import {
 	InfoTextContainer,
@@ -23,7 +23,7 @@ import HorizontalLine from "../../../../../../components/Lines/HorizontalLine";
 import { Common } from "../../../../../../styles";
 
 type Props = {
-	data: ReviewData;
+	data: WrittenReview;
 };
 
 const EachWrittenReviewWeb = ({ data }: Props) => {
@@ -36,20 +36,17 @@ const EachWrittenReviewWeb = ({ data }: Props) => {
 				<S.ItemInfoLeft>
 					<SquareImage
 						size={60}
-						imgUrl={data.itemImage}
+						imgUrl={data.imageUrl}
 						borderRadius={8}
 					/>
 					<InfoTextContainer>
 						<ItemNameContainer>
-							<Bold20Black>{data.itemName}</Bold20Black>
+							<Bold20Black>{data.title}</Bold20Black>
 						</ItemNameContainer>
 						<Regular14Gray>
-							{formatDate(new Date(data.travelStartDate))} ~{" "}
-							{formatDate(new Date(data.travelEndDate))}{" "}
-							{calculateNightStay(
-								data.travelStartDate,
-								data.travelEndDate
-							)}
+							{formatDate(new Date(data.startDate))} ~{" "}
+							{formatDate(new Date(data.endDate))}{" "}
+							{calculateNightStay(data.startDate, data.endDate)}
 						</Regular14Gray>
 					</InfoTextContainer>
 				</S.ItemInfoLeft>

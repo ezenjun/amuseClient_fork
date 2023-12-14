@@ -38,33 +38,41 @@ interface ReviewObject {
 
 const WriteReview = (props: Props) => {
 	const [rating, setRating] = useState<number | null>(5);
+	const [reviewObj, setReviewObj] = useState<ReviewObject>();
 	const [reviewContent, setReviewContent] = useState("");
-	const [selectedFiles, setSelectedFiles] = useState<FileList | null>(null);
+	const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
 	const [imagePreviews, setImagePreviews] = useState<string[]>([]);
 	const imgInput = useRef<HTMLInputElement>(null);
 
 	// 이미지 파일 선택 시 이벤트 핸들러
 	const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		const files = e.target.files; // Get the selected files
-
+		const files = e.target.files;
 		if (files) {
-			const newPreviews: string[] = [];
+			const newFiles = Array.from(files);
+			setSelectedFiles((prevFiles) => [...prevFiles, ...newFiles]);
 
+			// Optionally, create image previews here
+			const newPreviews = newFiles.map((file) =>
+				URL.createObjectURL(file)
+			);
+			setImagePreviews((prevPreviews) => [
+				...prevPreviews,
+				...newPreviews,
+			]);
 			for (let i = 0; i < files.length; i++) {
 				const reader = new FileReader();
 				reader.onload = (event) => {
 					if (event.target && event.target.result) {
 						newPreviews.push(event.target.result as string);
-						// Check if all files have been processed to update state once
 						if (newPreviews.length === files.length) {
 							setImagePreviews([
 								...imagePreviews,
 								...newPreviews,
-							]); // Add new previews to existing ones
+							]);
 						}
 					}
 				};
-				reader.readAsDataURL(files[i]); // Convert selected file to data URL
+				reader.readAsDataURL(files[i]);
 			}
 		}
 	};
@@ -87,13 +95,13 @@ const WriteReview = (props: Props) => {
 								reviewContent: reviewContent,
 								images: images,
 							};
-							console.log("리뷰 객체:", reviewObject);
-							// 이후 서버로 데이터를 전송하는 로직을 추가할 수 있습니다.
+							setReviewObj(reviewObject);
 						}
 					}
 				};
 				reader.readAsDataURL(file);
 			}
+			console.log(reviewObj);
 		}
 	};
 
@@ -202,7 +210,12 @@ const WriteReview = (props: Props) => {
 							))}
 						</ImgPreviewList>
 					</ReviewContentContainer>
-					<WebButton verticalPadding={15} color="red" fontSize={16}>
+					<WebButton
+						verticalPadding={15}
+						color="red"
+						fontSize={16}
+						onClick={handleSubmit}
+					>
 						리뷰 등록하기
 					</WebButton>
 				</Modal>

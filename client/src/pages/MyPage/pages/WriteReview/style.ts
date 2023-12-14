@@ -63,6 +63,7 @@ export const ImgPreviewList = styled.div`
 	flex-direction: row;
 	flex-grow: none;
 	position: relative;
+	min-height: 6.625rem;
 	width: 22.8125rem;
 	box-sizing: border-box;
 	align-items: center;

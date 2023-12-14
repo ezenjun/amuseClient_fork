@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import EachUnwrittenReviewWeb from "./EachUnwrittenReviewWeb";
 import EachUnwrittenReviewTablet from "./EachUnwrittenReviewTablet";
 import EachUnwrittenReviewMobile from "./EachUnwrittenReviewMobile";
-import { ReviewData } from "../../../../../../Types/DataTypes";
+import { ReviewData, WrittenReview } from "../../../../../../Types/DataTypes";
 
 type Props = {
 	data: ReviewData;

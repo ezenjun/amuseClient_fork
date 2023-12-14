@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 
-import { ReviewData } from "../../../../../../Types/DataTypes";
+import { ReviewData, WrittenReview } from "../../../../../../Types/DataTypes";
 import EachWrittenReviewWeb from "./EachWrittenReviewWeb";
 import EachWrittenReviewMobile from "./EachWrittenReviewMobile";
 
 type Props = {
-	data: ReviewData;
+	data: WrittenReview;
 };
 
 const EachWrittenReview = ({ data }: Props) => {

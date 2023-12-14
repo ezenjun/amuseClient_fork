@@ -38,12 +38,30 @@ export type PaymentHistoryData = {
 export type ReviewData = {
 	reviewId: number;
 	itemId: number;
-	itemName: string;
-	itemImage: string;
-	travelStartDate: string;
-	travelEndDate: string;
+	title: string;
+	imageUrl: string;
+	startDate: string;
+	endDate: string;
 	reservationDateTime: string;
 	reviewStatus?: boolean;
 };
 
+export type WrittenReview = {
+	itemId: number;
+	reviewId: number;
+	title: string;
+	imageUrl: string;
+	startDate: string;
+	endDate: string;
+	paymentDate: string;
+	userName: string;
+	rating: number;
+	reviewContent: string;
+	images: [
+		{
+			fileName: string;
+			base64Data: string;
+		}
+	];
+};
 // commit용 주석

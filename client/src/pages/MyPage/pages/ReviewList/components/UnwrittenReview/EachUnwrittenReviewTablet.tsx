@@ -17,7 +17,7 @@ import {
 	formatDate,
 } from "../../../../../../utils/DateFunctions";
 import { WebButton } from "../../../../../../components/Button/WebButton";
-import { ReviewData } from "../../../../../../Types/DataTypes";
+import { ReviewData, WrittenReview } from "../../../../../../Types/DataTypes";
 
 type Props = {
 	data: ReviewData;
@@ -32,20 +32,17 @@ const EachUnwrittenReviewTablet = ({ data }: Props) => {
 			<ItemInfoTabletContainer>
 				<SquareImage
 					size={60}
-					imgUrl={data.itemImage}
+					imgUrl={data.imageUrl}
 					borderRadius={8}
 				></SquareImage>
 				<InfoTextContainer>
 					<ItemNameContainer>
-						<Bold20Black>{data.itemName}</Bold20Black>
+						<Bold20Black>{data.title}</Bold20Black>
 					</ItemNameContainer>
 					<Regular14Gray>
-						{formatDate(new Date(data.travelStartDate))} ~{" "}
-						{formatDate(new Date(data.travelEndDate))}{" "}
-						{calculateNightStay(
-							data.travelStartDate,
-							data.travelEndDate
-						)}
+						{formatDate(new Date(data.startDate))} ~{" "}
+						{formatDate(new Date(data.endDate))}{" "}
+						{calculateNightStay(data.startDate, data.endDate)}
 					</Regular14Gray>
 				</InfoTextContainer>
 				<PaymentButtonContainer>

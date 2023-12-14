@@ -17,57 +17,139 @@ import { formatDate } from "../../../../utils/DateFunctions";
 import GrayBox from "../../../../components/Box/GrayBox";
 import EachUnwrittenReview from "./components/UnwrittenReview/EachUnwrittenReview";
 import EachWrittenReview from "./components/WrittenReveiw/EachWrittenReview";
+import axios from "axios";
+import { Review } from "../../../../Interfaces/DataInterfaces";
+import UnWrittenReveiw from "./components/UnwrittenReview/UnWrittenReveiw";
+import WrittenReviewComponent from "./components/WrittenReveiw/WrittenReviewComponent";
+import { WrittenReview } from "../../../../Types/DataTypes";
 
 const ReviewHistory = () => {
 	const [selectedTab, setSelectedTab] = useState("리뷰 작성");
-	const [reviewHistory, setReviewHistory] = useState({});
+	const [unWrittenHistory, setUnWrittenHistory] = useState<Review[]>([]);
+	const [writtenHistory, setWrittenHistory] = useState<WrittenReview[]>([]);
 	const [screenWidth, setScreenWidth] = useState(window.innerWidth);
-	const number = 3;
-	const date = new Date();
-	const review = {
-		itemImage:
-			"https://amuseimg.s3.ap-northeast-2.amazonaws.com/images/file_name",
-		itemName: "[호텔] 서울 신라호텔 숙박권",
-		reviewId: 31,
-		itemId: 104,
-		reservationDateTime: "2023-11-16T17:51:41.25818",
-		travelEndDate: "2023-11-16",
-		travelStartDate: "2023-11-16",
+	const [cookies] = useCookies(["__jwtkid__"]);
+	const getTotalReviewDataCount = (reviewList?: Review[]): number => {
+		let totalCount = 0;
+
+		if (!reviewList || reviewList.length === 0) {
+			return totalCount; // ReviewList의 길이가 0이면 0을 반환
+		}
+
+		reviewList.forEach((review) => {
+			totalCount += review.items.length;
+		});
+
+		return totalCount;
 	};
+
+	const getWrittenReviewData = async () => {
+		const token = cookies["__jwtkid__"];
+		axios
+			.get(`${process.env.REACT_APP_AMUSE_API}/my-page/item/review`, {
+				headers: {
+					"Content-Type": "application/json",
+					Authorization: `${token}`,
+				},
+			})
+			.then((response) => {
+				const res = response.data.data.reviewInfos;
+				console.log(res);
+				setWrittenHistory(res);
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+	};
+	const getUnWrittenReviewData = async () => {
+		const token = cookies["__jwtkid__"];
+		axios
+			.get(`${process.env.REACT_APP_AMUSE_API}/my-page/item/no-review`, {
+				headers: {
+					"Content-Type": "application/json",
+					Authorization: `${token}`,
+				},
+			})
+			.then((response) => {
+				const res = response.data.data;
+				console.log(res);
+				setUnWrittenHistory(res);
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+	};
+
+	useEffect(() => {
+		if (selectedTab.includes("리뷰 작성")) {
+			getUnWrittenReviewData();
+		} else {
+			getWrittenReviewData();
+		}
+	}, [selectedTab]);
 	return (
 		<PageContainer>
 			<Bold32Black>상품 리뷰</Bold32Black>
 			<SettingsContainer>
 				<Tabs
 					tabList={[
-						`리뷰 작성 (${number})`,
-						`작성한 리뷰 (${number})`,
+						`리뷰 작성 (${getTotalReviewDataCount(
+							unWrittenHistory
+						)})`,
+						`작성한 리뷰 (${
+							writtenHistory ? writtenHistory.length : 0
+						})`,
 					]}
 					gap={20}
 					width={screenWidth < 768 ? 270 : undefined}
 					activeTab={selectedTab}
 					setActiveTab={setSelectedTab}
 				></Tabs>
-				{reviewHistory ? (
+				{selectedTab.includes("리뷰 작성") ? (
+					<UnWrittenReveiw data={unWrittenHistory}></UnWrittenReveiw>
+				) : (
+					<WrittenReviewComponent
+						data={writtenHistory}
+					></WrittenReviewComponent>
+				)}
+				{/* {reviewHistory ? (
 					<HistoryContainer>
-						<EachDayContainer key={date.toDateString()}>
-							<Regular16Gray>
-								작성일 : {formatDate(new Date(date))}
-							</Regular16Gray>
-							<PaymentListContainer>
-								{selectedTab.includes("리뷰 작성") ? (
-									<EachUnwrittenReview
-										key={review.reviewId}
-										data={review}
-									/>
-								) : (
-									<EachWrittenReview
-										key={review.reviewId}
-										data={review}
-									/>
-								)}
-							</PaymentListContainer>
-						</EachDayContainer>
+						{reviewHistory.map((review) => {
+							return (
+								<EachDayContainer key={review.paymentDate}>
+									<Regular16Gray>
+										작성일 :{" "}
+										{formatDate(
+											new Date(review.paymentDate)
+										)}
+									</Regular16Gray>
+
+									{selectedTab.includes("리뷰 작성") ? (
+										<PaymentListContainer>
+											{review.items.map((item) => {
+												return (
+													<EachUnwrittenReview
+														key={item.itemId}
+														data={item}
+													/>
+												);
+											})}
+										</PaymentListContainer>
+									) : (
+										<PaymentListContainer>
+											{review.items.map((item) => {
+												return (
+													<EachWrittenReview
+														key={item.itemId}
+														data={item}
+													/>
+												);
+											})}
+										</PaymentListContainer>
+									)}
+								</EachDayContainer>
+							);
+						})}
 					</HistoryContainer>
 				) : (
 					<HistoryContainer>
@@ -75,7 +157,7 @@ const ReviewHistory = () => {
 							<Bold20Gray>작성할 리뷰가 없습니다.</Bold20Gray>
 						</GrayBox>
 					</HistoryContainer>
-				)}
+				)} */}
 			</SettingsContainer>
 		</PageContainer>
 	);
