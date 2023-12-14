@@ -47,7 +47,7 @@ const EachUnwrittenReviewWeb = ({ data }: Props) => {
 		};
 	return (
 		<EachPaymentContainer
-			onClick={() => navigate(`/detail/${data.itemId}`)}
+			onClick={() => navigate(`/detail/${data.itemDbId}`)}
 		>
 			<ItemInfoContainer>
 				<SquareImage
@@ -73,7 +73,7 @@ const EachUnwrittenReviewWeb = ({ data }: Props) => {
 				fontSize={16}
 				width={140}
 				onClick={(e) =>
-					handleWriteReview(data.paymentId, data.itemId)(e)
+					handleWriteReview(data.paymentId, data.itemDbId)(e)
 				}
 			>
 				리뷰 작성
