@@ -18,10 +18,11 @@ export const UserInfoContainer = styled.div`
 	gap: 1.5rem;
 `;
 
-export const Row = styled.div`
+export const Row = styled.div<{ marginTop?: number }>`
 	display: flex;
 	gap: 2.5rem;
 	align-items: center;
+	${({ marginTop }) => marginTop && `margin-top: ${marginTop * 0.0625}rem`}
 `;
 
 export const RowKey = styled.div`

@@ -290,6 +290,7 @@ export interface UserInfo {
 	grade: string;
 	phoneNumber: string;
 	loginType: string;
+	point: number;
 }
 
 export interface LikeItem {

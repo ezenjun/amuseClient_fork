@@ -8,41 +8,13 @@ import {
 	Regular16Gray,
 	Regular20Black,
 } from "../../../../../components/Text/Text";
-import {
-	Left,
-	Row,
-	RowKey,
-	SettingContainer,
-	UserInfoContainer,
-} from "./styles";
-import { WebButton } from "../../../../../components/Button/WebButton";
+import { Row, RowKey, UserInfoContainer } from "./styles";
 
-const CurrentUserInfo = () => {
-	const [cookies] = useCookies(["__jwtkid__"]);
-	const [userData, setUserData] = useState<UserInfo>();
-	const [isEdit, setIsEdit] = useState(false);
-	const getUserInfoAsToken = async () => {
-		const token = cookies["__jwtkid__"];
-		axios
-			.get(`${process.env.REACT_APP_AMUSE_API}/my-page/info`, {
-				headers: {
-					"Content-Type": "application/json",
-					Authorization: `${token}`,
-				},
-			})
-			.then((response) => {
-				const res = response.data.data;
-				console.log(res);
-				setUserData(res);
-			})
-			.catch((err) => {
-				console.log(err);
-			});
-	};
+interface CurrentUserInfoProps {
+	userData: UserInfo;
+}
 
-	useEffect(() => {
-		getUserInfoAsToken();
-	}, []);
+const CurrentUserInfo = ({ userData }: CurrentUserInfoProps) => {
 	return (
 		<UserInfoContainer>
 			<Row>
