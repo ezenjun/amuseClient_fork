@@ -23,9 +23,7 @@ import EachPayment from "../EachPayment";
 import { WebButton } from "../../../../../../components/Button/WebButton";
 import { Modal } from "../../../../../../components/Modal/Modal";
 
-type Props = {};
-
-const PaymentHistoryDetail = (props: Props) => {
+const PaymentHistoryDetail = () => {
 	const { id } = useParams();
 	const [data, setData] = useState<PaymentDetailInterface>();
 	const [cookies] = useCookies(["__jwtkid__"]);
@@ -52,6 +50,7 @@ const PaymentHistoryDetail = (props: Props) => {
 				)
 				.then((response) => {
 					const data = response.data.data;
+					console.log(data);
 					setData(data);
 				})
 				.catch((err) => {

@@ -11,4 +11,7 @@ export const atomKeys = {
 	editReviewobject: "editReviewobject" as const,
 	editReviewId: "editReviewId" as const,
 	reviewItemID: "reviewItemID" as const,
+
+	// 마이페이지 key
+	mypageInfo: "mypageInfo" as const,
 };
