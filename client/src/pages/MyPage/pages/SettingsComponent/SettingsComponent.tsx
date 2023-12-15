@@ -32,7 +32,7 @@ const SettingsComponent = () => {
 	const userInfo = useRecoilValue(MypageInfo);
 	const updateUserInfo = () => {
 		axios
-			.post(`${process.env.REACT_APP_AMUSE_API}/my-page/info`, userInfo, {
+			.put(`${process.env.REACT_APP_AMUSE_API}/my-page/info`, userInfo, {
 				headers: {
 					"Content-Type": "application/json",
 					Authorization: `${token}`,
@@ -42,7 +42,6 @@ const SettingsComponent = () => {
 				console.log(response);
 				getUserInfoAsToken();
 				alert("정보가 수정되었습니다.");
-				window.location.reload();
 			})
 			.catch((err) => {
 				console.log(err);
