@@ -113,6 +113,7 @@ export const Common = {
 		lightGray: "#F8F9FA",
 		darkGray: "#464646",
 		bgGray: "#F8F9FA",
+		buttonLG: "#DFDFDF",
 	},
 	bold: {
 		thin: 400,

@@ -11,10 +11,6 @@ export const EachPaymentContainer = styled.div`
 	border-radius: 0.5rem;
 	gap: 1rem;
 	cursor: pointer;
-	:hover {
-		box-shadow: 0 0 8px rgba(0, 0, 0, 0.1); /* Add your hover effect here */
-		transform: scale(1.001); /* Optional: Add a scale effect on hover */
-	}
 `;
 
 export const EachPaymentTabletContainer = styled.div`
@@ -55,6 +51,7 @@ export const ItemInfoContainer = styled.div`
 	display: flex;
 	flex-direction: row;
 	align-items: center;
+	width: 100%;
 	gap: 0.875rem;
 `;
 

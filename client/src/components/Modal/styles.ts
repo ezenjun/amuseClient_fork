@@ -14,13 +14,12 @@ export const ModalBackground = styled.div`
 	overflow: hidden;
 `;
 
-export const ModalContainer = styled.div`
+export const ModalContainer = styled.div<{ width?: number }>`
 	display: flex;
 	flex-direction: column;
 	border-radius: 0.5rem;
-	width: 60%;
-	max-width: 754px;
-	/* height: 486px; */
+	max-width: ${(props) =>
+		props.width ? `${props.width * 0.625}rem` : "60%"};
 	flex-shrink: 0;
 	background-color: white;
 	padding: 2.5rem 2.6875rem;
