@@ -119,6 +119,7 @@ export interface SquareImageProps {
 	size: number;
 	imgUrl: string;
 	borderRadius: number;
+	children?: any;
 }
 
 export interface GrayBoxProps extends IProps {
@@ -154,8 +155,8 @@ export interface RadioButtonProps {
 }
 
 export interface HorizontalLineProps {
-	marginTop: number;
-	marginBottom: number;
+	marginTop?: number;
+	marginBottom?: number;
 }
 
 export interface CheckButtonProps {

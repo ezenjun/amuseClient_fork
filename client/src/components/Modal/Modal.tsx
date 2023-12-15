@@ -7,17 +7,22 @@ import {
 } from "./styles";
 import { Bold32Black } from "../Text/Text";
 import { ReactComponent as Close } from "../../assets/Icons/Close/Close_24.svg";
+import { SetterOrUpdater } from "recoil";
 
 interface ModalProps {
-	setShowModal: React.Dispatch<SetStateAction<boolean>>;
+	setShowModal:
+		| React.Dispatch<SetStateAction<boolean>>
+		| SetterOrUpdater<boolean>;
 	title: string | undefined;
 	children?: any;
+	width?: number;
 }
 
 export const Modal: React.FC<ModalProps> = ({
 	setShowModal,
 	title,
 	children,
+	width,
 }) => {
 	const closeModal = () => {
 		setShowModal(false);
@@ -44,7 +49,7 @@ export const Modal: React.FC<ModalProps> = ({
 
 	return (
 		<ModalBackground>
-			<ModalContainer>
+			<ModalContainer width={width}>
 				<ModalHeader>
 					<Bold32Black>{title}</Bold32Black>
 					<Close onClick={closeModal}></Close>

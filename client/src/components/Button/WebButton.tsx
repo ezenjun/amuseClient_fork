@@ -33,6 +33,8 @@ export const WebButton = styled.button<{
 				return Common.colors.gray;
 			case "gray2":
 				return Common.colors.gray2;
+			case "buttonLG":
+				return Common.colors.buttonLG;
 			default:
 				return "transparent";
 		}
@@ -49,7 +51,9 @@ export const WebButton = styled.button<{
 					? Common.colors.black
 					: Common.colors.gray;
 			case "gray":
-				return Common.colors.gray;
+				return Common.colors.white;
+			case "buttonLG":
+				return Common.colors.darkGray;
 			default:
 				return Common.colors.black;
 		}
