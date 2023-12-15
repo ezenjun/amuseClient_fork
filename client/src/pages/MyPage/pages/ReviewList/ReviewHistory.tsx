@@ -22,14 +22,19 @@ import { Review } from "../../../../Interfaces/DataInterfaces";
 import UnWrittenReveiw from "./components/UnwrittenReview/UnWrittenReveiw";
 import WrittenReviewComponent from "./components/WrittenReveiw/WrittenReviewComponent";
 import { WrittenReview } from "../../../../Types/DataTypes";
-import { useRecoilState } from "recoil";
-import { createReviewVisibleState } from "../../../../Recoil/ReveiwAtomState";
+import { useRecoilState, useRecoilValue } from "recoil";
+import {
+	createReviewVisibleState,
+	editReviewVisibleState,
+} from "../../../../Recoil/ReviewAtomState";
 import WriteReview from "../WriteReview/WriteReview";
+import EditReview from "../WriteReview/EditReview";
 
 const ReviewHistory = () => {
 	const [selectedTab, setSelectedTab] = useState("리뷰 작성");
-	const [createReviewModalVisible, setCreateReviewModalVisible] =
-		useRecoilState(createReviewVisibleState);
+	const createReviewModalVisible = useRecoilValue(createReviewVisibleState);
+	const editReviewModalVisible = useRecoilValue(editReviewVisibleState);
+
 	const [unWrittenHistory, setUnWrittenHistory] = useState<Review[]>([]);
 	const [writtenHistory, setWrittenHistory] = useState<WrittenReview[]>([]);
 	const [screenWidth, setScreenWidth] = useState(window.innerWidth);
@@ -86,11 +91,8 @@ const ReviewHistory = () => {
 	};
 
 	useEffect(() => {
-		if (selectedTab.includes("리뷰 작성")) {
-			getUnWrittenReviewData();
-		} else {
-			getWrittenReviewData();
-		}
+		getUnWrittenReviewData();
+		getWrittenReviewData();
 	}, [selectedTab]);
 	return (
 		<PageContainer>
@@ -118,6 +120,7 @@ const ReviewHistory = () => {
 					></WrittenReviewComponent>
 				)}
 				{createReviewModalVisible && <WriteReview />}
+				{editReviewModalVisible && <EditReview />}
 			</SettingsContainer>
 		</PageContainer>
 	);

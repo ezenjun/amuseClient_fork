@@ -25,10 +25,10 @@ import { WebButton } from "../../../../../../components/Button/WebButton";
 import { ReviewData, WrittenReview } from "../../../../../../Types/DataTypes";
 import { useSetRecoilState } from "recoil";
 import {
-	createReviewID,
+	createReviewPaymentId,
 	createReviewVisibleState,
 	reviewItemID,
-} from "../../../../../../Recoil/ReveiwAtomState";
+} from "../../../../../../Recoil/ReviewAtomState";
 
 type Props = {
 	data: ReviewData;
@@ -39,7 +39,7 @@ const EachUnwrittenReviewMobile = ({ data }: Props) => {
 	const setCreateReviewModalVisible = useSetRecoilState(
 		createReviewVisibleState
 	);
-	const setCreateReviewID = useSetRecoilState(createReviewID);
+	const setCreateReviewID = useSetRecoilState(createReviewPaymentId);
 	const setCreateReviewItemID = useSetRecoilState(reviewItemID);
 	const handleWriteReview =
 		(reviewId: number, itemId: number) =>

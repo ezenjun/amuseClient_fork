@@ -6,6 +6,9 @@ export const atomKeys = {
 
 	// 리뷰 페이지 key
 	createReviewVisibleState: "createReviewVisibleState" as const,
-	createReviewID: "createReviewID" as const,
+	eidtReviewVisibleState: "eidtReviewVisibleState" as const,
+	createReviewPaymentId: "createReviewPaymentId" as const,
+	editReviewobject: "editReviewobject" as const,
+	editReviewId: "editReviewId" as const,
 	reviewItemID: "reviewItemID" as const,
 };

@@ -21,6 +21,12 @@ import {
 } from "../../../PaymentHistory/components/styles";
 import HorizontalLine from "../../../../../../components/Lines/HorizontalLine";
 import { Common } from "../../../../../../styles";
+import { useSetRecoilState } from "recoil";
+import {
+	editReviewId,
+	editReviewVisibleState,
+	editReviewobject,
+} from "../../../../../../Recoil/ReviewAtomState";
 
 type Props = {
 	data: WrittenReview;
@@ -28,6 +34,22 @@ type Props = {
 
 const EachWrittenReviewWeb = ({ data }: Props) => {
 	const navigate = useNavigate();
+	const setEditReviewObject = useSetRecoilState(editReviewobject);
+	const setEditReviewId = useSetRecoilState(editReviewId);
+	const setEditReviewModalVisible = useSetRecoilState(editReviewVisibleState);
+	const onEdit = (event: React.MouseEvent<HTMLButtonElement>) => {
+		event.stopPropagation();
+
+		const updatedEditReviewObject = {
+			rate: data.rating,
+			reviewContent: data.reviewContent,
+			oldImgs: data.reviewImages.map((image) => image.imgUrl),
+			newImgs: [],
+		};
+		setEditReviewId(data.reviewId);
+		setEditReviewObject(updatedEditReviewObject);
+		setEditReviewModalVisible(true);
+	};
 	return (
 		<S.WrittenReviewContainer
 			onClick={() => navigate(`/detail/${data.itemId}`)}
@@ -36,7 +58,7 @@ const EachWrittenReviewWeb = ({ data }: Props) => {
 				<S.ItemInfoLeft>
 					<SquareImage
 						size={60}
-						imgUrl={data.imageUrl}
+						imgUrl={data.itemImages[0].imgUrl}
 						borderRadius={8}
 					/>
 					<InfoTextContainer>
@@ -50,7 +72,7 @@ const EachWrittenReviewWeb = ({ data }: Props) => {
 						</Regular14Gray>
 					</InfoTextContainer>
 				</S.ItemInfoLeft>
-				<Bold16AppColor>수정하기</Bold16AppColor>
+				<Bold16AppColor onClick={onEdit}>수정하기</Bold16AppColor>
 			</S.ItemInfo>
 			<HorizontalLine></HorizontalLine>
 			<S.ReviewContent>
@@ -61,16 +83,12 @@ const EachWrittenReviewWeb = ({ data }: Props) => {
 						fill={Common.colors.appColor}
 					></Star>
 					<S.ScoreContainer>
-						<Bold24Black>4.8</Bold24Black>
+						<Bold24Black>{data.rating}</Bold24Black>
 						<Regular16Gray> / 5</Regular16Gray>
 					</S.ScoreContainer>
 				</S.StarContainer>
 
-				<Regular16Gray>
-					이용할 수 있는 혜택은 되게 많은데 ㅠㅠ 여유로운 일정을
-					즐기다 보면 결국 뽕뽑지 못하고 끝나는 것 같아요… 자꾸
-					이티켓에 집착해서 일정을 짜게 된게 아쉽네요.
-				</Regular16Gray>
+				<Regular16Gray>{data.reviewContent}</Regular16Gray>
 			</S.ReviewContent>
 		</S.WrittenReviewContainer>
 	);

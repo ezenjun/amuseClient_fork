@@ -50,17 +50,16 @@ export type WrittenReview = {
 	itemId: number;
 	reviewId: number;
 	title: string;
-	imageUrl: string;
+	itemImages: [{ imgUrl: string }];
 	startDate: string;
 	endDate: string;
 	paymentDate: string;
 	userName: string;
 	rating: number;
 	reviewContent: string;
-	images: [
+	reviewImages: [
 		{
-			fileName: string;
-			base64Data: string;
+			imgUrl: string;
 		}
 	];
 };

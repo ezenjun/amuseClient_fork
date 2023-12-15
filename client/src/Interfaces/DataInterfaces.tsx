@@ -309,3 +309,15 @@ export interface Review {
 	paymentDate: string;
 	items: Array<ReviewData>;
 }
+
+export interface IFile {
+	fileName: string;
+	base64Data: string;
+}
+
+export interface EditReviewObject {
+	rate: number | null;
+	reviewContent: string;
+	oldImgs: Array<string>;
+	newImgs: Array<IFile>;
+}

@@ -24,125 +24,30 @@ import { WebButton } from "../../../../components/Button/WebButton";
 import {
 	createReviewPaymentId,
 	createReviewVisibleState,
+	editReviewId,
+	editReviewVisibleState,
+	editReviewobject,
 	reviewItemID,
 } from "../../../../Recoil/ReviewAtomState";
-import { useSetRecoilState, useRecoilValue } from "recoil";
+import { useSetRecoilState, useRecoilValue, useRecoilState } from "recoil";
 import { useCookies } from "react-cookie";
 
-interface ReviewObject {
-	paymentId?: number | undefined;
-	rate?: number | null | undefined;
-	reviewContent?: string | undefined;
-	reviewImgs?:
-		| Array<{
-				fileName: string;
-				base64Data: string;
-		  }>
-		| undefined;
-}
-
-const WriteReview = () => {
-	const paymentId = useRecoilValue(createReviewPaymentId);
-	const itemId = useRecoilValue(reviewItemID);
-
+const EditReview = () => {
 	const [cookies] = useCookies(["__jwtkid__"]);
 	const token = cookies["__jwtkid__"];
-	const setCreateReviewModalVisible = useSetRecoilState(
-		createReviewVisibleState
+	const EditReviewId = useRecoilValue(editReviewId);
+	const [EditReviewObject, setEditReviewObject] =
+		useRecoilState(editReviewobject);
+	const setEditReviewModalVisible = useSetRecoilState(editReviewVisibleState);
+	const [rating, setRating] = useState<number | null>(EditReviewObject.rate);
+	const [reviewContent, setReviewContent] = useState(
+		EditReviewObject.reviewContent
 	);
-	const [rating, setRating] = useState<number | null>(5);
-	const [reviewObj, setReviewObj] = useState<ReviewObject | undefined>();
-	const [reviewContent, setReviewContent] = useState("");
 	const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
-	const [imagePreviews, setImagePreviews] = useState<string[]>([]);
+	const [imagePreviews, setImagePreviews] = useState<string[]>(
+		EditReviewObject.oldImgs
+	);
 	const imgInput = useRef<HTMLInputElement>(null);
-	// 이미지 파일 선택 시 이벤트 핸들러
-	const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		const files = e.target.files;
-		if (files) {
-			const newFiles = Array.from(files);
-			const updatedReviewObj = { ...reviewObj };
-			setSelectedFiles((prevFiles) => [...prevFiles, ...newFiles]);
-			const newPreviews = newFiles.map((file) =>
-				URL.createObjectURL(file)
-			);
-			setImagePreviews((prevPreviews) => [
-				...prevPreviews,
-				...newPreviews,
-			]);
-			const updatedReviewImgs = newFiles.map((file) => ({
-				fileName: file.name,
-				base64Data: URL.createObjectURL(file),
-			}));
-			if (updatedReviewObj.reviewImgs) {
-				updatedReviewObj.reviewImgs = [
-					...(updatedReviewObj.reviewImgs || []),
-					...updatedReviewImgs,
-				];
-			} else {
-				updatedReviewObj.reviewImgs = updatedReviewImgs;
-			}
-			setReviewObj(updatedReviewObj);
-		}
-	};
-
-	const handleImageDelete = (indexToDelete: number) => {
-		const updatedPreviews = [...imagePreviews];
-		const updatedReviewObj = { ...(reviewObj || {}) };
-		updatedPreviews.splice(indexToDelete, 1);
-		setImagePreviews(updatedPreviews);
-		if (updatedReviewObj.reviewImgs) {
-			updatedReviewObj.reviewImgs.splice(indexToDelete, 1);
-		}
-		setReviewObj(updatedReviewObj);
-	};
-
-	const handleSubmit = async () => {
-		if (selectedFiles) {
-			const reviewImgs: ReviewObject["reviewImgs"] = [];
-			for (let i = 0; i < selectedFiles.length; i++) {
-				const file = selectedFiles[i];
-				const reader = new FileReader();
-				reader.onload = () => {
-					if (reader.result) {
-						const base64data = reader.result as string;
-						reviewImgs.push({
-							fileName: file.name,
-							base64Data: base64data,
-						});
-						if (reviewImgs.length === selectedFiles.length) {
-							const reviewObject: ReviewObject = {
-								paymentId: paymentId,
-								rate: rating,
-								reviewContent: reviewContent,
-								reviewImgs: reviewObj?.reviewImgs,
-							};
-							setReviewObj(reviewObject);
-						}
-					}
-				};
-				reader.readAsDataURL(file);
-			}
-		}
-		axios
-			.post(
-				`${process.env.REACT_APP_AMUSE_API}/my-page/item/${itemId}/review`,
-				reviewObj,
-				{
-					headers: {
-						"Content-Type": "application/json",
-						Authorization: `${token}`,
-					},
-				}
-			)
-			.then((response) => {
-				console.log(response);
-				setCreateReviewModalVisible(false);
-			})
-			.catch((err) => {
-				console.log(err);
-			});
-	};
 
 	const [hover, setHover] = React.useState(-1);
 
@@ -153,19 +58,104 @@ const WriteReview = () => {
 	};
 
 	useEffect(() => {
-		const updatedReviewObject: ReviewObject = {
-			paymentId: paymentId,
+		setEditReviewObject((prevEditReviewObject) => ({
+			...prevEditReviewObject,
 			rate: rating,
 			reviewContent: reviewContent,
-			reviewImgs: reviewObj?.reviewImgs || [],
-		};
-		setReviewObj(updatedReviewObject);
-	}, [rating, reviewContent, paymentId, reviewObj?.reviewImgs]);
+			oldImgs: EditReviewObject.oldImgs, // Use EditReviewObject.oldImgs for old images URLs
+		}));
+	}, [rating, reviewContent, EditReviewObject.oldImgs, setEditReviewObject]);
 
+	const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+		if (event.target.files) {
+			const filesArray: File[] = Array.from(event.target.files);
+			const newImages: { fileName: string; base64Data: string }[] = [];
+
+			filesArray.forEach((file) => {
+				const reader = new FileReader();
+				reader.onload = () => {
+					if (reader.result) {
+						const base64data = reader.result as string;
+						newImages.push({
+							fileName: file.name,
+							base64Data: base64data,
+						});
+
+						if (newImages.length === filesArray.length) {
+							// Set image previews
+							const previews = newImages.map(
+								(image) => image.base64Data
+							);
+							setImagePreviews((prevPreviews) => [
+								...prevPreviews,
+								...previews,
+							]);
+
+							// Update newImgs in editReviewObject
+							setEditReviewObject((prevEditReviewObject) => ({
+								...prevEditReviewObject,
+								newImgs: [
+									...prevEditReviewObject.newImgs,
+									...newImages,
+								],
+							}));
+						}
+					}
+				};
+				reader.readAsDataURL(file);
+			});
+		}
+	};
+
+	const handleImageDelete = (index: number) => {
+		const updatedPreviews = imagePreviews.filter((_, i) => i !== index);
+		setImagePreviews(updatedPreviews);
+
+		if (index < EditReviewObject.oldImgs.length) {
+			// Remove the image only from imagePreviews and update oldImgs
+			const updatedOldImgs = [...EditReviewObject.oldImgs];
+			updatedOldImgs.splice(index, 1);
+
+			setEditReviewObject((prevEditReviewObject) => ({
+				...prevEditReviewObject,
+				oldImgs: updatedOldImgs,
+			}));
+			return;
+		}
+
+		const newImagesIndex = index - EditReviewObject.oldImgs.length;
+		setEditReviewObject((prevEditReviewObject) => ({
+			...prevEditReviewObject,
+			newImgs: [
+				...prevEditReviewObject.newImgs.slice(0, newImagesIndex),
+				...prevEditReviewObject.newImgs.slice(newImagesIndex + 1),
+			],
+		}));
+	};
+	const handleSubmit = async () => {
+		axios
+			.put(
+				`${process.env.REACT_APP_AMUSE_API}/my-page/item/review/${EditReviewId}`,
+				EditReviewObject,
+				{
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: `${token}`,
+					},
+				}
+			)
+			.then((response) => {
+				console.log(response);
+				setEditReviewModalVisible(false);
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+	};
 	return (
 		<Modal
-			setShowModal={setCreateReviewModalVisible}
-			title="리뷰 작성"
+			setShowModal={setEditReviewModalVisible}
+			title="리뷰 수정"
 			width={365}
 		>
 			<Regular20Black>구매하신 상품은 만족하시나요?</Regular20Black>
@@ -256,10 +246,10 @@ const WriteReview = () => {
 				fontSize={16}
 				onClick={handleSubmit}
 			>
-				리뷰 등록하기
+				리뷰 수정하기
 			</WebButton>
 		</Modal>
 	);
 };
 
-export default WriteReview;
+export default EditReview;
