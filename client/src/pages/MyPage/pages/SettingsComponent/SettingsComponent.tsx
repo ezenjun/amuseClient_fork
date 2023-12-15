@@ -20,13 +20,34 @@ import {
 	UserInfoContainer,
 } from "./components/styles";
 import { WebButton } from "../../../../components/Button/WebButton";
+import EditUserInfo from "./components/EditUserInfo";
+import { useRecoilValue } from "recoil";
+import { MypageInfo } from "../../../../Recoil/MypageAtomState";
 
 const SettingsComponent = () => {
 	const [cookies] = useCookies(["__jwtkid__"]);
+	const token = cookies["__jwtkid__"];
 	const [isEdit, setIsEdit] = useState(false);
 	const [userData, setUserData] = useState<UserInfo>();
+	const userInfo = useRecoilValue(MypageInfo);
 	const updateUserInfo = () => {
-		console.log("post");
+		axios
+			.put(`${process.env.REACT_APP_AMUSE_API}/my-page/info`, userInfo, {
+				headers: {
+					"Content-Type": "application/json",
+					Authorization: `${token}`,
+				},
+			})
+			.then((response) => {
+				console.log(response);
+				getUserInfoAsToken();
+				alert("정보가 수정되었습니다.");
+			})
+			.catch((err) => {
+				console.log(err);
+				alert(err);
+			});
+
 		setIsEdit(false);
 	};
 	const getUserInfoAsToken = async () => {
@@ -75,7 +96,17 @@ const SettingsComponent = () => {
 						</WebButton>
 					</SettingContainer>
 					{userData && (
-						<CurrentUserInfo userData={userData}></CurrentUserInfo>
+						<>
+							{isEdit ? (
+								<EditUserInfo
+									userData={userData}
+								></EditUserInfo>
+							) : (
+								<CurrentUserInfo
+									userData={userData}
+								></CurrentUserInfo>
+							)}
+						</>
 					)}
 				</GrayBox>
 

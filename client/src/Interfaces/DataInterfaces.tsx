@@ -321,3 +321,9 @@ export interface EditReviewObject {
 	oldImgs: Array<string>;
 	newImgs: Array<IFile>;
 }
+
+export interface IMypageInfo {
+	birthday: string;
+	phoneNumber: string;
+	email: string;
+}
