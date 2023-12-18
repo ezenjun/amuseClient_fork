@@ -28,7 +28,9 @@ const CurrentUserInfo = ({ userData }: CurrentUserInfoProps) => {
 					<Regular16Gray>생년월일</Regular16Gray>
 				</RowKey>
 				<Regular16Black>
-					{userData?.birthday.replaceAll("-", ". ")}
+					{userData?.birthday
+						? userData?.birthday?.replaceAll("-", ". ")
+						: "전화번호를 등록하세요"}
 				</Regular16Black>
 			</Row>
 			<Row>
