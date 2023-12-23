@@ -102,7 +102,7 @@ export const Terms = () => {
 		if (token) {
 			axios
 				.get(
-					`${process.env.REACT_APP_AMUSE_API}/test/api/terms-of-service-info-type?type=Domestic`,
+					`${process.env.REACT_APP_AMUSE_API}/test/api/terms-of-service-info-type?type=${paymentData.itemType}`,
 					{
 						headers: {
 							"Content-Type": "application/json",
