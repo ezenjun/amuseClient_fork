@@ -12,6 +12,7 @@ export const MyPageContainer = styled.div`
 	}
 	@media (max-width: 768px) {
 		padding: 2.5rem 1rem;
+		flex-direction: column;
 	}
 	@media (min-width: 769px) and (max-width: 1023px) {
 		gap: 1rem;

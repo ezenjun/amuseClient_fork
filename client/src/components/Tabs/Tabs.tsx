@@ -7,12 +7,20 @@ interface TabsProps {
 	tabList: string[];
 	activeTab: string;
 	setActiveTab: React.Dispatch<React.SetStateAction<string>>;
-	width?: number;
+	width?: number | string;
+	wrap?: boolean;
 }
 
-const Tabs = ({ gap, tabList, activeTab, setActiveTab, width }: TabsProps) => {
+const Tabs = ({
+	gap,
+	tabList,
+	activeTab,
+	setActiveTab,
+	width,
+	wrap,
+}: TabsProps) => {
 	return (
-		<TabsContainer gap={gap}>
+		<TabsContainer gap={gap} wrap={wrap}>
 			{tabList.map((tab) => {
 				return (
 					<Tab

@@ -108,7 +108,7 @@ const ReviewHistory = () => {
 						})`,
 					]}
 					gap={20}
-					width={screenWidth < 768 ? 270 : undefined}
+					width={screenWidth < 768 ? "50%" : 186}
 					activeTab={selectedTab}
 					setActiveTab={setSelectedTab}
 				></Tabs>

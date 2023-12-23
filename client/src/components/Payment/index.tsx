@@ -9,7 +9,7 @@ export interface PaymentProps {
 
 function Payment({ version }: PaymentProps) {
   const [cookies, setCookie, removeCookie] = useCookies(["__jwtkid__"]);
-  const { orderData, setOrderData, orderTicketData } = useOrderContext();
+  const {  orderTicketData } = useOrderContext();
   const movePage = useNavigate();
 
   // Ticket Button

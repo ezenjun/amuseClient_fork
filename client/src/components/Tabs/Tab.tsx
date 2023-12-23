@@ -5,7 +5,7 @@ interface TabProps {
 	isActive: boolean;
 	onClick: () => void;
 	children: any;
-	width?: number;
+	width?: number | string;
 }
 
 const Tab = ({ isActive, onClick, children, width }: TabProps) => {
