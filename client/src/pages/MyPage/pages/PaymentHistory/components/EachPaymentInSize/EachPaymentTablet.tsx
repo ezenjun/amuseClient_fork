@@ -8,7 +8,7 @@ import {
 	ItemNameContainer,
 	PaymentButtonContainer,
 } from "../styles";
-import { useNavigate } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import SquareImage from "../../../../../../components/Images/SquareImage";
 import {
 	Bold16DarkGray,
@@ -31,14 +31,18 @@ type Props = {
 
 const EachPaymentTablet = ({ data }: Props) => {
 	const navigate = useNavigate();
+	const { id } = useParams();
+	const onCLick = () => {
+		if (id) {
+			navigate(`/detail/${data.itemId}`);
+		} else {
+			navigate(`./${data.mainPaymentId}`, {
+				state: data.mainPaymentId,
+			});
+		}
+	};
 	return (
-		<EachPaymentTabletContainer
-			onClick={() =>
-				navigate(`./${data.mainPaymentId}`, {
-					state: data.mainPaymentId,
-				})
-			}
-		>
+		<EachPaymentTabletContainer onClick={() => onCLick()}>
 			{data.payStatus === "SUCCESS" && (
 				<Chips color="red">결제 완료</Chips>
 			)}

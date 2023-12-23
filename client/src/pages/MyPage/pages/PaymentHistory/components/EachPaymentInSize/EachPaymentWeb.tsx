@@ -5,7 +5,7 @@ import {
 	ItemInfoContainer,
 	ItemNameContainer,
 } from "../styles";
-import { useNavigate } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import SquareImage from "../../../../../../components/Images/SquareImage";
 import {
 	Bold20Black,
@@ -27,14 +27,18 @@ type Props = {
 
 const EachPaymentWeb = ({ data }: Props) => {
 	const navigate = useNavigate();
+	const { id } = useParams();
+	const onCLick = () => {
+		if (id) {
+			navigate(`/detail/${data.itemId}`);
+		} else {
+			navigate(`./${data.mainPaymentId}`, {
+				state: data.mainPaymentId,
+			});
+		}
+	};
 	return (
-		<EachPaymentContainer
-			onClick={() =>
-				navigate(`./${data.mainPaymentId}`, {
-					state: data.mainPaymentId,
-				})
-			}
-		>
+		<EachPaymentContainer onClick={() => onCLick()}>
 			<ItemInfoContainer>
 				<SquareImage
 					size={60}
