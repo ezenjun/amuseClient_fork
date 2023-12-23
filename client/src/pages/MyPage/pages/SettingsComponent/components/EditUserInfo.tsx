@@ -35,6 +35,7 @@ const EditUserInfo = ({ userData }: UserInfoProps) => {
 	) => {
 		setter(event.target.value);
 	};
+	console.log(userBirthday);
 
 	useEffect(() => {
 		setUserInfo((prevUserInfo) => ({
@@ -67,9 +68,7 @@ const EditUserInfo = ({ userData }: UserInfoProps) => {
 				<EditInputContainer>
 					<EditInput
 						type="text"
-						disabled={
-							userLoginType === "LOCAL" || userBirthday !== ""
-						}
+						disabled={userLoginType === "LOCAL"}
 						placeholder="생년월일"
 						value={userBirthday ? userBirthday : ""}
 						onChange={(event) =>

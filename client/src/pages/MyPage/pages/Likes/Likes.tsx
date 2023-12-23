@@ -130,6 +130,7 @@ const Likes = () => {
 					gap={16}
 					activeTab={selectedTab}
 					setActiveTab={setSelectedTab}
+					wrap={true}
 				></Tabs>
 				<GridContainer>
 					{likeData && likeData.length > 0 ? (

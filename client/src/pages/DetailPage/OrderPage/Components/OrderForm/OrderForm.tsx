@@ -39,12 +39,12 @@ export function OrderForm() {
 		if (allTermsAgreed && paymentData.totalAmount > 0) {
 			requestPay(updatedPaymentData, (rsp: any) => {
 				if (rsp.success) {
+					console.log("결제 성공");
 					const convertedData = updatePostInfo(
 						updatedPaymentData,
 						selectedItem,
 						rsp
 					);
-					console.log("convertedData", convertedData);
 					axios
 						.post(
 							`${process.env.REACT_APP_AMUSE_API}/api/payment`,
@@ -57,11 +57,11 @@ export function OrderForm() {
 							}
 						)
 						.then((response) => {
-							
 							if (response.status === 200)
-								navigate("./complete", {
-									state: response.data,
-								});
+								console.log("결제 성공 후 백엔드 post 성공");
+							navigate("./complete", {
+								state: response.data,
+							});
 						})
 						.catch((err) => {
 							console.log(err);
@@ -83,46 +83,6 @@ export function OrderForm() {
 			}
 		}
 	};
-
-	const setCurrentUserPoint = useSetRecoilState(currentUserPointState);
-	// 유저 정보 (이름, 생일, 전화번호 등)
-	const getPaymentUserInfo = async () => {
-		const token = cookies.__jwtkid__;
-		if (token) {
-			axios
-				.get(`${process.env.REACT_APP_AMUSE_API}/api/payment`, {
-					headers: {
-						"Content-Type": "application/json",
-						Authorization: `${token}`,
-					},
-				})
-				.then((response) => {
-					const data = response.data.data;
-					console.log("getPaymentUserInfo", data);
-					setPaymentData((prevData) => ({
-						...prevData,
-						reservationInfo: {
-							...prevData.reservationInfo,
-							reservationNameKR: data.userName,
-							reservationBirthday: data.userBirthDay.replace(
-								/-/g,
-								""
-							),
-							reservationPhoneNumber: data.userPhoneNumber,
-							reservationEmail: data.userEmail,
-						},
-					}));
-					setCurrentUserPoint(data.userPoint ? data.userPoint : 0);
-				})
-				.catch((err) => {
-					console.log(err);
-				});
-		}
-	};
-	useEffect(() => {
-		getPaymentUserInfo();
-	}, []);
-
 	// 결제 예약자 정보 초기화
 	const methods = useForm<FormValues>();
 
@@ -150,6 +110,7 @@ export function OrderForm() {
 			guestInfo: {
 				guestPassportNumber:
 					paymentData.guestInfo?.guestPassportNumber || "",
+				guestPhoneCode: paymentData.guestInfo?.guestPhoneCode || 82,
 			},
 		});
 	}, [methods, paymentData.reservationInfo.reservationNameKR]);

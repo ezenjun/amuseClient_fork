@@ -1,25 +1,32 @@
 import styled from "@emotion/styled";
 import { Common } from "../../styles";
 
-export const TabsContainer = styled.div<{ gap: number }>`
+export const TabsContainer = styled.div<{ gap: number; wrap?: boolean }>`
 	display: flex;
+	flex-wrap: ${(props) => (props.wrap ? "wrap" : '"no-wrap"')};
 	flex-direction: row;
 	align-items: center;
+	width: 100%;
 	gap: ${(props) => props.gap * 0.0625}rem;
 `;
 
 export const TabContainer = styled.div<{
-	width?: number;
+	width?: number | string;
 	verticalPadding?: number;
 	horizontalPadding?: number;
 	isActive: boolean;
 }>`
 	display: flex;
-	flex-shrink: 0;
+	/* flex-shrink: 0; */
+	white-space: nowrap;
 	justify-content: center;
-	box-sizing: border-box-;
-	min-width: ${(props) =>
-		props.width ? `${props.width * 0.625}rem` : `7.5rem`};
+	box-sizing: border-box;
+	width: ${(props) =>
+		props.width
+			? typeof props.width === "string" && props.width.includes("%")
+				? props.width
+				: `${parseFloat(props.width as string) * 0.0625}rem`
+			: "auto"};
 	padding: 1rem;
 	align-items: center;
 	border: ${(props) =>
