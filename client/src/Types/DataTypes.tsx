@@ -33,6 +33,7 @@ export type PaymentHistoryData = {
 	reservationDateTime: string;
 	itemPayPrice: number;
 	reservationNumber?: number;
+	itemId: number;
 };
 
 export type ReviewData = {
