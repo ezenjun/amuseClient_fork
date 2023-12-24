@@ -54,3 +54,8 @@ export const EditInput = styled.input`
 	font-size: 1.125rem;
 	color: ${Common.colors.black};
 `;
+
+export const DeleteBtnBox = styled.div`
+	display: flex;
+	justify-content: space-between;
+`;
