@@ -33,6 +33,7 @@ function Box({
     const data = {
       categoryName: hashTags,
     };
+    console.log(data);
     if (token) {
       axios
         .post(

@@ -108,13 +108,16 @@ function SubPageComp() {
       );
     } else if (type === "배너") {
       const bannerItem: BannerProps = Items[index];
+      console.log(bannerItem);
       return (
         <Banner
           key={index}
           title={bannerItem.title}
           content={bannerItem.content}
-          bannerUrl={bannerItem.pcBannerUrl}
-          bannerLink={bannerItem.pcBannerLink}
+          pcBannerUrl={bannerItem.pcBannerUrl}
+          pcBannerLink={bannerItem.pcBannerLink}
+          mobileBannerUrl={bannerItem.mobileBannerUrl}
+          mobileBannerLink={bannerItem.mobileBannerLink}
         />
       );
     }
