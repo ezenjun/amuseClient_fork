@@ -128,8 +128,10 @@ function Home() {
           key={index}
           title={bannerItem.title}
           content={bannerItem.content}
-          bannerUrl={bannerItem.pcBannerUrl}
-          bannerLink={bannerItem.pcBannerLink}
+          pcBannerUrl={bannerItem.pcBannerUrl}
+          pcBannerLink={bannerItem.pcBannerLink}
+          mobileBannerUrl={bannerItem.mobileBannerUrl}
+          mobileBannerLink={bannerItem.mobileBannerLink}
         />
       );
     }
