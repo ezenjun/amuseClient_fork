@@ -33,6 +33,7 @@ function Home() {
   const { categoriesInfo } = useCategoryContext();
   const [apiKeyNumber, setApiKeyNumber] = useState(0);
   const [categoryData, setCategoryData] = useState<CategoryData | null>(null);
+  const [categoryName, setCategoryName] = useState<string>("");
   const [cookies] = useCookies(["__jwtkid__"]);
 
   useEffect(() => {
@@ -61,6 +62,7 @@ function Home() {
         if (matchedIndex !== -1) {
           const matchedCategory = hashtagAll[matchedIndex];
           setCategoryData(matchedCategory);
+          setCategoryName(matchedCategory.categoryName);
         }
       })
       .catch((error) => {
@@ -109,6 +111,7 @@ function Home() {
           key={index}
           title={listItem.title}
           itemInfos={listItem.itemInfos}
+          categoryName={categoryName}
         />
       );
     } else if (type === "타일") {

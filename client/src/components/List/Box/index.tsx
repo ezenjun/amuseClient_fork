@@ -12,6 +12,7 @@ export interface BoxProps {
   startPrice: string;
   imageUrl: string;
   hashTags?: string[];
+  categoryName?: string;
 }
 
 function Box({
@@ -21,6 +22,7 @@ function Box({
   startPrice,
   imageUrl,
   hashTags,
+  categoryName,
 }: BoxProps) {
   const [isLiked, setIsLiked] = useState<boolean[]>([]);
   const [cookies, setCookie, removeCookie] = useCookies(["__jwtkid__"]);
@@ -30,15 +32,12 @@ function Box({
     updatedIsLiked[itemId] = !updatedIsLiked[itemId];
     setIsLiked(updatedIsLiked);
     const token = cookies["__jwtkid__"];
-    const data = {
-      categoryName: hashTags,
-    };
-    console.log(data);
+
     if (token) {
       axios
         .post(
           `${process.env.REACT_APP_AMUSE_API}/detail/${itemId}/like-plus`,
-          data,
+          categoryName,
           {
             headers: {
               "Content-Type": "application/json",
