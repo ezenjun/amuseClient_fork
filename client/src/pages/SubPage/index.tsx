@@ -30,6 +30,7 @@ interface tileList {
 function SubPageComp() {
   const { apiKey } = useParams() as { apiKey: string };
   const [categoryData, setCategoryData] = useState<CategoryData | null>(null);
+  const [categoryName, setCategoryName] = useState<string>("");
   const [cookies] = useCookies(["__jwtkid__"]);
   const apiKeyNumber: number = Number(apiKey);
 
@@ -48,6 +49,7 @@ function SubPageComp() {
         if (matchedIndex !== -1) {
           const matchedCategory = hashtagAll[matchedIndex];
           setCategoryData(matchedCategory);
+          setCategoryName(matchedCategory.categoryName);
         }
       })
       .catch((error) => {
@@ -94,6 +96,7 @@ function SubPageComp() {
           key={index}
           title={listItem.title}
           itemInfos={listItem.itemInfos}
+          categoryName={categoryName}
         />
       );
     } else if (type === "타일") {

@@ -13,12 +13,13 @@ const numberWithCommas = (number: number | null): string => {
   return number.toLocaleString("en");
 };
 
-function List({ title, itemInfos }: SubListsProps) {
+function List({ title, itemInfos, categoryName }: SubListsProps) {
   const [bestItemIds, setBestItemIds] = useState<number[]>([]);
   const [bestItemTitle, setBestItemTitle] = useState<string[]>([]);
   const [bestItemPrice, setBestItemPrice] = useState<number[]>([]);
   const [bestItemImageUrl, setBestItemImageUrl] = useState<string[]>([]);
   const [bestHashTag, setBestHashTag] = useState<string[][]>([]);
+  console.log(itemInfos, "요고 테스트욤");
 
   useEffect(() => {
     const ids = itemInfos.map((item: any) => item.itemDbId);
@@ -73,6 +74,7 @@ function List({ title, itemInfos }: SubListsProps) {
             handleClick={() => navigateToDetail(itemId)}
             imageUrl={bestItemImageUrl[index + currentIndex]}
             hashTags={bestHashTag[index + currentIndex]}
+            categoryName={categoryName}
           />
         ))}
       </S.BoxList>
