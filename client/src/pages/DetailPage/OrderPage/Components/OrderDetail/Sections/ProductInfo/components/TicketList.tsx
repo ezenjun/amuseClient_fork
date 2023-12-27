@@ -22,7 +22,6 @@ const TicketList = (props: Props) => {
 		useOrderContext();
 	const [ticketData, setTicketData] = useState<TicketData[]>([]);
 	const [paymentData, setPaymentData] = useRecoilState(PaymentDataState);
-	console.log("paymentData", paymentData);
 
 	useEffect(() => {
 		setTicketData(orderTicketData);

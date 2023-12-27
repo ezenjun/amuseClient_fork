@@ -67,7 +67,7 @@ export const requestPay = (data: PaymentInfo, callback: (rsp: any) => void) => {
 			bypass: {
 				acceptmethod: "cardpoint",
 			},
-			m_redirect_url: "https://amusetravel.wheelgo.net/order",
+			m_redirect_url: `${process.env.REACT_APP_REDIRECT_URL}/order`,
 		},
 		callback
 	);
@@ -81,8 +81,8 @@ export const updatePostInfo = (
 	const convertedData: PaymentPostData = {
 		paymentItemInfoRequestDto: {
 			itemId: data.itemId,
-			travelStartDate: data.startDate.toISOString(),
-			travelEndDate: data.endDate.toISOString(),
+			travelStartDate: new Date(data.startDate).toISOString(),
+			travelEndDate: new Date(data.endDate).toISOString(),
 			additionalRequest: data.additionalInfo,
 			itemCost: data.totalAmount,
 			itemPayPrice: data.payAmount,
@@ -91,27 +91,30 @@ export const updatePostInfo = (
 		},
 		paymentTicketRequestDtoList: data.ticketList,
 		paymentReservationInfoDto: {
-			bookerName: data.reservationInfo.reservationNameKR,
-			bookerBirthDay: data.reservationInfo.reservationBirthday,
-			bookerFirstNameEN: data.reservationInfo.reservationFirstNameEN,
-			bookerLastNameEN: data.reservationInfo.reservationLastNameEN,
-			bookerPhoneNumberCode: data.reservationInfo.reservationPhoneCode,
-			bookerPhoneNumber: data.reservationInfo.reservationPhoneNumber,
-			bookerEmail: data.reservationInfo.reservationEmail,
+			bookerName: data.reservationInfo.reservationNameKR || "",
+			bookerBirthDay: data.reservationInfo.reservationBirthday || "",
+			bookerFirstNameEN:
+				data.reservationInfo.reservationFirstNameEN || "",
+			bookerLastNameEN: data.reservationInfo.reservationLastNameEN || "",
+			bookerPhoneNumberCode:
+				data.reservationInfo.reservationPhoneCode || 82,
+			bookerPhoneNumber:
+				data.reservationInfo.reservationPhoneNumber || "",
+			bookerEmail: data.reservationInfo.reservationEmail || "",
 			bookerPassportNumber:
-				data.reservationInfo.reservationPassportNumber,
+				data.reservationInfo.reservationPassportNumber || "",
 			reservationItemType: data.itemType,
 			reservationNumber: pgResp.merchant_uid,
 		},
 		paymentGuestInfoDto: {
-			guestName: data.guestInfo.guestNameKR,
-			guestBirthDay: data.guestInfo.guestBirthday,
-			guestFirstNameEN: data.guestInfo.guestFirstNameEN,
-			guestLastNameEN: data.guestInfo.guestLastNameEN,
-			guestPhoneNumberCode: data.guestInfo.guestPhoneCode,
-			guestPhoneNumber: data.guestInfo.guestPhoneNumber,
-			guestPassportNumber: data.guestInfo.guestPassportNumber,
-			guestEmail: data.guestInfo.guestEmail,
+			guestName: data.guestInfo.guestNameKR || "",
+			guestBirthDay: data.guestInfo.guestBirthday || "",
+			guestFirstNameEN: data.guestInfo.guestFirstNameEN || "",
+			guestLastNameEN: data.guestInfo.guestLastNameEN || "",
+			guestPhoneNumberCode: data.guestInfo.guestPhoneCode || 82,
+			guestPhoneNumber: data.guestInfo.guestPhoneNumber || "",
+			guestPassportNumber: data.guestInfo.guestPassportNumber || "",
+			guestEmail: data.guestInfo.guestEmail || "",
 		},
 		additionalRequest: data.additionalInfo,
 		payType: pgResp.pay_method.toUpperCase(),
