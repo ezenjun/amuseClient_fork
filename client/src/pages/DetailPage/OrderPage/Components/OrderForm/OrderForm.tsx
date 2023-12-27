@@ -11,13 +11,23 @@ import {
 	selectedItemState,
 } from "../../../../../Recoil/OrderAtomState";
 import { FormProvider, useForm } from "react-hook-form";
-import { useCookies } from "react-cookie";
-import { FormValues } from "../../../../../Interfaces/DataInterfaces";
-import { useNavigate } from "react-router";
+import {
+	FormValues,
+	PaymentInfo,
+} from "../../../../../Interfaces/DataInterfaces";
+import { useNavigate, useParams } from "react-router";
 import axios from "axios";
+import { useCookies } from "react-cookie";
+import moment from "moment";
+import {
+	deleteDataFromLocalStorage,
+	savePaymentDataToLocalStorage,
+	saveSelectedItemToLocalStorage,
+} from "../../api";
 
 export function OrderForm() {
 	const navigate = useNavigate();
+
 	const [isLoading, setLoading] = useState(false);
 	const [paymentData, setPaymentData] = useRecoilState(PaymentDataState);
 	const selectedItem = useRecoilValue(selectedItemState);
@@ -32,7 +42,8 @@ export function OrderForm() {
 			payAmount: paymentData.totalAmount - paymentData.pointUsed,
 		};
 		setPaymentData(updatedPaymentData);
-
+		savePaymentDataToLocalStorage(updatedPaymentData);
+		saveSelectedItemToLocalStorage(selectedItem);
 		const allTermsAgreed = Object.values(paymentData.termsAgreement).every(
 			(term) => term
 		);
@@ -57,11 +68,13 @@ export function OrderForm() {
 							}
 						)
 						.then((response) => {
-							if (response.status === 200)
+							if (response.status === 200) {
 								console.log("결제 성공 후 백엔드 post 성공");
-							navigate("./complete", {
-								state: response.data,
-							});
+								deleteDataFromLocalStorage("__paymentData__");
+								navigate("./complete", {
+									state: response.data,
+								});
+							}
 						})
 						.catch((err) => {
 							console.log(err);
