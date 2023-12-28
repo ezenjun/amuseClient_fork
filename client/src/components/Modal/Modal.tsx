@@ -15,7 +15,8 @@ interface ModalProps {
 		| SetterOrUpdater<boolean>;
 	title: string | undefined;
 	children?: any;
-	width?: number;
+	width?: string;
+	height?: string;
 }
 
 export const Modal: React.FC<ModalProps> = ({
@@ -23,6 +24,7 @@ export const Modal: React.FC<ModalProps> = ({
 	title,
 	children,
 	width,
+	height,
 }) => {
 	const closeModal = () => {
 		setShowModal(false);
@@ -49,7 +51,7 @@ export const Modal: React.FC<ModalProps> = ({
 
 	return (
 		<ModalBackground>
-			<ModalContainer width={width}>
+			<ModalContainer width={width} height={height}>
 				<ModalHeader>
 					<Bold32Black>{title}</Bold32Black>
 					<Close onClick={closeModal}></Close>

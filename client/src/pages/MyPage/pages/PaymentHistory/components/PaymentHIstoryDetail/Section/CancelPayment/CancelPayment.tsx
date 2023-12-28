@@ -89,7 +89,12 @@ const CancelPayment = ({ data }: CancelPaymentProps) => {
 				</MobileButtonContainer>
 			)}
 			{showModal && data?.content && (
-				<Modal setShowModal={setShowModal} title="취소 및 환불 규정">
+				<Modal
+					setShowModal={setShowModal}
+					title="취소 및 환불 규정"
+					width={screenWidth < 768 ? "100%" : undefined}
+					height={screenWidth < 768 ? "100%" : undefined}
+				>
 					<CancelPolicyModal
 						content={data?.content}
 					></CancelPolicyModal>

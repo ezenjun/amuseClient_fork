@@ -112,8 +112,6 @@ const OrderedItem = (props: Props) => {
 							ticket,
 							orderRange
 						);
-						console.log("orderRange", orderRange);
-						console.log("selectedPriceIndex", selectedPriceIndex);
 						const price =
 							selectedPriceIndex !== -1
 								? ticket.priceList[selectedPriceIndex].price

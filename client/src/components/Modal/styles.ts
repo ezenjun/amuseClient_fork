@@ -14,13 +14,12 @@ export const ModalBackground = styled.div`
 	overflow: hidden;
 `;
 
-export const ModalContainer = styled.div<{ width?: number }>`
+export const ModalContainer = styled.div<{ width?: string; height?: string }>`
 	display: flex;
 	flex-direction: column;
 	border-radius: 0.5rem;
-	max-width: ${(props) =>
-		props.width ? `${props.width * 0.625}rem` : "60%"};
-	flex-shrink: 0;
+	min-width: ${(props) => (props.width ? `${props.width} ` : "60%")};
+	min-height: ${(props) => props.height && `${props.height} `};
 	background-color: white;
 	padding: 2.5rem 2.6875rem;
 	gap: 1.875rem;
@@ -41,6 +40,7 @@ export const ScrollContainer = styled.div`
 	overflow-y: scroll;
 	border: 1px solid ${Common.colors.bgGray};
 	padding: 0.625rem;
+	white-space: pre-wrap;
 
 	::-webkit-scrollbar {
 		width: 3px;
@@ -68,6 +68,13 @@ export const PersonalInfoContainer = styled.div`
 
 export const InfoRow = styled.div`
 	display: flex;
+	flex-direction: row;
+	gap: 1.5625rem;
+`;
+export const InfoRowBetween = styled.div`
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
 	flex-direction: row;
 	gap: 1.5625rem;
 `;

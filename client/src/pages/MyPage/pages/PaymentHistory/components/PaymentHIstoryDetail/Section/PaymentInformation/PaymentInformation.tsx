@@ -23,6 +23,7 @@ const PaymentInformation = ({ data }: PaymentInfoProps) => {
 	const [showReservationModal, setShowReservationModal] = useState(false);
 	const [showGuestModal, setShowGuestModal] = useState(false);
 	const [showInfoModal, setShowInfoModal] = useState(false);
+	const screenWidth = window.innerWidth;
 
 	const bookerInfo = {
 		bookerName: data?.bookerName || "",
@@ -69,6 +70,8 @@ const PaymentInformation = ({ data }: PaymentInfoProps) => {
 							<Modal
 								setShowModal={setShowReservationModal}
 								title="예약자 정보"
+								width={screenWidth < 768 ? "100%" : undefined}
+								height={screenWidth < 768 ? "100%" : undefined}
 							>
 								<BookerInfoModal
 									{...bookerInfo}

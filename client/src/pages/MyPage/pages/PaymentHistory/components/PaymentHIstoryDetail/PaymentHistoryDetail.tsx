@@ -22,13 +22,15 @@ import CancelPayment from "./Section/CancelPayment/CancelPayment";
 import EachPayment from "../EachPayment";
 import { WebButton } from "../../../../../../components/Button/WebButton";
 import { Modal } from "../../../../../../components/Modal/Modal";
+import PaymentInfoModal from "../../../../../../components/Modal/PaymentDetailModals/PaymentInfoModal";
 
 const PaymentHistoryDetail = () => {
 	const { id } = useParams();
 	const [data, setData] = useState<PaymentDetailInterface>();
 	const [cookies] = useCookies(["__jwtkid__"]);
 	const [screenWidth, setScreenWidth] = useState(window.innerWidth);
-	const [showModal, setShowModal] = useState(false);
+	const [showCancel, setShowCancel] = useState(false);
+	const [showPayment, setShowPayment] = useState(false);
 
 	const handleResize = () => {
 		setScreenWidth(window.innerWidth);
@@ -107,6 +109,7 @@ const PaymentHistoryDetail = () => {
 								fontSize={20}
 								verticalPadding={18}
 								width={270}
+								onClick={() => setShowPayment(true)}
 							>
 								결제 정보 확인
 							</WebButton>
@@ -117,15 +120,22 @@ const PaymentHistoryDetail = () => {
 							color="gray2"
 							fontSize={20}
 							verticalPadding={18}
+							onClick={() => setShowPayment(true)}
 						>
 							결제 정보 확인
 						</WebButton>
 					)}
-					{showModal && (
+					{showPayment && (
 						<Modal
-							setShowModal={setShowModal}
-							title="취소 및 환불 규정"
-						></Modal>
+							setShowModal={setShowPayment}
+							title="결제 정보"
+							height={screenWidth < 768 ? "100%" : undefined}
+							width={screenWidth < 768 ? "100%" : undefined}
+						>
+							<PaymentInfoModal
+								mainPaymentId={Number(id)}
+							></PaymentInfoModal>
+						</Modal>
 					)}
 				</ReservationInfoContainer>
 			</DetailContainer>
