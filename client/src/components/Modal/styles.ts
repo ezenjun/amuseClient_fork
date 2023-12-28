@@ -66,6 +66,15 @@ export const PersonalInfoContainer = styled.div`
 	gap: 1rem;
 `;
 
+export const CancelModalContainer = styled.div`
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
+	height: 100%;
+	gap: 1rem;
+`;
+
 export const InfoRow = styled.div`
 	display: flex;
 	flex-direction: row;
@@ -82,4 +91,12 @@ export const InfoRowBetween = styled.div`
 export const RowKey = styled.div`
 	display: flex;
 	min-width: 5.625rem;
+`;
+
+export const ConfirmButtonRow = styled.div`
+	display: flex;
+	margin-top: 3.75rem;
+	flex-direction: row;
+	justify-content: flex-end;
+	gap: 1.25rem;
 `;

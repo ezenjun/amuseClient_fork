@@ -23,6 +23,8 @@ import EachPayment from "../EachPayment";
 import { WebButton } from "../../../../../../components/Button/WebButton";
 import { Modal } from "../../../../../../components/Modal/Modal";
 import PaymentInfoModal from "../../../../../../components/Modal/PaymentDetailModals/PaymentInfoModal";
+import PaymentCancelModal from "../../../../../../components/Modal/PaymentDetailModals/PaymentCancelModal";
+import PaymentCancelConfirmModal from "../../../../../../components/Modal/PaymentDetailModals/PaymentCancelConfirmModal";
 
 const PaymentHistoryDetail = () => {
 	const { id } = useParams();
@@ -31,6 +33,7 @@ const PaymentHistoryDetail = () => {
 	const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 	const [showCancel, setShowCancel] = useState(false);
 	const [showPayment, setShowPayment] = useState(false);
+	const [showConfirmCancel, setShowConfirmCancel] = useState(false);
 
 	const handleResize = () => {
 		setScreenWidth(window.innerWidth);
@@ -135,6 +138,40 @@ const PaymentHistoryDetail = () => {
 							<PaymentInfoModal
 								mainPaymentId={Number(id)}
 							></PaymentInfoModal>
+						</Modal>
+					)}
+					{!showCancel && (
+						<Modal
+							setShowModal={setShowCancel}
+							title="결제 취소"
+							height={screenWidth < 768 ? "100%" : undefined}
+							width={screenWidth < 768 ? "100%" : undefined}
+						>
+							{data && (
+								<PaymentCancelModal
+									data={
+										data?.paymentDetailTopItemInfoResponseDto
+									}
+									paymentId={Number(id)}
+									showModal={showConfirmCancel}
+									setShowModal={setShowConfirmCancel}
+								></PaymentCancelModal>
+							)}
+						</Modal>
+					)}
+					{!showConfirmCancel && (
+						<Modal
+							setShowModal={setShowConfirmCancel}
+							title="결제를 취소하시겠습니까?"
+							width={screenWidth < 768 ? "100%" : "40%"}
+						>
+							{data && (
+								<PaymentCancelConfirmModal
+									showModal={showConfirmCancel}
+									setShowModal={setShowConfirmCancel}
+									paymentId={Number(id)}
+								></PaymentCancelConfirmModal>
+							)}
 						</Modal>
 					)}
 				</ReservationInfoContainer>

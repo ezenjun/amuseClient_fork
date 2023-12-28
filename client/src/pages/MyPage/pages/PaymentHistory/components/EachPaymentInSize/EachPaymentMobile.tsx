@@ -24,9 +24,10 @@ import { PaymentHistoryData } from "../../../../../../Types/DataTypes";
 
 type Props = {
 	data: PaymentHistoryData;
+	showPrice?: boolean;
 };
 
-const EachPaymentMobile = ({ data }: Props) => {
+const EachPaymentMobile = ({ data, showPrice }: Props) => {
 	const navigate = useNavigate();
 	const { id } = useParams();
 
@@ -67,9 +68,11 @@ const EachPaymentMobile = ({ data }: Props) => {
 							data.travelEndDate
 						)}
 					</Regular14Gray>
-					<Bold16DarkGray style={{ whiteSpace: "nowrap" }}>
-						{data.itemPayPrice.toLocaleString()} 원
-					</Bold16DarkGray>
+					{showPrice !== false && (
+						<Bold16DarkGray style={{ whiteSpace: "nowrap" }}>
+							{data.itemPayPrice.toLocaleString()} 원
+						</Bold16DarkGray>
+					)}
 				</InfoTextContainer>
 			</ItemInfoTabletContainer>
 			<PaymentButtonContainer>

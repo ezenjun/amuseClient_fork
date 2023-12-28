@@ -81,8 +81,8 @@ export const updatePostInfo = (
 	const convertedData: PaymentPostData = {
 		paymentItemInfoRequestDto: {
 			itemId: data.itemId,
-			travelStartDate: new Date(data.startDate).toISOString(),
-			travelEndDate: new Date(data.endDate).toISOString(),
+			travelStartDate: data.startDate.toISOString(),
+			travelEndDate: data.endDate.toISOString(),
 			additionalRequest: data.additionalInfo,
 			itemCost: data.totalAmount,
 			itemPayPrice: data.payAmount,

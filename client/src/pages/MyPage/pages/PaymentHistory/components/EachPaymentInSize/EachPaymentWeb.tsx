@@ -23,9 +23,10 @@ import { PaymentHistoryData } from "../../../../../../Types/DataTypes";
 
 type Props = {
 	data: PaymentHistoryData;
+	showPrice?: boolean;
 };
 
-const EachPaymentWeb = ({ data }: Props) => {
+const EachPaymentWeb = ({ data, showPrice }: Props) => {
 	const navigate = useNavigate();
 	const { id } = useParams();
 	const onCLick = () => {
@@ -67,9 +68,12 @@ const EachPaymentWeb = ({ data }: Props) => {
 			{data.payStatus === "PENDING" && (
 				<Chips color="gray">결제 취소</Chips>
 			)}
-			<Bold24DarkGray style={{ whiteSpace: "nowrap" }}>
-				{data.itemPayPrice.toLocaleString()} 원
-			</Bold24DarkGray>
+			{showPrice !== false && (
+				<Bold24DarkGray style={{ whiteSpace: "nowrap" }}>
+					{data.itemPayPrice.toLocaleString()} 원
+				</Bold24DarkGray>
+			)}
+
 			{data.payStatus === "SUCCESS" && (
 				<WebButton
 					color="gray2"

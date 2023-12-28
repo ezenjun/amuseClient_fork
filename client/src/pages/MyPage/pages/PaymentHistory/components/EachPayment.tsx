@@ -33,9 +33,10 @@ import EachPaymentMobile from "./EachPaymentInSize/EachPaymentMobile";
 
 type Props = {
 	data: PaymentHistoryData;
+	showPrice?: boolean;
 };
 
-const EachPayment = ({ data }: Props) => {
+const EachPayment = ({ data, showPrice }: Props) => {
 	const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
 	const handleResize = () => {
@@ -49,11 +50,11 @@ const EachPayment = ({ data }: Props) => {
 	}, [window.innerWidth, screenWidth]);
 
 	if (screenWidth > 1024) {
-		return <EachPaymentWeb data={data} />;
+		return <EachPaymentWeb data={data} showPrice={showPrice} />;
 	} else if (screenWidth <= 1024 && screenWidth > 768) {
-		return <EachPaymentTablet data={data} />;
+		return <EachPaymentTablet data={data} showPrice={showPrice} />;
 	} else {
-		return <EachPaymentMobile data={data} />;
+		return <EachPaymentMobile data={data} showPrice={showPrice} />;
 	}
 };
 
