@@ -122,7 +122,13 @@ export const updatePostInfo = (
 		pointUse: data.pointUsed,
 		cardType: pgResp.card_name,
 		discountRate: 0,
-		payStatus: pgResp.success ? "SUCCESS" : "PENDING",
+		payStatus: pgResp.success
+			? pgResp.success
+				? "SUCCESS"
+				: "PENDING"
+			: pgResp.status && pgResp.status === "paid"
+			? "SUCCESS"
+			: "PENDING",
 		paymentAgreementRequestDto: {
 			privacyCollection: data.termsAgreement.privacyCollection ? 1 : 0,
 			privacyToThirdParty: data.termsAgreement.privacyToThirdParty
