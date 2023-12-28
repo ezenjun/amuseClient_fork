@@ -28,10 +28,6 @@ export const OrderedItemContainer = styled.div`
 	::-webkit-scrollbar {
 		display: none;
 	}
-	@media (max-width: 768px) {
-		/* Mobile styles */
-		padding: 2.5rem 1rem;
-	}
 `;
 
 export const OrderInfoContainer = styled.div`

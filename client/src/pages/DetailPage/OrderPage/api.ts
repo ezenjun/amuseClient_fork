@@ -4,7 +4,7 @@ import {
 	SelectedItemData,
 } from "../../../Interfaces/DataInterfaces";
 
-// 객체를 로컬 스토리지에 저장하는 함수
+// payment 객체를 로컬 스토리지에 저장하는 함수
 export const savePaymentDataToLocalStorage = (data: PaymentInfo) => {
 	const stringifiedData = JSON.stringify(data);
 	localStorage.setItem("__paymentData__", stringifiedData);
@@ -15,6 +15,19 @@ export const saveSelectedItemToLocalStorage = (data: SelectedItemData) => {
 	const stringifiedData = JSON.stringify(data);
 	localStorage.setItem("selectedItem", stringifiedData);
 };
+
+// selectedItem을 로컬 스토리지에 저장하는 함수
+export const saveOrderTicketDataToLocalStorage = (data: SelectedItemData) => {
+	const stringifiedData = JSON.stringify(data);
+	localStorage.setItem("orderTicketData", stringifiedData);
+};
+
+// selectedItem을 로컬 스토리지에 저장하는 함수
+export const saveOrderRangeToLocalStorage = (data: SelectedItemData) => {
+	const stringifiedData = JSON.stringify(data);
+	localStorage.setItem("orderRange", stringifiedData);
+};
+
 
 // 로컬 스토리지에서 삭제
 export const deleteDataFromLocalStorage = (key: string) => {

@@ -21,6 +21,8 @@ import { useCookies } from "react-cookie";
 import moment from "moment";
 import {
 	deleteDataFromLocalStorage,
+	saveOrderRangeToLocalStorage,
+	saveOrderTicketDataToLocalStorage,
 	savePaymentDataToLocalStorage,
 	saveSelectedItemToLocalStorage,
 } from "../../api";
@@ -31,6 +33,7 @@ export function OrderForm() {
 	const [isLoading, setLoading] = useState(false);
 	const [paymentData, setPaymentData] = useRecoilState(PaymentDataState);
 	const selectedItem = useRecoilValue(selectedItemState);
+	const { orderTicketData, orderRange } = useOrderContext();
 	const [cookies] = useCookies(["__jwtkid__"]);
 	const token = cookies["__jwtkid__"];
 	// 최종 결제 api
@@ -44,6 +47,8 @@ export function OrderForm() {
 		setPaymentData(updatedPaymentData);
 		savePaymentDataToLocalStorage(updatedPaymentData);
 		saveSelectedItemToLocalStorage(selectedItem);
+		saveOrderTicketDataToLocalStorage(orderTicketData);
+		saveOrderRangeToLocalStorage(orderRange);
 		const allTermsAgreed = Object.values(paymentData.termsAgreement).every(
 			(term) => term
 		);
@@ -69,10 +74,13 @@ export function OrderForm() {
 						)
 						.then((response) => {
 							if (response.status === 200) {
-								console.log("결제 성공 후 백엔드 post 성공");
+								console.log(
+									"결제 성공 후 백엔드 post 성공",
+									response.data.data
+								);
 								deleteDataFromLocalStorage("__paymentData__");
 								navigate("./complete", {
-									state: response.data,
+									state: response.data.data,
 								});
 							}
 						})

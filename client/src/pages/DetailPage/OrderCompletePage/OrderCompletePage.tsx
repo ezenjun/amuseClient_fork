@@ -46,7 +46,7 @@ const OrderCompletePage = () => {
 						color="red"
 						onClick={() =>
 							navigate(
-								`/MyPage/payment-history/${state.data.mainPaymentId}`
+								`/MyPage/payment-history/${state.mainPaymentId}`
 							)
 						}
 					>
