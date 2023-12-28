@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import GrayBox from "../../../../components/Box/GrayBox";
 import styled from "@emotion/styled";
 import { Bold20DarkGray, Bold20Gray } from "../../../../components/Text/Text";
@@ -25,8 +25,22 @@ const UsedPoint = () => {
 		},
 		0
 	);
+	const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+	const handleResize = () => {
+		setScreenWidth(window.innerWidth);
+		window.removeEventListener("resize", handleResize);
+	};
+
+	useEffect(() => {
+		handleResize();
+		window.addEventListener("resize", handleResize);
+	}, [screenWidth]);
 	return (
-		<GrayBox verticalPadding={31} horizontalPadding={31} gap={26}>
+		<GrayBox
+			verticalPadding={screenWidth <= 768 ? 17 : 31}
+			horizontalPadding={screenWidth <= 768 ? 14 : 31}
+			gap={screenWidth <= 768 ? 12 : 26}
+		>
 			<PointRow>
 				<Bold20DarkGray>주문 금액</Bold20DarkGray>
 				<Bold20DarkGray>
