@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { selectedItemState } from "../../../../Recoil/OrderAtomState";
 import { TicketData } from "../../../../Interfaces/DataInterfaces";
 import { useOrderContext } from "../../Contexts/OrderContext";
@@ -25,36 +25,82 @@ import {
 	TicketLeft,
 	TicketRight,
 } from "../../OrderPage/Components/OrderDetail/Sections/ProductInfo/components/TicketList";
+import { getDataFromLocalStorage } from "../../OrderPage/api";
 
 type Props = {};
 
 const OrderedItem = (props: Props) => {
-	const selectedItem = useRecoilValue(selectedItemState);
+	const [selectedItem, setSelectedItem] = useRecoilState(selectedItemState);
 	const [ticketData, setTicketData] = useState<TicketData[]>([]);
-	const { orderTicketData, orderRange } = useOrderContext();
+	const { orderTicketData, orderRange, setOrderRange } = useOrderContext();
+	const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+	const handleResize = () => {
+		setScreenWidth(window.innerWidth);
+		window.removeEventListener("resize", handleResize);
+	};
+
+	useEffect(() => {
+		handleResize();
+		window.addEventListener("resize", handleResize);
+	}, [screenWidth]);
 
 	useEffect(() => {
 		setTicketData(orderTicketData);
 	}, [orderTicketData]);
+
+	// 모바일 결제 완료 후 selectedItem, ticketData
+	useEffect(() => {
+		console.log(orderTicketData, selectedItem);
+		if (!selectedItem.title) {
+			const data = getDataFromLocalStorage("selectedItem");
+			console.log("selected Item", data);
+			setSelectedItem(data);
+		}
+		if (!orderTicketData[0]) {
+			const data = getDataFromLocalStorage("orderTicketData");
+			console.log("orderTicketData", data);
+			setTicketData(data);
+		}
+		if (!orderRange) {
+			const data = getDataFromLocalStorage("orderRange");
+			if (data && data.from && data.to) {
+				data.from = new Date(data.from);
+				data.to = new Date(data.to);
+				setOrderRange(data);
+			}
+		}
+	}, [
+		selectedItem,
+		setSelectedItem,
+		orderRange,
+		setOrderRange,
+		orderTicketData,
+	]);
 	return (
-		<GrayBox verticalPadding={31} horizontalPadding={31}>
+		<GrayBox
+			verticalPadding={screenWidth <= 768 ? 14 : 31}
+			horizontalPadding={screenWidth <= 768 ? 14 : 31}
+		>
 			<OrderedItemContainer>
-				<Bold20DarkGray>결제 상품 내역</Bold20DarkGray>
+				{screenWidth > 768 && (
+					<Bold20DarkGray>결제 상품 내역</Bold20DarkGray>
+				)}
+
 				<ProductInfoContainer>
 					<SquareImage
 						imgUrl={selectedItem.img}
-						size={window.innerWidth <= 768 ? 77 : 110}
+						size={screenWidth <= 768 ? 77 : 110}
 						borderRadius={8}
 					></SquareImage>
 					<ProductInfoTextContainer>
-						{window.innerWidth <= 768 ? (
+						{screenWidth <= 768 ? (
 							<Bold16Black>{selectedItem.title}</Bold16Black>
 						) : (
 							<Bold24Black>{selectedItem.title}</Bold24Black>
 						)}
 
 						<Regular16Gray>
-							{formatDate(selectedItem.startDate)}{" "}
+							{formatDate(new Date(selectedItem.startDate))}{" "}
 							{selectedItem.duration}일
 						</Regular16Gray>
 					</ProductInfoTextContainer>
@@ -66,6 +112,8 @@ const OrderedItem = (props: Props) => {
 							ticket,
 							orderRange
 						);
+						console.log("orderRange", orderRange);
+						console.log("selectedPriceIndex", selectedPriceIndex);
 						const price =
 							selectedPriceIndex !== -1
 								? ticket.priceList[selectedPriceIndex].price

@@ -83,18 +83,17 @@ export const OrderPage = () => {
 					)
 					.then((response) => {
 						if (response.status === 200) {
-							deleteDataFromLocalStorage("__paymentData__");
-							deleteDataFromLocalStorage("selectedItem");
+							console.log(response.data.data);
 							navigate("/order/complete", {
-								state: response.data,
+								state: response.data.data,
 							});
 						}
 					})
 					.catch((err) => {
 						console.log(err);
 					});
-				deleteDataFromLocalStorage("__paymentData__");
-				deleteDataFromLocalStorage("selectedItem");
+				// deleteDataFromLocalStorage("__paymentData__");
+				// deleteDataFromLocalStorage("selectedItem");
 			}
 		};
 		postMobilePayData();
