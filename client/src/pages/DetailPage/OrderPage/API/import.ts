@@ -142,6 +142,7 @@ export const updatePostInfo = (
 			content: data.cancelPolicy,
 		},
 		cardNumber: pgResp.card_number,
+		imp_uid: pgResp.imp_uid,
 	};
 
 	return convertedData;
