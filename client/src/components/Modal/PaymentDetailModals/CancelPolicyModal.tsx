@@ -6,7 +6,7 @@ const CancelPolicyModal = ({ content }: AdditionalInfoModalProps) => {
 	return (
 		<ScrollContainer>
 			{content.split("\n").map((line, index) => (
-				<p key={index}>{line}</p>
+				<span key={index}>{line}</span>
 			))}
 		</ScrollContainer>
 	);

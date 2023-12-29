@@ -15,6 +15,8 @@ export const ChipContainer = styled.div<{ color: string }>`
 	padding: 0.1875rem 0.625rem;
 	background-color: rgba(230, 0, 61, 15%);
 	border-radius: 0.5rem;
+	justify-content: center;
+	align-items: center;
 	${Pretendard({
 		size: 14,
 		weight: Common.bold.regular,

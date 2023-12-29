@@ -166,7 +166,7 @@ const WriteReview = () => {
 		<Modal
 			setShowModal={setCreateReviewModalVisible}
 			title="리뷰 작성"
-			width={365}
+			width="365px"
 		>
 			<Regular20Black>구매하신 상품은 만족하시나요?</Regular20Black>
 			<GrayBox verticalPadding={16} horizontalPadding={47}>

@@ -22,13 +22,32 @@ import CancelPayment from "./Section/CancelPayment/CancelPayment";
 import EachPayment from "../EachPayment";
 import { WebButton } from "../../../../../../components/Button/WebButton";
 import { Modal } from "../../../../../../components/Modal/Modal";
+import PaymentInfoModal from "../../../../../../components/Modal/PaymentDetailModals/PaymentInfoModal";
+import PaymentCancelModal from "../../../../../../components/Modal/PaymentDetailModals/PaymentCancelModal";
+import PaymentCancelConfirmModal from "../../../../../../components/Modal/PaymentDetailModals/PaymentCancelConfirmModal";
+import { useRecoilState } from "recoil";
+import {
+	showCancelConfirmState,
+	showCancelModalState,
+	showCancelRequestCompleteState,
+	showRefundModalState,
+} from "../../../../../../Recoil/MypageAtomState";
+import CancelRequestCompleteModal from "../../../../../../components/Modal/PaymentDetailModals/CancelRequestCompleteModal";
+import PaymentRefundModal from "../../../../../../components/Modal/PaymentDetailModals/PaymentRefundModal";
 
 const PaymentHistoryDetail = () => {
 	const { id } = useParams();
 	const [data, setData] = useState<PaymentDetailInterface>();
 	const [cookies] = useCookies(["__jwtkid__"]);
 	const [screenWidth, setScreenWidth] = useState(window.innerWidth);
-	const [showModal, setShowModal] = useState(false);
+	const [showPayment, setShowPayment] = useState(false);
+	const [showRefund, setShowRefund] = useRecoilState(showRefundModalState);
+	const [showCancel, setShowCancel] = useRecoilState(showCancelModalState);
+	const [showConfirmCancel, setShowConfirmCancel] = useRecoilState(
+		showCancelConfirmState
+	);
+	const [showCancelRequestComplete, setShowCancelRequestComplete] =
+		useRecoilState(showCancelRequestCompleteState);
 
 	const handleResize = () => {
 		setScreenWidth(window.innerWidth);
@@ -97,7 +116,15 @@ const PaymentHistoryDetail = () => {
 				{/* 세부 사항 */}
 				<Details data={data?.paymentDetailMatterResponseDto} />
 				{/* 결제 취소 */}
-				<CancelPayment data={data?.paymentCancelRuleResponseDto} />
+				{data?.paymentDetailTopItemInfoResponseDto.payStatus && (
+					<CancelPayment
+						data={data?.paymentCancelRuleResponseDto}
+						payStatus={
+							data?.paymentDetailTopItemInfoResponseDto.payStatus
+						}
+					/>
+				)}
+
 				<ReservationInfoContainer>
 					<ReservationInfoMenuContainer>
 						<Bold32Black>결제 정보</Bold32Black>
@@ -107,6 +134,7 @@ const PaymentHistoryDetail = () => {
 								fontSize={20}
 								verticalPadding={18}
 								width={270}
+								onClick={() => setShowPayment(true)}
 							>
 								결제 정보 확인
 							</WebButton>
@@ -117,15 +145,87 @@ const PaymentHistoryDetail = () => {
 							color="gray2"
 							fontSize={20}
 							verticalPadding={18}
+							onClick={() => setShowPayment(true)}
 						>
 							결제 정보 확인
 						</WebButton>
 					)}
-					{showModal && (
+					{showPayment && (
 						<Modal
-							setShowModal={setShowModal}
-							title="취소 및 환불 규정"
-						></Modal>
+							setShowModal={setShowPayment}
+							title="결제 정보"
+							height={screenWidth < 768 ? "100%" : undefined}
+							width={screenWidth < 768 ? "100%" : undefined}
+						>
+							<PaymentInfoModal
+								mainPaymentId={Number(id)}
+							></PaymentInfoModal>
+						</Modal>
+					)}
+					{showCancel && (
+						<Modal
+							setShowModal={setShowCancel}
+							title="결제 취소"
+							height={screenWidth < 768 ? "100%" : undefined}
+							width={screenWidth < 768 ? "100%" : undefined}
+						>
+							{data && (
+								<PaymentCancelModal
+									data={
+										data?.paymentDetailTopItemInfoResponseDto
+									}
+									paymentId={Number(id)}
+									showModal={showCancel}
+									setShowModal={setShowCancel}
+								></PaymentCancelModal>
+							)}
+						</Modal>
+					)}
+					{showRefund && (
+						<Modal
+							setShowModal={setShowRefund}
+							title="환불정보"
+							height={screenWidth < 768 ? "100%" : undefined}
+							width={screenWidth < 768 ? "100%" : undefined}
+						>
+							{data && (
+								<PaymentRefundModal
+									data={
+										data?.paymentDetailTopItemInfoResponseDto
+									}
+									paymentId={Number(id)}
+								></PaymentRefundModal>
+							)}
+						</Modal>
+					)}
+					{showConfirmCancel && (
+						<Modal
+							setShowModal={setShowConfirmCancel}
+							title="결제를 취소하시겠습니까?"
+							width={screenWidth < 768 ? "100%" : "40%"}
+						>
+							{data && (
+								<PaymentCancelConfirmModal
+									showModal={showConfirmCancel}
+									setShowModal={setShowConfirmCancel}
+									paymentId={Number(id)}
+								></PaymentCancelConfirmModal>
+							)}
+						</Modal>
+					)}
+					{showCancelRequestComplete && (
+						<Modal
+							setShowModal={setShowCancelRequestComplete}
+							title="결제 취소 요청 접수"
+							width={screenWidth < 768 ? "100%" : "40%"}
+						>
+							{data && (
+								<CancelRequestCompleteModal
+									showModal={showCancelRequestComplete}
+									setShowModal={setShowCancelRequestComplete}
+								></CancelRequestCompleteModal>
+							)}
+						</Modal>
 					)}
 				</ReservationInfoContainer>
 			</DetailContainer>

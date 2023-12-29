@@ -14,4 +14,8 @@ export const atomKeys = {
 
 	// 마이페이지 key
 	mypageInfo: "mypageInfo" as const,
+	showCancelModal: "showCancelModal" as const,
+	showRefundModal: "showRefundModal" as const,
+	showCancelConfirm: "showCancelConfirm" as const,
+	showCancelRequestComplete: "showCancelRequestComplete" as const,
 };

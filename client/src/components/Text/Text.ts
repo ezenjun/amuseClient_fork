@@ -109,6 +109,13 @@ export const Bold16Black = styled.span`
 		color: Common.colors.black,
 	})}
 `;
+export const Bold16Gray = styled.span`
+	${Pretendard({
+		size: 16,
+		weight: Common.bold.bold,
+		color: Common.colors.gray,
+	})}
+`;
 export const Bold16DarkGray = styled.span`
 	${Pretendard({
 		size: 16,
