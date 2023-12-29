@@ -20,14 +20,19 @@ import {
 import Chips from "../../../../../../components/Chips/Chips";
 import { WebButton } from "../../../../../../components/Button/WebButton";
 import { PaymentHistoryData } from "../../../../../../Types/DataTypes";
+import { useRecoilState } from "recoil";
+import { showCancelModalState } from "../../../../../../Recoil/MypageAtomState";
 
 type Props = {
 	data: PaymentHistoryData;
+	showPrice?: boolean;
 };
 
-const EachPaymentWeb = ({ data }: Props) => {
+const EachPaymentWeb = ({ data, showPrice }: Props) => {
 	const navigate = useNavigate();
 	const { id } = useParams();
+	const [showCancelModal, setShowCancelModal] =
+		useRecoilState(showCancelModalState);
 	const onCLick = () => {
 		if (id) {
 			navigate(`/detail/${data.itemId}`);
@@ -37,6 +42,16 @@ const EachPaymentWeb = ({ data }: Props) => {
 			});
 		}
 	};
+
+	const onCancel = (
+		event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+	) => {
+		event.stopPropagation();
+		if (id) {
+			setShowCancelModal(!showCancelModal);
+		}
+	};
+
 	return (
 		<EachPaymentContainer onClick={() => onCLick()}>
 			<ItemInfoContainer>
@@ -64,32 +79,38 @@ const EachPaymentWeb = ({ data }: Props) => {
 			{data.payStatus === "SUCCESS" && (
 				<Chips color="red">결제 완료</Chips>
 			)}
-			{data.payStatus === "PENDING" && (
-				<Chips color="gray">결제 취소</Chips>
+			{data.payStatus === "PENDING" ||
+				(data.payStatus === "CANCEL" && (
+					<Chips color="gray">결제 취소</Chips>
+				))}
+			{showPrice !== false && (
+				<Bold24DarkGray style={{ whiteSpace: "nowrap" }}>
+					{data.itemPayPrice.toLocaleString()} 원
+				</Bold24DarkGray>
 			)}
-			<Bold24DarkGray style={{ whiteSpace: "nowrap" }}>
-				{data.itemPayPrice.toLocaleString()} 원
-			</Bold24DarkGray>
+
 			{data.payStatus === "SUCCESS" && (
 				<WebButton
 					color="gray2"
 					verticalPadding={12}
 					fontSize={16}
 					width={140}
+					onClick={onCancel}
 				>
 					결제 취소
 				</WebButton>
 			)}
-			{data.payStatus === "PENDING" && (
-				<WebButton
-					color="red"
-					verticalPadding={12}
-					fontSize={16}
-					width={140}
-				>
-					다시 예약
-				</WebButton>
-			)}
+			{data.payStatus === "PENDING" ||
+				(data.payStatus === "CANCEL" && (
+					<WebButton
+						color="red"
+						verticalPadding={12}
+						fontSize={16}
+						width={140}
+					>
+						다시 예약
+					</WebButton>
+				))}
 		</EachPaymentContainer>
 	);
 };

@@ -34,6 +34,9 @@ export function OrderForm() {
 	const [paymentData, setPaymentData] = useRecoilState(PaymentDataState);
 	const selectedItem = useRecoilValue(selectedItemState);
 	const { orderTicketData, orderRange } = useOrderContext();
+	console.log("paymentData", paymentData);
+	console.log(paymentData.startDate.toISOString());
+	console.log(paymentData.endDate.toISOString());
 	const [cookies] = useCookies(["__jwtkid__"]);
 	const token = cookies["__jwtkid__"];
 	// 최종 결제 api

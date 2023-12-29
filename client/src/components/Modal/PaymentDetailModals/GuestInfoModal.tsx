@@ -51,10 +51,6 @@ const GuestInfoModal = ({
 					</RowKey>
 					<Regular20DarkGray>{guestEmail}</Regular20DarkGray>
 				</InfoRow>
-				{/* <InfoRow>
-            <RowKey></RowKey>
-            <Regular20DarkGray>{}</Regular20DarkGray>
-        </InfoRow> */}
 			</PersonalInfoContainer>
 		</ScrollContainer>
 	);

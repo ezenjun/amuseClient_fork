@@ -20,7 +20,6 @@ import SignUp from "./pages/SignUpPage/SignUp";
 import SignUpAmuse from "./pages/SignUpPage/SignUpAmuse";
 import SearchPageComp from "./pages/SubPage/SearchPage/SearchPageComp";
 import OrderCompletePage from "./pages/DetailPage/OrderCompletePage/OrderCompletePage";
-import PaymentDetailPage from "./pages/DetailPage/PaymentDetailPage/PaymentDetailPage";
 import PaymentHistory from "./pages/MyPage/pages/PaymentHistory/PaymentHistory";
 import Likes from "./pages/MyPage/pages/Likes/Likes";
 // import Settings from "./pages/MyPage/MyPage/Settings/Settings";
@@ -135,10 +134,6 @@ function App() {
 						<Route
 							path="/order/complete"
 							element={<OrderCompletePage />}
-						></Route>
-						<Route
-							path="/payment/:paymentId"
-							element={<PaymentDetailPage />}
 						></Route>
 						<Route
 							path="/LogInAgree"

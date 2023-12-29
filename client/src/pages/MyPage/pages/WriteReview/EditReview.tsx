@@ -156,7 +156,7 @@ const EditReview = () => {
 		<Modal
 			setShowModal={setEditReviewModalVisible}
 			title="리뷰 수정"
-			width={365}
+			width="365px"
 		>
 			<Regular20Black>구매하신 상품은 만족하시나요?</Regular20Black>
 			<GrayBox verticalPadding={16} horizontalPadding={47}>

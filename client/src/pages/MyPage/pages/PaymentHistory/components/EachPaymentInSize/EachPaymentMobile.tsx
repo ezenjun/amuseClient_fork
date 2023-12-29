@@ -24,9 +24,10 @@ import { PaymentHistoryData } from "../../../../../../Types/DataTypes";
 
 type Props = {
 	data: PaymentHistoryData;
+	showPrice?: boolean;
 };
 
-const EachPaymentMobile = ({ data }: Props) => {
+const EachPaymentMobile = ({ data, showPrice }: Props) => {
 	const navigate = useNavigate();
 	const { id } = useParams();
 
@@ -45,9 +46,10 @@ const EachPaymentMobile = ({ data }: Props) => {
 			{data.payStatus === "SUCCESS" && (
 				<Chips color="red">결제 완료</Chips>
 			)}
-			{data.payStatus === "PENDING" && (
-				<Chips color="gray">결제 취소</Chips>
-			)}
+			{data.payStatus === "PENDING" ||
+				(data.payStatus === "CANCEL" && (
+					<Chips color="gray">결제 취소</Chips>
+				))}
 			<ItemInfoTabletContainer>
 				<SquareImage
 					size={60}
@@ -67,9 +69,11 @@ const EachPaymentMobile = ({ data }: Props) => {
 							data.travelEndDate
 						)}
 					</Regular14Gray>
-					<Bold16DarkGray style={{ whiteSpace: "nowrap" }}>
-						{data.itemPayPrice.toLocaleString()} 원
-					</Bold16DarkGray>
+					{showPrice !== false && (
+						<Bold16DarkGray style={{ whiteSpace: "nowrap" }}>
+							{data.itemPayPrice.toLocaleString()} 원
+						</Bold16DarkGray>
+					)}
 				</InfoTextContainer>
 			</ItemInfoTabletContainer>
 			<PaymentButtonContainer>
@@ -78,16 +82,17 @@ const EachPaymentMobile = ({ data }: Props) => {
 						결제 취소
 					</WebButton>
 				)}
-				{data.payStatus === "PENDING" && (
-					<WebButton
-						color="red"
-						verticalPadding={15}
-						fontSize={16}
-						onClick={() => navigate(`/detail/104`)}
-					>
-						다시 예약
-					</WebButton>
-				)}
+				{data.payStatus === "PENDING" ||
+					(data.payStatus === "CANCEL" && (
+						<WebButton
+							color="red"
+							verticalPadding={15}
+							fontSize={16}
+							onClick={() => navigate(`/detail/104`)}
+						>
+							다시 예약
+						</WebButton>
+					))}
 			</PaymentButtonContainer>
 		</EachPaymentTabletContainer>
 	);

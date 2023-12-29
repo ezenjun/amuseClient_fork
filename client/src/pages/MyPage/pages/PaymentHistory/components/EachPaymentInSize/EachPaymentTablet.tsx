@@ -27,9 +27,10 @@ import { PaymentHistoryData } from "../../../../../../Types/DataTypes";
 
 type Props = {
 	data: PaymentHistoryData;
+	showPrice?: boolean;
 };
 
-const EachPaymentTablet = ({ data }: Props) => {
+const EachPaymentTablet = ({ data, showPrice }: Props) => {
 	const navigate = useNavigate();
 	const { id } = useParams();
 	const onCLick = () => {
@@ -46,9 +47,10 @@ const EachPaymentTablet = ({ data }: Props) => {
 			{data.payStatus === "SUCCESS" && (
 				<Chips color="red">결제 완료</Chips>
 			)}
-			{data.payStatus === "PENDING" && (
-				<Chips color="gray">결제 취소</Chips>
-			)}
+			{data.payStatus === "PENDING" ||
+				(data.payStatus === "CANCEL" && (
+					<Chips color="gray">결제 취소</Chips>
+				))}
 			<ItemInfoTabletContainer>
 				<SquareImage
 					size={60}
@@ -68,9 +70,11 @@ const EachPaymentTablet = ({ data }: Props) => {
 							data.travelEndDate
 						)}
 					</Regular14Gray>
-					<Bold16DarkGray style={{ whiteSpace: "nowrap" }}>
-						{data.itemPayPrice.toLocaleString()} 원
-					</Bold16DarkGray>
+					{showPrice !== false && (
+						<Bold16DarkGray style={{ whiteSpace: "nowrap" }}>
+							{data.itemPayPrice.toLocaleString()} 원
+						</Bold16DarkGray>
+					)}
 				</InfoTextContainer>
 				<PaymentButtonContainer>
 					{data.payStatus === "SUCCESS" && (
@@ -83,17 +87,18 @@ const EachPaymentTablet = ({ data }: Props) => {
 							결제 취소
 						</WebButton>
 					)}
-					{data.payStatus === "PENDING" && (
-						<WebButton
-							color="red"
-							verticalPadding={12}
-							fontSize={16}
-							width={140}
-							onClick={() => navigate(`/detail/104`)}
-						>
-							다시 예약
-						</WebButton>
-					)}
+					{data.payStatus === "PENDING" ||
+						(data.payStatus === "CANCEL" && (
+							<WebButton
+								color="red"
+								verticalPadding={12}
+								fontSize={16}
+								width={140}
+								onClick={() => navigate(`/detail/104`)}
+							>
+								다시 예약
+							</WebButton>
+						))}
 				</PaymentButtonContainer>
 			</ItemInfoTabletContainer>
 		</EachPaymentTabletContainer>
