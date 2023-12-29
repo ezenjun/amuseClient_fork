@@ -55,7 +55,6 @@ const PaymentRefundModal = ({ paymentId, data }: PaymentRefundProps) => {
 				console.log(error.response.data.code);
 			});
 	};
-	console.log("CancelModal", data);
 	useEffect(() => {
 		getPaymentInfo();
 	}, []);

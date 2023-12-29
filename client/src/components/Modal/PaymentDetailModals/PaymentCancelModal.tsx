@@ -65,7 +65,6 @@ const PaymentCancelModal = ({
 				console.log(error.response.data.code);
 			});
 	};
-	console.log("CancelModal", data);
 	useEffect(() => {
 		getPaymentInfo();
 	}, []);

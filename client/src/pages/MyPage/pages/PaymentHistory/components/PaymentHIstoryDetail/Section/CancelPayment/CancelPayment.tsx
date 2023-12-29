@@ -28,7 +28,6 @@ interface CancelPaymentProps {
 
 const CancelPayment = ({ data, payStatus }: CancelPaymentProps) => {
 	const [showModal, setShowModal] = useState(false);
-	console.log("CancelPayment", payStatus);
 
 	const additionalInfoHTML = {
 		__html: data?.content || "",
