@@ -87,9 +87,10 @@ const PaymentInfoModal = ({ mainPaymentId }: PaymentInfoProps) => {
 					{paymentInfo?.payStatus === "SUCCESS" && (
 						<Chips color="red">결제 완료</Chips>
 					)}
-					{paymentInfo?.payStatus === "PENDING" && (
-						<Chips color="gray">결제 취소</Chips>
-					)}
+					{paymentInfo?.payStatus === "PENDING" ||
+						(paymentInfo?.payStatus === "CANCEL" && (
+							<Chips color="gray">결제 취소</Chips>
+						))}
 				</InfoRowBetween>
 				<InfoRowBetween>
 					<RowKey>

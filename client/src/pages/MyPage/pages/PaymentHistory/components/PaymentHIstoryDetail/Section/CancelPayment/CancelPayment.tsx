@@ -15,19 +15,27 @@ import GrayBox from "../../../../../../../../components/Box/GrayBox";
 import { GrayboxRow, RowDetail, RowName } from "../styles";
 import { Modal } from "../../../../../../../../components/Modal/Modal";
 import CancelPolicyModal from "../../../../../../../../components/Modal/PaymentDetailModals/CancelPolicyModal";
+import { useRecoilState } from "recoil";
+import {
+	showCancelModalState,
+	showRefundModalState,
+} from "../../../../../../../../Recoil/MypageAtomState";
 
 interface CancelPaymentProps {
 	data: paymentCancelContent | undefined;
+	payStatus: string;
 }
 
-const CancelPayment = ({ data }: CancelPaymentProps) => {
+const CancelPayment = ({ data, payStatus }: CancelPaymentProps) => {
 	const [showModal, setShowModal] = useState(false);
+	console.log("CancelPayment", payStatus);
 
 	const additionalInfoHTML = {
 		__html: data?.content || "",
 	};
 	const [screenWidth, setScreenWidth] = useState(window.innerWidth);
-
+	const [showCancel, setShowCancel] = useRecoilState(showCancelModalState);
+	const [showRefund, setShowRefund] = useRecoilState(showRefundModalState);
 	const handleResize = () => {
 		setScreenWidth(window.innerWidth);
 		window.removeEventListener("resize", handleResize);
@@ -43,23 +51,39 @@ const CancelPayment = ({ data }: CancelPaymentProps) => {
 			<ReservationInfoMenuContainer>
 				<Bold32Black>결제 취소</Bold32Black>
 				{screenWidth > 768 && (
-					<MenuRightContainer>
-						<WebButton
-							color="white"
-							fontSize={20}
-							verticalPadding={18}
-							onClick={() => setShowModal(!showModal)}
-						>
-							환불 규정 확인
-						</WebButton>
-						<WebButton
-							color="gray2"
-							fontSize={20}
-							verticalPadding={18}
-						>
-							취소 요청
-						</WebButton>
-					</MenuRightContainer>
+					<>
+						{payStatus === "SUCCESS" ? (
+							<MenuRightContainer>
+								<WebButton
+									color="white"
+									fontSize={20}
+									verticalPadding={18}
+									onClick={() => setShowModal(!showModal)}
+								>
+									환불 규정 확인
+								</WebButton>
+								<WebButton
+									color="gray2"
+									fontSize={20}
+									verticalPadding={18}
+									onClick={() => setShowCancel(!showCancel)}
+								>
+									취소 요청
+								</WebButton>
+							</MenuRightContainer>
+						) : (
+							<MenuRightContainer>
+								<WebButton
+									color="red"
+									fontSize={20}
+									verticalPadding={18}
+									onClick={() => setShowRefund(!showRefund)}
+								>
+									환불 정보 확인
+								</WebButton>
+							</MenuRightContainer>
+						)}
+					</>
 				)}
 			</ReservationInfoMenuContainer>
 			{data?.content && (

@@ -46,9 +46,10 @@ const EachPaymentMobile = ({ data, showPrice }: Props) => {
 			{data.payStatus === "SUCCESS" && (
 				<Chips color="red">결제 완료</Chips>
 			)}
-			{data.payStatus === "PENDING" && (
-				<Chips color="gray">결제 취소</Chips>
-			)}
+			{data.payStatus === "PENDING" ||
+				(data.payStatus === "CANCEL" && (
+					<Chips color="gray">결제 취소</Chips>
+				))}
 			<ItemInfoTabletContainer>
 				<SquareImage
 					size={60}
@@ -81,16 +82,17 @@ const EachPaymentMobile = ({ data, showPrice }: Props) => {
 						결제 취소
 					</WebButton>
 				)}
-				{data.payStatus === "PENDING" && (
-					<WebButton
-						color="red"
-						verticalPadding={15}
-						fontSize={16}
-						onClick={() => navigate(`/detail/104`)}
-					>
-						다시 예약
-					</WebButton>
-				)}
+				{data.payStatus === "PENDING" ||
+					(data.payStatus === "CANCEL" && (
+						<WebButton
+							color="red"
+							verticalPadding={15}
+							fontSize={16}
+							onClick={() => navigate(`/detail/104`)}
+						>
+							다시 예약
+						</WebButton>
+					))}
 			</PaymentButtonContainer>
 		</EachPaymentTabletContainer>
 	);

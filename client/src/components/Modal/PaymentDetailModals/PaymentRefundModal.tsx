@@ -18,11 +18,9 @@ import { WebButton } from "../../Button/WebButton";
 import { showCancelConfirmState } from "../../../Recoil/MypageAtomState";
 import { useRecoilState } from "recoil";
 
-interface PaymentCancelProps {
+interface PaymentRefundProps {
 	paymentId: number;
 	data: PaymentHistoryData;
-	showModal: boolean;
-	setShowModal: React.Dispatch<SetStateAction<boolean>>;
 }
 
 interface IPaymentData {
@@ -33,19 +31,11 @@ interface IPaymentData {
 	pointUse: number;
 	itemPayPrice: number;
 }
-const PaymentCancelModal = ({
-	paymentId,
-	data,
-	showModal,
-	setShowModal,
-}: PaymentCancelProps) => {
+const PaymentRefundModal = ({ paymentId, data }: PaymentRefundProps) => {
 	const [cookies] = useCookies();
 	const token = cookies["__jwtkid__"];
 	const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 	const [paymentInfo, setPaymentInfo] = useState<IPaymentData>();
-	const [showCancelConfirm, setCancelConfirm] = useRecoilState(
-		showCancelConfirmState
-	);
 
 	const getPaymentInfo = async () => {
 		await axios
@@ -72,7 +62,7 @@ const PaymentCancelModal = ({
 	return (
 		<ScrollContainer>
 			<CancelModalContainer>
-				{data && <EachPayment data={data} showPrice={false} />}
+				{/* {data && <EachPayment data={data} showPrice={false} />} */}
 				<GrayBox
 					verticalPadding={screenWidth <= 768 ? 17 : 31}
 					horizontalPadding={screenWidth <= 768 ? 14 : 31}
@@ -108,6 +98,12 @@ const PaymentCancelModal = ({
 							</Regular20Gray>
 						</PointRow>
 					)}
+					<PointRow>
+						<Bold24AppColor>총 환불 금액</Bold24AppColor>
+						<Bold24AppColor>
+							{paymentInfo?.itemPayPrice.toLocaleString()}원
+						</Bold24AppColor>
+					</PointRow>
 				</GrayBox>
 				<PointRow>
 					<Regular16Gray>
@@ -116,19 +112,9 @@ const PaymentCancelModal = ({
 						영업일 기준 10일 이내에 실제 환불 내역 확인 가능합니다.
 					</Regular16Gray>
 				</PointRow>
-
-				<WebButton
-					fontSize={18}
-					verticalPadding={18}
-					color="red"
-					width={308}
-					onClick={() => setCancelConfirm(!showCancelConfirm)}
-				>
-					취소 요청
-				</WebButton>
 			</CancelModalContainer>
 		</ScrollContainer>
 	);
 };
 
-export default PaymentCancelModal;
+export default PaymentRefundModal;
