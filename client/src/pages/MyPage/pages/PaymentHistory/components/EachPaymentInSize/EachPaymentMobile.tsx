@@ -56,10 +56,13 @@ const EachPaymentMobile = ({ data, showPrice }: Props) => {
 			{data.payStatus === "SUCCESS" && (
 				<Chips color="red">결제 완료</Chips>
 			)}
-			{data.payStatus === "PENDING" ||
-				(data.payStatus === "CANCEL" && (
-					<Chips color="gray">결제 취소</Chips>
-				))}
+			{data.payStatus === "CANCEL" && (
+				<Chips color="gray">결제 취소</Chips>
+			)}
+			{data.payStatus === "PENDING" && (
+				<Chips color="orange">취소 진행중</Chips>
+			)}
+
 			<ItemInfoTabletContainer>
 				<SquareImage
 					size={60}

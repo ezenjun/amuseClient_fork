@@ -255,6 +255,7 @@ export interface PaymentDetailInterface {
 		itemName: string;
 		reservationDateTime: string;
 		itemPayPrice: number;
+		itemType: string;
 		informationResponseDtoList: [
 			{
 				ticketName: string;

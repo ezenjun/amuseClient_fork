@@ -16,12 +16,16 @@ import {
 
 interface PaymentCancelConfirmProps {
 	paymentId: number;
+	itemType: string;
+	refundPayPrice: number;
 	showModal: boolean;
 	setShowModal: React.Dispatch<SetStateAction<boolean>>;
 }
 
 const PaymentCancelConfirmModal = ({
 	paymentId,
+	itemType,
+	refundPayPrice,
 	showModal,
 	setShowModal,
 }: PaymentCancelConfirmProps) => {
@@ -31,24 +35,50 @@ const PaymentCancelConfirmModal = ({
 	const [showCancelRequestComplete, setShowCancelRequestComplete] =
 		useRecoilState(showCancelRequestCompleteState);
 	const cancelPayment = async () => {
-		await axios
-			.patch(
-				`${process.env.REACT_APP_AMUSE_API}/api/payment/cancel/${paymentId}`,
-				{
-					headers: {
-						"Content-Type": "application/json",
-						Authorization: `${token}`,
-					},
-				}
-			)
-			.then((response) => {
-				alert("취소 성공");
-				setShowCancelRequestComplete(!showCancelRequestComplete);
-			})
-			.catch((error) => {
-				alert("취소 실패");
-				console.log(error.response.data.code);
-			});
+		if (itemType.includes("Hotel")) {
+			await axios
+				.patch(
+					`${process.env.REACT_APP_AMUSE_API}/api/payment/pending/${paymentId}`,
+					refundPayPrice,
+					{
+						headers: {
+							"Content-Type": "application/json",
+							Authorization: `${token}`,
+						},
+					}
+				)
+				.then((response) => {
+					alert("호텔 호텔 취소 성공");
+					console.log(" 호텔 취소", response);
+					setShowCancelRequestComplete(!showCancelRequestComplete);
+				})
+				.catch((error) => {
+					alert("취소 실패");
+					console.log(error.response.data.code);
+				});
+		} else {
+			//컨시어지
+			await axios
+				.patch(
+					`${process.env.REACT_APP_AMUSE_API}/api/payment/cancel/${paymentId}`,
+					refundPayPrice,
+					{
+						headers: {
+							"Content-Type": "application/json",
+							Authorization: `${token}`,
+						},
+					}
+				)
+				.then((response) => {
+					alert("컨시어지 취소 성공");
+					setShowCancelRequestComplete(!showCancelRequestComplete);
+				})
+				.catch((error) => {
+					alert("컨시어지 취소 실패");
+					console.log(error.response.data.code);
+				});
+		}
+
 		setShowModal(!showModal);
 		setShowCancel(!showCancel);
 	};
