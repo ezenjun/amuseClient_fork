@@ -32,6 +32,7 @@ interface IPaymentData {
 	travelEndDate: string;
 	pointUse: number;
 	itemPayPrice: number;
+	payType: string;
 }
 const PaymentCancelModal = ({
 	paymentId,
@@ -59,6 +60,7 @@ const PaymentCancelModal = ({
 				}
 			)
 			.then((response) => {
+				console.log("cancelData", response.data.data);
 				setPaymentInfo(response.data.data);
 			})
 			.catch((error) => {
@@ -94,7 +96,12 @@ const PaymentCancelModal = ({
 					gap={screenWidth <= 768 ? 12 : 16}
 				>
 					<PointRow>
-						<Regular20Gray>신용/체크카드 환불</Regular20Gray>
+						{paymentInfo?.payType === "CARD" ? (
+							<Regular20Gray>신용/체크카드 환불</Regular20Gray>
+						) : (
+							<Regular20Gray>계좌 환불</Regular20Gray>
+						)}
+
 						<Regular20Gray>
 							{paymentInfo?.itemPayPrice.toLocaleString()}원
 						</Regular20Gray>

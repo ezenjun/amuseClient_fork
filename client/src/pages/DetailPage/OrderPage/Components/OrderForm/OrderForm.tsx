@@ -59,6 +59,7 @@ export function OrderForm() {
 			requestPay(updatedPaymentData, (rsp: any) => {
 				if (rsp.success) {
 					console.log("결제 성공");
+					console.log("결제 response", rsp);
 					const convertedData = updatePostInfo(
 						updatedPaymentData,
 						selectedItem,

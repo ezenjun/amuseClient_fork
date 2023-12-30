@@ -209,6 +209,7 @@ const PaymentHistoryDetail = () => {
 									showModal={showConfirmCancel}
 									setShowModal={setShowConfirmCancel}
 									paymentId={Number(id)}
+									
 								></PaymentCancelConfirmModal>
 							)}
 						</Modal>

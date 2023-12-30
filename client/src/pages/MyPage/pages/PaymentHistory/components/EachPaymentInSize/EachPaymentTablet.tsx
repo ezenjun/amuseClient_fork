@@ -24,6 +24,8 @@ import {
 import Chips from "../../../../../../components/Chips/Chips";
 import { WebButton } from "../../../../../../components/Button/WebButton";
 import { PaymentHistoryData } from "../../../../../../Types/DataTypes";
+import { useRecoilState } from "recoil";
+import { showCancelModalState } from "../../../../../../Recoil/MypageAtomState";
 
 type Props = {
 	data: PaymentHistoryData;
@@ -33,6 +35,8 @@ type Props = {
 const EachPaymentTablet = ({ data, showPrice }: Props) => {
 	const navigate = useNavigate();
 	const { id } = useParams();
+	const [showCancelModal, setShowCancelModal] =
+		useRecoilState(showCancelModalState);
 	const onCLick = () => {
 		if (id) {
 			navigate(`/detail/${data.itemId}`);
@@ -40,6 +44,14 @@ const EachPaymentTablet = ({ data, showPrice }: Props) => {
 			navigate(`./${data.mainPaymentId}`, {
 				state: data.mainPaymentId,
 			});
+		}
+	};
+	const onCancel = (
+		event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+	) => {
+		event.stopPropagation();
+		if (id) {
+			setShowCancelModal(!showCancelModal);
 		}
 	};
 	return (
@@ -83,6 +95,7 @@ const EachPaymentTablet = ({ data, showPrice }: Props) => {
 							verticalPadding={12}
 							fontSize={16}
 							width={140}
+							onClick={onCancel}
 						>
 							결제 취소
 						</WebButton>

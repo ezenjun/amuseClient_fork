@@ -177,7 +177,7 @@ export interface PaymentPostData {
 		content: string;
 	};
 	cardNumber: string;
-	imp_uid: string;
+	impUid: string;
 }
 
 export interface UserPoint {

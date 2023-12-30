@@ -106,7 +106,12 @@ const CancelPayment = ({ data, payStatus }: CancelPaymentProps) => {
 					>
 						환불 규정 확인
 					</WebButton>
-					<WebButton color="gray2" fontSize={20} verticalPadding={15}>
+					<WebButton
+						color="gray2"
+						fontSize={20}
+						verticalPadding={15}
+						onClick={() => setShowCancel(!showCancel)}
+					>
 						취소 요청
 					</WebButton>
 				</MobileButtonContainer>
