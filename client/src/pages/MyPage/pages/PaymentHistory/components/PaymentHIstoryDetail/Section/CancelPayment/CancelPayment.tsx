@@ -59,7 +59,7 @@ const CancelPayment = ({ data, payStatus }: CancelPaymentProps) => {
 									verticalPadding={18}
 									onClick={() => setShowModal(!showModal)}
 								>
-									환불 규정 확인 {payStatus}s
+									환불 규정 확인
 								</WebButton>
 								<WebButton
 									color="gray2"
