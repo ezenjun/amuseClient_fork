@@ -200,25 +200,6 @@ const PaymentHistoryDetail = () => {
 							)}
 						</Modal>
 					)}
-					{/* {showConfirmCancel && (
-						<Modal
-							setShowModal={setShowConfirmCancel}
-							title="결제를 취소하시겠습니까?"
-							width={screenWidth < 768 ? "100%" : "40%"}
-						>
-							{data && (
-								<PaymentCancelConfirmModal
-									showModal={showConfirmCancel}
-									setShowModal={setShowConfirmCancel}
-									paymentId={Number(id)}
-									itemType={
-										data.paymentDetailItemResponseDto
-											.itemType
-									}
-								></PaymentCancelConfirmModal>
-							)}
-						</Modal>
-					)} */}
 					{showCancelRequestComplete && (
 						<Modal
 							setShowModal={setShowCancelRequestComplete}
