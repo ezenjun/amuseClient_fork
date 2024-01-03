@@ -30,6 +30,8 @@ export const ChipContainer = styled.div<{ color: string }>`
 				return "#FFE4E8";
 			case "gray":
 				return "#DFDFDF";
+			case "orange":
+				return "#FF9100";
 			default:
 				return "transparent";
 		}
@@ -41,6 +43,8 @@ export const ChipContainer = styled.div<{ color: string }>`
 				return Common.colors.appColor;
 			case "gray":
 				return "#343A40";
+			case "orange":
+				return "white";
 			default:
 				return Common.colors.black;
 		}

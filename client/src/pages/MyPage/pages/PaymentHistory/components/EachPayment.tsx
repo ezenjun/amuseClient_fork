@@ -13,7 +13,6 @@ type Props = {
 
 const EachPayment = ({ data, showPrice }: Props) => {
 	const [screenWidth, setScreenWidth] = useState(window.innerWidth);
-	console.log("EachPayment data", data);
 	const handleResize = () => {
 		setScreenWidth(window.innerWidth);
 		window.removeEventListener("resize", handleResize);

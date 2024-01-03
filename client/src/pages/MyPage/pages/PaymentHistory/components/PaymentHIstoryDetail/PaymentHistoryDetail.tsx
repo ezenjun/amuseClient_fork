@@ -174,9 +174,11 @@ const PaymentHistoryDetail = () => {
 									data={
 										data?.paymentDetailTopItemInfoResponseDto
 									}
+									itemType={
+										data.paymentDetailItemResponseDto
+											.itemType
+									}
 									paymentId={Number(id)}
-									showModal={showCancel}
-									setShowModal={setShowCancel}
 								></PaymentCancelModal>
 							)}
 						</Modal>
@@ -195,21 +197,6 @@ const PaymentHistoryDetail = () => {
 									}
 									paymentId={Number(id)}
 								></PaymentRefundModal>
-							)}
-						</Modal>
-					)}
-					{showConfirmCancel && (
-						<Modal
-							setShowModal={setShowConfirmCancel}
-							title="결제를 취소하시겠습니까?"
-							width={screenWidth < 768 ? "100%" : "40%"}
-						>
-							{data && (
-								<PaymentCancelConfirmModal
-									showModal={showConfirmCancel}
-									setShowModal={setShowConfirmCancel}
-									paymentId={Number(id)}
-								></PaymentCancelConfirmModal>
 							)}
 						</Modal>
 					)}
