@@ -17,6 +17,7 @@ import { Modal } from "../../../../../../../../components/Modal/Modal";
 import CancelPolicyModal from "../../../../../../../../components/Modal/PaymentDetailModals/CancelPolicyModal";
 import { useRecoilState } from "recoil";
 import {
+	showCancelConfirmState,
 	showCancelModalState,
 	showRefundModalState,
 } from "../../../../../../../../Recoil/MypageAtomState";
@@ -33,7 +34,9 @@ const CancelPayment = ({ data, payStatus }: CancelPaymentProps) => {
 		__html: data?.content || "",
 	};
 	const [screenWidth, setScreenWidth] = useState(window.innerWidth);
-	const [showCancel, setShowCancel] = useRecoilState(showCancelModalState);
+	const [showCancelConfirm, setShowCancelConfirm] = useRecoilState(
+		showCancelConfirmState
+	);
 	const [showRefund, setShowRefund] = useRecoilState(showRefundModalState);
 	const handleResize = () => {
 		setScreenWidth(window.innerWidth);
@@ -65,7 +68,9 @@ const CancelPayment = ({ data, payStatus }: CancelPaymentProps) => {
 									color="gray2"
 									fontSize={20}
 									verticalPadding={18}
-									onClick={() => setShowCancel(!showCancel)}
+									onClick={() =>
+										setShowCancelConfirm(!showCancelConfirm)
+									}
 								>
 									취소 요청
 								</WebButton>
@@ -112,7 +117,9 @@ const CancelPayment = ({ data, payStatus }: CancelPaymentProps) => {
 								color="gray2"
 								fontSize={20}
 								verticalPadding={15}
-								onClick={() => setShowCancel(!showCancel)}
+								onClick={() =>
+									setShowCancelConfirm(!showCancelConfirm)
+								}
 							>
 								취소 요청
 							</WebButton>

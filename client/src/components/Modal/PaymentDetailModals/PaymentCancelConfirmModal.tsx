@@ -17,7 +17,7 @@ import {
 interface PaymentCancelConfirmProps {
 	paymentId: number;
 	itemType: string;
-	refundPayPrice: number;
+	refundPayPrice?: number;
 	showModal: boolean;
 	setShowModal: React.Dispatch<SetStateAction<boolean>>;
 }
@@ -48,8 +48,7 @@ const PaymentCancelConfirmModal = ({
 					}
 				)
 				.then((response) => {
-					alert("호텔 호텔 취소 성공");
-					console.log(" 호텔 취소", response);
+					alert("취소 요청이 전달되었습니다.");
 					setShowCancelRequestComplete(!showCancelRequestComplete);
 				})
 				.catch((error) => {
@@ -70,7 +69,7 @@ const PaymentCancelConfirmModal = ({
 					}
 				)
 				.then((response) => {
-					alert("컨시어지 취소 성공");
+					alert("컨시어지 예약이 취소되었습니다.");
 					setShowCancelRequestComplete(!showCancelRequestComplete);
 				})
 				.catch((error) => {
