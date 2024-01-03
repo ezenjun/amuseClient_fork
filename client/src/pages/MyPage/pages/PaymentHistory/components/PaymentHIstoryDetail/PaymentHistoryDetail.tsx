@@ -84,6 +84,9 @@ const PaymentHistoryDetail = () => {
 	useEffect(() => {
 		getPaymentHistoryDetail();
 	}, []);
+	useEffect(() => {
+		getPaymentHistoryDetail();
+	}, [showCancelRequestComplete, getPaymentHistoryDetail]);
 	return (
 		<PageContainer>
 			<Bold40Black>결제 상세 내역</Bold40Black>
