@@ -59,7 +59,7 @@ const CancelPayment = ({ data, payStatus }: CancelPaymentProps) => {
 									verticalPadding={18}
 									onClick={() => setShowModal(!showModal)}
 								>
-									환불 규정 확인
+									환불 규정 확인 {payStatus}s
 								</WebButton>
 								<WebButton
 									color="gray2"
@@ -97,19 +97,39 @@ const CancelPayment = ({ data, payStatus }: CancelPaymentProps) => {
 				</GrayBox>
 			)}
 			{screenWidth < 768 && (
-				<MobileButtonContainer>
-					<WebButton
-						color="white"
-						fontSize={20}
-						verticalPadding={15}
-						onClick={() => setShowModal(!showModal)}
-					>
-						환불 규정 확인
-					</WebButton>
-					<WebButton color="gray2" fontSize={20} verticalPadding={15}>
-						취소 요청
-					</WebButton>
-				</MobileButtonContainer>
+				<>
+					{payStatus === "SUCCESS" ? (
+						<MobileButtonContainer>
+							<WebButton
+								color="white"
+								fontSize={20}
+								verticalPadding={15}
+								onClick={() => setShowModal(!showModal)}
+							>
+								환불 규정 확인
+							</WebButton>
+							<WebButton
+								color="gray2"
+								fontSize={20}
+								verticalPadding={15}
+								onClick={() => setShowCancel(!showCancel)}
+							>
+								취소 요청
+							</WebButton>
+						</MobileButtonContainer>
+					) : (
+						<MobileButtonContainer>
+							<WebButton
+								color="red"
+								fontSize={20}
+								verticalPadding={18}
+								onClick={() => setShowRefund(!showRefund)}
+							>
+								환불 정보 확인
+							</WebButton>
+						</MobileButtonContainer>
+					)}
+				</>
 			)}
 			{showModal && data?.content && (
 				<Modal

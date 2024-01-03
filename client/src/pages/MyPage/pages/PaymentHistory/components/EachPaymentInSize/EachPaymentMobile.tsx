@@ -21,6 +21,8 @@ import {
 import Chips from "../../../../../../components/Chips/Chips";
 import { WebButton } from "../../../../../../components/Button/WebButton";
 import { PaymentHistoryData } from "../../../../../../Types/DataTypes";
+import { useRecoilState } from "recoil";
+import { showCancelModalState } from "../../../../../../Recoil/MypageAtomState";
 
 type Props = {
 	data: PaymentHistoryData;
@@ -30,7 +32,8 @@ type Props = {
 const EachPaymentMobile = ({ data, showPrice }: Props) => {
 	const navigate = useNavigate();
 	const { id } = useParams();
-
+	const [showCancelModal, setShowCancelModal] =
+		useRecoilState(showCancelModalState);
 	const onCLick = () => {
 		if (id) {
 			navigate(`/detail/${data.itemId}`);
@@ -40,16 +43,26 @@ const EachPaymentMobile = ({ data, showPrice }: Props) => {
 			});
 		}
 	};
-
+	const onCancel = (
+		event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+	) => {
+		event.stopPropagation();
+		if (id) {
+			setShowCancelModal(!showCancelModal);
+		}
+	};
 	return (
 		<EachPaymentTabletContainer onClick={() => onCLick()}>
 			{data.payStatus === "SUCCESS" && (
 				<Chips color="red">결제 완료</Chips>
 			)}
-			{data.payStatus === "PENDING" ||
-				(data.payStatus === "CANCEL" && (
-					<Chips color="gray">결제 취소</Chips>
-				))}
+			{data.payStatus === "CANCEL" && (
+				<Chips color="gray">결제 취소</Chips>
+			)}
+			{data.payStatus === "PENDING" && (
+				<Chips color="orange">취소 진행중</Chips>
+			)}
+
 			<ItemInfoTabletContainer>
 				<SquareImage
 					size={60}
@@ -78,7 +91,12 @@ const EachPaymentMobile = ({ data, showPrice }: Props) => {
 			</ItemInfoTabletContainer>
 			<PaymentButtonContainer>
 				{data.payStatus === "SUCCESS" && (
-					<WebButton color="gray2" verticalPadding={15} fontSize={16}>
+					<WebButton
+						color="gray2"
+						verticalPadding={15}
+						fontSize={16}
+						onClick={onCancel}
+					>
 						결제 취소
 					</WebButton>
 				)}

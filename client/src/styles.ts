@@ -17,12 +17,12 @@ export const reset = css`
 		height: 100vh; */
 		@media (max-width: 768px) {
 			/* Mobile styles */
-			font-size: 14px;
+			font-size: 13px;
 		}
 
 		@media (min-width: 769px) and (max-width: 1023px) {
 			/* Tablet styles */
-			font-size: 15px; /* Adjust as needed */
+			font-size: 14.5px; /* Adjust as needed */
 		}
 
 		@media (min-width: 1024px) and (max-width: 1140px) {
